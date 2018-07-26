@@ -1,0 +1,4 @@
+Detects whether the structure has different chains and allow to select one (or all)
+of them to continue the analysis
+
+Options: --select_chains chain_ids

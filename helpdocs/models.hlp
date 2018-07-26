@@ -1,0 +1,4 @@
+Detects whether the structure has different models and allow to select one
+of them to continue the analysis
+
+Usage: checkStruct.py models --select_model model_num
