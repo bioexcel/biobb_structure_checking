@@ -1,0 +1,4 @@
+Detects HETATM being metal ions allow to selectively remove them 
+options: All, None, Residue List, Atom type List
+
+Usage: checkStruct.py metals --remove list_to_remove

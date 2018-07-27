@@ -7,11 +7,14 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
 import argparse
+import re
+
+import settings as sets
 from structure_checking.structure_manager import StructureManager
 from structure_checking.help_manager import HelpManager
-import settings as sets
 import structure_checking.util as util
-import readline
+
+
 
 class StructureChecking():
     def __init__(self, args):
@@ -87,7 +90,7 @@ class StructureChecking():
             opts.select_model = int(opts.select_model)
             if opts.select_model < 1 or opts.select_model > self.nmodels:
                 print ("Error: unknown model", opts.select_model, file=sys.stderr)
-                sys.exit(1)
+                opts.select_model=''
             else:
                 print ("Selecting model", opts.select_model)
                 self.struc_man.st = self.struc_man.st[int(opts.select_model)-1]
@@ -120,7 +123,7 @@ class StructureChecking():
                 for ch in ch_ok:
                     if not ch in self.chain_ids:
                         print ("Error: request chain not present", ch, file=sys.stderr)
-                        sys.exit(1)
+                        opts.select_chains=''
                 print ("Selecting chain(s) ", ','.join(ch_ok))
                 for ch in self.chain_ids:
                     if ch not in ch_ok:
@@ -159,7 +162,8 @@ class StructureChecking():
                         opts.select_altloc=_check_parameter('', "Select alternative (occupancy, "+ ','.join(altlocs) +'): ')
                         ok = opts.select_altloc in altlocs or opts.select_altloc=='occupancy'
                         if not ok:
-                            print ("Unknown ",opts.select_altloc)
+                            print ("Error: Unknown ",opts.select_altloc, file=sys.stderr)
+                            opts.select_altloc=''
                     
                         print ("Selecting location", opts.select_altloc)
                     for at in alt_loc_res[r]:
@@ -176,6 +180,90 @@ class StructureChecking():
         else:
             print ("No alternative location detected")
     
+    def metals (self,options):
+        optionsParser = argparse.ArgumentParser(prog="metals")
+        optionsParser.add_argument(
+            '--remove', 
+            action='store',
+            dest='remove_metals', 
+            help='Remove Metal ions'
+        )
+        opts = optionsParser.parse_args(options)
+        
+        print ("Running metals", ' '.join(options))
+        
+        self._load_structure(self.args.input_structure_path)
+        
+        met_list=[]
+        for at in self.struc_man.get_structure().get_atoms():
+            if not re.match('H_', at.get_parent().id[0]):
+                continue
+            if at.id in sets.metal_ats:
+                met_list.append(at)
+        if len(met_list) > 1:
+            print ("Metal ions found")
+            met_rid=[]
+            at_groups={}
+            for at in met_list:
+                print ("  ", util.atomid(at))
+                r = at.get_parent()
+                rid = r.get_parent().id + str(r.id[1])
+                met_rid.append(rid)
+                if at.id not in at_groups.keys():
+                    at_groups[at.id]=[]
+                at_groups[at.id].append(rid)
+            print (at_groups)
+            
+            ok = False
+            resids=False
+            atids=False
+            while not ok:
+                opts.remove_metals = _check_parameter(opts.remove_metals,
+                'Remove (All | None | any of  ' + ','.join(sorted(at_groups.keys())) + ' | any of ' + ','.join(met_rid)+': ')
+                ok = opts.remove_metals in ['All', 'None']
+                if not ok:
+                    ok= True
+                    for r in opts.remove_metals.split(','):
+                        ok = ok and r in met_rid
+                    resids=ok
+                
+                if not ok:
+                    ok= True
+                    for atid in opts.remove_metals.split(','):
+                        ok = ok and atid in at_groups.keys()
+                    atids=ok
+            
+                if not ok:
+                    print ("Error unknown", opts.remove_metals, file=sys.stderr)
+                    opts.remove_metals=''
+                
+                if opts.remove_metals == 'None':
+                    continue
+                
+                elif opts.remove_metals == 'All':
+                    to_remove = met_rid
+
+                elif resids:
+                    to_remove = opts.remove_metals.split(',')
+                
+                elif atids:
+                    to_remove=[]
+                    for atid in opts.remove_metals.split(','):
+                        to_remove.extend(at_groups[atid])
+
+                print (to_remove)
+                
+                for at in met_list:
+                    r = at.get_parent()
+                    rid = r.get_parent().id + str(r.id[1])
+                    if rid in to_remove:
+                        r.detach_child(at.id)
+                print ("Metals removed", opts.remove_metals)
+        else:
+            print ("No metal ions found")
+        
+        
+#===============================================================================
     
     def _load_structure(self,input_structure_path):
         if not hasattr(self,'struc_man'):
@@ -197,4 +285,5 @@ class StructureChecking():
 def _check_parameter (opts_param, input_text):
     while opts_param is None or opts_param=='':
         opts_param = input (input_text)
+    opts_param = opts_param.replace(' ','')
     return opts_param
