@@ -11,6 +11,7 @@ from structure_checking.structure_manager import StructureManager
 from structure_checking.help_manager import HelpManager
 import settings as sets
 import structure_checking.util as util
+import readline
 
 class StructureChecking():
     def __init__(self, args):
@@ -133,19 +134,45 @@ class StructureChecking():
     
     def altloc(self, options):
         optionsParser = argparse.ArgumentParser(prog="altloc")
-        optionsParser.add_argument('--select_altids', dest="select_altids", help="residue ids (comma separated)")
+        optionsParser.add_argument('--select_altloc', dest="select_altloc", help="select altloc occupancy|alt_id")
         opts = optionsParser.parse_args(options)
         
         print ("Running altlocs", ' '.join(options))
         
         self._load_structure(self.args.input_structure_path)
     
-        alt_ats=self.struc_man.get_altloc_atoms()
+        alt_loc_res=self.struc_man.get_altloc_residues()
         
-        if len(alt_ats) > 0:
+        if len(alt_loc_res) > 0:
             print ("Detected alternative locations")
-            for at in alt_ats:
-                print (util.atomid(at))
+            for r in alt_loc_res.keys():
+                if len(alt_loc_res[r])>1:
+                    print (r, ":")
+                    altlocs=sorted(alt_loc_res[r][0].child_dict.keys())
+                    for at in alt_loc_res[r]:
+                        s = "  " + at.id
+                        for alt in sorted(at.child_dict.keys()):
+                            s += " "+ alt + "("+ str(at.child_dict[alt].occupancy) +")"
+                        print (s)
+                    ok=False
+                    while not ok:
+                        opts.select_altloc=_check_parameter('', "Select alternative (occupancy, "+ ','.join(altlocs) +'): ')
+                        ok = opts.select_altloc in altlocs or opts.select_altloc=='occupancy'
+                        if not ok:
+                            print ("Unknown ",opts.select_altloc)
+                    
+                        print ("Selecting location", opts.select_altloc)
+                    for at in alt_loc_res[r]:
+                        if opts.select_altloc == 'occupancy':
+                            newat = at.selected_child
+                        else:
+                            newat = at.child_dict[opts.select_altloc]
+                        newat.disordered_flag=0
+                        newat.altloc=' '
+                        res = at.get_parent()
+                        res.detach_child(at.id)
+                        res.add (newat)
+                    res.disordered=0
         else:
             print ("No alternative location detected")
     

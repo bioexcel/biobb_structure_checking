@@ -154,10 +154,14 @@ class StructureManager():
                     dist_mat.append ([at1, at2, at1-at2])
         return dist_mat
     
-    def get_altloc_atoms(self):
-        at_list=[]
+    def get_altloc_residues(self):
+        res_list={}
         for at in self.st.get_atoms():
+            r = at.get_parent()
+            rid = util.residueid(r)
             if at.get_altloc() != ' ':
-                at_list.append(at)
-        return at_list
+                if rid not in res_list:
+                    res_list[rid]=[]
+                res_list[rid].append(at)
+        return res_list
 

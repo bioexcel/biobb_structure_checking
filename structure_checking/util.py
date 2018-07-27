@@ -42,7 +42,7 @@ def residueid(r):
         + str(r.get_parent().get_parent().id)
 
 def atomid(at):
-    return residueid(at.get_parent()) + "." +at.id+at.get_altloc()
+    return residueid(at.get_parent()) + "." +at.id
 
 def residueCheck(r):
     r = r.upper()

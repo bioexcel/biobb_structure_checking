@@ -1,0 +1,4 @@
+Detects atomswith alternative locations and allow to select one
+of them to continue the analysis. 
+
+Usage: checkStruct.py altloc --select_altloc occup|alt_id
