@@ -134,9 +134,9 @@ class StructureChecking():
                         for alt in sorted(at.child_dict.keys()):
                             s += " " + alt + "(" + str(at.child_dict[alt].occupancy) + ")"
                         print (s)
-                    ok = False
+                    ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
                     while not ok:
-                        opts.select_altloc = _check_parameter('', "Select alternative (occupancy, " + ','.join(altlocs) + '): ')
+                        opts.select_altloc = _check_parameter(opts.select_altloc, "Select alternative (occupancy, " + ','.join(altlocs) + '): ')
                         ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
                         if not ok:
                             print ("Error: Unknown ", opts.select_altloc, file=sys.stderr)
