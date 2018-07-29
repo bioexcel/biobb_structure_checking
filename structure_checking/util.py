@@ -26,13 +26,13 @@ three_letter_residue_code = {
 
 # Residue manipulation =======================================================
 def removeHFromRes (r, verbose=False):
-    H_list=[]
+    H_list = []
     for at in r.get_atoms():
         if at.element == 'H':
             H_list.append(at.id)
     for at_id in H_list:
         if verbose:
-            print ("  Deleting atom "+at_id)
+            print ("  Deleting atom " + at_id)
         r.detach_child(at_id)
 
 def residueid(r):
@@ -42,7 +42,7 @@ def residueid(r):
         + str(r.get_parent().get_parent().id)
 
 def atomid(at):
-    return residueid(at.get_parent()) + "." +at.id
+    return residueid(at.get_parent()) + "." + at.id
 
 def residueCheck(r):
     r = r.upper()
@@ -66,11 +66,11 @@ def buildCoordsOther(r, res_lib, new_res, at_id):
         i = i + 1
     if resid_def.ats[i].id == at_id:
         return buildCoords(
-            r[resid_def.ats[resid_def.ats[i].link[0]].id].get_coord(),
-            r[resid_def.ats[resid_def.ats[i].link[1]].id].get_coord(),
-            r[resid_def.ats[resid_def.ats[i].link[2]].id].get_coord(),
-            resid_def.ats[i].geom
-            )
+                           r[resid_def.ats[resid_def.ats[i].link[0]].id].get_coord(),
+                           r[resid_def.ats[resid_def.ats[i].link[1]].id].get_coord(),
+                           r[resid_def.ats[resid_def.ats[i].link[2]].id].get_coord(),
+                           resid_def.ats[i].geom
+                           )
     else:
         print ("#ERROR: Unknown target atom")
         sys.exit(1)
@@ -78,11 +78,11 @@ def buildCoordsOther(r, res_lib, new_res, at_id):
 def buildCoordsCB(r): # Get CB from Backbone
 
     return buildCoords(
-        r['CA'].get_coord(),
-        r['N'].get_coord(),
-        r['C'].get_coord(),
-        [1.5, 115.5, -123.]
-    )
+                       r['CA'].get_coord(),
+                       r['N'].get_coord(),
+                       r['C'].get_coord(),
+                       [1.5, 115.5, -123.]
+                       )
 
 def buildCoords(avec, bvec, cvec, geom):
 
@@ -131,7 +131,7 @@ def calcRMSdAll (st1, st2):
 
     return (math.sqrt(rmsd))
 
-def get_all_rr_distances(r1,r2):
+def get_all_rr_distances(r1, r2):
     dist_mat = []
     for at1 in r1.get_atoms():
         for at2 in r2.get_atoms():
@@ -139,18 +139,18 @@ def get_all_rr_distances(r1,r2):
                 dist_mat.append ([at1, at2, at1-at2])
     return dist_mat
 
-def same_residue (at1,at2):
+def same_residue (at1, at2):
     return at1.get_parent() == at2.get_parent()
 
-def same_model(r1,r2):
+def same_model(r1, r2):
     return r1.get_parent().get_parent() == r2.get_parent().get_parent()
 
-def same_chain(r1,r2):
-    return r1.get_parent() == r2.get_parent() and same_model(r1,r2)
+def same_chain(r1, r2):
+    return r1.get_parent() == r2.get_parent() and same_model(r1, r2)
 
-def seq_consecutive(r1,r2):
+def seq_consecutive(r1, r2):
     resnum1 = r1.id[1]
     resnum2 = r2.id[1]
-    return same_chain(r1,r2) and abs(resnum1-resnum2) == 1
-    
-    
+    return same_chain(r1, r2) and abs(resnum1-resnum2) == 1
+
+

@@ -3,16 +3,13 @@
 """
 
 
-import sys
-import re
-
+from Bio.PDB.MMCIFParser import MMCIFParser
 from Bio.PDB.PDBIO import PDBIO
 from Bio.PDB.PDBList import PDBList
 from Bio.PDB.PDBParser import PDBParser
-from Bio.PDB.MMCIFParser import MMCIFParser
-
-
+import re
 import structure_checking.util as util
+import sys
 
 MODELS_MAXRMS = 5.0    # Threshold value to detect NMR models (angs)
 
@@ -120,7 +117,7 @@ class StructureManager():
 
             for r in self.st.get_residues():
                 util.removeHFromRes(r)
-                
+
     def get_structure(self):
         return self.st
 
@@ -143,10 +140,10 @@ class StructureManager():
             if at.id == 'CA':
                 ca_ats.append(at)
         for i in range(0, len(ca_ats)-1):
-            for j in range(i+1, len(ca_ats)):
+            for j in range(i + 1, len(ca_ats)):
                 dist_mat.append ([ca_ats[i], ca_ats[j], ca_ats[i]-ca_ats[j]])
         return dist_mat
-    
+
     def get_all_distances(self):
         dist_mat = []
         for at1 in self.st.get_atoms():
@@ -154,15 +151,15 @@ class StructureManager():
                 if at1.serial_number < at2.serial_number:
                     dist_mat.append ([at1, at2, at1-at2])
         return dist_mat
-    
+
     def get_nmodels(self):
         return len(self.st)
-    
-    def select_model(self,nm):
+
+    def select_model(self, nm):
         self.st = self.st[nm-1]
-    
+
     def get_chain_ids(self):
-        chain_ids=[]
+        chain_ids = []
         for ch in st.get_chains():
             chain_ids.append(ch.id)
         return chain_ids
@@ -173,18 +170,19 @@ class StructureManager():
         for ch in ch_ok:
             if not ch in chain_ids:
                 print ("Error: request chain not present", ch, file=sys.stderr)
-                select_chains=''
+                select_chains = ''
         for ch in chain_ids:
             if ch not in ch_ok:
                 self.st[0].detach_child(ch)
+
     def get_altloc_residues(self):
-        res_list={}
+        res_list = {}
         for at in self.st.get_atoms():
             r = at.get_parent()
             rid = util.residueid(r)
             if at.get_altloc() != ' ':
                 if rid not in res_list:
-                    res_list[rid]=[]
+                    res_list[rid] = []
                 res_list[rid].append(at)
         return res_list
 
@@ -196,36 +194,36 @@ class StructureManager():
                 newat = at.selected_child
             else:
                 newat = at.child_dict[select_altloc]
-                newat.disordered_flag=0
-                newat.altloc=' '
+                newat.disordered_flag = 0
+                newat.altloc = ' '
                 res.detach_child(at.id)
                 res.add (newat)
-            res.disordered=0
+            res.disordered = 0
+
     def get_metals(self, metal_ats):
-        met_list=[]
-        met_rid=[]
-        at_groups={}
+        met_list = []
+        met_rid = []
+        at_groups = {}
         for at in self.st.get_atoms():
             if not re.match('H_', at.get_parent().id[0]):
                 continue
             if at.id in metal_ats:
                 met_list.append(at)
-        
+
         for at in met_list:
             r = at.get_parent()
             rid = r.get_parent().id + str(r.id[1])
             met_rid.append(rid)
             if at.id not in at_groups.keys():
-                at_groups[at.id]=[]
+                at_groups[at.id] = []
             at_groups[at.id].append(rid)
-        
+
         return [met_list, met_rid, at_groups]
-    
+
     #TODO refine this as remove_residue or remove_atom_set
-    def remove_metals (self, met_list, to_remove ):
+    def remove_metals (self, met_list, to_remove):
         for at in met_list:
             r = at.get_parent()
             rid = r.get_parent().id + str(r.id[1])
             if rid in to_remove:
                 r.detach_child(at.id)
-            
