@@ -37,7 +37,7 @@ class StructureChecking():
 
     def command_list(self, options):
 
-        opts = _get_parameter(options, "command_list", "--list", "op_list", "Command List File")
+        opts = _get_parameters(options, "command_list", "--list", "op_list", "Command List File")
 
         opts.op_list = _check_parameter(opts.op_list, "Command list file: ")
 
@@ -93,7 +93,7 @@ class StructureChecking():
 
     def chains(self, options):
 
-        opts = _get_parameter(options, "chains", '--select_chains', "select_chains", "Chains (*| list comma separated)")
+        opts = _get_parameters(options, "chains", '--select_chains', "select_chains", "Chains (*| list comma separated)")
         print ("Running chains", ' '.join(options))
         self._load_structure(self.args.input_structure_path)
         self.chain_ids = self.struc_man.get_chain_ids()

@@ -160,7 +160,7 @@ class StructureManager():
 
     def get_chain_ids(self):
         chain_ids = []
-        for ch in st.get_chains():
+        for ch in self.st.get_chains():
             chain_ids.append(ch.id)
         return chain_ids
 
@@ -194,11 +194,11 @@ class StructureManager():
                 newat = at.selected_child
             else:
                 newat = at.child_dict[select_altloc]
-                newat.disordered_flag = 0
-                newat.altloc = ' '
-                res.detach_child(at.id)
-                res.add (newat)
-            res.disordered = 0
+            newat.disordered_flag = 0
+            newat.altloc = ' '
+            res.detach_child(at.id)
+            res.add (newat)
+        res.disordered = 0
 
     def get_metals(self, metal_ats):
         met_list = []
