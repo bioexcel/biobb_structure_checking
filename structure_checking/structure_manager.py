@@ -4,6 +4,7 @@
 
 
 import sys
+import re
 
 from Bio.PDB.PDBIO import PDBIO
 from Bio.PDB.PDBList import PDBList
@@ -154,6 +155,28 @@ class StructureManager():
                     dist_mat.append ([at1, at2, at1-at2])
         return dist_mat
     
+    def get_nmodels(self):
+        return len(self.st)
+    
+    def select_model(self,nm):
+        self.st = self.st[nm-1]
+    
+    def get_chain_ids(self):
+        chain_ids=[]
+        for ch in st.get_chains():
+            chain_ids.append(ch.id)
+        return chain_ids
+
+    def select_chains(self, select_chain):
+        chain_ids = self.get_chain_ids
+        ch_ok = select_chains.split(',')
+        for ch in ch_ok:
+            if not ch in chain_ids:
+                print ("Error: request chain not present", ch, file=sys.stderr)
+                select_chains=''
+        for ch in chain_ids:
+            if ch not in ch_ok:
+                self.st[0].detach_child(ch)
     def get_altloc_residues(self):
         res_list={}
         for at in self.st.get_atoms():
@@ -165,3 +188,44 @@ class StructureManager():
                 res_list[rid].append(at)
         return res_list
 
+    def select_altloc_residues(self, r, select_altloc):
+        alt_loc_res = self.get_altloc_residues()
+        for at in alt_loc_res[r]:
+            res = at.get_parent()
+            if select_altloc == 'occupancy':
+                newat = at.selected_child
+            else:
+                newat = at.child_dict[select_altloc]
+                newat.disordered_flag=0
+                newat.altloc=' '
+                res.detach_child(at.id)
+                res.add (newat)
+            res.disordered=0
+    def get_metals(self, metal_ats):
+        met_list=[]
+        met_rid=[]
+        at_groups={}
+        for at in self.st.get_atoms():
+            if not re.match('H_', at.get_parent().id[0]):
+                continue
+            if at.id in metal_ats:
+                met_list.append(at)
+        
+        for at in met_list:
+            r = at.get_parent()
+            rid = r.get_parent().id + str(r.id[1])
+            met_rid.append(rid)
+            if at.id not in at_groups.keys():
+                at_groups[at.id]=[]
+            at_groups[at.id].append(rid)
+        
+        return [met_list, met_rid, at_groups]
+    
+    #TODO refine this as remove_residue or remove_atom_set
+    def remove_metals (self, met_list, to_remove ):
+        for at in met_list:
+            r = at.get_parent()
+            rid = r.get_parent().id + str(r.id[1])
+            if rid in to_remove:
+                r.detach_child(at.id)
+            
