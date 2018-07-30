@@ -67,9 +67,9 @@ class CmdLine():
         )
         
         self.argparser.add_argument(
-            '--no_interactive',
+            '--non_interactive',
             action='store_true',
-            dest='no_interactive',
+            dest='non_interactive',
             help='Do not prompt for missing parameters'
             )
 
