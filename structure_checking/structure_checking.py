@@ -106,7 +106,7 @@ class StructureChecking():
             opts.select_chains = _check_parameter(opts.select_chains, "Select chain id(s) or * for all [*," + ",".join(self.chain_ids) + "]: ")
             if opts.select_chains != '*':
                 self.struc_man.select_chains(opts.select_chains)
-                print ("Selecting chain(s) ", ','.join(ch_ok))
+                print ("Selecting chain(s) ", ','.join(opts.select_chains))
                 self.chain_ids = self.struc_man.get_chain_ids()
             else:
                 print ("Selecting all chains")
@@ -207,7 +207,8 @@ class StructureChecking():
                 to_remove = []
                 rid_list = opts.remove_metals.split(',')
                 for at in met_list:
-                    if at['rid'] in rid_list:
+                    r=at.get_parent()
+                    if r.get_parent().id + str(r.id[1]) in rid_list:
                         to_remove.append(at)
             elif atids:
                 to_remove = []

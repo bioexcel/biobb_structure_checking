@@ -164,8 +164,8 @@ class StructureManager():
             chain_ids.append(ch.id)
         return chain_ids
 
-    def select_chains(self, select_chain):
-        chain_ids = self.get_chain_ids
+    def select_chains(self, select_chains):
+        chain_ids = self.get_chain_ids()
         ch_ok = select_chains.split(',')
         for ch in ch_ok:
             if not ch in chain_ids:
