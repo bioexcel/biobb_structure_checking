@@ -54,6 +54,8 @@ class StructureChecking():
 
         i = 1
         for line in fh:
+            if line == "\n" or line[0:1] == '#':
+                continue
             print ("Step " + str(i) + ":", line)
             data = line.split()
             command = data[0]
@@ -62,7 +64,8 @@ class StructureChecking():
                 f = getattr(self, command)
             except AttributeError:
                 print ("Error: command unknown or not implemented")
-                sys.exit(1)
+                continue
+                #sys.exit(1)
             f(options)
             i += 1
 
@@ -155,24 +158,33 @@ class StructureChecking():
 
         self._load_structure(self.args.input_structure_path)
 
-        [met_list, met_rid, at_groups] = self.struc_man.get_metals(sets.metal_ats)
+        met_list = self.struc_man.get_metals(sets.metal_ats)
 
         if len(met_list) > 1:
             print ("Metal ions found")
+            met_rids=[]
+            at_groups={}
             for at in met_list:
                 print ("  ", util.atomid(at))
+                r=at.get_parent()
+                met_rids.append(r.get_parent().id + str(r.id[1]))
+                if not at.id in at_groups:
+                    at_groups[at.id]=[]
+                at_groups[at.id].append(at)
 
             ok = False
             resids = False
             atids = False
             while not ok:
                 opts.remove_metals = _check_parameter(opts.remove_metals,
-                                                      'Remove (All | None | any of  ' + ','.join(sorted(at_groups.keys())) + ' | any of ' + ','.join(met_rid) + ': ')
+                         'Remove (All | None | any of  ' 
+                         + ','.join(sorted(at_groups.keys())) 
+                         + ' | any of ' + ','.join(met_rids) + ': ')
                 ok = opts.remove_metals in ['All', 'None']
                 if not ok:
                     ok = True
                     for r in opts.remove_metals.split(','):
-                        ok = ok and r in met_rid
+                        ok = ok and r in met_rids
                     resids = ok
 
                 if not ok:
@@ -189,21 +201,129 @@ class StructureChecking():
                 to_remove = []
 
             elif opts.remove_metals == 'All':
-                to_remove = met_rid
+                to_remove = met_list
 
             elif resids:
-                to_remove = opts.remove_metals.split(',')
-
+                to_remove = []
+                rid_list = opts.remove_metals.split(',')
+                for at in met_list:
+                    if at['rid'] in rid_list:
+                        to_remove.append(at)
             elif atids:
                 to_remove = []
                 for atid in opts.remove_metals.split(','):
                     to_remove.extend(at_groups[atid])
 
-            selt.struc_man.remove_metals(met_list, to_remove)
-            print ("Metals removed", opts.remove_metals)
+            n=0
+            for at in to_remove:
+                self.struc_man.remove_residue(at.get_parent())
+                n+= 1
+        
+            print ("Metal Atoms removed", opts.remove_metals,"("+str(n)+")")
+        
         else:
             print ("No metal ions found")
 
+    def remwat(self, options):
+        
+        opts = _get_parameters(options, "remwat", '--remove', 'remove_wat', 'Remove Water molecules')
+
+        print ("Running remwat", ' '.join(options))
+
+        self._load_structure(self.args.input_structure_path)
+        
+        lig_list = self.struc_man.get_ligands(incl_water=True)
+        
+        wat_list=[]
+        for r in lig_list:
+            if r.id[0] == 'W':
+                wat_list.append(r)
+        if len(wat_list) > 0:
+            print ("Water molecules detected")
+            
+            ok = False
+            while not ok:
+                opts.remove_wat = _check_parameter(opts.remove_wat,'Remove (Yes | No): ')
+                ok = opts.remove_wat in ['Yes', 'No']                
+                if not ok:
+                    print ("Warning: unknown", opts.remove_wat)
+            
+            if opts.remove_wat == 'Yes':
+                n=0
+                for r in wat_list:
+                    self.struc_man.remove_residue(r)
+                    n+= 1
+            print ("Water molecules removed", '('+str(n)+')')
+                
+        else:
+            print ("No water molecules detected")
+
+
+    def ligands(self, options):
+
+        opts = _get_parameters(options, "ligands", '--remove', 'remove_ligands', 'Remove Ligand residues')
+
+        print ("Running ligands", ' '.join(options))
+
+        self._load_structure(self.args.input_structure_path)
+        
+        lig_list = self.struc_man.get_ligands()
+        if len(lig_list) > 0:
+            print ("Ligands detected")
+            rids = set()
+            rnums = []
+            for r in lig_list:
+                print (util.residueid(r))
+                rids.add(r.resname)
+                rnums.append(r.get_parent().id + str(r.id[1]))
+            
+            ok = False
+            byresnum = False
+            byrids = False
+            while not ok:
+                opts.remove_ligands = _check_parameter(opts.remove_ligands,
+                         'Remove (All | None | any of  ' 
+                         + ','.join(sorted(rids)) 
+                         + ' | any of ' + ','.join(rnums) + '): ')
+                ok = opts.remove_ligands in ['All', 'None']
+                if not ok:
+                    ok = True
+                    for rid in opts.remove_ligands.split(','):
+                        ok = ok and (rid in rids)
+                    byrids = ok
+                if not ok:
+                    ok = True
+                    for rn in opts.remove_ligands.split(','):
+                        ok = ok and (rn in rnums)
+                    byresnum = ok
+                if not ok:
+                    print ("Warning: unknown", opts.remove_ligands)
+            
+            to_remove=[]
+            
+            if opts.remove_ligands == 'None':
+                print ("Nothing to do")
+            elif opts.remove_ligands == 'All':
+                to_remove = lig_list
+            elif byrids:
+                rm = opts.remove_ligands.split(',')
+                for r in lig_list:
+                    if r.resname in rm:
+                        to_remove.append(r)
+            elif byresnum:
+                rm = opts.remove_ligands.split(',')
+                for r in lig_list:
+                    if (r.get_parent().id + str(r.id[1])) in rm:
+                        to_remove.append(r)
+            n=0
+            for r in to_remove:
+                self.struc_man.remove_residue(r)
+                n+= 1
+                    
+            print ("Ligands removed", opts.remove_ligands, '('+str(n)+')')
+                
+        else:
+            print ("No ligands detected")
 
 #===============================================================================
 

@@ -1,0 +1,4 @@
+Detects HETATM (excluding Water molecules) to selectively remove them 
+options: All, None, Residue List (by id, by num)
+
+Usage: checkStruct.py metals --remove list_to_remove

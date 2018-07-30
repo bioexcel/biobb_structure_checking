@@ -20,7 +20,7 @@ class StructureManager():
         self.num_ats = 0
 
     def loadStructure(self, input_pdb_path, use_models, remove_H, debug=False):
-
+# TODO support biounits
         if "pdb:"in input_pdb_path:
             pdbl = PDBList(pdb='tmpPDB')
 
@@ -202,28 +202,20 @@ class StructureManager():
 
     def get_metals(self, metal_ats):
         met_list = []
-        met_rid = []
-        at_groups = {}
         for at in self.st.get_atoms():
             if not re.match('H_', at.get_parent().id[0]):
                 continue
             if at.id in metal_ats:
                 met_list.append(at)
+        return met_list
 
-        for at in met_list:
-            r = at.get_parent()
-            rid = r.get_parent().id + str(r.id[1])
-            met_rid.append(rid)
-            if at.id not in at_groups.keys():
-                at_groups[at.id] = []
-            at_groups[at.id].append(rid)
-
-        return [met_list, met_rid, at_groups]
-
-    #TODO refine this as remove_residue or remove_atom_set
-    def remove_metals (self, met_list, to_remove):
-        for at in met_list:
-            r = at.get_parent()
-            rid = r.get_parent().id + str(r.id[1])
-            if rid in to_remove:
-                r.detach_child(at.id)
+    def remove_residue(self,r):
+        r.get_parent().detach_child(r.id)
+        
+    def get_ligands(self, incl_water=False):
+        lig_list = []
+        for r in self.st.get_residues():
+            if re.match('H_', r.id[0]) or (incl_water and re.match('W', r.id[0])):
+               lig_list.append(r)
+        return lig_list
+        
