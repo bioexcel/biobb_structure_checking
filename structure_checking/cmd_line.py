@@ -58,6 +58,20 @@ class CmdLine():
             dest='json_output_path',
             help='Cummulated checking results on a json file'
             )
+        
+        self.argparser.add_argument(
+            '--check_only',
+            action="store_true",
+            dest='check_only',
+            help='Perform checks, structures is not modified'
+        )
+        
+        self.argparser.add_argument(
+            '--no_interactive',
+            action='store_true',
+            dest='no_interactive',
+            help='Do not prompt for missing parameters'
+            )
 
         self.argparser.add_argument(
             'options',

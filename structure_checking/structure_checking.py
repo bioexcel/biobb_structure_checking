@@ -14,8 +14,6 @@ from structure_checking.json_writer import JSONWriter
 import structure_checking.util as util
 import sys
 
-
-
 class StructureChecking():
     def __init__(self, args):
         self.args = args
@@ -33,8 +31,9 @@ class StructureChecking():
 
         f(self.args.options)
 
-        self._save_structure()
-        print ("Structure saved on", self.args.output_structure_path)
+        if not self.args.check_only: 
+            self._save_structure()
+            print ("Structure saved on", self.args.output_structure_path)
         
         if self.args.json_output_path is not None:
             json_writer=JSONWriter()
@@ -91,23 +90,24 @@ class StructureChecking():
         print ("Models detected: ", self.nmodels)
         models_sum['detected'] = self.nmodels
         
-        if self.nmodels > 1:
-            ok = False
-            while not ok:
-                opts.select_model = int (_check_parameter(opts.select_model, "Select Model Num [1-" + str(self.nmodels) + "]: "))
-                print (opts.select_model)
-                ok = opts.select_model > 0 or opts.select_model <= self.nmodels
-                if not ok:
-                    print ("Error: unknown model", opts.select_model, file=sys.stderr)
-                    opts.select_model = ''
+        if not self.args.check_only:
+            if self.nmodels > 1:
+                ok = False
+                while not ok:
+                    opts.select_model = int (_check_parameter(opts.select_model, "Select Model Num [1-" + str(self.nmodels) + "]: "))
+                    print (opts.select_model)
+                    ok = opts.select_model > 0 or opts.select_model <= self.nmodels
+                    if not ok:
+                        print ("Error: unknown model", opts.select_model, file=sys.stderr)
+                        opts.select_model = ''
         
-            print ("Selecting model", opts.select_model)
-            self.struc_man.select_model(opts.select_model)
-            self.nmodels = self.struc_man.get_nmodels()
-            models_sum['selected'] = opts.select_model
+                print ("Selecting model", opts.select_model)
+                self.struc_man.select_model(opts.select_model)
+                self.nmodels = self.struc_man.get_nmodels()
+                models_sum['selected'] = opts.select_model
         
-        else:
-            print ("Nothing to do")
+            else:
+                print ("Nothing to do")
 
         self.summary['models'] = models_sum
 
@@ -125,27 +125,29 @@ class StructureChecking():
         
         chains_sum['detected'] = self.chain_ids
 
-        if len(self.chain_ids) > 1:
-            ok= False
-            while not ok:
-                opts.select_chains = _check_parameter(opts.select_chains, "Select chain id(s) or * for all [*," + ",".join(self.chain_ids) + "]: ")
-                ok = opts.select_chains == '*'
-                if not ok:
-                    ok = True
-                    for ch in opts.select_chains.split(','):
-                        ok = ok and ch in self.chain_ids
+        if not self.args.check_only:
+            if len(self.chain_ids) > 1:
+                ok= False
+                while not ok:
+                    opts.select_chains = _check_parameter(opts.select_chains, "Select chain id(s) orAll," + ",".join(self.chain_ids) + "]: ")
+                    ok = opts.select_chains == 'All'
+                    if not ok:
+                        ok = True
+                        for ch in opts.select_chains.split(','):
+                            ok = ok and ch in self.chain_ids
 
-            if opts.select_chains != '*':
-                self.struc_man.select_chains(opts.select_chains)
-                print ("Selecting chain(s) ", ','.join(opts.select_chains))
-                chains_sum['selected']=opts.select_chains.split(',')
+                if opts.select_chains != 'All':
+                    self.struc_man.select_chains(opts.select_chains)
+                    print ("Selecting chain(s) ", ','.join(opts.select_chains))
+                    chains_sum['selected']=opts.select_chains.split(',')
+                else:
+                    print ("Selecting all chains")
+                    chains_sum['selected']=self.chain_ids
+                self.chain_ids = self.struc_man.get_chain_ids()
+                chains_sum['final']=self.chain_ids            
             else:
-                print ("Selecting all chains")
-                chains_sum['selected']=self.chain_ids
-            self.chain_ids = self.struc_man.get_chain_ids()
-            chains_sum['final']=self.chain_ids            
-        else:
-            print ("Nothing to do")
+                print ("Nothing to do")
+
         print ()
         
         self.summary['chains'] = chains_sum
@@ -176,21 +178,24 @@ class StructureChecking():
                             s += " " + alt + "(" + str(at.child_dict[alt].occupancy) + ")"
                         print (s)
                         altloc_sum['detected'][r].append({'atom':at.id, 'loc_label':alt,'occupancy':at.child_dict[alt].occupancy})
-                    
-                    ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
-                    while not ok:
-                        opts.select_altloc = _check_parameter(opts.select_altloc, "Select alternative (occupancy, " + ','.join(altlocs) + '): ')
-                        ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
-                        if not ok:
-                            print ("Error: Unknown ", opts.select_altloc, file=sys.stderr)
-                            opts.select_altloc = ''
 
-                    print ("Selecting location", opts.select_altloc)
-                    altloc_sum['selected']=opts.select_altloc
-                    self.struc_man.select_altloc_residues(r, opts.select_altloc)
+                    if not self.args.check_only:
+                        ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
+                        while not ok:
+                            opts.select_altloc = _check_parameter(opts.select_altloc, "Select alternative (occupancy, " + ','.join(altlocs) + '): ')
+                            ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
+                            if not ok:
+                                print ("Error: Unknown ", opts.select_altloc, file=sys.stderr)
+                                opts.select_altloc = ''
+
+                        print ("Selecting location", opts.select_altloc)
+                        altloc_sum['selected']=opts.select_altloc
+                        self.struc_man.select_altloc_residues(r, opts.select_altloc)
         else:
             print ("No alternative locations detected")
+        
         self.summary['altloc']=altloc_sum
+    
     
     def metals (self, options):
 
@@ -217,57 +222,58 @@ class StructureChecking():
                 at_groups[at.id].append(at)
                 metals_sum['detected'].append(r.get_parent().id + str(r.id[1]))
 
-            ok = False
-            resids = False
-            atids = False
-            while not ok:
-                opts.remove_metals = _check_parameter(opts.remove_metals,
-                         'Remove (All | None | any of  ' 
-                         + ','.join(sorted(at_groups.keys())) 
-                         + ' | any of ' + ','.join(met_rids) + ': ')
-                ok = opts.remove_metals in ['All', 'None']
-                if not ok:
-                    ok = True
-                    for r in opts.remove_metals.split(','):
-                        ok = ok and r in met_rids
-                    resids = ok
+            if not self.args.check_only:
+                ok = False
+                resids = False
+                atids = False
+                while not ok:
+                    opts.remove_metals = _check_parameter(opts.remove_metals,
+                             'Remove (All | None | any of  ' 
+                             + ','.join(sorted(at_groups.keys())) 
+                             + ' | any of ' + ','.join(met_rids) + ': ')
+                    ok = opts.remove_metals in ['All', 'None']
+                    if not ok:
+                        ok = True
+                        for r in opts.remove_metals.split(','):
+                            ok = ok and r in met_rids
+                        resids = ok
 
-                if not ok:
-                    ok = True
+                    if not ok:
+                        ok = True
+                        for atid in opts.remove_metals.split(','):
+                            ok = ok and atid in at_groups.keys()
+                        atids = ok
+
+                    if not ok:
+                        print ("Error unknown", opts.remove_metals, file=sys.stderr)
+                        opts.remove_metals = ''
+
+                if opts.remove_metals == 'None':
+                    to_remove = []
+
+                elif opts.remove_metals == 'All':
+                    to_remove = met_list
+
+                elif resids:
+                    to_remove = []
+                    rid_list = opts.remove_metals.split(',')
+                    for at in met_list:
+                        r=at.get_parent()
+                        if r.get_parent().id + str(r.id[1]) in rid_list:
+                            to_remove.append(at)
+                elif atids:
+                    to_remove = []
                     for atid in opts.remove_metals.split(','):
-                        ok = ok and atid in at_groups.keys()
-                    atids = ok
-
-                if not ok:
-                    print ("Error unknown", opts.remove_metals, file=sys.stderr)
-                    opts.remove_metals = ''
-
-            if opts.remove_metals == 'None':
-                to_remove = []
-
-            elif opts.remove_metals == 'All':
-                to_remove = met_list
-
-            elif resids:
-                to_remove = []
-                rid_list = opts.remove_metals.split(',')
-                for at in met_list:
-                    r=at.get_parent()
-                    if r.get_parent().id + str(r.id[1]) in rid_list:
-                        to_remove.append(at)
-            elif atids:
-                to_remove = []
-                for atid in opts.remove_metals.split(','):
-                    to_remove.extend(at_groups[atid])
-            metals_sum['removed']=[]
-            n=0
-            for at in to_remove:
-                self.struc_man.remove_residue(at.get_parent())
-                metals_sum['removed'].append(util.residueid(at.get_parent()))
-                n+= 1
+                        to_remove.extend(at_groups[atid])
+                metals_sum['removed']=[]
+                n=0
+                for at in to_remove:
+                    metals_sum['removed'].append(util.residueid(at.get_parent()))
+                    self.struc_man.remove_residue(at.get_parent())
+                    n+= 1
         
-            print ("Metal Atoms removed", opts.remove_metals,"("+str(n)+")")
-            metals_sum['n_removed'] = n
+                print ("Metal Atoms removed", opts.remove_metals,"("+str(n)+")")
+                metals_sum['n_removed'] = n
         
         else:
             print ("No metal ions found")
@@ -293,24 +299,26 @@ class StructureChecking():
             print ("Water molecules detected")
             remwat_sum['n_detected']= len(wat_list)
             
-            ok = False
-            while not ok:
-                opts.remove_wat = _check_parameter(opts.remove_wat,'Remove (Yes | No): ')
-                ok = opts.remove_wat in ['Yes', 'No']                
-                if not ok:
-                    print ("Warning: unknown", opts.remove_wat)
+            if not self.args.check_only:
+                ok = False
+                while not ok:
+                    opts.remove_wat = _check_parameter(opts.remove_wat,'Remove (Yes | No): ')
+                    ok = opts.remove_wat in ['Yes', 'No']                
+                    if not ok:
+                        print ("Warning: unknown", opts.remove_wat)
             
-            if opts.remove_wat == 'Yes':
-                n=0
-                for r in wat_list:
-                    self.struc_man.remove_residue(r)
-                    n+= 1
-            print ("Water molecules removed", '('+str(n)+')')
-            remwat_sum['n_removed'] = n
+                if opts.remove_wat == 'Yes':
+                    n=0
+                    for r in wat_list:
+                        self.struc_man.remove_residue(r)
+                        n+= 1
+                    print ("Water molecules removed", '('+str(n)+')')
+                    remwat_sum['n_removed'] = n
         else:
             print ("No water molecules detected")
         
         self.summary['remwat']=remwat_sum
+        print ()
 
     def ligands(self, options):
 
@@ -333,58 +341,60 @@ class StructureChecking():
                 rids.add(r.resname)
                 rnums.append(r.get_parent().id + str(r.id[1]))
             
-            ok = False
-            byresnum = False
-            byrids = False
-            while not ok:
-                opts.remove_ligands = _check_parameter(opts.remove_ligands,
+            if not self.args.check_only:
+                ok = False
+                byresnum = False
+                byrids = False
+                while not ok:
+                    opts.remove_ligands = _check_parameter(opts.remove_ligands,
                          'Remove (All | None | any of  ' 
                          + ','.join(sorted(rids)) 
                          + ' | any of ' + ','.join(rnums) + '): ')
-                ok = opts.remove_ligands in ['All', 'None']
-                if not ok:
-                    ok = True
-                    for rid in opts.remove_ligands.split(','):
-                        ok = ok and (rid in rids)
-                    byrids = ok
-                if not ok:
-                    ok = True
-                    for rn in opts.remove_ligands.split(','):
-                        ok = ok and (rn in rnums)
-                    byresnum = ok
-                if not ok:
-                    print ("Warning: unknown", opts.remove_ligands)
+                    ok = opts.remove_ligands in ['All', 'None']
+                    if not ok:
+                        ok = True
+                        for rid in opts.remove_ligands.split(','):
+                            ok = ok and (rid in rids)
+                        byrids = ok
+                    if not ok:
+                        ok = True
+                        for rn in opts.remove_ligands.split(','):
+                            ok = ok and (rn in rnums)
+                        byresnum = ok
+                    if not ok:
+                        print ("Warning: unknown", opts.remove_ligands)
                 
-                ligands_sum['removed']={'opt':opts.remove_ligands,'lst':[]}
+                    ligands_sum['removed']={'opt':opts.remove_ligands,'lst':[]}
             
-            to_remove=[]
+                to_remove=[]
             
-            if opts.remove_ligands == 'None':
-                print ("Nothing to do")
-            elif opts.remove_ligands == 'All':
-                to_remove = lig_list
-            elif byrids:
-                rm = opts.remove_ligands.split(',')
-                for r in lig_list:
-                    if r.resname in rm:
-                        to_remove.append(r)
-            elif byresnum:
-                rm = opts.remove_ligands.split(',')
-                for r in lig_list:
-                    if (r.get_parent().id + str(r.id[1])) in rm:
-                        to_remove.append(r)
-            n=0
-            for r in to_remove:
-                ligands_sum['removed']['lst'].append(util.residueid(r))
-                self.struc_man.remove_residue(r)
-                n+= 1
+                if opts.remove_ligands == 'None':
+                    print ("Nothing to do")
+                elif opts.remove_ligands == 'All':
+                    to_remove = lig_list
+                elif byrids:
+                    rm = opts.remove_ligands.split(',')
+                    for r in lig_list:
+                        if r.resname in rm:
+                            to_remove.append(r)
+                elif byresnum:
+                    rm = opts.remove_ligands.split(',')
+                    for r in lig_list:
+                        if (r.get_parent().id + str(r.id[1])) in rm:
+                            to_remove.append(r)
+                n=0
+                for r in to_remove:
+                    ligands_sum['removed']['lst'].append(util.residueid(r))
+                    self.struc_man.remove_residue(r)
+                    n+= 1
                     
-            print ("Ligands removed", opts.remove_ligands, '('+str(n)+')')
-            ligands_sum['n_removed']=n
+                print ("Ligands removed", opts.remove_ligands, '('+str(n)+')')
+                ligands_sum['n_removed']=n
         else:
             print ("No ligands detected")
 
         self.summary['ligands']=ligands_sum
+        print()
 #===============================================================================
 
     def _load_structure(self, input_structure_path):
