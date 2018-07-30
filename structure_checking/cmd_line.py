@@ -52,6 +52,12 @@ class CmdLine():
             dest='res_lib_path',
             help="Override settings default residue library (AMBER prep format)"
         )
+        
+        self.argparser.add_argument(
+            '--json',
+            dest='json_output_path',
+            help='Cummulated checking results on a json file'
+            )
 
         self.argparser.add_argument(
             'options',
