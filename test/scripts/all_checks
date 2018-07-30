@@ -1,0 +1,6 @@
+models --select_model 1
+chains --select_chain All
+altloc --select_altloc occupancy
+metals --remove ZN
+ligands --remove SO4
+remwat --remove Yes
