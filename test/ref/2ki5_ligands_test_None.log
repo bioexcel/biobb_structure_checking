@@ -1,0 +1,17 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running ligands --remove None
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+Ligands detected
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+Nothing to do
+Ligands removed None (0)
+
+Structure saved on 2ki5_ligands_test_None.pdb

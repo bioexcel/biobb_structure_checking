@@ -1,0 +1,12 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running remwat --remove Yes
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+Water molecules detected
+Water molecules removed (292)
+
+Structure saved on 2ki5_remwat_test_Yes.pdb

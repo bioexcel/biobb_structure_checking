@@ -1,0 +1,377 @@
+{
+ "altloc": {
+  "detected": {
+   "ASN A361": [
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.59
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.59
+    },
+    {
+     "atom": "CG",
+     "loc_label": "B",
+     "occupancy": 0.59
+    },
+    {
+     "atom": "OD1",
+     "loc_label": "B",
+     "occupancy": 0.59
+    },
+    {
+     "atom": "ND2",
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ],
+   "GLN B347": [
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.57
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.57
+    },
+    {
+     "atom": "CG",
+     "loc_label": "B",
+     "occupancy": 0.57
+    },
+    {
+     "atom": "CD",
+     "loc_label": "B",
+     "occupancy": 0.57
+    },
+    {
+     "atom": "OE1",
+     "loc_label": "B",
+     "occupancy": 0.57
+    },
+    {
+     "atom": "NE2",
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "GLN B418": [
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.62
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.62
+    },
+    {
+     "atom": "CG",
+     "loc_label": "B",
+     "occupancy": 0.62
+    },
+    {
+     "atom": "CD",
+     "loc_label": "B",
+     "occupancy": 0.62
+    },
+    {
+     "atom": "OE1",
+     "loc_label": "B",
+     "occupancy": 0.62
+    },
+    {
+     "atom": "NE2",
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "LYS A340": [
+    {
+     "atom": "N",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "C",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "O",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CG",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CD",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CE",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "NZ",
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "SER B298": [
+    {
+     "atom": "N",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "C",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "O",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.5
+    },
+    {
+     "atom": "OG",
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "THR B411": [
+    {
+     "atom": "CA",
+     "loc_label": "B",
+     "occupancy": 0.66
+    },
+    {
+     "atom": "CB",
+     "loc_label": "B",
+     "occupancy": 0.66
+    },
+    {
+     "atom": "OG1",
+     "loc_label": "B",
+     "occupancy": 0.66
+    },
+    {
+     "atom": "CG2",
+     "loc_label": "B",
+     "occupancy": 0.66
+    }
+   ]
+  },
+  "selected": "occupancy"
+ },
+ "chains": {
+  "detected": [
+   "A",
+   "B"
+  ],
+  "final": [
+   "A",
+   "B"
+  ],
+  "selected": [
+   "A",
+   "B"
+  ]
+ },
+ "clashes": {
+  "detected": {
+   "acceptor": [
+    {
+     "at1": "SER B383.O",
+     "at2": "GLN B386.O",
+     "dist": 2.9106497764587402
+    },
+    {
+     "at1": "HIS A433.O",
+     "at2": "TYR A436.O",
+     "dist": 3.089860200881958
+    }
+   ],
+   "apolar": [
+    {
+     "at1": "HIS B429.CD2",
+     "at2": "ALA B431.N",
+     "dist": 2.8990869522094727
+    },
+    {
+     "at1": "CYS A261.SG",
+     "at2": "CYS A321.SG",
+     "dist": 2.035024881362915
+    },
+    {
+     "at1": "GLU A382.CB",
+     "at2": "GLN A386.O",
+     "dist": 2.893669843673706
+    },
+    {
+     "at1": "GLU A294.OE2",
+     "at2": "TYR A300.CE1",
+     "dist": 2.083376407623291
+    },
+    {
+     "at1": "CYS B261.SG",
+     "at2": "CYS B321.SG",
+     "dist": 2.0312585830688477
+    },
+    {
+     "at1": "ASN A297.ND2",
+     "at2": "NAG A501.C1",
+     "dist": 1.902539849281311
+    },
+    {
+     "at1": "BMA A503.O3",
+     "at2": "MAN A508.C1",
+     "dist": 1.27888023853302
+    },
+    {
+     "at1": "HIS B268.CE1",
+     "at2": "GLU B294.OE2",
+     "dist": 2.857300281524658
+    },
+    {
+     "at1": "CYS A367.SG",
+     "at2": "CYS A425.SG",
+     "dist": 1.9952038526535034
+    },
+    {
+     "at1": "MAN B507.O2",
+     "at2": "NAG B509.C1",
+     "dist": 1.365149736404419
+    },
+    {
+     "at1": "NAG B501.O6",
+     "at2": "FUL B508.C1",
+     "dist": 1.333856463432312
+    },
+    {
+     "at1": "ASN B297.ND2",
+     "at2": "NAG B501.C1",
+     "dist": 1.4676153659820557
+    },
+    {
+     "at1": "CYS B367.SG",
+     "at2": "CYS B425.SG",
+     "dist": 2.0464117527008057
+    },
+    {
+     "at1": "NAG A501.O6",
+     "at2": "FUL A507.C1",
+     "dist": 1.3469756841659546
+    },
+    {
+     "at1": "BMA B503.O3",
+     "at2": "MAN B507.C1",
+     "dist": 1.4401260614395142
+    }
+   ],
+   "donor": [],
+   "negative": [
+    {
+     "at1": "GLN B311.OE1",
+     "at2": "ASN B315.OD1",
+     "dist": 3.4233479499816895
+    },
+    {
+     "at1": "GLU B380.OE2",
+     "at2": "GLU B382.OE2",
+     "dist": 3.463707447052002
+    }
+   ],
+   "positive": [],
+   "severe": []
+  }
+ },
+ "getss": {
+  "detected": [
+   {
+    "at1": "CYS A261.SG",
+    "at2": "CYS A321.SG",
+    "dist": 2.035024881362915
+   },
+   {
+    "at1": "CYS A367.SG",
+    "at2": "CYS A425.SG",
+    "dist": 1.9952038526535034
+   },
+   {
+    "at1": "CYS B261.SG",
+    "at2": "CYS B321.SG",
+    "dist": 2.0312585830688477
+   },
+   {
+    "at1": "CYS B367.SG",
+    "at2": "CYS B425.SG",
+    "dist": 2.0464117527008057
+   }
+  ]
+ },
+ "ligands": {
+  "detected": [
+   "NAG A501",
+   "NAG A502",
+   "BMA A503",
+   "MAN A504",
+   "NAG A505",
+   "GAL A506",
+   "FUL A507",
+   "MAN A508",
+   "NAG A509",
+   "GAL A510",
+   "PG4 A511",
+   "NAG B501",
+   "NAG B502",
+   "BMA B503",
+   "MAN B504",
+   "NAG B505",
+   "GAL B506",
+   "MAN B507",
+   "FUL B508",
+   "NAG B509"
+  ]
+ },
+ "metals": {},
+ "models": {
+  "detected": 1
+ },
+ "remwat": {
+  "n_detected": 148,
+  "n_removed": 148
+ }
+}

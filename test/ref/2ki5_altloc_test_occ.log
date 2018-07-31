@@ -1,0 +1,17 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running altlocs --select_altloc occupancy
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+Detected alternative locations
+AC2 A1 :
+  C3' A(1.0) B(0.01)
+  O3' A(1.0) B(0.01)
+  C2' A(1.0) B(0.01)
+  O1' A(1.0) B(0.01)
+  C1' A(1.0) B(0.01)
+Selecting location occupancy
+Structure saved on 2ki5_altloc_test_occ.pdb

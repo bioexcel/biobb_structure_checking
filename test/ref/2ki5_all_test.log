@@ -1,0 +1,99 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running command_list from scripts/all_checks
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+Step 1: models --select_model 1
+
+Running models --select_model 1
+Models detected:  1
+Nothing to do
+
+Step 2: chains --select_chain All
+
+Running chains --select_chain All
+Chains detected:  2 ( A, B )
+Selecting all chains
+
+Step 3: altloc --select_altloc occupancy
+
+Running altlocs --select_altloc occupancy
+Detected alternative locations
+AC2 A1 :
+  C3' A(1.0) B(0.01)
+  O3' A(1.0) B(0.01)
+  C2' A(1.0) B(0.01)
+  O1' A(1.0) B(0.01)
+  C1' A(1.0) B(0.01)
+Selecting location occupancy
+Step 4: metals --remove ZN
+
+Running metals --remove ZN
+No metal ions found
+Step 5: ligands --remove SO4
+
+Running ligands --remove SO4
+Ligands detected
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+Ligands removed SO4 (2)
+
+Step 6: remwat --remove Yes
+
+Running remwat --remove Yes
+Water molecules detected
+Water molecules removed (292)
+
+Step 7: getss
+
+Running getss
+No SS bonds detected
+
+Step 8: clashes
+
+Running clashes
+No severe clashes detected
+Steric apolar clashes detected
+  GLU B210.O ILE B214.CG1 2.84166
+  THR B86.OG1 GLU B374.CB 2.89179
+  ASN A301.OD1 ASP A303.CB 2.87475
+  GLN A261.C SER A263.N 2.88964
+  MET A85.CG GLU A374.OE1 2.85713
+  MET A372.SD VAL B307.CG1 2.77693
+  THR B66.OG1 TYR B80.CE1 2.89009
+  GLY A61.O THR A65.CG2 2.79903
+  LEU A232.O ARG A236.CG 2.74138
+  HIS B105.CE1 GLN B109.OE1 2.77297
+  ARG A89.CD GLU A95.OE1 2.77572
+  PHE A292.C ALA A294.N 2.81923
+  HIS A283.C GLY A285.N 2.88405
+  ARG B212.CZ ASP B330.OD1 2.87537
+  LYS B62.O THR B66.CG2 2.87776
+  SER B357.O ILE B361.CG1 2.8614
+  HIS B58.CD2 TYR B172.OH 2.67491
+  LEU B217.C LYS B219.N 2.84758
+Steric acceptor clashes detected
+  ASP B211.O ASP B215.OD2 2.9139
+  ASP A55.O VAL A204.O 3.03469
+  ALA B334.O ASP B338.OD2 3.09967
+  ARG B89.O GLU B95.OE1 2.79238
+  PRO B359.O ASP B363.OD2 3.07252
+Steric donor clashes detected
+  HIS B213.ND1 ARG B236.NE 3.02481
+  HIS B283.ND1 GLY B285.N 2.77672
+  HIS A283.ND1 GLY A285.N 3.09201
+  LYS A62.NZ ARG A163.NH1 2.57788
+  ARG A212.NH2 ARG A216.NH2 3.07504
+Steric positive clashes detected
+  LYS A62.NZ ARG A163.NH1 2.57788
+  ARG A212.NH2 ARG A216.NH2 3.07504
+Steric negative clashes detected
+  GLN A221.OE1 GLU A225.OE2 3.27541
+
+Command list completed
+Structure saved on 2ki5_all_test.pdb

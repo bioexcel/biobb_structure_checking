@@ -1,0 +1,12 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running chains --select_chain All
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+Chains detected:  2 ( A, B )
+Selecting all chains
+
+Structure saved on 2ki5_chains_test_all.pdb

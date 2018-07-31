@@ -1,0 +1,64 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running command_list from scripts/all_checks
+Structure exists: 'tmpPDB/ar/1ark.cif' 
+Structure pdb:1ark loaded
+Step 1: models --select_model 1
+
+Running models --select_model 1
+Models detected:  15
+1
+Selecting model 1
+
+Step 2: chains --select_chain All
+
+Running chains --select_chain All
+Chains detected:  1 ( A )
+Nothing to do
+
+Step 3: altloc --select_altloc occupancy
+
+Running altlocs --select_altloc occupancy
+No alternative locations detected
+Step 4: metals --remove ZN
+
+Running metals --remove ZN
+No metal ions found
+Step 5: ligands --remove SO4
+
+Running ligands --remove SO4
+No ligands detected
+
+Step 6: remwat --remove Yes
+
+Running remwat --remove Yes
+No water molecules detected
+
+Step 7: getss
+
+Running getss
+No SS bonds detected
+
+Step 8: clashes
+
+Running clashes
+No severe clashes detected
+Steric apolar clashes detected
+  GLU A19.OE2 TRP A38.CZ3 2.64461
+  THR A42.OG1 THR A49.CG2 2.78782
+  MET A9.CE GLU A58.OE2 2.69475
+  TYR A40.CD1 GLY A50.O 2.79363
+Steric acceptor clashes detected
+  MET A39.O MET A51.SD 2.99912
+  ASN A30.OD1 GLN A32.O 2.59771
+  MET A9.O ASP A24.OD2 2.85119
+  TYR A10.O PHE A22.O 3.00635
+No donor clashes detected
+No positive clashes detected
+No negative clashes detected
+
+Command list completed
+Structure saved on 1ark_all_test.pdb

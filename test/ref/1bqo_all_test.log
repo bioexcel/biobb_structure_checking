@@ -1,0 +1,98 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running command_list from scripts/all_checks
+Structure exists: 'tmpPDB/bq/1bqo.cif' 
+Structure pdb:1bqo loaded
+Step 1: models --select_model 1
+
+Running models --select_model 1
+Models detected:  1
+Nothing to do
+
+Step 2: chains --select_chain All
+
+Running chains --select_chain All
+Chains detected:  2 ( A, B )
+Selecting all chains
+
+Step 3: altloc --select_altloc occupancy
+
+Running altlocs --select_altloc occupancy
+No alternative locations detected
+Step 4: metals --remove ZN
+
+Running metals --remove ZN
+Metal ions found
+   ZN A301.ZN
+   ZN A302.ZN
+   CA A303.CA
+   CA A304.CA
+   CA A305.CA
+   ZN B301.ZN
+   ZN B302.ZN
+   CA B303.CA
+   CA B304.CA
+   CA B305.CA
+Metal Atoms removed ZN (4)
+Step 5: ligands --remove SO4
+
+Running ligands --remove SO4
+Ligands detected
+CA A303
+CA A304
+CA A305
+CA B303
+CA B304
+CA B305
+N25 B401
+Error: unknown SO4
+Step 6: remwat --remove Yes
+
+Running remwat --remove Yes
+Water molecules detected
+Water molecules removed (75)
+
+Step 7: getss
+
+Running getss
+No SS bonds detected
+
+Step 8: clashes
+
+Running clashes
+No severe clashes detected
+Steric apolar clashes detected
+  ASP B107.CG CA B304.CA 2.71742
+  HIS B211.CE1 N25 B401.O24 2.84109
+  ASP A107.CG CA A304.CA 2.8548
+  ASP B182.C GLU B184.N 2.86017
+  THR A95.CG2 PRO A129.O 2.77019
+  ASP B228.OD2 ARG B231.CZ 2.66502
+Steric acceptor clashes detected
+  GLY B159.O ASP B181.OD2 3.02309
+  ASP B141.O ASP B177.OD1 2.96424
+  GLN B236.O ASN B240.OD1 2.98048
+  GLY B159.O GLU B184.OE2 2.67921
+  ASP B107.OD2 GLU B184.O 2.76237
+  ASP B181.OD2 GLU B184.OE2 3.08015
+  GLY A161.O GLU A184.OE2 2.94554
+  ASP A141.O ASP A177.OD1 3.08694
+  GLY B173.O ASN B175.O 3.01832
+  ASP B182.O GLU B184.O 2.93062
+  GLU A125.O THR A128.O 2.75144
+  GLU B125.O THR B128.O 2.72552
+  ASP B158.OD1 GLY B161.O 2.62031
+  ASP A182.O GLU A184.O 2.80214
+  ASP A107.OD2 GLU A184.O 3.08757
+No donor clashes detected
+No positive clashes detected
+Steric negative clashes detected
+  ASP B107.OD2 ASP B182.OD1 3.48206
+  ASP A181.OD2 GLU A184.OE2 3.46345
+  ASP B181.OD2 GLU B184.OE2 3.08015
+
+Command list completed
+Structure saved on 1bqo_all_test.pdb

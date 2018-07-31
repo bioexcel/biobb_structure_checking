@@ -1,0 +1,21 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running metals --remove All
+Structure exists: 'tmpPDB/bq/1bqo.cif' 
+Structure pdb:1bqo loaded
+Metal ions found
+   ZN A301.ZN
+   ZN A302.ZN
+   CA A303.CA
+   CA A304.CA
+   CA A305.CA
+   ZN B301.ZN
+   ZN B302.ZN
+   CA B303.CA
+   CA B304.CA
+   CA B305.CA
+Metal Atoms removed All (10)
+Structure saved on 1bqo_metals_test_All.pdb
