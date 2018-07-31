@@ -3,13 +3,15 @@
 """
 
 
+import re
+import sys
+
 from Bio.PDB.MMCIFParser import MMCIFParser
 from Bio.PDB.PDBIO import PDBIO
 from Bio.PDB.PDBList import PDBList
 from Bio.PDB.PDBParser import PDBParser
-import re
-import structure_checking.util as util
-import sys
+
+import structure_manager.util as util
 
 MODELS_MAXRMS = 5.0    # Threshold value to detect NMR models (angs)
 

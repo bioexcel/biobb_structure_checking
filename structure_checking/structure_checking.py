@@ -7,19 +7,20 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import argparse
 import re
-import settings as sets
-from structure_checking.help_manager import HelpManager
-from structure_checking.structure_manager import StructureManager
-from structure_checking.json_writer import JSONWriter
-import structure_checking.util as util
 import sys
+
+from structure_checking.help_manager import HelpManager
+from structure_manager.structure_manager import StructureManager
+from structure_checking.json_writer import JSONWriter
+import structure_manager.util as util
+import structure_manager.data_constants as dataCts
 
 class StructureChecking():
     def __init__(self, args):
         self.args = args
         self.summary={}
 
-    def launch(self):
+    def launch(self, sets):
         help = HelpManager(sets.help_dir_path)
         help.print_help('header')
 
@@ -220,7 +221,7 @@ class StructureChecking():
         
         self._load_structure()
 
-        met_list = self.struc_man.get_metals(sets.metal_ats)
+        met_list = self.struc_man.get_metals(dataCts.metal_ats)
 
         if len(met_list) > 1:
             print ("Metal ions found")

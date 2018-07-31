@@ -8,11 +8,13 @@ __author__ = "gelpi"
 __date__ = "$13-jul-2018 15:52:55$"
 
 import os
+import sys
+
 import settings as sets
+
 from structure_checking.cmd_line import CmdLine
 from structure_checking.help_manager import HelpManager
 from structure_checking.structure_checking import StructureChecking
-import sys
 
 def main():
     help = HelpManager(sets.help_dir_path)
@@ -27,7 +29,7 @@ def main():
         help.print_help(args.command, header=True)
         sys.exit(0)
 
-    StructureChecking(args).launch()
+    StructureChecking(args).launch(sets)
 
 if __name__ == "__main__":
     main()
