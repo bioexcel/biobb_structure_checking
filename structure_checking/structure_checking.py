@@ -422,6 +422,27 @@ class StructureChecking():
 
         self.summary['ligands']=ligands_sum
         print()
+    
+    def getss (self, options):
+        print ("Running getss")
+        getss_sum={}
+        
+        self._load_structure()
+        
+        SS_bonds = self.struc_man.get_all_at2at_distances('SG', dataCts.SS_DIST)
+        
+        if len(SS_bonds):            
+            print ("Possible SS Bonds detected")
+            getss_sum['detected']=[]
+            for ssb in SS_bonds:
+                print ("  ", util.atomid(ssb[0]), util.atomid(ssb[1]), ssb[2])
+                getss_sum['detected'].append({'at1':util.atomid(ssb[0]), 'at2':util.atomid(ssb[1]), 'dist': float(ssb[2])})
+        
+        else:
+            print ("No SS bonds detected")
+
+        self.summary['getss']=getss_sum
+        print ()
 #===============================================================================
 
     def _load_structure(self):

@@ -4,3 +4,4 @@ altloc --select_altloc occupancy
 metals --remove ZN
 ligands --remove SO4
 remwat --remove Yes
+getss

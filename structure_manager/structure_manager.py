@@ -134,26 +134,20 @@ class StructureManager():
         except OSError:
             print ("#ERROR: unable to save PDB data on " + output_path, file=sys.stderr)
 
-    def get_all_CA_distances(self):
+
+    def get_all_at2at_distances(self, at_ids = ['All'], d_cutoff=0.):
         dist_mat = []
-        # get CA Ats
-        ca_ats = []
+        at_list = []
         for at in self.st.get_atoms():
-            if at.id == 'CA':
-                ca_ats.append(at)
-        for i in range(0, len(ca_ats)-1):
-            for j in range(i + 1, len(ca_ats)):
-                dist_mat.append ([ca_ats[i], ca_ats[j], ca_ats[i]-ca_ats[j]])
+            if at.id in at_ids or at_ids[0] == 'All':
+                at_list.append(at)
+        for i in range(0, len(at_list)-1):
+            for j in range(i + 1, len(at_list)):
+                d = at_list[i] - at_list[j]
+                if d_cutoff > 0. and d < d_cutoff:
+                    dist_mat.append ([at_list[i], at_list[j], d])
         return dist_mat
-
-    def get_all_distances(self):
-        dist_mat = []
-        for at1 in self.st.get_atoms():
-            for at2 in self.st.get_atoms():
-                if at1.serial_number < at2.serial_number:
-                    dist_mat.append ([at1, at2, at1-at2])
-        return dist_mat
-
+        
     def get_nmodels(self):
         return len(self.st)
 

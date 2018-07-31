@@ -22,7 +22,11 @@ python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_None.pdb --non_int
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_None.pdb --non_interactive remwat --remove No > 2ki5_remwat_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive remwat --remove Yes > 2ki5_remwat_test_Yes.log
 
+#ss bonds
+python3 $APPDIR/checkStruc.py -i pdb:4ku1 --check_only --non_interactive getss > 4ku1_getss_test_log
+
 #all check
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_all_test.pdb --json 1ark_all_test.json --non_interactive command_list --list scripts/all_checks > 1ark_all_test.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_all_test.pdb --json 2ki5_all_test.json --non_interactive command_list --list scripts/all_checks > 2ki5_all_test.log
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_all_test.pdb --json 1bqo_all_test.json --non_interactive command_list --list scripts/all_checks > 1bqo_all_test.log
+python3 $APPDIR/checkStruc.py -i pdb:4ku1 -o 4ku1_all_test.pdb --json 4ku1_all_test.json --non_interactive command_list --list scripts/all_checks > 4ku1_all_test.log
