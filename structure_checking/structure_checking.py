@@ -443,6 +443,73 @@ class StructureChecking():
 
         self.summary['getss']=getss_sum
         print ()
+        
+    def clashes(self, options):
+        opts = _get_parameters(options, "clashes", '--no_wat', 'discard_wat', 'Discard water molecules') 
+        if opts.discard_wat is None: 
+            opts.discard_wat=True
+        print ("Running clashes")
+        clashes_sum={}
+        self._load_structure()
+        
+        rr_dist = self.struc_man.get_all_r2r_distances('All', dataCts.R_R_CUTOFF)
+        
+        clashes={
+            'severe':{},
+            'apolar':{},
+            'acceptor':{},
+            'donor':{},
+            'positive':{},
+            'negative':{}
+        }
+        
+        clashes_sum = {
+            'detected': {
+                'severe':[],
+                'apolar':[],
+                'acceptor':[],
+                'donor':[],
+                'positive':[],
+                'negative':[]
+            }
+        }
+        
+        for r_pair in rr_dist:
+            [r1,r2,d] = r_pair
+            if opts.discard_wat and (r1.id[0] == 'W' or r2.id[0] == 'W'):
+                continue
+            if r1 != r2 and not util.seq_consecutive(r1,r2) and util.same_model(r1,r2):
+                rkey = util.residueid(r1)+'-'+util.residueid(r2)
+                for at_pair in util.get_all_rr_distances(r1,r2):
+                    [at1,at2,dist] = at_pair
+                    for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
+                        if dist < dataCts.CLASH_DIST[cls]:
+                            if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
+                                continue
+                            if cls == 'donor' and not (at1.id in dataCts.polar_donor and at2.id in dataCts.polar_donor):
+                                continue
+                            if cls == 'acceptor' and not (at1.id in dataCts.polar_acceptor and at2.id in dataCts.polar_acceptor):
+                                continue
+                            if cls == 'positive' and not (at1.id in dataCts.pos_ats and at2.id in dataCts.pos_ats):
+                                continue
+                            if cls == 'negative' and not (at1.id in dataCts.neg_ats and at2.id in dataCts.neg_ats):
+                                continue
+                            if not rkey in clashes[cls].keys():
+                                clashes[cls][rkey]=at_pair
+                            if dist < clashes[cls][rkey][2]:
+                                clashes[cls][rkey]=at_pair
+        for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
+            if len(clashes[cls]):
+                print ("Steric", cls, "clashes detected")
+                for rkey in clashes[cls].keys():
+                    print (" ",util.atomid(clashes[cls][rkey][0]), util.atomid(clashes[cls][rkey][1]), clashes[cls][rkey][2])
+                    at_pair = clashes[cls][rkey]
+                    clashes_sum['detected'][cls].append({'at1':util.atomid(clashes[cls][rkey][0]), 'at2':util.atomid(clashes[cls][rkey][1]), 'dist': float(clashes[cls][rkey][2])})
+            else:
+                print ("No", cls, "clashes detected")
+        
+        self.summary['clashes'] = clashes_sum
+        print ()
 #===============================================================================
 
     def _load_structure(self):

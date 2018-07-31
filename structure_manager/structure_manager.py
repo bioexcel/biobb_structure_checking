@@ -139,13 +139,29 @@ class StructureManager():
         dist_mat = []
         at_list = []
         for at in self.st.get_atoms():
-            if at.id in at_ids or at_ids[0] == 'All':
+            if at.id in at_ids or at_ids == 'All':
                 at_list.append(at)
         for i in range(0, len(at_list)-1):
             for j in range(i + 1, len(at_list)):
                 d = at_list[i] - at_list[j]
                 if d_cutoff > 0. and d < d_cutoff:
                     dist_mat.append ([at_list[i], at_list[j], d])
+        return dist_mat
+    
+    def get_all_r2r_distances(self, r_ids = ['All'], d_cutoff=0.):
+        # Uses distances between the first atom of each residue as r-r distance
+        dist_mat = []
+        r_list = []
+        for r in self.st.get_residues():
+            if r.resname in r_ids or r_ids == 'All':
+                r_list.append(r)
+        for i in range(0, len(r_list)-1):
+            ati = r_list[i].child_list[0]
+            for j in range(i + 1, len(r_list)):
+                atj = r_list[j].child_list[0]
+                d = ati - atj
+                if d_cutoff > 0. and d < d_cutoff:
+                    dist_mat.append ([r_list[i], r_list[j], d])
         return dist_mat
         
     def get_nmodels(self):

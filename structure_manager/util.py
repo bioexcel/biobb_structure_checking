@@ -35,14 +35,17 @@ def removeHFromRes (r, verbose=False):
             print ("  Deleting atom " + at_id)
         r.detach_child(at_id)
 
-def residueid(r):
-    return r.get_resname() + " " \
+def residueid(r, models=False):
+    rid = r.get_resname() + " " \
         + str(r.get_parent().id) \
-        + str(r.id[1]) + "/" \
-        + str(r.get_parent().get_parent().id)
+        + str(r.id[1])
+    if models:
+        rid += "/" + str(r.get_parent().get_parent().id)
+    
+    return rid
 
-def atomid(at):
-    return residueid(at.get_parent()) + "." + at.id
+def atomid(at, models=False):
+    return residueid(at.get_parent(), models) + "." + at.id
 
 def residueCheck(r):
     r = r.upper()
@@ -131,10 +134,14 @@ def calcRMSdAll (st1, st2):
 
     return (math.sqrt(rmsd))
 
-def get_all_rr_distances(r1, r2):
+def get_all_rr_distances(r1, r2, with_h=False):
     dist_mat = []
     for at1 in r1.get_atoms():
+        if at1.element == 'H' and not with_h:
+            continue
         for at2 in r2.get_atoms():
+            if at2.element == 'H' and not with_h:
+                continue
             if at1.serial_number < at2.serial_number:
                 dist_mat.append ([at1, at2, at1-at2])
     return dist_mat

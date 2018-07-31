@@ -5,3 +5,4 @@ metals --remove ZN
 ligands --remove SO4
 remwat --remove Yes
 getss
+clashes
