@@ -126,7 +126,7 @@ class StructureChecking():
         chains_sum = {}
         
         self._load_structure()
-        self.chain_ids = self.struc_man.get_chain_ids()
+        self.chain_ids = sorted(self.struc_man.get_chain_ids())
         print ("Chains detected: ", len(self.chain_ids), '(', ', '.join(self.chain_ids), ')')
         
         chains_sum['detected'] = self.chain_ids
@@ -178,7 +178,7 @@ class StructureChecking():
 
             altloc_sum['detected']={}
 
-            for r in alt_loc_res.keys():
+            for r in sorted(alt_loc_res.keys()):
                 if len(alt_loc_res[r]) > 1:
                     print (r, ":")
                     altloc_sum['detected'][r]=[]
@@ -228,7 +228,7 @@ class StructureChecking():
             metals_sum['detected']=[]
             met_rids=[]
             at_groups={}
-            for at in met_list:
+            for at in sorted(met_list, key=lambda x: x.serial_number):
                 print ("  ", util.atomid(at))
                 r=at.get_parent()
                 met_rids.append(r.get_parent().id + str(r.id[1]))
@@ -353,12 +353,14 @@ class StructureChecking():
         self._load_structure()
         
         lig_list = self.struc_man.get_ligands()
+        
         if len(lig_list) > 0:
             print ("Ligands detected")
             rids = set()
             rnums = []
             ligands_sum['detected']=[]
-            for r in lig_list:
+            
+            for r in sorted(lig_list, key=lambda x: x.index):
                 print (util.residueid(r))
                 ligands_sum['detected'].append(util.residueid(r))
                 rids.add(r.resname)
@@ -501,7 +503,7 @@ class StructureChecking():
         for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
             if len(clashes[cls]):
                 print ("Steric", cls, "clashes detected")
-                for rkey in clashes[cls].keys():
+                for rkey in sorted(clashes[cls].keys(), key=lambda x: 10000*clashes[cls][x][0].serial_number+clashes[cls][x][1].serial_number):
                     print (" ",util.atomid(clashes[cls][rkey][0]), util.atomid(clashes[cls][rkey][1]), clashes[cls][rkey][2])
                     at_pair = clashes[cls][rkey]
                     clashes_sum['detected'][cls].append({'at1':util.atomid(clashes[cls][rkey][0]), 'at2':util.atomid(clashes[cls][rkey][1]), 'dist': float(clashes[cls][rkey][2])})
