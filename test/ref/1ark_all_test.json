@@ -64,5 +64,9 @@
   "detected": 15,
   "selected": 1
  },
+ "remh": {
+  "n_detected": 60,
+  "n_removed": 60
+ },
  "remwat": {}
 }

@@ -1,0 +1,11 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running remh. Options: --remove Yes
+Structure exists: 'tmpPDB/ar/1ark.cif' 
+Structure pdb:1ark loaded
+900 Residues containing H atoms detected
+Hydrogen atom removed from 900 residues
+Structure saved on 1ark_remh_test_Yes.pdb

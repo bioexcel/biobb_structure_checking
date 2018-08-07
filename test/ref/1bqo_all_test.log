@@ -52,12 +52,16 @@ Step 6: remwat --remove Yes
 Running remwat. Options: --remove Yes
 75 Water molecules detected
 75 Water molecules removed
-Step 7: getss
+Step 7: remh --remove Yes
+
+Running remh. Options: --remove Yes
+No residues with hydrogen atoms detected
+Step 8: getss
 
 Running getss
 No SS bonds detected
 
-Step 8: clashes
+Step 9: clashes
 
 Running clashes: Options 
 No severe clashes detected

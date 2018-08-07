@@ -28,6 +28,10 @@ python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_None.pdb --non_int
 echo "Running remwat on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_None.pdb --non_interactive remwat --remove No > 2ki5_remwat_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive remwat --remove Yes > 2ki5_remwat_test_Yes.log
+#remwat
+echo "Running remh on 1ark"
+python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_None.pdb --non_interactive remh --remove No > 1ark_remh_test_None.log
+python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_Yes.pdb --non_interactive remh --remove Yes > 1ark_remh_test_Yes.log
 #ss bonds
 echo "Running getss on 4ku1"
 python3 $APPDIR/checkStruc.py -i pdb:4ku1 --check_only --non_interactive getss > 4ku1_getss_test_log

@@ -337,6 +337,7 @@ class StructureChecking():
 
         self.summary['remwat'] = remwat_sum
 
+
     def ligands(self, options):
         opts = _get_parameters(options, "ligands", '--remove', 'remove_ligands', 'Remove Ligand residues')
 
@@ -418,6 +419,44 @@ class StructureChecking():
             print ("No ligands detected")
 
         self.summary['ligands'] = ligands_sum
+    
+    def remh(self, options):
+        opts = _get_parameters(options, "remh", '--remove', 'remove_h', 'Remove Hydrogen atoms')
+
+        print ('Running remh. Options: {}'.format(' '.join(options)))
+        remh_sum = {}
+
+        self._load_structure()
+
+        remh_list = self.struc_man.get_residues_with_H()
+
+        if len(remh_list) > 0:
+            print ('{} Residues containing H atoms detected'.format(len(remh_list)))
+            remh_sum['n_detected'] = len(remh_list)
+
+            if not self.args.check_only:
+                ok = False
+                while not ok:
+                    if not self.args.non_interactive:
+                        opts.remove_h = _check_parameter(opts.remove_h, 'Remove hydrogen atoms (Yes | No): ')
+                    ok = opts.remove_h.lower() in ['yes', 'no']
+                    if not ok:
+                        print ('Warning: unknown option {}'.format(opts.remove_h))
+                        if self.args.non_interactive:
+                            self.summary['remh'] = remh_sum
+                            return 1
+
+                if opts.remove_h.lower() == 'yes':
+                    n = 0
+                    for r in remh_list:
+                        util.removeHFromRes(r['r'])
+                        n += 1
+                    print ('Hydrogen atom removed from {} residues'.format(n))
+                    remh_sum['n_removed'] = n
+        else:
+            print ("No residues with hydrogen atoms detected")
+
+        self.summary['remh'] = remh_sum
 
     def getss (self, options):
         print ("Running getss")

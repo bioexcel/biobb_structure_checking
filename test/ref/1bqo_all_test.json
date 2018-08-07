@@ -183,6 +183,7 @@
  "models": {
   "detected": 1
  },
+ "remh": {},
  "remwat": {
   "n_detected": 75,
   "n_removed": 75
