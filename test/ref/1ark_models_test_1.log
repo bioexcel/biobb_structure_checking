@@ -3,11 +3,9 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running models --select_model 1
+Running models. Options: --select_model 1
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
-Models detected:  15
-1
-Selecting model 1
-
+15 Models detected
+Selecting model num. 1
 Structure saved on 1ark_models_1_test.pdb

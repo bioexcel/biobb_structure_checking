@@ -3,10 +3,9 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running chains --select_chain B
+Running chains. Options: --select_chain B
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
-Chains detected:  2 ( A, B )
-Selecting chain(s)  B
-
+2 Chains detected (A, B)
+Selecting chain(s) B
 Structure saved on 2ki5_chains_test_B.pdb

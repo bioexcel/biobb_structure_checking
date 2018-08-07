@@ -101,12 +101,12 @@
     },
     {
      "at1": "ASP A107.CG",
-     "at2": "CA A304.CA",
+     "at2": " CA A304.CA",
      "dist": 2.85479998588562
     },
     {
      "at1": "ASP B107.CG",
-     "at2": "CA B304.CA",
+     "at2": " CA B304.CA",
      "dist": 2.7174229621887207
     },
     {
@@ -150,12 +150,12 @@
  "getss": {},
  "ligands": {
   "detected": [
-   "CA A303",
-   "CA A304",
-   "CA A305",
-   "CA B303",
-   "CA B304",
-   "CA B305",
+   " CA A303",
+   " CA A304",
+   " CA A305",
+   " CA B303",
+   " CA B304",
+   " CA B305",
    "N25 B401"
   ]
  },
@@ -174,10 +174,10 @@
   ],
   "n_removed": 4,
   "removed": [
-   "ZN A301",
-   "ZN A302",
-   "ZN B301",
-   "ZN B302"
+   " ZN A301",
+   " ZN A302",
+   " ZN B301",
+   " ZN B302"
   ]
  },
  "models": {
