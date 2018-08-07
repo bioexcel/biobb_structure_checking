@@ -4,13 +4,13 @@
 ===============================================================================
 
 Running command_list from scripts/all_checks
-Structure exists: 'tmpPDB/ar/1ark.cif' 
-Structure pdb:1ark loaded
+Structure exists: 'tmpPDB/ub/1ubq.cif' 
+Structure pdb:1ubq loaded
 Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
-15 Models detected
-Selecting model num. 1
+1 Models detected
+Nothing to do
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
@@ -31,17 +31,17 @@ No ligands detected
 Step 6: remwat --remove Yes
 
 Running remwat. Options: --remove Yes
-No water molecules detected
+58 Water molecules detected
+58 Water molecules removed
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
-60 Residues containing H atoms detected
-Hydrogen atom removed from 60 residues
+No residues with hydrogen atoms detected
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contacts involving amide atoms found
- ASN A30.OD1  GLN A32.O       2.598
+ ARG A42.NE   GLN A49.NE2     2.750
 Amide residues fixed All (1)
 Step 9: getss
 
@@ -51,18 +51,12 @@ Step 10: clashes
 
 Running clashes: Options 
 No severe clashes detected
-4 Steric apolar clashes detected
- MET A9.CE    GLU A58.OE2     2.695
- GLU A19.OE2  TRP A38.CZ3     2.645
- TYR A40.CD1  GLY A50.O       2.794
- THR A42.OG1  THR A49.CG2     2.788
-3 Steric acceptor clashes detected
- MET A9.O     ASP A24.OD2     2.851
- TYR A10.O    PHE A22.O       3.006
- MET A39.O    MET A51.SD      2.999
+No apolar clashes detected
+1 Steric acceptor clashes detected
+ MET A1.O     VAL A17.O       3.035
 No donor clashes detected
 No positive clashes detected
 No negative clashes detected
 Command list completed
-Structure saved on 1ark_all_test.pdb
-Summary data saved on 1ark_all_test.json
+Structure saved on 1ubq_all_test.pdb
+Summary data saved on 1ubq_all_test.json

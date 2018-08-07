@@ -196,6 +196,9 @@
   },
   "selected": "occupancy"
  },
+ "amide": {
+  "n_amides": 40
+ },
  "chains": {
   "detected": [
    "A",

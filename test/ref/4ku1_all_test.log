@@ -106,7 +106,10 @@ Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
-Step 8: getss
+Step 8: amide --fix All
+
+Running amide. Options: --fix All
+Step 9: getss
 
 Running getss
 4 Possible SS Bonds detected
@@ -114,8 +117,7 @@ Running getss
   CYS A367.SG CYS A425.SG   1.995
   CYS B261.SG CYS B321.SG   2.031
   CYS B367.SG CYS B425.SG   2.046
-
-Step 9: clashes
+Step 10: clashes
 
 Running clashes: Options 
 No severe clashes detected

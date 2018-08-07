@@ -20,6 +20,8 @@ class StructureChecking():
     def __init__(self, args):
         self.args = args
         self.summary = {}
+        self.rr_dist=[]
+        self.nmodels=0
 
     def launch(self, sets):
         help = HelpManager(sets.help_dir_path)
@@ -119,7 +121,12 @@ class StructureChecking():
         print ('Running chains. Options: {}'.format(' '.join(options)))
         chains_sum = {}
 
-        self._load_structure()
+        self._load_structure()        
+        
+        if self.nmodels>1:
+            print ("Warning: structure contains models, running models first")
+            self.models([])
+            
         self.chain_ids = sorted(self.struc_man.get_chain_ids())
         print ('{} Chains detected ({})'.format(len(self.chain_ids),', '.join(self.chain_ids)))
         chains_sum['detected'] = self.chain_ids
@@ -224,7 +231,7 @@ class StructureChecking():
             met_rids = []
             at_groups = {}
             for at in sorted(met_list, key=lambda x: x.serial_number):
-                print ("  ", util.atomid(at))
+                print ("  ", util.atomid(at, self.nmodels>1))
                 r = at.get_parent()
                 met_rids.append(util.residuenum(r))
                 if not at.id in at_groups:
@@ -283,7 +290,7 @@ class StructureChecking():
                 
                 n = 0
                 for at in to_remove:
-                    metals_sum['removed'].append(util.residueid(at.get_parent()))
+                    metals_sum['removed'].append(util.residueid(at.get_parent(), self.nmodels>1))
                     self.struc_man.remove_residue(at.get_parent())
                     n += 1
 
@@ -355,8 +362,8 @@ class StructureChecking():
             ligands_sum['detected'] = []
 
             for r in sorted(lig_list, key=lambda x: x.index):
-                print (util.residueid(r))
-                ligands_sum['detected'].append(util.residueid(r))
+                print (util.residueid(r, self.nmodels>1))
+                ligands_sum['detected'].append(util.residueid(r, self.nmodels>1))
                 rids.add(r.resname)
                 rnums.append(util.residuenum(r))
 
@@ -409,7 +416,7 @@ class StructureChecking():
                             to_remove.append(r)
                 n = 0
                 for r in to_remove:
-                    ligands_sum['removed']['lst'].append(util.residueid(r))
+                    ligands_sum['removed']['lst'].append(util.residueid(r, self.nmodels>1))
                     self.struc_man.remove_residue(r)
                     n += 1
 
@@ -470,14 +477,96 @@ class StructureChecking():
             print ('{} Possible SS Bonds detected'.format(len(SS_bonds)))
             getss_sum['detected'] = []
             for ssb in SS_bonds:
-                print ('  {} {}{:8.3f}'.format(util.atomid(ssb[0]), util.atomid(ssb[1]), ssb[2]))
-                getss_sum['detected'].append({'at1':util.atomid(ssb[0]), 'at2':util.atomid(ssb[1]), 'dist': float(ssb[2])})
+                print ('  {} {}{:8.3f}'.format(util.atomid(ssb[0], self.nmodels>1), util.atomid(ssb[1], self.nmodels>1), ssb[2]))
+                getss_sum['detected'].append({'at1':util.atomid(ssb[0], self.nmodels>1), 'at2':util.atomid(ssb[1], self.nmodels>1), 'dist': float(ssb[2])})
 
         else:
             print ("No SS bonds detected")
 
         self.summary['getss'] = getss_sum
-        print ()
+
+    def amide(self,options):
+        opts = _get_parameters(options, "amide", '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
+        print ('Running amide. Options: {}'.format(' '.join(options)))
+        amide_sum = {}
+        
+        self._load_structure()
+        amide_list=[]
+        for r in self.struc_man.get_structure().get_residues():
+            if r.get_resname() in dataCts.amide_res:
+                amide_list.append(r)
+        
+        amide_sum['n_amides']=len(amide_list)
+        
+        if len(amide_list) > 0:
+            if len(self.rr_dist)== 0:
+                self.rr_dist = self.struc_man.get_all_r2r_distances('all', dataCts.R_R_CUTOFF)
+            res_to_fix=[]
+            cont_list=[]
+            rnums=[]
+            for r_pair in self.rr_dist:
+                [r1,r2,d]=r_pair
+                if r1.get_resname() in dataCts.amide_res or r2.get_resname() in dataCts.amide_res:
+                    if r1 != r2 and util.same_model(r1, r2) and not util.is_wat(r1) and not util.is_wat(r2):
+                        for at_pair in util.get_all_rr_distances(r1, r2): 
+                            [at1, at2, dist] = at_pair
+                            for cls in ['acceptor', 'donor']:
+                                if dist < dataCts.CLASH_DIST[cls]:
+                                    if cls == 'donor' and not (at1.id in dataCts.polar_donor and at2.id in dataCts.polar_donor):
+                                        continue
+                                    if cls == 'acceptor' and not (at1.id in dataCts.polar_acceptor and at2.id in dataCts.polar_acceptor):
+                                        continue
+                                    if not at1.id in dataCts.amide_atoms and not at2.id in dataCts.amide_atoms:
+                                        continue
+                                    if at1.id in dataCts.amide_atoms:
+                                        res_to_fix.append(at1.get_parent())
+                                        rnums.append(util.residuenum(at1.get_parent()))
+                                    if at2.id in dataCts.amide_atoms:
+                                        res_to_fix.append(at2.get_parent())
+                                        rnums.append(util.residuenum(at2.get_parent()))
+                                    cont_list.append(at_pair)
+            if len(cont_list):
+                print ('{} unusual contacts involving amide atoms found'.format(len(cont_list)))
+                amide_sum['detected']=[]
+                for at_pair in cont_list:
+                    print (' {:12} {:12} {:8.3f}'.format(util.atomid(at_pair[0],self.nmodels>1), util.atomid(at_pair[1],self.nmodels>1), at_pair[2]))
+                    amide_sum['detected'].append({'at1':util.atomid(at_pair[0], self.nmodels>1), 'at2':util.atomid(at_pair[1], self.nmodels>1), 'dist': float(at_pair[2])})
+
+                if not self.args.check_only:
+                    ok = False
+                    while not ok:
+                        if not self.args.non_interactive:
+                            opts.amide_fix = _check_parameter(opts.amide_fix, 'Fix amides (All | None | {}): '.format(','.join(rnums)))
+                        ok = opts.amide_fix.lower() in ['all', 'none']
+                        if not ok:
+                            ok=True
+                            for rn in opts.amide_fix.split(','):
+                                ok = ok and rn in rnums
+                        if not ok:
+                            print ('Warning: unknown option {}'.format(opts.amide_fix))
+                            if self.args.non_interactive:
+                                self.summary['amide'] = amide_sum
+                                return 1
+                    if opts.amide_fix.lower() == 'none':
+                        to_fix=[]
+                    elif opts.amide_fix.lower() == 'all':
+                        to_fix = res_to_fix
+                    else:
+                        to_fix=[]
+                        for r in res_to_fix:
+                            if util.residuenum(r) in opts.amide_fix.split(','):
+                                to_fix.append(r)
+                    n=0
+                    for r in to_fix:
+                        self.struc_man.invert_amide_residue(r)
+                        n += 1
+                    print ( 'Amide residues fixed {} ({})'.format(opts.amide_fix,n))
+                                        
+        else:
+            print ("No amide residues found")
+            
+        self.summary['amide']=amide_sum                
+   
 
     def clashes(self, options):
         opts = _get_parameters(options, "clashes", '--no_wat', 'discard_wat', 'Discard water molecules')
@@ -487,7 +576,8 @@ class StructureChecking():
         clashes_sum = {}
         self._load_structure()
 
-        rr_dist = self.struc_man.get_all_r2r_distances('all', dataCts.R_R_CUTOFF)
+        if len(self.rr_dist)== 0:
+            self.rr_dist = self.struc_man.get_all_r2r_distances('all', dataCts.R_R_CUTOFF)
 
         clashes = {
             'severe':{},
@@ -509,7 +599,7 @@ class StructureChecking():
             }
         }
 
-        for r_pair in rr_dist:
+        for r_pair in self.rr_dist:
             [r1, r2, d] = r_pair
             if opts.discard_wat and (r1.id[0] == 'W' or r2.id[0] == 'W'):
                 continue
@@ -560,6 +650,7 @@ class StructureChecking():
             self.struc_man = StructureManager()
             self.struc_man.loadStructure(self.args.input_structure_path, 'force', False, self.args.debug)
             print ('Structure {} loaded'.format(self.args.input_structure_path))
+            self.nmodels = self.struc_man.get_nmodels()
 
     def _get_structure(self):
         return self.struc_man.get_structure()

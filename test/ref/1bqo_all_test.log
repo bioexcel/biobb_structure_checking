@@ -56,12 +56,17 @@ Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
-Step 8: getss
+Step 8: amide --fix All
+
+Running amide. Options: --fix All
+1 unusual contacts involving amide atoms found
+ GLN B236.O   ASN B240.OD1    2.980
+Amide residues fixed All (1)
+Step 9: getss
 
 Running getss
 No SS bonds detected
-
-Step 9: clashes
+Step 10: clashes
 
 Running clashes: Options 
 No severe clashes detected
@@ -72,7 +77,7 @@ No severe clashes detected
  ASP B182.C   GLU B184.N      2.860
  HIS B211.CE1 N25 B401.O24    2.841
  ASP B228.OD2 ARG B231.CZ     2.665
-15 Steric acceptor clashes detected
+14 Steric acceptor clashes detected
  ASP A107.OD2 GLU A184.O      3.088
  GLU A125.O   THR A128.O      2.751
  ASP A141.O   ASP A177.OD1    3.087
@@ -87,13 +92,14 @@ No severe clashes detected
  GLY B173.O   ASN B175.O      3.018
  ASP B181.OD2 GLU B184.OE2    3.080
  ASP B182.O   GLU B184.O      2.931
- GLN B236.O   ASN B240.OD1    2.980
-No donor clashes detected
+1 Steric donor clashes detected
+ GLN B236.NE2 ASN B240.ND2    3.022
 No positive clashes detected
-3 Steric negative clashes detected
+4 Steric negative clashes detected
  ASP A181.OD2 GLU A184.OE2    3.463
  ASP B107.OD2 ASP B182.OD1    3.482
  ASP B181.OD2 GLU B184.OE2    3.080
+ ASP B237.OD1 ASN B240.OD1    3.231
 Command list completed
 Structure saved on 1bqo_all_test.pdb
 Summary data saved on 1bqo_all_test.json

@@ -1,5 +1,15 @@
 {
  "altloc": {},
+ "amide": {
+  "detected": [
+   {
+    "at1": "ASN A30.OD1",
+    "at2": "GLN A32.O",
+    "dist": 2.5977070331573486
+   }
+  ],
+  "n_amides": 4
+ },
  "chains": {
   "detected": [
    "A"
@@ -17,11 +27,6 @@
      "at1": "TYR A10.O",
      "at2": "PHE A22.O",
      "dist": 3.006348133087158
-    },
-    {
-     "at1": "ASN A30.OD1",
-     "at2": "GLN A32.O",
-     "dist": 2.5977070331573486
     },
     {
      "at1": "MET A39.O",

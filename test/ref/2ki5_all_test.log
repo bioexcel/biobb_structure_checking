@@ -49,12 +49,14 @@ Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
-Step 8: getss
+Step 8: amide --fix All
+
+Running amide. Options: --fix All
+Step 9: getss
 
 Running getss
 No SS bonds detected
-
-Step 9: clashes
+Step 10: clashes
 
 Running clashes: Options 
 No severe clashes detected

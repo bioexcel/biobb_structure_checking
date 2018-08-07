@@ -34,10 +34,14 @@ python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_None.pdb --non_inter
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_Yes.pdb --non_interactive remh --remove Yes > 1ark_remh_test_Yes.log
 #ss bonds
 echo "Running getss on 4ku1"
-python3 $APPDIR/checkStruc.py -i pdb:4ku1 --check_only --non_interactive getss > 4ku1_getss_test_log
+python3 $APPDIR/checkStruc.py -i pdb:4ku1 --check_only --non_interactive getss > 4ku1_getss_test.log
 #clashes
 echo "Running clashes on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 --check_only --non_interactive clashes > 2ki5_clashes_test.log
+#amide
+echo "Running amide on 1ubq"
+python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix None > 1ubq_amide_test_All.log
+python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_None.pdb --non_interactive amide --fix All > 1ubq_amide_test_None.log
 #all check
 echo -n "Running all checks"
 echo -n " 1ark"
@@ -46,8 +50,10 @@ echo -n " 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_all_test.pdb --json 2ki5_all_test.json --non_interactive command_list --list scripts/all_checks > 2ki5_all_test.log
 echo -n " 1bqo"
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_all_test.pdb --json 1bqo_all_test.json --non_interactive command_list --list scripts/all_checks > 1bqo_all_test.log
-echo " 4kui"
+echo -n " 4kui"
 python3 $APPDIR/checkStruc.py -i pdb:4ku1 -o 4ku1_all_test.pdb --json 4ku1_all_test.json --non_interactive command_list --list scripts/all_checks > 4ku1_all_test.log
+echo " 1ubq"
+python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_all_test.pdb --json 1ubq_all_test.json --non_interactive command_list --list scripts/all_checks > 1ubq_all_test.log
 echo "Calculating diffs"
 foreach f (*pdb *json *log)
 diff $f ref/$f > $f.diff

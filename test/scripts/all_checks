@@ -5,5 +5,6 @@ metals --remove ZN
 ligands --remove SO4
 remwat --remove Yes
 remh --remove Yes
+amide --fix All
 getss
 clashes

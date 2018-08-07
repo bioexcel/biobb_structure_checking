@@ -1,5 +1,15 @@
 {
  "altloc": {},
+ "amide": {
+  "detected": [
+   {
+    "at1": "GLN B236.O",
+    "at2": "ASN B240.OD1",
+    "dist": 2.980477809906006
+   }
+  ],
+  "n_amides": 18
+ },
  "chains": {
   "detected": [
    "A",
@@ -86,11 +96,6 @@
      "at1": "ASP B182.O",
      "at2": "GLU B184.O",
      "dist": 2.930624485015869
-    },
-    {
-     "at1": "GLN B236.O",
-     "at2": "ASN B240.OD1",
-     "dist": 2.980477809906006
     }
    ],
    "apolar": [
@@ -125,7 +130,13 @@
      "dist": 2.6650195121765137
     }
    ],
-   "donor": [],
+   "donor": [
+    {
+     "at1": "GLN B236.NE2",
+     "at2": "ASN B240.ND2",
+     "dist": 3.0220203399658203
+    }
+   ],
    "negative": [
     {
      "at1": "ASP A181.OD2",
@@ -141,6 +152,11 @@
      "at1": "ASP B181.OD2",
      "at2": "GLU B184.OE2",
      "dist": 3.080146074295044
+    },
+    {
+     "at1": "ASP B237.OD1",
+     "at2": "ASN B240.OD1",
+     "dist": 3.2310802936553955
     }
    ],
    "positive": [],

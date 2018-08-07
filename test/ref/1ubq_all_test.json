@@ -1,0 +1,45 @@
+{
+ "altloc": {},
+ "amide": {
+  "detected": [
+   {
+    "at1": "ARG A42.NE",
+    "at2": "GLN A49.NE2",
+    "dist": 2.7497353553771973
+   }
+  ],
+  "n_amides": 8
+ },
+ "chains": {
+  "detected": [
+   "A"
+  ]
+ },
+ "clashes": {
+  "detected": {
+   "acceptor": [
+    {
+     "at1": "MET A1.O",
+     "at2": "VAL A17.O",
+     "dist": 3.0353565216064453
+    }
+   ],
+   "apolar": [],
+   "donor": [],
+   "negative": [],
+   "positive": [],
+   "severe": []
+  }
+ },
+ "getss": {},
+ "ligands": {},
+ "metals": {},
+ "models": {
+  "detected": 1
+ },
+ "remh": {},
+ "remwat": {
+  "n_detected": 58,
+  "n_removed": 58
+ }
+}
