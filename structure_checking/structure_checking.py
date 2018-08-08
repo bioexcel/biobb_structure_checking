@@ -99,7 +99,9 @@ class StructureChecking():
         print ('{} Models detected'.format(self.nmodels))
         models_sum['detected'] = self.nmodels
 
-        if not self.args.check_only:
+        if self.args.check_only:
+            print ('Running with --check_only. Nothing else to do.')
+        else:
             if self.nmodels > 1:
                 ok = False
                 while not ok:
@@ -139,7 +141,9 @@ class StructureChecking():
         print ('{} Chains detected ({})'.format(len(self.chain_ids), ', '.join(self.chain_ids)))
         chains_sum['detected'] = self.chain_ids
 
-        if not self.args.check_only:
+        if self.args.check_only:
+            print ('Running with --check_only. Nothing else to do.')
+        else:
             if len(self.chain_ids) > 1:
                 ok = False
                 while not ok:
@@ -247,7 +251,9 @@ class StructureChecking():
                 at_groups[at.id].append(at)
                 metals_sum['detected'].append(util.residuenum(r))
 
-            if not self.args.check_only:
+            if self.args.check_only:
+                print ('Running with --check_only. Nothing else to do.')
+            else:
                 ok = False
                 resids = False
                 atids = False
@@ -324,11 +330,14 @@ class StructureChecking():
         for r in lig_list:
             if r.id[0] == 'W':
                 wat_list.append(r)
+
         if len(wat_list) > 0:
             print ('{} Water molecules detected'.format(len(wat_list)))
             remwat_sum['n_detected'] = len(wat_list)
 
-            if not self.args.check_only:
+            if self.args.check_only:
+                print ('Running with --check_only. Nothing else to do.')
+            else:
                 ok = False
                 while not ok:
                     if not self.args.non_interactive:
@@ -375,7 +384,9 @@ class StructureChecking():
                 rids.add(r.resname)
                 rnums.append(util.residuenum(r))
 
-            if not self.args.check_only:
+            if self.args.check_only:
+                print ('Running with --check_only. Nothing else to do.')
+            else:
                 ok = False
                 byresnum = False
                 byrids = False
@@ -449,7 +460,9 @@ class StructureChecking():
             print ('{} Residues containing H atoms detected'.format(len(remh_list)))
             remh_sum['n_detected'] = len(remh_list)
 
-            if not self.args.check_only:
+            if self.args.check_only:
+                print ('Running with --check_only. Nothing else to do.')
+            else:
                 ok = False
                 while not ok:
                     if not self.args.non_interactive:
@@ -540,7 +553,9 @@ class StructureChecking():
                     print (' {:12} {:12} {:8.3f}'.format(util.atomid(at_pair[0], self.nmodels > 1), util.atomid(at_pair[1], self.nmodels > 1), at_pair[2]))
                     amide_sum['detected'].append({'at1':util.atomid(at_pair[0], self.nmodels > 1), 'at2':util.atomid(at_pair[1], self.nmodels > 1), 'dist': float(at_pair[2])})
 
-                if not self.args.check_only:
+                if self.args.check_only:
+                    print ('Running with --check_only. Nothing else to do.')
+                else:
                     ok = False
                     while not ok:
                         if not self.args.non_interactive:
@@ -602,7 +617,9 @@ class StructureChecking():
                     print (' {:10}'.format(util.residueid(r, self.nmodels > 1)))
                     chiral_sum['detected'].append(util.residueid(r, self.nmodels > 1))
 
-                if not self.args.check_only:
+                if self.args.check_only:
+                    print ('Running with --check_only. Nothing else to do.')
+                else:
                     ok = False
                     while not ok:
                         if not self.args.non_interactive:
@@ -667,7 +684,9 @@ class StructureChecking():
                     print (' {:10}'.format(util.residueid(r, self.nmodels > 1)))
                     chiral_bck_sum['detected'].append(util.residueid(r, self.nmodels > 1))
 
-                if not self.args.check_only:
+                if self.args.check_only:
+                    print ('Running with --check_only. Nothing else to do.')
+                else:
                     ok = False
                     while not ok:
                         if not self.args.non_interactive:

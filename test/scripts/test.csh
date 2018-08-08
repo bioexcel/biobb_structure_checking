@@ -43,9 +43,11 @@ echo "Running amide on 1ubq"
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix None > 1ubq_amide_test_All.log
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_None.pdb --non_interactive amide --fix All > 1ubq_amide_test_None.log
 #chiral
+echo "Running chiral on modified 1ubq"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix All > 1ubq_chi_chiral_test_All.log
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix None > 1ubq_chi_none_test_None.log
 #chiral_bck
+echo "Running chiral_bck on modified 1ark"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log
 #All_test
 echo -n "Running All checks on 1ark"

@@ -59,3 +59,62 @@ No residues with incorrect chirality found
 Step 10: chiral_bck
 
 Running chiral. Options: 
+Warning: atom CA not found in VAL A70
+Warning: atom C not found in VAL A70
+Warning: atom CB not found in VAL A70
+Warning: atom CA not found in ALA A375
+Warning: atom C not found in ALA A375
+Warning: atom CB not found in ALA A375
+Warning: atom CA not found in SER B263
+Warning: atom C not found in SER B263
+Warning: atom CB not found in SER B263
+Warning: atom CA not found in ALA B375
+Warning: atom C not found in ALA B375
+Warning: atom CB not found in ALA B375
+No residues with incorrect backbone chirality found
+Step 11: getss
+
+Running getss
+No SS bonds detected
+Step 12: clashes
+
+Running clashes: Options 
+No severe clashes detected
+18 Steric apolar clashes detected
+ GLY A61.O    THR A65.CG2     2.799
+ MET A85.CG   GLU A374.OE1    2.857
+ ARG A89.CD   GLU A95.OE1     2.776
+ LEU A232.O   ARG A236.CG     2.741
+ GLN A261.C   SER A263.N      2.890
+ HIS A283.C   GLY A285.N      2.884
+ PHE A292.C   ALA A294.N      2.819
+ ASN A301.OD1 ASP A303.CB     2.875
+ MET A372.SD  VAL B307.CG1    2.777
+ HIS B58.CD2  TYR B172.OH     2.675
+ LYS B62.O    THR B66.CG2     2.878
+ THR B66.OG1  TYR B80.CE1     2.890
+ THR B86.OG1  GLU B374.CB     2.892
+ HIS B105.CE1 GLN B109.OE1    2.773
+ GLU B210.O   ILE B214.CG1    2.842
+ ARG B212.CZ  ASP B330.OD1    2.875
+ LEU B217.C   LYS B219.N      2.848
+ SER B357.O   ILE B361.CG1    2.861
+5 Steric acceptor clashes detected
+ ASP A55.O    VAL A204.O      3.035
+ ARG B89.O    GLU B95.OE1     2.792
+ ASP B211.O   ASP B215.OD2    2.914
+ ALA B334.O   ASP B338.OD2    3.100
+ PRO B359.O   ASP B363.OD2    3.073
+5 Steric donor clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578
+ ARG A212.NH2 ARG A216.NH2    3.075
+ HIS A283.ND1 GLY A285.N      3.092
+ HIS B213.ND1 ARG B236.NE     3.025
+ HIS B283.ND1 GLY B285.N      2.777
+2 Steric positive clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578
+ ARG A212.NH2 ARG A216.NH2    3.075
+1 Steric negative clashes detected
+ GLN A221.OE1 GLU A225.OE2    3.275
+Command list completed
+Summary data saved on 2ki5_all_test.json

@@ -7,3 +7,4 @@ Running chiral. Options:
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
 1 residues with incorrect backbone chirality found
  ALA A2    
+Running with --check_only. Nothing else to do.
