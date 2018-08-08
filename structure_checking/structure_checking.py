@@ -514,7 +514,7 @@ class StructureChecking():
             rnums = []
             for r_pair in self.rr_dist:
                 [r1, r2, d] = r_pair
-                if r1.get_resname() in dataCts.amide_res or r2.get_resname() in dataCts.amide_res:
+                if r1 in amide_list or r2 in amide_list:
                     if r1 != r2 and util.same_model(r1, r2) and not util.is_wat(r1) and not util.is_wat(r2):
                         for at_pair in util.get_all_rr_distances(r1, r2):
                             [at1, at2, dist] = at_pair
@@ -534,7 +534,7 @@ class StructureChecking():
                                         rnums.append(util.residuenum(at2.get_parent()))
                                     cont_list.append(at_pair)
             if len(cont_list):
-                print ('{} unusual contacts involving amide atoms found'.format(len(cont_list)))
+                print ('{} unusual contact(s) involving amide atoms found'.format(len(cont_list)))
                 amide_sum['detected'] = []
                 for at_pair in cont_list:
                     print (' {:12} {:12} {:8.3f}'.format(util.atomid(at_pair[0], self.nmodels > 1), util.atomid(at_pair[1], self.nmodels > 1), at_pair[2]))
@@ -575,6 +575,133 @@ class StructureChecking():
 
         self.summary['amide'] = amide_sum
 
+    def chiral(self, options):
+        opts = _get_parameters(options, "chiral", '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
+        print ('Running chiral. Options: {}'.format(' '.join(options)))
+        chiral_sum = {}
+
+        self._load_structure()
+        chiral_list = []
+        for r in self.struc_man.get_structure().get_residues():
+            if r.get_resname() in dataCts.chiral_res:
+                chiral_list.append(r)
+
+        chiral_sum['n_chirals'] = len(chiral_list)
+ 
+        if len(chiral_list) > 0:
+            res_to_fix = []
+            rnums = []
+            for r in chiral_list:
+                if not util.check_chiral_residue(r, dataCts.chiral_res):
+                    res_to_fix.append(r)
+                    rnums.append(util.residuenum(r))
+            if len(res_to_fix):
+                print ('{} residues with incorrect chirality found'.format(len(res_to_fix)))
+                chiral_sum['detected'] = []
+                for r in res_to_fix:
+                    print (' {:10}'.format(util.residueid(r, self.nmodels > 1)))
+                    chiral_sum['detected'].append(util.residueid(r, self.nmodels > 1))
+
+                if not self.args.check_only:
+                    ok = False
+                    while not ok:
+                        if not self.args.non_interactive:
+                            opts.chiral_fix = _check_parameter(opts.chiral_fix, 'Fix chiralities (All | None | {}): '.format(','.join(rnums)))
+                        ok = opts.chiral_fix.lower() in ['all', 'none']
+                        if not ok:
+                            ok = True
+                            for rn in opts.chiral_fix.split(','):
+                                ok = ok and rn in rnums
+                        if not ok:
+                            print ('Warning: unknown option {}'.format(opts.amide_fix))
+                            if self.args.non_interactive:
+                                self.summary['chiral'] = chiral_sum
+                                return 1
+                    if opts.chiral_fix.lower() == 'none':
+                        to_fix = []
+                    elif opts.chiral_fix.lower() == 'all':
+                        to_fix = res_to_fix
+                    else:
+                        to_fix = []
+                        for r in res_to_fix:
+                            if util.residuenum(r) in opts.chiral_fix.split(','):
+                                to_fix.append(r)
+                    n = 0
+                    for r in to_fix:
+                        self.struc_man.invert_chiral_side(r, dataCts.chiral_res)
+                        n += 1
+                    print ('Quiral residues fixed {} ({})'.format(opts.chiral_fix, n))
+            else:
+                print ("No residues with incorrect chirality found")
+        else:
+            print ("No chiral residues found")
+
+        self.summary['chiral'] = chiral_sum
+
+    def chiral_bck(self, options):
+        opts = _get_parameters(options, "chiral_bck", '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
+        print ('Running chiral. Options: {}'.format(' '.join(options)))
+        chiral_bck_sum = {}
+        
+        self.args.check_only=True # Provisional
+        
+        self._load_structure()
+        chiral_list = []
+        for r in self.struc_man.get_structure().get_residues():
+            if r.get_resname() != 'GLY' and not util.is_hetatm(r):
+                chiral_list.append(r)
+
+        chiral_bck_sum['n_chirals'] = len(chiral_list)
+ 
+        if len(chiral_list) > 0:
+            res_to_fix = []
+            rnums = []
+            for r in chiral_list:
+                if not util.check_chiral_ca(r):
+                    res_to_fix.append(r)
+                    rnums.append(util.residuenum(r))
+            if len(res_to_fix):
+                print ('{} residues with incorrect backbone chirality found'.format(len(res_to_fix)))
+                chiral_bck_sum['detected'] = []
+                for r in res_to_fix:
+                    print (' {:10}'.format(util.residueid(r, self.nmodels > 1)))
+                    chiral_bck_sum['detected'].append(util.residueid(r, self.nmodels > 1))
+
+                if not self.args.check_only:
+                    ok = False
+                    while not ok:
+                        if not self.args.non_interactive:
+                            opts.chiral_fix = _check_parameter(opts.chiral_fix, 'Fix CA chiralities (All | None | {}): '.format(','.join(rnums)))
+                        ok = opts.chiral_fix.lower() in ['all', 'none']
+                        if not ok:
+                            ok = True
+                            for rn in opts.chiral_fix.split(','):
+                                ok = ok and rn in rnums
+                        if not ok:
+                            print ('Warning: unknown option {}'.format(opts.amide_fix))
+                            if self.args.non_interactive:
+                                self.summary['chiral'] = chiral_sum
+                                return 1
+                    if opts.chiral_fix.lower() == 'none':
+                        to_fix = []
+                    elif opts.chiral_fix.lower() == 'all':
+                        to_fix = res_to_fix
+                    else:
+                        to_fix = []
+                        for r in res_to_fix:
+                            if util.residuenum(r) in opts.chiral_fix.split(','):
+                                to_fix.append(r)
+                    n = 0
+                    for r in to_fix:
+                        self.struc_man.invert_chiral_CA(r, dataCts.chiral_res) # TODO
+                        n += 1
+                    print ('Quiral residues fixed {} ({})'.format(opts.chiral_fix, n))
+            else:
+                print ("No residues with incorrect backbone chirality found")
+        else:
+            print ("No chiral residues found")
+
+        self.summary['chiral_bck'] = chiral_bck_sum
 
     def clashes(self, options):
         opts = _get_parameters(options, "clashes", '--no_wat', 'discard_wat', 'Discard water molecules')

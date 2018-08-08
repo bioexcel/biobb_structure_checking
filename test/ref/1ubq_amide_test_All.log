@@ -6,7 +6,7 @@
 Running amide. Options: --fix None
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
-1 unusual contacts involving amide atoms found
+1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750
 Amide residues fixed None (0)
 Structure saved on 1ubq_amide_test_All.pdb

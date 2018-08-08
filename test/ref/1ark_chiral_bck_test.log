@@ -3,10 +3,7 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running amide. Options: --fix All
-Structure exists: 'tmpPDB/ub/1ubq.cif' 
-Structure pdb:1ubq loaded
-1 unusual contact(s) involving amide atoms found
- ARG A42.NE   GLN A49.NE2     2.750
-Amide residues fixed All (1)
-Structure saved on 1ubq_amide_test_None.pdb
+Running chiral. Options: 
+Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
+1 residues with incorrect backbone chirality found
+ ALA A2    

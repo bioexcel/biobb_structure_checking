@@ -40,14 +40,22 @@ Hydrogen atom removed from 60 residues
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
-1 unusual contacts involving amide atoms found
+1 unusual contact(s) involving amide atoms found
  ASN A30.OD1  GLN A32.O       2.598
 Amide residues fixed All (1)
-Step 9: getss
+Step 9: chiral --fix All
+
+Running chiral. Options: --fix All
+No residues with incorrect chirality found
+Step 10: chiral_bck
+
+Running chiral. Options: 
+No residues with incorrect backbone chirality found
+Step 11: getss
 
 Running getss
 No SS bonds detected
-Step 10: clashes
+Step 12: clashes
 
 Running clashes: Options 
 No severe clashes detected
@@ -64,5 +72,4 @@ No donor clashes detected
 No positive clashes detected
 No negative clashes detected
 Command list completed
-Structure saved on 1ark_all_test.pdb
 Summary data saved on 1ark_all_test.json

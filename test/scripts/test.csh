@@ -28,7 +28,7 @@ python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_None.pdb --non_int
 echo "Running remwat on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_None.pdb --non_interactive remwat --remove No > 2ki5_remwat_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive remwat --remove Yes > 2ki5_remwat_test_Yes.log
-#remwat
+#remh
 echo "Running remh on 1ark"
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_None.pdb --non_interactive remh --remove No > 1ark_remh_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_Yes.pdb --non_interactive remh --remove Yes > 1ark_remh_test_Yes.log
@@ -42,9 +42,13 @@ python3 $APPDIR/checkStruc.py -i pdb:2ki5 --check_only --non_interactive clashes
 echo "Running amide on 1ubq"
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix None > 1ubq_amide_test_All.log
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_None.pdb --non_interactive amide --fix All > 1ubq_amide_test_None.log
-#all check
-echo -n "Running all checks"
-echo -n " 1ark"
+#chiral
+python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix All > 1ubq_chi_chiral_test_All.log
+python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix None > 1ubq_chi_none_test_None.log
+#chiral_bck
+python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log
+#All_test
+echo -n "Running All checks on 1ark"
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_all_test.pdb --json 1ark_all_test.json --non_interactive command_list --list scripts/all_checks > 1ark_all_test.log
 echo -n " 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_all_test.pdb --json 2ki5_all_test.json --non_interactive command_list --list scripts/all_checks > 2ki5_all_test.log

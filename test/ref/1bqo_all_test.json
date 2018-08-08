@@ -24,6 +24,12 @@
    "B"
   ]
  },
+ "chiral": {
+  "n_chirals": 43
+ },
+ "chiral_bck": {
+  "n_chirals": 316
+ },
  "clashes": {
   "detected": {
    "acceptor": [
