@@ -2,7 +2,9 @@
 # Template for structureCheck settings
 #
 #
-# Set this r
+# Set this to the application home directory
+#
+
 base_dir_path = "STRUCTURECHECK_HOME_DIR"
 
 #=========================================================================

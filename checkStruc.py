@@ -16,6 +16,7 @@ from structure_checking.cmd_line import CmdLine
 from structure_checking.help_manager import HelpManager
 from structure_checking.structure_checking import StructureChecking
 
+
 def main():
     help = HelpManager(sets.help_dir_path)
     cmd_line = CmdLine(defaults={})
