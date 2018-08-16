@@ -6,55 +6,72 @@
 Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
+ Num. models: 1
+ Num. chains: 1 (A)
+ Num. atoms:  660
+ Num. het atoms:  58
+ Num. water atoms:  58
+
 Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
-1 Models detected
+1 Model(s) detected
 Nothing to do
+
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
 1 Chains detected (A)
 Nothing to do
+
 Step 3: altloc --select_altloc occupancy
 
 Running altloc. Options: --select_altloc occupancy
 No residues with alternative location labels detected
+
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
 No metal ions found
+
 Step 5: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
 No ligands detected
+
 Step 6: remwat --remove Yes
 
 Running remwat. Options: --remove Yes
 58 Water molecules detected
 58 Water molecules removed
+
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
+
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750
 Amide residues fixed All (1)
+
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
 No residues with incorrect chirality found
+
 Step 10: chiral_bck
 
 Running chiral. Options: 
 No residues with incorrect backbone chirality found
+
 Step 11: getss
 
 Running getss
 No SS bonds detected
+
 Step 12: clashes
 
 Running clashes: Options 

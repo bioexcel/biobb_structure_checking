@@ -6,20 +6,29 @@
 Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
+ Num. models: 1
+ Num. chains: 2 (A,B)
+ Num. atoms:  2841
+ Num. het atoms:  119
+ Num. water atoms:  75
+
 Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
-1 Models detected
+1 Model(s) detected
 Nothing to do
+
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
 2 Chains detected (A, B)
 Selecting all chains
+
 Step 3: altloc --select_altloc occupancy
 
 Running altloc. Options: --select_altloc occupancy
 No residues with alternative location labels detected
+
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
@@ -35,6 +44,7 @@ Running metals. Options: --remove ZN
     CA B304.CA
     CA B305.CA
 Metal Atoms removed ZN (4)
+
 Step 5: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
@@ -47,33 +57,40 @@ Running ligands. Options: --remove SO4
  CA B305
 N25 B401
 Error: unknown selection SO4
+
 Step 6: remwat --remove Yes
 
 Running remwat. Options: --remove Yes
 75 Water molecules detected
 75 Water molecules removed
+
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
+
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  GLN B236.O   ASN B240.OD1    2.980
 Amide residues fixed All (1)
+
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
 No residues with incorrect chirality found
+
 Step 10: chiral_bck
 
 Running chiral. Options: 
 No residues with incorrect backbone chirality found
+
 Step 11: getss
 
 Running getss
 No SS bonds detected
+
 Step 12: clashes
 
 Running clashes: Options 

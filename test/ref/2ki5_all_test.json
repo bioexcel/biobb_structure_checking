@@ -243,11 +243,24 @@
  },
  "metals": {},
  "models": {
-  "detected": 1
+  "detected": {
+   "nmodels": 1
+  }
  },
  "remh": {},
  "remwat": {
   "n_detected": 292,
   "n_removed": 292
+ },
+ "stats": {
+  "chain_ids": [
+   "A",
+   "B"
+  ],
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 4961,
+  "num_hetats": 334,
+  "num_wats": 292
  }
 }

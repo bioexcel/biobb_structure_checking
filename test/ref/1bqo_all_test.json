@@ -203,11 +203,24 @@
   ]
  },
  "models": {
-  "detected": 1
+  "detected": {
+   "nmodels": 1
+  }
  },
  "remh": {},
  "remwat": {
   "n_detected": 75,
   "n_removed": 75
+ },
+ "stats": {
+  "chain_ids": [
+   "A",
+   "B"
+  ],
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 2841,
+  "num_hetats": 119,
+  "num_wats": 75
  }
 }

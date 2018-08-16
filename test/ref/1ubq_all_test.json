@@ -41,11 +41,23 @@
  "ligands": {},
  "metals": {},
  "models": {
-  "detected": 1
+  "detected": {
+   "nmodels": 1
+  }
  },
  "remh": {},
  "remwat": {
   "n_detected": 58,
   "n_removed": 58
+ },
+ "stats": {
+  "chain_ids": [
+   "A"
+  ],
+  "nchains": 1,
+  "nmodels": 1,
+  "num_ats": 660,
+  "num_hetats": 58,
+  "num_wats": 58
  }
 }

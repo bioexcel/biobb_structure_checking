@@ -6,6 +6,16 @@
 Running chains. Options: --select_chain All
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
+ Num. models: 1
+ Num. chains: 2 (A,B)
+ Num. atoms:  4961
+ Num. het atoms:  334
+ Num. water atoms:  292
 2 Chains detected (A, B)
 Selecting all chains
 Structure saved on 2ki5_chains_test_all.pdb
+Final Num. models: 1
+Final Num. chains: 2 (A,B)
+Final Num. atoms:  4961
+Final Num. het atoms:  334
+Final Num. water atoms:  292

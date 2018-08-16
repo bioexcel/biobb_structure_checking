@@ -6,16 +6,24 @@
 Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
+ Num. models: 1
+ Num. chains: 2 (A,B)
+ Num. atoms:  4961
+ Num. het atoms:  334
+ Num. water atoms:  292
+
 Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
-1 Models detected
+1 Model(s) detected
 Nothing to do
+
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
 2 Chains detected (A, B)
 Selecting all chains
+
 Step 3: altloc --select_altloc occupancy
 
 Running altloc. Options: --select_altloc occupancy
@@ -27,10 +35,12 @@ AC2 A1:
   O1'  A (1.00) B (0.01)
   C1'  A (1.00) B (0.01)
 Selecting location occupancy
+
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
 No metal ions found
+
 Step 5: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
@@ -40,22 +50,27 @@ AC2 A1
 SO4 B3
 AC2 B2
 Ligands removed SO4 (2)
+
 Step 6: remwat --remove Yes
 
 Running remwat. Options: --remove Yes
 292 Water molecules detected
 292 Water molecules removed
+
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 No residues with hydrogen atoms detected
+
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
+
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
 No residues with incorrect chirality found
+
 Step 10: chiral_bck
 
 Running chiral. Options: 
@@ -72,10 +87,12 @@ Warning: atom CA not found in ALA B375
 Warning: atom C not found in ALA B375
 Warning: atom CB not found in ALA B375
 No residues with incorrect backbone chirality found
+
 Step 11: getss
 
 Running getss
 No SS bonds detected
+
 Step 12: clashes
 
 Running clashes: Options 

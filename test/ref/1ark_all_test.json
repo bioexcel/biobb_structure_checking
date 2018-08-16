@@ -72,12 +72,42 @@
  "ligands": {},
  "metals": {},
  "models": {
-  "detected": 15,
-  "selected": 1
+  "detected": {
+   "nmodels": 15,
+   "type": {
+    "rmsd": 35.03169274121592,
+    "type": 2
+   }
+  },
+  "selected_model": 1
  },
  "remh": {
   "n_detected": 60,
   "n_removed": 60
  },
- "remwat": {}
+ "remwat": {},
+ "stats": {
+  "chain_ids": [
+   "A/1",
+   "A/2",
+   "A/3",
+   "A/4",
+   "A/5",
+   "A/6",
+   "A/7",
+   "A/8",
+   "A/9",
+   "A/10",
+   "A/11",
+   "A/12",
+   "A/13",
+   "A/14",
+   "A/15"
+  ],
+  "nchains": 15,
+  "nmodels": 15,
+  "num_ats": 13575,
+  "num_hetats": 0,
+  "num_wats": 0
+ }
 }
