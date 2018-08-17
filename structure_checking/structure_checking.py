@@ -547,14 +547,14 @@ class StructureChecking():
                                         (  self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
                                        and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
                                             continue
-                                    if at1.id in dataCts.amide_atoms:
+                                    if at1.id in dataCts.amide_atoms and r1 in amide_list:
                                         res_to_fix.append(r1)
                                         rnums.append(mu.residue_num(r1))
-                                    if at2.id in dataCts.amide_atoms:
+                                    if at2.id in dataCts.amide_atoms and r2 in amide_list:
                                         res_to_fix.append(r2)
                                         rnums.append(mu.residue_num(r2))
                                     cont_list.append(at_pair)
-
+            print (res_to_fix)
             if len(cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(cont_list)))
                 amide_sum['detected'] = []
