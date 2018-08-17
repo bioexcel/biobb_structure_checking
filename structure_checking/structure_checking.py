@@ -90,6 +90,7 @@ class StructureChecking():
 
         self._load_structure()
 
+
         print ('{} Model(s) detected'.format(self.stm.nmodels))
         models_sum['detected'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
