@@ -35,11 +35,16 @@ class StructureChecking():
         f(self.args.options)
 
         if not self.args.check_only:
-            self._save_structure()
-            self.stm.set_num_ats()
-            print ('Structure saved on {}'.format(self.args.output_structure_path))
-            self.stm.print_stats('Final')
-            self.summary['final_stats'] = self.stm.get_stats()
+            if self.stm.modified or self.args.force_save:
+                if not self.stm.modified:
+                    print ('Structure not modified, saving due to --force_save option')
+                self._save_structure()
+                self.stm.calc_stats()
+                print ('Structure saved on {}'.format(self.args.output_structure_path))
+                self.stm.print_stats('Final')
+                self.summary['final_stats'] = self.stm.get_stats()
+            elif not self.stm.modified:
+                print ('Structure not modified, not saving. Override with --force_save')
 
         if self.args.json_output_path is not None:
             json_writer = JSONWriter()

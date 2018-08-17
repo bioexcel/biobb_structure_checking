@@ -78,6 +78,13 @@ class CmdLine():
             nargs=argparse.REMAINDER,
             help="Specific command options"
         )
+        
+        self.argparser.add_argument(
+            '--force_save',
+            action='store_true',
+            dest='force_save',
+            help='Force saving an output file even if no modification'
+        )
 
     def parse_args(self):
         args = self.argparser.parse_args()
