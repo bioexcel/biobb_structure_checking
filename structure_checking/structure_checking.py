@@ -544,12 +544,12 @@ class StructureChecking():
                             for cls in ['acceptor', 'donor']:
                                 if dist < dataCts.CLASH_DIST[cls]:
                                     if cls == 'donor' and not \
-                                        (self.stm.is_at_in_list(at1, dataCts.polar_donor) \
-                                         and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
+                                        (mu.is_at_in_list(at1, dataCts.polar_donor) \
+                                         and mu.is_at_in_list(at2, dataCts.polar_donor)):
                                             continue
                                     if cls == 'acceptor' and not \
-                                        (self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                         and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                        (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                         and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
                                             continue
                                     if at1.id in dataCts.amide_atoms and r1 in amide_list:
                                         res_to_fix.append(r1)
@@ -558,12 +558,11 @@ class StructureChecking():
                                         res_to_fix.append(r2)
                                         rnums.append(mu.residue_num(r2))
                                     cont_list.append(at_pair)
-            print (res_to_fix)
             if len(cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(cont_list)))
                 amide_sum['detected'] = []
                 for at_pair in cont_list:
-                    print (' {:12} {:12} {:8.3f}'.format(mu.atom_id(at_pair[0], self.stm.nmodels > 1), mu.atom_id(at_pair[1], self.stm.nmodels > 1), at_pair[2]))
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0], self.stm.nmodels > 1), mu.atom_id(at_pair[1], self.stm.nmodels > 1), at_pair[2]))
                     amide_sum['detected'].append({'at1':mu.atom_id(at_pair[0], self.stm.nmodels > 1), 'at2':mu.atom_id(at_pair[1], self.stm.nmodels > 1), 'dist': float(at_pair[2])})
 
                 if self.args.check_only:
@@ -780,16 +779,20 @@ class StructureChecking():
                             if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
                                 continue
                             if cls == 'donor' and not \
-                                (self.stm.is_at_in_list(at1, dataCts.polar_donor) \
-                                 and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
+                                (mu.is_at_in_list(at1, dataCts.polar_donor) \
+                                 and mu.is_at_in_list(at2, dataCts.polar_donor)):
                                 continue
                             if cls == 'acceptor' and not \
-                                (self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                 and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                 and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
                                 continue
-                            if cls == 'positive' and not (at1.id in dataCts.pos_ats and at2.id in dataCts.pos_ats):
+                            if cls == 'positive' and not \
+                                (mu.is_at_in_list(at1,dataCts.pos_ats) \
+                                and mu.is_at_in_list(at2, dataCts.pos_ats)):
                                 continue
-                            if cls == 'negative' and not (at1.id in dataCts.neg_ats and at2.id in dataCts.neg_ats):
+                            if cls == 'negative' and not \
+                                (mu.is_at_in_list(at1, dataCts.neg_ats) \
+                                and mu.is_at_in_list(at2, dataCts.neg_ats)):
                                 continue
                             if not rkey in clashes[cls]:
                                 clashes[cls][rkey] = at_pair
@@ -799,7 +802,7 @@ class StructureChecking():
             if len(clashes[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clashes[cls]), cls))
                 for rkey in sorted(clashes[cls], key=lambda x: 10000 * clashes[cls][x][0].serial_number + clashes[cls][x][1].serial_number):
-                    print (' {:12} {:12} {:8.3f}'.format(mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels > 1), clashes[cls][rkey][2]))
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels > 1), clashes[cls][rkey][2]))
                     at_pair = clashes[cls][rkey]
                     clashes_sum['detected'][cls].append(
                                                         {
