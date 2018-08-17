@@ -9,13 +9,12 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import argparse
 import re
-import sys
-
-from   structure_checking.help_manager import HelpManager
-from   structure_checking.json_writer import JSONWriter
+from structure_checking.help_manager import HelpManager
+from structure_checking.json_writer import JSONWriter
 import structure_manager.data_constants as dataCts
-from   structure_manager.structure_manager import StructureManager
 import structure_manager.model_utils as mu
+from structure_manager.structure_manager import StructureManager
+import sys
 
 class StructureChecking():
     def __init__(self, args):
@@ -94,7 +93,7 @@ class StructureChecking():
         print ('{} Model(s) detected'.format(self.stm.nmodels))
         models_sum['detected'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
-            models_sum['detected']['type'] =self.stm.models_type
+            models_sum['detected']['type'] = self.stm.models_type
             if self.stm.models_type['type'] == mu.ENSM:
                 print ('Models superimpose, RMSd: {:8.3f} A, guessed as ensemble type (NMR / MD TRAJ)'.format(self.stm.models_type['rmsd']))
             elif self.stm.models_type['type'] == mu.BUNIT:
@@ -258,7 +257,7 @@ class StructureChecking():
                 while not ok:
                     if not self.args.non_interactive:
                         opts.remove_metals = _check_parameter(opts.remove_metals,
-                            'Remove (All | None | any of {} | any of {}):'.format(','.join(sorted(at_groups)), ','.join(met_rids)))
+                                                              'Remove (All | None | any of {} | any of {}):'.format(','.join(sorted(at_groups)), ','.join(met_rids)))
                     ok = opts.remove_metals.lower() in ['all', 'none']
                     if not ok:
                         ok = True
@@ -322,7 +321,7 @@ class StructureChecking():
 
         self._load_structure()
 
-        lig_list = mu.get_ligands(self._get_structure(),incl_water=True)
+        lig_list = mu.get_ligands(self._get_structure(), incl_water=True)
 
         wat_list = []
         for r in lig_list:
@@ -391,7 +390,7 @@ class StructureChecking():
                 while not ok:
                     if not self.args.non_interactive:
                         opts.remove_ligands = _check_parameter(opts.remove_ligands,
-                            'Remove (All | None | any of {} | any of {}): '.format(','.join(sorted(rids)), ','.join(rnums)))
+                                                               'Remove (All | None | any of {} | any of {}): '.format(','.join(sorted(rids)), ','.join(rnums)))
 
                     ok = opts.remove_ligands.lower() in ['all', 'none']
                     if not ok:
@@ -492,7 +491,7 @@ class StructureChecking():
 
         self._load_structure()
 
-        SS_bonds = mu.get_all_at2at_distances(self._get_structure(),'SG', dataCts.SS_DIST)
+        SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', dataCts.SS_DIST)
 
         if len(SS_bonds):
             print ('{} Possible SS Bonds detected'.format(len(SS_bonds)))
@@ -521,7 +520,7 @@ class StructureChecking():
 
         if len(amide_list) > 0:
             if len(self.rr_dist) == 0:
-                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(),'all', dataCts.R_R_CUTOFF)
+                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', dataCts.R_R_CUTOFF)
             res_to_fix = []
             cont_list = []
             rnums = []
@@ -540,12 +539,12 @@ class StructureChecking():
                             for cls in ['acceptor', 'donor']:
                                 if dist < dataCts.CLASH_DIST[cls]:
                                     if cls == 'donor' and not \
-                                        (  self.stm.is_at_in_list(at1, dataCts.polar_donor) \
-                                       and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
+                                        (self.stm.is_at_in_list(at1, dataCts.polar_donor) \
+                                         and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
                                             continue
                                     if cls == 'acceptor' and not \
-                                        (  self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                       and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                        (self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                         and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
                                             continue
                                     if at1.id in dataCts.amide_atoms and r1 in amide_list:
                                         res_to_fix.append(r1)
@@ -611,7 +610,7 @@ class StructureChecking():
                 chiral_list.append(r)
 
         chiral_sum['n_chirals'] = len(chiral_list)
- 
+
         if len(chiral_list) > 0:
             res_to_fix = []
             rnums = []
@@ -668,9 +667,9 @@ class StructureChecking():
         opts = _get_parameters(options, "chiral_bck", '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
         print ('Running chiral. Options: {}'.format(' '.join(options)))
         chiral_bck_sum = {}
-        
-        self.args.check_only=True # Provisional
-        
+
+        self.args.check_only = True # Provisional
+
         self._load_structure()
         chiral_list = []
         for ch in self._get_structure().get_chains():
@@ -679,7 +678,7 @@ class StructureChecking():
                     if r.get_resname() != 'GLY' and not mu.is_hetatm(r):
                         chiral_list.append(r)
         chiral_bck_sum['n_chirals'] = len(chiral_list)
- 
+
         if len(chiral_list) > 0:
             res_to_fix = []
             rnums = []
@@ -776,12 +775,12 @@ class StructureChecking():
                             if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
                                 continue
                             if cls == 'donor' and not \
-                                (   self.stm.is_at_in_list(at1, dataCts.polar_donor) \
-                                and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
+                                (self.stm.is_at_in_list(at1, dataCts.polar_donor) \
+                                 and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
                                 continue
                             if cls == 'acceptor' and not \
-                                (   self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                (self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                 and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
                                 continue
                             if cls == 'positive' and not (at1.id in dataCts.pos_ats and at2.id in dataCts.pos_ats):
                                 continue
@@ -795,12 +794,12 @@ class StructureChecking():
             if len(clashes[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clashes[cls]), cls))
                 for rkey in sorted(clashes[cls], key=lambda x: 10000 * clashes[cls][x][0].serial_number + clashes[cls][x][1].serial_number):
-                    print (' {:12} {:12} {:8.3f}'.format(mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels>1), mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels>1), clashes[cls][rkey][2]))
+                    print (' {:12} {:12} {:8.3f}'.format(mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels > 1), clashes[cls][rkey][2]))
                     at_pair = clashes[cls][rkey]
                     clashes_sum['detected'][cls].append(
                                                         {
-                                                        'at1':mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels>1),
-                                                        'at2':mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels>1),
+                                                        'at1':mu.atom_id(clashes[cls][rkey][0], self.stm.nmodels > 1),
+                                                        'at2':mu.atom_id(clashes[cls][rkey][1], self.stm.nmodels > 1),
                                                         'dist': float(clashes[cls][rkey][2])
                                                         }
                                                         )
@@ -819,7 +818,7 @@ class StructureChecking():
             if verbose:
                 print ('Structure {} loaded'.format(self.args.input_structure_path))
                 self.stm.print_stats()
-            self.summary['stats']=self.stm.get_stats()
+            self.summary['stats'] = self.stm.get_stats()
 
     def _get_structure(self):
         return self.stm.get_structure()
