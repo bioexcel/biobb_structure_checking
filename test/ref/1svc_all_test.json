@@ -1,0 +1,233 @@
+{
+ "altloc": {},
+ "amide": {
+  "detected": [
+   {
+    "at1": "GLN P180.NE2",
+    "at2": "ARG P231.NH1",
+    "dist": 2.844599723815918
+   }
+  ],
+  "n_amides": 24
+ },
+ "chains": {
+  "detected": {
+   "D": 2,
+   "P": 1
+  },
+  "final": {
+   "D": 2,
+   "P": 1
+  },
+  "selected": {
+   "D": 2,
+   "P": 1
+  }
+ },
+ "chiral": {
+  "n_chirals": 32
+ },
+ "chiral_bck": {
+  "n_chirals": 285
+ },
+ "clashes": {
+  "detected": {
+   "acceptor": [
+    {
+     "at1": "TYR P44.O",
+     "at2": "CYS P88.O",
+     "dist": 2.9385454654693604
+    },
+    {
+     "at1": "GLU P49.OE1",
+     "at2": "TYR P82.O",
+     "dist": 2.9505679607391357
+    },
+    {
+     "at1": "VAL P96.O",
+     "at2": "VAL P126.O",
+     "dist": 3.0597264766693115
+    },
+    {
+     "at1": "GLY P129.O",
+     "at2": "ASP P132.O",
+     "dist": 2.790377616882324
+    },
+    {
+     "at1": "CYS P162.O",
+     "at2": "GLU P182.O",
+     "dist": 3.0555596351623535
+    },
+    {
+     "at1": "TYR P178.O",
+     "at2": "GLU P182.OE1",
+     "dist": 3.086315155029297
+    },
+    {
+     "at1": "LEU P179.O",
+     "at2": "GLU P182.O",
+     "dist": 2.8518316745758057
+    }
+   ],
+   "apolar": [
+    {
+     "at1": "PRO P43.O",
+     "at2": "LEU P232.CD2",
+     "dist": 2.897714376449585
+    },
+    {
+     "at1": "ALA P62.C",
+     "at2": "GLY P64.N",
+     "dist": 2.829533100128174
+    },
+    {
+     "at1": "GLU P63.O",
+     "at2": "HIS P67.CD2",
+     "dist": 2.852599859237671
+    },
+    {
+     "at1": "SER P74.OG",
+     "at2": "SER P81.CB",
+     "dist": 2.8213794231414795
+    },
+    {
+     "at1": "PRO P93.O",
+     "at2": "PHE P228.CE1",
+     "dist": 2.7702629566192627
+    },
+    {
+     "at1": "HIS P108.CD2",
+     "at2": "GLN P204.OE1",
+     "dist": 2.681020498275757
+    },
+    {
+     "at1": "GLY P129.O",
+     "at2": "ASP P132.C",
+     "dist": 2.812793731689453
+    },
+    {
+     "at1": "TYR P178.C",
+     "at2": "GLN P180.N",
+     "dist": 2.882904052734375
+    },
+    {
+     "at1": "GLY P183.O",
+     "at2": "GLN P188.CB",
+     "dist": 2.8549883365631104
+    },
+    {
+     "at1": "GLY P185.C",
+     "at2": "ARG P187.N",
+     "dist": 2.871666431427002
+    },
+    {
+     "at1": "ALA P201.O",
+     "at2": "THR P205.CG2",
+     "dist": 2.846787214279175
+    },
+    {
+     "at1": "ALA P219.O",
+     "at2": "ARG P231.CA",
+     "dist": 2.86236310005188
+    },
+    {
+     "at1": "ASP P223.OD2",
+     "at2": "ARG P230.CG",
+     "dist": 2.8655266761779785
+    },
+    {
+     "at1": "LEU P251.O",
+     "at2": "SER P343.CB",
+     "dist": 2.8699162006378174
+    },
+    {
+     "at1": "TYR P286.CA",
+     "at2": "TRP P295.O",
+     "dist": 2.8205313682556152
+    },
+    {
+     "at1": "SER P302.C",
+     "at2": "THR P304.N",
+     "dist": 2.842040538787842
+    },
+    {
+     "at1": "TYR P319.CD2",
+     "at2": "ASP P321.O",
+     "dist": 2.8959624767303467
+    },
+    {
+     "at1": "ARG P336.O",
+     "at2": "LEU P340.CA",
+     "dist": 2.84039568901062
+    }
+   ],
+   "donor": [
+    {
+     "at1": "ARG P54.NH1",
+     "at2": "ARG P336.NH1",
+     "dist": 3.0561060905456543
+    }
+   ],
+   "negative": [
+    {
+     "at1": " DA D9.OP2",
+     "at2": "GLN P309.OE1",
+     "dist": 3.452418804168701
+    },
+    {
+     "at1": "ASP P121.OD2",
+     "at2": "GLU P160.OE2",
+     "dist": 3.1774356365203857
+    },
+    {
+     "at1": "GLU P287.OE1",
+     "at2": "GLU P289.OE2",
+     "dist": 3.2163121700286865
+    }
+   ],
+   "positive": [
+    {
+     "at1": "ARG P54.NH1",
+     "at2": "ARG P336.NH1",
+     "dist": 3.0561060905456543
+    },
+    {
+     "at1": "ARG P57.NH2",
+     "at2": "ARG P59.NH1",
+     "dist": 3.3555257320404053
+    },
+    {
+     "at1": "ARG P284.NE",
+     "at2": "ARG P335.NH1",
+     "dist": 3.4757349491119385
+    }
+   ],
+   "severe": []
+  }
+ },
+ "getss": {},
+ "ligands": {},
+ "metals": {},
+ "models": {
+  "detected": {
+   "nmodels": 1
+  }
+ },
+ "remh": {},
+ "remwat": {
+  "n_detected": 63,
+  "n_removed": 63
+ },
+ "stats": {
+  "chain_ids": {
+   "D": 2,
+   "P": 1
+  },
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 2903,
+  "num_hetats": 63,
+  "num_res": 393,
+  "num_wat": 63
+ }
+}

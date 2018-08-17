@@ -7,14 +7,16 @@ Running remh. Options: --remove No
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  Num. models: 15
- Num. chains: 15 (A/1,A/2,A/3,A/4,A/5,A/6,A/7,A/8,A/9,A/10,A/11,A/12,A/13,A/14,A/15)
+ Num. chains: 1 (A)
+ Num. residues:  900
  Num. atoms:  13575
  Num. het atoms:  0
  Num. water atoms:  0
 900 Residues containing H atoms detected
 Structure saved on 1ark_remh_test_None.pdb
 Final Num. models: 15
-Final Num. chains: 15 (A/1,A/2,A/3,A/4,A/5,A/6,A/7,A/8,A/9,A/10,A/11,A/12,A/13,A/14,A/15)
+Final Num. chains: 1 (A)
+Final Num. residues:  900
 Final Num. atoms:  13575
 Final Num. het atoms:  0
 Final Num. water atoms:  0

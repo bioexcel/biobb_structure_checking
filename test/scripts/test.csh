@@ -58,8 +58,10 @@ echo -n " 1bqo"
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_all_test.pdb --json 1bqo_all_test.json --non_interactive command_list --list scripts/all_checks > 1bqo_all_test.log
 echo -n " 4kui"
 python3 $APPDIR/checkStruc.py -i pdb:4ku1 -o 4ku1_all_test.pdb --json 4ku1_all_test.json --non_interactive command_list --list scripts/all_checks > 4ku1_all_test.log
-echo " 1ubq"
+echo -n " 1ubq"
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_all_test.pdb --json 1ubq_all_test.json --non_interactive command_list --list scripts/all_checks > 1ubq_all_test.log
+echo " 1svc"
+python3 $APPDIR/checkStruc.py -i pdb:1svc -o :wq1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 echo "Calculating diffs"
 foreach f (*pdb *json *log)
 diff $f ref/$f > $f.diff

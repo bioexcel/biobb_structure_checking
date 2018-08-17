@@ -7,6 +7,7 @@ Running chiral. Options:
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Num. models: 1
  Num. chains: 1 (A)
+ Num. residues:  60
  Num. atoms:  463
  Num. het atoms:  0
  Num. water atoms:  0

@@ -8,6 +8,7 @@ Structure exists: 'tmpPDB/ki/2ki5.cif'
 Structure pdb:2ki5 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
+ Num. residues:  908
  Num. atoms:  4961
  Num. het atoms:  334
  Num. water atoms:  292
@@ -21,6 +22,7 @@ Ligands removed None (0)
 Structure saved on 2ki5_ligands_test_None.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)
+Final Num. residues:  908
 Final Num. atoms:  4961
 Final Num. het atoms:  334
 Final Num. water atoms:  292

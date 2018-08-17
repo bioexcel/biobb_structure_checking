@@ -11,9 +11,9 @@
   "n_amides": 4
  },
  "chains": {
-  "detected": [
-   "A"
-  ]
+  "detected": {
+   "A": 1
+  }
  },
  "chiral": {
   "n_chirals": 9
@@ -75,7 +75,7 @@
   "detected": {
    "nmodels": 15,
    "type": {
-    "rmsd": 35.03169274121592,
+    "rmsd": 35.03169276576191,
     "type": 2
    }
   },
@@ -87,27 +87,14 @@
  },
  "remwat": {},
  "stats": {
-  "chain_ids": [
-   "A/1",
-   "A/2",
-   "A/3",
-   "A/4",
-   "A/5",
-   "A/6",
-   "A/7",
-   "A/8",
-   "A/9",
-   "A/10",
-   "A/11",
-   "A/12",
-   "A/13",
-   "A/14",
-   "A/15"
-  ],
-  "nchains": 15,
+  "chain_ids": {
+   "A": 1
+  },
+  "nchains": 1,
   "nmodels": 15,
   "num_ats": 13575,
   "num_hetats": 0,
-  "num_wats": 0
+  "num_res": 900,
+  "num_wat": 0
  }
 }

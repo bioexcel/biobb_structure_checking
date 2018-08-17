@@ -134,11 +134,9 @@ class StructureChecking():
 
         self._load_structure()
 
-        if self.stm.nmodels > 1:
-            print ("Warning: structure contains models, running models first")
-            self.models([])
-
-        print ('{} Chains detected ({})'.format(len(self.stm.chain_ids), ', '.join(self.stm.chain_ids)))
+        print ('{} Chains detected'.format(len(self.stm.chain_ids)))
+        for ch_id in sorted(self.stm.chain_ids):
+            print ('  {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
         chains_sum['detected'] = self.stm.chain_ids
 
         if self.args.check_only:
@@ -148,7 +146,7 @@ class StructureChecking():
                 ok = False
                 while not ok:
                     if not self.args.non_interactive:
-                        opts.select_chains = _check_parameter(opts.select_chains, 'Select All or chain id(s), [{}]: '.format(','.join(self.stm.chain_ids)))
+                        opts.select_chains = _check_parameter(opts.select_chains, 'Select All or chain id(s), [{}]: '.format(','.join(sorted(self.stm.chain_ids))))
                     ok = opts.select_chains.lower() == 'all'
                     if not ok:
                         ok = True
@@ -533,21 +531,30 @@ class StructureChecking():
                     if r1 != r2 and mu.same_model(r1, r2) and not mu.is_wat(r1) and not mu.is_wat(r2):
                         for at_pair in mu.get_all_rr_distances(r1, r2):
                             [at1, at2, dist] = at_pair
+                            r1 = at1.get_parent()
+                            ch1 = r1.get_parent()
+                            r2 = at2.get_parent()
+                            ch2 = r2.get_parent()
+                            if not at1.id in dataCts.amide_atoms and not at2.id in dataCts.amide_atoms:
+                                continue
                             for cls in ['acceptor', 'donor']:
                                 if dist < dataCts.CLASH_DIST[cls]:
-                                    if cls == 'donor' and not (at1.id in dataCts.polar_donor and at2.id in dataCts.polar_donor):
-                                        continue
-                                    if cls == 'acceptor' and not (at1.id in dataCts.polar_acceptor and at2.id in dataCts.polar_acceptor):
-                                        continue
-                                    if not at1.id in dataCts.amide_atoms and not at2.id in dataCts.amide_atoms:
-                                        continue
+                                    if cls == 'donor' and not \
+                                        (  self.stm.is_at_in_list(at1, dataCts.polar_donor) \
+                                       and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
+                                            continue
+                                    if cls == 'acceptor' and not \
+                                        (  self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                       and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                            continue
                                     if at1.id in dataCts.amide_atoms:
-                                        res_to_fix.append(at1.get_parent())
-                                        rnums.append(mu.residue_num(at1.get_parent()))
+                                        res_to_fix.append(r1)
+                                        rnums.append(mu.residue_num(r1))
                                     if at2.id in dataCts.amide_atoms:
-                                        res_to_fix.append(at2.get_parent())
-                                        rnums.append(mu.residue_num(at2.get_parent()))
+                                        res_to_fix.append(r2)
+                                        rnums.append(mu.residue_num(r2))
                                     cont_list.append(at_pair)
+
             if len(cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(cont_list)))
                 amide_sum['detected'] = []
@@ -666,10 +673,11 @@ class StructureChecking():
         
         self._load_structure()
         chiral_list = []
-        for r in self._get_structure().get_residues():
-            if r.get_resname() != 'GLY' and not mu.is_hetatm(r):
-                chiral_list.append(r)
-
+        for ch in self._get_structure().get_chains():
+            if self.stm.chain_ids[ch.id] == mu.PROTEIN:
+                for r in ch.get_residues():
+                    if r.get_resname() != 'GLY' and not mu.is_hetatm(r):
+                        chiral_list.append(r)
         chiral_bck_sum['n_chirals'] = len(chiral_list)
  
         if len(chiral_list) > 0:
@@ -767,9 +775,13 @@ class StructureChecking():
                         if dist < dataCts.CLASH_DIST[cls]:
                             if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
                                 continue
-                            if cls == 'donor' and not (at1.id in dataCts.polar_donor and at2.id in dataCts.polar_donor):
+                            if cls == 'donor' and not \
+                                (   self.stm.is_at_in_list(at1, dataCts.polar_donor) \
+                                and self.stm.is_at_in_list(at2, dataCts.polar_donor)):
                                 continue
-                            if cls == 'acceptor' and not (at1.id in dataCts.polar_acceptor and at2.id in dataCts.polar_acceptor):
+                            if cls == 'acceptor' and not \
+                                (   self.stm.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                and self.stm.is_at_in_list(at2, dataCts.polar_acceptor)):
                                 continue
                             if cls == 'positive' and not (at1.id in dataCts.pos_ats and at2.id in dataCts.pos_ats):
                                 continue

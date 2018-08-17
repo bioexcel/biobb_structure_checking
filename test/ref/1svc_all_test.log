@@ -1,0 +1,120 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running command_list from scripts/all_checks
+Structure exists: 'tmpPDB/sv/1svc.cif' 
+Structure pdb:1svc loaded
+ Num. models: 1
+ Num. chains: 2 (D,P)
+ Num. residues:  393
+ Num. atoms:  2903
+ Num. het atoms:  63
+ Num. water atoms:  63
+
+Step 1: models --select_model 1
+
+Running models. Options: --select_model 1
+1 Model(s) detected
+Nothing to do
+
+Step 2: chains --select_chain All
+
+Running chains. Options: --select_chain All
+2 Chains detected
+  D: DNA
+  P: Protein
+Selecting all chains
+
+Step 3: altloc --select_altloc occupancy
+
+Running altloc. Options: --select_altloc occupancy
+No residues with alternative location labels detected
+
+Step 4: metals --remove ZN
+
+Running metals. Options: --remove ZN
+No metal ions found
+
+Step 5: ligands --remove SO4
+
+Running ligands. Options: --remove SO4
+No ligands detected
+
+Step 6: remwat --remove Yes
+
+Running remwat. Options: --remove Yes
+63 Water molecules detected
+63 Water molecules removed
+
+Step 7: remh --remove Yes
+
+Running remh. Options: --remove Yes
+No residues with hydrogen atoms detected
+
+Step 8: amide --fix All
+
+Running amide. Options: --fix All
+1 unusual contact(s) involving amide atoms found
+ GLN P180.NE2 ARG P231.NH1    2.845
+Amide residues fixed All (1)
+
+Step 9: chiral --fix All
+
+Running chiral. Options: --fix All
+No residues with incorrect chirality found
+
+Step 10: chiral_bck
+
+Running chiral. Options: 
+No residues with incorrect backbone chirality found
+
+Step 11: getss
+
+Running getss
+No SS bonds detected
+
+Step 12: clashes
+
+Running clashes: Options 
+No severe clashes detected
+18 Steric apolar clashes detected
+ PRO P43.O    LEU P232.CD2    2.898
+ ALA P62.C    GLY P64.N       2.830
+ GLU P63.O    HIS P67.CD2     2.853
+ SER P74.OG   SER P81.CB      2.821
+ PRO P93.O    PHE P228.CE1    2.770
+ HIS P108.CD2 GLN P204.OE1    2.681
+ GLY P129.O   ASP P132.C      2.813
+ TYR P178.C   GLN P180.N      2.883
+ GLY P183.O   GLN P188.CB     2.855
+ GLY P185.C   ARG P187.N      2.872
+ ALA P201.O   THR P205.CG2    2.847
+ ALA P219.O   ARG P231.CA     2.862
+ ASP P223.OD2 ARG P230.CG     2.866
+ LEU P251.O   SER P343.CB     2.870
+ TYR P286.CA  TRP P295.O      2.821
+ SER P302.C   THR P304.N      2.842
+ TYR P319.CD2 ASP P321.O      2.896
+ ARG P336.O   LEU P340.CA     2.840
+7 Steric acceptor clashes detected
+ TYR P44.O    CYS P88.O       2.939
+ GLU P49.OE1  TYR P82.O       2.951
+ VAL P96.O    VAL P126.O      3.060
+ GLY P129.O   ASP P132.O      2.790
+ CYS P162.O   GLU P182.O      3.056
+ TYR P178.O   GLU P182.OE1    3.086
+ LEU P179.O   GLU P182.O      2.852
+1 Steric donor clashes detected
+ ARG P54.NH1  ARG P336.NH1    3.056
+3 Steric positive clashes detected
+ ARG P54.NH1  ARG P336.NH1    3.056
+ ARG P57.NH2  ARG P59.NH1     3.356
+ ARG P284.NE  ARG P335.NH1    3.476
+3 Steric negative clashes detected
+  DA D9.OP2   GLN P309.OE1    3.452
+ ASP P121.OD2 GLU P160.OE2    3.177
+ GLU P287.OE1 GLU P289.OE2    3.216
+Command list completed
+Summary data saved on 1svc_all_test.json

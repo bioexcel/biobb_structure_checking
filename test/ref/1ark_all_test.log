@@ -7,7 +7,8 @@ Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  Num. models: 15
- Num. chains: 15 (A/1,A/2,A/3,A/4,A/5,A/6,A/7,A/8,A/9,A/10,A/11,A/12,A/13,A/14,A/15)
+ Num. chains: 1 (A)
+ Num. residues:  900
  Num. atoms:  13575
  Num. het atoms:  0
  Num. water atoms:  0
@@ -22,7 +23,8 @@ Selecting model num. 1
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
-1 Chains detected (A)
+1 Chains detected
+  A: Protein
 Nothing to do
 
 Step 3: altloc --select_altloc occupancy

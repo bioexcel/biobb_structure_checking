@@ -8,6 +8,7 @@ Structure exists: 'tmpPDB/ki/2ki5.cif'
 Structure pdb:2ki5 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
+ Num. residues:  908
  Num. atoms:  4961
  Num. het atoms:  334
  Num. water atoms:  292

@@ -8,6 +8,7 @@ Structure exists: 'tmpPDB/ub/1ubq.cif'
 Structure pdb:1ubq loaded
  Num. models: 1
  Num. chains: 1 (A)
+ Num. residues:  134
  Num. atoms:  660
  Num. het atoms:  58
  Num. water atoms:  58
@@ -21,7 +22,8 @@ Nothing to do
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
-1 Chains detected (A)
+1 Chains detected
+  A: Protein
 Nothing to do
 
 Step 3: altloc --select_altloc occupancy

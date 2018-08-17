@@ -11,9 +11,9 @@
   "n_amides": 8
  },
  "chains": {
-  "detected": [
-   "A"
-  ]
+  "detected": {
+   "A": 1
+  }
  },
  "chiral": {
   "n_chirals": 14
@@ -51,13 +51,14 @@
   "n_removed": 58
  },
  "stats": {
-  "chain_ids": [
-   "A"
-  ],
+  "chain_ids": {
+   "A": 1
+  },
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 660,
   "num_hetats": 58,
-  "num_wats": 58
+  "num_res": 134,
+  "num_wat": 58
  }
 }

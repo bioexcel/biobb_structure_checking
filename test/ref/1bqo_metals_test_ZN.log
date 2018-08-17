@@ -8,6 +8,7 @@ Structure exists: 'tmpPDB/bq/1bqo.cif'
 Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
+ Num. residues:  428
  Num. atoms:  2841
  Num. het atoms:  119
  Num. water atoms:  75
@@ -26,6 +27,7 @@ Metal Atoms removed ZN (4)
 Structure saved on 1bqo_metals_test_SO4.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)
+Final Num. residues:  424
 Final Num. atoms:  2837
 Final Num. het atoms:  115
 Final Num. water atoms:  75
