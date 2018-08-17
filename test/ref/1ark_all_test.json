@@ -93,8 +93,8 @@
   "nchains": 1,
   "nmodels": 15,
   "num_ats": 13575,
-  "num_hetats": 0,
   "num_res": 900,
-  "num_wat": 0
+  "num_wat": 0,
+  "res_hetats": 0
  }
 }

@@ -9,16 +9,10 @@ Structure pdb:1ubq loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  134
+ Num. hetatm res:  58
+ Num. water mol.:  58
  Num. atoms:  660
- Num. het atoms:  58
- Num. water atoms:  58
 1 unusual contact(s) involving amide atoms found
- ARG A42.NE   GLN A49.NE2     2.750
+ ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)
-Structure saved on 1ubq_amide_test_None.pdb
-Final Num. models: 1
-Final Num. chains: 1 (A)
-Final Num. residues:  134
-Final Num. atoms:  660
-Final Num. het atoms:  58
-Final Num. water atoms:  58
+Structure not modified, not saving. Override with --force_save

@@ -202,13 +202,7 @@
      "dist": 2.776723861694336
     }
    ],
-   "negative": [
-    {
-     "at1": "GLN A221.OE1",
-     "at2": "GLU A225.OE2",
-     "dist": 3.2754108905792236
-    }
-   ],
+   "negative": [],
    "positive": [
     {
      "at1": "LYS A62.NZ",
@@ -260,8 +254,8 @@
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 4961,
-  "num_hetats": 334,
   "num_res": 908,
-  "num_wat": 292
+  "num_wat": 292,
+  "res_hetats": 296
  }
 }

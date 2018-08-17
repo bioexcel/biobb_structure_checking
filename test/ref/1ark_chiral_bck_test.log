@@ -8,9 +8,9 @@ Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  60
+ Num. hetatm res:  0
+ Num. water mol.:  0
  Num. atoms:  463
- Num. het atoms:  0
- Num. water atoms:  0
 1 residues with incorrect backbone chirality found
  ALA A2    
 Running with --check_only. Nothing else to do.

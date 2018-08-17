@@ -9,9 +9,9 @@ Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  428
+ Num. hetatm res:  86
+ Num. water mol.:  75
  Num. atoms:  2841
- Num. het atoms:  119
- Num. water atoms:  75
 
 Step 1: models --select_model 1
 
@@ -76,7 +76,7 @@ Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
- GLN B236.O   ASN B240.OD1    2.980
+ GLN B236.O   ASN B240.OD1    2.980 A
 Amide residues fixed All (1)
 
 Step 9: chiral --fix All
@@ -99,34 +99,33 @@ Step 12: clashes
 Running clashes: Options 
 No severe clashes detected
 6 Steric apolar clashes detected
- THR A95.CG2  PRO A129.O      2.770
- ASP A107.CG   CA A304.CA     2.855
- ASP B107.CG   CA B304.CA     2.717
- ASP B182.C   GLU B184.N      2.860
- HIS B211.CE1 N25 B401.O24    2.841
- ASP B228.OD2 ARG B231.CZ     2.665
+ THR A95.CG2  PRO A129.O      2.770 A
+ ASP A107.CG   CA A304.CA     2.855 A
+ ASP B107.CG   CA B304.CA     2.717 A
+ ASP B182.C   GLU B184.N      2.860 A
+ HIS B211.CE1 N25 B401.O24    2.841 A
+ ASP B228.OD2 ARG B231.CZ     2.665 A
 14 Steric acceptor clashes detected
- ASP A107.OD2 GLU A184.O      3.088
- GLU A125.O   THR A128.O      2.751
- ASP A141.O   ASP A177.OD1    3.087
- GLY A161.O   GLU A184.OE2    2.946
- ASP A182.O   GLU A184.O      2.802
- ASP B107.OD2 GLU B184.O      2.762
- GLU B125.O   THR B128.O      2.726
- ASP B141.O   ASP B177.OD1    2.964
- ASP B158.OD1 GLY B161.O      2.620
- GLY B159.O   ASP B181.OD2    3.023
- GLY B159.O   GLU B184.OE2    2.679
- GLY B173.O   ASN B175.O      3.018
- ASP B181.OD2 GLU B184.OE2    3.080
- ASP B182.O   GLU B184.O      2.931
+ ASP A107.OD2 GLU A184.O      3.088 A
+ GLU A125.O   THR A128.O      2.751 A
+ ASP A141.O   ASP A177.OD1    3.087 A
+ GLY A161.O   GLU A184.OE2    2.946 A
+ ASP A182.O   GLU A184.O      2.802 A
+ ASP B107.OD2 GLU B184.O      2.762 A
+ GLU B125.O   THR B128.O      2.726 A
+ ASP B141.O   ASP B177.OD1    2.964 A
+ ASP B158.OD1 GLY B161.O      2.620 A
+ GLY B159.O   ASP B181.OD2    3.023 A
+ GLY B159.O   GLU B184.OE2    2.679 A
+ GLY B173.O   ASN B175.O      3.018 A
+ ASP B181.OD2 GLU B184.OE2    3.080 A
+ ASP B182.O   GLU B184.O      2.931 A
 1 Steric donor clashes detected
- GLN B236.NE2 ASN B240.ND2    3.022
+ GLN B236.NE2 ASN B240.ND2    3.022 A
 No positive clashes detected
-4 Steric negative clashes detected
- ASP A181.OD2 GLU A184.OE2    3.463
- ASP B107.OD2 ASP B182.OD1    3.482
- ASP B181.OD2 GLU B184.OE2    3.080
- ASP B237.OD1 ASN B240.OD1    3.231
+3 Steric negative clashes detected
+ ASP A181.OD2 GLU A184.OE2    3.463 A
+ ASP B107.OD2 ASP B182.OD1    3.482 A
+ ASP B181.OD2 GLU B184.OE2    3.080 A
 Command list completed
 Summary data saved on 1bqo_all_test.json

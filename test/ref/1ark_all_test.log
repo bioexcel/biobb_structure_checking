@@ -9,9 +9,9 @@ Structure pdb:1ark loaded
  Num. models: 15
  Num. chains: 1 (A)
  Num. residues:  900
+ Num. hetatm res:  0
+ Num. water mol.:  0
  Num. atoms:  13575
- Num. het atoms:  0
- Num. water atoms:  0
 
 Step 1: models --select_model 1
 
@@ -57,7 +57,7 @@ Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
- ASN A30.OD1  GLN A32.O       2.598
+ ASN A30.OD1  GLN A32.O       2.598 A
 Amide residues fixed All (1)
 
 Step 9: chiral --fix All
@@ -80,14 +80,14 @@ Step 12: clashes
 Running clashes: Options 
 No severe clashes detected
 4 Steric apolar clashes detected
- MET A9.CE    GLU A58.OE2     2.695
- GLU A19.OE2  TRP A38.CZ3     2.645
- TYR A40.CD1  GLY A50.O       2.794
- THR A42.OG1  THR A49.CG2     2.788
+ MET A9.CE    GLU A58.OE2     2.695 A
+ GLU A19.OE2  TRP A38.CZ3     2.645 A
+ TYR A40.CD1  GLY A50.O       2.794 A
+ THR A42.OG1  THR A49.CG2     2.788 A
 3 Steric acceptor clashes detected
- MET A9.O     ASP A24.OD2     2.851
- TYR A10.O    PHE A22.O       3.006
- MET A39.O    MET A51.SD      2.999
+ MET A9.O     ASP A24.OD2     2.851 A
+ TYR A10.O    PHE A22.O       3.006 A
+ MET A39.O    MET A51.SD      2.999 A
 No donor clashes detected
 No positive clashes detected
 No negative clashes detected

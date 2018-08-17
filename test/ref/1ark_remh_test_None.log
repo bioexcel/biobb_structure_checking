@@ -9,14 +9,8 @@ Structure pdb:1ark loaded
  Num. models: 15
  Num. chains: 1 (A)
  Num. residues:  900
+ Num. hetatm res:  0
+ Num. water mol.:  0
  Num. atoms:  13575
- Num. het atoms:  0
- Num. water atoms:  0
 900 Residues containing H atoms detected
-Structure saved on 1ark_remh_test_None.pdb
-Final Num. models: 15
-Final Num. chains: 1 (A)
-Final Num. residues:  900
-Final Num. atoms:  13575
-Final Num. het atoms:  0
-Final Num. water atoms:  0
+Structure not modified, not saving. Override with --force_save

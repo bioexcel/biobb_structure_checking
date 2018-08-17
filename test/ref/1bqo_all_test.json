@@ -158,11 +158,6 @@
      "at1": "ASP B181.OD2",
      "at2": "GLU B184.OE2",
      "dist": 3.080146074295044
-    },
-    {
-     "at1": "ASP B237.OD1",
-     "at2": "ASN B240.OD1",
-     "dist": 3.2310802936553955
     }
    ],
    "positive": [],
@@ -220,8 +215,8 @@
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 2841,
-  "num_hetats": 119,
   "num_res": 428,
-  "num_wat": 75
+  "num_wat": 75,
+  "res_hetats": 86
  }
 }

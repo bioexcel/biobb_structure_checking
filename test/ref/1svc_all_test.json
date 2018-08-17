@@ -170,11 +170,6 @@
    ],
    "negative": [
     {
-     "at1": " DA D9.OP2",
-     "at2": "GLN P309.OE1",
-     "dist": 3.452418804168701
-    },
-    {
      "at1": "ASP P121.OD2",
      "at2": "GLU P160.OE2",
      "dist": 3.1774356365203857
@@ -226,8 +221,8 @@
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 2903,
-  "num_hetats": 63,
   "num_res": 393,
-  "num_wat": 63
+  "num_wat": 63,
+  "res_hetats": 63
  }
 }

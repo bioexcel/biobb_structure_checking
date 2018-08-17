@@ -9,9 +9,9 @@ Structure pdb:4ku1 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  583
+ Num. hetatm res:  168
+ Num. water mol.:  148
  Num. atoms:  3714
- Num. het atoms:  392
- Num. water atoms:  148
 4 Possible SS Bonds detected
   CYS A261.SG CYS A321.SG   4.141
   CYS A367.SG CYS A425.SG   3.981

@@ -57,8 +57,8 @@
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 660,
-  "num_hetats": 58,
   "num_res": 134,
-  "num_wat": 58
+  "num_wat": 58,
+  "res_hetats": 58
  }
 }

@@ -779,19 +779,19 @@ class StructureChecking():
                             if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
                                 continue
                             if cls == 'donor' and not \
-                                (mu.is_at_in_list(at1, dataCts.polar_donor) \
-                                 and mu.is_at_in_list(at2, dataCts.polar_donor)):
+                                (   mu.is_at_in_list(at1, dataCts.polar_donor) \
+                                and mu.is_at_in_list(at2, dataCts.polar_donor)):
                                 continue
                             if cls == 'acceptor' and not \
-                                (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                 and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                (   mu.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
                                 continue
                             if cls == 'positive' and not \
-                                (mu.is_at_in_list(at1,dataCts.pos_ats) \
+                                (   mu.is_at_in_list(at1, dataCts.pos_ats) \
                                 and mu.is_at_in_list(at2, dataCts.pos_ats)):
                                 continue
                             if cls == 'negative' and not \
-                                (mu.is_at_in_list(at1, dataCts.neg_ats) \
+                                (   mu.is_at_in_list(at1, dataCts.neg_ats) \
                                 and mu.is_at_in_list(at2, dataCts.neg_ats)):
                                 continue
                             if not rkey in clashes[cls]:

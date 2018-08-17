@@ -313,11 +313,6 @@
    "donor": [],
    "negative": [
     {
-     "at1": "GLN B311.OE1",
-     "at2": "ASN B315.OD1",
-     "dist": 3.4233479499816895
-    },
-    {
      "at1": "GLU B380.OE2",
      "at2": "GLU B382.OE2",
      "dist": 3.463707447052002
@@ -394,8 +389,8 @@
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 3714,
-  "num_hetats": 392,
   "num_res": 583,
-  "num_wat": 148
+  "num_wat": 148,
+  "res_hetats": 168
  }
 }

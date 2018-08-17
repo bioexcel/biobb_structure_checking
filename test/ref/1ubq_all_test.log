@@ -9,9 +9,9 @@ Structure pdb:1ubq loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  134
+ Num. hetatm res:  58
+ Num. water mol.:  58
  Num. atoms:  660
- Num. het atoms:  58
- Num. water atoms:  58
 
 Step 1: models --select_model 1
 
@@ -56,7 +56,7 @@ Step 8: amide --fix All
 
 Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
- ARG A42.NE   GLN A49.NE2     2.750
+ ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)
 
 Step 9: chiral --fix All
@@ -80,7 +80,7 @@ Running clashes: Options
 No severe clashes detected
 No apolar clashes detected
 1 Steric acceptor clashes detected
- MET A1.O     VAL A17.O       3.035
+ MET A1.O     VAL A17.O       3.035 A
 No donor clashes detected
 No positive clashes detected
 No negative clashes detected
