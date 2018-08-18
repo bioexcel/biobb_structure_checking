@@ -56,7 +56,7 @@ class StructureChecking():
 
     def command_list(self, options):
         opts = _get_parameters(options, "command_list", "--list", "op_list", "Command List File")
-        opts.op_list = _check_parameter(opts.op_list, "Command list file: ")
+        [input_option, opts.op_list] = ParamInput('Command List File', opts.op_list, False).run()
 
         try:
             fh = open(opts.op_list, "r")
@@ -809,10 +809,3 @@ def _get_parameters (options, this_prog, this_param, this_dest, this_help, this_
     optionsParser = argparse.ArgumentParser(prog=this_prog)
     optionsParser.add_argument(this_param, dest=this_dest, help=this_help, type=this_type)
     return optionsParser.parse_args(options)
-
-def _check_parameter (opts_param, input_text):
-    while opts_param is None or opts_param == '':
-        opts_param = input (input_text)
-    if opts_param is str:
-        opts_param = opts_param.replace(' ', '')
-    return opts_param

@@ -24,19 +24,27 @@ class ParamInput():
         
     def run(self):
         help_str = self.prefix
-        opt_strs=[]
-        for opt in self.options:
-            if opt['type'] == 'list':
-                opt_strs.append(','.join(opt['opt_list']))
-            elif opt['type'] == 'int' or opt['type'] == 'float':
-                if opt['min'] != 0 or opt['max'] != 0:
-                    opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
-            elif opt['type'] == 'input':
-                opt_strs.append('')
-            else: 
-                opt_strs.append('?')
+        if len(self.options):
+            opt_strs=[]
+            for opt in self.options:
+                if opt['type'] == 'list':
+                    opt_strs.append(','.join(opt['opt_list']))
+                elif opt['type'] == 'int' or opt['type'] == 'float':
+                    if opt['min'] != 0 or opt['max'] != 0:
+                        opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
+                elif opt['type'] == 'input':
+                    opt_strs.append('')
+                else: 
+                    opt_strs.append('?')
                 
-        help_str += ' ('+' | '.join(opt_strs)+'): '
+            help_str += ' ('+' | '.join(opt_strs)+')'
+        help_str += ': ' 
+# No options, simple input
+        if not len(self.options):
+            if not self.non_interactive:
+                self.opt_value = _check_parameter(self.opt_value, help_str)
+            return ['input', self.opt_value]
+        
         input_ok = False
         while not input_ok:
             if not self.non_interactive:
