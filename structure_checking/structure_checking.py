@@ -9,12 +9,13 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import argparse
 import re
+import sys
 from structure_checking.help_manager import HelpManager
 from structure_checking.json_writer import JSONWriter
 import structure_manager.data_constants as dataCts
 import structure_manager.model_utils as mu
 from structure_manager.structure_manager import StructureManager
-import sys
+from structure_checking.param_input import ParamInput
 
 class StructureChecking():
     def __init__(self, args):
@@ -94,7 +95,6 @@ class StructureChecking():
 
         self._load_structure()
 
-
         print ('{} Model(s) detected'.format(self.stm.nmodels))
         models_sum['detected'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
@@ -109,21 +109,21 @@ class StructureChecking():
             print ('Running with --check_only. Nothing else to do.')
         else:
             if self.stm.nmodels > 1:
-                ok = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.select_model = _check_parameter(opts.select_model, "Select Model Num [1-" + str(self.stm.nmodels) + "]: ")
-                    opts.select_model = int(opts.select_model)
-                    ok = opts.select_model > 0 or opts.select_model <= self.stm.nmodels
-                    if not ok:
-                        print ('Error: unknown model {}'.format(opts.select_model), file=sys.stderr)
-                        opts.select_model = ''
-                        if self.args.non_interactive:
-                            self.summary['models'] = models_sum
-                            return 1
-
+                input_line = ParamInput('Select Model Num', opts.select_model, self.args.non_interactive)
+                input_line.add_option_all ()
+                input_line.add_option ('modelno', [], type='int', min=1, max=self.stm.nmodels)
+                [input_option, opts.select_model] = input_line.run()
+                
+                if input_option == 'error':
+                    print ('Error: unknown model {}'.format(opts.select_model), file=sys.stderr)
+                    opts.select_model = ''
+                    if self.args.non_interactive:
+                        self.summary['models'] = models_sum
+                        return 1
                 print ('Selecting model num. {}'.format(opts.select_model))
-                self.stm.select_model(opts.select_model)
+                if input_option != 'all':
+                    self.stm.select_model(opts.select_model)
+                
                 models_sum['selected_model'] = opts.select_model
 
             else:
@@ -147,28 +147,24 @@ class StructureChecking():
             print ('Running with --check_only. Nothing else to do.')
         else:
             if len(self.stm.chain_ids) > 1:
-                ok = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.select_chains = _check_parameter(opts.select_chains, 'Select All or chain id(s), [{}]: '.format(','.join(sorted(self.stm.chain_ids))))
-                    ok = opts.select_chains.lower() == 'all'
-                    if not ok:
-                        ok = True
-                        for ch in opts.select_chains.split(','):
-                            ok = ok and ch in self.stm.chain_ids
-                    if not ok:
-                        print ('Error unknown selection: {}'.format(opts.select_chains))
-                        if self.args.non_interactive:
-                            self.summary['chains'] = chains_sum
-                            return 1
+                input_line = ParamInput('Select chain', opts.select_chains, self.args.non_interactive)
+                input_line.add_option_all()
+                input_line.add_option('chid',sorted(self.stm.chain_ids), multiple=True, case="sensitive")
+                [input_option, opts.select_chains] = input_line.run()
+                
+                if input_option == 'error':
+                    print ('Error unknown selection: {}'.format(opts.select_chains))
+                    if self.args.non_interactive:
+                        self.summary['chains'] = chains_sum
                         opts.select_chains = ''
+                        return 1
 
-                if opts.select_chains.lower() == 'all':
+                if input_option == 'all':
                     print ('Selecting all chains')
                     chains_sum['selected'] = self.stm.chain_ids
                 else:
                     self.stm.select_chains(opts.select_chains)
-                    print ('Selecting chain(s) {}'.format(','.join(opts.select_chains)))
+                    print ('Selecting chain(s) {}'.format(opts.select_chains))
                     chains_sum['selected'] = opts.select_chains.split(',')
                 self.stm.set_chain_ids()
                 chains_sum['final'] = self.stm.chain_ids
@@ -203,27 +199,30 @@ class StructureChecking():
                             s += ' {} ({:4.2f})'.format(alt, at.child_dict[alt].occupancy)
                         print (s)
                         altloc_sum['detected'][r].append({
-                                                         'atom':at.id,
-                                                         'loc_label':alt,
-                                                         'occupancy':at.child_dict[alt].occupancy}
-                                                         )
+                            'atom':at.id,
+                            'loc_label':alt,
+                            'occupancy':at.child_dict[alt].occupancy}
+                        )
 
                     if not self.args.check_only:
-                        ok = opts.select_altloc in altlocs or opts.select_altloc == 'occupancy'
-                        while not ok:
-                            if not self.args.non_interactive:
-                                opts.select_altloc = _check_parameter(opts.select_altloc, 'Select alternative (occupancy, {}): '.format(','.join(altlocs)))
-                            ok = opts.select_altloc in altlocs or opts.select_altloc.lower() == 'occupancy'
-                            if not ok:
-                                print ('Error: Unknown selection {} '.format(opts.select_altloc), file=sys.stderr)
-                                opts.select_altloc = ''
-                                if self.args.non_interactive:
-                                    self.summary['altloc'] = altloc_sum
-                                    return 1
-
+                        input_line = ParamInput('Select alternative', opts.select_altloc, self.args.non_interactive)
+                        input_line.add_option_all()
+                        input_line.add_option('occup',['occupancy'])
+                        input_line.add_option('altids',altlocs, case='upper')
+                        [input_option, opts.select_altloc] = input_line.run()
+                        
+                        if input_option=='error':
+                            print ('Error: Unknown selection {} '.format(opts.select_altloc), file=sys.stderr)
+                            opts.select_altloc = ''
+                            if self.args.non_interactive:
+                                self.summary['altloc'] = altloc_sum
+                                return 1
                         print ('Selecting location {}'.format(opts.select_altloc))
                         altloc_sum['selected'] = opts.select_altloc
-                        self.stm.select_altloc_residues(r, opts.select_altloc)
+                        if input_option == 'all':
+                            print ("Nothing to do")
+                        else:
+                            self.stm.select_altloc_residues(r, opts.select_altloc.upper())
         else:
             print ("No residues with alternative location labels detected")
 
@@ -256,49 +255,33 @@ class StructureChecking():
             if self.args.check_only:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                ok = False
-                resids = False
-                atids = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.remove_metals = _check_parameter(opts.remove_metals,
-                                                              'Remove (All | None | any of {} | any of {}):'.format(','.join(sorted(at_groups)), ','.join(met_rids)))
-                    ok = opts.remove_metals.lower() in ['all', 'none']
-                    if not ok:
-                        ok = True
-                        for r in opts.remove_metals.split(','):
-                            ok = ok and r in met_rids
-                        resids = ok
-
-                    if not ok:
-                        ok = True
-                        for atid in opts.remove_metals.split(','):
-                            ok = ok and atid in at_groups
-                            if not ok and atid.upper() in at_groups:
-                                print ('Warning: Atom names are case sensitive') # TODO check all case options with metals list
-                        atids = ok
-
-                    if not ok:
-                        sys.stderr.write ('Error: unknown selection {}'.format(opts.remove_metals))
-                        opts.remove_metals = ''
-                        if self.args.non_interactive:
-                            self.summary['metals'] = metals_sum
-                            return 1
-
-                if opts.remove_metals.lower() == 'none':
+                input_sess = ParamInput("Remove", opts.remove_metals, self.args.non_interactive)
+                input_sess.add_option_all()
+                input_sess.add_option_none()
+                input_sess.add_option('atids', sorted(at_groups), case='sensitive', multiple=True)
+                input_sess.add_option('resids', met_rids, case='sensitive', multiple=True)
+                [input_option, opts.remove_metals] = input_sess.run()
+                if input_option == "error":
+                    sys.stderr.write ('Error: unknown selection {}\n'.format(opts.remove_metals))
+                    opts.remove_metals = ''
+                    if self.args.non_interactive:
+                        self.summary['metals'] = metals_sum
+                        return 1
+        
+                if input_option == 'none':
                     to_remove = []
 
-                elif opts.remove_metals.lower() == 'all':
+                elif input_option == 'all':
                     to_remove = met_list
 
-                elif resids:
+                elif input_option == 'resids':
                     to_remove = []
                     rid_list = opts.remove_metals.split(',')
                     for at in met_list:
                         r = at.get_parent()
                         if mu.residue_num(r) in rid_list:
                             to_remove.append(at)
-                elif atids:
+                elif input_option == 'atids':
                     to_remove = []
                     for atid in opts.remove_metals.split(','):
                         to_remove.extend(at_groups[atid])
@@ -340,18 +323,17 @@ class StructureChecking():
             if self.args.check_only:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                ok = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.remove_wat = _check_parameter(opts.remove_wat, 'Remove (Yes | No): ')
-                    ok = opts.remove_wat.lower() in ['yes', 'no']
-                    if not ok:
-                        print ('Warning: unknown option {}'.format(opts.remove_wat))
-                        if self.args.non_interactive:
-                            self.summary['remwat'] = remwat_sum
-                            return 1
+                input_line = ParamInput('Remove', opts.remove_wat, self.args.non_interactive)
+                input_line.add_option_yes_no()
+                [input_option, opts.remove_wat] = input_line.run()
 
-                if opts.remove_wat.lower() == 'yes':
+                if input_option == 'error':
+                    print ('Warning: unknown option {}'.format(opts.remove_wat))
+                    if self.args.non_interactive:
+                        self.summary['remwat'] = remwat_sum
+                        return 1
+
+                if input_option == 'yes':
                     n = 0
                     for r in wat_list:
                         self.stm.remove_residue(r)
@@ -389,48 +371,34 @@ class StructureChecking():
             if self.args.check_only:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                ok = False
-                byresnum = False
-                byrids = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.remove_ligands = _check_parameter(opts.remove_ligands,
-                                                               'Remove (All | None | any of {} | any of {}): '.format(','.join(sorted(rids)), ','.join(rnums)))
-
-                    ok = opts.remove_ligands.lower() in ['all', 'none']
-                    if not ok:
-                        ok = True
-                        for rid in opts.remove_ligands.split(','):
-                            ok = ok and (rid.upper() in rids)
-                        byrids = ok
-                        if ok:
-                            opts.remove_ligands = opts.remove_ligands.upper()
-                    if not ok:
-                        ok = True
-                        for rn in opts.remove_ligands.split(','):
-                            ok = ok and (rn in rnums)
-                        byresnum = ok
-                    if not ok:
-                        print ('Error: unknown selection {}'.format(opts.remove_ligands))
-                        if self.args.non_interactive:
-                            self.summary['ligands'] = ligands_sum
-                            return 1
+                input_line = ParamInput('Remove', opts.remove_ligands, self.args.non_interactive)
+                input_line.add_option_all()
+                input_line.add_option_none()
+                input_line.add_option('byrids', sorted(rids), multiple=True)
+                input_line.add_option('byresnum', rnums,  case='sensitive', multiple=True)
+                [input_option, opts.remove_ligands]= input_line.run()
+                
+                if input_option == 'error':
+                    print ('Error: unknown selection {}'.format(opts.remove_ligands))
+                    if self.args.non_interactive:
                         opts.remove_ligands = ''
+                        self.summary['ligands'] = ligands_sum
+                        return 1
 
-                    ligands_sum['removed'] = {'opt':opts.remove_ligands, 'lst':[]}
+                ligands_sum['removed'] = {'opt':opts.remove_ligands, 'lst':[]}
 
                 to_remove = []
 
-                if opts.remove_ligands.lower() == 'none':
+                if input_option == 'none':
                     print ("Nothing to do")
-                elif opts.remove_ligands.lower() == 'all':
+                elif input_option == 'all':
                     to_remove = lig_list
-                elif byrids:
+                elif input_option == 'byrids':
                     rm = opts.remove_ligands.split(',')
                     for r in lig_list:
                         if r.get_resname() in rm:
                             to_remove.append(r)
-                elif byresnum:
+                elif input_option == 'byresnum':
                     rm = opts.remove_ligands.split(',')
                     for r in lig_list:
                         if mu.residue_num(r) in rm:
@@ -465,25 +433,23 @@ class StructureChecking():
             if self.args.check_only:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                ok = False
-                while not ok:
-                    if not self.args.non_interactive:
-                        opts.remove_h = _check_parameter(opts.remove_h, 'Remove hydrogen atoms (Yes | No): ')
-                    ok = opts.remove_h.lower() in ['yes', 'no']
-                    if not ok:
-                        print ('Warning: unknown option {}'.format(opts.remove_h))
-                        if self.args.non_interactive:
-                            self.summary['remh'] = remh_sum
-                            return 1
+                input_line = ParamInput('Remove hydrogen atoms', opts.remove_h, self.args.non_interactive)
+                input_line.add_option_yes_no()
+                [input_option, opts.remove_h] = input_line.run()
+                
+                if input_option == 'error':
+                    print ('Warning: unknown option {}'.format(opts.remove_h))
+                    if self.args.non_interactive:
+                        self.summary['remh'] = remh_sum
+                        return 1
 
-                if opts.remove_h.lower() == 'yes':
+                if input_option == 'yes':
                     n = 0
                     for r in remh_list:
                         mu.remove_H_from_r(r['r'])
                         n += 1
                     print ('Hydrogen atom removed from {} residues'.format(n))
-                    #self.stm.set_num_ats()
-                    #self.stm.atom_renumbering()
+                    self.stm.modified=True
                     remh_sum['n_removed'] = n
         else:
             print ("No residues with hydrogen atoms detected")
@@ -568,35 +534,34 @@ class StructureChecking():
                 if self.args.check_only:
                     print ('Running with --check_only. Nothing else to do.')
                 else:
-                    ok = False
-                    while not ok:
-                        if not self.args.non_interactive:
-                            opts.amide_fix = _check_parameter(opts.amide_fix, 'Fix amides (All | None | {}): '.format(','.join(rnums)))
-                        ok = opts.amide_fix.lower() in ['all', 'none']
-                        if not ok:
-                            ok = True
-                            for rn in opts.amide_fix.split(','):
-                                ok = ok and rn in rnums
-                        if not ok:
-                            print ('Warning: unknown option {}'.format(opts.amide_fix))
-                            if self.args.non_interactive:
-                                self.summary['amide'] = amide_sum
-                                return 1
-                    if opts.amide_fix.lower() == 'none':
+                    input_line = ParamInput('Fix amide atoms', opts.amide_fix, self.args.non_interactive)
+                    input_line.add_option_all()
+                    input_line.add_option_none()
+                    input_line.add_option('resnum',rnums, case='sensitive', multiple=True)
+                    [input_option, opts.amide_fix] = input_line.run()
+                    if input_option == 'error':
+                        print ('Warning: unknown option {}'.format(opts.amide_fix))
+                        if self.args.non_interactive:
+                            self.summary['amide'] = amide_sum
+                            return 1
+                    
+                    if input_option == 'none':
                         to_fix = []
-                    elif opts.amide_fix.lower() == 'all':
-                        to_fix = res_to_fix
+                        print ("Nothing to do")
                     else:
-                        to_fix = []
-                        for r in res_to_fix:
-                            if mu.residue_num(r) in opts.amide_fix.split(','):
-                                to_fix.append(r)
-                    n = 0
-                    for r in to_fix:
-                        mu.invert_side_atoms(r, dataCts.amide_res)
-                        n += 1
-                    print ('Amide residues fixed {} ({})'.format(opts.amide_fix, n))
-
+                        if input_option == 'all':
+                            to_fix = res_to_fix
+                        else:
+                            to_fix = []
+                            for r in res_to_fix:
+                                if mu.residue_num(r) in opts.amide_fix.split(','):
+                                    to_fix.append(r)
+                        n = 0
+                        for r in to_fix:
+                            mu.invert_side_atoms(r, dataCts.amide_res)
+                            n += 1
+                        print ('Amide residues fixed {} ({})'.format(opts.amide_fix, n))
+                        self.stm.modified = True
         else:
             print ("No amide residues found")
 
@@ -632,34 +597,33 @@ class StructureChecking():
                 if self.args.check_only:
                     print ('Running with --check_only. Nothing else to do.')
                 else:
-                    ok = False
-                    while not ok:
-                        if not self.args.non_interactive:
-                            opts.chiral_fix = _check_parameter(opts.chiral_fix, 'Fix chiralities (All | None | {}): '.format(','.join(rnums)))
-                        ok = opts.chiral_fix.lower() in ['all', 'none']
-                        if not ok:
-                            ok = True
-                            for rn in opts.chiral_fix.split(','):
-                                ok = ok and rn in rnums
-                        if not ok:
-                            print ('Warning: unknown option {}'.format(opts.amide_fix))
-                            if self.args.non_interactive:
-                                self.summary['chiral'] = chiral_sum
-                                return 1
-                    if opts.chiral_fix.lower() == 'none':
-                        to_fix = []
-                    elif opts.chiral_fix.lower() == 'all':
-                        to_fix = res_to_fix
+                    input_line = ParamInput('Fix chiralities', opts.chiral_fix, self.args.non_interactive)
+                    input_line.add_option_all()
+                    input_line.add_option_none()
+                    input_line.add_option('resnum', rnums, case='sensitive', multiple=True)
+                    [input_option, opts.chiral_fix] = input_line.run()
+                    
+                    if input_option == 'error':
+                        print ('Warning: unknown option {}'.format(opts.chiral_fix))
+                        if self.args.non_interactive:
+                            self.summary['chiral'] = chiral_sum
+                            return 1
+                    if input_option == 'none':
+                        print ("Nothing to do")
                     else:
-                        to_fix = []
-                        for r in res_to_fix:
-                            if mu.residue_num(r) in opts.chiral_fix.split(','):
-                                to_fix.append(r)
-                    n = 0
-                    for r in to_fix:
-                        mu.invert_side_atoms(r, dataCts.chiral_res)
-                        n += 1
-                    print ('Quiral residues fixed {} ({})'.format(opts.chiral_fix, n))
+                        if input_option == 'all':
+                            to_fix = res_to_fix
+                        else:
+                            to_fix = []
+                            for r in res_to_fix:
+                                if mu.residue_num(r) in opts.chiral_fix.split(','):
+                                    to_fix.append(r)
+                        n = 0
+                        for r in to_fix:
+                            mu.invert_side_atoms(r, dataCts.chiral_res)
+                            n += 1
+                        print ('Quiral residues fixed {} ({})'.format(opts.chiral_fix, n))
+                        self.stm.modified= True
             else:
                 print ("No residues with incorrect chirality found")
         else:
@@ -779,20 +743,20 @@ class StructureChecking():
                             if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
                                 continue
                             if cls == 'donor' and not \
-                                (   mu.is_at_in_list(at1, dataCts.polar_donor) \
-                                and mu.is_at_in_list(at2, dataCts.polar_donor)):
+                                (mu.is_at_in_list(at1, dataCts.polar_donor) \
+                                 and mu.is_at_in_list(at2, dataCts.polar_donor)):
                                 continue
                             if cls == 'acceptor' and not \
-                                (   mu.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
+                                (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
+                                 and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
                                 continue
                             if cls == 'positive' and not \
-                                (   mu.is_at_in_list(at1, dataCts.pos_ats) \
-                                and mu.is_at_in_list(at2, dataCts.pos_ats)):
+                                (mu.is_at_in_list(at1, dataCts.pos_ats) \
+                                 and mu.is_at_in_list(at2, dataCts.pos_ats)):
                                 continue
                             if cls == 'negative' and not \
-                                (   mu.is_at_in_list(at1, dataCts.neg_ats) \
-                                and mu.is_at_in_list(at2, dataCts.neg_ats)):
+                                (mu.is_at_in_list(at1, dataCts.neg_ats) \
+                                 and mu.is_at_in_list(at2, dataCts.neg_ats)):
                                 continue
                             if not rkey in clashes[cls]:
                                 clashes[cls][rkey] = at_pair

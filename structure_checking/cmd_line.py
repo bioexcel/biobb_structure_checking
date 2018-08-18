@@ -1,5 +1,5 @@
 """
-  Module to manage command line arguments
+  Module to manage command line arguments, adapted to the application
 """
 
 import argparse
