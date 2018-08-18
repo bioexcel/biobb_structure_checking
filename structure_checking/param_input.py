@@ -23,7 +23,7 @@ class ParamInput():
         self.add_option('nos', ['No'])
         
     def run(self):
-        help_str = self.prefix
+        prompt_str = self.prefix
         if len(self.options):
             opt_strs=[]
             for opt in self.options:
@@ -37,31 +37,31 @@ class ParamInput():
                 else: 
                     opt_strs.append('?')
                 
-            help_str += ' ('+' | '.join(opt_strs)+')'
-        help_str += ': ' 
+            prompt_str += ' ('+' | '.join(opt_strs)+')'
+        prompt_str += ': ' 
 # No options, simple input
         if not len(self.options):
             if not self.non_interactive:
-                self.opt_value = _check_parameter(self.opt_value, help_str)
+                self.opt_value = _get_input(self.opt_value, prompt_str)
             return ['input', self.opt_value]
-        
+# Check alternative options        
         input_ok = False
         while not input_ok:
             if not self.non_interactive:
-                self.opt_value = _check_parameter(self.opt_value, help_str)
+                self.opt_value = _get_input(self.opt_value, prompt_str)
             iopt=0
             if self.opt_value is None:
                 return ['error','']
             else:
                 while not input_ok and iopt < len(self.options):
                     opt = self.options[iopt]
-                    if opt['type'] == 'list':
+                    if opt['type'] == 'list' and isinstance(self.opt_value, str):
                         if not opt['multiple']:
                             values = [self.opt_value]
                         else:
                             values = self.opt_value.split(',')
+                        group_ok = True
                         for val in values:
-                            group_ok = False
                             if opt['case'] == 'upper':
                                 val=val.upper()
                                 group_ok = group_ok and val in opt['opt_list']
@@ -69,9 +69,9 @@ class ParamInput():
                                 val=val.lower()
                                 group_ok = group_ok and val in opt['opt_list']
                             elif opt['case'] == 'sensitive':
-                                group_ok = val in opt['opt_list']
+                                group_ok = group_ok and val in opt['opt_list']
                             else:
-                                group_ok = val.lower() in list(map(lambda x: x.lower(),opt['opt_list']))
+                                group_ok = group_ok and val.lower() in list(map(lambda x: x.lower(),opt['opt_list']))
                         input_ok = group_ok
                     elif opt['type'] == 'int': 
                         self.opt_value = int(self.opt_value)
@@ -80,15 +80,17 @@ class ParamInput():
                         iopt +=1
                 if not input_ok:
                     print ("Input not valid")
-                    self.opt_value = ''
                     if self.non_interactive:
                         self.options.append({'label':'error'})
                         input_ok=True
+                    else:
+                        self.opt_value = ''
+
         return [self.options[iopt]['label'],self.opt_value]
     
-def _check_parameter (opts_param, input_text):
-    while opts_param is None or opts_param == '':
-        opts_param = input (input_text)
-    if opts_param is str:
-        opts_param = opts_param.replace(' ', '')
-    return opts_param
+def _get_input (value, prompt_text):
+    while value is None or value == '':
+        value = input (prompt_text)
+    if isinstance(value, str):
+        value = value.replace(' ', '')
+    return value

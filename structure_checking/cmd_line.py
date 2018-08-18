@@ -85,6 +85,7 @@ class CmdLine():
             dest='force_save',
             help='Force saving an output file even if no modification'
         )
+        
 
     def parse_args(self):
         args = self.argparser.parse_args()

@@ -223,6 +223,7 @@
   "num_ats": 2903,
   "num_res": 393,
   "num_wat": 63,
-  "res_hetats": 63
+  "res_hetats": 63,
+  "res_ligands": 0
  }
 }

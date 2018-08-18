@@ -9,7 +9,8 @@ Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  428
- Num. hetatm res:  86
+ Num. HETATM residues:  86
+ Num. ligand or modified residues:  11
  Num. water mol.:  75
  Num. atoms:  2841
 10 Metal ions found
@@ -28,6 +29,7 @@ Structure saved on 1bqo_metals_test_SO4.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)
 Final Num. residues:  424
-Final Num. hetatm res:  82
+Final Num. HETATM residues:  82
+Final Num. ligand or modified residues:  7
 Final Num. water mol.:  75
 Final Num. atoms:  2837

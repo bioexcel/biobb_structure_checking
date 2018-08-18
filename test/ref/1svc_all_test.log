@@ -9,7 +9,8 @@ Structure pdb:1svc loaded
  Num. models: 1
  Num. chains: 2 (D,P)
  Num. residues:  393
- Num. hetatm res:  63
+ Num. HETATM residues:  63
+ Num. ligand or modified residues:  0
  Num. water mol.:  63
  Num. atoms:  2903
 

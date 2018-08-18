@@ -9,7 +9,8 @@ Structure pdb:4ku1 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  583
- Num. hetatm res:  168
+ Num. HETATM residues:  168
+ Num. ligand or modified residues:  20
  Num. water mol.:  148
  Num. atoms:  3714
 
@@ -109,6 +110,7 @@ GAL B506
 MAN B507
 FUL B508
 NAG B509
+Input not valid
 Error: unknown selection SO4
 
 Step 6: remwat --remove Yes

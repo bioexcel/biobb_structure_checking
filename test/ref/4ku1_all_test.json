@@ -391,6 +391,7 @@
   "num_ats": 3714,
   "num_res": 583,
   "num_wat": 148,
-  "res_hetats": 168
+  "res_hetats": 168,
+  "res_ligands": 20
  }
 }

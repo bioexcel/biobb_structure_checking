@@ -9,7 +9,8 @@ Structure pdb:2ki5 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  908
- Num. hetatm res:  296
+ Num. HETATM residues:  296
+ Num. ligand or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
 

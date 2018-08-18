@@ -9,7 +9,8 @@ Structure pdb:2ki5 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  908
- Num. hetatm res:  296
+ Num. HETATM residues:  296
+ Num. ligand or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
 292 Water molecules detected
@@ -18,6 +19,7 @@ Structure saved on 2ki5_remwat_test_Yes.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)
 Final Num. residues:  616
-Final Num. hetatm res:  4
+Final Num. HETATM residues:  4
+Final Num. ligand or modified residues:  4
 Final Num. water mol.:  0
 Final Num. atoms:  4669

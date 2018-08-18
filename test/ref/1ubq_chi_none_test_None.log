@@ -8,11 +8,12 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  134
- Num. hetatm res:  58
+ Num. HETATM residues:  58
+ Num. ligand or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  658
 2 residues with incorrect chirality found
  ILE A3    
  THR A7    
-Quiral residues fixed None (0)
+Nothing to do
 Structure not modified, not saving. Override with --force_save

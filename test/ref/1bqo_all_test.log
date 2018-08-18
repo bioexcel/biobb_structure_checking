@@ -9,7 +9,8 @@ Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  428
- Num. hetatm res:  86
+ Num. HETATM residues:  86
+ Num. ligand or modified residues:  11
  Num. water mol.:  75
  Num. atoms:  2841
 
@@ -59,6 +60,7 @@ Running ligands. Options: --remove SO4
  CA B304
  CA B305
 N25 B401
+Input not valid
 Error: unknown selection SO4
 
 Step 6: remwat --remove Yes
