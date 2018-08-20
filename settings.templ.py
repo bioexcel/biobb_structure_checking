@@ -15,5 +15,7 @@ help_dir_path = base_dir_path + "/helpdocs"
 
 data_dir_path = base_dir_path + "/dat"
 
-residue_library = data_dir_path + "all_amino03.lib"
+res_library_path = data_dir_path + "/all_amino03.lib"
+
+data_library_path = data_dir_path + "/data_lib.json"
 

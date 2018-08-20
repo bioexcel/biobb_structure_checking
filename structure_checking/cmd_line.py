@@ -52,6 +52,12 @@ class CmdLine():
             dest='res_lib_path',
             help="Override settings default residue library (AMBER prep format)"
         )
+
+        self.argparser.add_argument(
+            '--data_lib',
+            dest='data_library_path',
+            help="Override settings default data library"
+        )
         
         self.argparser.add_argument(
             '--json',

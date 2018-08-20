@@ -12,7 +12,7 @@ import re
 import sys
 from structure_checking.help_manager import HelpManager
 from structure_checking.json_writer import JSONWriter
-import structure_manager.data_constants as dataCts
+from structure_manager.data_lib_manager import DataLibManager
 import structure_manager.model_utils as mu
 from structure_manager.structure_manager import StructureManager
 from structure_checking.param_input import ParamInput
@@ -33,7 +33,10 @@ class StructureChecking():
             print ('Error: {} command unknown or not implemented'.format(self.args.command))
             sys.exit(1)
 
+        self.data_library = DataLibManager(sets.data_library_path)
+
         f(self.args.options)
+
 
         if not self.args.check_only:
             if self.stm.modified or self.args.force_save:
@@ -234,7 +237,7 @@ class StructureChecking():
 
         self._load_structure()
 
-        met_list = mu.get_metal_atoms(self._get_structure(), dataCts.metal_ats)
+        met_list = mu.get_metal_atoms(self._get_structure(), self.data_library.get_metal_atoms())
 
         if len(met_list) > 1:
             print ('{} Metal ions found'.format(len(met_list)))
@@ -458,7 +461,7 @@ class StructureChecking():
 
         self._load_structure()
 
-        SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', dataCts.SS_DIST)
+        SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distance('SS_DIST'))
 
         if len(SS_bonds):
             print ('{} Possible SS Bonds detected'.format(len(SS_bonds)))
@@ -478,16 +481,24 @@ class StructureChecking():
         amide_sum = {}
 
         self._load_structure()
+        
+        [amide_res, amide_atoms] = self.data_library.get_amide_data()
+        CLASH_DIST = self.data_library.get_distance('CLASH_DIST')
+        atoms_list = {
+            'donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
+            'acceptor' :self.data_library.get_atom_feature_list('polar_acceptor_atoms')
+        }
+        
         amide_list = []
         for r in self._get_structure().get_residues():
-            if r.get_resname() in dataCts.amide_res:
+            if r.get_resname() in amide_res:
                 amide_list.append(r)
 
         amide_sum['n_amides'] = len(amide_list)
-
+        
         if len(amide_list) > 0:
             if len(self.rr_dist) == 0:
-                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', dataCts.R_R_CUTOFF)
+                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distance('R_R_CUTOFF'))
             res_to_fix = []
             cont_list = []
             rnums = []
@@ -501,22 +512,16 @@ class StructureChecking():
                             ch1 = r1.get_parent()
                             r2 = at2.get_parent()
                             ch2 = r2.get_parent()
-                            if not at1.id in dataCts.amide_atoms and not at2.id in dataCts.amide_atoms:
+                            if not at1.id in amide_atoms and not at2.id in amide_atoms:
                                 continue
                             for cls in ['acceptor', 'donor']:
-                                if dist < dataCts.CLASH_DIST[cls]:
-                                    if cls == 'donor' and not \
-                                        (mu.is_at_in_list(at1, dataCts.polar_donor) \
-                                         and mu.is_at_in_list(at2, dataCts.polar_donor)):
-                                            continue
-                                    if cls == 'acceptor' and not \
-                                        (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                         and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
-                                            continue
-                                    if at1.id in dataCts.amide_atoms and r1 in amide_list:
+                                if dist < CLASH_DIST[cls]:
+                                    if not mu.is_at_in_list(at1, atoms_list[cls]) or not mu.is_at_in_list(at2, atoms_list[cls]):
+                                        continue
+                                    if at1.id in amide_atoms and r1 in amide_list:
                                         res_to_fix.append(r1)
                                         rnums.append(mu.residue_num(r1))
-                                    if at2.id in dataCts.amide_atoms and r2 in amide_list:
+                                    if at2.id in amide_atoms and r2 in amide_list:
                                         res_to_fix.append(r2)
                                         rnums.append(mu.residue_num(r2))
                                     cont_list.append(at_pair)
@@ -552,7 +557,7 @@ class StructureChecking():
                                     to_fix.append(r)
                         n = 0
                         for r in to_fix:
-                            mu.invert_side_atoms(r, dataCts.amide_res)
+                            mu.invert_side_atoms(r, amide_res)
                             n += 1
                         print ('Amide residues fixed {} ({})'.format(opts.amide_fix, n))
                         self.stm.modified = True
@@ -567,18 +572,21 @@ class StructureChecking():
         chiral_sum = {}
 
         self._load_structure()
+        
+        chiral_res = self.data_library.get_chiral_data()
         chiral_list = []
+        
         for r in self._get_structure().get_residues():
-            if r.get_resname() in dataCts.chiral_res:
+            if r.get_resname() in chiral_res:
                 chiral_list.append(r)
 
         chiral_sum['n_chirals'] = len(chiral_list)
-
+        
         if len(chiral_list) > 0:
             res_to_fix = []
             rnums = []
             for r in chiral_list:
-                if not mu.check_chiral_residue(r, dataCts.chiral_res):
+                if not mu.check_chiral_residue(r, chiral_res):
                     res_to_fix.append(r)
                     rnums.append(mu.residue_num(r))
             if len(res_to_fix):
@@ -600,7 +608,7 @@ class StructureChecking():
                     if input_option == 'error':
                         print ('Warning: unknown option {}'.format(opts.chiral_fix))
                         self.summary['chiral'] = chiral_sum
-                        return 1
+                        return1
 
                     if input_option == 'none':
                         print ("Nothing to do")
@@ -614,7 +622,7 @@ class StructureChecking():
                                     to_fix.append(r)
                         n = 0
                         for r in to_fix:
-                            mu.invert_side_atoms(r, dataCts.chiral_res)
+                            mu.invert_side_atoms(r, chiral_res)
                             n += 1
                         print ('Quiral residues fixed {} ({})'.format(opts.chiral_fix, n))
                         self.stm.modified= True
@@ -699,8 +707,17 @@ class StructureChecking():
         clashes_sum = {}
         self._load_structure()
 
+        CLASH_DIST = self.data_library.get_distance('CLASH_DIST')
+        atom_lists = {
+            'acceptor': self.data_library.get_atom_feature_list('polar_acceptor_atoms'),
+            'donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
+            'positive':self.data_library.get_atom_feature_list('positive_atoms'),
+            'negative':self.data_library.get_atom_feature_list('negative_atoms'),
+            'apolar':self.data_library.get_atom_feature_list('apolar_atoms'),
+        }
+        
         if len(self.rr_dist) == 0:
-            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', dataCts.R_R_CUTOFF)
+            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distance('R_R_CUTOFF'))
 
         clashes = {
             'severe':{},
@@ -721,6 +738,7 @@ class StructureChecking():
                 'negative':[]
             }
         }
+        
 
         for r_pair in self.rr_dist:
             [r1, r2, d] = r_pair
@@ -730,30 +748,20 @@ class StructureChecking():
                 rkey = mu.residue_id(r1) + '-' + mu.residue_id(r2)
                 for at_pair in mu.get_all_rr_distances(r1, r2):
                     [at1, at2, dist] = at_pair
-                    for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
-                        if dist < dataCts.CLASH_DIST[cls]:
-                            if cls == 'apolar' and (at1.element not in dataCts.apolar_elements and at2.element not in dataCts.apolar_elements):
-                                continue
-                            if cls == 'donor' and not \
-                                (mu.is_at_in_list(at1, dataCts.polar_donor) \
-                                 and mu.is_at_in_list(at2, dataCts.polar_donor)):
-                                continue
-                            if cls == 'acceptor' and not \
-                                (mu.is_at_in_list(at1, dataCts.polar_acceptor) \
-                                 and mu.is_at_in_list(at2, dataCts.polar_acceptor)):
-                                continue
-                            if cls == 'positive' and not \
-                                (mu.is_at_in_list(at1, dataCts.pos_ats) \
-                                 and mu.is_at_in_list(at2, dataCts.pos_ats)):
-                                continue
-                            if cls == 'negative' and not \
-                                (mu.is_at_in_list(at1, dataCts.neg_ats) \
-                                 and mu.is_at_in_list(at2, dataCts.neg_ats)):
-                                continue
-                            if not rkey in clashes[cls]:
-                                clashes[cls][rkey] = at_pair
-                            if dist < clashes[cls][rkey][2]:
-                                clashes[cls][rkey] = at_pair
+                    if dist < CLASH_DIST['severe']:
+                        if not rkey in clashes['severe']:
+                            clashes['severe'][rkey] = at_pair
+                        if dist < clashes['severe'][rkey][2]:
+                            clashes['severe'][rkey] = at_pair
+                    else:
+                        for cls in ['apolar', 'acceptor', 'donor', 'positive', 'negative']:
+                            if dist < CLASH_DIST[cls]:
+                                if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
+                                    continue
+                                if not rkey in clashes[cls]:
+                                    clashes[cls][rkey] = at_pair
+                                if dist < clashes[cls][rkey][2]:
+                                    clashes[cls][rkey] = at_pair
         for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
             if len(clashes[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clashes[cls]), cls))
