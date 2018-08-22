@@ -2,7 +2,7 @@
     "data_library": {
         "residue_codes": {
             "protein": ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY",
-                "HIS", "HID", "HIE", "ILE", "LYS", "LEU", "MET", "ASN", "PRO",
+                "HIS", "ILE", "LYS", "LEU", "MET", "ASN", "PRO",
                 "GLN", "ARG", "SER", "THR", "VAL", "TRP", "TYR"],
             "protein1": {
                 "A": "ALA",

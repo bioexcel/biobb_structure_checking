@@ -793,6 +793,69 @@ class StructureChecking():
 
         self.summary['clashes'] = clashes_sum
 
+    def fixside (self, options):
+        opts = _get_parameters(options, "fixside", '--fix', 'fix_side', 'Add missing atoms to side chains')
+        
+        print ('Running fixside: Options {}'.format(' '.join(options)))
+        fixside_sum = {}
+        self._load_structure()
+        
+        miss_at_list = self.stm.get_missing_side_chain_atoms(self.data_library.get_valid_codes('protein'), self.data_library.get_atom_lists())
+        
+        if len(miss_at_list):
+            rnums=[]
+            fixside_sum['detected']={}
+            print('{} Residues with missing side chain atoms found'.format(len(miss_at_list)))
+            for r_at in miss_at_list:
+                [r,at_list]= r_at
+                print ('{:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
+                rnums.append(mu.residue_num(r))
+                fixside_sum['detected'][mu.residue_id(r)] = at_list
+            
+            if not self.args.check_only:
+                input_line = ParamInput ('fixside', opts.fix_side, self.args.non_interactive)
+                input_line.add_option_all()
+                input_line.add_option_none()
+                input_line.add_option('resnum',rnums, case='sensitive', multiple=True)
+                [input_option, opts.fix_side] = input_line.run()
+                
+                if input_option == 'error':
+                    print ("Invalid option", opts.fix_side)
+                    self.summary['fix_side']=fixside_sum
+                    return 1
+                
+                fixside_sum['selected'] = opts.fix_side
+                
+                if input_option == 'none':
+                    print ('Nothing to do')
+                else:
+                    if input_option == 'all':
+                        to_fix = miss_at_list
+                    else:
+                        to_fix = []
+                        for r_at in miss_at_list:
+                            [r, at_list] = r_at
+                            if mu.residue_num(r) in opts.fix_side.split(','):
+                                to_fix.append(r_at)
+                    n=0
+                    fixside_sum['fixed']=[]
+                    for r_at in to_fix:
+                        self.stm.fix_side_chain(r_at)
+                        n+=1
+                        fixside_sum['fixed'].append(mu.residue_id(r_at[0]))
+                    
+                    print ('Fixed {} side chain(s)'.format(n))
+                    
+        else:
+            print ("No residue with missing side chain atoms found")
+        
+        self.summary['fix_side']=fixside_sum
+                                
+                    
+            
+        
+        
+        
 #===============================================================================
 
     def _load_structure(self, verbose=True):
