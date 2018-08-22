@@ -10,14 +10,15 @@ __date__ = "$13-jul-2018 15:52:55$"
 import os
 import sys
 
-import settings as sets
-
 from structure_checking.cmd_line import CmdLine
 from structure_checking.help_manager import HelpManager
 from structure_checking.structure_checking import StructureChecking
-
+from structure_checking.default_settings import DefaultSettings
 
 def main():
+
+    sets = DefaultSettings(os.path.dirname(__file__))
+#
     help = HelpManager(sets.help_dir_path)
     cmd_line = CmdLine(defaults={})
     args = cmd_line.parse_args()
