@@ -1,20 +1,42 @@
-Partial replacement of MDWeb structure checking
+### Structure Checking from MDWeb
 
-TODO: 
+checkStruc.py performs MDWeb structure checking set as a command line
+utility.
 
-Select (model, chain) from Structure
-Select (Protein/NA) from structure
-Select (Ligands) from Structure
-Remove H atoms
-Fix Side Chains
+It includes some structure manipulation options like selecting models or chains,
+removing components of the system, completing missing atoms, and some quality
+checking as residue quirality, amide orientation, or vdw clashes.
 
-Checking: 
-    HasDNA
-    Residue insertion
-    Alternate Location (+Select)
-    Steric clashes 
-    Main Chain Gaps (Missing Residues)
-    SSBonds
-    Chirality
-    cis-trans backbone
-    
+Usage:  checkStruc [-h|--help] command help|options 
+                   -i input_pdb_path -o input_pdb_path
+
+Available commands:
+
+commands:  This help
+command_list:      Run all tests from conf file
+
+1. System Configuration 
+=======================
+models     Detect/Select Models
+chains     Detect/Select Chains 
+altloc     Detect/Select Alt Locations 
+metals     Detect/Remove Heavy Metals
+ligands    Detect/Remove Ligands 
+remwat     Remove Water molecules
+remh       Remove Hydrogen atoms 
+
+2. Fix Structure Errors
+
+amide      Detect/Fix Amide Assignment
+chiral     Detect/Fix Improper quirality
+chiral_bck Detect/Fix Improper quirality on backbone CA's
+fixside    Complete side chains 
+
+3. Structure Warnings
+
+getss      Detect SS Bonds 
+cisbck     Unusual cis/trans backbone 
+nonconres  Non Consecutive residues 
+bckgaps    Detect missing residues
+clashes    Steric clashes (Severe, Polar Donors, Polar Acceptors, Apolar
+           Ionic Positive, Ionic Negative)
