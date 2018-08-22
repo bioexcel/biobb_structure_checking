@@ -1,4 +1,4 @@
-### Structure Checking from MDWeb
+# Structure Checking from MDWeb
 
 checkStruc.py performs MDWeb structure checking set as a command line
 utility.
@@ -7,16 +7,19 @@ It includes some structure manipulation options like selecting models or chains,
 removing components of the system, completing missing atoms, and some quality
 checking as residue quirality, amide orientation, or vdw clashes.
 
+```
 Usage:  checkStruc [-h|--help] command help|options 
                    -i input_pdb_path -o input_pdb_path
+```
 
-Available commands:
+## Available commands:
 
+```
 commands:  This help
 command_list:      Run all tests from conf file
 
 1. System Configuration 
-=======================
+
 models     Detect/Select Models
 chains     Detect/Select Chains 
 altloc     Detect/Select Alt Locations 
@@ -40,3 +43,10 @@ nonconres  Non Consecutive residues
 bckgaps    Detect missing residues
 clashes    Steric clashes (Severe, Polar Donors, Polar Acceptors, Apolar
            Ionic Positive, Ionic Negative)
+```
+### Dependencies
+* python 3.x
+* biopython 
+* numpy
+* biobb_model (structure_manager)
+
