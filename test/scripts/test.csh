@@ -20,17 +20,17 @@ python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_ligands_test_All.pdb --non_int
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_ligands_test_None.pdb --non_interactive ligands --remove None > 2ki5_ligands_test_None.log
 #metals
 echo "Running metals on 1bqo"
-python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_SO4.pdb --non_interactive metals --remove ZN > 1bqo_metals_test_ZN.log
+python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_ZN.pdb --non_interactive metals --remove ZN > 1bqo_metals_test_ZN.log
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_A305.pdb --non_interactive metals --remove A305 > 1bqo_metals_test_A305.log
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_All.pdb --non_interactive metals --remove All > 1bqo_metals_test_All.log
 python3 $APPDIR/checkStruc.py -i pdb:1bqo -o 1bqo_metals_test_None.pdb --non_interactive metals --remove None > 1bqo_metals_test_None.log
 #remwat
 echo "Running remwat on 2ki5"
-python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_None.pdb --non_interactive remwat --remove No > 2ki5_remwat_test_None.log
+python3 $APPDIR/checkStruc.py -i pdb:2ki5 --non_interactive remwat --remove No > 2ki5_remwat_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive remwat --remove Yes > 2ki5_remwat_test_Yes.log
 #remh
 echo "Running remh on 1ark"
-python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_None.pdb --non_interactive remh --remove No > 1ark_remh_test_None.log
+python3 $APPDIR/checkStruc.py -i pdb:1ark --non_interactive remh --remove No > 1ark_remh_test_None.log
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_remh_test_Yes.pdb --non_interactive remh --remove Yes > 1ark_remh_test_Yes.log
 #ss bonds
 echo "Running getss on 4ku1"
@@ -40,12 +40,12 @@ echo "Running clashes on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 --check_only --non_interactive clashes > 2ki5_clashes_test.log
 #amide
 echo "Running amide on 1ubq"
-python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix None > 1ubq_amide_test_All.log
-python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_None.pdb --non_interactive amide --fix All > 1ubq_amide_test_None.log
+python3 $APPDIR/checkStruc.py -i pdb:1ubq --non_interactive amide --fix None > 1ubq_amide_test_None.log
+python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix All > 1ubq_amide_test_All.log
 #chiral
 echo "Running chiral on modified 1ubq"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix All > 1ubq_chi_chiral_test_All.log
-python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix None > 1ubq_chi_none_test_None.log
+python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb --non_interactive chiral --fix None > 1ubq_chi_none_test_None.log
 #chiral_bck
 echo "Running chiral_bck on modified 1ark"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log
@@ -66,4 +66,3 @@ echo "Calculating diffs"
 foreach f (*pdb *json *log)
 diff $f ref/$f > $f.diff
 end
-

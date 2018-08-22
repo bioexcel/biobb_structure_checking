@@ -9,6 +9,7 @@ Structure pdb:1ubq loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  134
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  58
  Num. ligand or modified residues:  0
  Num. water mol.:  58

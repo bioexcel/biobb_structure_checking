@@ -9,6 +9,7 @@ Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  428
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  86
  Num. ligand or modified residues:  11
  Num. water mol.:  75
@@ -100,11 +101,8 @@ Step 12: clashes
 
 Running clashes: Options 
 No severe clashes detected
-6 Steric apolar clashes detected
+3 Steric apolar clashes detected
  THR A95.CG2  PRO A129.O      2.770 A
- ASP A107.CG   CA A304.CA     2.855 A
- ASP B107.CG   CA B304.CA     2.717 A
- ASP B182.C   GLU B184.N      2.860 A
  HIS B211.CE1 N25 B401.O24    2.841 A
  ASP B228.OD2 ARG B231.CZ     2.665 A
 14 Steric acceptor clashes detected

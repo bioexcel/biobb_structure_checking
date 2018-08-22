@@ -9,6 +9,7 @@ Structure pdb:1bqo loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  428
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  86
  Num. ligand or modified residues:  11
  Num. water mol.:  75
@@ -25,10 +26,11 @@ Structure pdb:1bqo loaded
     CA B304.CA
     CA B305.CA
 Metal Atoms removed ZN (4)
-Structure saved on 1bqo_metals_test_SO4.pdb
+Structure saved on 1bqo_metals_test_ZN.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)
 Final Num. residues:  424
+Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  82
 Final Num. ligand or modified residues:  7
 Final Num. water mol.:  75

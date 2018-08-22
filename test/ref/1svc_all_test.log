@@ -9,6 +9,7 @@ Structure pdb:1svc loaded
  Num. models: 1
  Num. chains: 2 (D,P)
  Num. residues:  393
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  63
  Num. ligand or modified residues:  0
  Num. water mol.:  63
@@ -80,24 +81,19 @@ Step 12: clashes
 
 Running clashes: Options 
 No severe clashes detected
-18 Steric apolar clashes detected
+13 Steric apolar clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A
- ALA P62.C    GLY P64.N       2.830 A
  GLU P63.O    HIS P67.CD2     2.853 A
  SER P74.OG   SER P81.CB      2.821 A
  PRO P93.O    PHE P228.CE1    2.770 A
  HIS P108.CD2 GLN P204.OE1    2.681 A
  GLY P129.O   ASP P132.C      2.813 A
- TYR P178.C   GLN P180.N      2.883 A
  GLY P183.O   GLN P188.CB     2.855 A
- GLY P185.C   ARG P187.N      2.872 A
  ALA P201.O   THR P205.CG2    2.847 A
  ALA P219.O   ARG P231.CA     2.862 A
  ASP P223.OD2 ARG P230.CG     2.866 A
  LEU P251.O   SER P343.CB     2.870 A
  TYR P286.CA  TRP P295.O      2.821 A
- SER P302.C   THR P304.N      2.842 A
- TYR P319.CD2 ASP P321.O      2.896 A
  ARG P336.O   LEU P340.CA     2.840 A
 7 Steric acceptor clashes detected
  TYR P44.O    CYS P88.O       2.939 A

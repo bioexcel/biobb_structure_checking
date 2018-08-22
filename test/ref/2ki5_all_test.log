@@ -9,6 +9,7 @@ Structure pdb:2ki5 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  908
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  296
  Num. ligand or modified residues:  4
  Num. water mol.:  292
@@ -101,15 +102,11 @@ Step 12: clashes
 
 Running clashes: Options 
 No severe clashes detected
-18 Steric apolar clashes detected
+13 Steric apolar clashes detected
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
  ARG A89.CD   GLU A95.OE1     2.776 A
  LEU A232.O   ARG A236.CG     2.741 A
- GLN A261.C   SER A263.N      2.890 A
- HIS A283.C   GLY A285.N      2.884 A
- PHE A292.C   ALA A294.N      2.819 A
- ASN A301.OD1 ASP A303.CB     2.875 A
  MET A372.SD  VAL B307.CG1    2.777 A
  HIS B58.CD2  TYR B172.OH     2.675 A
  LYS B62.O    THR B66.CG2     2.878 A
@@ -118,7 +115,6 @@ No severe clashes detected
  HIS B105.CE1 GLN B109.OE1    2.773 A
  GLU B210.O   ILE B214.CG1    2.842 A
  ARG B212.CZ  ASP B330.OD1    2.875 A
- LEU B217.C   LYS B219.N      2.848 A
  SER B357.O   ILE B361.CG1    2.861 A
 5 Steric acceptor clashes detected
  ASP A55.O    VAL A204.O      3.035 A
@@ -126,12 +122,9 @@ No severe clashes detected
  ASP B211.O   ASP B215.OD2    2.914 A
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
-5 Steric donor clashes detected
+2 Steric donor clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
- HIS A283.ND1 GLY A285.N      3.092 A
- HIS B213.ND1 ARG B236.NE     3.025 A
- HIS B283.ND1 GLY B285.N      2.777 A
 2 Steric positive clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A

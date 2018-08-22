@@ -756,8 +756,21 @@ class StructureChecking():
                     else:
                         for cls in ['apolar', 'acceptor', 'donor', 'positive', 'negative']:
                             if dist < CLASH_DIST[cls]:
-                                if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
-                                    continue
+                                if cls == 'apolar':
+                                    #Only one of the atoms should be apolar
+                                    if not mu.is_at_in_list(at1, atom_lists[cls]) and not mu.is_at_in_list(at2, atom_lists[cls]):
+                                       continue
+                                    #Remove n->n+2 backbone clashes. TODO Improve
+                                    if abs(at1.get_parent().index - at2.get_parent().index) <= 2:
+                                        continue
+                                    #Remove Ca2+ looking like backbone CA's 
+                                    if mu.is_hetatm(at1.get_parent()) and at1.id =='CA' or \
+                                       mu.is_hetatm(at2.get_parent()) and at2.id =='CA':
+                                        continue
+                                else:
+                                    # Both atoms should be of the same kind
+                                    if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
+                                        continue
                                 if not rkey in clashes[cls]:
                                     clashes[cls][rkey] = at_pair
                                 if dist < clashes[cls][rkey][2]:

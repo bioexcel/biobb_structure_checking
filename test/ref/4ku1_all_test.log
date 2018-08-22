@@ -9,6 +9,7 @@ Structure pdb:4ku1 loaded
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  583
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  168
  Num. ligand or modified residues:  20
  Num. water mol.:  148
@@ -151,22 +152,13 @@ Step 12: clashes
 
 Running clashes: Options 
 No severe clashes detected
-15 Steric apolar clashes detected
- CYS A261.SG  CYS A321.SG     2.035 A
+6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
- ASN A297.ND2 NAG A501.C1     1.903 A
- CYS A367.SG  CYS A425.SG     1.995 A
+ ASN A297.CG  NAG A501.C1     2.759 A
+ CYS A367.SG  CYS A425.CB     2.881 A
  GLU A382.CB  GLN A386.O      2.894 A
- NAG A501.O6  FUL A507.C1     1.347 A
- BMA A503.O3  MAN A508.C1     1.279 A
- CYS B261.SG  CYS B321.SG     2.031 A
  HIS B268.CE1 GLU B294.OE2    2.857 A
- ASN B297.ND2 NAG B501.C1     1.468 A
- CYS B367.SG  CYS B425.SG     2.046 A
- HIS B429.CD2 ALA B431.N      2.899 A
- NAG B501.O6  FUL B508.C1     1.334 A
- BMA B503.O3  MAN B507.C1     1.440 A
- MAN B507.O2  NAG B509.C1     1.365 A
+ ASN B297.CG  NAG B501.C1     2.433 A
 2 Steric acceptor clashes detected
  HIS A433.O   TYR A436.O      3.090 A
  SER B383.O   GLN B386.O      2.911 A

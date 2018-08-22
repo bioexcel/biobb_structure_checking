@@ -8,6 +8,7 @@ Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  60
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  0
  Num. ligand or modified residues:  0
  Num. water mol.:  0

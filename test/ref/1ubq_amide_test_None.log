@@ -3,24 +3,18 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running amide. Options: --fix All
+Running amide. Options: --fix None
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
  Num. models: 1
  Num. chains: 1 (A)
  Num. residues:  134
+ Num. residues with ins. codes:  0
  Num. HETATM residues:  58
  Num. ligand or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  660
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
-Amide residues fixed All (1)
-Structure saved on 1ubq_amide_test_None.pdb
-Final Num. models: 1
-Final Num. chains: 1 (A)
-Final Num. residues:  134
-Final Num. HETATM residues:  58
-Final Num. ligand or modified residues:  0
-Final Num. water mol.:  58
-Final Num. atoms:  660
+Nothing to do
+Structure not modified, not saving. Override with --force_save
