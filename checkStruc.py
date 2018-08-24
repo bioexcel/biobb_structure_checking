@@ -32,7 +32,7 @@ def main():
         sys.exit(0)
 
     
-    StructureChecking(vars(args)).launch(sets)
+    StructureChecking(sets,vars(args)).launch()
 
 if __name__ == "__main__":
     main()

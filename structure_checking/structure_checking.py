@@ -20,16 +20,19 @@ from structure_checking.param_input import ParamInput
 class StructureChecking():
     def __init__(self, sets, args):
         self.args = args
+        self.sets = sets
         self.summary = {}
         self.rr_dist = []
         self.data_library = DataLibManager(sets.data_library_path)
+        if not 'Notebook' in self.args:
+            self.args['Notebook']= False
         if self.args['Notebook']:
             self.args['non_interactive']=True
             self.args['check_only']=False
 
 
     def launch(self):
-        help = HelpManager(sets.help_dir_path)
+        help = HelpManager(self.sets.help_dir_path)
         help.print_help('header')
 
         try:
