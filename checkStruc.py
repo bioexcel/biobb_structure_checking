@@ -31,7 +31,8 @@ def main():
         help.print_help(args.command, header=True)
         sys.exit(0)
 
-    StructureChecking(args).launch(sets)
+    
+    StructureChecking(vars(args)).launch(sets)
 
 if __name__ == "__main__":
     main()

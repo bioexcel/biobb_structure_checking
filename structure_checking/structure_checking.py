@@ -18,45 +18,53 @@ from structure_manager.structure_manager import StructureManager
 from structure_checking.param_input import ParamInput
 
 class StructureChecking():
-    def __init__(self, args):
+    def __init__(self, sets, args):
         self.args = args
         self.summary = {}
         self.rr_dist = []
+        self.data_library = DataLibManager(sets.data_library_path)
+        if self.args['Notebook']:
+            self.args['non_interactive']=True
+            self.args['check_only']=False
 
-    def launch(self, sets):
+
+    def launch(self):
         help = HelpManager(sets.help_dir_path)
         help.print_help('header')
 
         try:
-            f = getattr(self, self.args.command)
+            f = getattr(self, self.args['command'])
         except AttributeError:
-            print ('Error: {} command unknown or not implemented'.format(self.args.command))
+            print ('Error: {} command unknown or not implemented'.format(self.args['command']))
             sys.exit(1)
 
-        self.data_library = DataLibManager(sets.data_library_path)
-
-        f(self.args.options)
+        f(self.args['options'])
 
 
-        if not self.args.check_only:
-            if self.stm.modified or self.args.force_save:
+        if not self.args['check_only']:
+            if self.stm.modified or self.args['force_save']:
                 if not self.stm.modified:
                     print ('Structure not modified, saving due to --force_save option')
                 self._save_structure()
                 self.stm.calc_stats()
-                print ('Structure saved on {}'.format(self.args.output_structure_path))
+                print ('Structure saved on {}'.format(self.args['output_structure_path']))
                 self.stm.print_stats('Final')
                 self.summary['final_stats'] = self.stm.get_stats()
             elif not self.stm.modified:
                 print ('Structure not modified, not saving. Override with --force_save')
 
-        if self.args.json_output_path is not None:
+        if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             for k in self.summary:
                 json_writer.set(k, self.summary[k])
-            json_writer.save(self.args.json_output_path)
-            print ('Summary data saved on {}'.format(self.args.json_output_path))
+            json_writer.save(self.args['json_output_path'])
+            print ('Summary data saved on {}'.format(self.args['json_output_path']))
 
+           
+    def print_stats(self, verbose=True):
+        self._load_structure()
+        self.stm.print_stats()
+        
     def command_list(self, options):
         opts = _get_parameters(options, "command_list", "--list", "op_list", "Command List File")
         [input_option, opts.op_list] = ParamInput('Command List File', opts.op_list, False).run()
@@ -108,11 +116,11 @@ class StructureChecking():
                 print ('Models do not superimpose, RMSd: {:8.3f} A, guessed as Biounit type'.format(self.stm.models_type['rmsd']))
             else:
                 print ('Models type unknown')
-        if self.args.check_only:
+        if self.args['check_only']:
             print ('Running with --check_only. Nothing else to do.')
         else:
             if self.stm.nmodels > 1:
-                input_line = ParamInput('Select Model Num', opts.select_model, self.args.non_interactive)
+                input_line = ParamInput('Select Model Num', opts.select_model, self.args['non_interactive'])
                 input_line.add_option_all ()
                 input_line.add_option ('modelno', [], type='int', min=1, max=self.stm.nmodels)
                 [input_option, opts.select_model] = input_line.run()
@@ -145,11 +153,11 @@ class StructureChecking():
             print ('  {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
         chains_sum['detected'] = self.stm.chain_ids
 
-        if self.args.check_only:
+        if self.args['check_only']:
             print ('Running with --check_only. Nothing else to do.')
         else:
             if len(self.stm.chain_ids) > 1:
-                input_line = ParamInput('Select chain', opts.select_chains, self.args.non_interactive)
+                input_line = ParamInput('Select chain', opts.select_chains, self.args['non_interactive'])
                 input_line.add_option_all()
                 input_line.add_option('chid',sorted(self.stm.chain_ids), multiple=True, case="sensitive")
                 [input_option, opts.select_chains] = input_line.run()
@@ -206,8 +214,8 @@ class StructureChecking():
                             'occupancy':at.child_dict[alt].occupancy}
                         )
 
-                    if not self.args.check_only:
-                        input_line = ParamInput('Select alternative', opts.select_altloc, self.args.non_interactive)
+                    if not self.args['check_only']:
+                        input_line = ParamInput('Select alternative', opts.select_altloc, self.args['non_interactive'])
                         input_line.add_option_all()
                         input_line.add_option('occup',['occupancy'])
                         input_line.add_option('altids',altlocs, case='upper')
@@ -253,10 +261,10 @@ class StructureChecking():
                 at_groups[at.id].append(at)
                 metals_sum['detected'].append(mu.residue_num(r))
 
-            if self.args.check_only:
+            if self.args['check_only']:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                input_sess = ParamInput("Remove", opts.remove_metals, self.args.non_interactive)
+                input_sess = ParamInput("Remove", opts.remove_metals, self.args['non_interactive'])
                 input_sess.add_option_all()
                 input_sess.add_option_none()
                 input_sess.add_option('atids', sorted(at_groups), case='sensitive', multiple=True)
@@ -322,10 +330,10 @@ class StructureChecking():
             print ('{} Water molecules detected'.format(len(wat_list)))
             remwat_sum['n_detected'] = len(wat_list)
 
-            if self.args.check_only:
+            if self.args['check_only']:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                input_line = ParamInput('Remove', opts.remove_wat, self.args.non_interactive)
+                input_line = ParamInput('Remove', opts.remove_wat, self.args['non_interactive'])
                 input_line.add_option_yes_no()
                 [input_option, opts.remove_wat] = input_line.run()
 
@@ -369,10 +377,10 @@ class StructureChecking():
                 rids.add(r.get_resname())
                 rnums.append(mu.residue_num(r))
 
-            if self.args.check_only:
+            if self.args['check_only']:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                input_line = ParamInput('Remove', opts.remove_ligands, self.args.non_interactive)
+                input_line = ParamInput('Remove', opts.remove_ligands, self.args['non_interactive'])
                 input_line.add_option_all()
                 input_line.add_option_none()
                 input_line.add_option('byrids', sorted(rids), multiple=True)
@@ -430,10 +438,10 @@ class StructureChecking():
             print ('{} Residues containing H atoms detected'.format(len(remh_list)))
             remh_sum['n_detected'] = len(remh_list)
 
-            if self.args.check_only:
+            if self.args['check_only']:
                 print ('Running with --check_only. Nothing else to do.')
             else:
-                input_line = ParamInput('Remove hydrogen atoms', opts.remove_h, self.args.non_interactive)
+                input_line = ParamInput('Remove hydrogen atoms', opts.remove_h, self.args['non_interactive'])
                 input_line.add_option_yes_no()
                 [input_option, opts.remove_h] = input_line.run()
                 
@@ -532,10 +540,10 @@ class StructureChecking():
                     print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0], self.stm.nmodels > 1), mu.atom_id(at_pair[1], self.stm.nmodels > 1), at_pair[2]))
                     amide_sum['detected'].append({'at1':mu.atom_id(at_pair[0], self.stm.nmodels > 1), 'at2':mu.atom_id(at_pair[1], self.stm.nmodels > 1), 'dist': float(at_pair[2])})
 
-                if self.args.check_only:
+                if self.args['check_only']:
                     print ('Running with --check_only. Nothing else to do.')
                 else:
-                    input_line = ParamInput('Fix amide atoms', opts.amide_fix, self.args.non_interactive)
+                    input_line = ParamInput('Fix amide atoms', opts.amide_fix, self.args['non_interactive'])
                     input_line.add_option_all()
                     input_line.add_option_none()
                     input_line.add_option('resnum',rnums, case='sensitive', multiple=True)
@@ -596,10 +604,10 @@ class StructureChecking():
                     print (' {:10}'.format(mu.residue_id(r, self.stm.nmodels > 1)))
                     chiral_sum['detected'].append(mu.residue_id(r, self.stm.nmodels > 1))
 
-                if self.args.check_only:
+                if self.args['check_only']:
                     print ('Running with --check_only. Nothing else to do.')
                 else:
-                    input_line = ParamInput('Fix chiralities', opts.chiral_fix, self.args.non_interactive)
+                    input_line = ParamInput('Fix chiralities', opts.chiral_fix, self.args['non_interactive'])
                     input_line.add_option_all()
                     input_line.add_option_none()
                     input_line.add_option('resnum', rnums, case='sensitive', multiple=True)
@@ -638,7 +646,7 @@ class StructureChecking():
         print ('Running chiral. Options: {}'.format(' '.join(options)))
         chiral_bck_sum = {}
 
-        self.args.check_only = True # Provisional
+        self.args['check_only'] = True # Provisional
 
         self._load_structure()
         chiral_list = []
@@ -663,10 +671,10 @@ class StructureChecking():
                     print (' {:10}'.format(mu.residue_id(r, self.stm.nmodels > 1)))
                     chiral_bck_sum['detected'].append(mu.residue_id(r, self.stm.nmodels > 1))
 
-                if self.args.check_only:
+                if self.args['check_only']:
                     print ('Running with --check_only. Nothing else to do.')
                 else:
-                    input_line = ParamInput('Fix CA chiralities', opts.chiral_fix, elf.args.non_interactive)
+                    input_line = ParamInput('Fix CA chiralities', opts.chiral_fix, elf.args['non_interactive'])
                     input_line.add_option_all()
                     input_line.add_option_none()
                     input_line.add_option('resnum', opts.chiral_fix, rnums, case='sensitive', multiple=True)
@@ -812,8 +820,8 @@ class StructureChecking():
                 rnums.append(mu.residue_num(r))
                 fixside_sum['detected'][mu.residue_id(r)] = at_list
             
-            if not self.args.check_only:
-                input_line = ParamInput ('fixside', opts.fix_side, self.args.non_interactive)
+            if not self.args['check_only']:
+                input_line = ParamInput ('fixside', opts.fix_side, self.args['non_interactive'])
                 input_line.add_option_all()
                 input_line.add_option_none()
                 input_line.add_option('resnum',rnums, case='sensitive', multiple=True)
@@ -860,11 +868,11 @@ class StructureChecking():
 
     def _load_structure(self, verbose=True):
         if not hasattr(self, 'stm'):
-            if not self.args.non_interactive and self.args.input_structure_path is None:
-                self.args.input_structure_path = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
-            self.stm = StructureManager(self.args.input_structure_path, self.args.debug)
+            if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
+                self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
+            self.stm = StructureManager(self.args['input_structure_path'], self.args['debug'])
             if verbose:
-                print ('Structure {} loaded'.format(self.args.input_structure_path))
+                print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_stats()
             self.summary['stats'] = self.stm.get_stats()
 
@@ -872,9 +880,9 @@ class StructureChecking():
         return self.stm.get_structure()
 
     def _save_structure(self):
-        if not self.args.non_interactive and self.args.output_structure_path is None:
-            self.args.output_structure_path = input("Enter output structure path: ")
-        self.stm.save_structure(self.args.output_structure_path)
+        if not self.args['non_interactive'] and self.args['output_structure_path'] is None:
+            self.args['output_structure_path'] = input("Enter output structure path: ")
+        self.stm.save_structure(self.args['output_structure_path'])
 
 #===============================================================================
 
