@@ -9,8 +9,8 @@ class ParamInput():
         self.non_interactive = non_interactive
         self.prefix = prefix
         
-    def add_option(self, label, opt_list, case=False, type='list', multiple=False, min=0, max=0):
-        self.options.append({'label':label,'opt_list':opt_list,'case':case,'type':type, 'min':min, 'max':max, 'multiple':multiple})
+    def add_option(self, label, opt_list, case=False, type='list', multiple=False, min=0, max=0, list2=None):
+        self.options.append({'label':label,'opt_list':opt_list,'case':case,'type':type, 'min':min, 'max':max, 'multiple':multiple, 'list2':list2})
     
     def add_option_all(self):
         self.add_option('all', ['All'])
@@ -34,9 +34,13 @@ class ParamInput():
                         opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
                 elif opt['type'] == 'input':
                     opt_strs.append('')
+                elif opt['type'] == 'pair_list':
+                    str_opt = []
+                    for op in opt['opt_list']:
+                        str_opt.append('{}:[{}]'.format(op,'|'.join(opt['list2'])))
+                    opt_strs.append(','.join(str_opt))
                 else: 
                     opt_strs.append('?')
-                
             prompt_str += ' ('+' | '.join(opt_strs)+')'
         prompt_str += ': ' 
 # No options, simple input
@@ -55,13 +59,16 @@ class ParamInput():
             else:
                 while not input_ok and iopt < len(self.options):
                     opt = self.options[iopt]
-                    if opt['type'] == 'list' and isinstance(self.opt_value, str):
+                    if (opt['type'] == 'list' or opt['type'] == 'pair_list') and isinstance(self.opt_value, str):
                         if not opt['multiple']:
                             values = [self.opt_value]
                         else:
                             values = self.opt_value.split(',')
                         group_ok = True
                         for val in values:
+                            if opt['type']=='pair_list':
+                                val_sp= val.split(':')
+                                val = val_sp[0]
                             if opt['case'] == 'upper':
                                 val=val.upper()
                                 group_ok = group_ok and val in opt['opt_list']
@@ -72,12 +79,14 @@ class ParamInput():
                                 group_ok = group_ok and val in opt['opt_list']
                             else:
                                 group_ok = group_ok and val.lower() in list(map(lambda x: x.lower(),opt['opt_list']))
+                            if opt['type']=='pair_list':
+                                group_ok = group_ok and val_sp[1] in opt['list2']
                         input_ok = group_ok
                     elif opt['type'] == 'int': 
                         self.opt_value = int(self.opt_value)
                         input_ok = self.opt_value >= opt['min'] and self.opt_value <= opt['max']
                     if not input_ok:
-                        iopt +=1
+                        iopt +=1                        
                 if not input_ok:
                     print ("Input not valid")
                     if self.non_interactive:
@@ -85,7 +94,7 @@ class ParamInput():
                         input_ok=True
                     else:
                         self.opt_value = ''
-
+            
         return [self.options[iopt]['label'],self.opt_value]
     
 def _get_input (value, prompt_text):
