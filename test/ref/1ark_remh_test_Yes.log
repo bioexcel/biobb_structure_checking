@@ -15,7 +15,7 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 900 Residues containing H atoms detected
-Hydrogen atom removed from 900 residues
+Hydrogen atoms removed from 900 residues
 Structure saved on 1ark_remh_test_Yes.pdb
 Final Num. models: 15
 Final Num. chains: 1 (A)

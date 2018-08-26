@@ -3,7 +3,6 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
  Num. models: 1
@@ -19,14 +18,13 @@ Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
 1 Model(s) detected
-Nothing to do
+Single model found
 
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All
 1 Chains detected
   A: Protein
-Nothing to do
 
 Step 3: altloc --select_altloc occupancy
 
@@ -36,12 +34,12 @@ No residues with alternative location labels detected
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
-No metal ions found
+No metal ions present
 
 Step 5: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-No ligands detected
+No ligands found
 
 Step 6: remwat --remove Yes
 
@@ -52,7 +50,7 @@ Running remwat. Options: --remove Yes
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
-No residues with hydrogen atoms detected
+No residues with Hydrogen atoms found
 
 Step 8: amide --fix All
 
@@ -64,21 +62,21 @@ Amide residues fixed All (1)
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect chirality found
+No residues with incorrent side-chain chirality found
 
 Step 10: chiral_bck
 
-Running chiral. Options: 
+Running chiral_bck. Options: 
 No residues with incorrect backbone chirality found
 
 Step 11: getss
 
-Running getss
+Running getss. Options: 
 No SS bonds detected
 
 Step 12: clashes
 
-Running clashes: Options 
+Running clashes. Options: 
 No severe clashes detected
 No apolar clashes detected
 1 Steric acceptor clashes detected
@@ -87,4 +85,13 @@ No donor clashes detected
 No positive clashes detected
 No negative clashes detected
 Command list completed
+Structure saved on 1ubq_all_test.pdb
+Final Num. models: 1
+Final Num. chains: 1 (A)
+Final Num. residues:  76
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  0
+Final Num. ligand or modified residues:  0
+Final Num. water mol.:  0
+Final Num. atoms:  602
 Summary data saved on 1ubq_all_test.json

@@ -27,32 +27,49 @@
      "loc_label": "B",
      "occupancy": 0.01
     }
+   ],
+   "HOH A779": [
+    {
+     "atom": "O",
+     "loc_label": "A",
+     "occupancy": 1.0
+    }
    ]
   },
+  "options": [
+   "--select_altloc",
+   "occupancy"
+  ],
   "selected": "occupancy"
  },
  "amide": {
-  "n_amides": 32
+  "n_amides": 32,
+  "options": [
+   "--fix",
+   "All"
+  ]
  },
  "chains": {
   "detected": {
    "A": 1,
    "B": 1
   },
-  "final": {
-   "A": 1,
-   "B": 1
-  },
-  "selected": {
-   "A": 1,
-   "B": 1
-  }
+  "options": [
+   "--select_chain",
+   "All"
+  ],
+  "selected": {}
  },
  "chiral": {
-  "n_chirals": 84
+  "n_chirals": 84,
+  "options": [
+   "--fix",
+   "All"
+  ]
  },
  "chiral_bck": {
-  "n_chirals": 561
+  "n_chirals": 561,
+  "options": []
  },
  "clashes": {
   "detected": {
@@ -178,7 +195,23 @@
    "severe": []
   }
  },
- "getss": {},
+ "final_stats": {
+  "chain_ids": {
+   "A": 1,
+   "B": 1
+  },
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 4659,
+  "num_res": 614,
+  "num_wat": 0,
+  "res_hetats": 2,
+  "res_insc": 0,
+  "res_ligands": 2
+ },
+ "getss": {
+  "options": []
+ },
  "ligands": {
   "detected": [
    "SO4 A4",
@@ -187,6 +220,10 @@
    "AC2 B2"
   ],
   "n_removed": 2,
+  "options": [
+   "--remove",
+   "SO4"
+  ],
   "removed": {
    "lst": [
     "SO4 A4",
@@ -195,16 +232,34 @@
    "opt": "SO4"
   }
  },
- "metals": {},
+ "metals": {
+  "options": [
+   "--remove",
+   "ZN"
+  ]
+ },
  "models": {
   "detected": {
    "nmodels": 1
-  }
+  },
+  "options": [
+   "--select_model",
+   "1"
+  ]
  },
- "remh": {},
+ "remh": {
+  "options": [
+   "--remove",
+   "Yes"
+  ]
+ },
  "remwat": {
   "n_detected": 292,
-  "n_removed": 292
+  "n_removed": 292,
+  "options": [
+   "--remove",
+   "Yes"
+  ]
  },
  "stats": {
   "chain_ids": {

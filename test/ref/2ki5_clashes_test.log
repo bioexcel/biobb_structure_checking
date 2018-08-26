@@ -3,7 +3,7 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running clashes: Options 
+Running clashes. Options: 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  Num. models: 1
@@ -42,3 +42,4 @@ No severe clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
 No negative clashes detected
+Running  check_only. Nothing else to do.

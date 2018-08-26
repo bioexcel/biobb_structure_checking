@@ -194,30 +194,40 @@
     }
    ]
   },
+  "options": [
+   "--select_altloc",
+   "occupancy"
+  ],
   "selected": "occupancy"
  },
  "amide": {
-  "n_amides": 40
+  "n_amides": 40,
+  "options": [
+   "--fix",
+   "All"
+  ]
  },
  "chains": {
   "detected": {
    "A": 1,
    "B": 1
   },
-  "final": {
-   "A": 1,
-   "B": 1
-  },
-  "selected": {
-   "A": 1,
-   "B": 1
-  }
+  "options": [
+   "--select_chain",
+   "All"
+  ],
+  "selected": {}
  },
  "chiral": {
-  "n_chirals": 36
+  "n_chirals": 36,
+  "options": [
+   "--fix",
+   "All"
+  ]
  },
  "chiral_bck": {
-  "n_chirals": 399
+  "n_chirals": 399,
+  "options": []
  },
  "clashes": {
   "detected": {
@@ -277,6 +287,20 @@
    "severe": []
   }
  },
+ "final_stats": {
+  "chain_ids": {
+   "A": 1,
+   "B": 1
+  },
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 3566,
+  "num_res": 435,
+  "num_wat": 0,
+  "res_hetats": 20,
+  "res_insc": 0,
+  "res_ligands": 20
+ },
  "getss": {
   "detected": [
    {
@@ -299,7 +323,8 @@
     "at2": "CYS B425.SG",
     "dist": 4.187800884246826
    }
-  ]
+  ],
+  "options": []
  },
  "ligands": {
   "detected": [
@@ -323,18 +348,40 @@
    "MAN B507",
    "FUL B508",
    "NAG B509"
+  ],
+  "options": [
+   "--remove",
+   "SO4"
   ]
  },
- "metals": {},
+ "metals": {
+  "options": [
+   "--remove",
+   "ZN"
+  ]
+ },
  "models": {
   "detected": {
    "nmodels": 1
-  }
+  },
+  "options": [
+   "--select_model",
+   "1"
+  ]
  },
- "remh": {},
+ "remh": {
+  "options": [
+   "--remove",
+   "Yes"
+  ]
+ },
  "remwat": {
   "n_detected": 148,
-  "n_removed": 148
+  "n_removed": 148,
+  "options": [
+   "--remove",
+   "Yes"
+  ]
  },
  "stats": {
   "chain_ids": {

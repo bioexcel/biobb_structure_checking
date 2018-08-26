@@ -3,7 +3,6 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  Num. models: 15
@@ -27,7 +26,6 @@ Step 2: chains --select_chain All
 Running chains. Options: --select_chain All
 1 Chains detected
   A: Protein
-Nothing to do
 
 Step 3: altloc --select_altloc occupancy
 
@@ -37,23 +35,23 @@ No residues with alternative location labels detected
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
-No metal ions found
+No metal ions present
 
 Step 5: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-No ligands detected
+No ligands found
 
 Step 6: remwat --remove Yes
 
 Running remwat. Options: --remove Yes
-No water molecules detected
+No water molecules found
 
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
 60 Residues containing H atoms detected
-Hydrogen atom removed from 60 residues
+Hydrogen atoms removed from 60 residues
 
 Step 8: amide --fix All
 
@@ -65,21 +63,21 @@ Amide residues fixed All (1)
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect chirality found
+No residues with incorrent side-chain chirality found
 
 Step 10: chiral_bck
 
-Running chiral. Options: 
+Running chiral_bck. Options: 
 No residues with incorrect backbone chirality found
 
 Step 11: getss
 
-Running getss
+Running getss. Options: 
 No SS bonds detected
 
 Step 12: clashes
 
-Running clashes: Options 
+Running clashes. Options: 
 No severe clashes detected
 4 Steric apolar clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A
@@ -94,4 +92,13 @@ No donor clashes detected
 No positive clashes detected
 No negative clashes detected
 Command list completed
+Structure saved on 1ark_all_test.pdb
+Final Num. models: 1
+Final Num. chains: 1 (A)
+Final Num. residues:  60
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  0
+Final Num. ligand or modified residues:  0
+Final Num. water mol.:  0
+Final Num. atoms:  463
 Summary data saved on 1ark_all_test.json

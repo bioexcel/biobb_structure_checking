@@ -3,7 +3,6 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running command_list from scripts/all_checks
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  Num. models: 1
@@ -19,7 +18,7 @@ Step 1: models --select_model 1
 
 Running models. Options: --select_model 1
 1 Model(s) detected
-Nothing to do
+Single model found
 
 Step 2: chains --select_chain All
 
@@ -33,30 +32,7 @@ Step 3: altloc --select_altloc occupancy
 
 Running altloc. Options: --select_altloc occupancy
 Detected 6 residues with alternative location labels
-ASN A361:
-  CA   A (0.41) B (0.59)
-  CB   A (0.41) B (0.59)
-  CG   A (0.41) B (0.59)
-  OD1  A (0.41) B (0.59)
-  ND2  A (0.41) B (0.59)
-Selecting location occupancy
-GLN B347:
-  CA   A (0.43) B (0.57)
-  CB   A (0.43) B (0.57)
-  CG   A (0.43) B (0.57)
-  CD   A (0.43) B (0.57)
-  OE1  A (0.43) B (0.57)
-  NE2  A (0.43) B (0.57)
-Selecting location occupancy
-GLN B418:
-  CA   A (0.38) B (0.62)
-  CB   A (0.38) B (0.62)
-  CG   A (0.38) B (0.62)
-  CD   A (0.38) B (0.62)
-  OE1  A (0.38) B (0.62)
-  NE2  A (0.38) B (0.62)
-Selecting location occupancy
-LYS A340:
+LYS A340
   N    A (0.50) B (0.50)
   CA   A (0.50) B (0.50)
   C    A (0.50) B (0.50)
@@ -66,26 +42,44 @@ LYS A340:
   CD   A (0.50) B (0.50)
   CE   A (0.50) B (0.50)
   NZ   A (0.50) B (0.50)
-Selecting location occupancy
-SER B298:
+ASN A361
+  CA   A (0.41) B (0.59)
+  CB   A (0.41) B (0.59)
+  CG   A (0.41) B (0.59)
+  OD1  A (0.41) B (0.59)
+  ND2  A (0.41) B (0.59)
+SER B298
   N    A (0.50) B (0.50)
   CA   A (0.50) B (0.50)
   C    A (0.50) B (0.50)
   O    A (0.50) B (0.50)
   CB   A (0.50) B (0.50)
   OG   A (0.50) B (0.50)
-Selecting location occupancy
-THR B411:
+GLN B347
+  CA   A (0.43) B (0.57)
+  CB   A (0.43) B (0.57)
+  CG   A (0.43) B (0.57)
+  CD   A (0.43) B (0.57)
+  OE1  A (0.43) B (0.57)
+  NE2  A (0.43) B (0.57)
+THR B411
   CA   A (0.34) B (0.66)
   CB   A (0.34) B (0.66)
   OG1  A (0.34) B (0.66)
   CG2  A (0.34) B (0.66)
+GLN B418
+  CA   A (0.38) B (0.62)
+  CB   A (0.38) B (0.62)
+  CG   A (0.38) B (0.62)
+  CD   A (0.38) B (0.62)
+  OE1  A (0.38) B (0.62)
+  NE2  A (0.38) B (0.62)
 Selecting location occupancy
 
 Step 4: metals --remove ZN
 
 Running metals. Options: --remove ZN
-No metal ions found
+No metal ions present
 
 Step 5: ligands --remove SO4
 
@@ -112,7 +106,6 @@ MAN B507
 FUL B508
 NAG B509
 Input not valid
-Error: unknown selection SO4
 
 Step 6: remwat --remove Yes
 
@@ -123,25 +116,26 @@ Running remwat. Options: --remove Yes
 Step 7: remh --remove Yes
 
 Running remh. Options: --remove Yes
-No residues with hydrogen atoms detected
+No residues with Hydrogen atoms found
 
 Step 8: amide --fix All
 
 Running amide. Options: --fix All
+No unusual contact(s) ivolving amide atoms found
 
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect chirality found
+No residues with incorrent side-chain chirality found
 
 Step 10: chiral_bck
 
-Running chiral. Options: 
+Running chiral_bck. Options: 
 No residues with incorrect backbone chirality found
 
 Step 11: getss
 
-Running getss
+Running getss. Options: 
 4 Possible SS Bonds detected
   CYS A261.SG CYS A321.SG   4.141
   CYS A367.SG CYS A425.SG   3.981
@@ -150,7 +144,7 @@ Running getss
 
 Step 12: clashes
 
-Running clashes: Options 
+Running clashes. Options: 
 No severe clashes detected
 6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
@@ -167,4 +161,13 @@ No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
 Command list completed
+Structure saved on 4ku1_all_test.pdb
+Final Num. models: 1
+Final Num. chains: 2 (A,B)
+Final Num. residues:  435
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  20
+Final Num. ligand or modified residues:  20
+Final Num. water mol.:  0
+Final Num. atoms:  3566
 Summary data saved on 4ku1_all_test.json

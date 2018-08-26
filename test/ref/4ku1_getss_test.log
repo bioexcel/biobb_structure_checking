@@ -3,7 +3,7 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running getss
+Running getss. Options: 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  Num. models: 1
@@ -19,3 +19,4 @@ Structure pdb:4ku1 loaded
   CYS A367.SG CYS A425.SG   3.981
   CYS B261.SG CYS B321.SG   4.126
   CYS B367.SG CYS B425.SG   4.188
+Running  check_only. Nothing else to do.
