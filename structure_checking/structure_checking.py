@@ -17,11 +17,33 @@ import structure_manager.model_utils as mu
 from structure_manager.structure_manager import StructureManager
 from structure_checking.param_input import ParamInput
 
+dialogs= {
+    'command_list':{'command':'command_list', 'prompt':'--list',       'dest':'op_list',       'help':'Command List File','type':str},
+    'models':    {'command':'models',      'prompt':'--select_model',  'dest':'select_model',  'help':'Select model to keep', 'type':int},
+    'chains':    {'command':'chains',      'prompt':'--select_chains', 'dest':'select_chains', 'help':'Chains (All | Chain list comma separated)', 'type':str},
+    'altloc':    {'command':'altloc',      'prompt':'--select_altloc', 'dest':'select_altloc', 'help':'Select altloc occupancy|alt_id', 'type':str},
+    'metals':    {'command':'metals',      'prompt':'--remove',        'dest':'remove_metals', 'help':'Remove Metal ions', 'type':str},
+    'remwat':    {'command':'remwat',      'prompt': '--remove',       'dest':'remove_wat',    'help':'Remove Water molecules', 'type':str},
+    'ligands':   {'command':'ligands',     'prompt': '--remove',       'dest':'remove_ligands','help':'Remove Ligand residues', 'type':str},
+    'remh':      {'command':'remh',        'prompt': '--remove',       'dest':'remove_h',      'help':'Remove Hydrogen atoms', 'type':str},
+    'amide':     {'command':'amide',       'prompt': '--fix',          'dest':'amide_fix',     'help':'Fix Residues (All | None | List)', 'type':str},
+    'chiral':    {'command':'chiral',      'prompt': '--fix',          'dest':'chiral_fix',    'help':'Fix Residues (All | None | List)', 'type':str},
+    'chiral_bck':{'command':'chiral_bck',  'prompt': '--fix',          'dest':'chiral_fix',    'help':'Fix Residues (All | None | List)', 'type':str},
+    'clashes':   {'command':'clashes',     'prompt': '--no_wat',       'dest':'discard_wat',   'help':'Discard water molecules', 'type':str},
+    'fixside':   {'command':'fixside',     'prompt': '--fix',          'dest':'fix_side',      'help':'Add missing atoms to side chains', 'type':str}
+}
+
+def _get_parameter (options, dialog):
+    optionsParser = argparse.ArgumentParser(prog=dialog['command'])
+    optionsParser.add_argument(dialog['prompt'], dest=dialog['dest'], help=dialog['help'], type=dialog['type'])
+    return vars(optionsParser.parse_args(options))
+
 class StructureChecking():
     def __init__(self, sets, args):
         self.args = args
         self.sets = sets
         self.summary = {}
+        self.tmp_data = {}
         self.rr_dist = []
         self.data_library = DataLibManager(sets.data_library_path)
         if not 'Notebook' in self.args:
@@ -35,14 +57,7 @@ class StructureChecking():
         help = HelpManager(self.sets.help_dir_path)
         help.print_help('header')
 
-        try:
-            f = getattr(self, self.args['command'])
-        except AttributeError:
-            print ('Error: {} command unknown or not implemented'.format(self.args['command']))
-            sys.exit(1)
-
-        f(self.args['options'])
-
+        self.run_method(self.args['command'], self.args['options'])
 
         if not self.args['check_only']:
             if self.stm.modified or self.args['force_save']:
@@ -62,14 +77,42 @@ class StructureChecking():
                 json_writer.set(k, self.summary[k])
             json_writer.save(self.args['json_output_path'])
             print ('Summary data saved on {}'.format(self.args['json_output_path']))
+    
+    def run_method(self, command, options):
+        try:
+            f_check= getattr(self, command+'_check')
+        except AttributeError:
+            print ('Error: {} command unknown or not implemented'.format(command))
+            sys.exit(1)
 
+        self.summary[command]={'options': options}
+        
+        print ('Running {}'.format(command))
+        
+        #Running checking method
+        self._load_structure()
+        f_check()
+
+        if self.args['check_only'] or options is None or options == '':
+            print ('Running  check_only. Nothing else to do.')
+        else:
+            try:
+                f_fix= getattr(self, command+'_fix')
+                if not self.args['Notebook']:
+                    if command in dialogs:
+                        opts = _get_parameter(options, dialogs[command])
+                        options = opts[dialogs[command]['dest']]
+                    else:
+                        options = ''
+                f_fix(options)
+            except:
+                pass
            
     def print_stats(self, verbose=True):
-        self._load_structure()
+        self._load_structure(print_stats=False)
         self.stm.print_stats()
         
-    def command_list(self, options):
-        opts = _get_parameters(options, "command_list", "--list", "op_list", "Command List File")
+    def command_list(self, opts):
         [input_option, opts.op_list] = ParamInput('Command List File', opts.op_list, False).run()
 
         try:
@@ -78,8 +121,6 @@ class StructureChecking():
         except OSError:
             print ('Error when opening file {}'.format(opts.op_list))
             sys.exit(1)
-
-        print ('Running command_list from {}'.format(opts.op_list))
 
         self._load_structure()
 
@@ -91,159 +132,160 @@ class StructureChecking():
             data = line.split()
             command = data[0]
             options = data[1:]
-            try:
-                f = getattr(self, command)
-            except AttributeError:
-                print ("Error: command unknown or not implemented")
-                continue
-                #sys.exit(1)
-            f(options)
+            self.run_method(command,options)
             i += 1
 
         print ("Command list completed")
+    
+    def models(self, options=None):
+        self.run_method('models', options)
 
-    def models(self, options):
-        opts = _get_parameters(options, "models", "--select_model", "select_model", "Select model to keep", int)
-        print ('Running models. Options: {}'.format(' '.join(options)))
-        models_sum = {}
-
-        self._load_structure()
-
+    def models_check(self):
         print ('{} Model(s) detected'.format(self.stm.nmodels))
-        models_sum['detected'] = {'nmodels': self.stm.nmodels}
+        self.summary['models']['detected'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
-            models_sum['detected']['type'] = self.stm.models_type
+            self.summary['models']['detected']['type'] = self.stm.models_type
             if self.stm.models_type['type'] == mu.ENSM:
                 print ('Models superimpose, RMSd: {:8.3f} A, guessed as ensemble type (NMR / MD TRAJ)'.format(self.stm.models_type['rmsd']))
             elif self.stm.models_type['type'] == mu.BUNIT:
                 print ('Models do not superimpose, RMSd: {:8.3f} A, guessed as Biounit type'.format(self.stm.models_type['rmsd']))
             else:
                 print ('Models type unknown')
-        if self.args['check_only']:
-            print ('Running with --check_only. Nothing else to do.')
-        else:
-            if self.stm.nmodels > 1:
-                input_line = ParamInput('Select Model Num', opts.select_model, self.args['non_interactive'])
-                input_line.add_option_all ()
-                input_line.add_option ('modelno', [], type='int', min=1, max=self.stm.nmodels)
-                [input_option, opts.select_model] = input_line.run()
-                
-                if input_option == 'error':
-                    print ('Error: unknown model {}'.format(opts.select_model), file=sys.stderr)
-                    self.summary['models'] = models_sum
-                    return 1
-
-                print ('Selecting model num. {}'.format(opts.select_model))
-                if input_option != 'all':
-                    self.stm.select_model(opts.select_model)
-                
-                models_sum['selected_model'] = opts.select_model
+    
+    def models_fix(self, select_model):
+        if self.stm.nmodels > 1:
+            input_line = ParamInput('Select Model Num', select_model, self.args['non_interactive'])
+            input_line.add_option_all ()
+            input_line.add_option ('modelno', [], type='int', min=1, max=self.stm.nmodels)
+            [input_option, select_model] = input_line.run()
             
-            else:
-                print ("Nothing to do")
+            if input_option == 'error':
+                print ('Error: unknown model {}'.format(select_model), file=sys.stderr)
+                self.summary['models']['error'] = 'Unknown model'
+                return 1
 
-        self.summary['models'] = models_sum
+            print ('Selecting model num. {}'.format(select_model))
+            if input_option != 'all':
+                self.stm.select_model(select_model)
+                
+            self.summary['models']['selected_model'] = select_model
+        else:
+            print ("Nothing to do")
 
-    def chains(self, options):
-        opts = _get_parameters(options, "chains", '--select_chains', "select_chains", "Chains (All | Chain list comma separated)")
-        print ('Running chains. Options: {}'.format(' '.join(options)))
-        chains_sum = {}
-
-        self._load_structure()
-
+    def chains (self, options=None):
+        self.run_method('chains', options)
+    
+    def chains_check(self):
         print ('{} Chains detected'.format(len(self.stm.chain_ids)))
         for ch_id in sorted(self.stm.chain_ids):
             print ('  {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
-        chains_sum['detected'] = self.stm.chain_ids
-
-        if self.args['check_only']:
-            print ('Running with --check_only. Nothing else to do.')
-        else:
-            if len(self.stm.chain_ids) > 1:
-                input_line = ParamInput('Select chain', opts.select_chains, self.args['non_interactive'])
-                input_line.add_option_all()
-                input_line.add_option('chid',sorted(self.stm.chain_ids), multiple=True, case="sensitive")
-                [input_option, opts.select_chains] = input_line.run()
+        self.summary['chains']['detected'] = self.stm.chain_ids
+    
+    def chains_fix(self,select_chains):
+        if len(self.stm.chain_ids) > 1:
+            self.summary['chains']['selected']={}
+            input_line = ParamInput('Select chain', select_chains, self.args['non_interactive'])
+            input_line.add_option_all()
+            input_line.add_option('chid',sorted(self.stm.chain_ids), multiple=True, case="sensitive")
+            [input_option, select_chains] = input_line.run()
                 
-                if input_option == 'error':
-                    print ('Error unknown selection: {}'.format(opts.select_chains))
-                    self.summary['chains'] = chains_sum
-                    return 1
+            if input_option == 'error':
+                print ('Error unknown selection: {}'.format(opts.select_chains))
+                self.summary['chains']['error']='Unknown selection'
+                return 1
 
-                if input_option == 'all':
-                    print ('Selecting all chains')
-                    chains_sum['selected'] = self.stm.chain_ids
-                else:
-                    self.stm.select_chains(opts.select_chains)
-                    print ('Selecting chain(s) {}'.format(opts.select_chains))
-                    chains_sum['selected'] = opts.select_chains.split(',')
-
-                self.stm.set_chain_ids()
-                chains_sum['final'] = self.stm.chain_ids
-
+            if input_option == 'all':
+                print ('Selecting all chains')
             else:
-                print ("Nothing to do")
+                self.stm.select_chains(select_chains)
+                print ('Selecting chain(s) {}'.format(select_chains))
+                self.summary['chains']['selected'] = select_chains.split(',')
+                self.stm.set_chain_ids()
+            self.summary['chains']['selected'] = self.stm.chain_ids
 
-        self.summary['chains'] = chains_sum
+        else:
+            print ("Nothing to do")
 
-    def altloc(self, options):
-        opts = _get_parameters(options, "altloc", '--select_altloc', "select_altloc", "select altloc occupancy|alt_id")
+    def altloc(self, opts=None):
+        self.run_method('altloc', options)
 
-        print ('Running altloc. Options: {}'.format(' '.join(options)))
-        altloc_sum = {}
+    def altloc_check(self): #TODO improve output
 
-        self._load_structure()
+        self.alt_loc_res = mu.get_altloc_residues(self._get_structure())
 
-        alt_loc_res = mu.get_altloc_residues(self._get_structure())
+        if len(self.alt_loc_res) > 0:
+            print ('Detected {} residues with alternative location labels'.format(len(self.alt_loc_res)))
 
-        if len(alt_loc_res) > 0:
-            print ('Detected {} residues with alternative location labels'.format(len(alt_loc_res)))
-
-            altloc_sum['detected'] = {}
-
-            for r in sorted(alt_loc_res):
-                if len(alt_loc_res[r]) > 1:
-                    print ('{}:'.format(r))
-                    altloc_sum['detected'][r] = []
-                    altlocs = sorted(alt_loc_res[r][0].child_dict)
-                    for at in alt_loc_res[r]:
-                        s = '  {:4}'.format(at.id)
-                        for alt in sorted(at.child_dict):
-                            s += ' {} ({:4.2f})'.format(alt, at.child_dict[alt].occupancy)
-                        print (s)
-                        altloc_sum['detected'][r].append({
-                            'atom':at.id,
-                            'loc_label':alt,
-                            'occupancy':at.child_dict[alt].occupancy}
-                        )
-
-                    if not self.args['check_only']:
-                        input_line = ParamInput('Select alternative', opts.select_altloc, self.args['non_interactive'])
-                        input_line.add_option_all()
-                        input_line.add_option('occup',['occupancy'])
-                        input_line.add_option('altids',altlocs, case='upper')
-                        [input_option, opts.select_altloc] = input_line.run()
-                        
-                        if input_option=='error':
-                            print ('Error: Unknown selection {} '.format(opts.select_altloc), file=sys.stderr)
-                            self.summary['altloc'] = altloc_sum
-                            return 1
-
-                        print ('Selecting location {}'.format(opts.select_altloc))
-                        altloc_sum['selected'] = opts.select_altloc
-                        if input_option == 'all':
-                            print ("Nothing to do")
-                        else:
-                            self.stm.select_altloc_residues(r, opts.select_altloc.upper())
+            self.summary['altloc']['detected'] = {}            
+            self.alt_loc_rnums = []
+            self.altlocs={}
+            for r in sorted(self.alt_loc_res, key = lambda x: x.index):
+                rid = mu.residue_id(r)
+                print(rid)
+                self.alt_loc_rnums.append(mu.residue_num(r))
+                self.summary['altloc']['detected'][r] = []
+                self.altlocs[r] = sorted(self.alt_loc_res[r][0].child_dict)
+                for at in self.alt_loc_res[r]:
+                    s = '  {:4}'.format(at.id)
+                    for alt in sorted(at.child_dict):
+                        s += ' {} ({:4.2f})'.format(alt, at.child_dict[alt].occupancy)
+                    print (s)
+                    self.summary['altloc']['detected'][r].append({
+                        'atom':at.id,
+                        'loc_label':alt,
+                        'occupancy':at.child_dict[alt].occupancy}
+                    )
         else:
             print ("No residues with alternative location labels detected")
 
-        self.summary['altloc'] = altloc_sum
+    def altloc_fix(self, select_altloc):
+        if len(self.alt_loc_res) > 0:
+            altlocs=[]
+            l=0
+            for r in self.altlocs:
+                if len(self.altlocs[r])>l:
+                    altlocs=self.altlocs[r]
+                    l=len(self.altlocs[r])            
+            input_line = ParamInput('Select alternative', select_altloc, self.args['non_interactive'])            
+            input_line.add_option('occup',['occupancy'])
+            input_line.add_option('altids', altlocs, case='upper')
+            input_line.add_option('resnum', self.alt_loc_rnums, type='pair_list', list2=altlocs, case='sensitive',multiple=True)
+            [input_option, select_altloc] = input_line.run()
+            if input_option=='error':
+                print ('Error: Unknown selection {} '.format(opts.select_altloc), file=sys.stderr)
+                self.summary['altloc']['error'] = "Unknown selection"
+                return 1
 
-    def metals (self, options):
-        opts = _get_parameters(options, "metals", '--remove', 'remove_metals', 'Remove Metal ions')
+            print ('Selecting location {}'.format(select_altloc))
+            if input_option == 'occup' or input_option == 'altids':
+                to_fix={}
+                for r in self.alt_loc_res.keys():
+                    to_fix[r]={}
+                    to_fix[r]['ats']=self.alt_loc_res[r]
+                    to_fix[r]['select']=select_altloc
+            elif input_option == 'resnum':
+                to_fix = {}
+                selected_rnums={}
+                for rsel in select_altloc.split(','):
+                    [rn,alt] = rsel.split(':')
+                    selected_rnums[rn]=alt
+                for r in self.alt_loc_res.keys():
+                    rn0 = mu.residue_num(r)
+                    if rn0 in selected_rnums.keys():
+                        to_fix[r]={}
+                        to_fix[r]['ats'] = self.alt_loc_res[r]
+                        to_fix[r]['select'] = selected_rnums[rn0]
+            else:
+                print ("Error: Unknown option")
+            self.summary['altloc']['selected'] = select_altloc
+            for r in to_fix.keys():
+                self.stm.select_altloc_residue(r,to_fix[r])
+        else:
+            print ("Nothing to do")
 
-        print ('Running metals. Options: {}'.format(' '.join(options)))
+
+    def metals (self, opts):
+
         metals_sum = {}
 
         self._load_structure()
@@ -314,10 +356,8 @@ class StructureChecking():
 
         self.summary['metals'] = metals_sum
 
-    def remwat(self, options):
-        opts = _get_parameters(options, "remwat", '--remove', 'remove_wat', 'Remove Water molecules')
+    def remwat(self, opts):
 
-        print ('Running remwat. Options: {}'.format(' '.join(options)))
         remwat_sum = {}
 
         self._load_structure()
@@ -358,10 +398,8 @@ class StructureChecking():
         self.summary['remwat'] = remwat_sum
 
 
-    def ligands(self, options):
-        opts = _get_parameters(options, "ligands", '--remove', 'remove_ligands', 'Remove Ligand residues')
+    def ligands(self, opts):
 
-        print ('Running ligands. Options: {}'.format(' '.join(options)))
         ligands_sum = {}
 
         self._load_structure()
@@ -427,10 +465,7 @@ class StructureChecking():
 
         self.summary['ligands'] = ligands_sum
 
-    def remh(self, options):
-        opts = _get_parameters(options, "remh", '--remove', 'remove_h', 'Remove Hydrogen atoms')
-
-        print ('Running remh. Options: {}'.format(' '.join(options)))
+    def remh(self, opts):
         remh_sum = {}
 
         self._load_structure()
@@ -466,7 +501,7 @@ class StructureChecking():
 
         self.summary['remh'] = remh_sum
 
-    def getss (self, options):
+    def getss (self, opts):
         print ("Running getss")
         getss_sum = {}
 
@@ -486,9 +521,8 @@ class StructureChecking():
 
         self.summary['getss'] = getss_sum
 
-    def amide(self, options):
-        opts = _get_parameters(options, "amide", '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
-        print ('Running amide. Options: {}'.format(' '.join(options)))
+    def amide(self, opts):
+        
         amide_sum = {}
 
         self._load_structure()
@@ -577,9 +611,8 @@ class StructureChecking():
 
         self.summary['amide'] = amide_sum
 
-    def chiral(self, options):
-        opts = _get_parameters(options, "chiral", '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
-        print ('Running chiral. Options: {}'.format(' '.join(options)))
+    def chiral(self, opts):
+
         chiral_sum = {}
 
         self._load_structure()
@@ -644,9 +677,8 @@ class StructureChecking():
 
         self.summary['chiral'] = chiral_sum
 
-    def chiral_bck(self, options):
-        opts = _get_parameters(options, "chiral_bck", '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
-        print ('Running chiral. Options: {}'.format(' '.join(options)))
+    def chiral_bck(self, opts):
+
         chiral_bck_sum = {}
 
         self.args['check_only'] = True # Provisional
@@ -710,11 +742,9 @@ class StructureChecking():
 
         self.summary['chiral_bck'] = chiral_bck_sum
 
-    def clashes(self, options):
-        opts = _get_parameters(options, "clashes", '--no_wat', 'discard_wat', 'Discard water molecules')
+    def clashes(self, opts):
         if opts.discard_wat is None:
             opts.discard_wat = True
-        print ('Running clashes: Options {}'.format(' '.join(options)))
         clashes_sum = {}
         self._load_structure()
 
@@ -804,10 +834,7 @@ class StructureChecking():
 
         self.summary['clashes'] = clashes_sum
 
-    def fixside (self, options):
-        opts = _get_parameters(options, "fixside", '--fix', 'fix_side', 'Add missing atoms to side chains')
-        
-        print ('Running fixside: Options {}'.format(' '.join(options)))
+    def fixside (self, opts):
         fixside_sum = {}
         self._load_structure()
         
@@ -869,13 +896,14 @@ class StructureChecking():
         
 #===============================================================================
 
-    def _load_structure(self, verbose=True):
+    def _load_structure(self, verbose=True, print_stats=True):
         if not hasattr(self, 'stm'):
             if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
                 self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
             self.stm = StructureManager(self.args['input_structure_path'], self.args['debug'])
             if verbose:
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
+            if print_stats:
                 self.stm.print_stats()
             self.summary['stats'] = self.stm.get_stats()
 
@@ -889,7 +917,4 @@ class StructureChecking():
 
 #===============================================================================
 
-def _get_parameters (options, this_prog, this_param, this_dest, this_help, this_type=str):
-    optionsParser = argparse.ArgumentParser(prog=this_prog)
-    optionsParser.add_argument(this_param, dest=this_dest, help=this_help, type=this_type)
-    return optionsParser.parse_args(options)
+#def _get_parameters (options, this_prog, this_param, this_dest, this_help, this_type=str):
