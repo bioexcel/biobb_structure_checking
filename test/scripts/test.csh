@@ -61,8 +61,12 @@ python3 $APPDIR/checkStruc.py -i pdb:4ku1 -o 4ku1_all_test.pdb --json 4ku1_all_t
 echo -n " 1ubq"
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_all_test.pdb --json 1ubq_all_test.json --non_interactive command_list --list scripts/all_checks > 1ubq_all_test.log
 echo " 1svc"
-python3 $APPDIR/checkStruc.py -i pdb:1svc -o :wq1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
+python3 $APPDIR/checkStruc.py -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 echo "Calculating diffs"
 foreach f (*pdb *json *log)
 diff $f ref/$f > $f.diff
+if !(-z $f.diff) then
+  echo $f.diff
+  cat $f.diff
+endif
 end
