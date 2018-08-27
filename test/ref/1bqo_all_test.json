@@ -184,6 +184,7 @@
    " CA B305",
    "N25 B401"
   ],
+  "error": "Unknown selection",
   "opts": [
    "--remove",
    "SO4"

@@ -106,6 +106,7 @@ MAN B507
 FUL B508
 NAG B509
 Input not valid
+Error: unknown selection SO4
 
 Step 6: remwat --remove Yes
 
@@ -121,7 +122,7 @@ No residues with Hydrogen atoms found
 Step 8: amide --fix All
 
 Running amide. Options: --fix All 
-No unusual contact(s) ivolving amide atoms found
+No unusual contact(s) involving amide atoms found
 
 Step 9: chiral --fix All
 

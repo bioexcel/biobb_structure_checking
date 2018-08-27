@@ -6,17 +6,16 @@
 __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
+import sys
 
-import argparse
-import re
 from structure_checking.help_manager import HelpManager
 from structure_checking.json_writer import JSONWriter
 from structure_checking.param_input import Dialog
 from structure_checking.param_input import ParamInput
+
 from structure_manager.data_lib_manager import DataLibManager
 import structure_manager.model_utils as mu
 from structure_manager.structure_manager import StructureManager
-import sys
 
 # Interactive dialogs to complete command_line missing paramters
 dialogs = Dialog()
@@ -53,11 +52,11 @@ class StructureChecking():
 
 
     def launch(self):
-        help = HelpManager(self.sets.help_dir_path)
-        help.print_help('header')
+        help_manager= HelpManager(self.sets.help_dir_path)
+        help_manager.print_help('header')
 
         if '-h' in self.args['options'] or '--help' in self.args['options']:
-            dialogs.get_parameter(self.args['command'], self.args['options'])
+            help_manager.print_help(self.args['command'])
             sys.exit()
 
         if self.args['command'] == 'command_list':
@@ -112,21 +111,22 @@ class StructureChecking():
         elif self.to_fix:
             try:
                 f_fix = getattr(self, command + '_fix')
-                if not self.args['Notebook']:
-                    if dialogs.exists(command):
-                        opts = dialogs.get_parameter(command, opts)
-                        opts = opts[dialogs.get_dialog(command)['dest']]
-                    else:
-                        opts = ''
-                f_fix(opts)
-            except:
-                pass
+            except AttributeError:
+                print ('Error: {}_fix command unknown or not implemented'.format(command))
+                sys.exit(1)
+            if not self.args['Notebook']:
+                if dialogs.exists(command):
+                    opts = dialogs.get_parameter(command, opts)
+                    opts = opts[dialogs.get_dialog(command)['dest']]
+                else:
+                    opts = ''
+            f_fix(opts)
 
     def command_list(self, opts):
         opts = dialogs.get_parameter('command_list', opts)
         op_list = opts[dialogs.get_dialog('command_list')['dest']]
 
-        [input_option, op_list] = ParamInput('Command List File', op_list, False).run()
+        op_list = ParamInput('Command List File', op_list, False).run()
 
         try:
             fh = open(op_list, "r")
@@ -176,7 +176,7 @@ class StructureChecking():
     def models_fix(self, select_model):
         input_line = ParamInput('Select Model Num', select_model, self.args['non_interactive'])
         input_line.add_option_all ()
-        input_line.add_option ('modelno', [], type='int', min=1, max=self.stm.nmodels)
+        input_line.add_option ('modelno', [], opt_type='int', min=1, max=self.stm.nmodels)
         [input_option, select_model] = input_line.run()
 
         if input_option == 'error':
@@ -269,7 +269,7 @@ class StructureChecking():
         input_line = ParamInput('Select alternative', select_altloc, self.args['non_interactive'])
         input_line.add_option('occup', ['occupancy'])
         input_line.add_option('altids', altlocs, case='upper')
-        input_line.add_option('resnum', self.alt_loc_rnums, type='pair_list', list2=altlocs, case='sensitive', multiple=True)
+        input_line.add_option('resnum', self.alt_loc_rnums, opt_type='pair_list', list2=altlocs, case='sensitive', multiple=True)
         [input_option, select_altloc] = input_line.run()
 
         if input_option == 'error':
@@ -438,7 +438,7 @@ class StructureChecking():
         [input_option, remove_ligands] = input_line.run()
 
         if input_option == 'error':
-            print ('Error: unknown selection {}'.format(opts.remove_ligands))
+            print ('Error: unknown selection {}'.format(remove_ligands))
             self.summary['ligands']['error'] = 'Unknown selection'
             return 1
 
@@ -588,7 +588,7 @@ class StructureChecking():
 
 # =============================================================================
     def amide_fix(self, amide_fix):
-        [amide_res, amide_atoms] = self.data_library.get_amide_data()
+        amide_res = self.data_library.get_amide_data()[0]
 
         input_line = ParamInput('Fix amide atoms', amide_fix, self.args['non_interactive'])
         input_line.add_option_all()
@@ -684,12 +684,13 @@ class StructureChecking():
             for r in to_fix:
                 mu.invert_side_atoms(r, chiral_res)
                 n += 1
+            #TODO: rebuild Ile CD1 atom after inversion
             print ('Quiral residues fixed {} ({})'.format(chiral_fix, n))
             self.stm.modified = True
 
 # =============================================================================
     def chiral_bck(self, opts=None):
-        run_method('chiral_bck', opts)
+        self.run_method('chiral_bck', opts)
 
     def chiral_bck_check(self):
 
@@ -728,7 +729,7 @@ class StructureChecking():
         input_line = ParamInput('Fix CA chiralities', chiral_fix, self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option('resnum', chiral_fix, chiral_bck_rnums, case='sensitive', multiple=True)
+        input_line.add_option('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
         [input_option, chiral_fix] = input_line.run()
         if input_option == 'error':
             print ('Warning: unknown option {}'.format(amide_fix))
@@ -769,7 +770,7 @@ class StructureChecking():
         if len(self.rr_dist) == 0:
             self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distance('R_R_CUTOFF'))
 
-        self.clashes = {
+        self.clash_list = {
             'severe':{},
             'apolar':{},
             'acceptor':{},
@@ -798,10 +799,10 @@ class StructureChecking():
                 for at_pair in mu.get_all_rr_distances(r1, r2):
                     [at1, at2, dist] = at_pair
                     if dist < CLASH_DIST['severe']:
-                        if not rkey in clashes['severe']:
-                            self.clashes['severe'][rkey] = at_pair
-                        if dist < clashes['severe'][rkey][2]:
-                            self.clashes['severe'][rkey] = at_pair
+                        if not rkey in self.clash_list['severe']:
+                            self.clash_list['severe'][rkey] = at_pair
+                        if dist < clash_list['severe'][rkey][2]:
+                            self.clash_list['severe'][rkey] = at_pair
                     else:
                         for cls in ['apolar', 'acceptor', 'donor', 'positive', 'negative']:
                             if dist < CLASH_DIST[cls]:
@@ -820,21 +821,21 @@ class StructureChecking():
                                     # Both atoms should be of the same kind
                                     if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
                                         continue
-                                if not rkey in self.clashes[cls]:
-                                    self.clashes[cls][rkey] = at_pair
-                                if dist < self.clashes[cls][rkey][2]:
-                                    self.clashes[cls][rkey] = at_pair
+                                if not rkey in self.clash_list[cls]:
+                                    self.clash_list[cls][rkey] = at_pair
+                                if dist < self.clash_list[cls][rkey][2]:
+                                    self.clash_list[cls][rkey] = at_pair
         for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
-            if len(self.clashes[cls]):
-                print ('{} Steric {} clashes detected'.format(len(self.clashes[cls]), cls))
-                for rkey in sorted(self.clashes[cls], key=lambda x: 10000 * self.clashes[cls][x][0].serial_number + self.clashes[cls][x][1].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(self.clashes[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(self.clashes[cls][rkey][1], self.stm.nmodels > 1), self.clashes[cls][rkey][2]))
-                    at_pair = self.clashes[cls][rkey]
+            if len(self.clash_list[cls]):
+                print ('{} Steric {} clashes detected'.format(len(self.clash_list[cls]), cls))
+                for rkey in sorted(self.clash_list[cls], key=lambda x: 10000 * self.clash_list[cls][x][0].serial_number + self.clash_list[cls][x][1].serial_number):
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(self.clash_list[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(self.clash_list[cls][rkey][1], self.stm.nmodels > 1), self.clash_list[cls][rkey][2]))
+                    at_pair = self.clash_list[cls][rkey]
                     self.summary['clashes']['detected'][cls].append(
                                                                     {
-                                                                    'at1':mu.atom_id(self.clashes[cls][rkey][0], self.stm.nmodels > 1),
-                                                                    'at2':mu.atom_id(self.clashes[cls][rkey][1], self.stm.nmodels > 1),
-                                                                    'dist': float(self.clashes[cls][rkey][2])
+                                                                    'at1':mu.atom_id(self.clash_list[cls][rkey][0], self.stm.nmodels > 1),
+                                                                    'at2':mu.atom_id(self.clash_list[cls][rkey][1], self.stm.nmodels > 1),
+                                                                    'dist': float(self.clash_list[cls][rkey][2])
                                                                     }
                                                                     )
             else:
@@ -888,8 +889,7 @@ class StructureChecking():
             else:
                 to_fix = []
                 for r_at in self.miss_at_list:
-                    [r, at_list] = r_at
-                    if mu.residue_num(r) in fix_side.split(','):
+                    if mu.residue_num(r_at[0]) in fix_side.split(','):
                         to_fix.append(r_at)
             n = 0
             self.summary['fixside']['fixed'] = []
@@ -923,4 +923,3 @@ class StructureChecking():
 
 #===============================================================================
 
-#def _get_parameters (opts, this_prog, this_param, this_dest, this_help, this_type=str):

@@ -58,20 +58,20 @@ class CmdLine():
             dest='data_library_path',
             help="Override settings default data library"
         )
-        
+
         self.argparser.add_argument(
             '--json',
             dest='json_output_path',
             help='Cummulated checking results on a json file'
             )
-        
+
         self.argparser.add_argument(
             '--check_only',
             action="store_true",
             dest='check_only',
             help='Perform checks, structures is not modified'
         )
-        
+
         self.argparser.add_argument(
             '--non_interactive',
             action='store_true',
@@ -84,14 +84,14 @@ class CmdLine():
             nargs=argparse.REMAINDER,
             help="Specific command options"
         )
-        
+
         self.argparser.add_argument(
             '--force_save',
             action='store_true',
             dest='force_save',
             help='Force saving an output file even if no modification'
         )
-        
+
 
     def parse_args(self):
         args = self.argparser.parse_args()

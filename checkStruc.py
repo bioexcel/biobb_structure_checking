@@ -19,19 +19,19 @@ def main():
 
     sets = DefaultSettings(os.path.dirname(__file__))
 #
-    help = HelpManager(sets.help_dir_path)
+    help_manager = HelpManager(sets.help_dir_path)
     cmd_line = CmdLine(defaults={})
     args = cmd_line.parse_args()
 
     if args.command == 'commands':
-        help.print_help("general", header=True, pager=True)
+        help_manager.print_help("general", header=True, pager=True)
         sys.exit(0)
 
     if 'help' in args.options:
-        help.print_help(args.command, header=True)
+        help_manager.print_help(args.command, header=True)
         sys.exit(0)
 
-    
+
     StructureChecking(sets,vars(args)).launch()
 
 if __name__ == "__main__":

@@ -71,7 +71,7 @@ No residues with Hydrogen atoms found
 Step 8: amide --fix All
 
 Running amide. Options: --fix All 
-No unusual contact(s) ivolving amide atoms found
+No unusual contact(s) involving amide atoms found
 
 Step 9: chiral --fix All
 

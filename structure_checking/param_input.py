@@ -17,8 +17,17 @@ class ParamInput():
         self.non_interactive = non_interactive
         self.prefix = prefix
 
-    def add_option(self, label, opt_list, case=False, type='list', multiple=False, min=0, max=0, list2=None):
-        self.options.append({'label':label,'opt_list':opt_list,'case':case,'type':type, 'min':min, 'max':max, 'multiple':multiple, 'list2':list2})
+    def add_option(self, label, opt_list, case=False, opt_type='list', multiple=False, min=0, max=0, list2=None):
+        self.options.append({
+            'label':label,
+            'opt_list':opt_list,
+            'case':case,
+            'type':opt_type,
+            'min':min,
+            'max':max,
+            'multiple':multiple,
+            'list2':list2
+        })
 
     def add_option_all(self):
         self.add_option('all', ['All'])
@@ -55,7 +64,7 @@ class ParamInput():
         if not len(self.options):
             if not self.non_interactive:
                 self.opt_value = _get_input(self.opt_value, prompt_str)
-            return ['input', self.opt_value]
+            return self.opt_value
 # Check alternative options
         input_ok = False
         while not input_ok:
@@ -110,14 +119,15 @@ class Dialog():
     def __init__(self):
         self.options={}
 
-    def add_option (self, command, prompt, dest, help, type = str):
+    def add_option (self, command, opt_prompt, opt_dest, opt_help, opt_type = str):
         self.options[command] = {
             'command':command,
-            'prompt': prompt,
-            'dest':   dest,
-            'help':   help,
-            'type':   type
+            'prompt': opt_prompt,
+            'dest':   opt_dest,
+            'help':   opt_help,
+            'type':   opt_type
         }
+
     def get_parameter (self, command, opts):
         dialog = self.options[command]
         if not dialog:
