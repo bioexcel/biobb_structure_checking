@@ -1,3 +1,3 @@
-Detects residues with hydrogen atoms and allows to remove them
+Detects hydrogen atoms and allows to remove them
 
 Usage: checkStruct.py remh --remove Yes|No

@@ -194,7 +194,7 @@
     }
    ]
   },
-  "options": [
+  "opts": [
    "--select_altloc",
    "occupancy"
   ],
@@ -202,7 +202,7 @@
  },
  "amide": {
   "n_amides": 40,
-  "options": [
+  "opts": [
    "--fix",
    "All"
   ]
@@ -212,7 +212,7 @@
    "A": 1,
    "B": 1
   },
-  "options": [
+  "opts": [
    "--select_chain",
    "All"
   ],
@@ -220,14 +220,13 @@
  },
  "chiral": {
   "n_chirals": 36,
-  "options": [
+  "opts": [
    "--fix",
    "All"
   ]
  },
  "chiral_bck": {
-  "n_chirals": 399,
-  "options": []
+  "n_chirals": 399
  },
  "clashes": {
   "detected": {
@@ -323,8 +322,7 @@
     "at2": "CYS B425.SG",
     "dist": 4.187800884246826
    }
-  ],
-  "options": []
+  ]
  },
  "ligands": {
   "detected": [
@@ -349,13 +347,13 @@
    "FUL B508",
    "NAG B509"
   ],
-  "options": [
+  "opts": [
    "--remove",
    "SO4"
   ]
  },
  "metals": {
-  "options": [
+  "opts": [
    "--remove",
    "ZN"
   ]
@@ -364,13 +362,13 @@
   "detected": {
    "nmodels": 1
   },
-  "options": [
+  "opts": [
    "--select_model",
    "1"
   ]
  },
  "remh": {
-  "options": [
+  "opts": [
    "--remove",
    "Yes"
   ]
@@ -378,7 +376,7 @@
  "remwat": {
   "n_detected": 148,
   "n_removed": 148,
-  "options": [
+  "opts": [
    "--remove",
    "Yes"
   ]

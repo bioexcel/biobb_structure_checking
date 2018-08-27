@@ -16,68 +16,68 @@ Structure pdb:1ark loaded
 
 Step 1: models --select_model 1
 
-Running models. Options: --select_model 1
+Running models. Options: --select_model 1 
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as Biounit type
 Selecting model num. 1
 
 Step 2: chains --select_chain All
 
-Running chains. Options: --select_chain All
+Running chains. Options: --select_chain All 
 1 Chains detected
   A: Protein
 
 Step 3: altloc --select_altloc occupancy
 
-Running altloc. Options: --select_altloc occupancy
+Running altloc. Options: --select_altloc occupancy 
 No residues with alternative location labels detected
 
 Step 4: metals --remove ZN
 
-Running metals. Options: --remove ZN
+Running metals. Options: --remove ZN 
 No metal ions present
 
 Step 5: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+Running ligands. Options: --remove SO4 
 No ligands found
 
 Step 6: remwat --remove Yes
 
-Running remwat. Options: --remove Yes
+Running remwat. Options: --remove Yes 
 No water molecules found
 
 Step 7: remh --remove Yes
 
-Running remh. Options: --remove Yes
+Running remh. Options: --remove Yes 
 60 Residues containing H atoms detected
 Hydrogen atoms removed from 60 residues
 
 Step 8: amide --fix All
 
-Running amide. Options: --fix All
+Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ASN A30.OD1  GLN A32.O       2.598 A
 Amide residues fixed All (1)
 
 Step 9: chiral --fix All
 
-Running chiral. Options: --fix All
+Running chiral. Options: --fix All 
 No residues with incorrent side-chain chirality found
 
 Step 10: chiral_bck
 
-Running chiral_bck. Options: 
+Running chiral_bck.
 No residues with incorrect backbone chirality found
 
 Step 11: getss
 
-Running getss. Options: 
+Running getss.
 No SS bonds detected
 
 Step 12: clashes
 
-Running clashes. Options: 
+Running clashes.
 No severe clashes detected
 4 Steric apolar clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A

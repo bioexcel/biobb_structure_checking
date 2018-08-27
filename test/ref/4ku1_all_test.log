@@ -16,13 +16,13 @@ Structure pdb:4ku1 loaded
 
 Step 1: models --select_model 1
 
-Running models. Options: --select_model 1
+Running models. Options: --select_model 1 
 1 Model(s) detected
 Single model found
 
 Step 2: chains --select_chain All
 
-Running chains. Options: --select_chain All
+Running chains. Options: --select_chain All 
 2 Chains detected
   A: Protein
   B: Protein
@@ -30,7 +30,7 @@ Selecting all chains
 
 Step 3: altloc --select_altloc occupancy
 
-Running altloc. Options: --select_altloc occupancy
+Running altloc. Options: --select_altloc occupancy 
 Detected 6 residues with alternative location labels
 LYS A340
   N    A (0.50) B (0.50)
@@ -78,12 +78,12 @@ Selecting location occupancy
 
 Step 4: metals --remove ZN
 
-Running metals. Options: --remove ZN
+Running metals. Options: --remove ZN 
 No metal ions present
 
 Step 5: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+Running ligands. Options: --remove SO4 
 20 Ligands detected 
 NAG A501
 NAG A502
@@ -109,33 +109,33 @@ Input not valid
 
 Step 6: remwat --remove Yes
 
-Running remwat. Options: --remove Yes
+Running remwat. Options: --remove Yes 
 148 Water molecules detected
 148 Water molecules removed
 
 Step 7: remh --remove Yes
 
-Running remh. Options: --remove Yes
+Running remh. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 8: amide --fix All
 
-Running amide. Options: --fix All
+Running amide. Options: --fix All 
 No unusual contact(s) ivolving amide atoms found
 
 Step 9: chiral --fix All
 
-Running chiral. Options: --fix All
+Running chiral. Options: --fix All 
 No residues with incorrent side-chain chirality found
 
 Step 10: chiral_bck
 
-Running chiral_bck. Options: 
+Running chiral_bck.
 No residues with incorrect backbone chirality found
 
 Step 11: getss
 
-Running getss. Options: 
+Running getss.
 4 Possible SS Bonds detected
   CYS A261.SG CYS A321.SG   4.141
   CYS A367.SG CYS A425.SG   3.981
@@ -144,7 +144,7 @@ Running getss. Options:
 
 Step 12: clashes
 
-Running clashes. Options: 
+Running clashes.
 No severe clashes detected
 6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A

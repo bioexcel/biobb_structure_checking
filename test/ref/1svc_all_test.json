@@ -1,6 +1,6 @@
 {
  "altloc": {
-  "options": [
+  "opts": [
    "--select_altloc",
    "occupancy"
   ]
@@ -14,7 +14,7 @@
    }
   ],
   "n_amides": 24,
-  "options": [
+  "opts": [
    "--fix",
    "All"
   ]
@@ -24,7 +24,7 @@
    "D": 2,
    "P": 1
   },
-  "options": [
+  "opts": [
    "--select_chain",
    "All"
   ],
@@ -32,14 +32,13 @@
  },
  "chiral": {
   "n_chirals": 32,
-  "options": [
+  "opts": [
    "--fix",
    "All"
   ]
  },
  "chiral_bck": {
-  "n_chirals": 285,
-  "options": []
+  "n_chirals": 285
  },
  "clashes": {
   "detected": {
@@ -200,17 +199,15 @@
   "res_insc": 0,
   "res_ligands": 0
  },
- "getss": {
-  "options": []
- },
+ "getss": {},
  "ligands": {
-  "options": [
+  "opts": [
    "--remove",
    "SO4"
   ]
  },
  "metals": {
-  "options": [
+  "opts": [
    "--remove",
    "ZN"
   ]
@@ -219,13 +216,13 @@
   "detected": {
    "nmodels": 1
   },
-  "options": [
+  "opts": [
    "--select_model",
    "1"
   ]
  },
  "remh": {
-  "options": [
+  "opts": [
    "--remove",
    "Yes"
   ]
@@ -233,7 +230,7 @@
  "remwat": {
   "n_detected": 63,
   "n_removed": 63,
-  "options": [
+  "opts": [
    "--remove",
    "Yes"
   ]

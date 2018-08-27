@@ -1,4 +1,6 @@
-Detects atomswith alternative locations and allow to select one
-of them to continue the analysis. 
+Checks for the presence of residues with alternative locations. 
+Atoms with alternative coordinates and their occupancy are reported.  
+MD simulations requires a single position for each atom.  
 
-Usage: checkStruct.py altloc --select_altloc occup|alt_id
+Usage: checkStruct.py altloc --select_altloc occupancy| alt_id | list of res_id:alt_id
+

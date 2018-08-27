@@ -3,7 +3,7 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running models. Options: --select_model 5
+Running models. Options: --select_model 5 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  Num. models: 15

@@ -9,28 +9,39 @@ checking as residue quirality, amide orientation, or vdw clashes.
 Usage:  checkStruc [-h|--help] command help|options 
                    -i input_pdb_path -o input_pdb_path
 
+Missing parameters will be prompted in interactive sessions
+
 Available commands:
 
 commands:  This help
 command_list:      Run all tests from conf file
 
+
 1. System Configuration 
 =======================
-models     Detect/Select Models
-chains     Detect/Select Chains 
-altloc     Detect/Select Alt Locations 
-metals     Detect/Remove Heavy Metals
-ligands    Detect/Remove Ligands 
-na         Detect/Remove/Select DNA/RNA /
-remwat     Remove Water molecules
-remh       Remove Hydrogen atoms 
+models [--select_model model_num]     
+    Detect/Select Models
+chains [--select_chains chain_ids]    
+    Detect/Select Chains 
+altloc [--select_altloc occupancy| alt_id | list of res_id:alt_id]
+    Detect/Select Alternative Locations 
+metals [--remove All | None | Met_ids_list | Residue_list]   
+    Detect/Remove Metals 
+ligands [--remove All | None | Res_type_list | Residue_list]
+    Detect/Remove Ligands 
+remwat [--remove Yes|No]
+    Remove Water molecules
+remh [remh --remove Yes|No]
+    Remove Hydrogen atoms from structure 
 
 2. Fix Structure Errors
 
-amide      Detect/Fix Amide Assignment
-quiral     Detect/Fix Improper quirality
-inscode    Detect insertion codes/Renum 
-fixside    Complete side chains 
+amide  [--fix All|None|Residue List]    
+    Detect/Fix Amide atoms Assignment
+chiral [--fix All|None|Residue List]
+    Detect/Fix Improper quirality
+fixside [--fix All |None|Residue List]    
+    Complete side chains 
 
 3. Structure Warnings
 
@@ -38,5 +49,5 @@ getss      Detect SS Bonds
 cisbck     Unusual cis/trans backbone 
 nonconres  Non Consecutive residues 
 bckgaps    Detect missing residues
-clashes    Steric clashes (Severe, CA, Polar Donors, Polar Acceptors, Apolar
+clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
            Ionic Positive, Ionic Negative)

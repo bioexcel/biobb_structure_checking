@@ -3,7 +3,7 @@
 =                      A. Hospital, J.L. Gelpi 2018                           =
 ===============================================================================
 
-Running chiral. Options: --fix None
+Running chiral. Options: --fix None 
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. models: 1
  Num. chains: 1 (A)

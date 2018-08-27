@@ -1,4 +1,6 @@
-Detects whether the structure has different chains and allow to select one (or all)
-of them to continue the analysis
+Checks for chains (also obtained from structure stats), and allow to select one or more.
+MD simulations are usually performed with complete structures.However input structure 
+may contain several copies of the system, or additional chains like peptides or
+nucleic acids that may be removed. 
 
-Options: --select_chains chain_ids
+Options: --select_chains chain_ids 
