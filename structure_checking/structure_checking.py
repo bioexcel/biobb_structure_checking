@@ -687,8 +687,12 @@ class StructureChecking():
             n = 0
             for r in to_fix:
                 mu.invert_side_atoms(r, chiral_res)
+                if r.get_resname() == 'ILE':
+                    mu.delete_atom(r,'CD1')
+                    if not hasattr(self,'residue_lib'):
+                        self.residue_lib = ResidueLib(self.sets.res_library_path)
+                    mu.build_atom(r, 'CD1', self.residue_lib,'ILE')
                 n += 1
-            #TODO: rebuild Ile CD1 atom after inversion
             print ('Quiral residues fixed {} ({})'.format(chiral_fix, n))
             self.stm.modified = True
 
