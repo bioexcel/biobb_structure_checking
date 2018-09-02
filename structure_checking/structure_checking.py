@@ -906,13 +906,13 @@ class StructureChecking():
 # =============================================================================
     def mutateside(self, mut_list):
         self.run_method('mutateside', mut_list)
-        
+
     def mutateside_check(self):
         return True
-    
+
     def mutateside_fix(self, mut_list):
         input_line = ParamInput ('Mutation list', mut_list, self.args['non_interactive'])
-        mut_list = input_line.run()        
+        mut_list = input_line.run()
         self.mutations = MutationManager(mut_list)
 
         self.mutations.prepare_mutations(self.stm.st)
@@ -923,11 +923,11 @@ class StructureChecking():
 
         if not hasattr(self,'residue_lib'):
             self.residue_lib = ResidueLib(self.sets.res_library_path)
-        
+
         self.mutations.apply_mutations (self.stm.st, self.mutation_rules, self.residue_lib)
-        
+
         self.stm.modified=True
-        
+
 
 #===============================================================================
 
