@@ -21,6 +21,31 @@ PRO A280   CG,CD
 MET B46    CG,SD,CE
 PRO B154   CG,CD
 ARG B220   CG,CD,NE,CZ,NH1,NH2
+Fixing side chains
+MET A46
+  Adding new atom CG
+  Adding new atom SD
+  Adding new atom CE
+PRO A154
+  Adding new atom CG
+  Adding new atom CD
+PRO A280
+  Adding new atom CG
+  Adding new atom CD
+MET B46
+  Adding new atom CG
+  Adding new atom SD
+  Adding new atom CE
+PRO B154
+  Adding new atom CG
+  Adding new atom CD
+ARG B220
+  Adding new atom CG
+  Adding new atom CD
+  Adding new atom NE
+  Adding new atom CZ
+  Adding new atom NH1
+  Adding new atom NH2
 Fixed 6 side chain(s)
 Structure saved on 1ki5_fixside_All_test.pdb
 Final Num. models: 1
@@ -30,4 +55,4 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  296
 Final Num. ligand or modified residues:  4
 Final Num. water mol.:  292
-Final Num. atoms:  4961
+Final Num. atoms:  4979

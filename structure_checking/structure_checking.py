@@ -805,7 +805,7 @@ class StructureChecking():
                     if dist < CLASH_DIST['severe']:
                         if not rkey in self.clash_list['severe']:
                             self.clash_list['severe'][rkey] = at_pair
-                        if dist < clash_list['severe'][rkey][2]:
+                        if dist < self.clash_list['severe'][rkey][2]:
                             self.clash_list['severe'][rkey] = at_pair
                     else:
                         for cls in ['apolar', 'acceptor', 'donor', 'positive', 'negative']:
@@ -895,10 +895,15 @@ class StructureChecking():
                 for r_at in self.miss_at_list:
                     if mu.residue_num(r_at[0]) in fix_side.split(','):
                         to_fix.append(r_at)
+            print ("Fixing side chains")
             n = 0
             self.summary['fixside']['fixed'] = []
+            if not hasattr(self,'residue_lib'):
+                self.residue_lib = ResidueLib(self.sets.res_library_path)
             for r_at in to_fix:
-                self.stm.fix_side_chain(r_at)
+                print (mu.residue_id(r_at[0]))
+                mu.remove_H_from_r(r_at[0], verbose= True)
+                self.stm.fix_side_chain(r_at, self.residue_lib)
                 n += 1
                 self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
 

@@ -300,6 +300,12 @@
   "res_insc": 0,
   "res_ligands": 20
  },
+ "fixside": {
+  "opts": [
+   "--fix",
+   "All"
+  ]
+ },
  "getss": {
   "detected": [
    {
@@ -347,6 +353,7 @@
    "FUL B508",
    "NAG B509"
   ],
+  "error": "Unknown selection",
   "opts": [
    "--remove",
    "SO4"

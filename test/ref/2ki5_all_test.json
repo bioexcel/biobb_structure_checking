@@ -74,6 +74,21 @@
   "detected": {
    "acceptor": [
     {
+     "at1": "MET A46.SD",
+     "at2": "VAL A352.O",
+     "dist": 2.170837879180908
+    },
+    {
+     "at1": "MET A46.SD",
+     "at2": "THR A354.O",
+     "dist": 2.569476366043091
+    },
+    {
+     "at1": "MET B46.SD",
+     "at2": "VAL B352.O",
+     "dist": 2.291478157043457
+    },
+    {
      "at1": "ASP A55.O",
      "at2": "VAL A204.O",
      "dist": 3.034691572189331
@@ -100,6 +115,21 @@
     }
    ],
    "apolar": [
+    {
+     "at1": "MET A46.CE",
+     "at2": "VAL A352.CG2",
+     "dist": 1.842692255973816
+    },
+    {
+     "at1": "MET A46.CE",
+     "at2": "THR A354.O",
+     "dist": 1.869175910949707
+    },
+    {
+     "at1": "MET B46.CE",
+     "at2": "VAL B352.C",
+     "dist": 1.8613858222961426
+    },
     {
      "at1": "GLY A61.O",
      "at2": "THR A65.CG2",
@@ -191,7 +221,13 @@
      "dist": 3.0750417709350586
     }
    ],
-   "severe": []
+   "severe": [
+    {
+     "at1": "MET B46.CE",
+     "at2": "VAL B352.O",
+     "dist": 0.9205783009529114
+    }
+   ]
   }
  },
  "final_stats": {
@@ -201,12 +237,59 @@
   },
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 4659,
+  "num_ats": 4677,
   "num_res": 614,
   "num_wat": 0,
   "res_hetats": 2,
   "res_insc": 0,
   "res_ligands": 2
+ },
+ "fixside": {
+  "detected": {
+   "ARG B220": [
+    "CG",
+    "CD",
+    "NE",
+    "CZ",
+    "NH1",
+    "NH2"
+   ],
+   "MET A46": [
+    "CG",
+    "SD",
+    "CE"
+   ],
+   "MET B46": [
+    "CG",
+    "SD",
+    "CE"
+   ],
+   "PRO A154": [
+    "CG",
+    "CD"
+   ],
+   "PRO A280": [
+    "CG",
+    "CD"
+   ],
+   "PRO B154": [
+    "CG",
+    "CD"
+   ]
+  },
+  "fixed": [
+   "MET A46",
+   "PRO A154",
+   "PRO A280",
+   "MET B46",
+   "PRO B154",
+   "ARG B220"
+  ],
+  "opts": [
+   "--fix",
+   "All"
+  ],
+  "selected": "All"
  },
  "getss": {},
  "ligands": {

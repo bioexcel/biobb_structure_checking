@@ -199,6 +199,12 @@
   "res_insc": 0,
   "res_ligands": 0
  },
+ "fixside": {
+  "opts": [
+   "--fix",
+   "All"
+  ]
+ },
  "getss": {},
  "ligands": {
   "opts": [

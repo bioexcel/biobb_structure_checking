@@ -134,7 +134,12 @@ Step 10: chiral_bck
 Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 11: getss
+Step 11: fixside --fix All
+
+Running fixside. Options: --fix All 
+No residues with missing side chain atoms found
+
+Step 12: getss
 
 Running getss.
 4 Possible SS Bonds detected
@@ -143,7 +148,7 @@ Running getss.
   CYS B261.SG CYS B321.SG   4.126
   CYS B367.SG CYS B425.SG   4.188
 
-Step 12: clashes
+Step 13: clashes
 
 Running clashes.
 No severe clashes detected

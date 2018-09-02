@@ -91,12 +91,17 @@ Step 10: chiral_bck
 Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 11: getss
+Step 11: fixside --fix All
+
+Running fixside. Options: --fix All 
+No residues with missing side chain atoms found
+
+Step 12: getss
 
 Running getss.
 No SS bonds detected
 
-Step 12: clashes
+Step 13: clashes
 
 Running clashes.
 No severe clashes detected

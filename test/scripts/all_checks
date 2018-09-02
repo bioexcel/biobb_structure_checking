@@ -8,5 +8,6 @@ remh --remove Yes
 amide --fix All
 chiral --fix All
 chiral_bck
+fixside --fix All
 getss
 clashes

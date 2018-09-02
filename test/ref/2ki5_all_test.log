@@ -95,16 +95,57 @@ Warning: atom C not found in ALA B375
 Warning: atom CB not found in ALA B375
 No residues with incorrect backbone chirality found
 
-Step 11: getss
+Step 11: fixside --fix All
+
+Running fixside. Options: --fix All 
+6 Residues with missing side chain atoms found
+MET A46    CG,SD,CE
+PRO A154   CG,CD
+PRO A280   CG,CD
+MET B46    CG,SD,CE
+PRO B154   CG,CD
+ARG B220   CG,CD,NE,CZ,NH1,NH2
+Fixing side chains
+MET A46
+  Adding new atom CG
+  Adding new atom SD
+  Adding new atom CE
+PRO A154
+  Adding new atom CG
+  Adding new atom CD
+PRO A280
+  Adding new atom CG
+  Adding new atom CD
+MET B46
+  Adding new atom CG
+  Adding new atom SD
+  Adding new atom CE
+PRO B154
+  Adding new atom CG
+  Adding new atom CD
+ARG B220
+  Adding new atom CG
+  Adding new atom CD
+  Adding new atom NE
+  Adding new atom CZ
+  Adding new atom NH1
+  Adding new atom NH2
+Fixed 6 side chain(s)
+
+Step 12: getss
 
 Running getss.
 No SS bonds detected
 
-Step 12: clashes
+Step 13: clashes
 
 Running clashes.
-No severe clashes detected
-13 Steric apolar clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
+16 Steric apolar clashes detected
+ MET A46.CE   VAL A352.CG2    1.843 A
+ MET A46.CE   THR A354.O      1.869 A
+ MET B46.CE   VAL B352.C      1.861 A
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
  ARG A89.CD   GLU A95.OE1     2.776 A
@@ -118,7 +159,10 @@ No severe clashes detected
  GLU B210.O   ILE B214.CG1    2.842 A
  ARG B212.CZ  ASP B330.OD1    2.875 A
  SER B357.O   ILE B361.CG1    2.861 A
-5 Steric acceptor clashes detected
+8 Steric acceptor clashes detected
+ MET A46.SD   VAL A352.O      2.171 A
+ MET A46.SD   THR A354.O      2.569 A
+ MET B46.SD   VAL B352.O      2.291 A
  ASP A55.O    VAL A204.O      3.035 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
@@ -140,5 +184,5 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
 Final Num. ligand or modified residues:  2
 Final Num. water mol.:  0
-Final Num. atoms:  4659
+Final Num. atoms:  4677
 Summary data saved on 2ki5_all_test.json
