@@ -46,6 +46,14 @@ python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_inter
 echo "Running chiral on modified 1ubq"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb -o 1ubq_chi_chiral_test.pdb --non_interactive chiral --fix All > 1ubq_chi_chiral_test_All.log
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ubq_chi.pdb --non_interactive chiral --fix None > 1ubq_chi_none_test_None.log
+#mutateside
+echo "Running mutateside on 2ki5"
+python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_mutateside_test.pdb mutateside --mut Leu49Ile,B:arg51Lys > 2ki5_mutateside_test.log
+#fixside
+echo "Running fixside on 2ki5"
+python3 $APPDIR/checkStruc.py -i pdb:2ki5 fixside --fix None > 2ki5_fixside_None_test.log
+python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_fixside_All_test.pdb fixside --fix All > 2ki5_fixside_All_test.log
+
 #chiral_bck
 echo "Running chiral_bck on modified 1ark"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log

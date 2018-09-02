@@ -14,8 +14,11 @@ from structure_checking.param_input import Dialog
 from structure_checking.param_input import ParamInput
 
 from structure_manager.data_lib_manager import DataLibManager
-import structure_manager.model_utils as mu
 from structure_manager.structure_manager import StructureManager
+from structure_manager.mutation_manager import MutationManager
+from structure_manager.residue_lib_manager import ResidueLib
+
+import structure_manager.model_utils as mu
 
 # Interactive dialogs to complete command_line missing paramters
 dialogs = Dialog()
@@ -33,7 +36,8 @@ dialogs.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | Li
 dialogs.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 dialogs.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
-dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains')
+dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
+dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
 
 # Main class
 class StructureChecking():
@@ -899,6 +903,31 @@ class StructureChecking():
                 self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
 
             print ('Fixed {} side chain(s)'.format(n))
+# =============================================================================
+    def mutateside(self, mut_list):
+        self.run_method('mutateside', mut_list)
+        
+    def mutateside_check(self):
+        return True
+    
+    def mutateside_fix(self, mut_list):
+        input_line = ParamInput ('Mutation list', mut_list, self.args['non_interactive'])
+        mut_list = input_line.run()        
+        self.mutations = MutationManager(mut_list)
+
+        self.mutations.prepare_mutations(self.stm.st)
+        print ('Mutations to perform')
+        print (self.mutations)
+        if not hasattr(self,'mutation_rules'):
+            self.mutation_rules = self.data_library.get_mutation_map()
+
+        if not hasattr(self,'residue_lib'):
+            self.residue_lib = ResidueLib(self.sets.res_library_path)
+        
+        self.mutations.apply_mutations (self.stm.st, self.mutation_rules, self.residue_lib)
+        
+        self.stm.modified=True
+        
 
 #===============================================================================
 
