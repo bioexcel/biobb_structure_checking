@@ -80,6 +80,9 @@ Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  GLN B236.O   ASN B240.OD1    2.980 A
 Amide residues fixed All (1)
+Rechecking
+1 unusual contact(s) involving amide atoms found
+ GLN B236.NE2 ASN B240.ND2    3.022 A
 
 Step 9: chiral --fix All
 

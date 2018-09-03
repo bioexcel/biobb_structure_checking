@@ -8,9 +8,9 @@
  "amide": {
   "detected": [
    {
-    "at1": "GLN B236.O",
-    "at2": "ASN B240.OD1",
-    "dist": 2.980477809906006
+    "at1": "GLN B236.NE2",
+    "at2": "ASN B240.ND2",
+    "dist": 3.0220203399658203
    }
   ],
   "n_amides": 18,

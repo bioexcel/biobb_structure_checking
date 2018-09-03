@@ -535,8 +535,8 @@ class StructureChecking():
 
     def amide_check(self):
         [amide_res, amide_atoms] = self.data_library.get_amide_data()
-        CLASH_DIST = self.data_library.get_distances('CLASH_DIST')
-        
+        CLASH_DISTS = self.data_library.get_distances('CLASH_DIST')
+
         atom_lists = {
             'polar_donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
             'polar_acceptor':self.data_library.get_atom_feature_list('polar_acceptor_atoms')
@@ -560,7 +560,7 @@ class StructureChecking():
                 [r1, r2, d] = r_pair
                 if r1 != r2 and mu.same_model(r1, r2) and not mu.is_wat(r1) and not mu.is_wat(r2) \
                     and (r1 in self.amide_list or r2 in self.amide_list):
-                    c_list = self._get_clashes(r1,r2,CLASH_DIST,atom_lists)
+                    c_list = mu.check_clashes(r1, r2, CLASH_DISTS, atom_lists)
                     for cls in c_list:
                         if len(c_list[cls]):
                             [at1,at2,d]=c_list[cls]
@@ -575,7 +575,7 @@ class StructureChecking():
                                 add_pair=True
                             if add_pair:
                                 self.amide_cont_list.append(c_list[cls])
-            
+
             if len(self.amide_cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
@@ -591,36 +591,51 @@ class StructureChecking():
             return False
 
 # =============================================================================
-    def amide_fix(self, amide_fix):
+    def amide_fix(self, amide_fix, recheck=True):
         amide_res = self.data_library.get_amide_data()[0]
 
-        input_line = ParamInput('Fix amide atoms', amide_fix, self.args['non_interactive'])
-        input_line.add_option_all()
-        input_line.add_option_none()
-        input_line.add_option('resnum', self.amide_rnums, case='sensitive', multiple=True)
-        [input_option, amide_fix] = input_line.run()
+        no_int_recheck = amide_fix is not None or self.args['non_interactive']
 
-        if input_option == 'error':
-            print ('Warning: unknown option {}'.format(amide_fix))
-            self.summary['amide']['error'] = 'Unknown option'
-            return 1
+        fix=True
+        while fix:
+            input_line = ParamInput('Fix amide atoms', amide_fix, self.args['non_interactive'])
+            input_line.add_option_all()
+            input_line.add_option_none()
+            input_line.add_option('resnum', self.amide_rnums, case='sensitive', multiple=True)
+            [input_option, amide_fix] = input_line.run()
 
-        if input_option == 'none':
-            print ("Nothing to do")
-        else:
-            if input_option == 'all':
-                to_fix = self.amide_res_to_fix
+            if input_option == 'error':
+                print ('Warning: unknown option {}'.format(amide_fix))
+                self.summary['amide']['error'] = 'Unknown option'
+                return 1
+
+            if input_option == 'none':
+                print ("Nothing to do")
+                fix=False
             else:
-                to_fix = []
-                for r in self.amide_res_to_fix:
-                    if mu.residue_num(r) in amide_fix.split(','):
-                        to_fix.append(r)
-            n = 0
-            for r in to_fix:
-                mu.invert_side_atoms(r, amide_res)
-                n += 1
-            print ('Amide residues fixed {} ({})'.format(amide_fix, n))
-            self.stm.modified = True
+                if input_option == 'all':
+                    to_fix = self.amide_res_to_fix
+                else:
+                    to_fix = []
+                    for r in self.amide_res_to_fix:
+                        if mu.residue_num(r) in amide_fix.split(','):
+                            to_fix.append(r)
+                n = 0
+                done=[]
+                for r in to_fix:
+                    if r not in done:
+                        mu.invert_side_atoms(r, amide_res)
+                        done.append(r)
+                    n += 1
+                print ('Amide residues fixed {} ({})'.format(amide_fix, n))
+                fix = False
+                if recheck:
+                    print ("Rechecking")
+                    fix=self.amide_check() #TODO reduce check to fixed residues if necessary
+                    amide_fix=''
+                    if no_int_recheck:
+                        fix=False
+                self.stm.modified = True
 
 # =============================================================================
     def chiral(self, opts=None):
@@ -767,19 +782,19 @@ class StructureChecking():
 
     def clashes_check(self):
         contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
-        
-        CLASH_DIST = self.data_library.get_distances('CLASH_DIST')
-        
+
+        CLASH_DISTS = self.data_library.get_distances('CLASH_DIST')
+
         atom_lists={}
         self.clash_list={}
-        self.summary['clashes']['detected']={}        
+        self.summary['clashes']['detected']={}
         for cls in contact_types:
             self.clash_list[cls]={}
             self.summary['clashes']['detected'][cls]=[]
             if cls == 'severe':
                 continue
             atom_lists[cls]= self.data_library.get_atom_feature_list(cls + '_atoms')
-        
+
         if len(self.rr_dist) == 0:
             self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'))
 
@@ -787,26 +802,24 @@ class StructureChecking():
             [r1, r2, d] = r_pair
             if mu.is_wat(r1) or mu.is_wat(r2):
                 continue
-            c_list = self._get_clashes(r1,r2,CLASH_DIST, atom_lists)
+            c_list = mu.check_clashes(r1,r2,CLASH_DISTS, atom_lists)
             rkey = mu.residue_id(r1)+'-'+mu.residue_id(r2)
             for cls in c_list:
                 if len(c_list[cls]):
                     self.clash_list[cls][rkey] = c_list[cls]
-        
-        
+
         for cls in contact_types:
             if len(self.clash_list[cls]):
                 print ('{} Steric {} clashes detected'.format(len(self.clash_list[cls]), cls))
                 for rkey in sorted(self.clash_list[cls], key=lambda x: 10000 * self.clash_list[cls][x][0].serial_number + self.clash_list[cls][x][1].serial_number):
                     print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(self.clash_list[cls][rkey][0], self.stm.nmodels > 1), mu.atom_id(self.clash_list[cls][rkey][1], self.stm.nmodels > 1), self.clash_list[cls][rkey][2]))
-                    at_pair = self.clash_list[cls][rkey]
                     self.summary['clashes']['detected'][cls].append(
-                                                                    {
-                                                                    'at1':mu.atom_id(self.clash_list[cls][rkey][0], self.stm.nmodels > 1),
-                                                                    'at2':mu.atom_id(self.clash_list[cls][rkey][1], self.stm.nmodels > 1),
-                                                                    'dist': float(self.clash_list[cls][rkey][2])
-                                                                    }
-                                                                    )
+                        {
+                            'at1':mu.atom_id(self.clash_list[cls][rkey][0], self.stm.nmodels > 1),
+                            'at2':mu.atom_id(self.clash_list[cls][rkey][1], self.stm.nmodels > 1),
+                            'dist': float(self.clash_list[cls][rkey][2])
+                        }
+                    )
             else:
                 print ('No {} clashes detected'.format(cls))
 
@@ -814,45 +827,6 @@ class StructureChecking():
 
     def clashes_fix(self, res_to_fix):
         pass
-#===============================================================================
-    def _get_clashes(self, r1, r2, CLASH_DIST, atom_lists):
-
-        clash_list={}
-        min_dist={}
-        for cls in atom_lists:
-            clash_list[cls]=[]
-            min_dist[cls]=999.
-        if r1 != r2 and not mu.seq_consecutive(r1, r2) and mu.same_model(r1, r2):
-            for at_pair in mu.get_all_rr_distances(r1, r2):
-                [at1, at2, dist] = at_pair
-                if 'severe' in atom_lists and dist < CLASH_DIST['severe']:
-                    if dist < min_dist:
-                        clash_list['severe'] = at_pair
-                        min_dist['severe'] = dist
-                else:
-                    for cls in atom_lists:
-                        if cls == 'apolar':
-                            #Only one of the atoms should be apolar
-                            if not mu.is_at_in_list(at1, atom_lists[cls]) and not mu.is_at_in_list(at2, atom_lists[cls]):
-                                continue
-                            #Remove n->n+2 backbone clashes. TODO Improve
-                            if abs(at1.get_parent().index - at2.get_parent().index) <= 2:
-                                continue
-                            #Remove Ca2+ looking like backbone CA's
-                            if mu.is_hetatm(at1.get_parent()) and at1.id == 'CA' or \
-                                mu.is_hetatm(at2.get_parent()) and at2.id == 'CA':
-                                    continue
-                        else:
-                            # Both atoms should be of the same kind
-                            if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
-                                continue
-                        if dist < CLASH_DIST[cls]:
-                            if dist < min_dist[cls]:
-                                clash_list[cls] = at_pair
-                                min_dist[cls] = dist
-
-        return clash_list
-
 # =============================================================================
     def fixside (self, opts=None):
         self.run_method('fixside', opts)
@@ -874,7 +848,7 @@ class StructureChecking():
             print ("No residues with missing side chain atoms found")
             return False
 
-    def fixside_fix(self, fix_side):
+    def fixside_fix(self, fix_side, check=True):
         input_line = ParamInput ('fixside', fix_side, self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -918,7 +892,7 @@ class StructureChecking():
     def mutateside_check(self):
         return True
 
-    def mutateside_fix(self, mut_list):
+    def mutateside_fix(self, mut_list, check=True):
         input_line = ParamInput ('Mutation list', mut_list, self.args['non_interactive'])
         mut_list = input_line.run()
         self.mutations = MutationManager(mut_list)
@@ -959,4 +933,3 @@ class StructureChecking():
         self.stm.save_structure(self.args['output_structure_path'])
 
 #===============================================================================
-

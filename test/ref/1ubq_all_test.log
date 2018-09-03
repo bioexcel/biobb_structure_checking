@@ -58,6 +58,8 @@ Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)
+Rechecking
+No unusual contact(s) involving amide atoms found
 
 Step 9: chiral --fix All
 

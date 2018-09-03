@@ -59,6 +59,8 @@ Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ASN A30.OD1  GLN A32.O       2.598 A
 Amide residues fixed All (1)
+Rechecking
+No unusual contact(s) involving amide atoms found
 
 Step 9: chiral --fix All
 
