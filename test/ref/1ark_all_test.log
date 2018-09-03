@@ -89,11 +89,11 @@ No severe clashes detected
  GLU A19.OE2  TRP A38.CZ3     2.645 A
  TYR A40.CD1  GLY A50.O       2.794 A
  THR A42.OG1  THR A49.CG2     2.788 A
-3 Steric acceptor clashes detected
+3 Steric polar_acceptor clashes detected
  MET A9.O     ASP A24.OD2     2.851 A
  TYR A10.O    PHE A22.O       3.006 A
  MET A39.O    MET A51.SD      2.999 A
-No donor clashes detected
+No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 Command list completed

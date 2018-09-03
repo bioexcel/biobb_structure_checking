@@ -40,16 +40,16 @@
  },
  "clashes": {
   "detected": {
-   "acceptor": [
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [
     {
      "at1": "MET A1.O",
      "at2": "VAL A17.O",
      "dist": 3.0353565216064453
     }
    ],
-   "apolar": [],
-   "donor": [],
-   "negative": [],
+   "polar_donor": [],
    "positive": [],
    "severe": []
   }

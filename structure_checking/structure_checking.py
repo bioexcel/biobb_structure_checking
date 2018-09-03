@@ -513,7 +513,7 @@ class StructureChecking():
         self.run_method('getss', opts)
 
     def getss_check(self):
-        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distance('SS_DIST'))
+        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'))
 
         if len(self.SS_bonds):
             print ('{} Possible SS Bonds detected'.format(len(self.SS_bonds)))
@@ -535,10 +535,11 @@ class StructureChecking():
 
     def amide_check(self):
         [amide_res, amide_atoms] = self.data_library.get_amide_data()
-        CLASH_DIST = self.data_library.get_distance('CLASH_DIST')
-        atoms_list = {
-            'donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
-            'acceptor':self.data_library.get_atom_feature_list('polar_acceptor_atoms')
+        CLASH_DIST = self.data_library.get_distances('CLASH_DIST')
+        
+        atom_lists = {
+            'polar_donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
+            'polar_acceptor':self.data_library.get_atom_feature_list('polar_acceptor_atoms')
         }
 
         self.amide_list = []
@@ -551,31 +552,30 @@ class StructureChecking():
 
         if len(self.amide_list) > 0:
             if len(self.rr_dist) == 0:
-                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distance('R_R_CUTOFF'))
+                self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'))
             self.amide_res_to_fix = []
             self.amide_cont_list = []
             self.amide_rnums = []
             for r_pair in self.rr_dist:
                 [r1, r2, d] = r_pair
-                if r1 in self.amide_list or r2 in self.amide_list:
-                    if r1 != r2 and mu.same_model(r1, r2) and not mu.is_wat(r1) and not mu.is_wat(r2):
-                        for at_pair in mu.get_all_rr_distances(r1, r2):
-                            [at1, at2, dist] = at_pair
-                            r1 = at1.get_parent()
-                            r2 = at2.get_parent()
-                            if not at1.id in amide_atoms and not at2.id in amide_atoms:
-                                continue
-                            for cls in ['acceptor', 'donor']:
-                                if dist < CLASH_DIST[cls]:
-                                    if not mu.is_at_in_list(at1, atoms_list[cls]) or not mu.is_at_in_list(at2, atoms_list[cls]):
-                                        continue
-                                    if at1.id in amide_atoms and r1 in self.amide_list:
-                                        self.amide_res_to_fix.append(r1)
-                                        self.amide_rnums.append(mu.residue_num(r1))
-                                    if at2.id in amide_atoms and r2 in self.amide_list:
-                                        self.amide_res_to_fix.append(r2)
-                                        self.amide_rnums.append(mu.residue_num(r2))
-                                    self.amide_cont_list.append(at_pair)
+                if r1 != r2 and mu.same_model(r1, r2) and not mu.is_wat(r1) and not mu.is_wat(r2) \
+                    and (r1 in self.amide_list or r2 in self.amide_list):
+                    c_list = self._get_clashes(r1,r2,CLASH_DIST,atom_lists)
+                    for cls in c_list:
+                        if len(c_list[cls]):
+                            [at1,at2,d]=c_list[cls]
+                            add_pair=False
+                            if at1.id in amide_atoms and r1 in self.amide_list:
+                                self.amide_res_to_fix.append(r1)
+                                self.amide_rnums.append(mu.residue_num(r1))
+                                add_pair=True
+                            if at2.id in amide_atoms and r2 in self.amide_list:
+                                self.amide_res_to_fix.append(r2)
+                                self.amide_rnums.append(mu.residue_num(r2))
+                                add_pair=True
+                            if add_pair:
+                                self.amide_cont_list.append(c_list[cls])
+            
             if len(self.amide_cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
@@ -766,74 +766,35 @@ class StructureChecking():
         self.run_method('clashes', opts)
 
     def clashes_check(self):
-        CLASH_DIST = self.data_library.get_distance('CLASH_DIST')
-        atom_lists = {
-            'acceptor': self.data_library.get_atom_feature_list('polar_acceptor_atoms'),
-            'donor': self.data_library.get_atom_feature_list('polar_donor_atoms'),
-            'positive':self.data_library.get_atom_feature_list('positive_atoms'),
-            'negative':self.data_library.get_atom_feature_list('negative_atoms'),
-            'apolar':self.data_library.get_atom_feature_list('apolar_atoms'),
-        }
-
+        contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
+        
+        CLASH_DIST = self.data_library.get_distances('CLASH_DIST')
+        
+        atom_lists={}
+        self.clash_list={}
+        self.summary['clashes']['detected']={}        
+        for cls in contact_types:
+            self.clash_list[cls]={}
+            self.summary['clashes']['detected'][cls]=[]
+            if cls == 'severe':
+                continue
+            atom_lists[cls]= self.data_library.get_atom_feature_list(cls + '_atoms')
+        
         if len(self.rr_dist) == 0:
-            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distance('R_R_CUTOFF'))
-
-        self.clash_list = {
-            'severe':{},
-            'apolar':{},
-            'acceptor':{},
-            'donor':{},
-            'positive':{},
-            'negative':{}
-        }
-
-        self.summary['clashes'] = {
-            'detected': {
-                'severe':[],
-                'apolar':[],
-                'acceptor':[],
-                'donor':[],
-                'positive':[],
-                'negative':[]
-            }
-        }
+            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'))
 
         for r_pair in self.rr_dist:
             [r1, r2, d] = r_pair
             if mu.is_wat(r1) or mu.is_wat(r2):
                 continue
-            if r1 != r2 and not mu.seq_consecutive(r1, r2) and mu.same_model(r1, r2):
-                rkey = mu.residue_id(r1) + '-' + mu.residue_id(r2)
-                for at_pair in mu.get_all_rr_distances(r1, r2):
-                    [at1, at2, dist] = at_pair
-                    if dist < CLASH_DIST['severe']:
-                        if not rkey in self.clash_list['severe']:
-                            self.clash_list['severe'][rkey] = at_pair
-                        if dist < self.clash_list['severe'][rkey][2]:
-                            self.clash_list['severe'][rkey] = at_pair
-                    else:
-                        for cls in ['apolar', 'acceptor', 'donor', 'positive', 'negative']:
-                            if dist < CLASH_DIST[cls]:
-                                if cls == 'apolar':
-                                    #Only one of the atoms should be apolar
-                                    if not mu.is_at_in_list(at1, atom_lists[cls]) and not mu.is_at_in_list(at2, atom_lists[cls]):
-                                        continue
-                                    #Remove n->n+2 backbone clashes. TODO Improve
-                                    if abs(at1.get_parent().index - at2.get_parent().index) <= 2:
-                                        continue
-                                    #Remove Ca2+ looking like backbone CA's
-                                    if mu.is_hetatm(at1.get_parent()) and at1.id == 'CA' or \
-                                        mu.is_hetatm(at2.get_parent()) and at2.id == 'CA':
-                                            continue
-                                else:
-                                    # Both atoms should be of the same kind
-                                    if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
-                                        continue
-                                if not rkey in self.clash_list[cls]:
-                                    self.clash_list[cls][rkey] = at_pair
-                                if dist < self.clash_list[cls][rkey][2]:
-                                    self.clash_list[cls][rkey] = at_pair
-        for cls in ['severe', 'apolar', 'acceptor', 'donor', 'positive', 'negative']:
+            c_list = self._get_clashes(r1,r2,CLASH_DIST, atom_lists)
+            rkey = mu.residue_id(r1)+'-'+mu.residue_id(r2)
+            for cls in c_list:
+                if len(c_list[cls]):
+                    self.clash_list[cls][rkey] = c_list[cls]
+        
+        
+        for cls in contact_types:
             if len(self.clash_list[cls]):
                 print ('{} Steric {} clashes detected'.format(len(self.clash_list[cls]), cls))
                 for rkey in sorted(self.clash_list[cls], key=lambda x: 10000 * self.clash_list[cls][x][0].serial_number + self.clash_list[cls][x][1].serial_number):
@@ -853,6 +814,44 @@ class StructureChecking():
 
     def clashes_fix(self, res_to_fix):
         pass
+#===============================================================================
+    def _get_clashes(self, r1, r2, CLASH_DIST, atom_lists):
+
+        clash_list={}
+        min_dist={}
+        for cls in atom_lists:
+            clash_list[cls]=[]
+            min_dist[cls]=999.
+        if r1 != r2 and not mu.seq_consecutive(r1, r2) and mu.same_model(r1, r2):
+            for at_pair in mu.get_all_rr_distances(r1, r2):
+                [at1, at2, dist] = at_pair
+                if 'severe' in atom_lists and dist < CLASH_DIST['severe']:
+                    if dist < min_dist:
+                        clash_list['severe'] = at_pair
+                        min_dist['severe'] = dist
+                else:
+                    for cls in atom_lists:
+                        if cls == 'apolar':
+                            #Only one of the atoms should be apolar
+                            if not mu.is_at_in_list(at1, atom_lists[cls]) and not mu.is_at_in_list(at2, atom_lists[cls]):
+                                continue
+                            #Remove n->n+2 backbone clashes. TODO Improve
+                            if abs(at1.get_parent().index - at2.get_parent().index) <= 2:
+                                continue
+                            #Remove Ca2+ looking like backbone CA's
+                            if mu.is_hetatm(at1.get_parent()) and at1.id == 'CA' or \
+                                mu.is_hetatm(at2.get_parent()) and at2.id == 'CA':
+                                    continue
+                        else:
+                            # Both atoms should be of the same kind
+                            if not mu.is_at_in_list(at1, atom_lists[cls]) or not mu.is_at_in_list(at2, atom_lists[cls]):
+                                continue
+                        if dist < CLASH_DIST[cls]:
+                            if dist < min_dist[cls]:
+                                clash_list[cls] = at_pair
+                                min_dist[cls] = dist
+
+        return clash_list
 
 # =============================================================================
     def fixside (self, opts=None):

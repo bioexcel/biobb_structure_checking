@@ -29,13 +29,13 @@ No severe clashes detected
  GLU B210.O   ILE B214.CG1    2.842 A
  ARG B212.CZ  ASP B330.OD1    2.875 A
  SER B357.O   ILE B361.CG1    2.861 A
-5 Steric acceptor clashes detected
+5 Steric polar_acceptor clashes detected
  ASP A55.O    VAL A204.O      3.035 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
-2 Steric donor clashes detected
+2 Steric polar_donor clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
 2 Steric positive clashes detected

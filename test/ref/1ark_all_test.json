@@ -40,23 +40,6 @@
  },
  "clashes": {
   "detected": {
-   "acceptor": [
-    {
-     "at1": "MET A9.O",
-     "at2": "ASP A24.OD2",
-     "dist": 2.8511886596679688
-    },
-    {
-     "at1": "TYR A10.O",
-     "at2": "PHE A22.O",
-     "dist": 3.006348133087158
-    },
-    {
-     "at1": "MET A39.O",
-     "at2": "MET A51.SD",
-     "dist": 2.9991238117218018
-    }
-   ],
    "apolar": [
     {
      "at1": "MET A9.CE",
@@ -79,8 +62,25 @@
      "dist": 2.787822961807251
     }
    ],
-   "donor": [],
    "negative": [],
+   "polar_acceptor": [
+    {
+     "at1": "MET A9.O",
+     "at2": "ASP A24.OD2",
+     "dist": 2.8511886596679688
+    },
+    {
+     "at1": "TYR A10.O",
+     "at2": "PHE A22.O",
+     "dist": 3.006348133087158
+    },
+    {
+     "at1": "MET A39.O",
+     "at2": "MET A51.SD",
+     "dist": 2.9991238117218018
+    }
+   ],
+   "polar_donor": [],
    "positive": [],
    "severe": []
   }

@@ -2221,8 +2221,8 @@
             "CLASH_DIST": {
                 "severe": 1.0,
                 "apolar": 2.9,
-                "donor": 3.1,
-                "acceptor": 3.1,
+                "polar_donor": 3.1,
+                "polar_acceptor": 3.1,
                 "positive": 3.5,
                 "negative": 3.5
             },

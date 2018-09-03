@@ -159,10 +159,10 @@ No severe clashes detected
  GLU A382.CB  GLN A386.O      2.894 A
  HIS B268.CE1 GLU B294.OE2    2.857 A
  ASN B297.CG  NAG B501.C1     2.433 A
-2 Steric acceptor clashes detected
+2 Steric polar_acceptor clashes detected
  HIS A433.O   TYR A436.O      3.090 A
  SER B383.O   GLN B386.O      2.911 A
-No donor clashes detected
+No polar_donor clashes detected
 No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A

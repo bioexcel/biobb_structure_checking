@@ -109,7 +109,7 @@ No severe clashes detected
  THR A95.CG2  PRO A129.O      2.770 A
  HIS B211.CE1 N25 B401.O24    2.841 A
  ASP B228.OD2 ARG B231.CZ     2.665 A
-14 Steric acceptor clashes detected
+14 Steric polar_acceptor clashes detected
  ASP A107.OD2 GLU A184.O      3.088 A
  GLU A125.O   THR A128.O      2.751 A
  ASP A141.O   ASP A177.OD1    3.087 A
@@ -124,7 +124,7 @@ No severe clashes detected
  GLY B173.O   ASN B175.O      3.018 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
  ASP B182.O   GLU B184.O      2.931 A
-1 Steric donor clashes detected
+1 Steric polar_donor clashes detected
  GLN B236.NE2 ASN B240.ND2    3.022 A
 No positive clashes detected
 3 Steric negative clashes detected

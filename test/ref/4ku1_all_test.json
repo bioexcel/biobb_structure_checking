@@ -230,18 +230,6 @@
  },
  "clashes": {
   "detected": {
-   "acceptor": [
-    {
-     "at1": "HIS A433.O",
-     "at2": "TYR A436.O",
-     "dist": 3.089860200881958
-    },
-    {
-     "at1": "SER B383.O",
-     "at2": "GLN B386.O",
-     "dist": 2.9106497764587402
-    }
-   ],
    "apolar": [
     {
      "at1": "GLU A294.OE2",
@@ -274,7 +262,6 @@
      "dist": 2.433356285095215
     }
    ],
-   "donor": [],
    "negative": [
     {
      "at1": "GLU B380.OE2",
@@ -282,6 +269,19 @@
      "dist": 3.463707447052002
     }
    ],
+   "polar_acceptor": [
+    {
+     "at1": "HIS A433.O",
+     "at2": "TYR A436.O",
+     "dist": 3.089860200881958
+    },
+    {
+     "at1": "SER B383.O",
+     "at2": "GLN B386.O",
+     "dist": 2.9106497764587402
+    }
+   ],
+   "polar_donor": [],
    "positive": [],
    "severe": []
   }

@@ -99,7 +99,7 @@ No severe clashes detected
  LEU P251.O   SER P343.CB     2.870 A
  TYR P286.CA  TRP P295.O      2.821 A
  ARG P336.O   LEU P340.CA     2.840 A
-7 Steric acceptor clashes detected
+7 Steric polar_acceptor clashes detected
  TYR P44.O    CYS P88.O       2.939 A
  GLU P49.OE1  TYR P82.O       2.951 A
  VAL P96.O    VAL P126.O      3.060 A
@@ -107,7 +107,7 @@ No severe clashes detected
  CYS P162.O   GLU P182.O      3.056 A
  TYR P178.O   GLU P182.OE1    3.086 A
  LEU P179.O   GLU P182.O      2.852 A
-1 Steric donor clashes detected
+1 Steric polar_donor clashes detected
  ARG P54.NH1  ARG P336.NH1    3.056 A
 3 Steric positive clashes detected
  ARG P54.NH1  ARG P336.NH1    3.056 A

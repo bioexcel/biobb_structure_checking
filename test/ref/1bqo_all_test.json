@@ -42,7 +42,41 @@
  },
  "clashes": {
   "detected": {
-   "acceptor": [
+   "apolar": [
+    {
+     "at1": "THR A95.CG2",
+     "at2": "PRO A129.O",
+     "dist": 2.7701938152313232
+    },
+    {
+     "at1": "HIS B211.CE1",
+     "at2": "N25 B401.O24",
+     "dist": 2.841092109680176
+    },
+    {
+     "at1": "ASP B228.OD2",
+     "at2": "ARG B231.CZ",
+     "dist": 2.6650195121765137
+    }
+   ],
+   "negative": [
+    {
+     "at1": "ASP A181.OD2",
+     "at2": "GLU A184.OE2",
+     "dist": 3.463454008102417
+    },
+    {
+     "at1": "ASP B107.OD2",
+     "at2": "ASP B182.OD1",
+     "dist": 3.4820568561553955
+    },
+    {
+     "at1": "ASP B181.OD2",
+     "at2": "GLU B184.OE2",
+     "dist": 3.080146074295044
+    }
+   ],
+   "polar_acceptor": [
     {
      "at1": "ASP A107.OD2",
      "at2": "GLU A184.O",
@@ -114,45 +148,11 @@
      "dist": 2.930624485015869
     }
    ],
-   "apolar": [
-    {
-     "at1": "THR A95.CG2",
-     "at2": "PRO A129.O",
-     "dist": 2.7701938152313232
-    },
-    {
-     "at1": "HIS B211.CE1",
-     "at2": "N25 B401.O24",
-     "dist": 2.841092109680176
-    },
-    {
-     "at1": "ASP B228.OD2",
-     "at2": "ARG B231.CZ",
-     "dist": 2.6650195121765137
-    }
-   ],
-   "donor": [
+   "polar_donor": [
     {
      "at1": "GLN B236.NE2",
      "at2": "ASN B240.ND2",
      "dist": 3.0220203399658203
-    }
-   ],
-   "negative": [
-    {
-     "at1": "ASP A181.OD2",
-     "at2": "GLU A184.OE2",
-     "dist": 3.463454008102417
-    },
-    {
-     "at1": "ASP B107.OD2",
-     "at2": "ASP B182.OD1",
-     "dist": 3.4820568561553955
-    },
-    {
-     "at1": "ASP B181.OD2",
-     "at2": "GLU B184.OE2",
-     "dist": 3.080146074295044
     }
    ],
    "positive": [],
