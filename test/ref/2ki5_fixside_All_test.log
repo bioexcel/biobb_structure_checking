@@ -47,6 +47,20 @@ ARG B220
   Adding new atom NH1
   Adding new atom NH2
 Fixed 6 side chain(s)
+Checking possible clashes
+No severe clashes detected
+4 Steric apolar clashes detected
+ MET A46.CE   VAL A352.CG2    1.843 A
+ MET A46.CE   THR A354.O      1.869 A
+ MET B46.CE   VAL B352.O      0.921 A
+ ARG B220.CZ  SO4 B3.O3       1.597 A
+3 Steric polar_acceptor clashes detected
+ MET A46.SD   VAL A352.O      2.171 A
+ MET A46.SD   THR A354.O      2.569 A
+ MET B46.SD   VAL B352.O      2.291 A
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 Structure saved on 1ki5_fixside_All_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A,B)

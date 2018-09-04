@@ -17,6 +17,13 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  ILE A3    
  THR A7    
 Quiral residues fixed All (2)
+Checking for steric clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 Structure saved on 1ubq_chi_chiral_test.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A)
