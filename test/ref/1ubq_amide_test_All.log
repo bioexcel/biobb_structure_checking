@@ -17,6 +17,8 @@ Structure pdb:1ubq loaded
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)
+Rechecking
+No unusual contact(s) involving amide atoms found
 Structure saved on 1ubq_amide_test_All.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A)
