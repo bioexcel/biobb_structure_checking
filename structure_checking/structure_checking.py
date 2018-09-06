@@ -942,12 +942,40 @@ class StructureChecking():
 #===============================================================================
     def backbone(self, opts):
         self.run_method('backbone',opts)
-    
+
     def backbone_check(self):
         backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
-        self.stm.check_backbone_connect()
-        
-        
+        # Residues with missing backbone
+        self.miss_at_list = self.stm.get_missing_backbone_atoms(self.data_library.get_valid_codes('protein'), self.data_library.get_all_atom_lists())
+        if len(self.miss_at_list):
+            self.summary['backbone']['missing_atoms'] = {}
+            print('{} Residues with missing backbone atoms found'.format(len(self.miss_at_list)))
+            for r_at in self.miss_at_list:
+                [r, at_list] = r_at
+                print (' {:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
+                self.summary['backbone']['missing_atoms'][mu.residue_id(r)] = at_list
+        self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
+        #Not bound consecutive residues
+        self.stm.get_bck_breaks()
+        if self.stm.bck_breaks_list:
+            print ("Backbone breaks found")
+            for br in self.stm.bck_breaks_list:
+                print (" {:10} - {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1])))
+        if self.stm.wrong_link_list:
+            print ("Unexpected backbone links found")
+            for br in self.stm.wrong_link_list:
+                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),mu.residue_id(br[2])))
+        if self.stm.not_link_seq_list:
+            print ("Consecutive residues too far away to be covalently linked")
+            for br in self.stm.not_link_seq_list:
+                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]))
+        #TODO move this section to ligands
+        if self.stm.modified_residue_list:
+            print ("Modified residues found")
+            for br in self.stm.modified_residue_list:
+                print (" {:10} ".format(mu.residue_id(br)))
+
+
 
     def backbone_fix(self, fix):
         #TODO
