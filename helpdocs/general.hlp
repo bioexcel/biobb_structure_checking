@@ -47,9 +47,9 @@ fixside [--fix All |None|Residue List]
 
 3. Structure Warnings
 
+backbone   Analyze main chain missing fragments
+cistransbck Analyzes cis-trans dihedrals on backbone atoms
 getss      Detect SS Bonds 
-cisbck     Unusual cis/trans backbone 
-nonconres  Non Consecutive residues 
-bckgaps    Detect missing residues
 clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
            Ionic Positive, Ionic Negative)
+

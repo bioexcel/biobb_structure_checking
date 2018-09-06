@@ -538,7 +538,8 @@ class StructureChecking():
     def amide_check(self):
 
         [amide_res, amide_atoms] = self.data_library.get_amide_data()
-        atom_lists = self.data_library.get_atom_lists(['polar_donor', 'polar_acceptor'])
+        contact_types = ['polar_donor','polar_acceptor']
+        atom_lists = self.data_library.get_atom_lists(contact_types)
 
         self.amide_list = []
 
@@ -938,7 +939,19 @@ class StructureChecking():
             )
 
         self.stm.modified=True
+#===============================================================================
+    def backbone(self, opts):
+        self.run_method('backbone',opts)
+    
+    def backbone_check(self):
+        backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+        self.stm.check_backbone_connect()
+        
+        
 
+    def backbone_fix(self, fix):
+        #TODO
+        pass
 
 #===============================================================================
 

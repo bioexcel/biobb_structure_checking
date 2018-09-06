@@ -2227,7 +2227,9 @@
                 "negative": 3.5
             },
             "MAX_DIST": 4.5,
-            "R_R_CUTOFF": 15
+            "R_R_CUTOFF": 15,
+            "COVLNK": 2.0,
+            "HBLNK" : 3.5
         }
     }
 }
