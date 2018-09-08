@@ -1,0 +1,33 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running backbone.
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+ Num. models: 1
+ Num. chains: 2 (A,B)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  296
+ Num. ligand or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+8 Residues with missing backbone atoms found
+ VAL A70    CA,C,O
+ GLY A148   CA,C,O
+ GLY A264   CA,C,O
+ ALA A375   CA,C,O
+ GLY B73    CA,C,O
+ GLY B148   CA,C,O
+ SER B263   CA,C,O
+ ALA B375   CA,C,O
+Backbone breaks found
+ VAL A70    - ASP A77    
+ GLY A148   - PRO A154   
+ GLY A264   - PRO A280   
+ GLY B73    - ASP B77    
+ GLY B148   - PRO B154   
+ SER B263   - ALA B278   
+Structure not modified, not saving. Override with --force_save

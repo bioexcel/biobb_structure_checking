@@ -838,9 +838,9 @@ class StructureChecking():
             print('{} Residues with missing side chain atoms found'.format(len(self.miss_at_list)))
             for r_at in self.miss_at_list:
                 [r, at_list] = r_at
-                print ('{:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
-                self.fixside_rnums.append(mu.residue_num(r))
-                self.summary['fixside']['detected'][mu.residue_id(r)] = at_list
+                print ('{:10} {}'.format(mu.residue_id(r,self.stm.nmodels>1), ','.join(at_list)))
+                self.fixside_rnums.append(mu.residue_num(r,self.stm.nmodels>1))
+                self.summary['fixside']['detected'][mu.residue_id(r,self.stm.nmodels>1)] = at_list
             return True
         else:
             print ("No residues with missing side chain atoms found")
@@ -877,11 +877,11 @@ class StructureChecking():
                 self.residue_lib = ResidueLib(self.sets.res_library_path)
             fixed_res=[]
             for r_at in to_fix:
-                print (mu.residue_id(r_at[0]))
+                print (mu.residue_id(r_at[0],self.stm.nmodels>1))
                 mu.remove_H_from_r(r_at[0], verbose= True)
                 self.stm.fix_side_chain(r_at, self.residue_lib)
                 n += 1
-                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
+                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0],self.stm.nmodels>1))
                 fixed_res.append(r_at[0])
 
             print ('Fixed {} side chain(s)'.format(n))
@@ -952,28 +952,28 @@ class StructureChecking():
             print('{} Residues with missing backbone atoms found'.format(len(self.miss_at_list)))
             for r_at in self.miss_at_list:
                 [r, at_list] = r_at
-                print (' {:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
-                self.summary['backbone']['missing_atoms'][mu.residue_id(r)] = at_list
+                print (' {:10} {}'.format(mu.residue_id(r,self.stm.nmodels>1), ','.join(at_list)))
+                self.summary['backbone']['missing_atoms'][mu.residue_id(r,self.stm.nmodels>1)] = at_list
         self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
         #Not bound consecutive residues
         self.stm.get_bck_breaks()
         if self.stm.bck_breaks_list:
             print ("Backbone breaks found")
             for br in self.stm.bck_breaks_list:
-                print (" {:10} - {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1])))
+                print (" {:10} - {:10} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1], self.stm.nmodels>1)))
         if self.stm.wrong_link_list:
             print ("Unexpected backbone links found")
             for br in self.stm.wrong_link_list:
-                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),mu.residue_id(br[2])))
+                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1],self.stm.nmodels>1),mu.residue_id(br[2],self.stm.nmodels>1)))
         if self.stm.not_link_seq_list:
             print ("Consecutive residues too far away to be covalently linked")
             for br in self.stm.not_link_seq_list:
-                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]))
+                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1],self.stm.nmodels>1),br[2]))
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
             for br in self.stm.modified_residue_list:
-                print (" {:10} ".format(mu.residue_id(br)))
+                print (" {:10} ".format(mu.residue_id(br,self.stm.nmodels>1)))
 
 
 

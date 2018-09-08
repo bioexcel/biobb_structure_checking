@@ -78,12 +78,16 @@ Step 11: fixside --fix All
 Running fixside. Options: --fix All 
 No residues with missing side chain atoms found
 
-Step 12: getss
+Step 12: backbone
+
+Running backbone.
+
+Step 13: getss
 
 Running getss.
 No SS bonds detected
 
-Step 13: clashes
+Step 14: clashes
 
 Running clashes.
 No severe clashes detected

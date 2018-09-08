@@ -145,12 +145,32 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 12: getss
+Step 12: backbone
+
+Running backbone.
+8 Residues with missing backbone atoms found
+ VAL A70    CA,C,O
+ GLY A148   CA,C,O
+ GLY A264   CA,C,O
+ ALA A375   CA,C,O
+ GLY B73    CA,C,O
+ GLY B148   CA,C,O
+ SER B263   CA,C,O
+ ALA B375   CA,C,O
+Backbone breaks found
+ VAL A70    - ASP A77    
+ GLY A148   - PRO A154   
+ GLY A264   - PRO A280   
+ GLY B73    - ASP B77    
+ GLY B148   - PRO B154   
+ SER B263   - ALA B278   
+
+Step 13: getss
 
 Running getss.
 No SS bonds detected
 
-Step 13: clashes
+Step 14: clashes
 
 Running clashes.
 No severe clashes detected
