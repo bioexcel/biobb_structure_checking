@@ -732,8 +732,10 @@ class StructureChecking():
     def chiral_bck_check(self):
 
         self.chiral_bck_list = []
+        prot_chains=0
         for ch in self._get_structure().get_chains():
             if self.stm.chain_ids[ch.id] == mu.PROTEIN:
+                prot_chains += 1
                 for r in ch.get_residues():
                     if r.get_resname() != 'GLY' and not mu.is_hetatm(r):
                         self.chiral_bck_list.append(r)
@@ -757,7 +759,10 @@ class StructureChecking():
                 print ("No residues with incorrect backbone chirality found")
                 return False
         else:
-            print ("No residues with chiral CA found (weird!!)")
+            if not prot_chains:
+                print ("No protein chains detected, skipping")
+            else:
+                print ("Protein chains detected but no residues with chiral CA found (weird!!)")
             return False
 
 
