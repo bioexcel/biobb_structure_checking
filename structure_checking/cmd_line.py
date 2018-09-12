@@ -66,6 +66,12 @@ class CmdLine():
             )
 
         self.argparser.add_argument(
+            '--quiet',
+            action="store_true",
+            dest='quiet',
+            help='Reduces output, removing labels and progress info'
+        )
+        self.argparser.add_argument(
             '--check_only',
             action="store_true",
             dest='check_only',
