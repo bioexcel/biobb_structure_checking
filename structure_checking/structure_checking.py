@@ -38,6 +38,8 @@ dialogs.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | Non
 dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
+ 
+AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','clashes']
 
 # Main class
 class StructureChecking():
@@ -66,6 +68,8 @@ class StructureChecking():
 
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
+        elif self.args['command'] == 'checkall':
+            self.checkall(self.args['options'])
         else:
             self.run_method(self.args['command'], self.args['options'])
 
@@ -156,6 +160,12 @@ class StructureChecking():
             i += 1
 
         print ("Command list completed")
+
+    def checkall(self, opts):
+        self.args['check_only'] = True
+        self._load_structure()
+        for meth in AVAILABLE_METHODS:
+            self.run_method(meth, opts)
 
     def print_stats(self, verbose=True):
         self._load_structure(print_stats=False)
