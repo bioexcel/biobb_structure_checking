@@ -112,7 +112,8 @@ class StructureChecking():
         self.to_fix = f_check()
 
         if self.args['check_only'] or opts is None or opts == '':
-            print ('Running  check_only. Nothing else to do.')
+            if not self.args['quiet']:
+                print ('Running  check_only. Nothing else to do.')
         elif self.to_fix:
             try:
                 f_fix = getattr(self, command + '_fix')
@@ -146,7 +147,8 @@ class StructureChecking():
         for line in fh:
             if line == "\n" or line[0:1] == '#':
                 continue
-            print ("\nStep {}: {}".format(i, line))
+            if not self.args['quiet']:
+                print ("\nStep {}: {}".format(i, line))
             data = line.split()
             command = data[0]
             opts = data[1:]
@@ -175,7 +177,8 @@ class StructureChecking():
                 print ('Models type unknown')
             return True
         else:
-            print ("Single model found")
+            if not self.args['quiet']:
+                print ("Single model found")
             return False
 
     def models_fix(self, select_model):
@@ -260,7 +263,8 @@ class StructureChecking():
                                                                    )
             return True
         else:
-            print ("No residues with alternative location labels detected")
+            if not self.args['quiet']:
+                print ("No residues with alternative location labels detected")
             return False
 
     def altloc_fix(self, select_altloc):
@@ -329,7 +333,8 @@ class StructureChecking():
                 self.summary['metals']['detected'].append(mu.residue_num(r))
             return True
         else:
-            print ("No metal ions present")
+            if not self.args['quiet']:
+                print ("No metal ions present")
             return False
 
     def metals_fix(self, remove_metals):
@@ -346,7 +351,8 @@ class StructureChecking():
             return 1
 
         if input_option == 'none':
-            print ("Nothing to do")
+            if not self.args['quiet']:
+                print ("Nothing to do")
         else:
             if input_option == 'all':
                 to_remove = self.met_list
@@ -389,7 +395,8 @@ class StructureChecking():
             self.summary['remwat']['n_detected'] = len(self.wat_list)
             return True
         else:
-            print ("No water molecules found")
+            if not self.args['quiet']:
+                print ("No water molecules found")
             return False
 
     def remwat_fix(self, remove_wat):
@@ -431,7 +438,8 @@ class StructureChecking():
                 self.ligand_rnums.append(mu.residue_num(r))
             return True
         else:
-            print ("No ligands found")
+            if not self.args['quiet']:
+                print ("No ligands found")
             return False
 
 # =============================================================================
@@ -453,7 +461,8 @@ class StructureChecking():
         to_remove = []
 
         if input_option == 'none':
-            print ("Nothing to do")
+            if not self.args['quiet']:
+                print ("Nothing to do")
         else:
             if input_option == 'all':
                 to_remove = self.lig_list
@@ -489,7 +498,8 @@ class StructureChecking():
             self.summary['remh']['n_detected'] = len(self.remh_list)
             return True
         else:
-            print ("No residues with Hydrogen atoms found")
+            if not self.args['quiet']:
+               print ("No residues with Hydrogen atoms found")
             return False
 
     def remh_fix(self, remove_h):
@@ -524,7 +534,8 @@ class StructureChecking():
                 print ('  {} {}{:8.3f}'.format(mu.atom_id(ssb[0], self.stm.nmodels > 1), mu.atom_id(ssb[1], self.stm.nmodels > 1), ssb[2]))
                 self.summary['getss']['detected'].append({'at1':mu.atom_id(ssb[0], self.stm.nmodels > 1), 'at2':mu.atom_id(ssb[1], self.stm.nmodels > 1), 'dist': float(ssb[2])})
         else:
-            print ("No SS bonds detected")
+            if not self.args['quiet']:
+                print ("No SS bonds detected")
 
         return False
 
@@ -582,10 +593,12 @@ class StructureChecking():
                     self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0], self.stm.nmodels > 1), 'at2':mu.atom_id(at_pair[1], self.stm.nmodels > 1), 'dist': float(at_pair[2])})
                 return True
             else:
-                print ("No unusual contact(s) involving amide atoms found")
+                if not self.args['quiet']:
+                    print ("No unusual contact(s) involving amide atoms found")
                 return False
         else:
-            print ("No amide residues found")
+            if not self.args['quiet']:
+                print ("No amide residues found")
             return False
 
 # =============================================================================
@@ -608,7 +621,8 @@ class StructureChecking():
                 return 1
 
             if input_option == 'none':
-                print ("Nothing to do")
+                if not self.args['quiet']:
+                    print ("Nothing to do")
                 fix=False
             else:
                 if input_option == 'all':
@@ -628,7 +642,8 @@ class StructureChecking():
                 print ('Amide residues fixed {} ({})'.format(amide_fix, n))
                 fix = False
                 if recheck:
-                    print ("Rechecking")
+                    if not self.args['quiet']:
+                        print ("Rechecking")
                     fix=self.amide_check() #TODO reduce check to fixed residues if necessary
                     amide_fix=''
                     if no_int_recheck:
@@ -666,10 +681,12 @@ class StructureChecking():
                     self.summary['chiral']['detected'].append(mu.residue_id(r, self.stm.nmodels > 1))
                 return True
             else:
-                print ("No residues with incorrent side-chain chirality found")
+                if not self.args['quiet']:
+                       print ("No residues with incorrect side-chain chirality found")
                 return False
         else:
-            print ("No chiral side-chains found")
+            if not self.args['quiet']:
+                print ("No chiral side-chains found")
             return False
 
     def chiral_fix(self, chiral_fix, check_clashes=True):
@@ -688,7 +705,8 @@ class StructureChecking():
             return 1
 
         if input_option == 'none':
-            print ("Nothing to do")
+            if not self.args['quiet']:
+                print ("Nothing to do")
         else:
             if input_option == 'all':
                 to_fix = self.chiral_res_to_fix
@@ -709,7 +727,8 @@ class StructureChecking():
             print ('Quiral residues fixed {} ({})'.format(chiral_fix, n))
 
             if check_clashes:
-                print ("Checking for steric clashes")
+                if not self.args['quiet']:
+                    print ("Checking for steric clashes")
 
                 contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
                 atom_lists = self.data_library.get_atom_lists(contact_types)
@@ -753,10 +772,12 @@ class StructureChecking():
                     self.summary['chiral_bck']['detected'].append(mu.residue_id(r, self.stm.nmodels > 1))
                 return False
             else:
-                print ("No residues with incorrect backbone chirality found")
+                if not self.args['quiet']:
+                    print ("No residues with incorrect backbone chirality found")
                 return False
         else:
-            print ("No residues with chiral CA found (weird!!)")
+            if not self.args['quiet']:
+                print ("No residues with chiral CA found (weird!!)")
             return False
 
 
@@ -773,7 +794,8 @@ class StructureChecking():
             return 1
 
         if input_option == 'none':
-            print ("Nothing to do")
+            if not self.args['quiet']:
+                print ("Nothing to do")
         else:
             if input_option == 'all':
                 to_fix = self.chiral_bck_res_to_fix
@@ -788,7 +810,8 @@ class StructureChecking():
                 n += 1
             print ('Quiral residues fixed {} ({})'.format(chiral_fix, n))
             if check_clashes:
-                print ("Checking new steric clashes")
+                if not self.args['quiet']:
+                    print ("Checking new steric clashes")
                 #TODO
 
             self.stm.modified = True
@@ -842,7 +865,8 @@ class StructureChecking():
                 self.summary['fixside']['detected'][mu.residue_id(r)] = at_list
             return True
         else:
-            print ("No residues with missing side chain atoms found")
+            if not self.args['quiet']:
+                print ("No residues with missing side chain atoms found")
             return False
 
     def fixside_fix(self, fix_side, check_clashes=True):
@@ -860,7 +884,8 @@ class StructureChecking():
         self.summary['fixside']['selected'] = fix_side
 
         if input_option == 'none':
-            print ('Nothing to do')
+            if not self.args['quiet']:
+                print ('Nothing to do')
         else:
             if input_option == 'all':
                 to_fix = self.miss_at_list
@@ -869,7 +894,8 @@ class StructureChecking():
                 for r_at in self.miss_at_list:
                     if mu.residue_num(r_at[0]) in fix_side.split(','):
                         to_fix.append(r_at)
-            print ("Fixing side chains")
+            if not self.args['quiet']:
+                print ("Fixing side chains")
             n = 0
             self.summary['fixside']['fixed'] = []
             if not hasattr(self,'residue_lib'):
@@ -924,7 +950,8 @@ class StructureChecking():
         mutated_res = self.mutations.apply_mutations (self.stm.st, self.mutation_rules, self.residue_lib)
 
         if check_clashes:
-            print ("Checking new clashes")
+            if not self.args['quiet']:
+                print ("Checking new clashes")
 
             contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
             atom_lists= self.data_library.get_atom_lists(contact_types)
@@ -977,7 +1004,8 @@ class StructureChecking():
                         }
                     )
             else:
-                print ('No {} clashes detected'.format(cls))
+                if not self.args['quiet']:
+                    print ('No {} clashes detected'.format(cls))
         return summary
 
 #===============================================================================
