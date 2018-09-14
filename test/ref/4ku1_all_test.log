@@ -127,7 +127,7 @@ No unusual contact(s) involving amide atoms found
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All 
-No residues with incorrent side-chain chirality found
+No residues with incorrect side-chain chirality found
 
 Step 10: chiral_bck
 
@@ -143,7 +143,16 @@ Step 12: backbone
 
 Running backbone.
 
-Step 13: getss
+Step 13: cistransbck
+
+Running cistransbck.
+2 cis peptide bonds
+TYR A373   PRO A374   Dihedral:   -4.211
+TYR B373   PRO B374   Dihedral:   -5.527
+1 trans peptide bonds with unusual omega dihedrals
+GLU B382   SER B383   Dihedral:  157.865
+
+Step 14: getss
 
 Running getss.
 4 Possible SS Bonds detected
@@ -152,7 +161,7 @@ Running getss.
   CYS B261.SG CYS B321.SG   4.126
   CYS B367.SG CYS B425.SG   4.188
 
-Step 14: clashes
+Step 15: clashes
 
 Running clashes.
 No severe clashes detected

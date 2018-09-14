@@ -1,0 +1,23 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Running cistransbck.
+Structure exists: 'tmpPDB/md/4mdh.cif' 
+Structure pdb:4mdh loaded
+ Num. models: 1
+ Num. chains: 2 (A,B)
+ Num. residues:  1143
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  477
+ Num. ligand or modified residues:  6
+ Num. water mol.:  471
+ Num. atoms:  5675
+2 cis peptide bonds
+ASN B130   PRO B131   Dihedral:   -2.078
+ASN A130   PRO A131   Dihedral:   -0.784
+2 trans peptide bonds with unusual omega dihedrals
+VAL B105   LYS B106   Dihedral:  156.996
+ASP A93    GLY A94    Dihedral: -159.766
+Structure not modified, not saving. Override with --force_save

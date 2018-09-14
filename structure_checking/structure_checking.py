@@ -39,7 +39,7 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
  
-AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','clashes']
+AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck',':clashes']
 
 # Main class
 class StructureChecking():
@@ -580,7 +580,7 @@ class StructureChecking():
             c_list = mu.check_r_list_clashes(self.amide_list, self.rr_dist, self.CLASH_DISTS, atom_lists)
 
             for cls in c_list:
-                for rkey in c_list[cls]:
+                for rkey in sorted(c_list[cls], key=lambda x: 10000 * c_list[cls][x][0].serial_number + c_list[cls][x][1].serial_number):
                     [at1,at2,d]=c_list[cls][rkey]
                     r1 = at1.get_parent()
                     r2 = at2.get_parent()
@@ -877,9 +877,9 @@ class StructureChecking():
             print('{} Residues with missing side chain atoms found'.format(len(self.miss_at_list)))
             for r_at in self.miss_at_list:
                 [r, at_list] = r_at
-                print ('{:10} {}'.format(mu.residue_id(r,self.stm.nmodels>1), ','.join(at_list)))
-                self.fixside_rnums.append(mu.residue_num(r,self.stm.nmodels>1))
-                self.summary['fixside']['detected'][mu.residue_id(r,self.stm.nmodels>1)] = at_list
+                print ('{:10} {}'.format(mu.residue_id(r,self.stm.has_models()), ','.join(at_list)))
+                self.fixside_rnums.append(mu.residue_num(r,self.stm.has_models()))
+                self.summary['fixside']['detected'][mu.residue_id(r,self.stm.has_models())] = at_list
             return True
         else:
             if not self.args['quiet']:
@@ -919,11 +919,11 @@ class StructureChecking():
                 self.residue_lib = ResidueLib(self.sets.res_library_path)
             fixed_res=[]
             for r_at in to_fix:
-                print (mu.residue_id(r_at[0],self.stm.nmodels>1))
+                print (mu.residue_id(r_at[0],self.stm.has_models()))
                 mu.remove_H_from_r(r_at[0], verbose= True)
                 self.stm.fix_side_chain(r_at, self.residue_lib)
                 n += 1
-                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0],self.stm.nmodels>1))
+                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0],self.stm.has_models()))
                 fixed_res.append(r_at[0])
 
             print ('Fixed {} side chain(s)'.format(n))
@@ -995,35 +995,61 @@ class StructureChecking():
             print('{} Residues with missing backbone atoms found'.format(len(self.miss_at_list)))
             for r_at in self.miss_at_list:
                 [r, at_list] = r_at
-                print (' {:10} {}'.format(mu.residue_id(r,self.stm.nmodels>1), ','.join(at_list)))
-                self.summary['backbone']['missing_atoms'][mu.residue_id(r,self.stm.nmodels>1)] = at_list
+                print (' {:10} {}'.format(mu.residue_id(r,self.stm.has_models()), ','.join(at_list)))
+                self.summary['backbone']['missing_atoms'][mu.residue_id(r,self.stm.has_models())] = at_list
         self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
         #Not bound consecutive residues
         self.stm.get_bck_breaks()
         if self.stm.bck_breaks_list:
             print ("Backbone breaks found")
             for br in self.stm.bck_breaks_list:
-                print (" {:10} - {:10} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1], self.stm.nmodels>1)))
+                print (" {:10} - {:10} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1], self.stm.has_models())))
         if self.stm.wrong_link_list:
             print ("Unexpected backbone links found")
             for br in self.stm.wrong_link_list:
-                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1],self.stm.nmodels>1),mu.residue_id(br[2],self.stm.nmodels>1)))
+                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),mu.residue_id(br[2],self.stm.has_models())))
         if self.stm.not_link_seq_list:
             print ("Consecutive residues too far away to be covalently linked")
             for br in self.stm.not_link_seq_list:
-                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0],self.stm.nmodels>1),mu.residue_id(br[1],self.stm.nmodels>1),br[2]))
+                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),br[2]))
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
             for br in self.stm.modified_residue_list:
-                print (" {:10} ".format(mu.residue_id(br,self.stm.nmodels>1)))
+                print (" {:10} ".format(mu.residue_id(br,self.stm.has_models())))
 
 
 
     def backbone_fix(self, fix):
         #TODO
         pass
-
+#===============================================================================
+    def cistransbck(self, opts):
+        self.run_method('cistransbck',opts)
+        
+    def cistransbck_check(self):
+        backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+        self.stm.check_cis_backbone(backbone_atoms, self.data_library.get_distances('COVLNK'))
+        if self.stm.cis_backbone_list:
+            print ('{} cis peptide bonds'.format(len(self.stm.cis_backbone_list)))
+            for lnk in self.stm.cis_backbone_list:
+                [r1,r2,dih] = lnk
+                print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1, self.stm.has_models()), mu.residue_id(r2, self.stm.has_models()), dih))
+        else:
+            if not self.args['quiet']:
+                print ("No cis peptide bonds found")
+ 
+        if self.stm.lowtrans_backbone_list:
+            print ('{} trans peptide bonds with unusual omega dihedrals'.format(len(self.stm.lowtrans_backbone_list)))
+            for lnk in self.stm.lowtrans_backbone_list:
+                [r1,r2,dih] = lnk
+                print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1, self.stm.has_models()), mu.residue_id(r2, self.stm.has_models()), dih))
+        else:
+            if not self.args['quiet']:
+                print ("No trans peptide bonds with unusual omega dihedrals found")
+                
+    def cistransbck_fix(self,option):
+        pass
 #===============================================================================
 
     def _load_structure(self, verbose=True, print_stats=True):
@@ -1064,5 +1090,5 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print ('No {} clashes detected'.format(cls))
         return summary
-
+    
 #===============================================================================

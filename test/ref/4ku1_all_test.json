@@ -229,6 +229,7 @@
  "chiral_bck": {
   "n_chirals": 399
  },
+ "cistransbck": {},
  "clashes": {
   "detected": {
    "apolar": [

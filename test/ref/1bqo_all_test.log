@@ -87,7 +87,7 @@ Rechecking
 Step 9: chiral --fix All
 
 Running chiral. Options: --fix All 
-No residues with incorrent side-chain chirality found
+No residues with incorrect side-chain chirality found
 
 Step 10: chiral_bck
 
@@ -103,12 +103,21 @@ Step 12: backbone
 
 Running backbone.
 
-Step 13: getss
+Step 13: cistransbck
+
+Running cistransbck.
+No cis peptide bonds found
+3 trans peptide bonds with unusual omega dihedrals
+ILE A203   GLY A204   Dihedral: -159.337
+ILE B203   GLY B204   Dihedral:  159.080
+THR A191   GLY A192   Dihedral:  156.442
+
+Step 14: getss
 
 Running getss.
 No SS bonds detected
 
-Step 14: clashes
+Step 15: clashes
 
 Running clashes.
 No severe clashes detected

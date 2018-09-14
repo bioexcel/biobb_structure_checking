@@ -53,12 +53,15 @@ python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_mutateside_test.pdb mutatesid
 echo "Running fixside on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 fixside --fix None > 2ki5_fixside_None_test.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_fixside_All_test.pdb fixside --fix All > 2ki5_fixside_All_test.log
-
 #chiral_bck
 echo "Running chiral_bck on modified 1ark"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log
 #backbone
+echo "Running backbone on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_backbone_test.pdb backbone > 2ki5_ibackbone_test.log
+#cistransbck
+echo "Running cistransbck on 4mdh"
+python3 $APPDIR/checkStruc.py -i pdb:4mdh -o 4mdh_cistransbck_test.pdb --non_interactive cistransbck > 4mdh_cistransbck_test.log
 #All_test
 echo -n "Running All checks on 1ark"
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_all_test.pdb --json 1ark_all_test.json --non_interactive command_list --list scripts/all_checks > 1ark_all_test.log

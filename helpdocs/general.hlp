@@ -15,7 +15,7 @@ Available commands:
 
 commands:  This help
 command_list:      Run all tests from conf file
-
+checkall:   Perform all checks without fixes
 
 1. System Configuration 
 =======================
