@@ -5,6 +5,11 @@
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
+ PDB id: 1SVC
+ Title: NFKB P50 HOMODIMER BOUND TO DNA
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSCRIPTION/DNA
+ Resolution: 2.600 A
  Num. models: 1
  Num. chains: 2 (D,P)
  Num. residues:  393

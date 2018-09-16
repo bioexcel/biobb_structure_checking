@@ -6,6 +6,11 @@
 Running clashes.
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
+ PDB id: 2KI5
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution: 1.90 A
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  908

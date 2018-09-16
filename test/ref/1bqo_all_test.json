@@ -21,14 +21,10 @@
  },
  "backbone": {},
  "chains": {
-  "detected": {
+  "ids": {
    "A": 1,
    "B": 1
   },
-  "opts": [
-   "--select_chain",
-   "All"
-  ],
   "selected": {}
  },
  "chiral": {
@@ -192,11 +188,7 @@
    " CA B305",
    "N25 B401"
   ],
-  "error": "Unknown selection",
-  "opts": [
-   "--remove",
-   "SO4"
-  ]
+  "error": "Unknown selection"
  },
  "metals": {
   "detected": [
@@ -212,10 +204,6 @@
    "B305"
   ],
   "n_removed": 4,
-  "opts": [
-   "--remove",
-   "ZN"
-  ],
   "removed": [
    " ZN A301",
    " ZN A302",
@@ -224,13 +212,7 @@
   ]
  },
  "models": {
-  "detected": {
-   "nmodels": 1
-  },
-  "opts": [
-   "--select_model",
-   "1"
-  ]
+  "nmodels": 1
  },
  "remh": {
   "opts": [

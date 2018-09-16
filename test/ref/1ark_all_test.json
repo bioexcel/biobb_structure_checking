@@ -21,13 +21,9 @@
  },
  "backbone": {},
  "chains": {
-  "detected": {
+  "ids": {
    "A": 1
-  },
-  "opts": [
-   "--select_chain",
-   "All"
-  ]
+  }
  },
  "chiral": {
   "n_chirals": 9,
@@ -120,18 +116,12 @@
   ]
  },
  "models": {
-  "detected": {
-   "nmodels": 15,
-   "type": {
-    "rmsd": 35.03169276576191,
-    "type": 2
-   }
-  },
-  "opts": [
-   "--select_model",
-   "1"
-  ],
-  "selected_model": 1
+  "nmodels": 15,
+  "selected": 1,
+  "type": {
+   "rmsd": 35.03169276576191,
+   "type": 2
+  }
  },
  "remh": {
   "n_detected": 60,

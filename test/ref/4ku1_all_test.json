@@ -1,202 +1,196 @@
 {
  "altloc": {
-  "detected": {
-   "ASN A361": [
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.59
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.59
-    },
-    {
-     "atom": "CG",
-     "loc_label": "B",
-     "occupancy": 0.59
-    },
-    {
-     "atom": "OD1",
-     "loc_label": "B",
-     "occupancy": 0.59
-    },
-    {
-     "atom": "ND2",
-     "loc_label": "B",
-     "occupancy": 0.59
-    }
-   ],
-   "GLN B347": [
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.57
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.57
-    },
-    {
-     "atom": "CG",
-     "loc_label": "B",
-     "occupancy": 0.57
-    },
-    {
-     "atom": "CD",
-     "loc_label": "B",
-     "occupancy": 0.57
-    },
-    {
-     "atom": "OE1",
-     "loc_label": "B",
-     "occupancy": 0.57
-    },
-    {
-     "atom": "NE2",
-     "loc_label": "B",
-     "occupancy": 0.57
-    }
-   ],
-   "GLN B418": [
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.62
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.62
-    },
-    {
-     "atom": "CG",
-     "loc_label": "B",
-     "occupancy": 0.62
-    },
-    {
-     "atom": "CD",
-     "loc_label": "B",
-     "occupancy": 0.62
-    },
-    {
-     "atom": "OE1",
-     "loc_label": "B",
-     "occupancy": 0.62
-    },
-    {
-     "atom": "NE2",
-     "loc_label": "B",
-     "occupancy": 0.62
-    }
-   ],
-   "LYS A340": [
-    {
-     "atom": "N",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "C",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "O",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CG",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CD",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CE",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "NZ",
-     "loc_label": "B",
-     "occupancy": 0.5
-    }
-   ],
-   "SER B298": [
-    {
-     "atom": "N",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "C",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "O",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.5
-    },
-    {
-     "atom": "OG",
-     "loc_label": "B",
-     "occupancy": 0.5
-    }
-   ],
-   "THR B411": [
-    {
-     "atom": "CA",
-     "loc_label": "B",
-     "occupancy": 0.66
-    },
-    {
-     "atom": "CB",
-     "loc_label": "B",
-     "occupancy": 0.66
-    },
-    {
-     "atom": "OG1",
-     "loc_label": "B",
-     "occupancy": 0.66
-    },
-    {
-     "atom": "CG2",
-     "loc_label": "B",
-     "occupancy": 0.66
-    }
-   ]
-  },
-  "opts": [
-   "--select_altloc",
-   "occupancy"
+  "ASN A361": [
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.59
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.59
+   },
+   {
+    "atom": "CG",
+    "loc_label": "B",
+    "occupancy": 0.59
+   },
+   {
+    "atom": "OD1",
+    "loc_label": "B",
+    "occupancy": 0.59
+   },
+   {
+    "atom": "ND2",
+    "loc_label": "B",
+    "occupancy": 0.59
+   }
+  ],
+  "GLN B347": [
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.57
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.57
+   },
+   {
+    "atom": "CG",
+    "loc_label": "B",
+    "occupancy": 0.57
+   },
+   {
+    "atom": "CD",
+    "loc_label": "B",
+    "occupancy": 0.57
+   },
+   {
+    "atom": "OE1",
+    "loc_label": "B",
+    "occupancy": 0.57
+   },
+   {
+    "atom": "NE2",
+    "loc_label": "B",
+    "occupancy": 0.57
+   }
+  ],
+  "GLN B418": [
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.62
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.62
+   },
+   {
+    "atom": "CG",
+    "loc_label": "B",
+    "occupancy": 0.62
+   },
+   {
+    "atom": "CD",
+    "loc_label": "B",
+    "occupancy": 0.62
+   },
+   {
+    "atom": "OE1",
+    "loc_label": "B",
+    "occupancy": 0.62
+   },
+   {
+    "atom": "NE2",
+    "loc_label": "B",
+    "occupancy": 0.62
+   }
+  ],
+  "LYS A340": [
+   {
+    "atom": "N",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "C",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "O",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CG",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CD",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CE",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "NZ",
+    "loc_label": "B",
+    "occupancy": 0.5
+   }
+  ],
+  "SER B298": [
+   {
+    "atom": "N",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "C",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "O",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.5
+   },
+   {
+    "atom": "OG",
+    "loc_label": "B",
+    "occupancy": 0.5
+   }
+  ],
+  "THR B411": [
+   {
+    "atom": "CA",
+    "loc_label": "B",
+    "occupancy": 0.66
+   },
+   {
+    "atom": "CB",
+    "loc_label": "B",
+    "occupancy": 0.66
+   },
+   {
+    "atom": "OG1",
+    "loc_label": "B",
+    "occupancy": 0.66
+   },
+   {
+    "atom": "CG2",
+    "loc_label": "B",
+    "occupancy": 0.66
+   }
   ],
   "selected": "occupancy"
  },
@@ -209,14 +203,10 @@
  },
  "backbone": {},
  "chains": {
-  "detected": {
+  "ids": {
    "A": 1,
    "B": 1
   },
-  "opts": [
-   "--select_chain",
-   "All"
-  ],
   "selected": {}
  },
  "chiral": {
@@ -355,11 +345,7 @@
    "FUL B508",
    "NAG B509"
   ],
-  "error": "Unknown selection",
-  "opts": [
-   "--remove",
-   "SO4"
-  ]
+  "error": "Unknown selection"
  },
  "metals": {
   "opts": [
@@ -368,13 +354,7 @@
   ]
  },
  "models": {
-  "detected": {
-   "nmodels": 1
-  },
-  "opts": [
-   "--select_model",
-   "1"
-  ]
+  "nmodels": 1
  },
  "remh": {
   "opts": [

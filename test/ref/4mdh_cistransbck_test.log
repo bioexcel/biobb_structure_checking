@@ -6,6 +6,11 @@
 Running cistransbck.
 Structure exists: 'tmpPDB/md/4mdh.cif' 
 Structure pdb:4mdh loaded
+ PDB id: 4MDH
+ Title: REFINED CRYSTAL STRUCTURE OF CYTOPLASMIC MALATE DEHYDROGENASE AT 2.5-ANGSTROMS RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: OXIDOREDUCTASE(NAD(A)-CHOH(D))
+ Resolution: 2.5 A
  Num. models: 1
  Num. chains: 2 (A,B)
  Num. residues:  1143

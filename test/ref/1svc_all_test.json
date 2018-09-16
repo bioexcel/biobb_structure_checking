@@ -21,14 +21,10 @@
  },
  "backbone": {},
  "chains": {
-  "detected": {
+  "ids": {
    "D": 2,
    "P": 1
   },
-  "opts": [
-   "--select_chain",
-   "All"
-  ],
   "selected": {}
  },
  "chiral": {
@@ -221,13 +217,7 @@
   ]
  },
  "models": {
-  "detected": {
-   "nmodels": 1
-  },
-  "opts": [
-   "--select_model",
-   "1"
-  ]
+  "nmodels": 1
  },
  "remh": {
   "opts": [

@@ -302,7 +302,7 @@ class StructureChecking():
             for r in self.alt_loc_res.keys():
                 to_fix[r] = {}
                 to_fix[r]['ats'] = self.alt_loc_res[r]
-                to_fix[r]['selected'] = select_altloc
+                to_fix[r]['select'] = select_altloc
         elif input_option == 'resnum':
             to_fix = {}
             selected_rnums = {}
