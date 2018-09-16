@@ -1011,7 +1011,7 @@ class StructureChecking():
             self.summary['backbone']['wrong_links']=[]
             for br in self.stm.wrong_link_list:
                 print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),mu.residue_id(br[2],self.stm.has_models())))
-                self.summary['backbone']['long_links'].append(
+                self.summary['backbone']['wrong_links'].append(
                 [mu.residue_id(br[0],self.stm.has_models()),
                 mu.residue_id(br[1],self.stm.has_models()),
                 mu.residue_id(br[2],self.stm.has_models())])
