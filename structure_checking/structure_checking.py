@@ -1059,6 +1059,7 @@ class StructureChecking():
             self.stm = StructureManager(self.args['input_structure_path'], self.args['debug'])
             if verbose:
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
+                self.stm.print_headers()
             if print_stats:
                 self.stm.print_stats()
             self.summary['stats'] = self.stm.get_stats()
