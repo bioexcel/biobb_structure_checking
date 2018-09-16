@@ -39,7 +39,7 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
  
-AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck',':clashes']
+AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
 
 # Main class
 class StructureChecking():
@@ -176,9 +176,9 @@ class StructureChecking():
 
     def models_check(self):
         print ('{} Model(s) detected'.format(self.stm.nmodels))
-        self.summary['models']['detected'] = {'nmodels': self.stm.nmodels}
+        self.summary['models'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
-            self.summary['models']['detected']['type'] = self.stm.models_type
+            self.summary['models']['type'] = self.stm.models_type
             if self.stm.models_type['type'] == mu.ENSM:
                 print ('Models superimpose, RMSd: {:8.3f} A, guessed as ensemble type (NMR / MD TRAJ)'.format(self.stm.models_type['rmsd']))
             elif self.stm.models_type['type'] == mu.BUNIT:
@@ -199,14 +199,14 @@ class StructureChecking():
 
         if input_option == 'error':
             print ('Error: unknown model {}'.format(select_model), file=sys.stderr)
-            self.summary['models']['error'] = 'Unknown model'
+            self.summary['models']['error'] = 'Unknown model '+select_model
             return 1
 
         print ('Selecting model num. {}'.format(select_model))
         if input_option != 'all':
             self.stm.select_model(select_model)
 
-        self.summary['models']['selected_model'] = select_model
+        self.summary['models']['selected'] = select_model
 
 # =============================================================================
     def chains (self, opts=None):
@@ -216,7 +216,7 @@ class StructureChecking():
         print ('{} Chains detected'.format(len(self.stm.chain_ids)))
         for ch_id in sorted(self.stm.chain_ids):
             print ('  {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
-        self.summary['chains']['detected'] = self.stm.chain_ids
+        self.summary['chains'] = {'ids':self.stm.chain_ids}
         return len(self.stm.chains_ids) > 1
 
     def chains_fix(self, select_chains):
@@ -227,8 +227,8 @@ class StructureChecking():
         [input_option, select_chains] = input_line.run()
 
         if input_option == 'error':
-            print ('Error unknown selection: {}'.format(opts.select_chains))
-            self.summary['chains']['error'] = 'Unknown selection'
+            print ('Error unknown selection: {}'.format(select_chains))
+            self.summary['chains']['error'] = 'Unknown selection ' + select_chains 
             return 1
 
         if input_option == 'all':
@@ -236,7 +236,6 @@ class StructureChecking():
         else:
             self.stm.select_chains(select_chains)
             print ('Selecting chain(s) {}'.format(select_chains))
-            self.summary['chains']['selected'] = select_chains.split(',')
             self.stm.set_chain_ids()
             self.summary['chains']['selected'] = self.stm.chain_ids
 
@@ -251,26 +250,26 @@ class StructureChecking():
         if len(self.alt_loc_res) > 0:
             print ('Detected {} residues with alternative location labels'.format(len(self.alt_loc_res)))
 
-            self.summary['altloc']['detected'] = {}
+            self.summary['altloc'] = {}
             self.alt_loc_rnums = []
             self.altlocs = {}
             for r in sorted(self.alt_loc_res, key=lambda x: x.index):
                 rid = mu.residue_id(r)
                 print(rid)
                 self.alt_loc_rnums.append(mu.residue_num(r))
-                self.summary['altloc']['detected'][rid] = []
+                self.summary['altloc'][rid] = []
                 self.altlocs[r] = sorted(self.alt_loc_res[r][0].child_dict)
                 for at in self.alt_loc_res[r]:
                     s = '  {:4}'.format(at.id)
                     for alt in sorted(at.child_dict):
                         s += ' {} ({:4.2f})'.format(alt, at.child_dict[alt].occupancy)
                     print (s)
-                    self.summary['altloc']['detected'][rid].append({
-                                                                   'atom':at.id,
-                                                                   'loc_label':alt,
-                                                                   'occupancy':at.child_dict[alt].occupancy
-                                                                   }
-                                                                   )
+                    self.summary['altloc'][rid].append({
+                                                 'atom':at.id,
+                                                 'loc_label':alt,
+                                                 'occupancy':at.child_dict[alt].occupancy
+                                                 }
+                                             )
             return True
         else:
             if not self.args['quiet']:
@@ -293,8 +292,8 @@ class StructureChecking():
         [input_option, select_altloc] = input_line.run()
 
         if input_option == 'error':
-            print ('Error: Unknown selection {} '.format(opts.select_altloc), file=sys.stderr)
-            self.summary['altloc']['error'] = "Unknown selection"
+            print ('Error: Unknown selection {} '.format(select_altloc), file=sys.stderr)
+            self.summary['altloc']['error'] = "Unknown selection " + select_altloc
             return 1
 
         print ('Selecting location {}'.format(select_altloc))
@@ -303,7 +302,7 @@ class StructureChecking():
             for r in self.alt_loc_res.keys():
                 to_fix[r] = {}
                 to_fix[r]['ats'] = self.alt_loc_res[r]
-                to_fix[r]['select'] = select_altloc
+                to_fix[r]['selected'] = select_altloc
         elif input_option == 'resnum':
             to_fix = {}
             selected_rnums = {}
@@ -330,7 +329,7 @@ class StructureChecking():
 
         if len(self.met_list) > 1:
             print ('{} Metal ions found'.format(len(self.met_list)))
-            self.summary['metals']['detected'] = []
+            self.summary['metals'] = {'detected':[]}
             self.met_rids = []
             self.at_groups = {}
             for at in sorted(self.met_list, key=lambda x: x.serial_number):
@@ -356,8 +355,8 @@ class StructureChecking():
         [input_option, remove_metals] = input_sess.run()
 
         if input_option == "error":
-            sys.stderr.write ('Error: unknown selection {}\n'.format(opts.remove_metals))
-            self.summary['metals']['error'] = 'Unknown selection'
+            sys.stderr.write ('Error: unknown selection {}\n'.format(remove_metals))
+            self.summary['metals']['error'] = 'Unknown selection ' + remove_metals
             return 1
 
         if input_option == 'none':
@@ -415,7 +414,7 @@ class StructureChecking():
         [input_option, remove_wat] = input_line.run()
 
         if input_option == 'error':
-            print ('Warning: unknown option {}'.format(opts.remove_wat))
+            print ('Warning: unknown option {}'.format(remove_wat))
             self.summary['remwat']['error'] = 'Unknown option'
             return 1
 
@@ -439,7 +438,7 @@ class StructureChecking():
             print ('{} Ligands detected '.format(len(self.lig_list)))
             self.ligand_rids = set()
             self.ligand_rnums = []
-            self.summary['ligands']['detected'] = []
+            self.summary['ligands'] = {'detected': []}
 
             for r in sorted(self.lig_list, key=lambda x: x.index):
                 print (mu.residue_id(r, self.stm.nmodels > 1))
@@ -1002,21 +1001,33 @@ class StructureChecking():
         self.stm.get_bck_breaks()
         if self.stm.bck_breaks_list:
             print ("Backbone breaks found")
+            self.summary['backbone']['breaks']=[]
             for br in self.stm.bck_breaks_list:
                 print (" {:10} - {:10} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1], self.stm.has_models())))
+                self.summary['backbone']['breaks'].append([mu.residue_id(br[0],self.stm.has_models()),
+                mu.residue_id(br[1], self.stm.has_models())])
         if self.stm.wrong_link_list:
             print ("Unexpected backbone links found")
+            self.summary['backbone']['wrong_links']=[]
             for br in self.stm.wrong_link_list:
                 print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),mu.residue_id(br[2],self.stm.has_models())))
+                self.summary['backbone']['long_links'].append(
+                [mu.residue_id(br[0],self.stm.has_models()),
+                mu.residue_id(br[1],self.stm.has_models()),
+                mu.residue_id(br[2],self.stm.has_models())])
         if self.stm.not_link_seq_list:
             print ("Consecutive residues too far away to be covalently linked")
+            self.summary['backbone']['long_links']=[]
             for br in self.stm.not_link_seq_list:
                 print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),br[2]))
+                self.summary['backbone']['long_links'].append([mu.residue_id(br[0],self.stm.has_models()),mu.residue_id(br[1],self.stm.has_models()),br[2]])
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
+            self.summary['backbone']['mod_residues']=[]
             for br in self.stm.modified_residue_list:
                 print (" {:10} ".format(mu.residue_id(br,self.stm.has_models())))
+                self.summary['backbone']['mod_residues'].append(mu.residue_id(br,self.stm.has_models()))
 
 
 
