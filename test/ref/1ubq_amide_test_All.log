@@ -11,6 +11,7 @@ Structure pdb:1ubq loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: CHROMOSOMAL PROTEIN
  Resolution: 1.8 A
+
  Num. models: 1
  Num. chains: 1 (A: Protein)
  Num. residues:  134
@@ -19,6 +20,7 @@ Structure pdb:1ubq loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  660
+
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)

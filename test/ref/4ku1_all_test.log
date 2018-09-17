@@ -10,6 +10,7 @@ Structure pdb:4ku1 loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: IMMUNE SYSTEM
  Resolution: 1.90 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  583
@@ -18,6 +19,7 @@ Structure pdb:4ku1 loaded
  Num. ligands or modified residues:  20
  Num. water mol.:  148
  Num. atoms:  3714
+
 
 Step 1: models --select_model 1
 
@@ -28,9 +30,9 @@ Single model found
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All 
-2 Chains detected
-  A: Protein
-  B: Protein
+2 Chain(s) detected
+ A: Protein
+ B: Protein
 Selecting all chains
 
 Step 3: inscodes
@@ -95,26 +97,26 @@ Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
 20 Ligands detected 
-NAG A501
-NAG A502
-BMA A503
-MAN A504
-NAG A505
-GAL A506
-FUL A507
-MAN A508
-NAG A509
-GAL A510
-PG4 A511
-NAG B501
-NAG B502
-BMA B503
-MAN B504
-NAG B505
-GAL B506
-MAN B507
-FUL B508
-NAG B509
+ NAG A501
+ NAG A502
+ BMA A503
+ MAN A504
+ NAG A505
+ GAL A506
+ FUL A507
+ MAN A508
+ NAG A509
+ GAL A510
+ PG4 A511
+ NAG B501
+ NAG B502
+ BMA B503
+ MAN B504
+ NAG B505
+ GAL B506
+ MAN B507
+ FUL B508
+ NAG B509
 Input not valid
 Error: unknown selection SO4
 
@@ -166,10 +168,10 @@ Step 15: getss
 
 Running getss.
 4 Possible SS Bonds detected
-  CYS A261.SG CYS A321.SG   4.141
-  CYS A367.SG CYS A425.SG   3.981
-  CYS B261.SG CYS B321.SG   4.126
-  CYS B367.SG CYS B425.SG   4.188
+ CYS A261.SG  CYS A321.SG     4.141
+ CYS A367.SG  CYS A425.SG     3.981
+ CYS B261.SG  CYS B321.SG     4.126
+ CYS B367.SG  CYS B425.SG     4.188
 
 Step 16: clashes
 

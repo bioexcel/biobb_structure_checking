@@ -9,6 +9,7 @@ Title:  structure of ubiquitin refined at 1.8 angstroms resolution
 Experimental method: x-ray diffraction
 Keywords: chromosomal protein
 Resolution: 1.8 A
+
  Num. models: 1
  Num. chains: 1 (A: Protein)
  Num. residues:  134
@@ -17,6 +18,7 @@ Resolution: 1.8 A
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  658
+
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    

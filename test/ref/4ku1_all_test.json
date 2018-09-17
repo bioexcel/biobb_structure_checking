@@ -298,30 +298,28 @@
    "All"
   ]
  },
- "getss": {
-  "detected": [
-   {
-    "at1": "CYS A261.SG",
-    "at2": "CYS A321.SG",
-    "dist": 4.141325950622559
-   },
-   {
-    "at1": "CYS A367.SG",
-    "at2": "CYS A425.SG",
-    "dist": 3.9808382987976074
-   },
-   {
-    "at1": "CYS B261.SG",
-    "at2": "CYS B321.SG",
-    "dist": 4.126011371612549
-   },
-   {
-    "at1": "CYS B367.SG",
-    "at2": "CYS B425.SG",
-    "dist": 4.187800884246826
-   }
-  ]
- },
+ "getss": [
+  {
+   "at1": "CYS A261.SG",
+   "at2": "CYS A321.SG",
+   "dist": 4.141325950622559
+  },
+  {
+   "at1": "CYS A367.SG",
+   "at2": "CYS A425.SG",
+   "dist": 3.9808382987976074
+  },
+  {
+   "at1": "CYS B261.SG",
+   "at2": "CYS B321.SG",
+   "dist": 4.126011371612549
+  },
+  {
+   "at1": "CYS B367.SG",
+   "at2": "CYS B425.SG",
+   "dist": 4.187800884246826
+  }
+ ],
  "inscodes": {},
  "ligands": {
   "detected": [

@@ -8,6 +8,7 @@ Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
 Title: 
 Experimental method: unknown
 Resolution: 0.0 A
+
  Num. models: 1
  Num. chains: 1 (A: Protein)
  Num. residues:  60
@@ -16,6 +17,7 @@ Resolution: 0.0 A
  Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  463
+
 1 residues with incorrect backbone chirality found
  ALA A2    
 Structure not modified, not saving. Override with --force_save

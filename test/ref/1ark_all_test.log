@@ -9,6 +9,7 @@ Structure pdb:1ark loaded
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
+
  Num. models: 15
  Num. chains: 1 (A: Protein)
  Num. residues:  900
@@ -17,6 +18,7 @@ Structure pdb:1ark loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  13575
+
 
 Step 1: models --select_model 1
 
@@ -28,8 +30,8 @@ Selecting model num. 1
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All 
-1 Chains detected
-  A: Protein
+1 Chain(s) detected
+ A: Protein
 
 Step 3: inscodes
 

@@ -11,6 +11,7 @@ Structure pdb:2ki5 loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
  Resolution: 1.90 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
@@ -19,13 +20,14 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+
 6 Residues with missing side chain atoms found
-MET A46    CG,SD,CE
-PRO A154   CG,CD
-PRO A280   CG,CD
-MET B46    CG,SD,CE
-PRO B154   CG,CD
-ARG B220   CG,CD,NE,CZ,NH1,NH2
+ MET A46    CG,SD,CE
+ PRO A154   CG,CD
+ PRO A280   CG,CD
+ MET B46    CG,SD,CE
+ PRO B154   CG,CD
+ ARG B220   CG,CD,NE,CZ,NH1,NH2
 Fixing side chains
 MET A46
   Adding new atom CG

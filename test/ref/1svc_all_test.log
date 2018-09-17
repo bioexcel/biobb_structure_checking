@@ -10,6 +10,7 @@ Structure pdb:1svc loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA
  Resolution: 2.600 A
+
  Num. models: 1
  Num. chains: 2 (D: DNA, P: Protein)
  Num. residues:  393
@@ -18,6 +19,7 @@ Structure pdb:1svc loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  63
  Num. atoms:  2903
+
 
 Step 1: models --select_model 1
 
@@ -28,9 +30,9 @@ Single model found
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All 
-2 Chains detected
-  D: DNA
-  P: Protein
+2 Chain(s) detected
+ D: DNA
+ P: Protein
 Selecting all chains
 
 Step 3: inscodes

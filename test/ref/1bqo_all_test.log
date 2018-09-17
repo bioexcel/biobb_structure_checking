@@ -10,6 +10,7 @@ Structure pdb:1bqo loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: METALLOPROTEASE
  Resolution: 2.3 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  428
@@ -18,6 +19,7 @@ Structure pdb:1bqo loaded
  Num. ligands or modified residues:  11
  Num. water mol.:  75
  Num. atoms:  2841
+
 
 Step 1: models --select_model 1
 
@@ -28,9 +30,9 @@ Single model found
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All 
-2 Chains detected
-  A: Protein
-  B: Protein
+2 Chain(s) detected
+ A: Protein
+ B: Protein
 Selecting all chains
 
 Step 3: inscodes
@@ -47,29 +49,29 @@ Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
 10 Metal ions found
-    ZN A301.ZN
-    ZN A302.ZN
-    CA A303.CA
-    CA A304.CA
-    CA A305.CA
-    ZN B301.ZN
-    ZN B302.ZN
-    CA B303.CA
-    CA B304.CA
-    CA B305.CA
+ {:12}  ZN A301.ZN
+ {:12}  ZN A302.ZN
+ {:12}  CA A303.CA
+ {:12}  CA A304.CA
+ {:12}  CA A305.CA
+ {:12}  ZN B301.ZN
+ {:12}  ZN B302.ZN
+ {:12}  CA B303.CA
+ {:12}  CA B304.CA
+ {:12}  CA B305.CA
 Metal Atoms removed ZN (4)
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
 7 Ligands detected 
- CA A303
- CA A304
- CA A305
- CA B303
- CA B304
- CA B305
-N25 B401
+  CA A303
+  CA A304
+  CA A305
+  CA B303
+  CA B304
+  CA B305
+ N25 B401
 Input not valid
 Error: unknown selection SO4
 

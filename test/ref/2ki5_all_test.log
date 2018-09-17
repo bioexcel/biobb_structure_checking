@@ -10,6 +10,7 @@ Structure pdb:2ki5 loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
  Resolution: 1.90 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
@@ -18,6 +19,7 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+
 
 Step 1: models --select_model 1
 
@@ -28,9 +30,9 @@ Single model found
 Step 2: chains --select_chain All
 
 Running chains. Options: --select_chain All 
-2 Chains detected
-  A: Protein
-  B: Protein
+2 Chain(s) detected
+ A: Protein
+ B: Protein
 Selecting all chains
 
 Step 3: inscodes
@@ -61,10 +63,10 @@ Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
 4 Ligands detected 
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+ SO4 A4
+ AC2 A1
+ SO4 B3
+ AC2 B2
 Ligands removed SO4 (2)
 
 Step 7: remwat --remove Yes
@@ -109,12 +111,12 @@ Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
 6 Residues with missing side chain atoms found
-MET A46    CG,SD,CE
-PRO A154   CG,CD
-PRO A280   CG,CD
-MET B46    CG,SD,CE
-PRO B154   CG,CD
-ARG B220   CG,CD,NE,CZ,NH1,NH2
+ MET A46    CG,SD,CE
+ PRO A154   CG,CD
+ PRO A280   CG,CD
+ MET B46    CG,SD,CE
+ PRO B154   CG,CD
+ ARG B220   CG,CD,NE,CZ,NH1,NH2
 Fixing side chains
 MET A46
   Adding new atom CG
@@ -144,13 +146,13 @@ Fixed 6 side chain(s)
 Checking possible clashes
 No severe clashes detected
 3 Steric apolar clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
- MET B46.CE   VAL B352.O      0.921 A
 3 Steric polar_acceptor clashes detected
+ MET B46.SD   VAL B352.O      2.291 A
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
- MET B46.SD   VAL B352.O      2.291 A
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
@@ -167,7 +169,7 @@ Running backbone.
  GLY B148   CA,C,O
  SER B263   CA,C,O
  ALA B375   CA,C,O
-Backbone breaks found
+6 Backbone breaks found
  VAL A70    - ASP A77    
  GLY A148   - PRO A154   
  GLY A264   - PRO A280   
@@ -209,8 +211,8 @@ No severe clashes detected
  SER B357.O   ILE B361.CG1    2.861 A
 8 Steric polar_acceptor clashes detected
  MET A46.SD   VAL A352.O      2.171 A
- MET A46.SD   THR A354.O      2.569 A
  MET B46.SD   VAL B352.O      2.291 A
+ MET A46.SD   THR A354.O      2.569 A
  ASP A55.O    VAL A204.O      3.035 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A

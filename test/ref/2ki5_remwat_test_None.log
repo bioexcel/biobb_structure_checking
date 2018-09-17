@@ -11,6 +11,7 @@ Structure pdb:2ki5 loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
  Resolution: 1.90 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
@@ -19,5 +20,6 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+
 292 Water molecules detected
 Structure not modified, not saving. Override with --force_save

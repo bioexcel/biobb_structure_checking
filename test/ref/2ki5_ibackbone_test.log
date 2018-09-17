@@ -11,6 +11,7 @@ Structure pdb:2ki5 loaded
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
  Resolution: 1.90 A
+
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
@@ -19,6 +20,7 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+
 8 Residues with missing backbone atoms found
  VAL A70    CA,C,O
  GLY A148   CA,C,O
@@ -28,7 +30,7 @@ Structure pdb:2ki5 loaded
  GLY B148   CA,C,O
  SER B263   CA,C,O
  ALA B375   CA,C,O
-Backbone breaks found
+6 Backbone breaks found
  VAL A70    - ASP A77    
  GLY A148   - PRO A154   
  GLY A264   - PRO A280   
