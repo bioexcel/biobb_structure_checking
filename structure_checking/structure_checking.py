@@ -444,8 +444,13 @@ class StructureChecking():
             self.summary['ligands'] = {'detected': []}
 
             for r in sorted(self.lig_list, key=lambda x: x.index):
-                print (mu.residue_id(r, self.stm.nmodels > 1))
-                self.summary['ligands']['detected'].append(mu.residue_id(r, self.stm.nmodels > 1))
+                if self.stm.has_models():
+                    if r.get_parent().get_parent().id > 0:
+                        continue
+                    print (mu.residue_id(r,False)+'/*')
+                else:
+                    print (mu.residue_id(r,False))
+                self.summary['ligands']['detected'].append(mu.residue_id(r, self.stm.has_models()))
                 self.ligand_rids.add(r.get_resname())
                 self.ligand_rnums.append(mu.residue_num(r))
             return True
@@ -795,8 +800,8 @@ class StructureChecking():
                 print ("No protein chains detected, skipping")
             else:
                 print ("Protein chains detected but no residues with chiral CA found (weird!!)")
-            if not self.args['quiet']:
-                print ("No residues with chiral CA found (weird!!)")
+                if not self.args['quiet']:
+                    print ("No residues with chiral CA found (weird!!)")
             return False
 
 
