@@ -39,7 +39,7 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
  
-AVAILABLE_METHODS=['models','chains','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
+AVAILABLE_METHODS=['models','chains','inscodes','metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
 
 # Main class
 class StructureChecking():
@@ -242,6 +242,24 @@ class StructureChecking():
             self.stm.set_chain_ids()
             self.summary['chains']['selected'] = self.stm.chain_ids
 
+# =============================================================================
+    def inscodes(self, opts=None):
+        self.run_method('inscodes', opts)
+    
+    def inscodes_check(self):
+        self.stm.get_ins_codes()
+        if self.stm.ins_codes_list:
+            print ('{} Residues with insertion codes found'.format(len(self.stm.ins_codes_list)))
+            self.summary['inscodes']=[]
+            for r in self.stm.ins_codes_list:
+                print (mu.residue_id(r,self.stm.has_models()))
+                self.summary['inscodes'].append(mu.residue_id(r,self.stm.has_models()))
+        else:
+            if not self.args['quiet']:
+                print ("No residues with insertion codes found")
+            
+    def inscodes_fix(self,select_codes):
+        pass
 # =============================================================================
     def altloc(self, opts=None):
         self.run_method('altloc', opts)

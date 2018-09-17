@@ -1,0 +1,3 @@
+Detects residues with insertion codes
+
+Usage: checkStruct.py inscodes
