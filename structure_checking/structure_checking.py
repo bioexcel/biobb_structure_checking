@@ -215,7 +215,7 @@ class StructureChecking():
     def chains_check(self):
         print ('{} Chains detected'.format(len(self.stm.chain_ids)))
         for ch_id in sorted(self.stm.chain_ids):
-            if len (self.stm.chain_ids[ch_id]) > 1:
+            if isinstance(self.stm.chain_ids[ch_id],list):
                 print ('  {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} RNA: {s[2]:4.2f} Other: {s[3]:4.2f})'.format(ch_id, s=self.stm.chain_ids[ch_id]))
             else:
                 print ('  {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
