@@ -603,9 +603,8 @@ class StructureChecking():
             self.amide_rnums = []
 
             c_list = mu.check_r_list_clashes(self.amide_list, self.rr_dist, self.CLASH_DISTS, atom_lists)
-
             for cls in c_list:
-                for rkey in sorted(c_list[cls], key=lambda x: 10000 * c_list[cls][x][0].serial_number + c_list[cls][x][1].serial_number):
+                for rkey in c_list[cls]:
                     [at1,at2,d]=c_list[cls][rkey]
                     r1 = at1.get_parent()
                     r2 = at2.get_parent()
@@ -624,7 +623,7 @@ class StructureChecking():
             if len(self.amide_cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
-                for at_pair in self.amide_cont_list:
+                for at_pair in sorted(self.amide_cont_list, key=lambda x: x[0].serial_number):
                     print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0], self.stm.nmodels > 1), mu.atom_id(at_pair[1], self.stm.nmodels > 1), at_pair[2]))
                     self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0], self.stm.nmodels > 1), 'at2':mu.atom_id(at_pair[1], self.stm.nmodels > 1), 'dist': float(at_pair[2])})
                 return True
