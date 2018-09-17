@@ -12,11 +12,11 @@ Structure pdb:2ki5 loaded
  Keywords: TRANSFERASE
  Resolution: 1.90 A
  Num. models: 1
- Num. chains: 2 (A,B)
+ Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
  Num. residues with ins. codes:  0
  Num. HETATM residues:  296
- Num. ligand or modified residues:  4
+ Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
 Detected 2 residues with alternative location labels
@@ -31,10 +31,10 @@ HOH A779
 Selecting location occupancy
 Structure saved on 2ki5_altloc_test_occ.pdb
 Final Num. models: 1
-Final Num. chains: 2 (A,B)
+Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  296
-Final Num. ligand or modified residues:  4
+Final Num. ligands or modified residues:  4
 Final Num. water mol.:  292
 Final Num. atoms:  4961

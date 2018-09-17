@@ -204,6 +204,7 @@
   ]
  },
  "getss": {},
+ "inscodes": {},
  "ligands": {
   "opts": [
    "--remove",

@@ -10,11 +10,11 @@ Experimental method: x-ray diffraction
 Keywords: chromosomal protein
 Resolution: 1.8 A
  Num. models: 1
- Num. chains: 1 (A)
+ Num. chains: 1 (A: Protein)
  Num. residues:  134
  Num. residues with ins. codes:  0
  Num. HETATM residues:  58
- Num. ligand or modified residues:  0
+ Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  658
 2 residues with incorrect side-chain chirality found
@@ -30,10 +30,10 @@ No positive clashes detected
 No negative clashes detected
 Structure saved on 1ubq_chi_chiral_test.pdb
 Final Num. models: 1
-Final Num. chains: 1 (A)
+Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  58
-Final Num. ligand or modified residues:  0
+Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  658

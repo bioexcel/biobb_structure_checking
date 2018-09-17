@@ -11,11 +11,11 @@ Structure pdb:1ark loaded
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
  Num. models: 15
- Num. chains: 1 (A)
+ Num. chains: 1 (A: Protein)
  Num. residues:  900
  Num. residues with ins. codes:  0
  Num. HETATM residues:  0
- Num. ligand or modified residues:  0
+ Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  13575
 900 Residues containing H atoms detected

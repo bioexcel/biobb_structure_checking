@@ -9,6 +9,9 @@ python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_models_1_test.pdb --non_intera
 echo "Running chains on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select_chain All > 2ki5_chains_test_all.log
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select_chain B > 2ki5_chains_test_B.log
+#inscodes
+echo "Running inscodes on 104l"
+python3 $APPDIR/checkStruc.py -i pdb:104l -o 104l_chains_test.pdb --non_interactive inscodes > 104l_chains_test.log
 #altloc
 echo "Running altloc on 2ki5"
 python3 $APPDIR/checkStruc.py -i pdb:2ki5 -o 2ki5_altloc_test_occ.pdb --non_interactive altloc --select_altloc occupancy > 2ki5_altloc_test_occ.log

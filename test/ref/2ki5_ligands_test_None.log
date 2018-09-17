@@ -12,11 +12,11 @@ Structure pdb:2ki5 loaded
  Keywords: TRANSFERASE
  Resolution: 1.90 A
  Num. models: 1
- Num. chains: 2 (A,B)
+ Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
  Num. residues with ins. codes:  0
  Num. HETATM residues:  296
- Num. ligand or modified residues:  4
+ Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
 4 Ligands detected 

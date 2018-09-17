@@ -11,11 +11,11 @@ Structure pdb:1ark loaded
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
  Num. models: 15
- Num. chains: 1 (A)
+ Num. chains: 1 (A: Protein)
  Num. residues:  900
  Num. residues with ins. codes:  0
  Num. HETATM residues:  0
- Num. ligand or modified residues:  0
+ Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  13575
 15 Model(s) detected
@@ -23,10 +23,10 @@ Models do not superimpose, RMSd:   35.032 A, guessed as Biounit type
 Selecting model num. 5
 Structure saved on 1ark_models_5_test.pdb
 Final Num. models: 1
-Final Num. chains: 1 (A)
+Final Num. chains: 1 (A: Protein)
 Final Num. residues:  60
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  0
-Final Num. ligand or modified residues:  0
+Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  905

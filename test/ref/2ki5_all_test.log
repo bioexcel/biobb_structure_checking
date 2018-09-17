@@ -11,11 +11,11 @@ Structure pdb:2ki5 loaded
  Keywords: TRANSFERASE
  Resolution: 1.90 A
  Num. models: 1
- Num. chains: 2 (A,B)
+ Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
  Num. residues with ins. codes:  0
  Num. HETATM residues:  296
- Num. ligand or modified residues:  4
+ Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
 
@@ -33,7 +33,12 @@ Running chains. Options: --select_chain All
   B: Protein
 Selecting all chains
 
-Step 3: altloc --select_altloc occupancy
+Step 3: inscodes
+
+Running inscodes.
+No residues with insertion codes found
+
+Step 4: altloc --select_altloc occupancy
 
 Running altloc. Options: --select_altloc occupancy 
 Detected 2 residues with alternative location labels
@@ -47,12 +52,12 @@ HOH A779
   O    A (1.00)
 Selecting location occupancy
 
-Step 4: metals --remove ZN
+Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
 No metal ions present
 
-Step 5: ligands --remove SO4
+Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
 4 Ligands detected 
@@ -62,28 +67,28 @@ SO4 B3
 AC2 B2
 Ligands removed SO4 (2)
 
-Step 6: remwat --remove Yes
+Step 7: remwat --remove Yes
 
 Running remwat. Options: --remove Yes 
 292 Water molecules detected
 292 Water molecules removed
 
-Step 7: remh --remove Yes
+Step 8: remh --remove Yes
 
 Running remh. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
-Step 8: amide --fix All
+Step 9: amide --fix All
 
 Running amide. Options: --fix All 
 No unusual contact(s) involving amide atoms found
 
-Step 9: chiral --fix All
+Step 10: chiral --fix All
 
 Running chiral. Options: --fix All 
 No residues with incorrect side-chain chirality found
 
-Step 10: chiral_bck
+Step 11: chiral_bck
 
 Running chiral_bck.
 Warning: atom CA not found in VAL A70
@@ -100,7 +105,7 @@ Warning: atom C not found in ALA B375
 Warning: atom CB not found in ALA B375
 No residues with incorrect backbone chirality found
 
-Step 11: fixside --fix All
+Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
 6 Residues with missing side chain atoms found
@@ -150,7 +155,7 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 12: backbone
+Step 13: backbone
 
 Running backbone.
 8 Residues with missing backbone atoms found
@@ -170,18 +175,18 @@ Backbone breaks found
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
 
-Step 13: cistransbck
+Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 14: getss
+Step 15: getss
 
 Running getss.
 No SS bonds detected
 
-Step 15: clashes
+Step 16: clashes
 
 Running clashes.
 No severe clashes detected
@@ -221,11 +226,11 @@ No negative clashes detected
 Command list completed
 Structure saved on 2ki5_all_test.pdb
 Final Num. models: 1
-Final Num. chains: 2 (A,B)
+Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  614
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
-Final Num. ligand or modified residues:  2
+Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
 Final Num. atoms:  4677
 Summary data saved on 2ki5_all_test.json

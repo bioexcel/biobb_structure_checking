@@ -23,6 +23,8 @@ models [--select_model model_num]
     Detect/Select Models
 chains [--select_chains chain_ids]    
     Detect/Select Chains 
+inscodes 
+    Detects residues with insertion codes (no fix)
 altloc [--select_altloc occupancy| alt_id | list of res_id:alt_id]
     Detect/Select Alternative Locations 
 metals [--remove All | None | Met_ids_list | Residue_list]   

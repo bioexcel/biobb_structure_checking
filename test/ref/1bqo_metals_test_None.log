@@ -12,11 +12,11 @@ Structure pdb:1bqo loaded
  Keywords: METALLOPROTEASE
  Resolution: 2.3 A
  Num. models: 1
- Num. chains: 2 (A,B)
+ Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  428
  Num. residues with ins. codes:  0
  Num. HETATM residues:  86
- Num. ligand or modified residues:  11
+ Num. ligands or modified residues:  11
  Num. water mol.:  75
  Num. atoms:  2841
 10 Metal ions found

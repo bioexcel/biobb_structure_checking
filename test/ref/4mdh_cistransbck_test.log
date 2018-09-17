@@ -12,11 +12,11 @@ Structure pdb:4mdh loaded
  Keywords: OXIDOREDUCTASE(NAD(A)-CHOH(D))
  Resolution: 2.5 A
  Num. models: 1
- Num. chains: 2 (A,B)
+ Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  1143
  Num. residues with ins. codes:  0
  Num. HETATM residues:  477
- Num. ligand or modified residues:  6
+ Num. ligands or modified residues:  6
  Num. water mol.:  471
  Num. atoms:  5675
 2 cis peptide bonds
