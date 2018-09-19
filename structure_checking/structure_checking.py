@@ -195,7 +195,7 @@ class StructureChecking():
     def models_fix(self, select_model):
         input_line = ParamInput('Select Model Num', select_model, self.args['non_interactive'])
         input_line.add_option_all ()
-        input_line.add_option ('modelno', [], opt_type='int', min=1, max=self.stm.nmodels)
+        input_line.add_option ('modelno', [], opt_type='int', min_val=1, max_val=self.stm.nmodels)
         [input_option, select_model] = input_line.run()
 
         if input_option == 'error':

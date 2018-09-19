@@ -17,14 +17,14 @@ class ParamInput():
         self.non_interactive = non_interactive
         self.prefix = prefix
 
-    def add_option(self, label, opt_list, case=False, opt_type='list', multiple=False, min=0, max=0, list2=None):
+    def add_option(self, label, opt_list, case=False, opt_type='list', multiple=False, min_val=0, max_val=0, list2=None):
         self.options.append({
             'label':label,
             'opt_list':opt_list,
             'case':case,
             'type':opt_type,
-            'min':min,
-            'max':max,
+            'min':min_val,
+            'max':max_val,
             'multiple':multiple,
             'list2':list2
         })
