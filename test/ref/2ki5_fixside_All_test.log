@@ -59,8 +59,8 @@ No severe clashes detected
 4 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
- MET B46.CE   VAL B352.O      0.921 A
  ARG B220.CZ  SO4 B3.O3       1.597 A
+ MET B46.CE   VAL B352.O      0.921 A
 3 Steric polar_acceptor clashes detected
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A

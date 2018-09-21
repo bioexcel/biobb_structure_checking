@@ -29,13 +29,6 @@ class CmdLine():
         )
 
         self.argparser.add_argument(
-            '-d', '--debug',
-            action="store_true",
-            dest="debug",
-            help='Print DEBUG information'
-        )
-
-        self.argparser.add_argument(
             '--version',
             action='version',
             version="%(prog)s v0.1"
@@ -108,7 +101,5 @@ class CmdLine():
         print ("Arguments")
         print ("=========")
         print ("Command:", args.command)
-        if args.debug:
-            print (' DEBUG mode on')
         print()
 

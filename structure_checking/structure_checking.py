@@ -355,7 +355,7 @@ class StructureChecking():
             self.met_rids = []
             self.at_groups = {}
             for at in sorted(self.met_list, key=lambda x: x.serial_number):
-                print (" {:12}", mu.atom_id(at))
+                print (" {:12}".format(mu.atom_id(at)))
                 r = at.get_parent()
                 self.met_rids.append(mu.residue_num(r))
                 if not at.id in self.at_groups:
@@ -1088,7 +1088,7 @@ class StructureChecking():
         if not hasattr(self, 'stm'):
             if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
                 self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
-            self.stm = StructureManager(self.args['input_structure_path'], self.args['debug'])
+            self.stm = StructureManager(self.args['input_structure_path'])
             if verbose:
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_headers()

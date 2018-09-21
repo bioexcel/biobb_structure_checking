@@ -84,6 +84,7 @@
   }
  },
  "final_stats": {
+  "ca_only": false,
   "chain_ids": {
    "A": 1
   },
@@ -139,6 +140,7 @@
   ]
  },
  "stats": {
+  "ca_only": false,
   "chain_ids": {
    "A": 1
   },

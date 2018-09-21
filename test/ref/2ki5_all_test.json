@@ -136,13 +136,13 @@
    "apolar": [
     {
      "at1": "MET A46.CE",
-     "at2": "VAL A352.CG2",
-     "dist": 1.842692255973816
+     "at2": "THR A354.O",
+     "dist": 1.869175910949707
     },
     {
      "at1": "MET A46.CE",
-     "at2": "THR A354.O",
-     "dist": 1.869175910949707
+     "at2": "VAL A352.CG2",
+     "dist": 1.842692255973816
     },
     {
      "at1": "MET B46.CE",
@@ -219,8 +219,8 @@
    "polar_acceptor": [
     {
      "at1": "MET A46.SD",
-     "at2": "VAL A352.O",
-     "dist": 2.170837879180908
+     "at2": "THR A354.O",
+     "dist": 2.569476366043091
     },
     {
      "at1": "MET B46.SD",
@@ -229,8 +229,8 @@
     },
     {
      "at1": "MET A46.SD",
-     "at2": "THR A354.O",
-     "dist": 2.569476366043091
+     "at2": "VAL A352.O",
+     "dist": 2.170837879180908
     },
     {
      "at1": "ASP A55.O",
@@ -286,6 +286,7 @@
   }
  },
  "final_stats": {
+  "ca_only": false,
   "chain_ids": {
    "A": 1,
    "B": 1
@@ -349,11 +350,6 @@
  "fixside_clashes": {
   "apolar": [
    {
-    "at1": "MET B46.CE",
-    "at2": "VAL B352.O",
-    "dist": 0.9205783009529114
-   },
-   {
     "at1": "MET A46.CE",
     "at2": "VAL A352.CG2",
     "dist": 1.842692255973816
@@ -362,15 +358,15 @@
     "at1": "MET A46.CE",
     "at2": "THR A354.O",
     "dist": 1.869175910949707
+   },
+   {
+    "at1": "MET B46.CE",
+    "at2": "VAL B352.O",
+    "dist": 0.9205783009529114
    }
   ],
   "negative": [],
   "polar_acceptor": [
-   {
-    "at1": "MET B46.SD",
-    "at2": "VAL B352.O",
-    "dist": 2.291478157043457
-   },
    {
     "at1": "MET A46.SD",
     "at2": "VAL A352.O",
@@ -380,6 +376,11 @@
     "at1": "MET A46.SD",
     "at2": "THR A354.O",
     "dist": 2.569476366043091
+   },
+   {
+    "at1": "MET B46.SD",
+    "at2": "VAL B352.O",
+    "dist": 2.291478157043457
    }
   ],
   "polar_donor": [],
@@ -428,6 +429,7 @@
   ]
  },
  "stats": {
+  "ca_only": false,
   "chain_ids": {
    "A": 1,
    "B": 1

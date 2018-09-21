@@ -22,16 +22,16 @@ Structure pdb:1bqo loaded
  Num. atoms:  2841
 
 10 Metal ions found
- {:12}  ZN A301.ZN
- {:12}  ZN A302.ZN
- {:12}  CA A303.CA
- {:12}  CA A304.CA
- {:12}  CA A305.CA
- {:12}  ZN B301.ZN
- {:12}  ZN B302.ZN
- {:12}  CA B303.CA
- {:12}  CA B304.CA
- {:12}  CA B305.CA
+  ZN A301.ZN 
+  ZN A302.ZN 
+  CA A303.CA 
+  CA A304.CA 
+  CA A305.CA 
+  ZN B301.ZN 
+  ZN B302.ZN 
+  CA B303.CA 
+  CA B304.CA 
+  CA B305.CA 
 Metal Atoms removed A305 (1)
 Structure saved on 1bqo_metals_test_A305.pdb
 Final Num. models: 1
