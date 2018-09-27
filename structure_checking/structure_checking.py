@@ -1039,8 +1039,7 @@ class StructureChecking():
         self.run_method('cistransbck',opts)
         
     def cistransbck_check(self):
-        backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
-        self.stm.check_cis_backbone(backbone_atoms, self.data_library.get_distances('COVLNK'))
+        self.stm.check_cis_backbone(self.data_library.get_distances('COVLNK'))
         if self.stm.cis_backbone_list:
             print ('{} cis peptide bonds'.format(len(self.stm.cis_backbone_list)))
             for lnk in self.stm.cis_backbone_list:
