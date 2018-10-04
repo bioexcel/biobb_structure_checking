@@ -1042,7 +1042,7 @@ class StructureChecking():
             self.summary['backbone']['long_links']=[]
             for br in self.stm.not_link_seq_list:
                 print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]))
-                self.summary['backbone']['long_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]])
+                self.summary['backbone']['long_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),float(br[2])])
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
@@ -1062,19 +1062,23 @@ class StructureChecking():
     def cistransbck_check(self):
         self.stm.check_cis_backbone(self.data_library.get_distances('COVLNK'))
         if self.stm.cis_backbone_list:
+            self.summary['cistransbck']['cis']=[]
             print ('{} cis peptide bonds'.format(len(self.stm.cis_backbone_list)))
             for lnk in self.stm.cis_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
+                self.summary['cistransbck']['cis'].append([mu.residue_id(r1), mu.residue_id(r2), float(dih)])
         else:
             if not self.args['quiet']:
                 print ("No cis peptide bonds found")
 
         if self.stm.lowtrans_backbone_list:
+            self.summary['cistransbck']['unusual_trans']=[]
             print ('{} trans peptide bonds with unusual omega dihedrals'.format(len(self.stm.lowtrans_backbone_list)))
             for lnk in self.stm.lowtrans_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
+                self.summary['cistransbck']['unusual_trans'].append([mu.residue_id(r1), mu.residue_id(r2), float(dih)])
         else:
             if not self.args['quiet']:
                 print ("No trans peptide bonds with unusual omega dihedrals found")
