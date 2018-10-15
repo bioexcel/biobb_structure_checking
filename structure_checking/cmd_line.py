@@ -90,7 +90,13 @@ class CmdLine():
             dest='force_save',
             help='Force saving an output file even if no modification'
         )
-
+        self.argparser.add_argument(
+            '--pdb_server',
+            action='store',
+            dest='pdb_server',
+            default='default',
+            help='Server for retrieving structures (default|MMB)'
+        )
 
     def parse_args(self):
         args = self.argparser.parse_args()
