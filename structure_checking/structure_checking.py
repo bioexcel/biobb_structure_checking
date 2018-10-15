@@ -49,6 +49,7 @@ class StructureChecking():
         self.summary = {}
         self.tmp_data = {}
         self.rr_dist = []
+        self.server='mmb'
         self.data_library = DataLibManager(sets.data_library_path)
         if not 'Notebook' in self.args:
             self.args['Notebook'] = False
@@ -110,7 +111,6 @@ class StructureChecking():
 
         if not self.args['quiet']:
             print (msg)
-
         self._load_structure()
 
     #Running checking method
@@ -1091,7 +1091,7 @@ class StructureChecking():
         if not hasattr(self, 'stm'):
             if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
                 self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
-            self.stm = StructureManager(self.args['input_structure_path'])
+            self.stm = StructureManager(self.args['input_structure_path'], server=self.server)
             if verbose:
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_headers()
