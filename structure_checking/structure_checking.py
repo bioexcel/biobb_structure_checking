@@ -39,7 +39,7 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
 
-AVAILABLE_METHODS=['models','chains','inscodes','remh','remwat', 'metals','ligands','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
+AVAILABLE_METHODS=['models','chains','inscodes','remh','remwat', 'metals','ligands','getss','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
 
 # Main class
 class StructureChecking():
@@ -561,7 +561,7 @@ class StructureChecking():
         self.run_method('getss', opts)
 
     def getss_check(self):
-        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'))
+        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'), self.stm.biounit)
 
         if len(self.SS_bonds):
             print ('{} Possible SS Bonds detected'.format(len(self.SS_bonds)))
@@ -603,7 +603,7 @@ class StructureChecking():
             self.amide_cont_list = []
             self.amide_rnums = []
 
-            c_list = mu.check_r_list_clashes(self.amide_list, self.rr_dist, self.CLASH_DISTS, atom_lists)
+            c_list = mu.check_r_list_clashes(self.amide_list, self.rr_dist, self.CLASH_DISTS, atom_lists, not self.stm.biounit)
             for cls in c_list:
                 for rkey in c_list[cls]:
                     [at1,at2,d]=c_list[cls][rkey]
@@ -871,7 +871,7 @@ class StructureChecking():
             self.clash_list[cls]={}
 
         if len(self.rr_dist) == 0:
-            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'))
+            self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'), self.stm.biounit)
 
         for r_pair in self.rr_dist:
             [r1, r2, d] = r_pair
