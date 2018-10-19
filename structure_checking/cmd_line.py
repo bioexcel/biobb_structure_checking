@@ -94,7 +94,7 @@ class CmdLine():
             '--pdb_server',
             action='store',
             dest='pdb_server',
-            default='default',
+            default='ftp://ftp.wwpdb.org',
             help='Server for retrieving structures (default|MMB)'
         )
 
