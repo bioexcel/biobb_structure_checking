@@ -65,6 +65,12 @@ python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_backbone_test.pdb backbone > 
 #cistransbck
 echo "Running cistransbck on 4mdh"
 python3 $APPDIR/checkStruc.py -i pdb:4mdh -o 4mdh_cistransbck_test.pdb --non_interactive cistransbck > 4mdh_cistransbck_test.log
+echo "Running all checks on 1ldn.1"
+python3 $APPDIR/checkStruc.py -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
+echo "Running all checks on 2ki5.1"
+python3 $APPDIR/checkStruc.py -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall > 2ki5_checkall_test.log
+echo "Running all checks on 1vtk.1"
+python3 $APPDIR/checkStruc.py -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall > 1vtk_checkall_test.log
 #All_test
 echo -n "Running All checks on 1ark"
 python3 $APPDIR/checkStruc.py -i pdb:1ark -o 1ark_all_test.pdb --json 1ark_all_test.json --non_interactive command_list --list scripts/all_checks > 1ark_all_test.log
@@ -76,8 +82,11 @@ echo -n " 4kui"
 python3 $APPDIR/checkStruc.py -i pdb:4ku1 -o 4ku1_all_test.pdb --json 4ku1_all_test.json --non_interactive command_list --list scripts/all_checks > 4ku1_all_test.log
 echo -n " 1ubq"
 python3 $APPDIR/checkStruc.py -i pdb:1ubq -o 1ubq_all_test.pdb --json 1ubq_all_test.json --non_interactive command_list --list scripts/all_checks > 1ubq_all_test.log
-echo " 1svc"
+echo -n " 1svc"
 python3 $APPDIR/checkStruc.py -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
+echo "Calculating diffs"
+echo " 1vtk.1"
+python3 $APPDIR/checkStruc.py -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_all_test.log
 echo "Calculating diffs"
 foreach f (*pdb *json *log)
 diff $f ref/$f > $f.diff
