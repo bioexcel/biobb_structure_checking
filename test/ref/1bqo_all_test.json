@@ -37,7 +37,25 @@
  "chiral_bck": {
   "n_chirals": 316
  },
- "cistransbck": {},
+ "cistransbck": {
+  "unusual_trans": [
+   [
+    "ILE A203",
+    "GLY A204",
+    -159.3374669959955
+   ],
+   [
+    "ILE B203",
+    "GLY B204",
+    159.07983226050263
+   ],
+   [
+    "THR A191",
+    "GLY A192",
+    156.4423547125022
+   ]
+  ]
+ },
  "clashes": {
   "detected": {
    "apolar": [
@@ -122,13 +140,13 @@
     },
     {
      "at1": "GLY B159.O",
-     "at2": "GLU B184.OE2",
-     "dist": 2.6792120933532715
+     "at2": "ASP B181.OD2",
+     "dist": 3.023092269897461
     },
     {
      "at1": "GLY B159.O",
-     "at2": "ASP B181.OD2",
-     "dist": 3.023092269897461
+     "at2": "GLU B184.OE2",
+     "dist": 2.6792120933532715
     },
     {
      "at1": "GLY B173.O",
@@ -158,6 +176,7 @@
   }
  },
  "final_stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "A": 1,
@@ -231,6 +250,7 @@
   ]
  },
  "stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "A": 1,

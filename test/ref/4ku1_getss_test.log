@@ -20,6 +20,27 @@ Structure pdb:4ku1 loaded
  Num. ligands or modified residues:  20
  Num. water mol.:  148
  Num. atoms:  3714
+Small mol ligands found
+NAG A501
+NAG A502
+BMA A503
+MAN A504
+NAG A505
+GAL A506
+FUL A507
+MAN A508
+NAG A509
+GAL A510
+PG4 A511
+NAG B501
+NAG B502
+BMA B503
+MAN B504
+NAG B505
+GAL B506
+MAN B507
+FUL B508
+NAG B509
 
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141

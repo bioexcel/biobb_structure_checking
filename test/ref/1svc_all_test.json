@@ -184,6 +184,7 @@
   }
  },
  "final_stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "D": 2,
@@ -236,6 +237,7 @@
   ]
  },
  "stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "D": 2,

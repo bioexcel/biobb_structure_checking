@@ -20,6 +20,11 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
 
 4 Ligands detected 
  SO4 A4
@@ -36,3 +41,6 @@ Final Num. HETATM residues:  294
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  292
 Final Num. atoms:  4951
+Small mol ligands found
+AC2 A1
+AC2 B2

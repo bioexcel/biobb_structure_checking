@@ -1,0 +1,140 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Downloading PDB structure '2KI5.1'...
+Structure pdb:2ki5.1 loaded
+Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
+Experimental method: x-ray diffraction
+Keywords: transferase (phosphotransferase) thymid, transferase (phosphotransferase) thymidine kinase; viridae; ds-dna enveloped viruses; herpesviridae; alphaherpesvirinae antiviral drug (aciclovir)
+Resolution: 0.0 A
+Biounit no. 1
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  296
+ Num. ligands or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+
+Running models.
+1 Model(s) detected
+Single model found
+Running  check_only. Nothing else to do.
+Running chains.
+2 Chain(s) detected
+ A: Protein
+ B: Protein
+Running  check_only. Nothing else to do.
+Running inscodes.
+No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running remh.
+No residues with Hydrogen atoms found
+Running  check_only. Nothing else to do.
+Running remwat.
+292 Water molecules detected
+Running  check_only. Nothing else to do.
+Running metals.
+No metal ions present
+Running  check_only. Nothing else to do.
+Running ligands.
+4 Ligands detected 
+ SO4 A4
+ AC2 A1
+ SO4 B3
+ AC2 B2
+Running  check_only. Nothing else to do.
+Running getss.
+No SS bonds detected
+Running  check_only. Nothing else to do.
+Running amide.
+No unusual contact(s) involving amide atoms found
+Running  check_only. Nothing else to do.
+Running chiral.
+No residues with incorrect side-chain chirality found
+Running  check_only. Nothing else to do.
+Running chiral_bck.
+Warning: atom CA not found in VAL A70
+Warning: atom C not found in VAL A70
+Warning: atom CB not found in VAL A70
+Warning: atom CA not found in ALA A375
+Warning: atom C not found in ALA A375
+Warning: atom CB not found in ALA A375
+Warning: atom CA not found in SER B263
+Warning: atom C not found in SER B263
+Warning: atom CB not found in SER B263
+Warning: atom CA not found in ALA B375
+Warning: atom C not found in ALA B375
+Warning: atom CB not found in ALA B375
+No residues with incorrect backbone chirality found
+Running  check_only. Nothing else to do.
+Running fixside.
+6 Residues with missing side chain atoms found
+ MET A46    CG,SD,CE
+ PRO A154   CG,CD
+ PRO A280   CG,CD
+ MET B46    CG,SD,CE
+ PRO B154   CG,CD
+ ARG B220   CG,CD,NE,CZ,NH1,NH2
+Running  check_only. Nothing else to do.
+Running backbone.
+8 Residues with missing backbone atoms found
+ VAL A70    CA,C,O
+ GLY A148   CA,C,O
+ GLY A264   CA,C,O
+ ALA A375   CA,C,O
+ GLY B73    CA,C,O
+ GLY B148   CA,C,O
+ SER B263   CA,C,O
+ ALA B375   CA,C,O
+6 Backbone breaks found
+ VAL A70    - ASP A77    
+ GLY A148   - PRO A154   
+ GLY A264   - PRO A280   
+ GLY B73    - ASP B77    
+ GLY B148   - PRO B154   
+ SER B263   - ALA B278   
+Running  check_only. Nothing else to do.
+Running cistransbck.
+No cis peptide bonds found
+No trans peptide bonds with unusual omega dihedrals found
+Running  check_only. Nothing else to do.
+Running clashes.
+No severe clashes detected
+13 Steric apolar clashes detected
+ GLY A61.O    THR A65.CG2     2.799 A
+ MET A85.CG   GLU A374.OE1    2.857 A
+ ARG A89.CD   GLU A95.OE1     2.776 A
+ LEU A232.O   ARG A236.CG     2.741 A
+ MET A372.SD  VAL B307.CG1    2.777 A
+ HIS B58.CD2  TYR B172.OH     2.675 A
+ LYS B62.O    THR B66.CG2     2.878 A
+ THR B66.OG1  TYR B80.CE1     2.890 A
+ THR B86.OG1  GLU B374.CB     2.892 A
+ HIS B105.CE1 GLN B109.OE1    2.773 A
+ GLU B210.O   ILE B214.CG1    2.842 A
+ ARG B212.CZ  ASP B330.OD1    2.875 A
+ SER B357.O   ILE B361.CG1    2.861 A
+5 Steric polar_acceptor clashes detected
+ ASP A55.O    VAL A204.O      3.035 A
+ ARG B89.O    GLU B95.OE1     2.792 A
+ ASP B211.O   ASP B215.OD2    2.914 A
+ ALA B334.O   ASP B338.OD2    3.100 A
+ PRO B359.O   ASP B363.OD2    3.073 A
+2 Steric polar_donor clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578 A
+ ARG A212.NH2 ARG A216.NH2    3.075 A
+2 Steric positive clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578 A
+ ARG A212.NH2 ARG A216.NH2    3.075 A
+No negative clashes detected
+Running  check_only. Nothing else to do.

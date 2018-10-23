@@ -19,6 +19,11 @@ Structure pdb:2ki5 loaded
  Num. ligands or modified residues:  4
  Num. water mol.:  292
  Num. atoms:  4961
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
 
 
 Step 1: models --select_model 1
@@ -145,16 +150,20 @@ ARG B220
 Fixed 6 side chain(s)
 Checking possible clashes
 No severe clashes detected
-3 Steric apolar clashes detected
- MET A46.CE   VAL A352.CG2    1.843 A
+4 Steric apolar clashes detected
  MET A46.CE   THR A354.O      1.869 A
+ ARG B220.NH1 GLY B61.CA      2.301 A
  MET B46.CE   VAL B352.O      0.921 A
+ MET A46.CE   VAL A352.CG2    1.843 A
 3 Steric polar_acceptor clashes detected
- MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
  MET B46.SD   VAL B352.O      2.291 A
-No polar_donor clashes detected
-No positive clashes detected
+ MET A46.SD   VAL A352.O      2.171 A
+2 Steric polar_donor clashes detected
+ ARG B220.NH1 GLY B61.N       2.443 A
+ ARG B220.NH1 ARG B216.NH2    2.977 A
+1 Steric positive clashes detected
+ ARG B220.NH1 ARG B216.NH2    2.977 A
 No negative clashes detected
 
 Step 13: backbone
@@ -192,9 +201,10 @@ Step 16: clashes
 
 Running clashes.
 No severe clashes detected
-16 Steric apolar clashes detected
- MET A46.CE   THR A354.O      1.869 A
+17 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
+ MET A46.CE   THR A354.O      1.869 A
+ ARG B220.NH1 GLY B61.CA      2.301 A
  MET B46.CE   VAL B352.O      0.921 A
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
@@ -210,18 +220,21 @@ No severe clashes detected
  ARG B212.CZ  ASP B330.OD1    2.875 A
  SER B357.O   ILE B361.CG1    2.861 A
 8 Steric polar_acceptor clashes detected
+ MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
  MET B46.SD   VAL B352.O      2.291 A
- MET A46.SD   VAL A352.O      2.171 A
  ASP A55.O    VAL A204.O      3.035 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
-2 Steric polar_donor clashes detected
+4 Steric polar_donor clashes detected
+ ARG B220.NH1 GLY B61.N       2.443 A
+ ARG B220.NH1 ARG B216.NH2    2.977 A
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
-2 Steric positive clashes detected
+3 Steric positive clashes detected
+ ARG B220.NH1 ARG B216.NH2    2.977 A
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
 No negative clashes detected
@@ -235,4 +248,7 @@ Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
 Final Num. atoms:  4677
+Small mol ligands found
+AC2 A1
+AC2 B2
 Summary data saved on 2ki5_all_test.json
