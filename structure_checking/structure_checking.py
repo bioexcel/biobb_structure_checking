@@ -71,6 +71,9 @@ class StructureChecking():
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
             self.checkall(self.args['options'])
+        elif self.args['command'] == 'load':
+            self._load_structure()
+            sys.exit(0)
         else:
             self.run_method(self.args['command'], self.args['options'])
 
