@@ -97,6 +97,14 @@ class CmdLine():
             default='ftp://ftp.wwpdb.org',
             help='Server for retrieving structures (default|MMB)'
         )
+        self.argparser.add_argument(
+            '--cache_dir',
+            action='store',
+            dest='cache_dir',
+            default='tmpPDB',
+            help='Path for structure cache directory (default: tmpPDB)'
+        )
+ 
 
     def parse_args(self):
         args = self.argparser.parse_args()
