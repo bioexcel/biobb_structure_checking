@@ -19,6 +19,19 @@ Structure pdb:1bqo loaded
  Num. ligands or modified residues:  11
  Num. water mol.:  75
  Num. atoms:  2841
+Metal/Ion residues found
+ ZN A301
+ ZN A302
+ CA A303
+ CA A304
+ CA A305
+ ZN B301
+ ZN B302
+ CA B303
+ CA B304
+ CA B305
+Small mol ligands found
+N25 B401
 
 
 Step 1: models --select_model 1
@@ -147,8 +160,8 @@ No severe clashes detected
  GLU B125.O   THR B128.O      2.726 A
  ASP B141.O   ASP B177.OD1    2.964 A
  ASP B158.OD1 GLY B161.O      2.620 A
- GLY B159.O   GLU B184.OE2    2.679 A
  GLY B159.O   ASP B181.OD2    3.023 A
+ GLY B159.O   GLU B184.OE2    2.679 A
  GLY B173.O   ASN B175.O      3.018 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
  ASP B182.O   GLU B184.O      2.931 A
@@ -169,4 +182,13 @@ Final Num. HETATM residues:  7
 Final Num. ligands or modified residues:  7
 Final Num. water mol.:  0
 Final Num. atoms:  2762
+Metal/Ion residues found
+ CA A303
+ CA A304
+ CA A305
+ CA B303
+ CA B304
+ CA B305
+Small mol ligands found
+N25 B401
 Summary data saved on 1bqo_all_test.json

@@ -20,6 +20,14 @@ Structure pdb:4mdh loaded
  Num. ligands or modified residues:  6
  Num. water mol.:  471
  Num. atoms:  5675
+Modified residues found
+ACE A0
+ACE B0
+Small mol ligands found
+SO4 A334
+NAD A335
+SO4 B334
+NAD B335
 
 2 cis peptide bonds
 ASN B130   PRO B131   Dihedral:   -2.078

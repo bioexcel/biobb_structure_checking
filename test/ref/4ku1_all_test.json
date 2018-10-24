@@ -219,7 +219,27 @@
  "chiral_bck": {
   "n_chirals": 399
  },
- "cistransbck": {},
+ "cistransbck": {
+  "cis": [
+   [
+    "TYR A373",
+    "PRO A374",
+    -4.210637026602202
+   ],
+   [
+    "TYR B373",
+    "PRO B374",
+    -5.527191847615303
+   ]
+  ],
+  "unusual_trans": [
+   [
+    "GLU B382",
+    "SER B383",
+    157.8650284751025
+   ]
+  ]
+ },
  "clashes": {
   "detected": {
    "apolar": [
@@ -279,6 +299,7 @@
   }
  },
  "final_stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "A": 1,
@@ -371,6 +392,7 @@
   ]
  },
  "stats": {
+  "biounit": false,
   "ca_only": false,
   "chain_ids": {
    "A": 1,

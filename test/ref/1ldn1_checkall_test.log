@@ -1,0 +1,338 @@
+===============================================================================
+=                     MDWeb structure checking utility                        =
+=                      A. Hospital, J.L. Gelpi 2018                           =
+===============================================================================
+
+Downloading PDB structure '1LDN.1'...
+Structure pdb:1ldn.1 loaded
+Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+Experimental method: x-ray diffraction
+Keywords: oxidoreductase(choh(d)-nad(a))
+Resolution: 0.0 A
+Biounit no. 1
+
+ Num. models: 1
+ Num. chains: 4 (A: Protein, B: Protein, C: Protein, D: Protein)
+ Num. residues:  1561
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  297
+ Num. ligands or modified residues:  10
+ Num. water mol.:  287
+ Num. atoms:  10319
+Small mol ligands found
+FBP A353
+OXM A351
+NAD A352
+FBP B353
+OXM B351
+NAD B352
+OXM C351
+NAD C352
+OXM D351
+NAD D352
+
+Running models.
+1 Model(s) detected
+Single model found
+Running  check_only. Nothing else to do.
+Running chains.
+4 Chain(s) detected
+ A: Protein
+ B: Protein
+ C: Protein
+ D: Protein
+Running  check_only. Nothing else to do.
+Running inscodes.
+No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running remh.
+No residues with Hydrogen atoms found
+Running  check_only. Nothing else to do.
+Running remwat.
+287 Water molecules detected
+Running  check_only. Nothing else to do.
+Running metals.
+No metal ions present
+Running  check_only. Nothing else to do.
+Running ligands.
+10 Ligands detected 
+ FBP A353
+ OXM A351
+ NAD A352
+ FBP B353
+ OXM B351
+ NAD B352
+ OXM C351
+ NAD C352
+ OXM D351
+ NAD D352
+Running  check_only. Nothing else to do.
+Running getss.
+No SS bonds detected
+Running  check_only. Nothing else to do.
+Running amide.
+No unusual contact(s) involving amide atoms found
+Running  check_only. Nothing else to do.
+Running chiral.
+No residues with incorrect side-chain chirality found
+Running  check_only. Nothing else to do.
+Running chiral_bck.
+No residues with incorrect backbone chirality found
+Running  check_only. Nothing else to do.
+Running fixside.
+No residues with missing side chain atoms found
+Running  check_only. Nothing else to do.
+Running backbone.
+Unexpected backbone links found
+ MET D15    linked to HOH D359  , expected LYS D16    
+Modified residues found
+ HOH A354   
+Running  check_only. Nothing else to do.
+Running cistransbck.
+4 cis peptide bonds
+ASN B138   PRO B139   Dihedral:   -1.397
+ASN C138   PRO C139   Dihedral:   -1.167
+ASN D138   PRO D139   Dihedral:    2.871
+ASN A138   PRO A139   Dihedral:   -2.457
+No trans peptide bonds with unusual omega dihedrals found
+Running  check_only. Nothing else to do.
+Running clashes.
+No severe clashes detected
+162 Steric apolar clashes detected
+ MET A15.CB   GLY A19.CA      2.625 A
+ MET A15.CE   ASN B296.OD1    2.684 A
+ LYS A16.O    ASP A77.CG      2.880 A
+ LYS A16.CD   ASP A46.O       2.424 A
+ LYS A16.CE   PRO A75.O       2.803 A
+ TYR A35.OH   LEU A39.CD1     2.896 A
+ ASN A41.O    PRO A73.CG      2.873 A
+ GLY A43.O    LYS A74.CD      2.631 A
+ GLU A55.O    ILE A59.CD1     2.659 A
+ ILE A59.O    MET A63.CG      2.696 A
+ ASP A61.OD1  LYS D244.CE     2.816 A
+ TYR A83.O    SER A127.CB     2.612 A
+ CYS A86.CB   SER A127.OG     2.824 A
+ VAL A93.CA   LEU A134.O      2.847 A
+ GLN A100.CB  THR A105.O      2.295 A
+ ARG A106.O   LEU A109.CG     2.591 A
+ LEU A107.O   VAL A110.CG2    2.364 A
+ LEU A109.O   ASN A113.CG     2.885 A
+ ILE A120.O   VAL A124.CG1    2.605 A
+ GLU A122.O   ALA A126.CB     2.615 A
+ VAL A124.O   SER A127.CB     2.815 A
+ ASN A138.CB  NAD A352.O2D    2.856 A
+ TRP A148.CD1 LEU A153.O      2.728 A
+ VAL A158.O   TYR A286.CE1    2.831 A
+ TYR A177.OH  ALA A222.CA     2.889 A
+ PRO A182.O   VAL A185.CB     2.882 A
+ GLU A192.O   GLU A197.CB     2.732 A
+ GLU A192.CB  THR A196.OG1    2.843 A
+ THR A196.OG1 SER A317.CB     2.650 A
+ SER A202.OG  GLU A310.CD     2.724 A
+ ILE A206.CD1 ILE A211.CD1    2.834 A
+ VAL A208.O   GLN C203.CG     2.786 A
+ PRO A210.O   LEU A214.CG     2.727 A
+ ARG A212.NH1 LEU A226.CB     2.651 A
+ LYS A213.O   GLU A216.CB     2.838 A
+ LYS A213.CE  GLU C305.OE2    2.871 A
+ PHE A230.O   VAL A233.CB     2.871 A
+ VAL A231.O   ASP A235.CG     2.838 A
+ ILE A241.O   GLY A245.CA     2.860 A
+ THR A247.CB  OXM A351.O3     2.855 A
+ ILE A251.O   LEU A255.CD2    2.705 A
+ ARG A257.O   ARG A260.CG     2.894 A
+ HIS A264.O   LYS B16.CD      2.543 A
+ ASN A265.CB  LYS B16.N       2.800 A
+ ASN A265.OD1 ASN B17.CB      2.557 A
+ TYR A280.CE1 VAL A289.CG2    2.889 A
+ ARG A295.CD  MET B15.CG      2.859 A
+ ASN A307.OD1 GLU A310.CG     2.890 A
+ ARG A313.O   HIS A316.CB     2.804 A
+ SER A323.O   ARG A327.CG     2.841 A
+ MET B15.CB   GLY B19.N       2.887 A
+ LYS B16.CE   PRO B75.O       2.755 A
+ VAL B24.CG1  ILE B51.CD1     2.885 A
+ GLY B29.CA   NAD B352.O5B    2.846 A
+ GLY B29.O    ALA B33.CB      2.805 A
+ ASN B41.O    PRO B73.CG      2.716 A
+ ASP B52.CG   NAD B352.O3B    2.875 A
+ GLU B55.O    ALA B58.CA      2.713 A
+ GLU B55.O    ILE B59.CD1     2.853 A
+ ASP B61.O    PHE B65.CD2     2.809 A
+ MET B63.O    HIS B67.CG      2.877 A
+ ASP B64.OD2  LYS C244.CE     2.362 A
+ TYR B83.O    CYS B86.CB      2.827 A
+ CYS B86.O    PHE B129.CD1    2.759 A
+ ARG B87.CG   SER B127.O      2.507 A
+ ALA B98.O    LEU B109.CD1    2.790 A
+ LEU B109.O   LYS B112.CB     2.836 A
+ ILE B114.CD1 ALA B328.O      2.831 A
+ PHE B117.O   VAL B121.CB     2.826 A
+ ARG B118.O   GLU B122.CB     2.855 A
+ ARG B118.CD  THR B330.OG1    2.808 A
+ VAL B124.O   SER B127.CB     2.879 A
+ ASN B138.CB  NAD B352.O2D    2.407 A
+ THR B147.O   SER B151.CB     2.767 A
+ VAL B158.O   TYR B286.CE1    2.767 A
+ SER B161.O   ILE B164.CG2    2.713 A
+ ASP B166.OD2 GLU B197.CD     2.779 A
+ ALA B168.CB  HIS C67.O       2.889 A
+ PHE B172.CE1 LYS C69.NZ      2.849 A
+ GLY B194.O   GLU B197.CG     2.790 A
+ SER B202.CB  GLU B310.OE2    2.688 A
+ GLN B203.NE2 MET D209.CE     2.844 A
+ MET B209.CE  GLN D203.NE2    2.748 A
+ VAL B215.CB  ALA B222.CB     2.823 A
+ GLU B227.O   VAL B231.CG2    2.776 A
+ ILE B241.O   GLY B245.CA     2.569 A
+ LYS B243.CG  SER C56.O       2.739 A
+ LYS B244.CE  ASP C61.OD1     2.765 A
+ ALA B256.O   ARG B260.CG     2.793 A
+ ARG B257.CZ  GLU B266.OE2    2.803 A
+ LEU B276.O   ARG B283.CA     2.832 A
+ VAL B289.CG1 VAL B301.CG1    2.881 A
+ ASP B309.O   ARG B313.CG     2.792 A
+ HIS B316.O   ALA B319.CB     2.836 A
+ MET C15.N    GLY C20.CA      2.780 A
+ MET C15.CA   ASN D265.OD1    2.782 A
+ MET C15.O    GLU C47.CD      2.682 A
+ MET C15.CB   GLY C19.N       2.778 A
+ LYS C16.O    ASP C77.CG      2.742 A
+ LYS C16.CE   HIS D264.O      2.464 A
+ GLY C29.O    ALA C33.CB      2.881 A
+ ASN C66.O    LYS C69.CG      2.842 A
+ GLY C81.CA   ASP C85.OD2     2.829 A
+ ASP C82.O    ASP C85.CB      2.640 A
+ TYR C83.O    SER C127.CB     2.575 A
+ LEU C107.O   VAL C110.CG2    2.774 A
+ PHE C117.O   VAL C121.CG2    2.542 A
+ PHE C117.CD2 THR C147.OG1    2.603 A
+ ARG C118.O   GLU C122.CG     2.795 A
+ ILE C120.O   VAL C124.CG1    2.642 A
+ ASN C138.CG  NAD C352.O2D    2.895 A
+ TYR C145.CD1 PHE C329.CZ     2.871 A
+ THR C147.O   SER C151.CB     2.823 A
+ TRP C148.CD1 LEU C153.O      2.660 A
+ THR C167.O   ARG C171.CG     2.559 A
+ TYR C177.CE1 ASP C225.OD2    2.677 A
+ SER C202.OG  GLU C310.CD     2.857 A
+ GLU C221.OE1 LYS C224.CG     2.409 A
+ ARG C228.NH1 ASN C232.CG     2.879 A
+ THR C247.CG2 OXM C351.O3     2.574 A
+ ARG C260.NH2 PRO D75.CD      2.688 A
+ HIS C264.CB  LYS D16.NZ      2.632 A
+ ASP C309.O   ARG C313.CG     2.471 A
+ ASP C309.O   ASN C312.CB     2.831 A
+ SER C323.O   ARG C327.CG     2.818 A
+ MET D15.N    GLY D20.CA      2.696 A
+ MET D15.C    GLU D47.OE2     2.838 A
+ LYS D16.C    GLU D47.OE2     2.754 A
+ LYS D16.CG   ASP D46.O       2.661 A
+ LYS D16.CE   PRO D75.O       2.632 A
+ ARG D22.CG   ALA D89.CA      2.820 A
+ GLY D29.CA   NAD D352.O1A    2.887 A
+ GLY D32.O    TYR D35.CB      2.873 A
+ ALA D38.O    GLN D42.CB      2.795 A
+ ASP D52.CG   NAD D352.O2B    2.876 A
+ GLU D55.O    ILE D59.CG1     2.688 A
+ TYR D83.O    SER D127.CB     2.872 A
+ TYR D83.O    CYS D86.CB      2.669 A
+ ILE D94.CG2  PHE D117.CZ     2.854 A
+ LEU D107.O   VAL D110.CG2    2.768 A
+ PHE D117.O   VAL D121.CG2    2.867 A
+ ARG D118.CD  THR D330.OG1    2.808 A
+ VAL D124.O   SER D127.CB     2.898 A
+ THR D137.CG2 NAD D352.O3D    2.839 A
+ ASN D138.CB  NAD D352.O2D    2.533 A
+ PHE D170.CD2 ILE D189.CD1    2.788 A
+ ARG D171.CD  VAL D185.O      2.815 A
+ LEU D174.O   PHE D178.CD1    2.621 A
+ SER D202.CB  GLU D310.OE2    2.769 A
+ VAL D215.CB  ALA D222.CB     2.662 A
+ ASP D225.O   ARG D228.CB     2.848 A
+ ASN D265.ND2 ARG D295.CB     2.827 A
+ ASN D267.CA  ILE D293.O      2.872 A
+ LEU D279.O   GLU D303.CD     2.785 A
+ TYR D280.CE1 VAL D289.CG2    2.858 A
+ GLU D282.OE1 ALA D318.CB     2.825 A
+ ARG D283.O   LYS D322.CE     2.865 A
+ ASP D309.O   ARG D313.CG     2.568 A
+ ALA D318.O   LYS D322.CG     2.557 A
+ ALA D319.O   LYS D322.CB     2.776 A
+ SER D323.O   ALA D326.CB     2.882 A
+ VAL D324.O   ALA D328.CB     2.574 A
+48 Steric polar_acceptor clashes detected
+ MET A15.O    GLU A47.OE2     2.608 A
+ MET A15.SD   ASN A17.O       2.699 A
+ MET A15.SD   ASN A18.O       2.938 A
+ LYS A16.O    ASP A77.OD2     2.613 A
+ ALA A21.O    GLU A47.O       2.917 A
+ ILE A48.O    ASP A77.O       2.948 A
+ ASP A166.OD2 GLU A197.OE1    2.441 A
+ PRO A182.O   VAL A185.O      3.023 A
+ HIS A186.O   TYR A205.O      2.966 A
+ GLY A194.O   GLU A197.OE1    2.896 A
+ VAL A231.O   ASP A235.OD1    3.001 A
+ LEU A279.O   GLU A303.OE2    2.388 A
+ ASN A294.O   GLY A297.O      3.059 A
+ MET B15.O    GLU B47.OE2     2.397 A
+ LYS B16.O    ASP B77.OD2     2.720 A
+ GLY B20.O    ASP B90.OD2     2.903 A
+ ASP B166.OD2 GLU B197.OE1    2.318 A
+ GLY B175.O   VAL B180.O      2.797 A
+ GLY B194.O   GLU B197.OE1    2.752 A
+ VAL B272.O   ILE B287.O      2.847 A
+ VAL B272.O   VAL B289.O      2.978 A
+ LEU B279.O   GLU B303.OE2    2.486 A
+ MET C15.O    GLU C47.OE2     2.126 A
+ MET C15.SD   ASN C17.O       3.054 A
+ LYS C16.O    ASP C77.OD2     2.673 A
+ VAL C25.O    ILE C51.O       2.980 A
+ ASP C82.O    ASP C85.OD2     2.903 A
+ GLN C100.OE1 GLU C104.O      2.665 A
+ PHE C133.O   ILE C159.O      2.988 A
+ HIS C155.O   VAL C158.O      2.979 A
+ ASP C166.OD1 GLU C197.OE1    2.624 A
+ GLY C175.O   VAL C180.O      2.920 A
+ LEU C270.O   ALA C291.O      2.929 A
+ LEU C279.O   GLU C303.OE2    2.196 A
+ ASN C294.O   GLY C297.O      3.056 A
+ MET D15.O    GLU D47.OE2     2.318 A
+ MET D15.SD   ASN D17.O       3.015 A
+ LYS D16.O    GLU D47.OE2     2.915 A
+ ALA D21.O    GLU D47.O       2.929 A
+ GLN D100.OE1 GLU D104.O      2.562 A
+ HIS D155.O   VAL D158.O      3.040 A
+ ASP D166.OD2 GLU D197.OE1    2.608 A
+ GLY D175.O   VAL D180.O      3.081 A
+ GLY D194.O   GLU D197.OE1    2.943 A
+ ILE D206.O   MET D209.O      2.809 A
+ VAL D272.O   VAL D289.O      2.991 A
+ ALA D274.O   ILE D287.O      2.994 A
+ LEU D279.O   GLU D303.OE2    2.707 A
+15 Steric polar_donor clashes detected
+ MET A15.N    GLY A20.N       3.086 A
+ ASN A54.ND2  SER A56.N       2.851 A
+ ASN A54.ND2  LYS A57.N       2.631 A
+ ASN A294.ND2 ASN A296.N      2.601 A
+ ASN B54.ND2  LYS B57.N       2.898 A
+ ASN B54.ND2  SER B56.N       3.020 A
+ ASN B265.ND2 ARG B295.N      2.772 A
+ ASN B294.ND2 ASN B296.N      3.037 A
+ MET C15.N    GLY C20.N       2.651 A
+ TRP C148.NE1 HIS C155.N      2.852 A
+ ARG C228.NH1 ASN C232.ND2    2.309 A
+ ASN C267.ND2 ARG C299.NH1    2.930 A
+ MET D15.N    GLY D20.N       2.716 A
+ ASN D138.ND2 VAL D140.N      3.043 A
+ ASN D294.ND2 ASN D296.N      2.757 A
+2 Steric positive clashes detected
+ ARG A257.NH1 ARG A260.NH1    3.494 A
+ LYS B16.NZ   LYS B74.NZ      3.147 A
+5 Steric negative clashes detected
+ ASP A166.OD2 GLU A197.OE1    2.441 A
+ ASP B82.OD1  ASP B85.OD2     3.260 A
+ ASP B166.OD2 GLU B197.OE1    2.318 A
+ ASP C166.OD1 GLU C197.OE1    2.624 A
+ ASP D166.OD2 GLU D197.OE1    2.608 A
+Running  check_only. Nothing else to do.
