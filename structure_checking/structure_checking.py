@@ -279,19 +279,19 @@ class StructureChecking():
                 rid = mu.residue_id(r)
                 print(rid)
                 self.alt_loc_rnums.append(mu.residue_num(r))
-                self.summary['altloc'][rid] = []
+                self.summary['altloc'][rid] = {}
                 self.altlocs[r] = sorted(self.alt_loc_res[r][0].child_dict)
                 for at in self.alt_loc_res[r]:
+                    self.summary['altloc'][rid][at.id]=[]
                     s = '  {:4}'.format(at.id)
                     for alt in sorted(at.child_dict):
                         s += ' {} ({:4.2f})'.format(alt, at.child_dict[alt].occupancy)
+                        self.summary['altloc'][rid][at.id].append({
+                                'loc_label':alt,
+                                'occupancy':at.child_dict[alt].occupancy
+                            }
+                            )
                     print (s)
-                    self.summary['altloc'][rid].append({
-                                                 'atom':at.id,
-                                                 'loc_label':alt,
-                                                 'occupancy':at.child_dict[alt].occupancy
-                                                 }
-                                             )
             return True
         else:
             if not self.args['quiet']:
