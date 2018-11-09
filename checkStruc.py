@@ -9,6 +9,7 @@ __date__ = "$13-jul-2018 15:52:55$"
 
 import os
 import sys
+import cProfile
 
 from structure_checking.cmd_line import CmdLine
 from structure_checking.help_manager import HelpManager
@@ -30,7 +31,6 @@ def main():
     if 'help' in args.options:
         help_manager.print_help(args.command, header=True)
         sys.exit(0)
-
 
     StructureChecking(sets,vars(args)).launch()
 
