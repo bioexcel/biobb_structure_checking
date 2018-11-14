@@ -39,7 +39,7 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
 
-AVAILABLE_METHODS=['models','chains','inscodes','remh','remwat', 'metals','ligands','getss','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
+AVAILABLE_METHODS=['models','chains','inscodes','altloc','remh','remwat', 'metals','ligands','getss','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
 
 # Main class
 class StructureChecking():
