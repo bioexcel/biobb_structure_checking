@@ -76,6 +76,8 @@ class StructureChecking():
         elif self.args['command'] == 'load':
             self._load_structure()
             sys.exit(0)
+        elif self.args['command'] == 'stats':
+            self._load_structure()
         else:
             self.run_method(self.args['command'], self.args['options'])
 
@@ -630,8 +632,8 @@ class StructureChecking():
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
                 for at_pair in sorted(self.amide_cont_list, key=lambda x: x[0].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), at_pair[2]))
-                    self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': float(at_pair[2])})
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), np.sqrt(at_pair[2])))
+                    self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': np.sqrt(float(at_pair[2]))})
                 return True
             else:
                 if not self.args['quiet']:
@@ -1101,6 +1103,7 @@ class StructureChecking():
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_headers()
                 print()
+                self.summary['headers'] = self.stm.meta
             if print_stats:
                 self.stm.print_stats()
                 print()
