@@ -33,6 +33,8 @@ optional arguments:
   --force_save          Force saving an output file even if no modification
   --pdb_server PDB_SERVER
                         Server for retrieving structures (default: RCSB|mmb)
+  --load                Loads structure from PDB server into the local cache
+  --stats               Loads structure and get basic statistics and headers
 
 Available commands:
 

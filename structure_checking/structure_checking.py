@@ -7,6 +7,7 @@ __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
+import numpy as np
 
 from structure_checking.help_manager import HelpManager
 from structure_checking.json_writer import JSONWriter
@@ -23,7 +24,7 @@ import structure_manager.model_utils as mu
 # Interactive dialogs to complete command_line missing paramters
 dialogs = Dialog()
 
-#dialogs.add_option(command, prompt, destination, help_text, type(str))
+#dialogs.add_option(command, prompt, destinmore ation, help_text, type(str))
 dialogs.add_option('command_list', '--list', 'op_list', 'Command List File')
 dialogs.add_option('models', '--select_model', 'select_model', 'Select model to keep', int)
 dialogs.add_option('chains', '--select_chains', 'select_chains', 'Chains (All | Chain list comma separated)')
@@ -75,6 +76,8 @@ class StructureChecking():
         elif self.args['command'] == 'load':
             self._load_structure()
             sys.exit(0)
+        elif self.args['command'] == 'stats':
+            self._load_structure()
         else:
             self.run_method(self.args['command'], self.args['options'])
 
@@ -629,8 +632,8 @@ class StructureChecking():
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
                 for at_pair in sorted(self.amide_cont_list, key=lambda x: x[0].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), at_pair[2]))
-                    self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': float(at_pair[2])})
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), np.sqrt(at_pair[2])))
+                    self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': np.sqrt(float(at_pair[2]))})
                 return True
             else:
                 if not self.args['quiet']:
@@ -1100,6 +1103,7 @@ class StructureChecking():
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_headers()
                 print()
+                self.summary['headers'] = self.stm.meta
             if print_stats:
                 self.stm.print_stats()
                 print()
@@ -1120,12 +1124,12 @@ class StructureChecking():
             if len(clash_list[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clash_list[cls]), cls))
                 for rkey in sorted(clash_list[cls], key=lambda x: clash_list[cls][x][0].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(clash_list[cls][rkey][0]), mu.atom_id(clash_list[cls][rkey][1]), clash_list[cls][rkey][2]))
+                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(clash_list[cls][rkey][0]), mu.atom_id(clash_list[cls][rkey][1]), np.sqrt(clash_list[cls][rkey][2])))
                     summary[cls].append(
                         {
                             'at1':mu.atom_id(clash_list[cls][rkey][0]),
                             'at2':mu.atom_id(clash_list[cls][rkey][1]),
-                            'dist': float(clash_list[cls][rkey][2])
+                            'dist': float(np.sqrt(clash_list[cls][rkey][2]))
                         }
                     )
             else:
