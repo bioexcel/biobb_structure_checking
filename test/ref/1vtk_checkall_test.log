@@ -1,9 +1,9 @@
 ===============================================================================
 =                     MDWeb structure checking utility                        =
-=                      A. Hospital, J.L. Gelpi 2018                           =
+=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Downloading PDB structure '1VTK.1'...
+Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
 Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
 Experimental method: x-ray diffraction
@@ -35,6 +35,9 @@ Running chains.
 Running  check_only. Nothing else to do.
 Running inscodes.
 No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running altloc.
+No residues with alternative location labels detected
 Running  check_only. Nothing else to do.
 Running remh.
 No residues with Hydrogen atoms found
@@ -79,8 +82,8 @@ Running  check_only. Nothing else to do.
 Running clashes.
 No severe clashes detected
 4 Steric apolar clashes detected
- GLY A59/1.O  HIS A213/1.CD2    2.824 A
  GLY A59/2.O  HIS A213/2.CD2    2.824 A
+ GLY A59/1.O  HIS A213/1.CD2    2.824 A
  ALA A118/2.CA SER A181/2.O    2.890 A
  ALA A118/1.CA SER A181/1.O    2.890 A
 8 Steric polar_acceptor clashes detected
@@ -88,21 +91,21 @@ No severe clashes detected
  SER A74/1.O  ASP A77/1.OD2    2.685 A
  GLN A104/2.O ASP A108/2.OD2    3.061 A
  GLN A104/1.O ASP A108/1.OD2    3.061 A
- PRO A153/1.O GLN A349/1.OE1    3.093 A
  PRO A153/2.O GLN A349/2.OE1    3.093 A
+ PRO A153/1.O GLN A349/1.OE1    3.093 A
  LEU A217/2.O ARG A220/2.O    2.862 A
  LEU A217/1.O ARG A220/1.O    2.862 A
 4 Steric polar_donor clashes detected
  ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
  ARG A220/1.NH1 ARG A222/1.NH1    2.991 A
- TRP A259/1.NE1 ARG A293/1.NH1    3.094 A
  TRP A259/2.NE1 ARG A293/2.NH1    3.094 A
+ TRP A259/1.NE1 ARG A293/1.NH1    3.094 A
 6 Steric positive clashes detected
  LYS A62/1.NZ ARG A163/1.NH1    3.439 A
  LYS A62/2.NZ ARG A163/2.NH1    3.439 A
- ARG A212/2.NH2 ARG A216/2.NH2    3.171 A
  ARG A212/1.NH2 ARG A216/1.NH2    3.171 A
- ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
+ ARG A212/2.NH2 ARG A216/2.NH2    3.171 A
  ARG A220/1.NH1 ARG A222/1.NH1    2.991 A
+ ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
 No negative clashes detected
 Running  check_only. Nothing else to do.

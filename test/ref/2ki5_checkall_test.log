@@ -1,9 +1,9 @@
 ===============================================================================
 =                     MDWeb structure checking utility                        =
-=                      A. Hospital, J.L. Gelpi 2018                           =
+=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Downloading PDB structure '2KI5.1'...
+Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Structure pdb:2ki5.1 loaded
 Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
 Experimental method: x-ray diffraction
@@ -36,6 +36,17 @@ Running chains.
 Running  check_only. Nothing else to do.
 Running inscodes.
 No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running altloc.
+Detected 2 residues with alternative location labels
+AC2 A1
+  C3'  A (1.00) B (0.01)
+  O3'  A (1.00) B (0.01)
+  C2'  A (1.00) B (0.01)
+  O1'  A (1.00) B (0.01)
+  C1'  A (1.00) B (0.01)
+HOH A779
+  O    A (1.00)
 Running  check_only. Nothing else to do.
 Running remh.
 No residues with Hydrogen atoms found

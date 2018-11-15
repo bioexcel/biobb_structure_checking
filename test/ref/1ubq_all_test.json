@@ -10,7 +10,7 @@
    {
     "at1": "ARG A42.NE",
     "at2": "GLN A49.NE2",
-    "dist": 2.7497353553771973
+    "dist": 2.749735472701024
    }
   ],
   "n_amides": 8,
@@ -74,6 +74,13 @@
   ]
  },
  "getss": {},
+ "headers": {
+  "entry_id": "1UBQ",
+  "keywords": "CHROMOSOMAL PROTEIN",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.8",
+  "title": "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION"
+ },
  "inscodes": {},
  "ligands": {
   "opts": [

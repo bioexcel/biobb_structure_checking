@@ -10,7 +10,7 @@
    {
     "at1": "GLN P180.NE2",
     "at2": "ARG P231.NH1",
-    "dist": 2.844599723815918
+    "dist": 2.844599837869971
    }
   ],
   "n_amides": 24,
@@ -206,6 +206,13 @@
   ]
  },
  "getss": {},
+ "headers": {
+  "entry_id": "1SVC",
+  "keywords": "TRANSCRIPTION/DNA",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "2.600",
+  "title": "NFKB P50 HOMODIMER BOUND TO DNA"
+ },
  "inscodes": {},
  "ligands": {
   "opts": [

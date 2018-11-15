@@ -10,7 +10,7 @@
    {
     "at1": "ASN A30.OD1",
     "at2": "GLN A32.O",
-    "dist": 2.5977070331573486
+    "dist": 2.5977070050551405
    }
   ],
   "n_amides": 4,
@@ -105,6 +105,12 @@
   ]
  },
  "getss": {},
+ "headers": {
+  "entry_id": "1ARK",
+  "keywords": "TRANSFERASE",
+  "method": "SOLUTION NMR",
+  "title": "SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES"
+ },
  "inscodes": {},
  "ligands": {
   "opts": [

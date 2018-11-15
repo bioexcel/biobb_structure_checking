@@ -1,16 +1,16 @@
 ===============================================================================
 =                     MDWeb structure checking utility                        =
-=                      A. Hospital, J.L. Gelpi 2018                           =
+=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
 Running fixside. Options: --fix All 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
- Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
- Experimental method: X-RAY DIFFRACTION
- Keywords: TRANSFERASE
- Resolution: 1.90 A
+Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+Experimental method: X-RAY DIFFRACTION
+Keywords: TRANSFERASE
+Resolution: 1.90 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -62,15 +62,15 @@ Fixed 6 side chain(s)
 Checking possible clashes
 No severe clashes detected
 5 Steric apolar clashes detected
+ ARG B220.NH1 GLY B61.CA      2.301 A
  MET A46.CE   THR A354.O      1.869 A
  ARG B220.CZ  SO4 B3.O3       1.597 A
- ARG B220.NH1 GLY B61.CA      2.301 A
- MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
+ MET B46.CE   VAL B352.O      0.921 A
 3 Steric polar_acceptor clashes detected
  MET A46.SD   THR A354.O      2.569 A
- MET B46.SD   VAL B352.O      2.291 A
  MET A46.SD   VAL A352.O      2.171 A
+ MET B46.SD   VAL B352.O      2.291 A
 2 Steric polar_donor clashes detected
  ARG B220.NH1 GLY B61.N       2.443 A
  ARG B220.NH1 ARG B216.NH2    2.977 A

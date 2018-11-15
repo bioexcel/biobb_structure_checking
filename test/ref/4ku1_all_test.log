@@ -1,15 +1,15 @@
 ===============================================================================
 =                     MDWeb structure checking utility                        =
-=                      A. Hospital, J.L. Gelpi 2018                           =
+=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  PDB id: 4KU1
- Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
- Experimental method: X-RAY DIFFRACTION
- Keywords: IMMUNE SYSTEM
- Resolution: 1.90 A
+Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
+Experimental method: X-RAY DIFFRACTION
+Keywords: IMMUNE SYSTEM
+Resolution: 1.90 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
