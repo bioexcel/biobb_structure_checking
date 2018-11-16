@@ -8,6 +8,14 @@ checking as residue quirality, amide orientation, or vdw clashes.
 
 Missing parameters will be prompted in interactive sessions
 
+usage: checkStruc.py [-h] [-i INPUT_STRUCTURE_PATH] [-o OUTPUT_STRUCTURE_PATH]
+                     [--version] [--data_dir DATA_DIR]
+                     [--res_lib RES_LIB_PATH] [--data_lib DATA_LIBRARY_PATH]
+                     [--json JSON_OUTPUT_PATH] [--quiet] [--check_only]
+                     [--non_interactive] [--force_save]
+                     [--pdb_server PDB_SERVER]
+                     command ...
+
 positional arguments:
   command               Command to execute (help: checkStruc commands)
   options               Specific command options
@@ -80,39 +88,3 @@ cistransbck Analyzes cis-trans dihedrals on backbone atoms
 getss      Detect SS Bonds 
 clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
            Ionic Positive, Ionic Negative)
-
-usage: checkStruc.py [-h] [-i INPUT_STRUCTURE_PATH] [-o OUTPUT_STRUCTURE_PATH]
-                     [--version] [--data_dir DATA_DIR]
-                     [--res_lib RES_LIB_PATH] [--data_lib DATA_LIBRARY_PATH]
-                     [--json JSON_OUTPUT_PATH] [--quiet] [--check_only]
-                     [--non_interactive] [--force_save]
-                     [--pdb_server PDB_SERVER]
-                     command ...
-
-Basic Structure checking based on MDWeb
-
-positional arguments:
-  command               Command to execute (help: checkStruc commands)
-  options               Specific command options
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH
-                        Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}
-  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
-                        Output structure. Format PDB
-  --version             show program's version number and exit
-  --data_dir DATA_DIR   Override settings default data dir
-  --res_lib RES_LIB_PATH
-                        Override settings default residue library (AMBER prep
-                        format)
-  --data_lib DATA_LIBRARY_PATH
-                        Override settings default data library
-  --json JSON_OUTPUT_PATH
-                        Cummulated checking results on a json file
-  --quiet               Reduces output, removing labels and progress info
-  --check_only          Perform checks, structures is not modified
-  --non_interactive     Do not prompt for missing parameters
-  --force_save          Force saving an output file even if no modification
-  --pdb_server PDB_SERVER
-                        Server for retrieving structures (default|MMB)
