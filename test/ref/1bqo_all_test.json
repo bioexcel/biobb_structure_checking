@@ -10,7 +10,7 @@
    {
     "at1": "GLN B236.NE2",
     "at2": "ASN B240.ND2",
-    "dist": 3.0220203399658203
+    "dist": 3.0220202690166817
    }
   ],
   "n_amides": 18,
@@ -198,6 +198,13 @@
   ]
  },
  "getss": {},
+ "headers": {
+  "entry_id": "1BQO",
+  "keywords": "METALLOPROTEASE",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "2.3",
+  "title": "DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS"
+ },
  "inscodes": {},
  "ligands": {
   "detected": [

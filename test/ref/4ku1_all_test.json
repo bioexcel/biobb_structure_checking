@@ -1,197 +1,377 @@
 {
  "altloc": {
-  "ASN A361": [
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.59
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.59
-   },
-   {
-    "atom": "CG",
-    "loc_label": "B",
-    "occupancy": 0.59
-   },
-   {
-    "atom": "OD1",
-    "loc_label": "B",
-    "occupancy": 0.59
-   },
-   {
-    "atom": "ND2",
-    "loc_label": "B",
-    "occupancy": 0.59
-   }
-  ],
-  "GLN B347": [
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.57
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.57
-   },
-   {
-    "atom": "CG",
-    "loc_label": "B",
-    "occupancy": 0.57
-   },
-   {
-    "atom": "CD",
-    "loc_label": "B",
-    "occupancy": 0.57
-   },
-   {
-    "atom": "OE1",
-    "loc_label": "B",
-    "occupancy": 0.57
-   },
-   {
-    "atom": "NE2",
-    "loc_label": "B",
-    "occupancy": 0.57
-   }
-  ],
-  "GLN B418": [
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.62
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.62
-   },
-   {
-    "atom": "CG",
-    "loc_label": "B",
-    "occupancy": 0.62
-   },
-   {
-    "atom": "CD",
-    "loc_label": "B",
-    "occupancy": 0.62
-   },
-   {
-    "atom": "OE1",
-    "loc_label": "B",
-    "occupancy": 0.62
-   },
-   {
-    "atom": "NE2",
-    "loc_label": "B",
-    "occupancy": 0.62
-   }
-  ],
-  "LYS A340": [
-   {
-    "atom": "N",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "C",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "O",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CG",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CD",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CE",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "NZ",
-    "loc_label": "B",
-    "occupancy": 0.5
-   }
-  ],
-  "SER B298": [
-   {
-    "atom": "N",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "C",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "O",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.5
-   },
-   {
-    "atom": "OG",
-    "loc_label": "B",
-    "occupancy": 0.5
-   }
-  ],
-  "THR B411": [
-   {
-    "atom": "CA",
-    "loc_label": "B",
-    "occupancy": 0.66
-   },
-   {
-    "atom": "CB",
-    "loc_label": "B",
-    "occupancy": 0.66
-   },
-   {
-    "atom": "OG1",
-    "loc_label": "B",
-    "occupancy": 0.66
-   },
-   {
-    "atom": "CG2",
-    "loc_label": "B",
-    "occupancy": 0.66
-   }
-  ],
+  "ASN A361": {
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.41
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.41
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ],
+   "CG": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.41
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ],
+   "ND2": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.41
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ],
+   "OD1": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.41
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.59
+    }
+   ]
+  },
+  "GLN B347": {
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "CD": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "CG": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "NE2": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ],
+   "OE1": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.43
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.57
+    }
+   ]
+  },
+  "GLN B418": {
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "CD": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "CG": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "NE2": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ],
+   "OE1": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.38
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.62
+    }
+   ]
+  },
+  "LYS A340": {
+   "C": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CD": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CE": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CG": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "N": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "NZ": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "O": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ]
+  },
+  "SER B298": {
+   "C": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "N": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "O": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ],
+   "OG": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.5
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.5
+    }
+   ]
+  },
+  "THR B411": {
+   "CA": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.34
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.66
+    }
+   ],
+   "CB": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.34
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.66
+    }
+   ],
+   "CG2": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.34
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.66
+    }
+   ],
+   "OG1": [
+    {
+     "loc_label": "A",
+     "occupancy": 0.34
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.66
+    }
+   ]
+  },
   "selected": "occupancy"
  },
  "amide": {
@@ -342,6 +522,13 @@
    "dist": 4.187800884246826
   }
  ],
+ "headers": {
+  "entry_id": "4KU1",
+  "keywords": "IMMUNE SYSTEM",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.90",
+  "title": "Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering"
+ },
  "inscodes": {},
  "ligands": {
   "detected": [

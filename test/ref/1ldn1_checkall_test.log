@@ -1,9 +1,9 @@
 ===============================================================================
 =                     MDWeb structure checking utility                        =
-=                      A. Hospital, J.L. Gelpi 2018                           =
+=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Downloading PDB structure '1LDN.1'...
+Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Structure pdb:1ldn.1 loaded
 Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
 Experimental method: x-ray diffraction
@@ -44,6 +44,51 @@ Running chains.
 Running  check_only. Nothing else to do.
 Running inscodes.
 No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running altloc.
+Detected 2 residues with alternative location labels
+FBP A353
+  P1   A (0.50) C (0.50)
+  O1P  A (0.50) C (0.50)
+  O2P  A (0.50) C (0.50)
+  O3P  A (0.50) C (0.50)
+  O1   A (0.50) C (0.50)
+  C1   A (0.50) C (0.50)
+  C2   A (0.50) C (0.50)
+  O2   A (0.50) C (0.50)
+  C3   A (0.50) C (0.50)
+  O3   A (0.50) C (0.50)
+  C4   A (0.50) C (0.50)
+  O4   A (0.50) C (0.50)
+  C5   A (0.50) C (0.50)
+  O5   A (0.50) C (0.50)
+  C6   A (0.50) C (0.50)
+  O6   A (0.50) C (0.50)
+  P2   A (0.50) C (0.50)
+  O4P  A (0.50) C (0.50)
+  O5P  A (0.50) C (0.50)
+  O6P  A (0.50) C (0.50)
+FBP B353
+  P1   B (0.50) D (0.50)
+  O1P  B (0.50) D (0.50)
+  O2P  B (0.50) D (0.50)
+  O3P  B (0.50) D (0.50)
+  O1   B (0.50) D (0.50)
+  C1   B (0.50) D (0.50)
+  C2   B (0.50) D (0.50)
+  O2   B (0.50) D (0.50)
+  C3   B (0.50) D (0.50)
+  O3   B (0.50) D (0.50)
+  C4   B (0.50) D (0.50)
+  O4   B (0.50) D (0.50)
+  C5   B (0.50) D (0.50)
+  O5   B (0.50) D (0.50)
+  C6   B (0.50) D (0.50)
+  O6   B (0.50) D (0.50)
+  P2   B (0.50) D (0.50)
+  O4P  B (0.50) D (0.50)
+  O5P  B (0.50) D (0.50)
+  O6P  B (0.50) D (0.50)
 Running  check_only. Nothing else to do.
 Running remh.
 No residues with Hydrogen atoms found
@@ -156,8 +201,8 @@ No severe clashes detected
  GLY B29.O    ALA B33.CB      2.805 A
  ASN B41.O    PRO B73.CG      2.716 A
  ASP B52.CG   NAD B352.O3B    2.875 A
- GLU B55.O    ALA B58.CA      2.713 A
  GLU B55.O    ILE B59.CD1     2.853 A
+ GLU B55.O    ALA B58.CA      2.713 A
  ASP B61.O    PHE B65.CD2     2.809 A
  MET B63.O    HIS B67.CG      2.877 A
  ASP B64.OD2  LYS C244.CE     2.362 A
@@ -263,8 +308,8 @@ No severe clashes detected
  VAL D324.O   ALA D328.CB     2.574 A
 48 Steric polar_acceptor clashes detected
  MET A15.O    GLU A47.OE2     2.608 A
- MET A15.SD   ASN A17.O       2.699 A
  MET A15.SD   ASN A18.O       2.938 A
+ MET A15.SD   ASN A17.O       2.699 A
  LYS A16.O    ASP A77.OD2     2.613 A
  ALA A21.O    GLU A47.O       2.917 A
  ILE A48.O    ASP A77.O       2.948 A
@@ -315,8 +360,8 @@ No severe clashes detected
  ASN A54.ND2  SER A56.N       2.851 A
  ASN A54.ND2  LYS A57.N       2.631 A
  ASN A294.ND2 ASN A296.N      2.601 A
- ASN B54.ND2  LYS B57.N       2.898 A
  ASN B54.ND2  SER B56.N       3.020 A
+ ASN B54.ND2  LYS B57.N       2.898 A
  ASN B265.ND2 ARG B295.N      2.772 A
  ASN B294.ND2 ASN B296.N      3.037 A
  MET C15.N    GLY C20.N       2.651 A

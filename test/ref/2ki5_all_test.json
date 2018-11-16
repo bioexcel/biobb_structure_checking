@@ -1,39 +1,65 @@
 {
  "altloc": {
-  "AC2 A1": [
-   {
-    "atom": "C3'",
-    "loc_label": "B",
-    "occupancy": 0.01
-   },
-   {
-    "atom": "O3'",
-    "loc_label": "B",
-    "occupancy": 0.01
-   },
-   {
-    "atom": "C2'",
-    "loc_label": "B",
-    "occupancy": 0.01
-   },
-   {
-    "atom": "O1'",
-    "loc_label": "B",
-    "occupancy": 0.01
-   },
-   {
-    "atom": "C1'",
-    "loc_label": "B",
-    "occupancy": 0.01
-   }
-  ],
-  "HOH A779": [
-   {
-    "atom": "O",
-    "loc_label": "A",
-    "occupancy": 1.0
-   }
-  ],
+  "AC2 A1": {
+   "C1'": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.01
+    }
+   ],
+   "C2'": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.01
+    }
+   ],
+   "C3'": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.01
+    }
+   ],
+   "O1'": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.01
+    }
+   ],
+   "O3'": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    },
+    {
+     "loc_label": "B",
+     "occupancy": 0.01
+    }
+   ]
+  },
+  "HOH A779": {
+   "O": [
+    {
+     "loc_label": "A",
+     "occupancy": 1.0
+    }
+   ]
+  },
   "selected": "occupancy"
  },
  "amide": {
@@ -135,14 +161,14 @@
   "detected": {
    "apolar": [
     {
-     "at1": "MET A46.CE",
-     "at2": "VAL A352.CG2",
-     "dist": 1.842692255973816
+     "at1": "MET B46.CE",
+     "at2": "VAL B352.O",
+     "dist": 0.9205783009529114
     },
     {
      "at1": "MET A46.CE",
-     "at2": "THR A354.O",
-     "dist": 1.869175910949707
+     "at2": "VAL A352.CG2",
+     "dist": 1.842692255973816
     },
     {
      "at1": "ARG B220.NH1",
@@ -150,9 +176,9 @@
      "dist": 2.3009517192840576
     },
     {
-     "at1": "MET B46.CE",
-     "at2": "VAL B352.O",
-     "dist": 0.9205783009529114
+     "at1": "MET A46.CE",
+     "at2": "THR A354.O",
+     "dist": 1.869175910949707
     },
     {
      "at1": "GLY A61.O",
@@ -223,6 +249,11 @@
    "negative": [],
    "polar_acceptor": [
     {
+     "at1": "MET B46.SD",
+     "at2": "VAL B352.O",
+     "dist": 2.291478157043457
+    },
+    {
      "at1": "MET A46.SD",
      "at2": "VAL A352.O",
      "dist": 2.170837879180908
@@ -231,11 +262,6 @@
      "at1": "MET A46.SD",
      "at2": "THR A354.O",
      "dist": 2.569476366043091
-    },
-    {
-     "at1": "MET B46.SD",
-     "at2": "VAL B352.O",
-     "dist": 2.291478157043457
     },
     {
      "at1": "ASP A55.O",
@@ -266,13 +292,13 @@
    "polar_donor": [
     {
      "at1": "ARG B220.NH1",
-     "at2": "GLY B61.N",
-     "dist": 2.4425175189971924
+     "at2": "ARG B216.NH2",
+     "dist": 2.976968288421631
     },
     {
      "at1": "ARG B220.NH1",
-     "at2": "ARG B216.NH2",
-     "dist": 2.976968288421631
+     "at2": "GLY B61.N",
+     "dist": 2.4425175189971924
     },
     {
      "at1": "LYS A62.NZ",
@@ -371,16 +397,6 @@
  "fixside_clashes": {
   "apolar": [
    {
-    "at1": "MET A46.CE",
-    "at2": "THR A354.O",
-    "dist": 1.869175910949707
-   },
-   {
-    "at1": "ARG B220.NH1",
-    "at2": "GLY B61.CA",
-    "dist": 2.3009517192840576
-   },
-   {
     "at1": "MET B46.CE",
     "at2": "VAL B352.O",
     "dist": 0.9205783009529114
@@ -389,15 +405,20 @@
     "at1": "MET A46.CE",
     "at2": "VAL A352.CG2",
     "dist": 1.842692255973816
+   },
+   {
+    "at1": "ARG B220.NH1",
+    "at2": "GLY B61.CA",
+    "dist": 2.3009517192840576
+   },
+   {
+    "at1": "MET A46.CE",
+    "at2": "THR A354.O",
+    "dist": 1.869175910949707
    }
   ],
   "negative": [],
   "polar_acceptor": [
-   {
-    "at1": "MET A46.SD",
-    "at2": "THR A354.O",
-    "dist": 2.569476366043091
-   },
    {
     "at1": "MET B46.SD",
     "at2": "VAL B352.O",
@@ -407,18 +428,23 @@
     "at1": "MET A46.SD",
     "at2": "VAL A352.O",
     "dist": 2.170837879180908
+   },
+   {
+    "at1": "MET A46.SD",
+    "at2": "THR A354.O",
+    "dist": 2.569476366043091
    }
   ],
   "polar_donor": [
    {
     "at1": "ARG B220.NH1",
-    "at2": "GLY B61.N",
-    "dist": 2.4425175189971924
+    "at2": "ARG B216.NH2",
+    "dist": 2.976968288421631
    },
    {
     "at1": "ARG B220.NH1",
-    "at2": "ARG B216.NH2",
-    "dist": 2.976968288421631
+    "at2": "GLY B61.N",
+    "dist": 2.4425175189971924
    }
   ],
   "positive": [
@@ -431,6 +457,13 @@
   "severe": []
  },
  "getss": {},
+ "headers": {
+  "entry_id": "2KI5",
+  "keywords": "TRANSFERASE",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.90",
+  "title": "HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION"
+ },
  "inscodes": {},
  "ligands": {
   "detected": [
