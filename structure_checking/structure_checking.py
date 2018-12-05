@@ -273,9 +273,7 @@ class StructureChecking():
         self.run_method('altloc', opts)
 
     def altloc_check(self): #TODO improve output
-
         self.alt_loc_res = mu.get_altloc_residues(self._get_structure())
-
         if len(self.alt_loc_res) > 0:
             print ('Detected {} residues with alternative location labels'.format(len(self.alt_loc_res)))
 
@@ -568,7 +566,8 @@ class StructureChecking():
         self.run_method('getss', opts)
 
     def getss_check(self):
-        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'), self.stm.biounit)
+        print (self.stm.biounit)
+        self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'), not self.stm.biounit)
 
         if len(self.SS_bonds):
             print ('{} Possible SS Bonds detected'.format(len(self.SS_bonds)))
@@ -1067,7 +1066,7 @@ class StructureChecking():
         self.run_method('cistransbck',opts)
 
     def cistransbck_check(self):
-        self.stm.check_cis_backbone(self.data_library.get_distances('COVLNK'))
+        self.stm.check_cis_backbone(self.data_library.get_distances('COVLNK'), not self.stm.biounit)
         if self.stm.cis_backbone_list:
             self.summary['cistransbck']['cis']=[]
             print ('{} cis peptide bonds'.format(len(self.stm.cis_backbone_list)))
