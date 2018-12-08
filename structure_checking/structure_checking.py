@@ -594,11 +594,11 @@ class StructureChecking():
         contact_types = ['polar_donor','polar_acceptor']
         atom_lists = self.data_library.get_atom_lists(contact_types)
 
-        self.amide_list = []
+        self.amide_list = set()
 
         for r in self._get_structure().get_residues():
             if r.get_resname() in amide_res:
-                self.amide_list.append(r)
+                self.amide_list.add(r)
 
         self.summary['amide']['n_amides'] = len(self.amide_list)
 
