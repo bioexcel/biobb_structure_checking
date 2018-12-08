@@ -654,7 +654,7 @@ class StructureChecking():
             input_line = ParamInput('Fix amide atoms', amide_fix, self.args['non_interactive'])
             input_line.add_option_all()
             input_line.add_option_none()
-            input_line.add_option('resnum', self.amide_rnums, case='sensitive', multiple=True)
+            input_line.add_option('resnum', sorted(self.amide_rnums), case='sensitive', multiple=True)
             [input_option, amide_fix] = input_line.run()
 
             if input_option == 'error':
