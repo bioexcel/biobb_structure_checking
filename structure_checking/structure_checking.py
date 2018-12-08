@@ -40,7 +40,10 @@ dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecule
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
 
-AVAILABLE_METHODS=['models','chains','inscodes','altloc','remh','remwat', 'metals','ligands','getss','amide','chiral','chiral_bck','fixside','backbone','cistransbck','clashes']
+AVAILABLE_METHODS=[
+    'models','chains','inscodes','altloc','remh','remwat', 'metals','ligands',
+    'getss','amide','chiral','chiral_bck','fixside','backbone','cistransbck',
+    'clashes']
 
 # Main class
 class StructureChecking():
@@ -566,7 +569,6 @@ class StructureChecking():
         self.run_method('getss', opts)
 
     def getss_check(self):
-        print (self.stm.biounit)
         self.SS_bonds = mu.get_all_at2at_distances(self._get_structure(), 'SG', self.data_library.get_distances('SS_DIST'), not self.stm.biounit)
 
         if len(self.SS_bonds):
