@@ -5,11 +5,11 @@
 
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Structure pdb:1ldn.1 loaded
-Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
-Experimental method: x-ray diffraction
-Keywords: oxidoreductase(choh(d)-nad(a))
-Resolution: 0.0 A
-Biounit no. 1
+ Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+ Experimental method: x-ray diffraction
+ Keywords: oxidoreductase(choh(d)-nad(a))
+ Resolution: 0.0 A
+ Biounit no. 1
 
  Num. models: 1
  Num. chains: 4 (A: Protein, B: Protein, C: Protein, D: Protein)
@@ -116,7 +116,20 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-No unusual contact(s) involving amide atoms found
+13 unusual contact(s) involving amide atoms found
+ ASN A54.ND2  LYS A57.N       2.631 A
+ ASN A54.ND2  SER A56.N       2.851 A
+ ASN A294.ND2 ASN A296.N      2.601 A
+ ASN B54.ND2  SER B56.N       3.020 A
+ ASN B54.ND2  LYS B57.N       2.898 A
+ ASN B265.ND2 ARG B295.N      2.772 A
+ ASN B294.ND2 ASN B296.N      3.037 A
+ GLN C100.OE1 GLU C104.O      2.665 A
+ ARG C228.NH1 ASN C232.ND2    2.309 A
+ ASN C267.ND2 ARG C299.NH1    2.930 A
+ GLN D100.OE1 GLU D104.O      2.562 A
+ ASN D138.ND2 VAL D140.N      3.043 A
+ ASN D294.ND2 ASN D296.N      2.757 A
 Running  check_only. Nothing else to do.
 Running chiral.
 No residues with incorrect side-chain chirality found
@@ -129,16 +142,16 @@ No residues with missing side chain atoms found
 Running  check_only. Nothing else to do.
 Running backbone.
 Unexpected backbone links found
- MET D15    linked to HOH D359  , expected LYS D16    
+ LEU B153   linked to HOH B384  , expected PRO B154   
 Modified residues found
  HOH A354   
 Running  check_only. Nothing else to do.
 Running cistransbck.
 4 cis peptide bonds
-ASN B138   PRO B139   Dihedral:   -1.397
-ASN C138   PRO C139   Dihedral:   -1.167
-ASN D138   PRO D139   Dihedral:    2.871
 ASN A138   PRO A139   Dihedral:   -2.457
+ASN D138   PRO D139   Dihedral:    2.871
+ASN C138   PRO C139   Dihedral:   -1.167
+ASN B138   PRO B139   Dihedral:   -1.398
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
@@ -266,8 +279,8 @@ No severe clashes detected
  THR C247.CG2 OXM C351.O3     2.574 A
  ARG C260.NH2 PRO D75.CD      2.688 A
  HIS C264.CB  LYS D16.NZ      2.632 A
- ASP C309.O   ARG C313.CG     2.471 A
  ASP C309.O   ASN C312.CB     2.831 A
+ ASP C309.O   ARG C313.CG     2.471 A
  SER C323.O   ARG C327.CG     2.818 A
  MET D15.N    GLY D20.CA      2.696 A
  MET D15.C    GLU D47.OE2     2.838 A
@@ -308,8 +321,8 @@ No severe clashes detected
  VAL D324.O   ALA D328.CB     2.574 A
 48 Steric polar_acceptor clashes detected
  MET A15.O    GLU A47.OE2     2.608 A
- MET A15.SD   ASN A18.O       2.938 A
  MET A15.SD   ASN A17.O       2.699 A
+ MET A15.SD   ASN A18.O       2.938 A
  LYS A16.O    ASP A77.OD2     2.613 A
  ALA A21.O    GLU A47.O       2.917 A
  ILE A48.O    ASP A77.O       2.948 A
@@ -326,8 +339,8 @@ No severe clashes detected
  ASP B166.OD2 GLU B197.OE1    2.318 A
  GLY B175.O   VAL B180.O      2.797 A
  GLY B194.O   GLU B197.OE1    2.752 A
- VAL B272.O   ILE B287.O      2.847 A
  VAL B272.O   VAL B289.O      2.978 A
+ VAL B272.O   ILE B287.O      2.847 A
  LEU B279.O   GLU B303.OE2    2.486 A
  MET C15.O    GLU C47.OE2     2.126 A
  MET C15.SD   ASN C17.O       3.054 A
@@ -357,8 +370,8 @@ No severe clashes detected
  LEU D279.O   GLU D303.OE2    2.707 A
 15 Steric polar_donor clashes detected
  MET A15.N    GLY A20.N       3.086 A
- ASN A54.ND2  SER A56.N       2.851 A
  ASN A54.ND2  LYS A57.N       2.631 A
+ ASN A54.ND2  SER A56.N       2.851 A
  ASN A294.ND2 ASN A296.N      2.601 A
  ASN B54.ND2  SER B56.N       3.020 A
  ASN B54.ND2  LYS B57.N       2.898 A

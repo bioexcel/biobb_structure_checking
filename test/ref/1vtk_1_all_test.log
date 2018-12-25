@@ -5,13 +5,13 @@
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
-Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
-Experimental method: x-ray diffraction
-Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
-Resolution: 0.0 A
-Biounit no. 1
+ Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Experimental method: x-ray diffraction
+ Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
+ Resolution: 0.0 A
+ Biounit no. 1
 
- Num. models: 2
+ Num. models: 2 (type: BioUnit,   42.552 A)
  Num. chains: 1 (A: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
@@ -77,7 +77,12 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All 
-No unusual contact(s) involving amide atoms found
+1 unusual contact(s) involving amide atoms found
+ PRO A153.O   GLN A349.OE1    3.093 A
+Amide residues fixed All (1)
+Rechecking
+1 unusual contact(s) involving amide atoms found
+ PRO A153.O   GLN A349.OE1    2.802 A
 
 Step 10: chiral --fix All
 
@@ -122,7 +127,7 @@ No severe clashes detected
 4 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
- PRO A153.O   GLN A349.OE1    3.093 A
+ PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
 2 Steric polar_donor clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A

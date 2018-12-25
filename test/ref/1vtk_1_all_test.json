@@ -6,6 +6,13 @@
   ]
  },
  "amide": {
+  "detected": [
+   {
+    "at1": "PRO A153.O",
+    "at2": "GLN A349.OE1",
+    "dist": 2.802204701419878
+   }
+  ],
   "n_amides": 17,
   "opts": [
    "--fix",
@@ -69,7 +76,7 @@
     {
      "at1": "PRO A153.O",
      "at2": "GLN A349.OE1",
-     "dist": 3.093168020248413
+     "dist": 2.8022046089172363
     },
     {
      "at1": "LEU A217.O",
@@ -115,6 +122,7 @@
   "chain_ids": {
    "A": 1
   },
+  "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 2439,
@@ -179,6 +187,10 @@
   "ca_only": false,
   "chain_ids": {
    "A": 1
+  },
+  "models_type": {
+   "rmsd": 42.55247211515264,
+   "type": 2
   },
   "nchains": 1,
   "nmodels": 2,

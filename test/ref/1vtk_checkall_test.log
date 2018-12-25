@@ -5,13 +5,13 @@
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
-Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
-Experimental method: x-ray diffraction
-Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
-Resolution: 0.0 A
-Biounit no. 1
+ Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Experimental method: x-ray diffraction
+ Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
+ Resolution: 0.0 A
+ Biounit no. 1
 
- Num. models: 2
+ Num. models: 2 (type: BioUnit,   42.552 A)
  Num. chains: 1 (A: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
@@ -57,7 +57,9 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-No unusual contact(s) involving amide atoms found
+2 unusual contact(s) involving amide atoms found
+ PRO A153/1.O GLN A349/1.OE1    3.093 A
+ PRO A153/2.O GLN A349/2.OE1    3.093 A
 Running  check_only. Nothing else to do.
 Running chiral.
 No residues with incorrect side-chain chirality found
@@ -82,24 +84,24 @@ Running  check_only. Nothing else to do.
 Running clashes.
 No severe clashes detected
 4 Steric apolar clashes detected
- GLY A59/2.O  HIS A213/2.CD2    2.824 A
  GLY A59/1.O  HIS A213/1.CD2    2.824 A
- ALA A118/2.CA SER A181/2.O    2.890 A
+ GLY A59/2.O  HIS A213/2.CD2    2.824 A
  ALA A118/1.CA SER A181/1.O    2.890 A
+ ALA A118/2.CA SER A181/2.O    2.890 A
 8 Steric polar_acceptor clashes detected
- SER A74/2.O  ASP A77/2.OD2    2.685 A
  SER A74/1.O  ASP A77/1.OD2    2.685 A
- GLN A104/2.O ASP A108/2.OD2    3.061 A
+ SER A74/2.O  ASP A77/2.OD2    2.685 A
  GLN A104/1.O ASP A108/1.OD2    3.061 A
- PRO A153/2.O GLN A349/2.OE1    3.093 A
+ GLN A104/2.O ASP A108/2.OD2    3.061 A
  PRO A153/1.O GLN A349/1.OE1    3.093 A
- LEU A217/2.O ARG A220/2.O    2.862 A
+ PRO A153/2.O GLN A349/2.OE1    3.093 A
  LEU A217/1.O ARG A220/1.O    2.862 A
+ LEU A217/2.O ARG A220/2.O    2.862 A
 4 Steric polar_donor clashes detected
- ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
  ARG A220/1.NH1 ARG A222/1.NH1    2.991 A
- TRP A259/2.NE1 ARG A293/2.NH1    3.094 A
+ ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
  TRP A259/1.NE1 ARG A293/1.NH1    3.094 A
+ TRP A259/2.NE1 ARG A293/2.NH1    3.094 A
 6 Steric positive clashes detected
  LYS A62/1.NZ ARG A163/1.NH1    3.439 A
  LYS A62/2.NZ ARG A163/2.NH1    3.439 A

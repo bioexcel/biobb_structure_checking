@@ -7,10 +7,10 @@ Running mutateside. Options: --mut Leu49Ile,B:arg51Lys
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
-Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
-Experimental method: X-RAY DIFFRACTION
-Keywords: TRANSFERASE
-Resolution: 1.90 A
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution: 1.90 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -51,8 +51,8 @@ No severe clashes detected
 4 Steric apolar clashes detected
  ILE B49.CG2  THR B350.OG1    2.611 A
  LYS B51.NZ   ILE B143.CD1    2.319 A
- ILE A49.CG2  THR A350.OG1    2.815 A
  LYS B51.NZ   LEU B139.CG     2.403 A
+ ILE A49.CG2  THR A350.OG1    2.815 A
 No polar_acceptor clashes detected
 No polar_donor clashes detected
 No positive clashes detected

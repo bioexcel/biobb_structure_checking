@@ -6,10 +6,10 @@
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  PDB id: 4KU1
-Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
-Experimental method: X-RAY DIFFRACTION
-Keywords: IMMUNE SYSTEM
-Resolution: 1.90 A
+ Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: IMMUNE SYSTEM
+ Resolution: 1.90 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -180,8 +180,8 @@ Step 14: cistransbck
 
 Running cistransbck.
 2 cis peptide bonds
-TYR A373   PRO A374   Dihedral:   -4.211
 TYR B373   PRO B374   Dihedral:   -5.527
+TYR A373   PRO A374   Dihedral:   -4.211
 1 trans peptide bonds with unusual omega dihedrals
 GLU B382   SER B383   Dihedral:  157.865
 

@@ -44,7 +44,7 @@
     {
      "at1": "MET A1.O",
      "at2": "VAL A17.O",
-     "dist": 3.0353565216064453
+     "dist": 3.0353567600250244
     }
    ],
    "polar_donor": [],
@@ -58,6 +58,7 @@
   "chain_ids": {
    "A": 1
   },
+  "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 602,
@@ -117,6 +118,7 @@
   "chain_ids": {
    "A": 1
   },
+  "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 660,

@@ -6,10 +6,10 @@
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
  PDB id: 1BQO
-Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
-Experimental method: X-RAY DIFFRACTION
-Keywords: METALLOPROTEASE
-Resolution: 2.3 A
+ Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: METALLOPROTEASE
+ Resolution: 2.3 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -133,9 +133,9 @@ Step 14: cistransbck
 Running cistransbck.
 No cis peptide bonds found
 3 trans peptide bonds with unusual omega dihedrals
-ILE A203   GLY A204   Dihedral: -159.337
-ILE B203   GLY B204   Dihedral:  159.080
 THR A191   GLY A192   Dihedral:  156.442
+ILE B203   GLY B204   Dihedral:  159.080
+ILE A203   GLY A204   Dihedral: -159.337
 
 Step 15: getss
 
@@ -160,8 +160,8 @@ No severe clashes detected
  GLU B125.O   THR B128.O      2.726 A
  ASP B141.O   ASP B177.OD1    2.964 A
  ASP B158.OD1 GLY B161.O      2.620 A
- GLY B159.O   ASP B181.OD2    3.023 A
  GLY B159.O   GLU B184.OE2    2.679 A
+ GLY B159.O   ASP B181.OD2    3.023 A
  GLY B173.O   ASN B175.O      3.018 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
  ASP B182.O   GLU B184.O      2.931 A

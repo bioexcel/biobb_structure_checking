@@ -47,7 +47,7 @@
     {
      "at1": "GLU A19.OE2",
      "at2": "TRP A38.CZ3",
-     "dist": 2.644611358642578
+     "dist": 2.644611120223999
     },
     {
      "at1": "TYR A40.CD1",
@@ -89,6 +89,7 @@
   "chain_ids": {
    "A": 1
   },
+  "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 463,
@@ -128,7 +129,7 @@
   "nmodels": 15,
   "selected": 1,
   "type": {
-   "rmsd": 35.03169276576191,
+   "rmsd": 35.03169275469215,
    "type": 2
   }
  },
@@ -151,6 +152,10 @@
   "ca_only": false,
   "chain_ids": {
    "A": 1
+  },
+  "models_type": {
+   "rmsd": 35.03169275469215,
+   "type": 2
   },
   "nchains": 1,
   "nmodels": 15,

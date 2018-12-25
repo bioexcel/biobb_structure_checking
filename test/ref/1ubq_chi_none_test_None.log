@@ -5,10 +5,10 @@
 
 Running chiral. Options: --fix None 
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
-Title:  structure of ubiquitin refined at 1.8 angstroms resolution
-Experimental method: x-ray diffraction
-Keywords: chromosomal protein
-Resolution: 1.8 A
+ Title:  structure of ubiquitin refined at 1.8 angstroms resolution
+ Experimental method: x-ray diffraction
+ Keywords: chromosomal protein
+ Resolution: 1.8 A
 
  Num. models: 1
  Num. chains: 1 (A: Protein)

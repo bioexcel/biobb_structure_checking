@@ -79,7 +79,7 @@
     {
      "at1": "ALA P201.O",
      "at2": "THR P205.CG2",
-     "dist": 2.846787214279175
+     "dist": 2.8467869758605957
     },
     {
      "at1": "ALA P219.O",
@@ -190,6 +190,7 @@
    "D": 2,
    "P": 1
   },
+  "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 2840,
@@ -250,6 +251,7 @@
    "D": 2,
    "P": 1
   },
+  "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 2903,

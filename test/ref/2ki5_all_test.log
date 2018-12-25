@@ -6,10 +6,10 @@
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
-Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
-Experimental method: X-RAY DIFFRACTION
-Keywords: TRANSFERASE
-Resolution: 1.90 A
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution: 1.90 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -153,17 +153,17 @@ No severe clashes detected
 4 Steric apolar clashes detected
  MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
- ARG B220.NH1 GLY B61.CA      2.301 A
  MET A46.CE   THR A354.O      1.869 A
+ GLY B61.CA   ARG B220.NH1    2.301 A
 3 Steric polar_acceptor clashes detected
  MET B46.SD   VAL B352.O      2.291 A
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
 2 Steric polar_donor clashes detected
- ARG B220.NH1 ARG B216.NH2    2.977 A
- ARG B220.NH1 GLY B61.N       2.443 A
+ GLY B61.N    ARG B220.NH1    2.443 A
+ ARG B216.NH2 ARG B220.NH1    2.977 A
 1 Steric positive clashes detected
- ARG B220.NH1 ARG B216.NH2    2.977 A
+ ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 
 Step 13: backbone
@@ -204,7 +204,6 @@ No severe clashes detected
 17 Steric apolar clashes detected
  MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
- ARG B220.NH1 GLY B61.CA      2.301 A
  MET A46.CE   THR A354.O      1.869 A
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
@@ -212,6 +211,7 @@ No severe clashes detected
  LEU A232.O   ARG A236.CG     2.741 A
  MET A372.SD  VAL B307.CG1    2.777 A
  HIS B58.CD2  TYR B172.OH     2.675 A
+ GLY B61.CA   ARG B220.NH1    2.301 A
  LYS B62.O    THR B66.CG2     2.878 A
  THR B66.OG1  TYR B80.CE1     2.890 A
  THR B86.OG1  GLU B374.CB     2.892 A
@@ -229,14 +229,14 @@ No severe clashes detected
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
 4 Steric polar_donor clashes detected
- ARG B220.NH1 ARG B216.NH2    2.977 A
- ARG B220.NH1 GLY B61.N       2.443 A
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
+ GLY B61.N    ARG B220.NH1    2.443 A
+ ARG B216.NH2 ARG B220.NH1    2.977 A
 3 Steric positive clashes detected
- ARG B220.NH1 ARG B216.NH2    2.977 A
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
+ ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 Command list completed
 Structure saved on 2ki5_all_test.pdb
