@@ -74,18 +74,18 @@ Running chiral.
 No residues with incorrect side-chain chirality found
 Running  check_only. Nothing else to do.
 Running chiral_bck.
-Warning: atom CA not found in VAL A70
-Warning: atom C not found in VAL A70
-Warning: atom CB not found in VAL A70
-Warning: atom CA not found in ALA A375
-Warning: atom C not found in ALA A375
-Warning: atom CB not found in ALA A375
-Warning: atom CA not found in SER B263
-Warning: atom C not found in SER B263
-Warning: atom CB not found in SER B263
-Warning: atom CA not found in ALA B375
-Warning: atom C not found in ALA B375
-Warning: atom CB not found in ALA B375
+Warning: atom CA  not found in VAL A70
+Warning: atom C   not found in VAL A70
+Warning: atom CB  not found in VAL A70
+Warning: atom CA  not found in ALA A375
+Warning: atom C   not found in ALA A375
+Warning: atom CB  not found in ALA A375
+Warning: atom CA  not found in SER B263
+Warning: atom C   not found in SER B263
+Warning: atom CB  not found in SER B263
+Warning: atom CA  not found in ALA B375
+Warning: atom C   not found in ALA B375
+Warning: atom CB  not found in ALA B375
 No residues with incorrect backbone chirality found
 Running  check_only. Nothing else to do.
 Running fixside.

@@ -98,18 +98,18 @@ No residues with incorrect side-chain chirality found
 Step 11: chiral_bck
 
 Running chiral_bck.
-Warning: atom CA not found in VAL A70
-Warning: atom C not found in VAL A70
-Warning: atom CB not found in VAL A70
-Warning: atom CA not found in ALA A375
-Warning: atom C not found in ALA A375
-Warning: atom CB not found in ALA A375
-Warning: atom CA not found in SER B263
-Warning: atom C not found in SER B263
-Warning: atom CB not found in SER B263
-Warning: atom CA not found in ALA B375
-Warning: atom C not found in ALA B375
-Warning: atom CB not found in ALA B375
+Warning: atom CA  not found in VAL A70
+Warning: atom C   not found in VAL A70
+Warning: atom CB  not found in VAL A70
+Warning: atom CA  not found in ALA A375
+Warning: atom C   not found in ALA A375
+Warning: atom CB  not found in ALA A375
+Warning: atom CA  not found in SER B263
+Warning: atom C   not found in SER B263
+Warning: atom CB  not found in SER B263
+Warning: atom CA  not found in ALA B375
+Warning: atom C   not found in ALA B375
+Warning: atom CB  not found in ALA B375
 No residues with incorrect backbone chirality found
 
 Step 12: fixside --fix All
@@ -148,17 +148,17 @@ ARG B220
   Adding new atom NH1
   Adding new atom NH2
 Fixed 6 side chain(s)
-Checking possible clashes
+Checking possible new clashes
 No severe clashes detected
 4 Steric apolar clashes detected
- MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
+ MET B46.CE   VAL B352.O      0.921 A
  GLY B61.CA   ARG B220.NH1    2.301 A
 3 Steric polar_acceptor clashes detected
- MET B46.SD   VAL B352.O      2.291 A
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
+ MET B46.SD   VAL B352.O      2.291 A
 2 Steric polar_donor clashes detected
  GLY B61.N    ARG B220.NH1    2.443 A
  ARG B216.NH2 ARG B220.NH1    2.977 A
@@ -202,7 +202,6 @@ Step 16: clashes
 Running clashes.
 No severe clashes detected
 17 Steric apolar clashes detected
- MET B46.CE   VAL B352.O      0.921 A
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
  GLY A61.O    THR A65.CG2     2.799 A
@@ -210,6 +209,7 @@ No severe clashes detected
  ARG A89.CD   GLU A95.OE1     2.776 A
  LEU A232.O   ARG A236.CG     2.741 A
  MET A372.SD  VAL B307.CG1    2.777 A
+ MET B46.CE   VAL B352.O      0.921 A
  HIS B58.CD2  TYR B172.OH     2.675 A
  GLY B61.CA   ARG B220.NH1    2.301 A
  LYS B62.O    THR B66.CG2     2.878 A
@@ -220,10 +220,10 @@ No severe clashes detected
  ARG B212.CZ  ASP B330.OD1    2.875 A
  SER B357.O   ILE B361.CG1    2.861 A
 8 Steric polar_acceptor clashes detected
- MET B46.SD   VAL B352.O      2.291 A
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
  ASP A55.O    VAL A204.O      3.035 A
+ MET B46.SD   VAL B352.O      2.291 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
  ALA B334.O   ASP B338.OD2    3.100 A

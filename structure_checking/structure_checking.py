@@ -978,7 +978,7 @@ class StructureChecking():
             print ('Fixed {} side chain(s)'.format(n))
             # Checking new clashes
             if check_clashes:
-                print ("Checking possible clashes")
+                print ("Checking possible new clashes")
                 contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
                 atom_lists= self.data_library.get_atom_lists(contact_types)
 
@@ -1014,7 +1014,7 @@ class StructureChecking():
             self.residue_lib = ResidueLib(self.sets.res_library_path)
 
         mutated_res = self.mutations.apply_mutations (self.stm.st, self.mutation_rules, self.residue_lib)
-
+        self.stm.atom_renumbering()
         if check_clashes:
             if not self.args['quiet']:
                 print ("Checking new clashes")
@@ -1141,7 +1141,12 @@ class StructureChecking():
             if len(clash_list[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clash_list[cls]), cls))
                 for rkey in sorted(clash_list[cls], key=lambda x: clash_list[cls][x][0].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(clash_list[cls][rkey][0]), mu.atom_id(clash_list[cls][rkey][1]), np.sqrt(clash_list[cls][rkey][2])))
+                    print (' {:12} {:12} {:8.3f} A'.format(
+                        mu.atom_id(clash_list[cls][rkey][0]), 
+                        mu.atom_id(clash_list[cls][rkey][1]), 
+                        np.sqrt(clash_list[cls][rkey][2])
+                        )
+                    )
                     summary[cls].append(
                         {
                             'at1':mu.atom_id(clash_list[cls][rkey][0]),
