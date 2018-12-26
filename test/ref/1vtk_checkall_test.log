@@ -11,7 +11,7 @@ Structure pdb:1vtk.1 loaded
  Resolution: 0.0 A
  Biounit no. 1
 
- Num. models: 2 (type: BioUnit,   42.552 A)
+ Num. models: 2 (type: BioUnit,   42.553 A)
  Num. chains: 1 (A: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
@@ -27,7 +27,7 @@ TMP A500/2
 
 Running models.
 2 Model(s) detected
-Models do not superimpose, RMSd:   42.552 A, guessed as Biounit type
+Models do not superimpose, RMSd:   42.553 A, guessed as Biounit type
 Running  check_only. Nothing else to do.
 Running chains.
 1 Chain(s) detected
