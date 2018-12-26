@@ -117,8 +117,8 @@ No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
 13 unusual contact(s) involving amide atoms found
- ASN A54.ND2  LYS A57.N       2.631 A
  ASN A54.ND2  SER A56.N       2.851 A
+ ASN A54.ND2  LYS A57.N       2.631 A
  ASN A294.ND2 ASN A296.N      2.601 A
  ASN B54.ND2  SER B56.N       3.020 A
  ASN B54.ND2  LYS B57.N       2.898 A
@@ -214,8 +214,8 @@ No severe clashes detected
  GLY B29.O    ALA B33.CB      2.805 A
  ASN B41.O    PRO B73.CG      2.716 A
  ASP B52.CG   NAD B352.O3B    2.875 A
- GLU B55.O    ILE B59.CD1     2.853 A
  GLU B55.O    ALA B58.CA      2.713 A
+ GLU B55.O    ILE B59.CD1     2.853 A
  ASP B61.O    PHE B65.CD2     2.809 A
  MET B63.O    HIS B67.CG      2.877 A
  ASP B64.OD2  LYS C244.CE     2.362 A
@@ -293,8 +293,8 @@ No severe clashes detected
  ALA D38.O    GLN D42.CB      2.795 A
  ASP D52.CG   NAD D352.O2B    2.876 A
  GLU D55.O    ILE D59.CG1     2.688 A
- TYR D83.O    SER D127.CB     2.872 A
  TYR D83.O    CYS D86.CB      2.669 A
+ TYR D83.O    SER D127.CB     2.872 A
  ILE D94.CG2  PHE D117.CZ     2.854 A
  LEU D107.O   VAL D110.CG2    2.768 A
  PHE D117.O   VAL D121.CG2    2.867 A
@@ -339,8 +339,8 @@ No severe clashes detected
  ASP B166.OD2 GLU B197.OE1    2.318 A
  GLY B175.O   VAL B180.O      2.797 A
  GLY B194.O   GLU B197.OE1    2.752 A
- VAL B272.O   VAL B289.O      2.978 A
  VAL B272.O   ILE B287.O      2.847 A
+ VAL B272.O   VAL B289.O      2.978 A
  LEU B279.O   GLU B303.OE2    2.486 A
  MET C15.O    GLU C47.OE2     2.126 A
  MET C15.SD   ASN C17.O       3.054 A
@@ -370,8 +370,8 @@ No severe clashes detected
  LEU D279.O   GLU D303.OE2    2.707 A
 15 Steric polar_donor clashes detected
  MET A15.N    GLY A20.N       3.086 A
- ASN A54.ND2  LYS A57.N       2.631 A
  ASN A54.ND2  SER A56.N       2.851 A
+ ASN A54.ND2  LYS A57.N       2.631 A
  ASN A294.ND2 ASN A296.N      2.601 A
  ASN B54.ND2  SER B56.N       3.020 A
  ASN B54.ND2  LYS B57.N       2.898 A

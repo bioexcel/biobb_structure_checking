@@ -580,8 +580,15 @@ class StructureChecking():
             print ('{} Possible SS Bonds detected'.format(len(self.SS_bonds)))
             self.summary['getss'] = []
             for ssb in self.SS_bonds:
-                print (' {:12} {:12} {:8.3f}'.format(mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]))
-                self.summary['getss'].append({'at1':mu.atom_id(ssb[0]), 'at2':mu.atom_id(ssb[1]), 'dist': float(ssb[2])})
+                print (' {:12} {:12} {:8.3f}'.format(
+                    mu.atom_id(ssb[0]),
+                    mu.atom_id(ssb[1]),
+                    ssb[2]))
+                self.summary['getss'].append({
+                    'at1':mu.atom_id(ssb[0]),
+                    'at2':mu.atom_id(ssb[1]),
+                    'dist': round(float(ssb[2]),4)}
+                )
         else:
             if not self.args['quiet']:
                 print ("No SS bonds detected")
@@ -644,8 +651,16 @@ class StructureChecking():
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
                 for at_pair in sorted(self.amide_cont_list, key=lambda x:  _key_sort_atom_pairs(x)):
-                    print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), np.sqrt(at_pair[2])))
-                    self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': np.sqrt(float(at_pair[2]))})
+                    print (' {:12} {:12} {:8.3f} A'.format(
+                        mu.atom_id(at_pair[0]),
+                        mu.atom_id(at_pair[1]),
+                        np.sqrt(at_pair[2]))
+                    )
+                    self.summary['amide']['detected'].append({
+                        'at1':mu.atom_id(at_pair[0]),
+                        'at2':mu.atom_id(at_pair[1]),
+                        'dist': round(np.sqrt(float(at_pair[2])),4)}
+                    )
                 return True
             else:
                 if not self.args['quiet']:
@@ -1066,7 +1081,7 @@ class StructureChecking():
             self.summary['backbone']['long_links']=[]
             for br in self.stm.not_link_seq_list:
                 print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]))
-                self.summary['backbone']['long_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),float(br[2])])
+                self.summary['backbone']['long_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),round(br[2],5)])
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
@@ -1091,7 +1106,7 @@ class StructureChecking():
             for lnk in self.stm.cis_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
-                self.summary['cistransbck']['cis'].append([mu.residue_id(r1), mu.residue_id(r2), float(dih)])
+                self.summary['cistransbck']['cis'].append([mu.residue_id(r1), mu.residue_id(r2), round(dih,3)])
         else:
             if not self.args['quiet']:
                 print ("No cis peptide bonds found")
@@ -1102,7 +1117,7 @@ class StructureChecking():
             for lnk in self.stm.lowtrans_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
-                self.summary['cistransbck']['unusual_trans'].append([mu.residue_id(r1), mu.residue_id(r2), float(dih)])
+                self.summary['cistransbck']['unusual_trans'].append([mu.residue_id(r1), mu.residue_id(r2), round(dih,3)])
         else:
             if not self.args['quiet']:
                 print ("No trans peptide bonds with unusual omega dihedrals found")
@@ -1142,8 +1157,8 @@ class StructureChecking():
                 print ('{} Steric {} clashes detected'.format(len(clash_list[cls]), cls))
                 for rkey in sorted(clash_list[cls], key=lambda x: _key_sort_atom_pairs(clash_list[cls][x])):
                     print (' {:12} {:12} {:8.3f} A'.format(
-                        mu.atom_id(clash_list[cls][rkey][0]), 
-                        mu.atom_id(clash_list[cls][rkey][1]), 
+                        mu.atom_id(clash_list[cls][rkey][0]),
+                        mu.atom_id(clash_list[cls][rkey][1]),
                         np.sqrt(clash_list[cls][rkey][2])
                         )
                     )
@@ -1151,14 +1166,14 @@ class StructureChecking():
                         {
                             'at1':mu.atom_id(clash_list[cls][rkey][0]),
                             'at2':mu.atom_id(clash_list[cls][rkey][1]),
-                            'dist': float(np.sqrt(clash_list[cls][rkey][2]))
+                            'dist': round(float(np.sqrt(clash_list[cls][rkey][2])),4)
                         }
                     )
             else:
                 if not self.args['quiet']:
                     print ('No {} clashes detected'.format(cls))
         return summary
-        
+
 #===============================================================================
 def _key_sort_atom_pairs(at_pair):
     return at_pair[0].serial_number * 10000 + at_pair[1].serial_number

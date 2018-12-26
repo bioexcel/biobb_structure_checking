@@ -51,8 +51,8 @@ No severe clashes detected
 4 Steric apolar clashes detected
  ILE A49.CG2  THR A350.OG1    2.815 A
  ILE B49.CG2  THR B350.OG1    2.611 A
- LYS B51.NZ   ILE B143.CD1    2.319 A
  LYS B51.NZ   LEU B139.CG     2.403 A
+ LYS B51.NZ   ILE B143.CD1    2.319 A
 No polar_acceptor clashes detected
 No polar_donor clashes detected
 No positive clashes detected
