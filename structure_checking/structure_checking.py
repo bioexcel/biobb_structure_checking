@@ -643,7 +643,7 @@ class StructureChecking():
             if len(self.amide_cont_list):
                 print ('{} unusual contact(s) involving amide atoms found'.format(len(self.amide_cont_list)))
                 self.summary['amide']['detected'] = []
-                for at_pair in sorted(self.amide_cont_list, key=lambda x: x[0].serial_number):
+                for at_pair in sorted(self.amide_cont_list, key=lambda x:  _key_sort_atom_pairs(x)):
                     print (' {:12} {:12} {:8.3f} A'.format(mu.atom_id(at_pair[0]), mu.atom_id(at_pair[1]), np.sqrt(at_pair[2])))
                     self.summary['amide']['detected'].append({'at1':mu.atom_id(at_pair[0]), 'at2':mu.atom_id(at_pair[1]), 'dist': np.sqrt(float(at_pair[2]))})
                 return True
@@ -1140,11 +1140,12 @@ class StructureChecking():
             summary[cls]=[]
             if len(clash_list[cls]):
                 print ('{} Steric {} clashes detected'.format(len(clash_list[cls]), cls))
-                for rkey in sorted(clash_list[cls], key=lambda x: clash_list[cls][x][0].serial_number):
-                    print (' {:12} {:12} {:8.3f} A'.format(
+                for rkey in sorted(clash_list[cls], key=lambda x: _key_sort_atom_pairs(clash_list[cls][x])):
+                    print (' {:12} {:12} {:8.3f} A {}'.format(
                         mu.atom_id(clash_list[cls][rkey][0]), 
                         mu.atom_id(clash_list[cls][rkey][1]), 
-                        np.sqrt(clash_list[cls][rkey][2])
+                        np.sqrt(clash_list[cls][rkey][2]),
+                        _key_sort_atom_pairs(clash_list[cls][rkey])
                         )
                     )
                     summary[cls].append(
@@ -1158,5 +1159,7 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print ('No {} clashes detected'.format(cls))
         return summary
-
+        
 #===============================================================================
+def _key_sort_atom_pairs(at_pair):
+    return at_pair[0].serial_number * 10000 + at_pair[1].serial_number
