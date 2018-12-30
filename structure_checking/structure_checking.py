@@ -659,7 +659,7 @@ class StructureChecking():
                     self.summary['amide']['detected'].append({
                         'at1':mu.atom_id(at_pair[0]),
                         'at2':mu.atom_id(at_pair[1]),
-                        'dist': round(np.sqrt(float(at_pair[2])),4)}
+                        'dist': round(float(np.sqrt(at_pair[2])),4)}
                     )
                 return True
             else:
@@ -1053,7 +1053,10 @@ class StructureChecking():
     def backbone_check(self):
         backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
         # Residues with missing backbone
-        self.miss_at_list = self.stm.get_missing_backbone_atoms(self.data_library.get_valid_codes('protein'), self.data_library.get_all_atom_lists())
+        self.miss_at_list = self.stm.get_missing_backbone_atoms(
+            self.data_library.get_valid_codes('protein'), 
+            self.data_library.get_all_atom_lists()
+        )
         if len(self.miss_at_list):
             self.summary['backbone']['missing_atoms'] = {}
             print('{} Residues with missing backbone atoms found'.format(len(self.miss_at_list)))
@@ -1074,14 +1077,26 @@ class StructureChecking():
             print ("Unexpected backbone links found")
             self.summary['backbone']['wrong_links']=[]
             for br in self.stm.wrong_link_list:
-                print (" {:10} linked to {:10}, expected {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),mu.residue_id(br[2])))
+                print (" {:10} linked to {:10}, expected {:10} ".format(
+                    mu.residue_id(br[0]),
+                    mu.residue_id(br[1]),
+                    mu.residue_id(br[2]))
+                )
                 self.summary['backbone']['wrong_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),mu.residue_id(br[2])])
         if self.stm.not_link_seq_list:
             print ("Consecutive residues too far away to be covalently linked")
             self.summary['backbone']['long_links']=[]
             for br in self.stm.not_link_seq_list:
-                print (" {:10} - {:10}, bond distance {:8.3f} ".format(mu.residue_id(br[0]),mu.residue_id(br[1]),br[2]))
-                self.summary['backbone']['long_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),round(br[2],5)])
+                print (" {:10} - {:10}, bond distance {:8.3f} ".format(
+                    mu.residue_id(br[0]),
+                    mu.residue_id(br[1]),
+                    br[2])
+                )
+                self.summary['backbone']['long_links'].append(
+                    [mu.residue_id(br[0]),
+                    mu.residue_id(br[1]),
+                    round(float(br[2]),5)]
+                )
         #TODO move this section to ligands
         if self.stm.modified_residue_list:
             print ("Modified residues found")
@@ -1106,7 +1121,7 @@ class StructureChecking():
             for lnk in self.stm.cis_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
-                self.summary['cistransbck']['cis'].append([mu.residue_id(r1), mu.residue_id(r2), round(dih,3)])
+                self.summary['cistransbck']['cis'].append([mu.residue_id(r1), mu.residue_id(r2), round(float(dih),3)])
         else:
             if not self.args['quiet']:
                 print ("No cis peptide bonds found")
@@ -1117,7 +1132,7 @@ class StructureChecking():
             for lnk in self.stm.lowtrans_backbone_list:
                 [r1,r2,dih] = lnk
                 print ('{:10} {:10} Dihedral: {:8.3f}'.format(mu.residue_id(r1), mu.residue_id(r2), dih))
-                self.summary['cistransbck']['unusual_trans'].append([mu.residue_id(r1), mu.residue_id(r2), round(dih,3)])
+                self.summary['cistransbck']['unusual_trans'].append([mu.residue_id(r1), mu.residue_id(r2), round(float(dih),3)])
         else:
             if not self.args['quiet']:
                 print ("No trans peptide bonds with unusual omega dihedrals found")
@@ -1130,7 +1145,12 @@ class StructureChecking():
         if not hasattr(self, 'stm'):
             if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
                 self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
-            self.stm = StructureManager(self.args['input_structure_path'], pdb_server=self.pdb_server, cache_dir=self.cache_dir)
+            self.stm = StructureManager(
+                self.args['input_structure_path'], 
+                pdb_server=self.pdb_server, 
+                cache_dir=self.cache_dir, 
+                file_format=self.args['file_format']
+            )
             if verbose:
                 print ('Structure {} loaded'.format(self.args['input_structure_path']))
                 self.stm.print_headers()

@@ -98,6 +98,13 @@ class CmdLine():
             help='Server for retrieving structures (default|MMB)'
         )
         self.argparser.add_argument(
+            '--file_format',
+            action='store',
+            dest='file_format',
+            default='mmCif',
+            help='Format for retrieving structures (default=mmCif|pdb|xml)'
+        )
+        self.argparser.add_argument(
             '--cache_dir',
             action='store',
             dest='cache_dir',
