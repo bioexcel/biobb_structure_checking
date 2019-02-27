@@ -1,0 +1,4 @@
+Add Hydrogen Atoms according to pH, from residue library
+
+Usage: checkStruct.py addH --addH_mode standard | select | pH_value
+

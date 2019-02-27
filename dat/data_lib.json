@@ -29,6 +29,52 @@
             "dna": ["DA", "DC", "DG", "DT"],
             "rna": ["A", "C", "G", "U"]
         },
+        "addH_check_residues": ["ASP","GLU","HIS","LYS","ARG","CYS","TYR"],
+        "addH_std_ion": {
+            "ASP": {
+                "std": "ASP",
+                "pK": 4.5,
+                "lowpH": "ASH",
+                "highpH": "ASP"
+            },
+            "GLU": {
+                "std": "GLU",
+                "pK": 4.5,
+                "lowpH": "GLH",
+                "highpH": "GLU"
+            },
+            "HIS": {
+                "std":"HIE",
+                "pK": 6.5,
+                "lowpH": "HIP",
+                "highpH": "HIE"
+            },
+            "ARG": {
+                "std":"ARG",
+                "pK": 12.5,
+                "lowpH": "ARG",
+                "highpH": "ARN"
+            },
+            "LYS": {
+                "std": "LYS",
+                "pK": 10.8,
+                "lowpH": "LYS",
+                "highpH": "LYN"
+            },
+            "CYS":{
+                "std": "CYS",
+                "pK": 8.3,
+                "lowpH": "CYS",
+                "highpH": "CYM"
+            },           
+            "TYR": {
+                "std":"TYR",
+                "pK": 10.9,
+                "lowpH": "TYR",
+                "highpH": "TYM"
+            }
+        },
+            
         "atom_data": {
             "metal_atoms": [
                 "MG", "MN", "MO", "Mg2", "Mn2", "Ca2", "ZN", "NI", "FE",
@@ -42,11 +88,13 @@
                 "polar_donor_atoms": ["N"],
                 "polar_acceptor_atoms": ["O", "O4'", "05'" , "OXT"],
                 "negative_atoms": ["OXT", "OP1", "OP2"],
-                "apolar_atoms" : ["CA", "C"]
+                "apolar_atoms" : ["CA", "C"],
+		"hydrogen_atoms" : ["H","HA"]
             },
             "ALA": {
                 "side_atoms": ["CB"],
                 "apolar_atoms" : ["CB"],
+   		"hydrogen_atoms" : ["HB1","HB2","HB3"],
                 "mutation_rules": {
                     "ALA": {
                         "Add": [],
@@ -153,6 +201,11 @@
             "CYS": {
                 "side_atoms": ["CB", "SG"],
                 "apolar_atoms": ["CB"],
+		"hydrogen_atoms": {
+			"CYS": ["HB2","HB3","HG"],
+			"CYM": ["HB2","HB3"],	
+			"CYX": ["HB2","HB3"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["SG"],
@@ -259,6 +312,10 @@
             "ASP": {
                 "side_atoms": ["CB", "CG", "OD1", "OD2"],
                 "apolar_atoms": ["CB", "CG"],
+		"hydrogen_atoms": {
+			"ASP": ["HB2","HB3"],
+			"ASH": ["HB2","HB3","HD2"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "OD1", "OD2"],
@@ -337,7 +394,7 @@
                     },
                     "SER": {
                         "Del": ["OD1", "OD2"],
-                        "Mov": ["CG-OG"],
+                        "Mov": ["CG-OG"], 
                         "Add": []
                     },
                     "THR": {
@@ -367,6 +424,10 @@
             "GLU": {
                 "side_atoms": ["CB", "CG", "CD", "OE1", "OE2"],
                 "apolar_atoms": ["CB", "CG", "CD"],
+		"hydrogen_atoms" : {
+			"GLU": ["HB2","HB3","HG2","HG3"],
+			"GLH": ["HB2","HB3","HG2","HG3","HE2"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "OE1", "OE2"],
@@ -475,6 +536,7 @@
             "PHE": {
                 "side_atoms": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
                 "apolar_atoms": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
+		"hydrogen_atoms": ["HB2","HB3","HD1","HE1","HZ","HE2","HD2"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
@@ -581,6 +643,7 @@
             "GLY": {
                 "side_atoms": [],
                 "apolar_atoms": [],
+		"hydrogen_atoms": ["HA2","HA3"],
                 "mutation_rules": {
                     "ALA": {
                         "Add": ["CB"],
@@ -688,6 +751,11 @@
                 "aliases": ["HID", "HIE"],
                 "side_atoms": ["CB", "CG", "ND1", "CE1", "NE2", "CD2"],
                 "apolar_atoms": ["CB", "CG", "CE1","CD2"],
+		"hydrogen_atoms": {
+			"HID": ["HB2","HB3","HD1","HE1","HD2"],
+			"HIE": ["HB2","HB3","HE1","HE2","HD2"],
+			"HIP": ["HB2","HB3","HD1","HE1","HE2","HD2"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "ND1", "CE1", "NE2", "CD2"],
@@ -794,6 +862,7 @@
             "ILE": {
                 "side_atoms": ["CB", "CG2", "CG1", "CD1"],
                 "apolar_atoms": ["CB", "CG2", "CG1", "CD1"],
+		"hydrogen_atoms": ["HB","HG21","HG22","HG23","HG12","HG13","HD11","HD12","HD13"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG2", "CG1", "CD1"],
@@ -901,6 +970,10 @@
             "LYS": {
                 "side_atoms": ["CB", "CG", "CD", "CE", "NZ"],
                 "apolar_atoms": ["CB", "CG", "CD", "CE"],
+		"hydrogen_atoms": {
+			"LYS": ["HB2","HB3","HG2","HG3","HD2","HD3","HE2","HE3","HZ1","HZ2","HZ3"],
+			"LYN": ["HB2","HB3","HG2","HG3","HD2","HD3","HE2","HE3","HZ2","HZ3"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "CE", "NZ"],
@@ -1008,6 +1081,7 @@
             "LEU": {
                 "side_atoms": ["CB", "CG", "CD1", "CD2"],
                 "apolar_atoms": ["CB", "CG", "CD1", "CD2"],
+		"hydrogen_atoms": ["HB2","HB3","HG","HD11","HD12","HD13","HD21","HD22","HD23"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD1", "CD2"],
@@ -1113,6 +1187,7 @@
             "MET": {
                 "side_atoms": ["CB", "CG", "SD", "CE"],
                 "apolar_atoms": ["CB", "CG", "CE"],
+		"hydrogen_atoms": ["HB2","HB3","HG2","HG3","HE1","HE2","HE3"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "SD", "CE"],
@@ -1220,6 +1295,7 @@
             "ASN": {
                 "side_atoms": ["CB", "CG", "OD1", "ND2"],
                 "apolar_atoms": ["CB", "CG"],
+		"hydrogen_atoms": ["HB2","HB3","HD21","HD22"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "OD1", "ND2"],
@@ -1329,6 +1405,7 @@
             "PRO": {
                 "side_atoms": ["CB", "CG", "CD"],
                 "apolar_atoms": ["CB", "CG", "CD"],
+		"hydrogen_atoms": ["HB2","HB3","HG2","HG3","HD2","HD3"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CD", "CG"],
@@ -1435,6 +1512,7 @@
             "GLN": {
                 "side_atoms": ["CB", "CG", "CD", "OE1", "NE2"],
                 "apolar_atoms": ["CB", "CG", "CD"],
+		"hydrogen_atoms": ["HB2","HB3","HG2","HG3","HE21","HE22"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "OE1", "NE2"],
@@ -1544,6 +1622,10 @@
             "ARG": {
                 "side_atoms": ["CB", "CG", "CD", "NE", "CZ", "NH1", "NH2"],
                 "apolar_atoms": ["CB", "CG", "CD", "CZ"],
+		"hydrogen_atoms": {
+			"ARG": ["HB2","HB3","HG2","HG3","HD2","HD3","HE","HH11","HH12","HH21","HH22"],
+			"ARN": ["HB2","HB3","HG2","HG3","HD2","HD3","HH11","HH12","HH21","HH22"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
@@ -1652,6 +1734,7 @@
             "SER": {
                 "side_atoms": ["CB", "OG"],
                 "apolar_atoms": ["CB"],
+		"hydrogen_atoms": ["HB2","HB3","HG"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["OG"],
@@ -1758,6 +1841,7 @@
             "THR": {
                 "side_atoms": ["CB", "CG2", "OG1"],
                 "apolar_atoms": ["CB", "CG2"],
+		"hydrogen_atoms": ["HB","HG21","HG22","HG23","HG1"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG2", "OG1"],
@@ -1865,6 +1949,7 @@
             "VAL": {
                 "side_atoms": ["CB", "CG1", "CG2"],
                 "apolar_atoms": ["CB", "CG1", "CG2"],
+		"hydrogen_atoms": ["HB","HG11","HG12","HG13","HG21","HG22","HG23"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG1", "CG2"],
@@ -1971,6 +2056,7 @@
             "TRP": {
                 "side_atoms": ["CB", "CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
                 "apolar_atoms": ["CB", "CG", "CD1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
+		"hydrogen_atoms": ["HB2","HB3","HD1","HE1","HZ2","HH2","HZ3","HE3"],
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
@@ -2078,6 +2164,10 @@
             "TYR": {
                 "side_atoms": ["CB", "CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
                 "apolar_atoms": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
+		"hydrogen_atoms": {
+			"TYR": ["HB2","HB3","HD1","HE1","HH","HE2","HD2"],
+			"TYM": ["HB2","HB3","HD1","HE1","HE2","HD2"]
+		},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
