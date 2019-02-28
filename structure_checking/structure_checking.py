@@ -39,6 +39,7 @@ dialogs.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | Non
 dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
+dialogs.add_option('addH', '--mode', 'mode', 'Selection mode (None | auto | interactive | interactive_his | ph )')
 
 AVAILABLE_METHODS=[
     'models','chains','inscodes','altloc','remh','remwat', 'metals','ligands',
@@ -1027,10 +1028,10 @@ class StructureChecking():
                 print ("No residues requiring selection on adding H")
             return False
         
-    def addH_fix(self,addH_mode):
-        input_line = ParamInput ('Add H Mode', addH_mode, self.args['non_interactive'])
+    def addH_fix(self,mode):
+        input_line = ParamInput ('Mode', mode, self.args['non_interactive'])
         input_line.add_option_none()
-        input_line.add_option('std', ['std'], case="lower")
+        input_line.add_option('auto', ['auto'], case="lower")
         input_line.add_option('inter', ['interactive'], case="lower")
         input_line.add_option('inter_His', ['interactive_his'], case="lower")
         input_line.add_option('ph', ['pH'])
@@ -1051,7 +1052,7 @@ class StructureChecking():
             to_fix=[]
             std_ion= self.data_library.get_ion_data()
             print(std_ion)
-            if input_option == 'std':
+            if input_option == 'auto':
                 for r_at in self.ion_res_list:
                     [r, at_list] = r_at
                     rcode=r.get_resname()
@@ -1075,7 +1076,8 @@ class StructureChecking():
             else:
                 print ("Not Valid")
                 return 1
-            self.stm.add_hydrogens(to_fix,self.data_library.get_hydrogen_atoms(), self.residue_lib)
+            backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+            self.stm.add_hydrogens(to_fix,self.data_library.get_hydrogen_atoms(), self.residue_lib, backbone_atoms, self.data_library.get_distances('COVLNK'))
             
         return ""
         
