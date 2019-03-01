@@ -71,8 +71,8 @@ remh [remh --remove Yes|No]
     Remove Hydrogen atoms from structure 
 mutateside [--mut mutation_list]
     Mutate side chain with minimal atom replacement. Allows multiple mutations
-addH [--addH_mode standard | select | pH_value]
-    Add Hydrogen Atoms according to pH, from residue library
+addH [--mode auto | pH | interactive | interactive_his]
+    Add Hydrogen Atoms
 
 2. Fix Structure Errors
 

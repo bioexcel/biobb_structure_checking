@@ -1048,10 +1048,11 @@ class StructureChecking():
         else:
             if not hasattr(self,'residue_lib'):
                 self.residue_lib = ResidueLib(self.sets.res_library_path)
-            print (input_option)
             to_fix=[]
             std_ion= self.data_library.get_ion_data()
             if input_option == 'auto':
+                if not self.args['quiet']:
+                    print ('Selection: auto')
                 for r_at in self.ion_res_list:
                     [r, at_list] = r_at
                     rcode=r.get_resname()
@@ -1061,6 +1062,8 @@ class StructureChecking():
                 input_line = ParamInput("pH Value", ph_value,self.args['non_interactive'])
                 input_line.add_option("pH", [], opt_type="float", min_val=0., max_val=14.)
                 [input_option, ph_value] = input_line.run()
+                if not self.args['quiet']:
+                    print ('Selection: pH',ph_value)
                 for r_at in self.ion_res_list:
                     [r, at_list] = r_at
                     rcode=r.get_resname()
@@ -1069,8 +1072,12 @@ class StructureChecking():
                     else:
                         to_fix.append([r,std_ion[rcode]['highpH']])
             elif input_option == 'interactive':
+                if not self.args['quiet']:
+                    print ('Selection: interactive')
                 pass
             elif input_option == 'interactive_His':
+                if not self.args['quiet']:
+                    print ('Selection: interactive-his')
                 pass
             else:
                 print ("Not Valid")

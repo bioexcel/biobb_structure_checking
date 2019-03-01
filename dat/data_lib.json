@@ -212,14 +212,33 @@
                     "CYX": ["HB2", "HB3"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "SG"],
-                        "ats": ["HB2", "HB3"]
+                    "CYS": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "SG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "SG": {
+                            "mode": "L",
+                            "ats": ["HG"]
+                        }
                     },
-                    "SG": {
-                        "mode": "L",
-                        "ats": ["HG"]
+                    "CYM":  {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "SG"],
+                            "ats": ["HB2", "HB3"]
+                        }
+                    },
+                    "CYX":  {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "SG"],
+                            "ats": ["HB2", "HB3"]
+                        }
                     }
                 },
                 "mutation_rules": {
@@ -333,11 +352,27 @@
                     "ASH": ["HB2", "HB3", "HD2"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
+                    "ASP" : {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        }
+                    },
+                    "ASH" : {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*" : {
+                            "mode": "L",
+                            "ats":["HD2"]
+                        }
                     }
+                        
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -452,15 +487,37 @@
                     "GLH": ["HB2", "HB3", "HG2", "HG3", "HE2"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
+                    "GLU": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CB", "CD"],
+                            "ats": ["HG2", "HG3"]
+                        }
                     },
-                    "CG": {
-                        "mode": "B2",
-                        "ref_ats": ["CB", "CD"],
-                        "ats": ["HG2", "HG3"]
+                    "GLH": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CB", "CD"],
+                            "ats": ["HG2", "HG3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HE2"]
+                        }
                     }
                 },
                 "mutation_rules": {
@@ -575,6 +632,7 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
@@ -802,14 +860,41 @@
                     "HIP": ["HB2", "HB3", "HD1", "HE1", "HE2", "HD2"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
+                    "HIE": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HE1", "HE2", "HD2"]
+                        }
                     },
-                    "*": {
-                        "mode": "L",
-                        "ats": ["HE1", "HE2", "HD2"]
+                    "HID": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HD1", "HE2", "HD2"]
+                        }
+                    },
+                    "HIP": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HD1","HE1", "HE2", "HD2"]
+                        }
                     }
                 },
                 "mutation_rules": {
@@ -922,11 +1007,13 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B1",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG1", "CG2"],
                         "ats": ["HB"]
                     },
                     "CG1": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CB", "CD1"],
                         "ats": ["HG12", "HG13"]
                     },
@@ -1047,29 +1134,65 @@
                     "LYN": ["HB2", "HB3", "HG2", "HG3", "HD2", "HD3", "HE2", "HE3", "HZ2", "HZ3"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
+                    "LYS": {
+                        "CB": {
+                            "dist": 1.090,
+                            "mode": "B2",
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CB", "CD"],
+                            "ats": ["HG2", "HG3"]
+                        },
+                        "CD": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CG", "CE"],
+                            "ats": ["HD2", "HD3"]
+                        },
+                        "CE": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CD", "NZ"],
+                            "ats": ["HE2", "HE3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HZ1", "HZ2", "HZ3"]
+                        }
                     },
-                    "CG": {
-                        "mode": "B2",
-                        "ref_ats": ["CB", "CD"],
-                        "ats": ["HG2", "HG3"]
-                    },
-                    "CD": {
-                        "mode": "B2",
-                        "ref_ats": ["CG", "CE"],
-                        "ats": ["HD2", "HD3"]
-                    },
-                    "CE": {
-                        "mode": "B2",
-                        "ref_ats": ["CD", "NZ"],
-                        "ats": ["HE2", "HE3"]
-                    },
-                    "*": {
-                        "mode": "L",
-                        "ats": ["HZ1", "HZ2", "HZ3"]
+                    "LYN": {
+                        "CB": {
+                            "dist": 1.090,
+                            "mode": "B2",
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CB", "CD"],
+                            "ats": ["HG2", "HG3"]
+                        },
+                        "CD": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CG", "CE"],
+                            "ats": ["HD2", "HD3"]
+                        },
+                        "CE": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CD", "NZ"],
+                            "ats": ["HE2", "HE3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HZ2", "HZ3"]
+                        }
                     }
                 },                
                 "mutation_rules": {
@@ -1183,11 +1306,13 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
                     "CG": {
                         "mode": "B1",
+                        "dist": 1.090,
                         "ref_ats": ["CB", "CD1", "CD2"],
                         "ats": ["HG"]
                     },
@@ -1305,11 +1430,13 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
                     "CG": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CB", "SD"],
                         "ats": ["HG2", "HG3"]
                     },
@@ -1429,6 +1556,7 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
@@ -1548,9 +1676,23 @@
                 "apolar_atoms": ["CB", "CG", "CD"],
                 "hydrogen_atoms": ["HB2", "HB3", "HG2", "HG3", "HD2", "HD3"],
                 "addH_rules": {
-                    "*": {
-                        "mode": "L",
-                        "ats": ["HB2", "HB3", "HG2", "HG3", "HD2", "HD3"]
+                    "CB" : {
+                        "mode":"B2",
+                        "dist": 1.080,
+                        "ref_ats":["CA","CG"],
+                        "ats":["HB2","HB3"]
+                    },
+                    "CG" : {
+                        "mode":"B2",
+                        "dist": 1.080,
+                        "ref_ats":["CB","CD"],
+                        "ats":["HG2","HG3"]
+                    },
+                    "CD" : {
+                        "mode":"B2",
+                        "dist": 1.080,
+                        "ref_ats":["CG","N"],
+                        "ats":["HD2","HD3"]
                     }
                 },
                 "mutation_rules": {
@@ -1663,11 +1805,13 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
                     "CG": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CB", "CD"],
                         "ats": ["HG2", "HG3"]
                     },
@@ -1791,29 +1935,59 @@
                     "ARN": ["HB2", "HB3", "HG2", "HG3", "HD2", "HD3", "HH11", "HH12", "HH21", "HH22"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
-                    },
-                    "CG": {
-                        "mode": "B2",
-                        "ref_ats": ["CB", "CD"],
-                        "ats": ["HG2", "HG3"]
-                    },
-                    "CD": {
-                        "mode": "B2",
-                        "ref_ats": ["CG", "NE"],
-                        "ats": ["HD2", "HD3"]
-                    },
-                    "NE": {
-                        "mode": "S2",
-                        "ref_ats": ["CG", "CZ"],
-                        "ats": ["HE"],
+                    "ARG": {
+                        "CB": {
+                            "mode": "B2",
+                            "ref_ats": ["CA", "CG"],
+                            "dist": 1.090,
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "ref_ats": ["CB", "CD"],
+                            "dist": 1.090,
+                            "ats": ["HG2", "HG3"]
+                        },
+                        "CD": {
+                            "mode": "B2",
+                            "ref_ats": ["CG", "NE"],
+                            "dist": 1.090,
+                            "ats": ["HD2", "HD3"]
+                        },
+                        "NE": {
+                            "mode": "S2",
+                            "ref_ats": ["CD", "CZ"],
+                            "dist": 1.010,
+                            "ats": ["HE"]
+                        },
                         "*": {
                             "mode": "L",
                             "ats": ["HH11", "HH12", "HH21", "HH22"]
-                        }                    
+                        }
+                    },
+                    "ARN": {
+                        "CB": {
+                            "mode": "B2",
+                            "ref_ats": ["CA", "CG"],
+                            "dist": 1.090,
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "CG": {
+                            "mode": "B2",
+                            "ref_ats": ["CB", "CD"],
+                            "dist": 1.090,
+                            "ats": ["HG2", "HG3"]
+                        },
+                        "CD": {
+                            "mode": "B2",
+                            "ref_ats": ["CG", "NE"],
+                            "dist": 1.090,
+                            "ats": ["HD2", "HD3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HH11", "HH12", "HH21", "HH22"]
+                        }
                     }
                 },
                 "mutation_rules": {
@@ -1928,6 +2102,7 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "OG"],
                         "ats": ["HB2", "HB3"]
                     },
@@ -2046,6 +2221,7 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B1",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG2", "OG1"],
                         "ats": ["HB"]
                     },
@@ -2163,9 +2339,15 @@
                 "apolar_atoms": ["CB", "CG1", "CG2"],
                 "hydrogen_atoms": ["HB", "HG11", "HG12", "HG13", "HG21", "HG22", "HG23"],
                 "addH_rules": {
+                    "CB": {
+                        "mode": "B1",
+                        "dist": 1.090,
+                        "ref_ats": ["CA","CG1","CG2"],
+                        "ats": ["HB"]
+                    },
                     "*": {
                         "mode": "L",
-                        "ats": ["HB", "HG11", "HG12", "HG13", "HG21", "HG22", "HG23"]
+                        "ats": ["HG11", "HG12", "HG13", "HG21", "HG22", "HG23"]
                     }
                 },
                 "mutation_rules": {
@@ -2278,6 +2460,7 @@
                 "addH_rules": {
                     "CB": {
                         "mode": "B2",
+                        "dist": 1.090,
                         "ref_ats": ["CA", "CG"],
                         "ats": ["HB2", "HB3"]
                     },
@@ -2398,14 +2581,29 @@
                     "TYM": ["HB2", "HB3", "HD1", "HE1", "HE2", "HD2"]
                 },
                 "addH_rules": {
-                    "CB": {
-                        "mode": "B2",
-                        "ref_ats": ["CA", "CG"],
-                        "ats": ["HB2", "HB3"]
+                    "TYR": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HD1", "HE1", "HH", "HE2", "HD2"]
+                        }
                     },
-                    "*": {
-                        "mode": "L",
-                        "ats": ["HD1", "HE1", "HH", "HE2", "HD2"]
+                    "TYM": {
+                        "CB": {
+                            "mode": "B2",
+                            "dist": 1.090,
+                            "ref_ats": ["CA", "CG"],
+                            "ats": ["HB2", "HB3"]
+                        },
+                        "*": {
+                            "mode": "L",
+                            "ats": ["HD1", "HE1", "HE2", "HD2"]
+                        }
                     }
                 },
                 "mutation_rules": {

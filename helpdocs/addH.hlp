@@ -1,4 +1,4 @@
-Add Hydrogen Atoms according to pH, from residue library
+Add Hydrogen Atoms with selection of ionized states
 
-Usage: checkStruct.py addH --addH_mode standard | select | pH_value
+Usage: checkStruct.py addH --mode auto | ph | interactive | interactive_his
 
