@@ -1051,7 +1051,6 @@ class StructureChecking():
             print (input_option)
             to_fix=[]
             std_ion= self.data_library.get_ion_data()
-            print(std_ion)
             if input_option == 'auto':
                 for r_at in self.ion_res_list:
                     [r, at_list] = r_at
@@ -1077,7 +1076,8 @@ class StructureChecking():
                 print ("Not Valid")
                 return 1
             backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
-            self.stm.add_hydrogens(to_fix,self.data_library.get_hydrogen_atoms(), self.residue_lib, backbone_atoms, self.data_library.get_distances('COVLNK'))
+            addH_rules = self.data_library.get_addH_rules()
+            self.stm.add_hydrogens(to_fix,self.data_library.get_hydrogen_atoms(), self.residue_lib, backbone_atoms, self.data_library.get_distances('COVLNK'), addH_rules)
             
         return ""
         
