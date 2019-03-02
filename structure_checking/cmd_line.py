@@ -111,7 +111,7 @@ class CmdLine():
             default='tmpPDB',
             help='Path for structure cache directory (default: tmpPDB)'
         )
- 
+
 
     def parse_args(self):
         args = self.argparser.parse_args()

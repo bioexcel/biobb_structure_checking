@@ -1054,7 +1054,7 @@ class StructureChecking():
         backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
         # Residues with missing backbone
         self.miss_at_list = self.stm.get_missing_backbone_atoms(
-            self.data_library.get_valid_codes('protein'), 
+            self.data_library.get_valid_codes('protein'),
             self.data_library.get_all_atom_lists()
         )
         if len(self.miss_at_list):
@@ -1146,9 +1146,9 @@ class StructureChecking():
             if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
                 self.args['input_structure_path'] = input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
             self.stm = StructureManager(
-                self.args['input_structure_path'], 
-                pdb_server=self.pdb_server, 
-                cache_dir=self.cache_dir, 
+                self.args['input_structure_path'],
+                pdb_server=self.pdb_server,
+                cache_dir=self.cache_dir,
                 file_format=self.args['file_format']
             )
             if verbose:
