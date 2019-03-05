@@ -1026,7 +1026,7 @@ class StructureChecking():
         else:
             if not self.args['quiet']:
                 print ("No residues requiring selection on adding H")
-            return False
+            return True
         
     def addH_fix(self,mode):
         input_line = ParamInput ('Mode', mode, self.args['non_interactive'])
