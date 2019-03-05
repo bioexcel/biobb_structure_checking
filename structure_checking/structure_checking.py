@@ -39,6 +39,7 @@ dialogs.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | Non
 dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
+dialogs.add_option('addH', '--mode', 'mode', 'Selection mode (None | auto | interactive | interactive_his | ph )')
 
 AVAILABLE_METHODS=[
     'models','chains','inscodes','altloc','remh','remwat', 'metals','ligands',
@@ -1004,6 +1005,89 @@ class StructureChecking():
                     contact_types,
                     mu.check_r_list_clashes(fixed_res, self.rr_dist, self.CLASH_DISTS, atom_lists)
                 )
+# =============================================================================
+    def addH(self, opts=None):
+        self.run_method('addH', opts)
+
+    def addH_check(self):
+
+        self.ion_res_list = self.stm.get_ion_res_list(self.data_library.ion_res, self.data_library.get_hydrogen_atoms())
+
+        if len(self.ion_res_list):
+            self.addH_rnums = []
+            self.summary['addH']['detected'] = {}
+            print('{} Residues requiring selection on adding H'.format(len(self.ion_res_list)))
+            for r_at in self.ion_res_list:
+                [r, at_list] = r_at
+                #print (' {:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
+                self.addH_rnums.append(mu.residue_num(r))
+                self.summary['addH']['detected'][mu.residue_id(r)] = at_list
+            return True
+        else:
+            if not self.args['quiet']:
+                print ("No residues requiring selection on adding H")
+            return True
+
+    def addH_fix(self,mode):
+        input_line = ParamInput ('Mode', mode, self.args['non_interactive'])
+        input_line.add_option_none()
+        input_line.add_option('auto', ['auto'], case="lower")
+        input_line.add_option('inter', ['interactive'], case="lower")
+        input_line.add_option('inter_His', ['interactive_his'], case="lower")
+        input_line.add_option('ph', ['pH'])
+        #input_line.add_option('resnum', sorted(self.addH_rnums), case='sensitive', multiple=True)
+        [input_option, addH_mode] = input_line.run()
+
+        if input_option == 'error':
+            print ("Invalid option", addH_mode)
+            self.summary['addH']['error'] = "Unknown option"
+            return 1
+        if input_option== "none":
+            if not self.args['quiet']:
+                print ('Nothing to do')
+        else:
+            if not hasattr(self,'residue_lib'):
+                self.residue_lib = ResidueLib(self.sets.res_library_path)
+            to_fix=[]
+            std_ion= self.data_library.get_ion_data()
+            if input_option == 'auto':
+                if not self.args['quiet']:
+                    print ('Selection: auto')
+                for r_at in self.ion_res_list:
+                    [r, at_list] = r_at
+                    rcode=r.get_resname()
+                    to_fix.append([r,std_ion[rcode]['std']])
+            elif input_option == 'ph':
+                ph_value=None
+                input_line = ParamInput("pH Value", ph_value,self.args['non_interactive'])
+                input_line.add_option("pH", [], opt_type="float", min_val=0., max_val=14.)
+                [input_option, ph_value] = input_line.run()
+                if not self.args['quiet']:
+                    print ('Selection: pH',ph_value)
+                for r_at in self.ion_res_list:
+                    [r, at_list] = r_at
+                    rcode=r.get_resname()
+                    if ph_value <= std_ion[rcode]['pK']:
+                        to_fix.append([r,std_ion[rcode]['lowpH']])
+                    else:
+                        to_fix.append([r,std_ion[rcode]['highpH']])
+            elif input_option == 'interactive':
+                if not self.args['quiet']:
+                    print ('Selection: interactive')
+                pass
+            elif input_option == 'interactive_His':
+                if not self.args['quiet']:
+                    print ('Selection: interactive-his')
+                pass
+            else:
+                print ("Not Valid")
+                return 1
+            backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+            addH_rules = self.data_library.get_addH_rules()
+            self.stm.add_hydrogens(to_fix,self.data_library.get_hydrogen_atoms(), self.residue_lib, backbone_atoms, self.data_library.get_distances('COVLNK'), addH_rules)
+
+        return ""
+
 
 
 # =============================================================================

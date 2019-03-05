@@ -99,8 +99,11 @@ class ParamInput():
                             if opt['type']=='pair_list':
                                 group_ok = group_ok and val_sp[1] in opt['list2']
                         input_ok = group_ok
-                    elif opt['type'] == 'int':
-                        self.opt_value = int(self.opt_value)
+                    elif opt['type'] == 'int' or opt['type'] == 'float':
+                        if opt['type'] == "int":
+                            self.opt_value = int(self.opt_value)
+                        if opt['type'] == "float":
+                            self.opt_value = float(self.opt_value)
                         input_ok = self.opt_value >= opt['min'] and self.opt_value <= opt['max']
                     if not input_ok:
                         iopt +=1
