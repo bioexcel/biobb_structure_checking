@@ -38,6 +38,7 @@ dialogs.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | 
 dialogs.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 dialogs.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
 dialogs.add_option('fixside', '--fix', 'fix_side', 'Add missing atoms to side chains (All | None | List)')
+dialogs.add_option('backbone', '--fix', 'fix_back', 'Add missing O atoms to backbone (All | None | List)')
 dialogs.add_option('mutateside', '--mut', 'mut_list', 'Mutate side chains (Mutation List as [*:]arg234Thr)')
 dialogs.add_option('addH', '--mode', 'mode', 'Selection mode (None | auto | interactive | interactive_his | ph )')
 
@@ -984,7 +985,6 @@ class StructureChecking():
                 self.residue_lib = ResidueLib(self.sets.res_library_path)
             fixed_res=[]
             for r_at in to_fix:
-                print (mu.residue_id(r_at[0]))
                 mu.remove_H_from_r(r_at[0], verbose= True)
                 self.stm.fix_side_chain(r_at, self.residue_lib)
                 n += 1
@@ -1137,26 +1137,31 @@ class StructureChecking():
     def backbone_check(self):
         backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
         # Residues with missing backbone
-        self.miss_at_list = self.stm.get_missing_backbone_atoms(
+        self.miss_bck_at_list = self.stm.get_missing_backbone_atoms(
             self.data_library.get_valid_codes('protein'),
             self.data_library.get_all_atom_lists()
         )
-        if len(self.miss_at_list):
+        if len(self.miss_bck_at_list):
             self.summary['backbone']['missing_atoms'] = {}
-            print('{} Residues with missing backbone atoms found'.format(len(self.miss_at_list)))
-            for r_at in self.miss_at_list:
+            self.fixbck_rnums=[]
+            print('{} Residues with missing backbone atoms found'.format(len(self.miss_bck_at_list)))
+            for r_at in self.miss_bck_at_list:
                 [r, at_list] = r_at
                 print (' {:10} {}'.format(mu.residue_id(r), ','.join(at_list)))
+                self.fixbck_rnums.append(mu.residue_num(r))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(r)] = at_list
+
         self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
+
         #Not bound consecutive residues
-        self.stm.get_bck_breaks()
+        self.stm.get_backbone_breaks()
         if self.stm.bck_breaks_list:
             print ("{} Backbone breaks found".format(len(self.stm.bck_breaks_list)))
             self.summary['backbone']['breaks']=[]
             for br in self.stm.bck_breaks_list:
                 print (" {:10} - {:10} ".format(mu.residue_id(br[0]),mu.residue_id(br[1])))
                 self.summary['backbone']['breaks'].append([mu.residue_id(br[0]),mu.residue_id(br[1])])
+
         if self.stm.wrong_link_list:
             print ("Unexpected backbone links found")
             self.summary['backbone']['wrong_links']=[]
@@ -1167,6 +1172,7 @@ class StructureChecking():
                     mu.residue_id(br[2]))
                 )
                 self.summary['backbone']['wrong_links'].append([mu.residue_id(br[0]),mu.residue_id(br[1]),mu.residue_id(br[2])])
+
         if self.stm.not_link_seq_list:
             print ("Consecutive residues too far away to be covalently linked")
             self.summary['backbone']['long_links']=[]
@@ -1188,10 +1194,65 @@ class StructureChecking():
             for br in self.stm.modified_residue_list:
                 print (" {:10} ".format(mu.residue_id(br)))
                 self.summary['backbone']['mod_residues'].append(mu.residue_id(br))
+        #Provisional only missing atoms can be fixed
+        if len(self.miss_bck_at_list):
+            return True
+        else:
+            return False
 
+    def backbone_fix(self, fix_back, check_clashes=True):
+        input_line = ParamInput ('fixbck', fix_back, self.args['non_interactive'])
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option('resnum', self.fixbck_rnums, case='sensitive', multiple=True)
+        [input_option, fix_back] = input_line.run()
 
-    def backbone_fix(self, fix):
-        #TODO
+        if input_option == 'error':
+            print ("Invalid option", fix_back)
+            self.summary['backbone']['missing_atoms']['error'] = "Unknown option"
+            return 1
+
+        self.summary['backbone']['missing_atoms']['selected'] = fix_back
+
+        if input_option == 'none':
+            if not self.args['quiet']:
+                print ('Nothing to do')
+        else:
+            if input_option == 'all':
+                to_fix = self.miss_bck_at_list
+            else:
+                to_fix = []
+                for r_at in self.miss_bck_at_list:
+                    if mu.residue_num(r_at[0]) in fix_back.split(','):
+                        to_fix.append(r_at)
+            if not self.args['quiet']:
+                print ("Adding missing backbone atoms")
+            n = 0
+            self.summary['backbone']['missing_atoms']['fixed'] = []
+            fixed_res=[]
+            for r_at in to_fix:
+                if self.stm.fix_backbone_atoms(r_at):
+                    n += 1
+                self.summary['backbone']['missing_atoms']['fixed'].append(mu.residue_id(r_at[0]))
+                fixed_res.append(r_at[0])
+
+            print ('Fixed {} backbone atom(s)'.format(n))
+            # Checking new clashes
+            if check_clashes:
+                print ("Checking possible new clashes")
+                contact_types = ['severe','apolar','polar_acceptor','polar_donor', 'positive', 'negative']
+                atom_lists= self.data_library.get_atom_lists(contact_types)
+
+                if len(self.rr_dist) == 0:
+                    self.rr_dist = mu.get_all_r2r_distances(self._get_structure(), 'all', self.data_library.get_distances('R_R_CUTOFF'))
+
+                self.summary['backbone']['missing_atoms']['clashes'] = self._clash_report(
+                    contact_types,
+                    mu.check_r_list_clashes(fixed_res, self.rr_dist, self.CLASH_DISTS, atom_lists)
+                )
+
+        #TODO Chain fix
+
         pass
 #===============================================================================
     def cistransbck(self, opts):
@@ -1244,6 +1305,9 @@ class StructureChecking():
                 self.stm.print_stats()
                 print()
             self.summary['stats'] = self.stm.get_stats()
+
+            backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+            self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
 
     def _get_structure(self):
         return self.stm.get_structure()

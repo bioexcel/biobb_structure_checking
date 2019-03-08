@@ -61,7 +61,7 @@ echo "Running chiral_bck on modified 1ark"
 python3 $APPDIR/checkStruc.py -i chiral_pdb_test/1ark_m1_chica_nh.pdb -o 1ark_chiral_bck_test.pdb --non_interactive chiral_bck > 1ark_chiral_bck_test.log
 #backbone
 echo "Running backbone on 2ki5"
-python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_backbone_test.pdb backbone > 2ki5_ibackbone_test.log
+python3 $APPDIR/checkStruc.py -i pdb:2ki5  -o 1ki5_backbone_test.pdb --non_interactive --check_only backbone > 2ki5_ibackbone_test.log
 #cistransbck
 echo "Running cistransbck on 4mdh"
 python3 $APPDIR/checkStruc.py -i pdb:4mdh -o 4mdh_cistransbck_test.pdb --non_interactive cistransbck > 4mdh_cistransbck_test.log
