@@ -1,4 +1,334 @@
 {
+ "addH": {
+  "detected": {
+   "ARG A45": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ARG A48": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ARG A7": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ASP A11": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A16": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A18": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A24": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A26": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A35": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "GLU A19": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A36": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A58": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "LYS A23": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A4": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "TYR A10": {
+    "TYM": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "TYR": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HH",
+     "HE2",
+     "HD2"
+    ]
+   },
+   "TYR A12": {
+    "TYM": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "TYR": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HH",
+     "HE2",
+     "HD2"
+    ]
+   },
+   "TYR A40": {
+    "TYM": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "TYR": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HH",
+     "HE2",
+     "HD2"
+    ]
+   },
+   "TYR A56": {
+    "TYM": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "TYR": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HH",
+     "HE2",
+     "HD2"
+    ]
+   }
+  },
+  "opts": [
+   "--mode",
+   "auto"
+  ]
+ },
  "altloc": {
   "opts": [
    "--select_altloc",
@@ -19,7 +349,12 @@
    "All"
   ]
  },
- "backbone": {},
+ "backbone": {
+  "opts": [
+   "--fix",
+   "All"
+  ]
+ },
  "chains": {
   "ids": {
    "A": 1
@@ -92,7 +427,7 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 463,
+  "num_ats": 905,
   "num_res": 60,
   "num_wat": 0,
   "res_hetats": 0,

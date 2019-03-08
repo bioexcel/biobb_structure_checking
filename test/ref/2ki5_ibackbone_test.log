@@ -27,14 +27,14 @@ SO4 B3
 AC2 B2
 
 8 Residues with missing backbone atoms found
- VAL A70    CA,C,O
- GLY A148   CA,C,O
- GLY A264   CA,C,O
- ALA A375   CA,C,O
- GLY B73    CA,C,O
- GLY B148   CA,C,O
- SER B263   CA,C,O
- ALA B375   CA,C,O
+ VAL A70    CA,C,O,OXT
+ GLY A148   CA,C,O,OXT
+ GLY A264   CA,C,O,OXT
+ ALA A375   CA,C,O,OXT
+ GLY B73    CA,C,O,OXT
+ GLY B148   CA,C,O,OXT
+ SER B263   CA,C,O,OXT
+ ALA B375   CA,C,O,OXT
 6 Backbone breaks found
  VAL A70    - ASP A77    
  GLY A148   - PRO A154   
@@ -42,4 +42,4 @@ AC2 B2
  GLY B73    - ASP B77    
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
-Structure not modified, not saving. Override with --force_save
+Running  check_only. Nothing else to do.

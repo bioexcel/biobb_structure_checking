@@ -172,9 +172,25 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All 
 No residues with missing side chain atoms found
 
-Step 13: backbone
+Step 13: backbone --fix All
 
-Running backbone.
+Running backbone. Options: --fix All 
+2 Residues with missing backbone atoms found
+ LEU A443   OXT
+ SER B444   OXT
+Adding missing backbone atoms
+LEU A443
+  Adding new atom OXT
+SER B444
+  Adding new atom OXT
+Fixed 2 backbone atom(s)
+Checking possible new clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 
@@ -212,6 +228,12 @@ No polar_donor clashes detected
 No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
+
+Step 17: addH --mode auto
+
+Running addH. Options: --mode auto 
+134 Residues requiring selection on adding H
+Selection: auto
 Command list completed
 Structure saved on 4ku1_all_test.pdb
 Final Num. models: 1
@@ -221,7 +243,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  20
 Final Num. ligands or modified residues:  20
 Final Num. water mol.:  0
-Final Num. atoms:  3566
+Final Num. atoms:  6839
 Small mol ligands found
 NAG A501
 NAG A502

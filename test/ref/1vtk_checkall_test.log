@@ -71,6 +71,11 @@ Running fixside.
 No residues with missing side chain atoms found
 Running  check_only. Nothing else to do.
 Running backbone.
+4 Residues with missing backbone atoms found
+ SER A149/1 OXT
+ GLY A264/1 OXT
+ SER A149/2 OXT
+ GLY A264/2 OXT
 4 Backbone breaks found
  SER A149/1 - PRO A153/1 
  GLY A264/1 - PRO A280/1 

@@ -141,6 +141,11 @@ Running fixside.
 No residues with missing side chain atoms found
 Running  check_only. Nothing else to do.
 Running backbone.
+4 Residues with missing backbone atoms found
+ THR A330   OXT
+ THR B330   OXT
+ THR C330   OXT
+ THR D330   OXT
 Unexpected backbone links found
  LEU B153   linked to HOH B384  , expected PRO B154   
 Modified residues found
@@ -151,7 +156,7 @@ Running cistransbck.
 ASN A138   PRO A139   Dihedral:   -2.457
 ASN D138   PRO D139   Dihedral:    2.871
 ASN C138   PRO C139   Dihedral:   -1.167
-ASN B138   PRO B139   Dihedral:   -1.398
+ASN B138   PRO B139   Dihedral:   -1.397
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.

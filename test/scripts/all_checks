@@ -10,7 +10,8 @@ amide --fix All
 chiral --fix All
 chiral_bck
 fixside --fix All
-backbone
+backbone --fix All
 cistransbck
 getss
 clashes
+addH --mode auto
