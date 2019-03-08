@@ -124,9 +124,22 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All 
 No residues with missing side chain atoms found
 
-Step 13: backbone
+Step 13: backbone --fix All
 
-Running backbone.
+Running backbone. Options: --fix All 
+1 Residues with missing backbone atoms found
+ ASP A251   OXT
+Adding missing backbone atoms
+ASP A251
+  Adding new atom OXT
+Fixed 1 backbone atom(s)
+Checking possible new clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 
@@ -172,6 +185,12 @@ No positive clashes detected
  ASP A181.OD2 GLU A184.OE2    3.463 A
  ASP B107.OD2 ASP B182.OD1    3.482 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
+
+Step 17: addH --mode auto
+
+Running addH. Options: --mode auto 
+107 Residues requiring selection on adding H
+Selection: auto
 Command list completed
 Structure saved on 1bqo_all_test.pdb
 Final Num. models: 1
@@ -181,7 +200,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  7
 Final Num. ligands or modified residues:  7
 Final Num. water mol.:  0
-Final Num. atoms:  2762
+Final Num. atoms:  5334
 Metal/Ion residues found
  CA A303
  CA A304

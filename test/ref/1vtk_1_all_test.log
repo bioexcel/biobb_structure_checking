@@ -99,12 +99,29 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All 
 No residues with missing side chain atoms found
 
-Step 13: backbone
+Step 13: backbone --fix All
 
-Running backbone.
+Running backbone. Options: --fix All 
+2 Residues with missing backbone atoms found
+ SER A149   OXT
+ GLY A264   OXT
 2 Backbone breaks found
  SER A149   - PRO A153   
  GLY A264   - PRO A280   
+Adding missing backbone atoms
+SER A149
+  Adding new atom OXT
+GLY A264
+  Adding new atom OXT
+Fixed 2 backbone atom(s)
+Checking possible new clashes
+No severe clashes detected
+No apolar clashes detected
+1 Steric polar_acceptor clashes detected
+ SER A149.OXT GLN A349.OE1    2.827 A
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 
@@ -124,9 +141,10 @@ No severe clashes detected
 2 Steric apolar clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A
  ALA A118.CA  SER A181.O      2.890 A
-4 Steric polar_acceptor clashes detected
+5 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
+ SER A149.OXT GLN A349.OE1    2.827 A
  PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
 2 Steric polar_donor clashes detected
@@ -137,6 +155,12 @@ No severe clashes detected
  ARG A212.NH2 ARG A216.NH2    3.171 A
  ARG A220.NH1 ARG A222.NH1    2.991 A
 No negative clashes detected
+
+Step 17: addH --mode auto
+
+Running addH. Options: --mode auto 
+76 Residues requiring selection on adding H
+Selection: auto
 Command list completed
 Structure saved on 1vtk_1_all_test.pdb
 Final Num. models: 1
@@ -146,7 +170,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
-Final Num. atoms:  2439
+Final Num. atoms:  4855
 Small mol ligands found
 ADP A400
 TMP A500

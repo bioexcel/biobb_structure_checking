@@ -1,4 +1,497 @@
 {
+ "addH": {
+  "detected": {
+   "ARG A42": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ARG A54": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ARG A72": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ARG A74": {
+    "ARG": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ],
+    "ARN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HH11",
+     "HH12",
+     "HH21",
+     "HH22"
+    ]
+   },
+   "ASP A21": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A32": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A39": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A52": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "ASP A58": {
+    "ASH": [
+     "HB2",
+     "HB3",
+     "HD2"
+    ],
+    "ASP": [
+     "HB2",
+     "HB3"
+    ]
+   },
+   "GLU A16": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A18": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A24": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A34": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A51": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "GLU A64": {
+    "GLH": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HE2"
+    ],
+    "GLU": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3"
+    ]
+   },
+   "HIS A68": {
+    "HID": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HD2"
+    ],
+    "HIE": [
+     "HB2",
+     "HB3",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "HIP": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ]
+   },
+   "LYS A11": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A27": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A29": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A33": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A48": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A6": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "LYS A63": {
+    "LYN": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ2",
+     "HZ3"
+    ],
+    "LYS": [
+     "HB2",
+     "HB3",
+     "HG2",
+     "HG3",
+     "HD2",
+     "HD3",
+     "HE2",
+     "HE3",
+     "HZ1",
+     "HZ2",
+     "HZ3"
+    ]
+   },
+   "TYR A59": {
+    "TYM": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HE2",
+     "HD2"
+    ],
+    "TYR": [
+     "HB2",
+     "HB3",
+     "HD1",
+     "HE1",
+     "HH",
+     "HE2",
+     "HD2"
+    ]
+   }
+  },
+  "opts": [
+   "--mode",
+   "auto"
+  ]
+ },
  "altloc": {
   "opts": [
    "--select_altloc",
@@ -19,7 +512,12 @@
    "All"
   ]
  },
- "backbone": {},
+ "backbone": {
+  "opts": [
+   "--fix",
+   "All"
+  ]
+ },
  "chains": {
   "ids": {
    "A": 1
@@ -61,7 +559,7 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 602,
+  "num_ats": 1231,
   "num_res": 76,
   "num_wat": 0,
   "res_hetats": 0,
