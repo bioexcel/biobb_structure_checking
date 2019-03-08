@@ -1,4 +1,5 @@
-Detects HETATM being metal ions allow to selectively remove them 
-options: All, None, Residue List, Atom type List
+Analyze main chain missing atoms and fragments. Missing Oxygen atoms (O, OXT)
+can be added
+options: All, None, Residue List
 
-Usage: checkStruct.py metals --remove list_to_remove
+Usage: checkStruct.py backbone --fix All|None|List

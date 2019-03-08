@@ -82,10 +82,11 @@ chiral [--fix All|None|Residue List]
     Detect/Fix Improper quirality
 fixside [--fix All |None|Residue List]    
     Complete side chains 
+backbone [--fix All|None|Residue List]   
+    Analyze main chain missing atoms and fragments. O, OXT atoms can be fixed
 
 3. Structure Warnings
 
-backbone   Analyze main chain missing fragments
 cistransbck Analyzes cis-trans dihedrals on backbone atoms
 getss      Detect SS Bonds 
 clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
