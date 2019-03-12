@@ -446,7 +446,7 @@ class StructureChecking():
         [input_option, remove_wat] = input_line.run()
 
         if input_option == 'error':
-            print ('Warning: unknown option {}'.format(remove_wat))
+            print (' unknown option {}'.format(remove_wat), file=sys.stderr)
             self.summary['remwat']['error'] = 'Unknown option'
             return 1
 
@@ -554,7 +554,7 @@ class StructureChecking():
         [input_option, remove_h] = input_line.run()
 
         if input_option == 'error':
-            print ('Warning: unknown option {}'.format(remove_h))
+            print ('Warning: unknown option {}'.format(remove_h), file=sys.stderr)
             self.summary['remh']['error'] = 'Unknown option'
             return 1
         if input_option == 'yes':
@@ -688,7 +688,7 @@ class StructureChecking():
             [input_option, amide_fix] = input_line.run()
 
             if input_option == 'error':
-                print ('Warning: unknown option {}'.format(amide_fix))
+                print ('Warning: unknown option {}'.format(amide_fix), file=sys.stderr)
                 self.summary['amide']['error'] = 'Unknown option'
                 return 1
 
@@ -772,7 +772,7 @@ class StructureChecking():
         [input_option, chiral_fix] = input_line.run()
 
         if input_option == 'error':
-            print ('Warning: unknown option {}'.format(chiral_fix))
+            print ('Warning: unknown option {}'.format(chiral_fix), file=sys.stderr)
             self.summary['chiral']['error'] = 'Unknown option'
             return 1
 
@@ -867,7 +867,7 @@ class StructureChecking():
         input_line.add_option('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
         [input_option, chiral_fix] = input_line.run()
         if input_option == 'error':
-            print ('Warning: unknown option {}'.format(amide_fix))
+            print ('Warning: unknown option {}'.format(amide_fix), file=sys.stderr)
             self.summary['chiral']['error'] = 'Unknown option'
             return 1
 
