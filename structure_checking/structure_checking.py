@@ -222,20 +222,16 @@ class StructureChecking():
         self.summary['models'] = {'nmodels': self.stm.nmodels}
         if self.stm.nmodels > 1:
             self.summary['models']['type'] = self.stm.models_type
-            if self.stm.models_type['type'] == mu.ENSM:
-                print(
-                    'Models superimpose, RMSd: {:8.3f} A, guessed as ensemble type (NMR / MD TRAJ)'.format(
-                        self.stm.models_type['rmsd']
-                    )
+            supimp = ''
+            if self.stm.models_type['type'] == mu.BUNIT:
+                supimp = 'do not'
+            print(
+                'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} '.format(
+                    supimp, self.stm.models_type['rmsd'], mu.MODEL_TYPE_LABELS[self.stm.models_type['type']]
                 )
-            elif self.stm.models_type['type'] == mu.BUNIT:
-                print(
-                    'Models do not superimpose, RMSd: {:8.3f} A, guessed as Biounit type'.format(
-                        self.stm.models_type['rmsd']
-                    )
-                )
-            else:
-                print('Models type unknown')
+             )
+            
+            
             fix_data = True
         else:
             if not self.args['quiet']:
@@ -274,7 +270,7 @@ class StructureChecking():
                     )
                 )
             else:
-                print(' {}: {}'.format(ch_id, mu.chain_type_labels[self.stm.chain_ids[ch_id]]))
+                print(' {}: {}'.format(ch_id, mu.CHAIN_TYPE_LABELS[self.stm.chain_ids[ch_id]]))
         self.summary['chains'] = {'ids':self.stm.chain_ids}
         return len(self.stm.chains_ids) > 1
 
@@ -630,7 +626,7 @@ class StructureChecking():
         [input_option, remove_h] = input_line.run()
 
         if input_option == 'error':
-            print('Warning: unknown option {}'.format(remove_h), file=sys.stderr)
+            print('Warning: unknown option {}'.format(remove_h))
             self.summary['remh']['error'] = 'Unknown option'
             return
         if input_option == 'yes':
@@ -786,7 +782,7 @@ class StructureChecking():
             [input_option, amide_fix] = input_line.run()
 
             if input_option == 'error':
-                print('Warning: unknown option {}'.format(amide_fix), file=sys.stderr)
+                print('Warning: unknown option {}'.format(amide_fix))
                 self.summary['amide']['error'] = 'Unknown option'
                 return
 
@@ -875,7 +871,7 @@ class StructureChecking():
         [input_option, chiral_fix] = input_line.run()
 
         if input_option == 'error':
-            print('Warning: unknown option {}'.format(chiral_fix), file=sys.stderr)
+            print('Warning: unknown option {}'.format(chiral_fix))
             self.summary['chiral']['error'] = 'Unknown option'
             return
 
@@ -982,7 +978,7 @@ class StructureChecking():
 #        input_line.add_option('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
 #        [input_option, chiral_fix] = input_line.run()
 #        if input_option == 'error':
-#            print('Warning: unknown option {}'.format(amide_fix), file=sys.stderr)
+#            print('Warning: unknown option {}'.format(amide_fix))
 #            self.summary['chiral']['error'] = 'Unknown option'
 #            return
 #
@@ -1219,9 +1215,7 @@ class StructureChecking():
             add_h_rules = self.data_library.get_add_h_rules()
             self.stm.add_hydrogens(
                 to_fix,
-                self.data_library.get_hydrogen_atoms(),
-                self.residue_lib, backbone_atoms,
-                self.data_library.get_distances('COVLNK'),
+                self.residue_lib,                
                 add_h_rules
             )
 
@@ -1428,7 +1422,6 @@ class StructureChecking():
     def _cistransbck_check(self):
         self.stm.check_cis_backbone(
             self.data_library.get_distances('COVLNK'),
-            not self.stm.biounit
         )
         if self.stm.cis_backbone_list:
             self.summary['cistransbck']['cis'] = []
