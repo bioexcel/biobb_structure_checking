@@ -33,3 +33,41 @@ Replacing LEU A49 into ILE
   Renaming CG to CG1
   Deleting CD2
   Adding new atom CG2
+Replacing LEU B49 into ILE
+  Renaming CG to CG1
+  Deleting CD2
+  Adding new atom CG2
+
+Replacing ARG B51 into LYS
+  Deleting NE
+  Deleting CZ
+  Deleting NH1
+  Deleting NH2
+  Adding new atom CE
+  Adding new atom NZ
+
+Checking new clashes
+No severe clashes detected
+4 Steric apolar clashes detected
+ ILE A49.CG2  THR A350.OG1    2.815 A
+ ILE B49.CG2  THR B350.OG1    2.611 A
+ LYS B51.NZ   LEU B139.CG     2.403 A
+ LYS B51.NZ   ILE B143.CD1    2.319 A
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
+Structure saved on 1ki5_mutateside_test.pdb
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  908
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  296
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  292
+Final Num. atoms:  4959
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2

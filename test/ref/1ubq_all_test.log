@@ -117,7 +117,7 @@ No negative clashes detected
 Step 17: addH --mode auto
 
 Running addH. Options: --mode auto 
-24 Residues requiring selection on adding H
+24 Residues requiring selection on adding H atoms
 Selection: auto
 Command list completed
 Structure saved on 1ubq_all_test.pdb

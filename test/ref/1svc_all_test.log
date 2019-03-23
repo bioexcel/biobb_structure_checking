@@ -157,46 +157,46 @@ No severe clashes detected
 Step 17: addH --mode auto
 
 Running addH. Options: --mode auto 
-106 Residues requiring selection on adding H
+106 Residues requiring selection on adding H atoms
 Selection: auto
-Warning: Incomplete backbone in  DA D1
-Warning: addH not implemented (yet) for residue  DA
-Warning: Incomplete backbone in  DG D2
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DA D3
-Warning: addH not implemented (yet) for residue  DA
-Warning: Incomplete backbone in  DT D4
-Warning: addH not implemented (yet) for residue  DT
-Warning: Incomplete backbone in  DG D5
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DG D6
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DG D7
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DG D8
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DA D9
-Warning: addH not implemented (yet) for residue  DA
-Warning: Incomplete backbone in  DA D10
-Warning: addH not implemented (yet) for residue  DA
-Warning: Incomplete backbone in  DT D11
-Warning: addH not implemented (yet) for residue  DT
-Warning: Incomplete backbone in  DC D12
-Warning: addH not implemented (yet) for residue  DC
-Warning: Incomplete backbone in  DC D13
-Warning: addH not implemented (yet) for residue  DC
-Warning: Incomplete backbone in  DC D14
-Warning: addH not implemented (yet) for residue  DC
-Warning: Incomplete backbone in  DC D15
-Warning: addH not implemented (yet) for residue  DC
-Warning: Incomplete backbone in  DT D16
-Warning: addH not implemented (yet) for residue  DT
-Warning: Incomplete backbone in  DA D17
-Warning: addH not implemented (yet) for residue  DA
-Warning: Incomplete backbone in  DG D18
-Warning: addH not implemented (yet) for residue  DG
-Warning: Incomplete backbone in  DA D19
-Warning: addH not implemented (yet) for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DA D1
+Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DG D2
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DA D3
+Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DT D4
+Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add backbone hydrogens not implemented for residue   DG D5
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DG D6
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DG D7
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DG D8
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DA D9
+Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DA D10
+Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DT D11
+Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add backbone hydrogens not implemented for residue   DC D12
+Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add backbone hydrogens not implemented for residue   DC D13
+Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add backbone hydrogens not implemented for residue   DC D14
+Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add backbone hydrogens not implemented for residue   DC D15
+Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add backbone hydrogens not implemented for residue   DT D16
+Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add backbone hydrogens not implemented for residue   DA D17
+Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add backbone hydrogens not implemented for residue   DG D18
+Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add backbone hydrogens not implemented for residue   DA D19
+Warning: add side chain hydrogens not implemented for residue  DA
 Command list completed
 Structure saved on 1svc_all_test.pdb
 Final Num. models: 1

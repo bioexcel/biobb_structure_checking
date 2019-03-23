@@ -51,6 +51,9 @@ Running  check_only. Nothing else to do.
 Running remh.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
+Running addH.
+148 Residues requiring selection on adding H atoms
+Running  check_only. Nothing else to do.
 Running remwat.
 292 Water molecules detected
 Running  check_only. Nothing else to do.

@@ -232,7 +232,7 @@ No positive clashes detected
 Step 17: addH --mode auto
 
 Running addH. Options: --mode auto 
-134 Residues requiring selection on adding H
+134 Residues requiring selection on adding H atoms
 Selection: auto
 Command list completed
 Structure saved on 4ku1_all_test.pdb

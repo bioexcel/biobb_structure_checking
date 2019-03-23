@@ -21,7 +21,7 @@ Structure pdb:1ark loaded
  Num. atoms:  13575
 
 15 Model(s) detected
-Models do not superimpose, RMSd:   35.032 A, guessed as Biounit type
+Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
 Structure saved on 1ark_models_1_test.pdb
 Final Num. models: 1

@@ -36,6 +36,7 @@ AC2 A1
 HOH A779
   O    A (1.00)
 Selecting location B
+Warning: unknown alternative B in HOH A779.O
 Structure saved on 2ki5_altloc_test_B.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

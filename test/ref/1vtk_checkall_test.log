@@ -27,7 +27,7 @@ TMP A500/2
 
 Running models.
 2 Model(s) detected
-Models do not superimpose, RMSd:   42.553 A, guessed as Biounit type
+Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
 Running  check_only. Nothing else to do.
 Running chains.
 1 Chain(s) detected
@@ -41,6 +41,9 @@ No residues with alternative location labels detected
 Running  check_only. Nothing else to do.
 Running remh.
 No residues with Hydrogen atoms found
+Running  check_only. Nothing else to do.
+Running addH.
+152 Residues requiring selection on adding H atoms
 Running  check_only. Nothing else to do.
 Running remwat.
 104 Water molecules detected

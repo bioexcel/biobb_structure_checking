@@ -34,18 +34,24 @@ AC2 B2
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
 Fixing side chains
+MET A46
   Adding new atom CG
   Adding new atom SD
   Adding new atom CE
+PRO A154
   Adding new atom CG
   Adding new atom CD
+PRO A280
   Adding new atom CG
   Adding new atom CD
+MET B46
   Adding new atom CG
   Adding new atom SD
   Adding new atom CE
+PRO B154
   Adding new atom CG
   Adding new atom CD
+ARG B220
   Adding new atom CG
   Adding new atom CD
   Adding new atom NE

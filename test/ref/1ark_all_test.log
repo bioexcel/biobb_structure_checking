@@ -24,7 +24,7 @@ Step 1: models --select_model 1
 
 Running models. Options: --select_model 1 
 15 Model(s) detected
-Models do not superimpose, RMSd:   35.032 A, guessed as Biounit type
+Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
 
 Step 2: chains --select_chain All
@@ -123,7 +123,7 @@ No negative clashes detected
 Step 17: addH --mode auto
 
 Running addH. Options: --mode auto 
-18 Residues requiring selection on adding H
+18 Residues requiring selection on adding H atoms
 Selection: auto
 Command list completed
 Structure saved on 1ark_all_test.pdb
