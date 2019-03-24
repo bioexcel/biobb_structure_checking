@@ -28,12 +28,20 @@ def main():
     args = cmd_line.parse_args()
 
     if args.command == 'commands':
-        help_manager.print_help("general", header=True, pager=True)
+        help_manager.print_help("commands", header=True, pager=True)
         sys.exit(0)
 
     if 'help' in args.options:
         help_manager.print_help(args.command, header=True)
         sys.exit(0)
+
+    if '-h' in args.options or '--help' in args.options:
+        help_manager.print_help('header')
+        help_manager.print_help(args.command)
+        sys.exit(0)
+
+    help_manager.print_help('header')
+    print()
 
     StructureChecking(sets, vars(args)).launch()
 

@@ -1,4 +1,0 @@
-Loads structure from PDB server into the local cache and print statistics
-
-Usage: checkStruct.py stats
-

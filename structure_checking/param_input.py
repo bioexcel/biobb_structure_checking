@@ -79,51 +79,52 @@ class ParamInput():
             if not self.non_interactive:
                 self.opt_value = _get_input(self.opt_value, prompt_str)
             iopt = 0
+
             if self.opt_value is None:
                 return ['error', '']
-            else:
-                while not input_ok and iopt < len(self.options):
-                    opt = self.options[iopt]
-                    if (opt['type'] == 'list' or opt['type'] == 'pair_list') and\
-                            isinstance(self.opt_value, str):
-                        if not opt['multiple']:
-                            values = [self.opt_value]
-                        else:
-                            values = self.opt_value.split(',')
-                        group_ok = True
-                        for val in values:
-                            if opt['type'] == 'pair_list':
-                                val_sp = val.split(':')
-                                val = val_sp[0]
-                            if opt['case'] == 'upper':
-                                val = val.upper()
-                                group_ok = group_ok and val in opt['opt_list']
-                            elif opt['case'] == 'lower':
-                                val = val.lower()
-                                group_ok = group_ok and val in opt['opt_list']
-                            elif opt['case'] == 'sensitive':
-                                group_ok = group_ok and val in opt['opt_list']
-                            else:
-                                group_ok = group_ok and val.lower()\
-                                   in list(map(lambda x: x.lower(), opt['opt_list']))
-                            if opt['type'] == 'pair_list':
-                                group_ok = group_ok and val_sp[1] in opt['list2']
-                        input_ok = group_ok
-                    elif opt['type'] == 'int' or opt['type'] == 'float':
-                        if opt['type'] == "int":
-                            self.opt_value = int(self.opt_value)
-                        if opt['type'] == "float":
-                            self.opt_value = float(self.opt_value)
-                        input_ok = self.opt_value >= opt['min'] and self.opt_value <= opt['max']
-                    if not input_ok:
-                        iopt += 1
-                if not input_ok:
-                    print("Input not valid")
-                    if self.non_interactive:
-                        self.options.append({'label':'error'})
-                        input_ok = True
+
+            while not input_ok and iopt < len(self.options):
+                opt = self.options[iopt]
+                if (opt['type'] == 'list' or opt['type'] == 'pair_list') and\
+                        isinstance(self.opt_value, str):
+                    if not opt['multiple']:
+                        values = [self.opt_value]
                     else:
-                        self.opt_value = ''
+                        values = self.opt_value.split(',')
+                    group_ok = True
+                    for val in values:
+                        if opt['type'] == 'pair_list':
+                            val_sp = val.split(':')
+                            val = val_sp[0]
+                        if opt['case'] == 'upper':
+                            val = val.upper()
+                            group_ok = group_ok and val in opt['opt_list']
+                        elif opt['case'] == 'lower':
+                            val = val.lower()
+                            group_ok = group_ok and val in opt['opt_list']
+                        elif opt['case'] == 'sensitive':
+                            group_ok = group_ok and val in opt['opt_list']
+                        else:
+                            group_ok = group_ok and val.lower()\
+                               in list(map(lambda x: x.lower(), opt['opt_list']))
+                        if opt['type'] == 'pair_list':
+                            group_ok = group_ok and val_sp[1] in opt['list2']
+                    input_ok = group_ok
+                elif opt['type'] == 'int' or opt['type'] == 'float':
+                    if opt['type'] == "int":
+                        self.opt_value = int(self.opt_value)
+                    if opt['type'] == "float":
+                        self.opt_value = float(self.opt_value)
+                    input_ok = self.opt_value >= opt['min'] and self.opt_value <= opt['max']
+                if not input_ok:
+                    iopt += 1
+            if not input_ok:
+                print("Input not valid")
+                if self.non_interactive:
+                    self.options.append({'label':'error'})
+                    input_ok = True
+                else:
+                    self.opt_value = ''
         return [self.options[iopt]['label'], self.opt_value]
 
 class Dialog():

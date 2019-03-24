@@ -9,14 +9,10 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import numpy as np
 
-from structure_checking.help_manager import HelpManager
 from structure_checking.json_writer import JSONWriter
-from structure_checking.param_input import Dialog
-from structure_checking.param_input import ParamInput
-
+from structure_checking.param_input import Dialog, ParamInput
 from structure_manager.structure_manager import StructureManager
 from structure_manager.data_lib_manager import DataLibManager
-from structure_manager.mutation_manager import MutationManager
 from structure_manager.residue_lib_manager import ResidueLib
 import structure_manager.model_utils as mu
 
@@ -77,13 +73,9 @@ class StructureChecking():
         self.pdb_server = self.args['pdb_server']
         self.cache_dir = self.args['cache_dir']
 
-        self.data_library = DataLibManager(sets.data_library_path)
-
         self.residue_lib = ResidueLib(self.sets.res_library_path)
 
-        self.stm=None # To be loaded when necessary
-
-        self.rr_dist = []
+        self.stm = self._load_structure()
 
         if not 'Notebook' in self.args:
             self.args['Notebook'] = False
@@ -95,22 +87,12 @@ class StructureChecking():
 
     def launch(self):
         """main method to run checking"""
-        help_manager = HelpManager(self.sets.help_dir_path)
-        help_manager.print_help('header')
-
-        if '-h' in self.args['options'] or '--help' in self.args['options']:
-            help_manager.print_help(self.args['command'])
-            sys.exit()
-
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
             self.checkall(self.args['options'])
         elif self.args['command'] == 'load':
-            self._load_structure()
             sys.exit(0)
-        elif self.args['command'] == 'stats':
-            self._load_structure()
         else:
             self._run_method(self.args['command'], self.args['options'])
 
@@ -147,7 +129,7 @@ class StructureChecking():
             print('Error when opening file {}'.format(op_list))
             sys.exit(1)
 
-        self._load_structure()
+        #self._load_structure()
 
         i = 1
         for line in list_file_h:
@@ -166,7 +148,7 @@ class StructureChecking():
     def checkall(self, opts):
         """Predefined workflow for complete checking"""
         self.args['check_only'] = True
-        self._load_structure()
+        #self._load_structure()
         for meth in AVAILABLE_METHODS:
             self._run_method(meth, opts)
 
@@ -189,7 +171,7 @@ class StructureChecking():
 
         if not self.args['quiet']:
             print(msg)
-        self._load_structure()
+        # self._load_structure()
 
     #Running checking method
         fix_data = f_check()
@@ -227,11 +209,12 @@ class StructureChecking():
                 supimp = 'do not'
             print(
                 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} '.format(
-                    supimp, self.stm.models_type['rmsd'], mu.MODEL_TYPE_LABELS[self.stm.models_type['type']]
+                    supimp,
+                    self.stm.models_type['rmsd'],
+                    mu.MODEL_TYPE_LABELS[self.stm.models_type['type']]
                 )
-             )
-            
-            
+            )
+
             fix_data = True
         else:
             if not self.args['quiet']:
@@ -382,7 +365,7 @@ class StructureChecking():
             return
 
         print('Selecting location {}'.format(select_altloc))
-        if input_option == 'occup' or input_option == 'altids':
+        if input_option in ('occup', 'altids'):
             to_fix = {}
             for res in fix_data['alt_loc_res']:
                 to_fix[res] = {}
@@ -412,9 +395,8 @@ class StructureChecking():
 
     def _metals_check(self):
         fix_data = {}
-        met_list = mu.get_metal_atoms(
-            self._get_structure(), self.data_library.get_metal_atoms()
-        )
+
+        met_list = self.stm.get_metal_atoms()
 
         if len(met_list) > 1:
             fix_data['met_list'] = met_list
@@ -549,7 +531,9 @@ class StructureChecking():
                     print(' ' + mu.residue_id(res, False) + '/*')
                 else:
                     print(' ' + mu.residue_id(res, False))
-                self.summary['ligands']['detected'].append(mu.residue_id(res, self.stm.has_models()))
+                self.summary['ligands']['detected'].append(
+                    mu.residue_id(res, self.stm.has_models())
+                )
                 fix_data['ligand_rids'].add(res.get_resname())
                 fix_data['ligand_rnums'].append(mu.residue_num(res))
         else:
@@ -644,12 +628,8 @@ class StructureChecking():
         self._run_method('getss', opts)
 
     def _getss_check(self):
-        SS_bonds = mu.get_all_at2at_distances(
-            self._get_structure(),
-            'SG',
-            self.data_library.get_distances('SS_DIST'),
-            not self.stm.has_superimp_models()
-        )
+
+        SS_bonds = self.stm.get_SS_bonds()
 
         if SS_bonds:
             print('{} Possible SS Bonds detected'.format(len(SS_bonds)))
@@ -683,31 +663,17 @@ class StructureChecking():
 
     def _amide_check(self):
         fix_data = {}
-        [amide_res, amide_atoms] = self.data_library.get_amide_data()
-        atom_lists = self.data_library.get_atom_lists(AMIDE_CONTACT_TYPES)
 
-        amide_list = set()
+        amide_atoms = self.stm.data_library.get_amide_data()[1]
 
-        for res in self._get_structure().get_residues():
-            if res.get_resname() in amide_res:
-                amide_list.add(res)
+        amide_list = self.stm.get_amide_list()
 
         self.summary['amide']['n_amides'] = len(amide_list)
 
         if amide_list:
-            if not self.rr_dist:
-                self.rr_dist = mu.get_all_r2r_distances(
-                    self._get_structure(),
-                    'all',
-                    self.data_library.get_distances('R_R_CUTOFF')
-                )
-
-            c_list = mu.check_r_list_clashes(
+            c_list = self.stm.check_r_list_clashes(
                 amide_list,
-                self.rr_dist,
-                self.data_library.get_distances('CLASH_DIST'),
-                atom_lists,
-                not self.stm.has_superimp_models()
+                AMIDE_CONTACT_TYPES
             )
             amide_res_to_fix = []
             amide_rnums = []
@@ -765,7 +731,7 @@ class StructureChecking():
 
 # =============================================================================
     def _amide_fix(self, amide_fix, fix_data=None, recheck=True, ):
-        amide_res = self.data_library.get_amide_data()[0]
+        amide_res = self.stm.data_library.get_amide_data()[0]
 
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
 
@@ -823,13 +789,10 @@ class StructureChecking():
 
     def _chiral_check(self):
         fix_data = {}
-        chiral_res = self.data_library.get_chiral_data()
 
-        chiral_list = []
+        chiral_res = self.stm.data_library.get_chiral_data()
 
-        for res in self._get_structure().get_residues():
-            if res.get_resname() in chiral_res:
-                chiral_list.append(res)
+        chiral_list = self.stm.get_chiral_list()
 
         self.summary['chiral']['n_chirals'] = len(chiral_list)
 
@@ -862,7 +825,7 @@ class StructureChecking():
 
     def _chiral_fix(self, chiral_fix, fix_data=None, check_clashes=True):
 
-        chiral_res = self.data_library.get_chiral_data()
+        chiral_res = self.stm.data_library.get_chiral_data()
 
         input_line = ParamInput('Fix chiralities', chiral_fix, self.args['non_interactive'])
         input_line.add_option_all()
@@ -899,22 +862,11 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print("Checking for steric clashes")
 
-                atom_lists = self.data_library.get_atom_lists(ALL_CONTACT_TYPES)
-
-                if not self.rr_dist:
-                    self.rr_dist = mu.get_all_r2r_distances(
-                        self._get_structure(),
-                        'all',
-                        self.data_library.get_distances('R_R_CUTOFF')
-                    )
-
                 self.summary['chiral_clashes'] = self._clash_report(
                     ALL_CONTACT_TYPES,
-                    mu.check_r_list_clashes(
+                    self.stm.check_r_list_clashes(
                         to_fix,
-                        self.rr_dist,
-                        self.data_library.get_distances('CLASH_DIST'),
-                        atom_lists
+                        ALL_CONTACT_TYPES
                     )
                 )
 
@@ -927,14 +879,9 @@ class StructureChecking():
 
     def _chiral_bck_check(self):
         fix_data = {}
-        chiral_bck_list = []
-        prot_chains = 0
-        for chn in self._get_structure().get_chains():
-            if self.stm.chain_ids[chn.id] == mu.PROTEIN:
-                prot_chains += 1
-                for res in chn.get_residues():
-                    if res.get_resname() != 'GLY' and not mu.is_hetatm(res):
-                        chiral_bck_list.append(res)
+
+        chiral_bck_list = self.stm.get_chiral_bck_list()
+
         self.summary['chiral_bck']['n_chirals'] = len(chiral_bck_list)
 
         if chiral_bck_list:
@@ -959,13 +906,7 @@ class StructureChecking():
             else:
                 if not self.args['quiet']:
                     print("No residues with incorrect backbone chirality found")
-        else:
-            if not prot_chains:
-                print("No protein chains detected, skipping")
-            else:
-                print("Protein chains detected but no residues with chiral CA found (weird!!)")
-                if not self.args['quiet']:
-                    print("No residues with chiral CA found (weird!!)")
+
         return fix_data
 
 
@@ -1012,23 +953,28 @@ class StructureChecking():
     def _clashes_check(self):
 
         clash_list = {}
-        atom_lists = self.data_library.get_atom_lists(ALL_CONTACT_TYPES)
         for cls in ALL_CONTACT_TYPES:
             clash_list[cls] = {}
 
-        if not self.rr_dist:
-            self.rr_dist = mu.get_all_r2r_distances(
+        #Recalc when models are separated molecules
+        if not self.stm.has_superimp_models():
+            rr_dist = mu.get_all_r2r_distances(
                 self._get_structure(),
                 'all',
-                self.data_library.get_distances('R_R_CUTOFF'),
-                not self.stm.has_superimp_models()
+                self.stm.data_library.get_distances('R_R_CUTOFF'),
+                join_models=True #not self.stm.has_superimp_models()
             )
+        else:
+            rr_dist = self.stm.rr_dist
 
-        for r_pair in self.rr_dist:
+        for r_pair in rr_dist:
             [res1, res2] = r_pair[0:2]
+
             if mu.is_wat(res1) or mu.is_wat(res2):
                 continue
-            c_list = mu.check_rr_clashes(res1, res2, self.data_library.get_distances('CLASH_DIST'), atom_lists)
+
+            c_list = self.stm.check_rr_clashes(res1, res2, ALL_CONTACT_TYPES)
+
             rkey = mu.residue_id(res1) + '-' + mu.residue_id(res2)
             for cls in c_list:
                 if c_list[cls]:
@@ -1049,10 +995,8 @@ class StructureChecking():
 
     def _fixside_check(self):
         fix_data = {}
-        miss_at_list = self.stm.get_missing_side_chain_atoms(
-            self.data_library.get_valid_codes('protein'),
-            self.data_library.get_all_atom_lists()
-        )
+
+        miss_at_list = self.stm.get_missing_atoms('side')
 
         if miss_at_list:
             fix_data['miss_at_list'] = miss_at_list
@@ -1115,20 +1059,9 @@ class StructureChecking():
             if check_clashes:
                 print("Checking possible new clashes")
 
-                atom_lists = self.data_library.get_atom_lists(ALL_CONTACT_TYPES)
-
-                if not self.rr_dist:
-                    self.rr_dist = mu.get_all_r2r_distances(
-                        self._get_structure(),
-                        'all',
-                        self.data_library.get_distances('R_R_CUTOFF')
-                    )
-
                 self.summary['fixside_clashes'] = self._clash_report(
                     ALL_CONTACT_TYPES,
-                    mu.check_r_list_clashes(
-                        fixed_res, self.rr_dist, self.data_library.get_distances('CLASH_DIST'), atom_lists
-                    )
+                    self.stm.check_r_list_clashes(fixed_res, ALL_CONTACT_TYPES)
                 )
 # =============================================================================
     def addH(self, opts=None):
@@ -1137,10 +1070,8 @@ class StructureChecking():
 
     def _addH_check(self):
         fix_data = {}
-        ion_res_list = self.stm.get_ion_res_list(
-            self.data_library.ion_res,
-            self.data_library.get_hydrogen_atoms()
-        )
+
+        ion_res_list = self.stm.get_ion_res_list()
 
         if ion_res_list:
             fix_data['ion_res_list'] = ion_res_list
@@ -1180,7 +1111,7 @@ class StructureChecking():
                 print('Nothing to do')
         else:
             to_fix = []
-            std_ion = self.data_library.get_ion_data()
+            std_ion = self.stm.data_library.get_ion_data()
             if input_option == 'auto':
                 if not self.args['quiet']:
                     print('Selection: auto')
@@ -1211,13 +1142,7 @@ class StructureChecking():
             else:
                 print("Not Valid")
                 return
-            backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
-            add_h_rules = self.data_library.get_add_h_rules()
-            self.stm.add_hydrogens(
-                to_fix,
-                self.residue_lib,                
-                add_h_rules
-            )
+            self.stm.add_hydrogens(to_fix, self.residue_lib)
 
 # =============================================================================
     def mutateside(self, mut_list):
@@ -1230,35 +1155,24 @@ class StructureChecking():
     def _mutateside_fix(self, mut_list, fix_data=None, check_clashes=True):
         input_line = ParamInput('Mutation list', mut_list, self.args['non_interactive'])
         mut_list = input_line.run()
-        mutations = MutationManager(mut_list)
-        mutations.prepare_mutations(self.stm.st)
+
+        mutations = self.stm.prepare_mutations(mut_list)
+#        mutations = MutationManager(mut_list)
+#        mutations.prepare_mutations(self.stm.st)
+
         print('Mutations to perform')
         for mut in mutations.mutation_list:
             print(mut)
 
-        mutated_res = mutations.apply_mutations(
-            self.stm.st,
-            self.data_library.get_mutation_map(),
-            self.residue_lib
-        )
-        self.stm.atom_renumbering()
+        mutated_res = self.stm.apply_mutations(mutations, self.residue_lib)
+
         if check_clashes:
             if not self.args['quiet']:
                 print("Checking new clashes")
 
-            atom_lists = self.data_library.get_atom_lists(ALL_CONTACT_TYPES)
-
-            if not self.rr_dist:
-                self.rr_dist = mu.get_all_r2r_distances(
-                    self._get_structure(),
-                    'all',
-                    self.data_library.get_distances('R_R_CUTOFF')
-                )
-
             self.summary['mutateside_clashes'] = self._clash_report(
-                ALL_CONTACT_TYPES, mu.check_r_list_clashes(
-                    mutated_res, self.rr_dist, self.data_library.get_distances('CLASH_DIST'), atom_lists
-                )
+                ALL_CONTACT_TYPES,
+                self.stm.check_r_list_clashes(mutated_res, ALL_CONTACT_TYPES)
             )
 
         self.stm.modified = True
@@ -1269,12 +1183,9 @@ class StructureChecking():
 
     def _backbone_check(self):
         fix_data = {}
-        backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
+        #backbone_atoms = self.stm.data_library.get_all_atom_lists()['GLY']['backbone']
         # Residues with missing backbone
-        miss_bck_at_list = self.stm.get_missing_backbone_atoms(
-            self.data_library.get_valid_codes('protein'),
-            self.data_library.get_all_atom_lists()
-        )
+        miss_bck_at_list = self.stm.get_missing_atoms('backbone')
         if miss_bck_at_list:
             fix_data['miss_bck_at_list'] = miss_bck_at_list
             self.summary['backbone']['missing_atoms'] = {}
@@ -1289,8 +1200,6 @@ class StructureChecking():
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 fix_data['fixbck_rnums'].append(mu.residue_num(res))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
-
-        self.stm.check_backbone_connect(backbone_atoms, self.data_library.get_distances('COVLNK'))
 
         #Not bound consecutive residues
         self.stm.get_backbone_breaks()
@@ -1355,7 +1264,7 @@ class StructureChecking():
         return fix_data
 
     def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True):
-        if not fix_data['miss_bck_at_list']:
+        if 'miss_bck_at_list' not in fix_data:
             return
         input_line = ParamInput('fixbck', fix_back, self.args['non_interactive'])
         input_line.add_option_all()
@@ -1396,21 +1305,9 @@ class StructureChecking():
             # Checking new clashes
             if check_clashes:
                 print("Checking possible new clashes")
-
-                atom_lists = self.data_library.get_atom_lists(ALL_CONTACT_TYPES)
-
-                if not self.rr_dist:
-                    self.rr_dist = mu.get_all_r2r_distances(
-                        self._get_structure(),
-                        'all',
-                        self.data_library.get_distances('R_R_CUTOFF')
-                    )
-
                 self.summary['backbone']['missing_atoms']['clashes'] = self._clash_report(
                     ALL_CONTACT_TYPES,
-                    mu.check_r_list_clashes(
-                        fixed_res, self.rr_dist, self.data_library.get_distances('CLASH_DIST'), atom_lists
-                    )
+                    self.stm.check_r_list_clashes(fixed_res, ALL_CONTACT_TYPES)
                 )
 
         #TODO Chain fix
@@ -1420,13 +1317,11 @@ class StructureChecking():
         self._run_method('cistransbck', opts)
 
     def _cistransbck_check(self):
-        self.stm.check_cis_backbone(
-            self.data_library.get_distances('COVLNK'),
-        )
-        if self.stm.cis_backbone_list:
+        (cis_backbone_list, lowtrans_backbone_list) = self.stm.check_cis_backbone()
+        if cis_backbone_list:
             self.summary['cistransbck']['cis'] = []
-            print('{} cis peptide bonds'.format(len(self.stm.cis_backbone_list)))
-            for lnk in self.stm.cis_backbone_list:
+            print('{} cis peptide bonds'.format(len(cis_backbone_list)))
+            for lnk in cis_backbone_list:
                 [res1, res2, dih] = lnk
                 print(
                     '{:10} {:10} Dihedral: {:8.3f}'.format(
@@ -1444,14 +1339,14 @@ class StructureChecking():
             if not self.args['quiet']:
                 print("No cis peptide bonds found")
 
-        if self.stm.lowtrans_backbone_list:
+        if lowtrans_backbone_list:
             self.summary['cistransbck']['unusual_trans'] = []
             print(
                 '{} trans peptide bonds with unusual omega dihedrals'.format(
-                    len(self.stm.lowtrans_backbone_list)
+                    len(lowtrans_backbone_list)
                 )
             )
-            for lnk in self.stm.lowtrans_backbone_list:
+            for lnk in lowtrans_backbone_list:
                 [res1, res2, dih] = lnk
                 print(
                     '{:10} {:10} Dihedral: {:8.3f}'.format(
@@ -1470,30 +1365,31 @@ class StructureChecking():
         pass
 #===============================================================================
     def _load_structure(self, verbose=True, print_stats=True):
-        if not self.stm:
-            if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
-                self.args['input_structure_path'] =\
-                    input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
-            self.stm = StructureManager(
-                self.args['input_structure_path'],
-                pdb_server=self.pdb_server,
-                cache_dir=self.cache_dir,
-                file_format=self.args['file_format']
-            )
-            if verbose:
-                print('Structure {} loaded'.format(self.args['input_structure_path']))
-                self.stm.print_headers()
-                print()
-                self.summary['headers'] = self.stm.meta
-            if print_stats:
-                self.stm.print_stats()
-                print()
-            self.summary['stats'] = self.stm.get_stats()
+        if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
+            self.args['input_structure_path'] =\
+                input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
 
-            backbone_atoms = self.data_library.get_all_atom_lists()['GLY']['backbone']
-            self.stm.check_backbone_connect(
-                backbone_atoms, self.data_library.get_distances('COVLNK')
-            )
+        stm = StructureManager(
+            self.args['input_structure_path'],
+            DataLibManager(self.sets.data_library_path),
+            pdb_server=self.pdb_server,
+            cache_dir=self.cache_dir,
+            file_format=self.args['file_format']
+        )
+
+        if verbose:
+            print('Structure {} loaded'.format(self.args['input_structure_path']))
+            stm.print_headers()
+            print()
+            self.summary['headers'] = stm.meta
+
+        if print_stats:
+            stm.print_stats()
+            print()
+
+        self.summary['stats'] = stm.get_stats()
+
+        return stm
 
     def _get_structure(self):
         return self.stm.get_structure()

@@ -9,4 +9,4 @@ class DefaultSettings():
         self.data_dir_path = self.base_dir_path + "/dat"
         self.res_library_path = self.data_dir_path + "/all_amino03.in"
         self.data_library_path = self.data_dir_path + "/data_lib.json"
-
+        
