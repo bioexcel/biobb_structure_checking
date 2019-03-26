@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
  PDB id: 1SVC
@@ -160,43 +161,43 @@ Running addH. Options: --mode auto
 106 Residues requiring selection on adding H atoms
 Selection: auto
 Warning: Add backbone hydrogens not implemented for residue   DA D1
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Warning: Add backbone hydrogens not implemented for residue   DG D2
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DA D3
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Warning: Add backbone hydrogens not implemented for residue   DT D4
-Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add side chain hydrogens not implemented for residue  DT
 Warning: Add backbone hydrogens not implemented for residue   DG D5
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DG D6
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DG D7
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DG D8
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DA D9
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Warning: Add backbone hydrogens not implemented for residue   DA D10
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Warning: Add backbone hydrogens not implemented for residue   DT D11
-Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add side chain hydrogens not implemented for residue  DT
 Warning: Add backbone hydrogens not implemented for residue   DC D12
-Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add side chain hydrogens not implemented for residue  DC
 Warning: Add backbone hydrogens not implemented for residue   DC D13
-Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add side chain hydrogens not implemented for residue  DC
 Warning: Add backbone hydrogens not implemented for residue   DC D14
-Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add side chain hydrogens not implemented for residue  DC
 Warning: Add backbone hydrogens not implemented for residue   DC D15
-Warning: add side chain hydrogens not implemented for residue  DC
+Warning: Add side chain hydrogens not implemented for residue  DC
 Warning: Add backbone hydrogens not implemented for residue   DT D16
-Warning: add side chain hydrogens not implemented for residue  DT
+Warning: Add side chain hydrogens not implemented for residue  DT
 Warning: Add backbone hydrogens not implemented for residue   DA D17
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Warning: Add backbone hydrogens not implemented for residue   DG D18
-Warning: add side chain hydrogens not implemented for residue  DG
+Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DA D19
-Warning: add side chain hydrogens not implemented for residue  DA
+Warning: Add side chain hydrogens not implemented for residue  DA
 Command list completed
 Structure saved on 1svc_all_test.pdb
 Final Num. models: 1

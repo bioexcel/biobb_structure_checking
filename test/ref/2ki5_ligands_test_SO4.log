@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running ligands. Options: --remove SO4 
+
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
@@ -26,6 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 
+Running ligands. Options: --remove SO4 
 4 Ligands detected 
  SO4 A4
  AC2 A1

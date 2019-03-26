@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running getss.
+
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  PDB id: 4KU1
@@ -42,6 +42,7 @@ MAN B507
 FUL B508
 NAG B509
 
+Running getss.
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981

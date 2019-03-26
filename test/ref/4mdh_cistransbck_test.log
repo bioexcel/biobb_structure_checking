@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running cistransbck.
+
 Structure exists: 'tmpPDB/md/4mdh.cif' 
 Structure pdb:4mdh loaded
  PDB id: 4MDH
@@ -29,6 +29,7 @@ NAD A335
 SO4 B334
 NAD B335
 
+Running cistransbck.
 2 cis peptide bonds
 ASN A130   PRO A131   Dihedral:   -0.784
 ASN B130   PRO B131   Dihedral:   -2.078

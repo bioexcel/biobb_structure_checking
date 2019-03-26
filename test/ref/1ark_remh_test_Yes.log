@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running remh. Options: --remove Yes 
+
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  PDB id: 1ARK
@@ -20,6 +20,7 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 
+Running remh. Options: --remove Yes 
 900 Residues containing H atoms detected
 Hydrogen atoms removed from 900 residues
 Structure saved on 1ark_remh_test_Yes.pdb

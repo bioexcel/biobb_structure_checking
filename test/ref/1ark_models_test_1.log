@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running models. Options: --select_model 1 
+
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
  PDB id: 1ARK
@@ -20,6 +20,7 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 
+Running models. Options: --select_model 1 
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
