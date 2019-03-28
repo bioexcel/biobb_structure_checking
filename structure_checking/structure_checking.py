@@ -1024,7 +1024,7 @@ class StructureChecking():
         return False
 # =============================================================================
     def addH(self, opts=None):
-        """ run addH command """
+        """ Run addH command """
         self._run_method('addH', opts)
 
     def _addH_check(self):

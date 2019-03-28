@@ -87,7 +87,6 @@ class ParamInput():
                     values = opt_value.split(',')
                 else:
                     values = [opt_value]
-
                 for val in values:
                     # To support both 'list' and 'pair_list':
                     val_sp = val.split(':')
@@ -107,7 +106,6 @@ class ParamInput():
                 if opt['type'] == "int":
                     opt_value = int(opt_value)
                 input_ok = opt_value >= opt['min'] and opt_value <= opt['max']
-
             if not input_ok:
                 iopt += 1
 
@@ -140,6 +138,7 @@ class ParamInput():
             (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
             if not input_ok:
                 print('Input not valid ({})'.format(opt_value))
+                print("Warning: Input not valid ({})".format(opt_value))
                 opt_value = ''
         return [self.options[iopt]['label'], opt_value]
 
