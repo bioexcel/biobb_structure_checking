@@ -69,11 +69,11 @@ class StructureChecking():
             print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
 
     def command_list(self, opts):
-        """ Manages command_list workflows"""        
+        """ Manages command_list workflows"""
         opts = cts.DIALOGS.get_parameter('command_list', opts)
         op_list = opts[cts.DIALOGS.get_dialog('command_list')['dest']]
 
-        op_list = ParamInput('Command List File', op_list, False).run()
+        op_list = ParamInput('Command List File', False).run(op_list)
 
         try:
             list_file_h = open(op_list, "r")
@@ -128,7 +128,7 @@ class StructureChecking():
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
                 print(cts.MSGS['CHECK_ONLY_DONE'])
-        
+
         elif data_to_fix:
             try:
                 f_fix = getattr(self, '_' + command + '_fix')
@@ -167,18 +167,18 @@ class StructureChecking():
             )
 
             fix_data = True
-            
+
         else:
             if not self.args['quiet']:
                 print(cts.MSGS['SINGLE_MODEL'])
-                
+
         return fix_data
 
     def _models_fix(self, select_model, fix_data=None):
-        input_line = ParamInput('Select Model Num', select_model, self.args['non_interactive'])
+        input_line = ParamInput('Select Model Num', self.args['non_interactive'])
         input_line.add_option_all()
-        input_line.add_option('modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels)
-        [input_option, select_model] = input_line.run()
+        input_line.add_option_numeric('modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels)
+        [input_option, select_model] = input_line.run(select_model)
 
         if input_option == 'error':
             msg = cts.MSGS['UNKNOWN_MODEL'] + ' ' + select_model
@@ -187,7 +187,7 @@ class StructureChecking():
             return
 
         print(cts.MSGS['SELECT_MODEL'], select_model)
-        
+
         if input_option != 'all':
             self.strucm.select_model(select_model)
 
@@ -214,10 +214,10 @@ class StructureChecking():
 
     def _chains_fix(self, select_chains, fix_data=None):
         self.summary['chains']['selected'] = {}
-        input_line = ParamInput('Select chain', select_chains, self.args['non_interactive'])
+        input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
-        input_line.add_option('chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive")
-        [input_option, select_chains] = input_line.run()
+        input_line.add_option_list('chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive")
+        [input_option, select_chains] = input_line.run(select_chains)
 
         if input_option == 'error':
             msg = 'SELECTION NOT VALID ' + select_chains
@@ -249,7 +249,7 @@ class StructureChecking():
         else:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_INSCODES_FOUND'])
-                
+
         return {}
 
     def _inscodes_fix(self, select_codes, fix_data=None):
@@ -268,7 +268,7 @@ class StructureChecking():
             self.summary['altloc'] = {}
             fix_data['alt_loc_rnums'] = []
             fix_data['altlocs'] = {}
-            
+
             for res in sorted(alt_loc_res, key=lambda x: x.index):
                 rid = mu.residue_id(res)
                 print(rid)
@@ -299,10 +299,10 @@ class StructureChecking():
                 altlocs = fix_data['altlocs'][res]
                 max_al_len = len(fix_data['altlocs'][res])
 
-        input_line = ParamInput('Select alternative', select_altloc, self.args['non_interactive'])
-        input_line.add_option('occup', ['occupancy'])
-        input_line.add_option('altids', altlocs, case='upper')
-        input_line.add_option(
+        input_line = ParamInput('Select alternative', self.args['non_interactive'])
+        input_line.add_option_list('occup', ['occupancy'])
+        input_line.add_option_list('altids', altlocs, case='upper')
+        input_line.add_option_list(
             'resnum',
             fix_data['alt_loc_rnums'],
             opt_type='pair_list',
@@ -310,7 +310,7 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
-        [input_option, select_altloc] = input_line.run()
+        [input_option, select_altloc] = input_line.run(select_altloc)
 
         if input_option == 'error':
             print('Error: Unknown selection {} '.format(select_altloc), file=sys.stderr)
@@ -371,17 +371,17 @@ class StructureChecking():
         return fix_data
 
     def _metals_fix(self, remove_metals, fix_data=None):
-        input_sess = ParamInput("Remove", remove_metals, self.args['non_interactive'])
+        input_sess = ParamInput("Remove", self.args['non_interactive'])
         input_sess.add_option_all()
         input_sess.add_option_none()
-        input_sess.add_option(
+        input_sess.add_option_list(
             'atids',
             sorted(fix_data['at_groups']),
             case='sensitive',
             multiple=True
         )
-        input_sess.add_option('resids', fix_data['met_rids'], case='sensitive', multiple=True)
-        [input_option, remove_metals] = input_sess.run()
+        input_sess.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
+        [input_option, remove_metals] = input_sess.run(remove_metals)
 
         if input_option == "error":
             print('Error: unknown selection {}\n'.format(remove_metals), file=sys.stderr)
@@ -444,9 +444,9 @@ class StructureChecking():
         return fix_data
 
     def _remwat_fix(self, remove_wat, fix_data=None):
-        input_line = ParamInput('Remove', remove_wat, self.args['non_interactive'])
+        input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_yes_no()
-        [input_option, remove_wat] = input_line.run()
+        [input_option, remove_wat] = input_line.run(remove_wat)
 
         if input_option == 'error':
             print(' unknown option {}'.format(remove_wat), file=sys.stderr)
@@ -496,12 +496,12 @@ class StructureChecking():
 
 # =============================================================================
     def _ligands_fix(self, remove_ligands, fix_data=None):
-        input_line = ParamInput('Remove', remove_ligands, self.args['non_interactive'])
+        input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option('byrids', sorted(fix_data['ligand_rids']), multiple=True)
-        input_line.add_option('byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True)
-        [input_option, remove_ligands] = input_line.run()
+        input_line.add_option_list('byrids', sorted(fix_data['ligand_rids']), multiple=True)
+        input_line.add_option_list('byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True)
+        [input_option, remove_ligands] = input_line.run(remove_ligands)
 
         if input_option == 'error':
             print('Error: unknown selection {}'.format(remove_ligands))
@@ -558,9 +558,9 @@ class StructureChecking():
         return fix_data
 
     def _remh_fix(self, remove_h, fix_data=None):
-        input_line = ParamInput('Remove hydrogen atoms', remove_h, self.args['non_interactive'])
+        input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
         input_line.add_option_yes_no()
-        [input_option, remove_h] = input_line.run()
+        [input_option, remove_h] = input_line.run(remove_h)
 
         if input_option == 'error':
             print('Warning: unknown option {}'.format(remove_h))
@@ -690,15 +690,14 @@ class StructureChecking():
 
         fix = True
         while fix:
-            input_line = ParamInput(
-                'Fix amide atoms', amide_fix, self.args['non_interactive']
+            input_line = ParamInput('Fix amide atoms', self.args['non_interactive']
             )
             input_line.add_option_all()
             input_line.add_option_none()
-            input_line.add_option(
+            input_line.add_option_list(
                 'resnum', sorted(fix_data['amide_rnums']), case='sensitive', multiple=True
             )
-            [input_option, amide_fix] = input_line.run()
+            [input_option, amide_fix] = input_line.run(amide_fix)
 
             if input_option == 'error':
                 print('Warning: unknown option {}'.format(amide_fix))
@@ -780,11 +779,11 @@ class StructureChecking():
 
         chiral_res = self.strucm.data_library.get_chiral_data()
 
-        input_line = ParamInput('Fix chiralities', chiral_fix, self.args['non_interactive'])
+        input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option('resnum', fix_data['chiral_rnums'], case='sensitive', multiple=True)
-        [input_option, chiral_fix] = input_line.run()
+        input_line.add_option_list('resnum', fix_data['chiral_rnums'], case='sensitive', multiple=True)
+        [input_option, chiral_fix] = input_line.run(chiral_fix)
 
         if input_option == 'error':
             print('Warning: unknown option {}'.format(chiral_fix))
@@ -860,11 +859,11 @@ class StructureChecking():
     def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
         return
 #TODO chiral_bck_fix
-#        input_line = ParamInput('Fix CA chiralities', chiral_fix, self.args['non_interactive'])
+#        input_line = ParamInput('Fix CA chiralities', self.args['non_interactive'])
 #        input_line.add_option_all()
 #        input_line.add_option_none()
-#        input_line.add_option('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
-#        [input_option, chiral_fix] = input_line.run()
+#        input_line.add_option_list('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
+#        [input_option, chiral_fix] = input_line.run(chiral_fix)
 #        if input_option == 'error':
 #            print('Warning: unknown option {}'.format(amide_fix))
 #            self.summary['chiral']['error'] = 'Unknown option'
@@ -965,11 +964,11 @@ class StructureChecking():
         return fix_data
 
     def _fixside_fix(self, fix_side, fix_data=None, check_clashes=True):
-        input_line = ParamInput('fixside', fix_side, self.args['non_interactive'])
+        input_line = ParamInput('fixside', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option('resnum', fix_data['fixside_rnums'], case='sensitive', multiple=True)
-        [input_option, fix_side] = input_line.run()
+        input_line.add_option_list('resnum', fix_data['fixside_rnums'], case='sensitive', multiple=True)
+        [input_option, fix_side] = input_line.run(fix_side)
 
         if input_option == 'error':
             print("Invalid option", fix_side)
@@ -1037,14 +1036,14 @@ class StructureChecking():
         return fix_data
 
     def _addH_fix(self, mode, fix_data=None):
-        input_line = ParamInput('Mode', mode, self.args['non_interactive'])
+        input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
-        input_line.add_option('auto', ['auto'], case="lower")
-        input_line.add_option('inter', ['interactive'], case="lower")
-        input_line.add_option('inter_His', ['interactive_his'], case="lower")
-        input_line.add_option('ph', ['pH'])
+        input_line.add_option_list('auto', ['auto'], case="lower")
+        input_line.add_option_list('inter', ['interactive'], case="lower")
+        input_line.add_option_list('inter_His', ['interactive_his'], case="lower")
+        input_line.add_option_list('ph', ['pH'])
         #input_line.add_option('resnum', sorted(self.add_h_rnums), case='sensitive', multiple=True)
-        [input_option, add_h_mode] = input_line.run()
+        [input_option, add_h_mode] = input_line.run(mode)
 
         if input_option == 'error':
             print("Invalid option", add_h_mode)
@@ -1063,9 +1062,9 @@ class StructureChecking():
                     to_fix.append([r_at[0], std_ion[r_at[0].get_resname()]['std']])
             elif input_option == 'ph':
                 ph_value = None
-                input_line = ParamInput("pH Value", ph_value, self.args['non_interactive'])
-                input_line.add_option("pH", [], opt_type="float", min_val=0., max_val=14.)
-                [input_option, ph_value] = input_line.run()
+                input_line = ParamInput("pH Value", self.args['non_interactive'])
+                input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
+                [input_option, ph_value] = input_line.run(ph_value)
                 if not self.args['quiet']:
                     print('Selection: pH', ph_value)
                 for r_at in fix_data['ion_res_list']:
@@ -1097,12 +1096,10 @@ class StructureChecking():
         return True
 
     def _mutateside_fix(self, mut_list, fix_data=None, check_clashes=True):
-        input_line = ParamInput('Mutation list', mut_list, self.args['non_interactive'])
-        mut_list = input_line.run()
+        input_line = ParamInput('Mutation list', self.args['non_interactive'])
+        mut_list = input_line.run(mut_list)
 
         mutations = self.strucm.prepare_mutations(mut_list)
-#        mutations = MutationManager(mut_list)
-#        mutations.prepare_mutations(self.strucm.st)
 
         print('Mutations to perform')
         for mut in mutations.mutation_list:
@@ -1207,11 +1204,11 @@ class StructureChecking():
     def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True):
         if 'miss_bck_at_list' not in fix_data:
             return
-        input_line = ParamInput('fixbck', fix_back, self.args['non_interactive'])
+        input_line = ParamInput('fixbck', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option('resnum', fix_data['fixbck_rnums'], case='sensitive', multiple=True)
-        [input_option, fix_back] = input_line.run()
+        input_line.add_option_list('resnum', fix_data['fixbck_rnums'], case='sensitive', multiple=True)
+        [input_option, fix_back] = input_line.run(fix_back)
 
         if input_option == 'error':
             print("Invalid option", fix_back)
@@ -1338,7 +1335,9 @@ class StructureChecking():
             self.args['output_structure_path'] = input("Enter output structure path: ")
         self.strucm.save_structure(self.args['output_structure_path'])
 
-    def _check_report_clashes(self, residue_list, contact_types=stm.ALL_CONTACT_TYPES):
+    def _check_report_clashes(self, residue_list, contact_types=None):
+        if contact_types is None:
+            contact_types = stm.ALL_CONTACT_TYPES
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)

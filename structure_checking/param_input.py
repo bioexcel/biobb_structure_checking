@@ -4,7 +4,7 @@
 import argparse
 
 def _get_input(value, prompt_text):
-    """ get input data """
+    """ Get input data """
     while value is None or value == '':
         value = input(prompt_text)
     if isinstance(value, str):
@@ -12,120 +12,136 @@ def _get_input(value, prompt_text):
     return value
 
 class ParamInput():
-    """Class to generate and manage interactive parameter dialogs"""
-    def __init__(self, prefix, opt_value, non_interactive=True):
+    """ Class to generate and manage interactive parameter dialogs"""
+    def __init__(self, prefix, non_interactive=True):
         self.options = []
-        self.opt_value = opt_value
         self.non_interactive = non_interactive
         self.prefix = prefix
 
-    def add_option(self, label, opt_list, case=False, opt_type='list', \
-            multiple=False, min_val=0, max_val=0, list2=None):
-        """Add option to dialog"""
+
+    def add_option_all(self):
+        """ Add 'All' option to dialog"""
+        self.add_option_list('all', ['All'])
+
+    def add_option_none(self):
+        """ Add 'None' option to dialog"""
+        self.add_option_list('none', ['None'])
+
+    def add_option_yes_no(self):
+        """Add 'Yes/No' option to dialog"""
+        self.add_option_list('yes', ['Yes'])
+        self.add_option_list('no', ['No'])
+
+    def add_option_list(self, label, opt_list, case=False, opt_type='list', \
+            multiple=False, list2=None):
+        """ Add a list based option to dialog """
         self.options.append({
             'label':label,
             'opt_list':opt_list,
             'case':case,
             'type':opt_type,
-            'min':min_val,
-            'max':max_val,
             'multiple':multiple,
             'list2':list2
         })
 
-    def add_option_all(self):
-        """add All option to dialog"""
-        self.add_option('all', ['All'])
+    def add_option_numeric(self, label, opt_list, opt_type, min_val, max_val):
+        """ Add a numeric option to dialog """
+        self.options.append({
+            'label':label,
+            'opt_list':opt_list,
+            'type':opt_type,
+            'min':min_val,
+            'max':max_val,
+        })
 
-    def add_option_none(self):
-        """add None option to dialog"""
-        self.add_option('none', ['None'])
-
-    def add_option_yes_no(self):
-        """add Yes/No option to dialog"""
-        self.add_option('yes', ['Yes'])
-        self.add_option('nos', ['No'])
-
-    def run(self):
-        """build and execute dialog"""
-        prompt_str = self.prefix
-        if self.options:
-            opt_strs = []
-            for opt in self.options:
-                if opt['type'] == 'list':
-                    opt_strs.append(','.join(opt['opt_list']))
-                elif opt['type'] == 'int' or opt['type'] == 'float':
-                    if opt['min'] != 0 or opt['max'] != 0:
-                        opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
-                elif opt['type'] == 'input':
-                    opt_strs.append('')
-                elif opt['type'] == 'pair_list':
-                    str_opt = []
-                    for oper in opt['opt_list']:
-                        str_opt.append('{}:[{}]'.format(oper, '|'.join(opt['list2'])))
-                    opt_strs.append(','.join(str_opt))
-                else:
-                    opt_strs.append('?')
-            prompt_str += ' (' + ' | '.join(opt_strs) + ')'
-        prompt_str += ': '
-# No options, simple input
+    def _build_dialog(self):
         if not self.options:
-            if not self.non_interactive:
-                self.opt_value = _get_input(self.opt_value, prompt_str)
-            return self.opt_value
-# Check alternative options
+            return self.prefix + ':'
+        opt_strs = []
+        for opt in self.options:
+            if opt['type'] == 'list':
+                opt_strs.append(','.join(opt['opt_list']))
+            elif opt['type'] in ('int', 'float'):
+                if opt['min'] != 0 or opt['max'] != 0:
+                    opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
+            elif opt['type'] == 'input':
+                opt_strs.append('')
+            elif opt['type'] == 'pair_list':
+                str_opt = []
+                for oper in opt['opt_list']:
+                    str_opt.append('{}:[{}]'.format(oper, '|'.join(opt['list2'])))
+                opt_strs.append(','.join(str_opt))
+            else:
+                opt_strs.append('?')
+        return self.prefix + ' (' + ' | '.join(opt_strs) + '): '
+
+    def _check_dialog_value(self, opt_value):
+        if opt_value is None:
+            return [False, -1, None]
+        iopt = 0
+        input_ok = False
+        while not input_ok and iopt < len(self.options):
+            opt = self.options[iopt]
+            if opt['type'] in ('list', 'pair_list') and isinstance(opt_value, str):
+                if opt['multiple']:
+                    values = opt_value.split(',')
+                else:
+                    values = [opt_value]
+
+                for val in values:
+                    # To support both 'list' and 'pair_list':
+                    val_sp = val.split(':')
+                    val = val_sp[0]
+
+                    input_ok =\
+                        (opt['case'] == 'sensitive' and val in opt['opt_list'])\
+                        or (opt['case'] == 'upper' and val.upper() in opt['opt_list'])\
+                        or (opt['case'] == 'lower' and val.lower() in opt['opt_list'])\
+                        or (not opt['case'] and val.lower() in list(map(lambda x: x.lower(), opt['opt_list'])))
+
+                    if opt['type'] == 'pair_list':
+                        input_ok = input_ok and val_sp[1] in opt['list2']
+
+            elif opt['type'] in ('int', 'float'):
+                opt_value = float(opt_value)
+                if opt['type'] == "int":
+                    opt_value = int(opt_value)
+                input_ok = opt_value >= opt['min'] and opt_value <= opt['max']
+
+            if not input_ok:
+                iopt += 1
+
+        return [input_ok, iopt, opt_value]
+
+    def run(self, opt_value):
+        """ Build and execute dialog"""
+
+        # Non interactive enviroment, check available input only
+        if self.non_interactive:
+            # No options, nothing to do, return original value
+            if not self.options:
+                return opt_value
+            # Check input
+            (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
+            if not input_ok:
+                print("Warning: Input not valid ({})".format(opt_value))
+                self.options.append({'label':'error'})
+            return [self.options[iopt]['label'], opt_value]
+
+        # Interactive input case
+        prompt_str = self._build_dialog()
+        # No options, simple input
+        if not self.options:
+            return _get_input(opt_value, prompt_str)
+        # Prompt repeats until valid
         input_ok = False
         while not input_ok:
-            if not self.non_interactive:
-                self.opt_value = _get_input(self.opt_value, prompt_str)
-            iopt = 0
-
-            if self.opt_value is None:
-                return ['error', '']
-
-            while not input_ok and iopt < len(self.options):
-                opt = self.options[iopt]
-                if (opt['type'] == 'list' or opt['type'] == 'pair_list') and\
-                        isinstance(self.opt_value, str):
-                    if not opt['multiple']:
-                        values = [self.opt_value]
-                    else:
-                        values = self.opt_value.split(',')
-                    group_ok = True
-                    for val in values:
-                        if opt['type'] == 'pair_list':
-                            val_sp = val.split(':')
-                            val = val_sp[0]
-                        if opt['case'] == 'upper':
-                            val = val.upper()
-                            group_ok = group_ok and val in opt['opt_list']
-                        elif opt['case'] == 'lower':
-                            val = val.lower()
-                            group_ok = group_ok and val in opt['opt_list']
-                        elif opt['case'] == 'sensitive':
-                            group_ok = group_ok and val in opt['opt_list']
-                        else:
-                            group_ok = group_ok and val.lower()\
-                               in list(map(lambda x: x.lower(), opt['opt_list']))
-                        if opt['type'] == 'pair_list':
-                            group_ok = group_ok and val_sp[1] in opt['list2']
-                    input_ok = group_ok
-                elif opt['type'] == 'int' or opt['type'] == 'float':
-                    if opt['type'] == "int":
-                        self.opt_value = int(self.opt_value)
-                    if opt['type'] == "float":
-                        self.opt_value = float(self.opt_value)
-                    input_ok = self.opt_value >= opt['min'] and self.opt_value <= opt['max']
-                if not input_ok:
-                    iopt += 1
+            opt_value = _get_input(opt_value, prompt_str)
+            (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
             if not input_ok:
-                print("Input not valid")
-                if self.non_interactive:
-                    self.options.append({'label':'error'})
-                    input_ok = True
-                else:
-                    self.opt_value = ''
-        return [self.options[iopt]['label'], self.opt_value]
+                print("Warning: Input not valid ({})".format(opt_value))
+                opt_value = ''
+        return [self.options[iopt]['label'], opt_value]
 
 class Dialog():
     """Dialog to complete command options"""
