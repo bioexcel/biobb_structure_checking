@@ -124,7 +124,7 @@ class ParamInput():
             # Check input
             (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
             if not input_ok:
-                print("Warning: Input not valid ({})".format(opt_value))
+                print('Input not valid ({})'.format(opt_value))
                 self.options.append({'label':'error'})
             return [self.options[iopt]['label'], opt_value]
 
@@ -139,7 +139,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str)
             (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
             if not input_ok:
-                print("Warning: Input not valid ({})".format(opt_value))
+                print('Input not valid ({})'.format(opt_value))
                 opt_value = ''
         return [self.options[iopt]['label'], opt_value]
 

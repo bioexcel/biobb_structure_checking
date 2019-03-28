@@ -101,10 +101,10 @@ Running remwat.
 287 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-10 Ligands detected 
+10 Ligands detected
  FBP A353
  OXM A351
  NAD A352

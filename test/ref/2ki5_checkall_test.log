@@ -59,10 +59,10 @@ Running remwat.
 292 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected 
+4 Ligands detected
  SO4 A4
  AC2 A1
  SO4 B3

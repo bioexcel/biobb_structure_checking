@@ -41,6 +41,10 @@ MSGS = {
     'STRUCTURE_SAVED': 'Structure saved on',
     'FORCE_SAVE_STRUCTURE': 'Structure not modified, saving due to --force_save option',
     'JSON_SAVED': 'Summary data saved on',
+    'UNKNOWN_SELECTION': 'Unknown selection',
+    'DO_NOTHING': 'Nothing to do',
+    #Param input
+    'INPUT_NOT_VALID' : 'Input not valid ({})',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
@@ -58,7 +62,7 @@ MSGS = {
     'CHAINS_DETECTED': '{} Chain(s) detected',
     'UNKNOWN_CHAINS':   ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} ' +\
                         'RNA: {s[2]:4.2f} Other: {s[3]:4.2f})',
-    'SELECTION NOT VALID': 'Selection not valid',
+    'SELECTION_NOT_VALID': 'Selection not valid',
     'SELECT_ALL_CHAINS': 'Selecting all chains',
     'SELECT_CHAINS': 'Selecting chain(s)',
     #inscodes
@@ -67,6 +71,66 @@ MSGS = {
     #altloc
     'ALTLOC_FOUND': 'Detected {} residues with alternative location labels',
     'NO_ALTLOC_FOUND': 'No residues with alternative location labels detected',
-    
+    #metals
+    'METALS_FOUND': '{} Metal ions found',
+    'NO_METALS_FOUND' : 'No metal ions found',
+    'METALS_REMOVED': 'Metal Atoms removed {} ({:d})',
+    # Waters
+    'WATERS_FOUND': '{} Water molecules detected',
+    'WATER_REMOVED': '{} Water molecules removed',
+    'NO_WATERS': 'No water molecules found',
+    # ligands
+    'LIGANDS_DETECTED' : '{} Ligands detected',
+    'NO_LIGANDS_FOUND': 'No ligands found',
+    'LIGANDS_REMOVED' : 'Ligands removed {} ({})',
 
+    # Hydrogens
+    'RESIDUES_H_FOUND' : '{} Residues containing H atoms detected',
+    'NO_RESIDUES_H_FOUND': 'No residues with Hydrogen atoms found',
+    'REMOVED_H': 'Hydrogen atoms removed from {} residues',
+    # SS bonds
+    'POSSIBLE_SS': '{} Possible SS Bonds detected',
+    'NO_SS': 'No SS bonds detected',
+    #amide
+    'UNUSUAL_AMIDES': '{} unusual contact(s) involving amide atoms found',
+    'NO_UNUSUAL_AMIDES': 'No unusual contact(s) involving amide atoms found',
+    'NO_AMIDES': 'No amide residues found',
+    'AMIDES_FIXED': 'Amide residues fixed {} ({})',
+    'AMIDES_RECHECK': 'Rechecking',
+    #chiral
+    'WRONG_CHIRAL_SIDE': '{} residues with incorrect side-chain chirality found',
+    'NO_WRONG_CHIRAL_SIDE': 'No residues with incorrect side-chain chirality found',
+    'NO_CHIRALS' : 'No chiral side-chains found',
+    'CHIRAL_SIDE_FIXED': 'Chiral side chains fixed {} ({})',
+    #chiral Backbone
+    'CHIRAL_BCK_RESIDUES': '{} residues with incorrect backbone chirality found',
+    'NO_CHIRAL_BCK_RESIDUES': 'No residues with incorrect backbone chirality found',
+    #fixside
+    'MISSING_SIDE_ATOMS': '{} Residues with missing side chain atoms found',
+    'FIXING_SIDE_CHAINS': '"Fixing side chains"',
+    'SIDE_CHAIN_FIXED': 'Fixed {} side chain(s)',
+    #add hydrogens
+    'NO_SELECT_ADDH' : 'No residues requiring selection on adding H atoms',
+    'SELECT_ADDH_RESIDUES' : '{} Residues requiring selection on adding H atoms',
+    #Mutations
+    'MUTATIONS_TO_DO': 'Mutations to perform',
+    #Backbone
+    'BCK_MISSING_RESIDUES': '{} Residues with missing backbone atoms found',
+    'BACKBONE_BREAKS': '{} Backbone breaks found',
+    'UNEXPECTED_BCK_LINKS': 'Unexpected backbone links found',
+    'CONSEC_RES_FAR': 'Consecutive residues too far away to be covalently linked',
+    'MODIF_RESIDUES': 'Modified residues found',
+    'ADDING_BCK_ATOMS': 'Adding missing backbone atoms',
+    'BCK_ATOMS_FIXED': 'Fixed {} backbone atom(s)',
+    #cistrasnbck
+    'CIS_BONDS': '{} cis peptide bonds',
+    'NO_CIS_BONDS': 'No cis peptide bonds found',
+    'LOWTRANS_BONDS': '{} trans peptide bonds with unusual omega dihedrals',
+    'NO_LOWTRANS_BONDS': 'No trans peptide bonds with unusual omega dihedrals found',
+    #clashes
+    'CHECKING_CLASHES' : 'Checking for steric clashes',
+    'CLASHES_DETECTED': '{} Steric {} clashes detected',
+    'NO_CLASHES_DETECTED': 'No {} clashes detected',
+    #load
+    'STRUCTURE_LOADED': 'Structure {} loaded'
 }

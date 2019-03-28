@@ -21,4 +21,4 @@ Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
 Running chiral_bck.
 1 residues with incorrect backbone chirality found
  ALA A2    
-Structure not modified, not saving. Override with --force_save
+Error: chiral_bck command fix not implemented

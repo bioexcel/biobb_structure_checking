@@ -49,7 +49,7 @@ No residues with alternative location labels detected
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
-No metal ions present
+No metal ions found
 
 Step 6: ligands --remove SO4
 
@@ -100,7 +100,7 @@ Adding missing backbone atoms
 GLU P353
   Adding new atom OXT
 Fixed 1 backbone atom(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected

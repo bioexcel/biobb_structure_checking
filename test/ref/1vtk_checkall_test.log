@@ -50,10 +50,10 @@ Running remwat.
 104 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected 
+4 Ligands detected
  ADP A400/*
  TMP A500/*
 Running  check_only. Nothing else to do.

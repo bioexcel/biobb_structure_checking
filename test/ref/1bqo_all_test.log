@@ -78,7 +78,7 @@ Metal Atoms removed ZN (4)
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
-7 Ligands detected 
+7 Ligands detected
   CA A303
   CA A304
   CA A305
@@ -86,8 +86,7 @@ Running ligands. Options: --remove SO4
   CA B304
   CA B305
  N25 B401
-Input not valid
-Error: unknown selection SO4
+Input not valid (SO4)
 
 Step 7: remwat --remove Yes
 
@@ -134,7 +133,7 @@ Adding missing backbone atoms
 ASP A251
   Adding new atom OXT
 Fixed 1 backbone atom(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected

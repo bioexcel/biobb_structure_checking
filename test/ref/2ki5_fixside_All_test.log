@@ -34,7 +34,7 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
-Fixing side chains
+"Fixing side chains"
 MET A46
   Adding new atom CG
   Adding new atom SD
@@ -60,7 +60,7 @@ ARG B220
   Adding new atom NH1
   Adding new atom NH2
 Fixed 6 side chain(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 5 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A

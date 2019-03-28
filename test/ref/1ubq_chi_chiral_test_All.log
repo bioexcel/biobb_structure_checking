@@ -23,7 +23,7 @@ Running chiral. Options: --fix All
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    
-Quiral residues fixed All (2)
+Chiral side chains fixed All (2)
 Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected

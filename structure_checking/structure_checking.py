@@ -2,7 +2,6 @@
     Main Class for Structure Checking functionality
 
 """
-
 __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
@@ -16,7 +15,6 @@ from structure_checking.param_input import ParamInput
 
 import structure_manager.structure_manager as stm
 import structure_manager.model_utils as mu
-
 
 # Main class
 class StructureChecking():
@@ -142,7 +140,11 @@ class StructureChecking():
                     opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
                 else:
                     opts = ''
-            f_fix(opts, data_to_fix)
+            error_status = f_fix(opts, data_to_fix)
+            if error_status:
+                print('ERROR', ' '.join(error_status), file=sys.stderr)
+                self.summary[command]['error'] = ' '.join(error_status)
+
 
 # ==============================================================================q
     def models(self, opts=None):
@@ -150,41 +152,37 @@ class StructureChecking():
         self._run_method('models', opts)
 
     def _models_check(self):
-        fix_data = False
         print(cts.MSGS['MODELS_FOUND'].format(self.strucm.nmodels))
         self.summary['models'] = {'nmodels': self.strucm.nmodels}
-        if self.strucm.nmodels > 1:
-            self.summary['models']['type'] = self.strucm.models_type
-            supimp = ''
-            if self.strucm.models_type['type'] == mu.BUNIT:
-                supimp = 'do not'
-            print(
-                cts.MSGS['MODELS_GUESS'].format(
-                    supimp,
-                    self.strucm.models_type['rmsd'],
-                    mu.MODEL_TYPE_LABELS[self.strucm.models_type['type']]
-                )
-            )
-
-            fix_data = True
-
-        else:
+        if self.strucm.nmodels == 1:
             if not self.args['quiet']:
                 print(cts.MSGS['SINGLE_MODEL'])
+            return {}
 
-        return fix_data
+        self.summary['models']['type'] = self.strucm.models_type
+        supimp = ''
+        if self.strucm.models_type['type'] == mu.BUNIT:
+            supimp = 'do not'
+        print(
+            cts.MSGS['MODELS_GUESS'].format(
+                supimp,
+                self.strucm.models_type['rmsd'],
+                mu.MODEL_TYPE_LABELS[self.strucm.models_type['type']]
+            )
+        )
+
+        return True
 
     def _models_fix(self, select_model, fix_data=None):
         input_line = ParamInput('Select Model Num', self.args['non_interactive'])
         input_line.add_option_all()
-        input_line.add_option_numeric('modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels)
+        input_line.add_option_numeric(
+            'modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels
+        )
         [input_option, select_model] = input_line.run(select_model)
 
         if input_option == 'error':
-            msg = cts.MSGS['UNKNOWN_MODEL'] + ' ' + select_model
-            print(msg, file=sys.stderr)
-            self.summary['models']['error'] = msg
-            return
+            return [cts.MSGS['UNKNOWN_MODEL'], select_model]
 
         print(cts.MSGS['SELECT_MODEL'], select_model)
 
@@ -192,6 +190,8 @@ class StructureChecking():
             self.strucm.select_model(select_model)
 
         self.summary['models']['selected'] = select_model
+
+        return False
 
 # =============================================================================
     def chains(self, opts=None):
@@ -208,7 +208,11 @@ class StructureChecking():
                     )
                 )
             else:
-                print(' {}: {}'.format(ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]))
+                print(
+                    ' {}: {}'.format(
+                        ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]
+                    )
+                )
         self.summary['chains'] = {'ids':self.strucm.chain_ids}
         return len(self.strucm.chains_ids) > 1
 
@@ -216,22 +220,24 @@ class StructureChecking():
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
-        input_line.add_option_list('chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive")
+        input_line.add_option_list(
+            'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
+        )
         [input_option, select_chains] = input_line.run(select_chains)
 
         if input_option == 'error':
-            msg = 'SELECTION NOT VALID ' + select_chains
-            print(msg)
-            self.summary['chains']['error'] = msg
-            return
+            return [cts.MSGS['SELECTION_NOT_VALID'], select_chains]
 
         if input_option == 'all':
             print(cts.MSGS['SELECT_ALL_CHAINS'])
-        else:
-            self.strucm.select_chains(select_chains)
-            print(cts.MSGS['SELECT_CHAINS'], select_chains)
-            self.strucm.set_chain_ids()
-            self.summary['chains']['selected'] = self.strucm.chain_ids
+            return False
+
+        self.strucm.select_chains(select_chains)
+        print(cts.MSGS['SELECT_CHAINS'], select_chains)
+        self.strucm.set_chain_ids()
+        self.summary['chains']['selected'] = self.strucm.chain_ids
+
+        return False
 
 # =============================================================================
     def inscodes(self, opts=None):
@@ -240,54 +246,59 @@ class StructureChecking():
 
     def _inscodes_check(self):
         self.strucm.get_ins_codes()
-        if self.strucm.ins_codes_list:
-            print(cts.MSGS['INSCODES_FOUND'].format(len(self.strucm.ins_codes_list)))
-            self.summary['inscodes'] = []
-            for res in self.strucm.ins_codes_list:
-                print(mu.residue_id(res))
-                self.summary['inscodes'].append(mu.residue_id(res))
-        else:
+        if not self.strucm.ins_codes_list:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_INSCODES_FOUND'])
+            return {}
 
+        print(cts.MSGS['INSCODES_FOUND'].format(len(self.strucm.ins_codes_list)))
+        self.summary['inscodes'] = []
+        for res in self.strucm.ins_codes_list:
+            print(mu.residue_id(res))
+            self.summary['inscodes'].append(mu.residue_id(res))
         return {}
 
-    def _inscodes_fix(self, select_codes, fix_data=None):
-        pass
+#    def _inscodes_fix(self, select_codes, fix_data=None):
+#        pass
 # =============================================================================
     def altloc(self, opts=None):
         """ run altloc command """
         self._run_method('altloc', opts)
 
     def _altloc_check(self): #TODO improve output
-        fix_data = {}
         alt_loc_res = mu.get_altloc_residues(self._get_structure())
-        if alt_loc_res:
-            fix_data['alt_loc_res'] = alt_loc_res
-            print(cts.MSGS['ALTLOC_FOUND'].format(len(alt_loc_res)))
-            self.summary['altloc'] = {}
-            fix_data['alt_loc_rnums'] = []
-            fix_data['altlocs'] = {}
-
-            for res in sorted(alt_loc_res, key=lambda x: x.index):
-                rid = mu.residue_id(res)
-                print(rid)
-                fix_data['alt_loc_rnums'].append(mu.residue_num(res))
-                self.summary['altloc'][rid] = {}
-                fix_data['altlocs'][res] = sorted(alt_loc_res[res][0].child_dict)
-                for atm in alt_loc_res[res]:
-                    self.summary['altloc'][rid][atm.id] = []
-                    alt_str = '  {:4}'.format(atm.id)
-                    for alt in sorted(atm.child_dict):
-                        alt_str += ' {} ({:4.2f})'.format(alt, atm.child_dict[alt].occupancy)
-                        self.summary['altloc'][rid][atm.id].append({
-                            'loc_label':alt,
-                            'occupancy':atm.child_dict[alt].occupancy
-                        })
-                    print(alt_str)
-        else:
+        if not alt_loc_res:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_ALTLOC_FOUND'])
+            return {}
+
+        print(cts.MSGS['ALTLOC_FOUND'].format(len(alt_loc_res)))
+
+        self.summary['altloc'] = {}
+
+        fix_data = {
+            'alt_loc_res' : alt_loc_res,
+            'alt_loc_rnums' : [],
+            'altlocs' : {}
+        }
+
+        for res in sorted(alt_loc_res, key=lambda x: x.index):
+            rid = mu.residue_id(res)
+            print(rid)
+            fix_data['alt_loc_rnums'].append(mu.residue_num(res))
+            self.summary['altloc'][rid] = {}
+            fix_data['altlocs'][res] = sorted(alt_loc_res[res][0].child_dict)
+            for atm in alt_loc_res[res]:
+                self.summary['altloc'][rid][atm.id] = []
+                alt_str = '  {:4}'.format(atm.id)
+                for alt in sorted(atm.child_dict):
+                    alt_str += ' {} ({:4.2f})'.format(alt, atm.child_dict[alt].occupancy)
+                    self.summary['altloc'][rid][atm.id].append({
+                        'loc_label':alt,
+                        'occupancy':atm.child_dict[alt].occupancy
+                    })
+                print(alt_str)
+
         return fix_data
 
     def _altloc_fix(self, select_altloc, fix_data=None):
@@ -313,17 +324,16 @@ class StructureChecking():
         [input_option, select_altloc] = input_line.run(select_altloc)
 
         if input_option == 'error':
-            print('Error: Unknown selection {} '.format(select_altloc), file=sys.stderr)
-            self.summary['altloc']['error'] = "Unknown selection " + select_altloc
-            return
+            return [cts.MSGS['UNKNOWN_ALTLOC_SELECTION'], select_altloc]
 
         print('Selecting location {}'.format(select_altloc))
         if input_option in ('occup', 'altids'):
             to_fix = {}
             for res in fix_data['alt_loc_res']:
-                to_fix[res] = {}
-                to_fix[res]['ats'] = fix_data['alt_loc_res'][res]
-                to_fix[res]['select'] = select_altloc
+                to_fix[res] = {
+                    'ats': fix_data['alt_loc_res'][res],
+                    'select' : select_altloc
+                }
         elif input_option == 'resnum':
             to_fix = {}
             selected_rnums = {}
@@ -333,41 +343,44 @@ class StructureChecking():
             for res in fix_data['alt_loc_res']:
                 rnum0 = mu.residue_num(res)
                 if rnum0 in selected_rnums:
-                    to_fix[res] = {}
-                    to_fix[res]['ats'] = fix_data['alt_loc_res'][res]
-                    to_fix[res]['select'] = selected_rnums[rnum0]
+                    to_fix[res] = {
+                        'ats' : fix_data['alt_loc_res'][res],
+                        'select' : selected_rnums[rnum0]
+                    }
 
         self.summary['altloc']['selected'] = select_altloc
         for res in to_fix:
             self.strucm.select_altloc_residue(res, to_fix[res])
-
+        return False
 # =============================================================================
     def metals(self, opts=None):
-        """ run metals command """
+        """ Run metals command """
         self._run_method('metals', opts)
 
     def _metals_check(self):
-        fix_data = {}
-
         met_list = self.strucm.get_metal_atoms()
 
-        if len(met_list) > 1:
-            fix_data['met_list'] = met_list
-            print('{} Metal ions found'.format(len(met_list)))
-            self.summary['metals'] = {'detected':[]}
-            fix_data['met_rids'] = []
-            fix_data['at_groups'] = {}
-            for atm in sorted(met_list, key=lambda x: x.serial_number):
-                print(" {:12}".format(mu.atom_id(atm)))
-                res = atm.get_parent()
-                fix_data['met_rids'].append(mu.residue_num(res))
-                if not atm.id in fix_data['at_groups']:
-                    fix_data['at_groups'][atm.id] = []
-                fix_data['at_groups'][atm.id].append(atm)
-                self.summary['metals']['detected'].append(mu.residue_num(res))
-        else:
+        if not met_list:
             if not self.args['quiet']:
-                print("No metal ions present")
+                print(cts.MSGS['NO_METALS_FOUND'])
+            return {}
+
+        print(cts.MSGS['METALS_FOUND'].format(len(met_list)))
+        self.summary['metals'] = {'detected':[]}
+        fix_data = {
+            'met_list': met_list,
+            'met_rids': [],
+            'at_groups': {}
+        }
+        for atm in sorted(met_list, key=lambda x: x.serial_number):
+            print(" {:12}".format(mu.atom_id(atm)))
+            res = atm.get_parent()
+            fix_data['met_rids'].append(mu.residue_num(res))
+            if not atm.id in fix_data['at_groups']:
+                fix_data['at_groups'][atm.id] = []
+            fix_data['at_groups'][atm.id].append(atm)
+            self.summary['metals']['detected'].append(mu.residue_num(res))
+
         return fix_data
 
     def _metals_fix(self, remove_metals, fix_data=None):
@@ -384,64 +397,63 @@ class StructureChecking():
         [input_option, remove_metals] = input_sess.run(remove_metals)
 
         if input_option == "error":
-            print('Error: unknown selection {}\n'.format(remove_metals), file=sys.stderr)
-            self.summary['metals']['error'] = 'Unknown selection ' + remove_metals
-            return
+            return [cts.MSGS['UNKNOWN_SELECTION'], remove_metals]
 
         if input_option == 'none':
             if not self.args['quiet']:
-                print("Nothing to do")
-        else:
-            if input_option == 'all':
-                to_remove = fix_data['met_list']
-            elif input_option == 'resids':
-                to_remove = []
-                rid_list = remove_metals.split(',')
-                for atm in fix_data['met_list']:
-                    res = atm.get_parent()
-                    if mu.residue_num(res) in rid_list:
-                        to_remove.append(atm)
-            elif input_option == 'atids':
-                to_remove = []
-                for atid in remove_metals.split(','):
-                    to_remove.extend(fix_data['at_groups'][atid])
+                print(cts.MSGS['DO_NOTHING'])
+            return False
 
-            self.summary['metals']['removed'] = []
+        if input_option == 'all':
+            to_remove = fix_data['met_list']
+        elif input_option == 'resids':
+            to_remove = []
+            rid_list = remove_metals.split(',')
+            for atm in fix_data['met_list']:
+                res = atm.get_parent()
+                if mu.residue_num(res) in rid_list:
+                    to_remove.append(atm)
+        elif input_option == 'atids':
+            to_remove = []
+            for atid in remove_metals.split(','):
+                to_remove.extend(fix_data['at_groups'][atid])
 
-            rmm_num = 0
-            for atm in to_remove:
-                self.summary['metals']['removed'].append(
-                    mu.residue_id(
-                        atm.get_parent(), self.strucm.has_models()
-                    )
+        self.summary['metals']['removed'] = []
+
+        rmm_num = 0
+        for atm in to_remove:
+            self.summary['metals']['removed'].append(
+                mu.residue_id(
+                    atm.get_parent(), self.strucm.has_models()
                 )
-                self.strucm.remove_residue(atm.get_parent())
-                rmm_num += 1
+            )
+            self.strucm.remove_residue(atm.get_parent())
+            rmm_num += 1
 
-            print('Metal Atoms removed {} ({:d})'.format(remove_metals, rmm_num))
-            self.summary['metals']['n_removed'] = rmm_num
-
+        print(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
+        self.summary['metals']['n_removed'] = rmm_num
+        return False
 # =============================================================================
     def remwat(self, opts=None):
         """ run remwat command """
         self._run_method('remwat', opts)
 
     def _remwat_check(self):
-        fix_data = {}
         lig_list = mu.get_ligands(self._get_structure(), incl_water=True)
         wat_list = []
         for res in lig_list:
             if mu.is_wat(res):
                 wat_list.append(res)
 
-        if wat_list:
-            fix_data['wat_list'] = wat_list
-            print('{} Water molecules detected'.format(len(wat_list)))
-            self.summary['remwat']['n_detected'] = len(wat_list)
-        else:
+        if not wat_list:
             if not self.args['quiet']:
-                print("No water molecules found")
-        return fix_data
+                print(cts.MSGS['NO_WATERS'])
+            return {}
+
+        print(cts.MSGS['WATERS_FOUND'].format(len(wat_list)))
+        self.summary['remwat']['n_detected'] = len(wat_list)
+
+        return {'wat_list': wat_list}
 
     def _remwat_fix(self, remove_wat, fix_data=None):
         input_line = ParamInput('Remove', self.args['non_interactive'])
@@ -449,49 +461,51 @@ class StructureChecking():
         [input_option, remove_wat] = input_line.run(remove_wat)
 
         if input_option == 'error':
-            print(' unknown option {}'.format(remove_wat), file=sys.stderr)
-            self.summary['remwat']['error'] = 'Unknown option'
-            return
+            return [cts.MSGS['UNKNOWN_OPTION'], remove_wat]
 
         if input_option == 'yes':
             rmw_num = 0
             for res in fix_data['wat_list']:
                 self.strucm.remove_residue(res)
                 rmw_num += 1
-            print('{} Water molecules removed'.format(rmw_num))
+            print(cts.MSGS['WATER_REMOVED'].format(rmw_num))
             self.summary['remwat']['n_removed'] = rmw_num
-
+        return False
 # =============================================================================
     def ligands(self, opts=None):
         """ run ligands command """
         self._run_method('ligands', opts)
 
     def _ligands_check(self):
-        fix_data = {}
         lig_list = mu.get_ligands(self._get_structure(), incl_water=False)
 
-        if lig_list:
-            fix_data['lig_list'] = lig_list
-            print('{} Ligands detected '.format(len(lig_list)))
-            fix_data['ligand_rids'] = set()
-            fix_data['ligand_rnums'] = []
-            self.summary['ligands'] = {'detected': []}
-
-            for res in sorted(lig_list, key=lambda x: x.index):
-                if self.strucm.has_models():
-                    if res.get_parent().get_parent().id > 0:
-                        continue
-                    print(' ' + mu.residue_id(res, False) + '/*')
-                else:
-                    print(' ' + mu.residue_id(res, False))
-                self.summary['ligands']['detected'].append(
-                    mu.residue_id(res, self.strucm.has_models())
-                )
-                fix_data['ligand_rids'].add(res.get_resname())
-                fix_data['ligand_rnums'].append(mu.residue_num(res))
-        else:
+        if not lig_list:
             if not self.args['quiet']:
-                print("No ligands found")
+                print(cts.MSGS['NO_LIGANDS_FOUND'])
+            return {}
+
+        print(cts.MSGS['LIGANDS_DETECTED'].format(len(lig_list)))
+        fix_data = {
+            'lig_list': lig_list,
+            'ligand_rids': set(),
+            'ligand_rnums': []
+        }
+        self.summary['ligands'] = {'detected': []}
+
+        for res in sorted(lig_list, key=lambda x: x.index):
+            if self.strucm.has_models():
+                if res.get_parent().get_parent().id > 0:
+                    continue
+                print(' {}/*'.format(mu.residue_id(res, False)))
+            else:
+                print(' {}'.format(mu.residue_id(res, False)))
+
+            self.summary['ligands']['detected'].append(
+                mu.residue_id(res, self.strucm.has_models())
+            )
+            fix_data['ligand_rids'].add(res.get_resname())
+            fix_data['ligand_rnums'].append(mu.residue_num(res))
+
         return fix_data
 
 # =============================================================================
@@ -500,13 +514,13 @@ class StructureChecking():
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list('byrids', sorted(fix_data['ligand_rids']), multiple=True)
-        input_line.add_option_list('byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True)
+        input_line.add_option_list(
+            'byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True
+        )
         [input_option, remove_ligands] = input_line.run(remove_ligands)
 
         if input_option == 'error':
-            print('Error: unknown selection {}'.format(remove_ligands))
-            self.summary['ligands']['error'] = 'Unknown selection'
-            return
+            return [cts.MSGS['UNKNOWN_SELECTION'], remove_ligands]
 
         self.summary['ligands']['removed'] = {'opt':remove_ligands, 'lst':[]}
 
@@ -514,48 +528,50 @@ class StructureChecking():
 
         if input_option == 'none':
             if not self.args['quiet']:
-                print("Nothing to do")
-        else:
-            if input_option == 'all':
-                to_remove = fix_data['lig_list']
-            elif input_option == 'byrids':
-                rm_lig = remove_ligands.split(',')
-                for res in fix_data['lig_list']:
-                    if res.get_resname() in rm_lig:
-                        to_remove.append(res)
-            elif input_option == 'byresnum':
-                rm_lig = remove_ligands.split(',')
-                for res in fix_data['lig_list']:
-                    if mu.residue_num(res) in rm_lig:
-                        to_remove.append(res)
-            rl_num = 0
-            for res in to_remove:
-                self.summary['ligands']['removed']['lst'].append(
-                    mu.residue_id(res, self.strucm.has_models())
-                )
-                self.strucm.remove_residue(res)
-                rl_num += 1
+                print(cts.MSGS['DO_NOTHING'])
+            return False
 
-            print('Ligands removed {} ({})'.format(remove_ligands, rl_num))
-            self.summary['ligands']['n_removed'] = rl_num
+        if input_option == 'all':
+            to_remove = fix_data['lig_list']
+        elif input_option == 'byrids':
+            rm_lig = remove_ligands.split(',')
+            for res in fix_data['lig_list']:
+                if res.get_resname() in rm_lig:
+                    to_remove.append(res)
+        elif input_option == 'byresnum':
+            rm_lig = remove_ligands.split(',')
+            for res in fix_data['lig_list']:
+                if mu.residue_num(res) in rm_lig:
+                    to_remove.append(res)
+        rl_num = 0
+        for res in to_remove:
+            self.summary['ligands']['removed']['lst'].append(
+                mu.residue_id(res, self.strucm.has_models())
+            )
+            self.strucm.remove_residue(res)
+            rl_num += 1
+
+        print(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
+        self.summary['ligands']['n_removed'] = rl_num
+        return False
 
 # =============================================================================
     def remh(self, opts=None):
-        """ run remh command """
+        """ Run remh command """
         self._run_method('remh', opts)
 
     def _remh_check(self):
-        fix_data = {}
+
         remh_list = mu.get_residues_with_H(self._get_structure())
 
-        if remh_list:
-            fix_data['remh_list'] = remh_list
-            print('{} Residues containing H atoms detected'.format(len(remh_list)))
-            self.summary['remh']['n_detected'] = len(remh_list)
-        else:
+        if not remh_list:
             if not self.args['quiet']:
-                print("No residues with Hydrogen atoms found")
-        return fix_data
+                print(cts.MSGS['NO_RESIDUES_H_FOUND'])
+            return {}
+
+        print(cts.MSGS['RESIDUES_H_FOUND'].format(len(remh_list)))
+        self.summary['remh']['n_detected'] = len(remh_list)
+        return {'remh_list': remh_list}
 
     def _remh_fix(self, remove_h, fix_data=None):
         input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
@@ -563,17 +579,17 @@ class StructureChecking():
         [input_option, remove_h] = input_line.run(remove_h)
 
         if input_option == 'error':
-            print('Warning: unknown option {}'.format(remove_h))
-            self.summary['remh']['error'] = 'Unknown option'
-            return
+            return [cts.MSGS['UNKNOWN_SELECTION'], remove_h]
+
         if input_option == 'yes':
             rmh_num = 0
             for resh in fix_data['remh_list']:
                 mu.remove_H_from_r(resh['r'])
                 rmh_num += 1
-            print('Hydrogen atoms removed from {} residues'.format(rmh_num))
+            print(cts.MSGS['REMOVED_H'].format(rmh_num))
             self.strucm.modified = True
             self.summary['remh']['n_removed'] = rmh_num
+        return False
 
 # =============================================================================
     def getss(self, opts=None):
@@ -584,30 +600,29 @@ class StructureChecking():
 
         SS_bonds = self.strucm.get_SS_bonds()
 
-        if SS_bonds:
-            print('{} Possible SS Bonds detected'.format(len(SS_bonds)))
-            self.summary['getss'] = []
-            for ssb in SS_bonds:
-                print(
-                    ' {:12} {:12} {:8.3f}'.format(
-                        mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
-                    )
-                )
-                self.summary['getss'].append(
-                    {
-                        'at1':mu.atom_id(ssb[0]),
-                        'at2':mu.atom_id(ssb[1]),
-                        'dist': round(float(ssb[2]), 4)
-                    }
-                )
-        else:
+        if not SS_bonds:
             if not self.args['quiet']:
-                print("No SS bonds detected")
-
+                print(cts.MSGS['NO_SS'])
+            return {}
+        print(cts.MSGS['POSSIBLE_SS'].format(len(SS_bonds)))
+        self.summary['getss'] = []
+        for ssb in SS_bonds:
+            print(
+                ' {:12} {:12} {:8.3f}'.format(
+                    mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
+                )
+            )
+            self.summary['getss'].append(
+                {
+                    'at1':mu.atom_id(ssb[0]),
+                    'at2':mu.atom_id(ssb[1]),
+                    'dist': round(float(ssb[2]), 4)
+                }
+            )
         return {}
 
-    def _getss_fix(self):
-        pass
+#    def _getss_fix(self):
+#        pass
 
 # =============================================================================
     def amide(self, opts=None):
@@ -615,7 +630,6 @@ class StructureChecking():
         self._run_method('amide', opts)
 
     def _amide_check(self):
-        fix_data = {}
 
         amide_atoms = self.strucm.data_library.get_amide_data()[1]
 
@@ -623,64 +637,63 @@ class StructureChecking():
 
         self.summary['amide']['n_amides'] = len(amide_list)
 
-        if amide_list:
-            c_list = self.strucm.check_r_list_clashes(
-                amide_list,
-                stm.AMIDE_CONTACT_TYPES
-            )
-            amide_res_to_fix = []
-            amide_rnums = []
-            amide_cont_list = []
-            for cls in c_list:
-                for rkey in c_list[cls]:
-                    [at1, at2] = c_list[cls][rkey][0:2]
-                    res1 = at1.get_parent()
-                    res2 = at2.get_parent()
-                    add_pair = False
-                    if at1.id in amide_atoms and res1 in amide_list:
-                        amide_res_to_fix.append(res1)
-                        amide_rnums.append(mu.residue_num(res1))
-                        add_pair = True
-                    if at2.id in amide_atoms and res2 in amide_list:
-                        amide_res_to_fix.append(res2)
-                        amide_rnums.append(mu.residue_num(res2))
-                        add_pair = True
-                    if add_pair:
-                        amide_cont_list.append(c_list[cls][rkey])
-
-            if amide_cont_list:
-                print(
-                    '{} unusual contact(s) involving amide atoms found'.format(
-                        len(amide_cont_list)
-                    )
-                )
-                self.summary['amide']['detected'] = []
-                for at_pair in sorted(amide_cont_list, key=_key_sort_atom_pairs):
-                    print(
-                        ' {:12} {:12} {:8.3f} A'.format(
-                            mu.atom_id(at_pair[0]),
-                            mu.atom_id(at_pair[1]),
-                            np.sqrt(at_pair[2])
-                        )
-                    )
-                    self.summary['amide']['detected'].append(
-                        {
-                            'at1': mu.atom_id(at_pair[0]),
-                            'at2': mu.atom_id(at_pair[1]),
-                            'dist': round(float(np.sqrt(at_pair[2])), 4)
-                        }
-                    )
-                fix_data['amide_list'] = amide_list
-                fix_data['amide_res_to_fix'] = amide_res_to_fix
-                fix_data['amide_cont_list'] = amide_cont_list
-                fix_data['amide_rnums'] = amide_rnums
-            else:
-                if not self.args['quiet']:
-                    print("No unusual contact(s) involving amide atoms found")
-        else:
+        if not amide_list:
             if not self.args['quiet']:
-                print("No amide residues found")
-        return fix_data
+                print('NO_AMIDES')
+            return {}
+
+        c_list = self.strucm.check_r_list_clashes(
+            amide_list,
+            stm.AMIDE_CONTACT_TYPES
+        )
+        amide_res_to_fix = []
+        amide_rnums = []
+        amide_cont_list = []
+        for cls in c_list:
+            for rkey in c_list[cls]:
+                [at1, at2] = c_list[cls][rkey][0:2]
+                res1 = at1.get_parent()
+                res2 = at2.get_parent()
+                add_pair = False
+                if at1.id in amide_atoms and res1 in amide_list:
+                    amide_res_to_fix.append(res1)
+                    amide_rnums.append(mu.residue_num(res1))
+                    add_pair = True
+                if at2.id in amide_atoms and res2 in amide_list:
+                    amide_res_to_fix.append(res2)
+                    amide_rnums.append(mu.residue_num(res2))
+                    add_pair = True
+                if add_pair:
+                    amide_cont_list.append(c_list[cls][rkey])
+
+        if not amide_cont_list:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_UNUSUAL_AMIDES'])
+            return {}
+
+        print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_cont_list)))
+        self.summary['amide']['detected'] = []
+        for at_pair in sorted(amide_cont_list, key=_key_sort_atom_pairs):
+            print(
+                ' {:12} {:12} {:8.3f} A'.format(
+                    mu.atom_id(at_pair[0]),
+                    mu.atom_id(at_pair[1]),
+                    np.sqrt(at_pair[2])
+                )
+            )
+            self.summary['amide']['detected'].append(
+                {
+                    'at1': mu.atom_id(at_pair[0]),
+                    'at2': mu.atom_id(at_pair[1]),
+                    'dist': round(float(np.sqrt(at_pair[2])), 4)
+                }
+            )
+        return {
+            'amide_list':  amide_list,
+            'amide_res_to_fix': amide_res_to_fix,
+            'amide_cont_list': amide_cont_list,
+            'amide_rnums': amide_rnums
+        }
 
 # =============================================================================
     def _amide_fix(self, amide_fix, fix_data=None, recheck=True, ):
@@ -690,7 +703,8 @@ class StructureChecking():
 
         fix = True
         while fix:
-            input_line = ParamInput('Fix amide atoms', self.args['non_interactive']
+            input_line = ParamInput(
+                'Fix amide atoms', self.args['non_interactive']
             )
             input_line.add_option_all()
             input_line.add_option_none()
@@ -700,39 +714,38 @@ class StructureChecking():
             [input_option, amide_fix] = input_line.run(amide_fix)
 
             if input_option == 'error':
-                print('Warning: unknown option {}'.format(amide_fix))
-                self.summary['amide']['error'] = 'Unknown option'
-                return
+                return [cts.MSGS['UNKNOWN_OPTION'], amide_fix]
 
             if input_option == 'none':
                 if not self.args['quiet']:
-                    print("Nothing to do")
-                fix = False
+                    print(cts.MSGS['DO_NOTHING'])
+                return False
+
+            if input_option == 'all':
+                to_fix = fix_data['amide_res_to_fix']
             else:
-                if input_option == 'all':
-                    to_fix = fix_data['amide_res_to_fix']
-                else:
-                    to_fix = []
-                    for res in fix_data['amide_res_to_fix']:
-                        if mu.residue_num(res) in amide_fix.split(','):
-                            to_fix.append(res)
-                fix_num = 0
-                done = []
-                for res in to_fix:
-                    if res not in done:
-                        mu.invert_side_atoms(res, amide_res)
-                        done.append(res)
-                    fix_num += 1
-                print('Amide residues fixed {} ({})'.format(amide_fix, fix_num))
-                fix = {}
-                if recheck:
-                    if not self.args['quiet']:
-                        print("Rechecking")
-                    fix = self._amide_check() #TODO reduce check to fixed residues if necessary
-                    amide_fix = ''
-                    if no_int_recheck:
-                        fix = {}
-                self.strucm.modified = True
+                to_fix = []
+                for res in fix_data['amide_res_to_fix']:
+                    if mu.residue_num(res) in amide_fix.split(','):
+                        to_fix.append(res)
+            fix_num = 0
+            done = []
+            for res in to_fix:
+                if res not in done:
+                    mu.invert_side_atoms(res, amide_res)
+                    done.append(res)
+                fix_num += 1
+            print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
+            fix = {}
+            if recheck:
+                if not self.args['quiet']:
+                    print(cts.MSGS['AMIDES_RECHECK'])
+                fix = self._amide_check() #TODO reduce check to fixed residues if necessary
+                amide_fix = ''
+                if no_int_recheck:
+                    fix = {}
+            self.strucm.modified = True
+        return False
 
 # =============================================================================
     def chiral(self, opts=None):
@@ -740,40 +753,38 @@ class StructureChecking():
         self._run_method('chiral', opts)
 
     def _chiral_check(self):
-        fix_data = {}
-
-        chiral_res = self.strucm.data_library.get_chiral_data()
 
         chiral_list = self.strucm.get_chiral_list()
 
         self.summary['chiral']['n_chirals'] = len(chiral_list)
 
-        if chiral_list:
-            chiral_res_to_fix = []
-            chiral_rnums = []
-            for res in chiral_list:
-                if not mu.check_chiral_residue(res, chiral_res):
-                    chiral_res_to_fix.append(res)
-                    chiral_rnums.append(mu.residue_num(res))
-            if chiral_res_to_fix:
-                print(
-                    '{} residues with incorrect side-chain chirality found'.format(
-                        len(chiral_res_to_fix)
-                    )
-                )
-                self.summary['chiral']['detected'] = []
-                for res in chiral_res_to_fix:
-                    print(' {:10}'.format(mu.residue_id(res)))
-                    self.summary['chiral']['detected'].append(mu.residue_id(res))
-                fix_data['chiral_res_to_fix'] = chiral_res_to_fix
-                fix_data['chiral_rnums'] = chiral_rnums
-            else:
-                if not self.args['quiet']:
-                    print("No residues with incorrect side-chain chirality found")
-        else:
+        if not chiral_list:
             if not self.args['quiet']:
-                print("No chiral side-chains found")
-        return fix_data
+                print(cts.MSGS['NO_CHIRALS'])
+            return {}
+
+        chiral_res = self.strucm.data_library.get_chiral_data()
+
+        chiral_res_to_fix = []
+        chiral_rnums = []
+
+        for res in chiral_list:
+            if not mu.check_chiral_residue(res, chiral_res):
+                chiral_res_to_fix.append(res)
+                chiral_rnums.append(mu.residue_num(res))
+
+        if not chiral_res_to_fix:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_WRONG_CHIRAL_SIDE'])
+            return {}
+
+        print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_res_to_fix)))
+        self.summary['chiral']['detected'] = []
+        for res in chiral_res_to_fix:
+            print(' {:10}'.format(mu.residue_id(res)))
+            self.summary['chiral']['detected'].append(mu.residue_id(res))
+
+        return {'chiral_res_to_fix': chiral_res_to_fix, 'chiral_rnums' : chiral_rnums}
 
     def _chiral_fix(self, chiral_fix, fix_data=None, check_clashes=True):
 
@@ -782,41 +793,43 @@ class StructureChecking():
         input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option_list('resnum', fix_data['chiral_rnums'], case='sensitive', multiple=True)
+        input_line.add_option_list(
+            'resnum', fix_data['chiral_rnums'], case='sensitive', multiple=True
+        )
         [input_option, chiral_fix] = input_line.run(chiral_fix)
 
         if input_option == 'error':
-            print('Warning: unknown option {}'.format(chiral_fix))
-            self.summary['chiral']['error'] = 'Unknown option'
-            return
+            return [cts.MSGS['UNKNOWN_OPTION'], chiral_fix]
 
         if input_option == 'none':
             if not self.args['quiet']:
-                print("Nothing to do")
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+
+        if input_option == 'all':
+            to_fix = fix_data['chiral_res_to_fix']
         else:
-            if input_option == 'all':
-                to_fix = fix_data['chiral_res_to_fix']
-            else:
-                to_fix = []
-                for res in fix_data['chiral_res_to_fix']:
-                    if mu.residue_num(res) in chiral_fix.split(','):
-                        to_fix.append(res)
-            fix_num = 0
-            for res in to_fix:
-                mu.invert_side_atoms(res, chiral_res)
-                if res.get_resname() == 'ILE':
-                    mu.delete_atom(res, 'CD1')
-                    mu.build_atom(res, 'CD1', self.strucm.res_library, 'ILE')
-                fix_num += 1
-            print('Quiral residues fixed {} ({})'.format(chiral_fix, fix_num))
+            to_fix = []
+            for res in fix_data['chiral_res_to_fix']:
+                if mu.residue_num(res) in chiral_fix.split(','):
+                    to_fix.append(res)
+        fix_num = 0
+        for res in to_fix:
+            mu.invert_side_atoms(res, chiral_res)
+            if res.get_resname() == 'ILE':
+                mu.delete_atom(res, 'CD1')
+                mu.build_atom(res, 'CD1', self.strucm.res_library, 'ILE')
+            fix_num += 1
+        print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
-            if check_clashes:
-                if not self.args['quiet']:
-                    print("Checking for steric clashes")
+        if check_clashes:
+            if not self.args['quiet']:
+                print(cts.MSGS['CHECKING_CLASHES'])
 
-                self.summary['chiral_clashes'] = self._check_report_clashes(to_fix)
+            self.summary['chiral_clashes'] = self._check_report_clashes(to_fix)
 
-            self.strucm.modified = True
+        self.strucm.modified = True
+        return False
 
 # =============================================================================
     def chiral_bck(self, opts=None):
@@ -824,7 +837,6 @@ class StructureChecking():
         self._run_method('chiral_bck', opts)
 
     def _chiral_bck_check(self):
-        fix_data = {}
 
         chiral_bck_list = self.strucm.get_chiral_bck_list()
 
@@ -837,32 +849,33 @@ class StructureChecking():
                 if not mu.check_chiral_ca(res):
                     chiral_bck_res_to_fix.append(res)
                     chiral_bck_rnums.append(mu.residue_num(res))
-            if chiral_bck_res_to_fix:
-                print(
-                    '{} residues with incorrect backbone chirality found'.format(
-                        len(chiral_bck_res_to_fix)
-                    )
-                )
-                self.summary['chiral_bck']['detected'] = []
-                for res in chiral_bck_res_to_fix:
-                    print(' {:10}'.format(mu.residue_id(res)))
-                    self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
-                fix_data['chiral_bck_res_to_fix'] = chiral_bck_res_to_fix
-                fix_data['chiral_bck_rnums'] = chiral_bck_rnums
-            else:
+
+            if not chiral_bck_res_to_fix:
                 if not self.args['quiet']:
-                    print("No residues with incorrect backbone chirality found")
+                    print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
+                return {}
 
-        return fix_data
+            print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(chiral_bck_res_to_fix)))
+            self.summary['chiral_bck']['detected'] = []
+            for res in chiral_bck_res_to_fix:
+                print(' {:10}'.format(mu.residue_id(res)))
+                self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
+            return {
+                'chiral_bck_res_to_fix': chiral_bck_res_to_fix,
+                'chiral_bck_rnums': chiral_bck_rnums
+            }
+        
+        return {}
 
-    def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
-        return
+#    def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
+#        return False
 #TODO chiral_bck_fix
 #        input_line = ParamInput('Fix CA chiralities', self.args['non_interactive'])
 #        input_line.add_option_all()
 #        input_line.add_option_none()
-#        input_line.add_option_list('resnum', self.chiral_bck_rnums, case='sensitive', multiple=True)
+#        input_line.add_option_list('resnum', self.chiral_bck_rnums, 
+#            case='sensitive', multiple=True)
 #        [input_option, chiral_fix] = input_line.run(chiral_fix)
 #        if input_option == 'error':
 #            print('Warning: unknown option {}'.format(amide_fix))
@@ -932,164 +945,164 @@ class StructureChecking():
 
         return False
 
-    def _clashes_fix(self, res_to_fix, fix_data=None):
-        pass
+#    def _clashes_fix(self, res_to_fix, fix_data=None):
+#        pass
 # =============================================================================
     def fixside(self, opts=None):
         """ run fixside command """
         self._run_method('fixside', opts)
 
     def _fixside_check(self):
-        fix_data = {}
-
         miss_at_list = self.strucm.get_missing_atoms('side')
 
-        if miss_at_list:
-            fix_data['miss_at_list'] = miss_at_list
-            fix_data['fixside_rnums'] = []
-            self.summary['fixside']['detected'] = {}
-            print(
-                '{} Residues with missing side chain atoms found'.format(
-                    len(miss_at_list)
-                )
-            )
-            for r_at in miss_at_list:
-                [res, at_list] = r_at
-                print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-                fix_data['fixside_rnums'].append(mu.residue_num(res))
-                self.summary['fixside']['detected'][mu.residue_id(res)] = at_list
-        else:
+        if not miss_at_list:
             if not self.args['quiet']:
                 print("No residues with missing side chain atoms found")
+            return {}
+
+        fix_data = {
+            'miss_at_list': miss_at_list,
+            'fixside_rnums': []
+        }
+
+        self.summary['fixside']['detected'] = {}
+        print(cts.MSGS['MISSING_SIDE_ATOMS'].format(len(miss_at_list)))
+        for r_at in miss_at_list:
+            [res, at_list] = r_at
+            print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+            fix_data['fixside_rnums'].append(mu.residue_num(res))
+            self.summary['fixside']['detected'][mu.residue_id(res)] = at_list
+
         return fix_data
 
     def _fixside_fix(self, fix_side, fix_data=None, check_clashes=True):
         input_line = ParamInput('fixside', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option_list('resnum', fix_data['fixside_rnums'], case='sensitive', multiple=True)
+        input_line.add_option_list(
+            'resnum', fix_data['fixside_rnums'], case='sensitive', multiple=True
+        )
         [input_option, fix_side] = input_line.run(fix_side)
 
         if input_option == 'error':
-            print("Invalid option", fix_side)
-            self.summary['fix_side']['error'] = "Unknown option"
-            return
+            return [cts.MSGS['INVALID_OPTION'], fix_side]
 
         self.summary['fixside']['selected'] = fix_side
 
         if input_option == 'none':
             if not self.args['quiet']:
-                print('Nothing to do')
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+
+        if input_option == 'all':
+            to_fix = fix_data['miss_at_list']
         else:
-            if input_option == 'all':
-                to_fix = fix_data['miss_at_list']
-            else:
-                to_fix = []
-                for r_at in fix_data['miss_at_list']:
-                    if mu.residue_num(r_at[0]) in fix_side.split(','):
-                        to_fix.append(r_at)
-            if not self.args['quiet']:
-                print("Fixing side chains")
-            fix_num = 0
-            self.summary['fixside']['fixed'] = []
-            fixed_res = []
-            for r_at in to_fix:
-                mu.remove_H_from_r(r_at[0], verbose=True)
-                self.strucm.fix_side_chain(r_at)
-                fix_num += 1
-                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
-                fixed_res.append(r_at[0])
+            to_fix = []
+            for r_at in fix_data['miss_at_list']:
+                if mu.residue_num(r_at[0]) in fix_side.split(','):
+                    to_fix.append(r_at)
 
-            print('Fixed {} side chain(s)'.format(fix_num))
-            # Checking new clashes
-            if check_clashes:
-                print("Checking possible new clashes")
+        if not self.args['quiet']:
+            print(cts.MSGS['FIXING_SIDE_CHAINS'])
 
-                self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
+        fix_num = 0
+        self.summary['fixside']['fixed'] = []
+        fixed_res = []
+        for r_at in to_fix:
+            mu.remove_H_from_r(r_at[0], verbose=True)
+            self.strucm.fix_side_chain(r_at)
+            fix_num += 1
+            self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
+            fixed_res.append(r_at[0])
+
+        print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
+        # Checking new clashes
+        if check_clashes:
+            print(cts.MSGS['CHECKING_CLASHES'])
+
+            self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
+        return False
 # =============================================================================
     def addH(self, opts=None):
         """ run addH command """
         self._run_method('addH', opts)
 
     def _addH_check(self):
-        fix_data = {}
 
         ion_res_list = self.strucm.get_ion_res_list()
 
-        if ion_res_list:
-            fix_data['ion_res_list'] = ion_res_list
-            fix_data['add_h_rnums'] = []
-            self.summary['addH']['detected'] = {}
-            print(
-                '{} Residues requiring selection on adding H atoms'.format(
-                    len(ion_res_list)
-                )
-            )
-            for r_at in ion_res_list:
-                [res, at_list] = r_at
-                #print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-                fix_data['add_h_rnums'].append(mu.residue_num(res))
-                self.summary['addH']['detected'][mu.residue_id(res)] = at_list
-        else:
+        if not ion_res_list:
             if not self.args['quiet']:
-                print("No residues requiring selection on adding H atoms")
+                print(cts.MSGS['NO_SELECT_ADDH'])
+            return {'ion_res_list':[]}
+
+        fix_data = {
+            'ion_res_list': ion_res_list,
+            'add_h_rnums' : []
+        }
+        self.summary['addH']['detected'] = {}
+        print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
+        for r_at in ion_res_list:
+            [res, at_list] = r_at
+            #print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+            fix_data['add_h_rnums'].append(mu.residue_num(res))
+            self.summary['addH']['detected'][mu.residue_id(res)] = at_list
         return fix_data
 
     def _addH_fix(self, mode, fix_data=None):
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_list('auto', ['auto'], case="lower")
-        input_line.add_option_list('inter', ['interactive'], case="lower")
-        input_line.add_option_list('inter_His', ['interactive_his'], case="lower")
         input_line.add_option_list('ph', ['pH'])
+        if fix_data['ion_res_list']:
+            input_line.add_option_list('inter', ['interactive'], case="lower")
+            input_line.add_option_list('inter_His', ['interactive_his'], case="lower")
         #input_line.add_option('resnum', sorted(self.add_h_rnums), case='sensitive', multiple=True)
         [input_option, add_h_mode] = input_line.run(mode)
 
         if input_option == 'error':
-            print("Invalid option", add_h_mode)
-            self.summary['addH']['error'] = "Unknown option"
-            return
+            return [cts.MSGS['INVALID_OPTION'], add_h_mode]
+
         if input_option == "none":
             if not self.args['quiet']:
-                print('Nothing to do')
-        else:
-            to_fix = []
-            std_ion = self.strucm.data_library.get_ion_data()
-            if input_option == 'auto':
-                if not self.args['quiet']:
-                    print('Selection: auto')
-                for r_at in fix_data['ion_res_list']:
-                    to_fix.append([r_at[0], std_ion[r_at[0].get_resname()]['std']])
-            elif input_option == 'ph':
-                ph_value = None
-                input_line = ParamInput("pH Value", self.args['non_interactive'])
-                input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
-                [input_option, ph_value] = input_line.run(ph_value)
-                if not self.args['quiet']:
-                    print('Selection: pH', ph_value)
-                for r_at in fix_data['ion_res_list']:
-                    res = r_at[0]
-                    rcode = res.get_resname()
-                    if ph_value <= std_ion[rcode]['pK']:
-                        to_fix.append([res, std_ion[rcode]['lowpH']])
-                    else:
-                        to_fix.append([res, std_ion[rcode]['highpH']])
-            elif input_option == 'interactive':
-                if not self.args['quiet']:
-                    print('Selection: interactive')
-                #TODO
-            elif input_option == 'interactive_His':
-                if not self.args['quiet']:
-                    print('Selection: interactive-his')
-                #TODO
-            else:
-                print("Not Valid")
-                return
-            self.strucm.add_hydrogens(to_fix)
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+
+        to_fix = []
+        std_ion = self.strucm.data_library.get_ion_data()
+        if input_option == 'auto':
+            if not self.args['quiet']:
+                print('Selection: auto')
+            for r_at in fix_data['ion_res_list']:
+                to_fix.append([r_at[0], std_ion[r_at[0].get_resname()]['std']])
+        elif input_option == 'ph':
+            ph_value = None
+            input_line = ParamInput("pH Value", self.args['non_interactive'])
+            input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
+            [input_option, ph_value] = input_line.run(ph_value)
+            if not self.args['quiet']:
+                print('Selection: pH', ph_value)
+            for r_at in fix_data['ion_res_list']:
+                res = r_at[0]
+                rcode = res.get_resname()
+                if ph_value <= std_ion[rcode]['pK']:
+                    to_fix.append([res, std_ion[rcode]['lowpH']])
+                else:
+                    to_fix.append([res, std_ion[rcode]['highpH']])
+        elif input_option == 'interactive':
+            if not self.args['quiet']:
+                print('Selection: interactive')
+            #TODO
+        elif input_option == 'interactive_His':
+            if not self.args['quiet']:
+                print('Selection: interactive-his')
+            #TODO
+        self.strucm.add_hydrogens(to_fix)
+        return False
 
 # =============================================================================
     def mutateside(self, mut_list):
-        """ run mutateside command """
+        """ Run mutateside command """
         self._run_method('mutateside', mut_list)
 
     def _mutateside_check(self):
@@ -1101,7 +1114,7 @@ class StructureChecking():
 
         mutations = self.strucm.prepare_mutations(mut_list)
 
-        print('Mutations to perform')
+        print(cts.MSGS['MUTATIONS_TO_DO'])
         for mut in mutations.mutation_list:
             print(mut)
 
@@ -1109,30 +1122,26 @@ class StructureChecking():
 
         if check_clashes:
             if not self.args['quiet']:
-                print("Checking new clashes")
+                print(cts.MSGS['CHECKING_CLASHES'])
 
             self.summary['mutateside_clashes'] = self._check_report_clashes(mutated_res)
 
         self.strucm.modified = True
+        return False
 #===============================================================================
     def backbone(self, opts):
-        """ run backbone command """
+        """ Run backbone command """
         self._run_method('backbone', opts)
 
     def _backbone_check(self):
         fix_data = {}
-        #backbone_atoms = self.strucm.data_library.get_all_atom_lists()['GLY']['backbone']
         # Residues with missing backbone
         miss_bck_at_list = self.strucm.get_missing_atoms('backbone')
         if miss_bck_at_list:
             fix_data['miss_bck_at_list'] = miss_bck_at_list
             self.summary['backbone']['missing_atoms'] = {}
             fix_data['fixbck_rnums'] = []
-            print(
-                '{} Residues with missing backbone atoms found'.format(
-                    len(miss_bck_at_list)
-                )
-            )
+            print(cts.MSGS['BCK_MISSING_RESIDUES'].format(len(miss_bck_at_list)))
             for r_at in miss_bck_at_list:
                 [res, at_list] = r_at
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
@@ -1142,7 +1151,7 @@ class StructureChecking():
         #Not bound consecutive residues
         self.strucm.get_backbone_breaks()
         if self.strucm.bck_breaks_list:
-            print("{} Backbone breaks found".format(len(self.strucm.bck_breaks_list)))
+            print(cts.MSGS['BACKBONE_BREAKS'].format(len(self.strucm.bck_breaks_list)))
             self.summary['backbone']['breaks'] = []
             for brk in self.strucm.bck_breaks_list:
                 print(
@@ -1156,7 +1165,7 @@ class StructureChecking():
                 ])
             fix_data['bck_breaks_list'] = True
         if self.strucm.wrong_link_list:
-            print("Unexpected backbone links found")
+            print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
             self.summary['backbone']['wrong_links'] = []
             for brk in self.strucm.wrong_link_list:
                 print(
@@ -1174,7 +1183,7 @@ class StructureChecking():
             fix_data['wrong_link_list'] = True
 
         if self.strucm.not_link_seq_list:
-            print("Consecutive residues too far away to be covalently linked")
+            print(cts.MSGS['CONSEC_RES_FAR'])
             self.summary['backbone']['long_links'] = []
             for brk in self.strucm.not_link_seq_list:
                 print(
@@ -1192,7 +1201,7 @@ class StructureChecking():
             fix_data['not_link_seq_list'] = True
         #TODO move this section to ligands
         if self.strucm.modified_residue_list:
-            print("Modified residues found")
+            print(cts.MSGS['MODIF_RESIDUES'])
             self.summary['backbone']['mod_residues'] = []
             for brk in self.strucm.modified_residue_list:
                 print(" {:10} ".format(mu.residue_id(brk)))
@@ -1203,59 +1212,62 @@ class StructureChecking():
 
     def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True):
         if 'miss_bck_at_list' not in fix_data:
-            return
+            return False
         input_line = ParamInput('fixbck', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
-        input_line.add_option_list('resnum', fix_data['fixbck_rnums'], case='sensitive', multiple=True)
+        input_line.add_option_list(
+            'resnum', fix_data['fixbck_rnums'], case='sensitive', multiple=True
+        )
         [input_option, fix_back] = input_line.run(fix_back)
 
         if input_option == 'error':
-            print("Invalid option", fix_back)
-            self.summary['backbone']['missing_atoms']['error'] = "Unknown option"
-            return
+            return [cts.MSGS['INVALID_OPTION'], fix_back]
 
         self.summary['backbone']['missing_atoms']['selected'] = fix_back
 
         if input_option == 'none':
             if not self.args['quiet']:
-                print('Nothing to do')
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+        if input_option == 'all':
+            to_fix = fix_data['miss_bck_at_list']
         else:
-            if input_option == 'all':
-                to_fix = fix_data['miss_bck_at_list']
-            else:
-                to_fix = []
-                for r_at in fix_data['miss_bck_at_list']:
-                    if mu.residue_num(r_at[0]) in fix_back.split(','):
-                        to_fix.append(r_at)
-            if not self.args['quiet']:
-                print("Adding missing backbone atoms")
-            fix_num = 0
-            self.summary['backbone']['missing_atoms']['fixed'] = []
-            fixed_res = []
-            for r_at in to_fix:
-                if self.strucm.fix_backbone_atoms(r_at):
-                    fix_num += 1
-                self.summary['backbone']['missing_atoms']['fixed'].append(mu.residue_id(r_at[0]))
-                fixed_res.append(r_at[0])
+            to_fix = []
+            for r_at in fix_data['miss_bck_at_list']:
+                if mu.residue_num(r_at[0]) in fix_back.split(','):
+                    to_fix.append(r_at)
+        if not self.args['quiet']:
+            print(cts.MSGS['ADDING_BCK_ATOMS'])
+        fix_num = 0
+        self.summary['backbone']['missing_atoms']['fixed'] = []
+        fixed_res = []
+        for r_at in to_fix:
+            if self.strucm.fix_backbone_atoms(r_at):
+                fix_num += 1
+            self.summary['backbone']['missing_atoms']['fixed'].append(
+                mu.residue_id(r_at[0])
+            )
+            fixed_res.append(r_at[0])
 
-            print('Fixed {} backbone atom(s)'.format(fix_num))
-            # Checking new clashes
-            if check_clashes:
-                print("Checking possible new clashes")
-                self.summary['backbone']['missing_atoms']['clashes'] = self._check_report_clashes(fixed_res)
+        print(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
+        # Checking new clashes
+        if check_clashes:
+            print(cts.MSGS['CHECKING_CLASHES'])
+            self.summary['backbone']['missing_atoms']['clashes'] = self._check_report_clashes(fixed_res)
 
         #TODO Chain fix
+        return False
 #===============================================================================
     def cistransbck(self, opts):
-        """ run cistransbck command """
+        """ Run cistransbck command """
         self._run_method('cistransbck', opts)
 
     def _cistransbck_check(self):
         (cis_backbone_list, lowtrans_backbone_list) = self.strucm.check_cis_backbone()
         if cis_backbone_list:
             self.summary['cistransbck']['cis'] = []
-            print('{} cis peptide bonds'.format(len(cis_backbone_list)))
+            print(cts.MSGS['CIS_BONDS'].format(len(cis_backbone_list)))
             for lnk in cis_backbone_list:
                 [res1, res2, dih] = lnk
                 print(
@@ -1272,15 +1284,11 @@ class StructureChecking():
                 ])
         else:
             if not self.args['quiet']:
-                print("No cis peptide bonds found")
+                print(cts.MSGS['NO_CIS_BONDS'])
 
         if lowtrans_backbone_list:
             self.summary['cistransbck']['unusual_trans'] = []
-            print(
-                '{} trans peptide bonds with unusual omega dihedrals'.format(
-                    len(lowtrans_backbone_list)
-                )
-            )
+            print(cts.MSGS['LOWTRANS_BONDS'].format(len(lowtrans_backbone_list)))
             for lnk in lowtrans_backbone_list:
                 [res1, res2, dih] = lnk
                 print(
@@ -1293,11 +1301,12 @@ class StructureChecking():
                 ])
         else:
             if not self.args['quiet']:
-                print("No trans peptide bonds with unusual omega dihedrals found")
+                print(cts.MSGS['NO_LOWTRANS_BONDS'])
+
         return {}
 
-    def _cistransbck_fix(self, option):
-        pass
+#    def _cistransbck_fix(self, option):
+#        pass
 #===============================================================================
     def _load_structure(self, verbose=True, print_stats=True):
         if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
@@ -1314,7 +1323,7 @@ class StructureChecking():
         )
 
         if verbose:
-            print('Structure {} loaded'.format(self.args['input_structure_path']))
+            print(cts.MSGS['STRUCTURE_LOADED'].format(self.args['input_structure_path']))
             strucm.print_headers()
             print()
             self.summary['headers'] = strucm.meta
@@ -1348,7 +1357,7 @@ class StructureChecking():
         for cls in contact_types:
             summary[cls] = []
             if clash_list[cls]:
-                print('{} Steric {} clashes detected'.format(len(clash_list[cls]), cls))
+                print(cts.MSGS['CLASHES_DETECTED'].format(len(clash_list[cls]), cls))
                 for rkey in sorted(
                         clash_list[cls],
                         key=lambda x: _key_sort_atom_pairs(clash_list[cls][x])):
@@ -1366,7 +1375,7 @@ class StructureChecking():
                     })
             else:
                 if not self.args['quiet']:
-                    print('No {} clashes detected'.format(cls))
+                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 
 #===============================================================================
