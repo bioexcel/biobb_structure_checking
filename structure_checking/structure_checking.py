@@ -9,43 +9,14 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import numpy as np
 
+import structure_checking.constants as cts
+
 from structure_checking.json_writer import JSONWriter
-from structure_checking.param_input import Dialog, ParamInput
+from structure_checking.param_input import ParamInput
+
 import structure_manager.structure_manager as stm
 import structure_manager.model_utils as mu
 
-# Interactive DIALOGS to complete command_line missing parameters
-DIALOGS = Dialog()
-
-#DIALOGS.add_option(command, prompt, destinmore ation, help_text, type(str))
-DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
-DIALOGS.add_option('models', '--select_model', 'select_model', \
-    'Select model to keep', int)
-DIALOGS.add_option('chains', '--select_chains', 'select_chains',\
-    'Chains (All | Chain list comma separated)')
-DIALOGS.add_option('altloc', '--select_altloc', 'select_altloc', \
-    'Select altloc occupancy|alt_id')
-DIALOGS.add_option('metals', '--remove', 'remove_metals', 'Remove Metal ions')
-DIALOGS.add_option('remwat', '--remove', 'remove_wat', 'Remove Water molecules')
-DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
-DIALOGS.add_option('remh', '--remove', 'remove_h', 'Remove Hydrogen atoms')
-DIALOGS.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
-DIALOGS.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
-DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
-DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
-DIALOGS.add_option('fixside', '--fix', 'fix_side',\
-    'Add missing atoms to side chains (All | None | List)')
-DIALOGS.add_option('backbone', '--fix', 'fix_back',\
-    'Add missing O atoms to backbone (All | None | List)')
-DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
-    'Mutate side chains (Mutation List as [*:]arg234Thr)')
-DIALOGS.add_option('addH', '--mode', 'mode',\
-    'Selection mode (None | auto | interactive | interactive_his | ph )')
-
-AVAILABLE_METHODS = [
-    'models', 'chains', 'inscodes', 'altloc', 'remh', 'addH', 'remwat', 'metals', 'ligands',
-    'getss', 'amide', 'chiral', 'chiral_bck', 'fixside', 'backbone', 'cistransbck',
-    'clashes']
 
 # Main class
 class StructureChecking():
@@ -81,26 +52,26 @@ class StructureChecking():
         if not self.args['check_only']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
-                    print('Structure not modified, saving due to --force_save option')
+                    print(cts.MSGS['FORCE_SAVE_STRUCTURE'])
                 self._save_structure()
                 self.strucm.calc_stats()
-                print('Structure saved on {}'.format(self.args['output_structure_path']))
+                print(cts.MSGS['STRUCTURE_SAVED'], self.args['output_structure_path'])
                 self.strucm.print_stats('Final')
                 self.summary['final_stats'] = self.strucm.get_stats()
             elif not self.strucm.modified:
-                print('Structure not modified, not saving. Override with --force_save')
+                print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
 
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             for k in self.summary:
                 json_writer.set(k, self.summary[k])
             json_writer.save(self.args['json_output_path'])
-            print('Summary data saved on {}'.format(self.args['json_output_path']))
+            print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
 
     def command_list(self, opts):
-        """manages command_list worlflows"""
-        opts = DIALOGS.get_parameter('command_list', opts)
-        op_list = opts[DIALOGS.get_dialog('command_list')['dest']]
+        """ Manages command_list workflows"""        
+        opts = cts.DIALOGS.get_parameter('command_list', opts)
+        op_list = opts[cts.DIALOGS.get_dialog('command_list')['dest']]
 
         op_list = ParamInput('Command List File', op_list, False).run()
 
@@ -108,7 +79,7 @@ class StructureChecking():
             list_file_h = open(op_list, "r")
 
         except OSError:
-            print('Error when opening file {}'.format(op_list))
+            print(cts.MSGS['ERROR_OPEN_FILE'], op_list)
             sys.exit(1)
 
         i = 1
@@ -123,21 +94,21 @@ class StructureChecking():
             self._run_method(command, opts)
             i += 1
 
-        print("Command list completed")
+        print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
     def checkall(self, opts):
-        """Predefined workflow for complete checking"""
+        """ Predefined workflow for complete checking"""
         self.args['check_only'] = True
 
-        for meth in AVAILABLE_METHODS:
+        for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
 
     def _run_method(self, command, opts):
-        """run check and fix methods for specific command"""
+        """ Run check and fix methods for specific command"""
         try:
             f_check = getattr(self, '_' + command + '_check')
         except AttributeError:
-            print('Error: {} command unknown or not implemented'.format(command))
+            print(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
             sys.exit(1)
 
         if not command in self.summary:
@@ -152,24 +123,26 @@ class StructureChecking():
         if not self.args['quiet']:
             print(msg)
     #Running checking method
-        fix_data = f_check()
+        data_to_fix = f_check()
     #Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
-                print('Running  check_only. Nothing else to do.')
-        elif fix_data:
+                print(cts.MSGS['CHECK_ONLY_DONE'])
+        
+        elif data_to_fix:
             try:
                 f_fix = getattr(self, '_' + command + '_fix')
             except AttributeError:
-                print('Error: {}_fix command unknown or not implemented'.format(command))
+                print(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
                 sys.exit(1)
+
             if not self.args['Notebook']:
-                if DIALOGS.exists(command):
-                    opts = DIALOGS.get_parameter(command, opts)
-                    opts = opts[DIALOGS.get_dialog(command)['dest']]
+                if cts.DIALOGS.exists(command):
+                    opts = cts.DIALOGS.get_parameter(command, opts)
+                    opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
                 else:
                     opts = ''
-            f_fix(opts, fix_data)
+            f_fix(opts, data_to_fix)
 
 # ==============================================================================q
     def models(self, opts=None):
@@ -178,7 +151,7 @@ class StructureChecking():
 
     def _models_check(self):
         fix_data = False
-        print('{} Model(s) detected'.format(self.strucm.nmodels))
+        print(cts.MSGS['MODELS_FOUND'].format(self.strucm.nmodels))
         self.summary['models'] = {'nmodels': self.strucm.nmodels}
         if self.strucm.nmodels > 1:
             self.summary['models']['type'] = self.strucm.models_type
@@ -186,7 +159,7 @@ class StructureChecking():
             if self.strucm.models_type['type'] == mu.BUNIT:
                 supimp = 'do not'
             print(
-                'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} '.format(
+                cts.MSGS['MODELS_GUESS'].format(
                     supimp,
                     self.strucm.models_type['rmsd'],
                     mu.MODEL_TYPE_LABELS[self.strucm.models_type['type']]
@@ -194,9 +167,11 @@ class StructureChecking():
             )
 
             fix_data = True
+            
         else:
             if not self.args['quiet']:
-                print("Single model found")
+                print(cts.MSGS['SINGLE_MODEL'])
+                
         return fix_data
 
     def _models_fix(self, select_model, fix_data=None):
@@ -206,11 +181,13 @@ class StructureChecking():
         [input_option, select_model] = input_line.run()
 
         if input_option == 'error':
-            print('Error: unknown model {}'.format(select_model), file=sys.stderr)
-            self.summary['models']['error'] = 'Unknown model ' + select_model
+            msg = cts.MSGS['UNKNOWN_MODEL'] + ' ' + select_model
+            print(msg, file=sys.stderr)
+            self.summary['models']['error'] = msg
             return
 
-        print('Selecting model num. {}'.format(select_model))
+        print(cts.MSGS['SELECT_MODEL'], select_model)
+        
         if input_option != 'all':
             self.strucm.select_model(select_model)
 
@@ -218,15 +195,15 @@ class StructureChecking():
 
 # =============================================================================
     def chains(self, opts=None):
-        """ run chains command """
+        """ Run chains command """
         self._run_method('chains', opts)
 
     def _chains_check(self):
-        print('{} Chain(s) detected'.format(len(self.strucm.chain_ids)))
+        print(cts.MSGS['CHAINS_DETECTED'].format(len(self.strucm.chain_ids)))
         for ch_id in sorted(self.strucm.chain_ids):
             if isinstance(self.strucm.chain_ids[ch_id], list):
                 print(
-                    ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} RNA: {s[2]:4.2f} Other: {s[3]:4.2f})'.format(
+                    cts.MSGS['UNKNOWN_CHAINS'].format(
                         ch_id, s=self.strucm.chain_ids[ch_id]
                     )
                 )
@@ -243,34 +220,36 @@ class StructureChecking():
         [input_option, select_chains] = input_line.run()
 
         if input_option == 'error':
-            print('Error unknown selection: {}'.format(select_chains))
-            self.summary['chains']['error'] = 'Unknown selection ' + select_chains
+            msg = 'SELECTION NOT VALID ' + select_chains
+            print(msg)
+            self.summary['chains']['error'] = msg
             return
 
         if input_option == 'all':
-            print('Selecting all chains')
+            print(cts.MSGS['SELECT_ALL_CHAINS'])
         else:
             self.strucm.select_chains(select_chains)
-            print('Selecting chain(s) {}'.format(select_chains))
+            print(cts.MSGS['SELECT_CHAINS'], select_chains)
             self.strucm.set_chain_ids()
             self.summary['chains']['selected'] = self.strucm.chain_ids
 
 # =============================================================================
     def inscodes(self, opts=None):
-        """ run inscodes command """
+        """ Run inscodes command """
         self._run_method('inscodes', opts)
 
     def _inscodes_check(self):
         self.strucm.get_ins_codes()
         if self.strucm.ins_codes_list:
-            print('{} Residues with insertion codes found'.format(len(self.strucm.ins_codes_list)))
+            print(cts.MSGS['INSCODES_FOUND'].format(len(self.strucm.ins_codes_list)))
             self.summary['inscodes'] = []
             for res in self.strucm.ins_codes_list:
                 print(mu.residue_id(res))
                 self.summary['inscodes'].append(mu.residue_id(res))
         else:
             if not self.args['quiet']:
-                print("No residues with insertion codes found")
+                print(cts.MSGS['NO_INSCODES_FOUND'])
+                
         return {}
 
     def _inscodes_fix(self, select_codes, fix_data=None):
@@ -285,15 +264,11 @@ class StructureChecking():
         alt_loc_res = mu.get_altloc_residues(self._get_structure())
         if alt_loc_res:
             fix_data['alt_loc_res'] = alt_loc_res
-            print(
-                'Detected {} residues with alternative location labels'.format(
-                    len(alt_loc_res)
-                )
-            )
-
+            print(cts.MSGS['ALTLOC_FOUND'].format(len(alt_loc_res)))
             self.summary['altloc'] = {}
             fix_data['alt_loc_rnums'] = []
             fix_data['altlocs'] = {}
+            
             for res in sorted(alt_loc_res, key=lambda x: x.index):
                 rid = mu.residue_id(res)
                 print(rid)
@@ -312,7 +287,7 @@ class StructureChecking():
                     print(alt_str)
         else:
             if not self.args['quiet']:
-                print("No residues with alternative location labels detected")
+                print(cts.MSGS['NO_ALTLOC_FOUND'])
         return fix_data
 
     def _altloc_fix(self, select_altloc, fix_data=None):
