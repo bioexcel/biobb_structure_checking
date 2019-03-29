@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
@@ -62,12 +63,12 @@ Selecting location occupancy
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
-No metal ions present
+No metal ions found
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
-4 Ligands detected 
+4 Ligands detected
  SO4 A4
  AC2 A1
  SO4 B3
@@ -122,7 +123,7 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
-Fixing side chains
+"Fixing side chains"
 MET A46
   Adding new atom CG
   Adding new atom SD
@@ -148,7 +149,7 @@ ARG B220
   Adding new atom NH1
   Adding new atom NH2
 Fixed 6 side chain(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 4 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
@@ -203,7 +204,7 @@ SER B263
 ALA B375
   Warning: not enough backbone to reconstruct missing atoms
 Fixed 0 backbone atom(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected

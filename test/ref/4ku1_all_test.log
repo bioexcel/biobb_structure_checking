@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Structure pdb:4ku1 loaded
  PDB id: 4KU1
@@ -112,12 +113,12 @@ Selecting location occupancy
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
-No metal ions present
+No metal ions found
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
-20 Ligands detected 
+20 Ligands detected
  NAG A501
  NAG A502
  BMA A503
@@ -138,8 +139,7 @@ Running ligands. Options: --remove SO4
  MAN B507
  FUL B508
  NAG B509
-Input not valid
-Error: unknown selection SO4
+Input not valid (SO4)
 
 Step 7: remwat --remove Yes
 
@@ -184,7 +184,7 @@ LEU A443
 SER B444
   Adding new atom OXT
 Fixed 2 backbone atom(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected

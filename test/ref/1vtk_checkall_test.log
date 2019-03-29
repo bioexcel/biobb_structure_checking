@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
  Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
@@ -49,10 +50,10 @@ Running remwat.
 104 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected 
+4 Ligands detected
  ADP A400/*
  TMP A500/*
 Running  check_only. Nothing else to do.

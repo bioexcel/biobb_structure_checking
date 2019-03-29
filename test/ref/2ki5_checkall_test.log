@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Structure pdb:2ki5.1 loaded
  Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
@@ -58,10 +59,10 @@ Running remwat.
 292 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected 
+4 Ligands detected
  SO4 A4
  AC2 A1
  SO4 B3

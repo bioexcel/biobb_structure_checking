@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Structure pdb:1ldn.1 loaded
  Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
@@ -100,10 +101,10 @@ Running remwat.
 287 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.
-No metal ions present
+No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-10 Ligands detected 
+10 Ligands detected
  FBP A353
  OXM A351
  NAD A352
@@ -149,10 +150,6 @@ Running backbone.
  THR B330   OXT
  THR C330   OXT
  THR D330   OXT
-Unexpected backbone links found
- LEU B153   linked to HOH B384  , expected PRO B154   
-Modified residues found
- HOH A354   
 Running  check_only. Nothing else to do.
 Running cistransbck.
 4 cis peptide bonds

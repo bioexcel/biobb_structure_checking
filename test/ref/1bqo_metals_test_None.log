@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running metals. Options: --remove None 
+
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
  PDB id: 1BQO
@@ -34,6 +34,7 @@ Metal/Ion residues found
 Small mol ligands found
 N25 B401
 
+Running metals. Options: --remove None 
 10 Metal ions found
   ZN A301.ZN 
   ZN A302.ZN 

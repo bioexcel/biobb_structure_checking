@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running inscodes.
+
 Structure exists: 'tmpPDB/04/104l.cif' 
 Structure pdb:104l loaded
  PDB id: 104L
@@ -21,6 +21,7 @@ Structure pdb:104l loaded
  Num. water mol.:  32
  Num. atoms:  2636
 
+Running inscodes.
 4 Residues with insertion codes found
 ALA A44A
 ALA A44B

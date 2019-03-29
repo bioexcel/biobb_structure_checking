@@ -3,6 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
+
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
  Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
@@ -52,16 +53,15 @@ No residues with alternative location labels detected
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN 
-No metal ions present
+No metal ions found
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4 
-2 Ligands detected 
+2 Ligands detected
  ADP A400
  TMP A500
-Input not valid
-Error: unknown selection SO4
+Input not valid (SO4)
 
 Step 7: remwat --remove Yes
 
@@ -114,7 +114,7 @@ SER A149
 GLY A264
   Adding new atom OXT
 Fixed 2 backbone atom(s)
-Checking possible new clashes
+Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 1 Steric polar_acceptor clashes detected

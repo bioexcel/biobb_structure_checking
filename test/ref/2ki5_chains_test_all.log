@@ -3,7 +3,7 @@
 =                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
 ===============================================================================
 
-Running chains. Options: --select_chain All 
+
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
@@ -26,6 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 
+Running chains. Options: --select_chain All 
 2 Chain(s) detected
  A: Protein
  B: Protein
