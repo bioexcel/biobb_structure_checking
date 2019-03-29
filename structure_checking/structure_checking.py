@@ -27,7 +27,17 @@ class StructureChecking():
         self.pdb_server = self.args['pdb_server']
         self.cache_dir = self.args['cache_dir']
 
-        self.strucm = self._load_structure()
+        try:
+            self.strucm = self._load_structure()
+        except IOError:
+            print('ERROR: fetching structure from {}'.format(self.args['input_structure_path']), file=sys.stderr)
+            sys.exit(2)
+        except OSError:
+            print("ERROR: parsing PDB", file=sys.stderr)
+            sys.exit(2)
+        except (stm.WrongServerError, stm.UnknownFileTypeError) as err:
+            print(err.message, file=sys.stderr)
+            sys.exit(1)
 
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
@@ -52,11 +62,17 @@ class StructureChecking():
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
                     print(cts.MSGS['FORCE_SAVE_STRUCTURE'])
-                self._save_structure()
                 self.strucm.calc_stats()
-                print(cts.MSGS['STRUCTURE_SAVED'], self.args['output_structure_path'])
                 self.strucm.print_stats('Final')
                 self.summary['final_stats'] = self.strucm.get_stats()
+                try:
+                    output_structure_path = self._save_structure()
+                    print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
+
+                except OSError:
+                    print ('ERROR: unable to save PDB data on ', self.args['output_structure_path'], file=sys.stderr)
+                except stm.OutputPathNotProvidedError as err:
+                    print (err.message, file=sys.stderr)
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
 
@@ -64,13 +80,19 @@ class StructureChecking():
             json_writer = JSONWriter()
             for k in self.summary:
                 json_writer.set(k, self.summary[k])
-            json_writer.save(self.args['json_output_path'])
-            print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
+            try:
+                json_writer.save(self.args['json_output_path'])
+                print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
+            except IOError:
+                print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
 
     def command_list(self, opts):
         """ Manages command_list workflows"""
-        opts = cts.DIALOGS.get_parameter('command_list', opts)
-        op_list = opts[cts.DIALOGS.get_dialog('command_list')['dest']]
+        try:
+            opts = cts.DIALOGS.get_parameter('command_list', opts)
+            op_list = opts[cts.DIALOGS.get_dialog('command_list')['dest']]
+        except NoDialogAvailableError as err:
+            print (err.message)
 
         op_list = ParamInput('Command List File', False).run(op_list)
 
@@ -132,6 +154,7 @@ class StructureChecking():
             except AttributeError:
                 print(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
                 sys.exit(1)
+
             if not self.args['Notebook']:
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
@@ -181,7 +204,7 @@ class StructureChecking():
 
         if input_option == 'error':
             return [cts.MSGS['UNKNOWN_MODEL'], select_model]
-
+        
         print(cts.MSGS['SELECT_MODEL'], select_model)
 
         if input_option != 'all':
@@ -232,7 +255,6 @@ class StructureChecking():
 
         self.strucm.select_chains(select_chains)
         print(cts.MSGS['SELECT_CHAINS'], select_chains)
-        self.strucm.set_chain_ids()
         self.summary['chains']['selected'] = self.strucm.chain_ids
 
         return False
@@ -327,6 +349,7 @@ class StructureChecking():
         print('Selecting location {}'.format(select_altloc))
         if input_option in ('occup', 'altids'):
             to_fix = {}
+            select_altloc = select_altloc.upper()
             for res in fix_data['alt_loc_res']:
                 to_fix[res] = {
                     'ats': fix_data['alt_loc_res'][res],
@@ -348,7 +371,7 @@ class StructureChecking():
 
         self.summary['altloc']['selected'] = select_altloc
         for res in to_fix:
-            self.strucm.select_altloc_residue(res, to_fix[res])
+                self.strucm.select_altloc_residue(res, to_fix[res])
         return False
 # =============================================================================
     def metals(self, opts=None):
@@ -1307,12 +1330,15 @@ class StructureChecking():
 #        pass
 #===============================================================================
     def _load_structure(self, verbose=True, print_stats=True):
-        if not self.args['non_interactive'] and self.args['input_structure_path'] is None:
-            self.args['input_structure_path'] =\
-                input("Enter input structure path (PDB, mmcif | pdb:pdbid): ")
+        
+        input_line = ParamInput(
+            "Enter input structure path (PDB, mmcif | pdb:pdbid)", 
+            self.args['non_interactive']
+        )
+        input_structure_path = input_line.run(self.args['input_structure_path'])
 
         strucm = stm.StructureManager(
-            self.args['input_structure_path'],
+            input_structure_path,
             self.sets.data_library_path,
             self.sets.res_library_path,
             pdb_server=self.pdb_server,
@@ -1321,7 +1347,7 @@ class StructureChecking():
         )
 
         if verbose:
-            print(cts.MSGS['STRUCTURE_LOADED'].format(self.args['input_structure_path']))
+            print(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
             strucm.print_headers()
             print()
             self.summary['headers'] = strucm.meta
@@ -1338,9 +1364,13 @@ class StructureChecking():
         return self.strucm.get_structure()
 
     def _save_structure(self):
-        if not self.args['non_interactive'] and self.args['output_structure_path'] is None:
-            self.args['output_structure_path'] = input("Enter output structure path: ")
-        self.strucm.save_structure(self.args['output_structure_path'])
+        input_line = ParamInput(
+            "Enter output structure path", 
+            self.args['non_interactive']
+        )
+        output_structure_path = input_line.run(self.args['output_structure_path'])
+        self.strucm.save_structure(output_structure_path)
+        return output_structure_path
 
     def _check_report_clashes(self, residue_list, contact_types=None):
         if contact_types is None:
@@ -1379,3 +1409,6 @@ class StructureChecking():
 #===============================================================================
 def _key_sort_atom_pairs(at_pair):
     return at_pair[0].serial_number * 10000 + at_pair[1].serial_number
+
+
+        

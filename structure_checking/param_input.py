@@ -56,7 +56,7 @@ class ParamInput():
 
     def _build_dialog(self):
         if not self.options:
-            return self.prefix + ':'
+            return self.prefix + ': '
         opt_strs = []
         for opt in self.options:
             if opt['type'] == 'list':
@@ -138,7 +138,6 @@ class ParamInput():
             (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
             if not input_ok:
                 print('Input not valid ({})'.format(opt_value))
-                print("Warning: Input not valid ({})".format(opt_value))
                 opt_value = ''
         return [self.options[iopt]['label'], opt_value]
 
@@ -161,8 +160,8 @@ class Dialog():
         """Generate Dialog"""
         dialog = self.options[command]
         if not dialog:
-            print("Error: no dialog available for {}".format(command))
-            return 1
+            raise exc.NoDialogAvailableError(command)
+            return None
         opts_parser = argparse.ArgumentParser(prog=dialog['command'])
         opts_parser.add_argument(
             dialog['prompt'],
@@ -179,3 +178,12 @@ class Dialog():
     def exists(self, command):
         """Checks whether a Dialog for **command** is defined"""
         return command in self.options
+
+#===============================================================================
+class Error(Exception):
+    """ Base class """
+    pass
+
+class NoDialogAvailableError(Error):
+    def __init__(self,command):
+        self.message = 'ERROR: no dialog available for {}".format(command)'

@@ -41,6 +41,7 @@ MSGS = {
     'STRUCTURE_SAVED': 'Structure saved on',
     'FORCE_SAVE_STRUCTURE': 'Structure not modified, saving due to --force_save option',
     'JSON_SAVED': 'Summary data saved on',
+    'JSON_NOT_SAVED': 'Unable to save JSON data on ',
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
     #Param input
