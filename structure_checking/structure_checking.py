@@ -60,7 +60,7 @@ class StructureChecking():
 
         self.strucm = self._load_structure()
 
-        if not 'Notebook' in self.args:
+        if 'Notebook' not in self.args:
             self.args['Notebook'] = False
 
         if self.args['Notebook']:
@@ -69,12 +69,13 @@ class StructureChecking():
 
     def launch(self):
         """main method to run checking"""
+        if self.args['command'] == 'load':
+            sys.exit()
+        
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
             self.checkall(self.args['options'])
-        elif self.args['command'] == 'load':
-            sys.exit(0)
         else:
             self._run_method(self.args['command'], self.args['options'])
 
@@ -101,16 +102,12 @@ class StructureChecking():
         """manages command_list worlflows"""
         opts = DIALOGS.get_parameter('command_list', opts)
         op_list = opts[DIALOGS.get_dialog('command_list')['dest']]
-
         op_list = ParamInput('Command List File', op_list, False).run()
-
         try:
             list_file_h = open(op_list, "r")
-
         except OSError:
             print('Error when opening file {}'.format(op_list))
             sys.exit(1)
-
         i = 1
         for line in list_file_h:
             if line == "\n" or line[0:1] == '#':
@@ -140,7 +137,7 @@ class StructureChecking():
             print('Error: {} command unknown or not implemented'.format(command))
             sys.exit(1)
 
-        if not command in self.summary:
+        if command not in self.summary:
             self.summary[command] = {}
 
         msg = 'Running {}.'.format(command)
@@ -151,18 +148,20 @@ class StructureChecking():
 
         if not self.args['quiet']:
             print(msg)
-    #Running checking method
+        #Running checking method
         fix_data = f_check()
-    #Running fix method if needed
+        
+        #Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
-                print('Running  check_only. Nothing else to do.')
+                print('Running  check_only. Done.')
         elif fix_data:
             try:
                 f_fix = getattr(self, '_' + command + '_fix')
             except AttributeError:
                 print('Error: {}_fix command unknown or not implemented'.format(command))
                 sys.exit(1)
+                
             if not self.args['Notebook']:
                 if DIALOGS.exists(command):
                     opts = DIALOGS.get_parameter(command, opts)
@@ -173,7 +172,7 @@ class StructureChecking():
 
 # ==============================================================================q
     def models(self, opts=None):
-        """ run models command """
+        """ direct entry to run models command """
         self._run_method('models', opts)
 
     def _models_check(self):
@@ -184,15 +183,14 @@ class StructureChecking():
             self.summary['models']['type'] = self.strucm.models_type
             supimp = ''
             if self.strucm.models_type['type'] == mu.BUNIT:
-                supimp = 'do not'
+                supimp = 'do not '
             print(
-                'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} '.format(
+                'Models {}superimpose, RMSd: {:8.3f} A, guessed as {} '.format(
                     supimp,
                     self.strucm.models_type['rmsd'],
                     mu.MODEL_TYPE_LABELS[self.strucm.models_type['type']]
                 )
             )
-
             fix_data = True
         else:
             if not self.args['quiet']:
@@ -250,8 +248,8 @@ class StructureChecking():
         if input_option == 'all':
             print('Selecting all chains')
         else:
-            self.strucm.select_chains(select_chains)
             print('Selecting chain(s) {}'.format(select_chains))
+            self.strucm.select_chains(select_chains)
             self.strucm.set_chain_ids()
             self.summary['chains']['selected'] = self.strucm.chain_ids
 
@@ -290,7 +288,6 @@ class StructureChecking():
                     len(alt_loc_res)
                 )
             )
-
             self.summary['altloc'] = {}
             fix_data['alt_loc_rnums'] = []
             fix_data['altlocs'] = {}
