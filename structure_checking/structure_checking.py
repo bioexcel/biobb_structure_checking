@@ -723,13 +723,10 @@ class StructureChecking():
         }
 
 # =============================================================================
-    def _amide_fix(self, amide_fix, fix_data=None, recheck=True, ):
-        amide_res = self.strucm.data_library.get_amide_data()[0]
-
+    def _amide_fix(self, amide_fix, fix_data=None, recheck=True):
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
 
-        fix = True
-        while fix:
+        while fix_data:
             input_line = ParamInput(
                 'Fix amide atoms', self.args['non_interactive']
             )
@@ -748,30 +745,32 @@ class StructureChecking():
                     print(cts.MSGS['DO_NOTHING'])
                 return False
 
-            if input_option == 'all':
-                to_fix = fix_data['amide_res_to_fix']
-            else:
-                to_fix = []
-                for res in fix_data['amide_res_to_fix']:
-                    if mu.residue_num(res) in amide_fix.split(','):
-                        to_fix.append(res)
+            to_fix = []
+            for res in fix_data['amide_res_to_fix']:
+                if mu.residue_num(res) in amide_fix.split(',')\
+                        or input_option == 'all':
+                    to_fix.append(res)
             fix_num = 0
-            done = []
+            done = set()
             for res in to_fix:
                 if res not in done:
-                    mu.invert_side_atoms(res, amide_res)
-                    done.append(res)
-                fix_num += 1
+                    try:
+                        self.strucm.invert_amide_atoms(res)
+                    except stm.NotAValidResidueError as err:
+                        return [err.message]
+                    done.add(res) # To avoid double change
+                    fix_num += 1
+                    
             print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
-            fix = {}
+            self.strucm.modified = True
+            fix_data = {}
             if recheck:
                 if not self.args['quiet']:
                     print(cts.MSGS['AMIDES_RECHECK'])
-                fix = self._amide_check()
+                fix_data = self._amide_check()
                 amide_fix = ''
                 if no_int_recheck:
-                    fix = {}
-            self.strucm.modified = True
+                    fix_data = {}
         return False
 
 # =============================================================================
@@ -1252,21 +1251,26 @@ class StructureChecking():
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
-        if input_option == 'all':
-            to_fix = fix_data['miss_bck_at_list']
-        else:
-            to_fix = []
-            for r_at in fix_data['miss_bck_at_list']:
-                if mu.residue_num(r_at[0]) in fix_back.split(','):
-                    to_fix.append(r_at)
+        
+        to_fix = []
+        for r_at in fix_data['miss_bck_at_list']:
+            if mu.residue_num(r_at[0]) in fix_back.split(',')\
+                    or input_option == 'all':
+                to_fix.append(r_at)
+        
         if not self.args['quiet']:
             print(cts.MSGS['ADDING_BCK_ATOMS'])
+        
         fix_num = 0
         self.summary['backbone']['missing_atoms']['fixed'] = []
         fixed_res = []
         for r_at in to_fix:
-            if self.strucm.fix_backbone_atoms(r_at):
-                fix_num += 1
+            try:
+                if self.strucm.fix_backbone_O_atoms(r_at):
+                    fix_num += 1
+            except stm.NotEnoughAtomsError as err:
+                print(err.message)
+
             self.summary['backbone']['missing_atoms']['fixed'].append(
                 mu.residue_id(r_at[0])
             )
@@ -1274,7 +1278,7 @@ class StructureChecking():
 
         print(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
         # Checking new clashes
-        if check_clashes:
+        if fix_num and check_clashes:
             print(cts.MSGS['CHECKING_CLASHES'])
             self.summary['backbone']['missing_atoms']['clashes'] =\
                 self._check_report_clashes(fixed_res)
