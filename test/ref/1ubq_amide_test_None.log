@@ -24,5 +24,6 @@ Structure pdb:1ubq loaded
 Running amide. Options: --fix None 
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
+None
 Nothing to do
 Structure not modified, not saving. Override with --force_save

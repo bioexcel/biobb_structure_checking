@@ -46,8 +46,8 @@ Running metals. Options: --remove A305
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
+A305
 Metal Atoms removed A305 (1)
-Structure saved on 1bqo_metals_test_A305.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  427
@@ -68,3 +68,4 @@ Metal/Ion residues found
  CA B305
 Small mol ligands found
 N25 B401
+Structure saved on 1bqo_metals_test_A305.pdb

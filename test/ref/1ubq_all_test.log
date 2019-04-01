@@ -22,15 +22,15 @@ Structure pdb:1ubq loaded
  Num. atoms:  660
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 1 Chain(s) detected
  A: Protein
 
@@ -39,9 +39,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
@@ -54,15 +54,16 @@ Step 6: ligands --remove SO4
 Running ligands. Options: --remove SO4 
 No ligands found
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 58 Water molecules detected
+Yes
 58 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -70,6 +71,7 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
+All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
@@ -115,13 +117,13 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 24 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Command list completed
-Structure saved on 1ubq_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  76
@@ -130,4 +132,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  1231
+Structure saved on 1ubq_all_test.pdb
 Summary data saved on 1ubq_all_test.json

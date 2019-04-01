@@ -23,5 +23,6 @@ Running chiral. Options: --fix None
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    
+None
 Nothing to do
 Structure not modified, not saving. Override with --force_save

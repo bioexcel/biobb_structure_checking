@@ -26,6 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 
-Running remwat. Options: --remove No 
+Running water. Options: --remove No 
 292 Water molecules detected
+No
 Structure not modified, not saving. Override with --force_save

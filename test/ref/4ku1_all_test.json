@@ -1,5 +1,5 @@
 {
- "addH": {
+ "add_hydrogen": {
   "detected": {
    "ARG A255": {
     "ARG": [
@@ -2689,7 +2689,7 @@
    }
   },
   "opts": [
-   "--mode",
+   "--add_mode",
    "auto"
   ]
  },
@@ -3066,7 +3066,7 @@
     }
    ]
   },
-  "selected": "occupancy"
+  "selected": "OCCUPANCY"
  },
  "amide": {
   "n_amides": 40,
@@ -3285,15 +3285,7 @@
  "models": {
   "nmodels": 1
  },
- "remh": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
- },
- "remwat": {
-  "n_detected": 148,
-  "n_removed": 148,
+ "rem_hydrogen": {
   "opts": [
    "--remove",
    "Yes"
@@ -3315,5 +3307,13 @@
   "res_hetats": 168,
   "res_insc": 0,
   "res_ligands": 20
+ },
+ "water": {
+  "n_detected": 148,
+  "n_removed": 148,
+  "opts": [
+   "--remove",
+   "Yes"
+  ]
  }
 }

@@ -40,13 +40,13 @@ Running  check_only. Nothing else to do.
 Running altloc.
 No residues with alternative location labels detected
 Running  check_only. Nothing else to do.
-Running remh.
+Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
-Running addH.
+Running add_hydrogen.
 152 Residues requiring selection on adding H atoms
 Running  check_only. Nothing else to do.
-Running remwat.
+Running water.
 104 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.

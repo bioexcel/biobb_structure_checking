@@ -27,18 +27,19 @@ SO4 B3
 AC2 B2
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 2 Chain(s) detected
  A: Protein
  B: Protein
+All
 Selecting all chains
 
 Step 3: inscodes
@@ -46,9 +47,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 Detected 2 residues with alternative location labels
 AC2 A1
   C3'  A (1.00) B (0.01)
@@ -58,6 +59,7 @@ AC2 A1
   C1'  A (1.00) B (0.01)
 HOH A779
   O    A (1.00)
+occupancy
 Selecting location occupancy
 
 Step 5: metals --remove ZN
@@ -73,17 +75,19 @@ Running ligands. Options: --remove SO4
  AC2 A1
  SO4 B3
  AC2 B2
+SO4
 Ligands removed SO4 (2)
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 292 Water molecules detected
+Yes
 292 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -123,6 +127,7 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
+All
 "Fixing side chains"
 MET A46
   Adding new atom CG
@@ -186,6 +191,7 @@ Running backbone. Options: --fix All
  GLY B73    - ASP B77    
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
+All
 Adding missing backbone atoms
 VAL A70
   Warning: not enough backbone to reconstruct missing atoms
@@ -265,10 +271,11 @@ No severe clashes detected
  ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 148 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Warning: not enough atoms to build backbone H atoms on  VAL A70
 Warning: not enough atoms to build side chain H atoms on  VAL A70
@@ -283,7 +290,6 @@ Warning: not enough atoms to build side chain H atoms on  SER B263
 Warning: not enough atoms to build backbone H atoms on  ALA B375
 Warning: not enough atoms to build side chain H atoms on  ALA B375
 Command list completed
-Structure saved on 2ki5_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  614
@@ -295,4 +301,5 @@ Final Num. atoms:  9380
 Small mol ligands found
 AC2 A1
 AC2 B2
+Structure saved on 2ki5_all_test.pdb
 Summary data saved on 2ki5_all_test.json

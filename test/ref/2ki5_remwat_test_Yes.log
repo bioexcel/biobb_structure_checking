@@ -26,10 +26,10 @@ AC2 A1
 SO4 B3
 AC2 B2
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 292 Water molecules detected
+Yes
 292 Water molecules removed
-Structure saved on 2ki5_remwat_test_Yes.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  616
@@ -43,3 +43,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
+Structure saved on 2ki5_remwat_test_Yes.pdb

@@ -1,5 +1,5 @@
 {
- "addH": {
+ "add_hydrogen": {
   "detected": {
    "ARG A100": {
     "ARG": [
@@ -2008,13 +2008,13 @@
    }
   },
   "opts": [
-   "--mode",
+   "--add_mode",
    "auto"
   ]
  },
  "altloc": {
   "opts": [
-   "--select_altloc",
+   "--select",
    "occupancy"
   ]
  },
@@ -2278,15 +2278,7 @@
  "models": {
   "nmodels": 1
  },
- "remh": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
- },
- "remwat": {
-  "n_detected": 75,
-  "n_removed": 75,
+ "rem_hydrogen": {
   "opts": [
    "--remove",
    "Yes"
@@ -2308,5 +2300,13 @@
   "res_hetats": 86,
   "res_insc": 0,
   "res_ligands": 11
+ },
+ "water": {
+  "n_detected": 75,
+  "n_removed": 75,
+  "opts": [
+   "--remove",
+   "Yes"
+  ]
  }
 }

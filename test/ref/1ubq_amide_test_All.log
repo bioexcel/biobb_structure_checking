@@ -24,10 +24,10 @@ Structure pdb:1ubq loaded
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
+All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
-Structure saved on 1ubq_amide_test_All.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134
@@ -36,3 +36,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  660
+Structure saved on 1ubq_amide_test_All.pdb

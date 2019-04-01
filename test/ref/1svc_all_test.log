@@ -22,18 +22,19 @@ Structure pdb:1svc loaded
  Num. atoms:  2903
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 2 Chain(s) detected
  D: DNA
  P: Protein
+All
 Selecting all chains
 
 Step 3: inscodes
@@ -41,9 +42,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
@@ -56,15 +57,16 @@ Step 6: ligands --remove SO4
 Running ligands. Options: --remove SO4 
 No ligands found
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 63 Water molecules detected
+Yes
 63 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -72,6 +74,7 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  GLN P180.NE2 ARG P231.NH1    2.845 A
+All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
@@ -96,6 +99,7 @@ Step 13: backbone --fix All
 Running backbone. Options: --fix All 
 1 Residues with missing backbone atoms found
  GLU P353   OXT
+All
 Adding missing backbone atoms
 GLU P353
   Adding new atom OXT
@@ -155,10 +159,11 @@ No severe clashes detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  GLU P287.OE1 GLU P289.OE2    3.216 A
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 106 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Warning: Add backbone hydrogens not implemented for residue   DA D1
 Warning: Add side chain hydrogens not implemented for residue  DA
@@ -199,7 +204,6 @@ Warning: Add side chain hydrogens not implemented for residue  DG
 Warning: Add backbone hydrogens not implemented for residue   DA D19
 Warning: Add side chain hydrogens not implemented for residue  DA
 Command list completed
-Structure saved on 1svc_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (D: DNA, P: Protein)
 Final Num. residues:  330
@@ -208,4 +212,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  5295
+Structure saved on 1svc_all_test.pdb
 Summary data saved on 1svc_all_test.json

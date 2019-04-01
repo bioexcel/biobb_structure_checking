@@ -27,6 +27,7 @@ SO4 B3
 AC2 B2
 
 Running mutateside. Options: --mut Leu49Ile,B:arg51Lys 
+Leu49Ile,B:arg51Lys
 Mutations to perform
 *:LEU49ILE
 B:ARG51LYS
@@ -58,7 +59,6 @@ No polar_acceptor clashes detected
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
-Structure saved on 1ki5_mutateside_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908
@@ -72,3 +72,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
+Structure saved on 1ki5_mutateside_test.pdb

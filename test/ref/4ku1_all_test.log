@@ -43,18 +43,19 @@ FUL B508
 NAG B509
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 2 Chain(s) detected
  A: Protein
  B: Protein
+All
 Selecting all chains
 
 Step 3: inscodes
@@ -62,9 +63,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 Detected 6 residues with alternative location labels
 LYS A340
   N    A (0.50) B (0.50)
@@ -108,6 +109,7 @@ GLN B418
   CD   A (0.38) B (0.62)
   OE1  A (0.38) B (0.62)
   NE2  A (0.38) B (0.62)
+occupancy
 Selecting location occupancy
 
 Step 5: metals --remove ZN
@@ -139,17 +141,19 @@ Running ligands. Options: --remove SO4
  MAN B507
  FUL B508
  NAG B509
+SO4
 Input not valid (SO4)
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 148 Water molecules detected
+Yes
 148 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -178,6 +182,7 @@ Running backbone. Options: --fix All
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT
+All
 Adding missing backbone atoms
 LEU A443
   Adding new atom OXT
@@ -229,13 +234,13 @@ No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 134 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Command list completed
-Structure saved on 4ku1_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  435
@@ -265,4 +270,5 @@ GAL B506
 MAN B507
 FUL B508
 NAG B509
+Structure saved on 4ku1_all_test.pdb
 Summary data saved on 4ku1_all_test.json

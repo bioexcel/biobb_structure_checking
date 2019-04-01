@@ -34,6 +34,7 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
+All
 "Fixing side chains"
 MET A46
   Adding new atom CG
@@ -78,7 +79,6 @@ No severe clashes detected
 1 Steric positive clashes detected
  ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
-Structure saved on 1ki5_fixside_All_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908
@@ -92,3 +92,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
+Structure saved on 1ki5_fixside_All_test.pdb

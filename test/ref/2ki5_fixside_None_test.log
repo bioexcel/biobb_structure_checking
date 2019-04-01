@@ -34,5 +34,6 @@ Running fixside. Options: --fix None
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
+None
 Nothing to do
 Structure not modified, not saving. Override with --force_save

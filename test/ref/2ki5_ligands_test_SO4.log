@@ -32,8 +32,8 @@ Running ligands. Options: --remove SO4
  AC2 A1
  SO4 B3
  AC2 B2
+SO4
 Ligands removed SO4 (2)
-Structure saved on 2ki5_ligands_test_SO4.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  906
@@ -45,3 +45,4 @@ Final Num. atoms:  4951
 Small mol ligands found
 AC2 A1
 AC2 B2
+Structure saved on 2ki5_ligands_test_SO4.pdb

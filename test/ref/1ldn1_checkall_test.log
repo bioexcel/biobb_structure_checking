@@ -91,13 +91,13 @@ FBP B353
   O5P  B (0.50) D (0.50)
   O6P  B (0.50) D (0.50)
 Running  check_only. Nothing else to do.
-Running remh.
+Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
-Running addH.
+Running add_hydrogen.
 372 Residues requiring selection on adding H atoms
 Running  check_only. Nothing else to do.
-Running remwat.
+Running water.
 287 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.

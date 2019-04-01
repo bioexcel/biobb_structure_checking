@@ -46,8 +46,8 @@ Running metals. Options: --remove ZN
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
+ZN
 Metal Atoms removed ZN (4)
-Structure saved on 1bqo_metals_test_ZN.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  424
@@ -65,3 +65,4 @@ Metal/Ion residues found
  CA B305
 Small mol ligands found
 N25 B401
+Structure saved on 1bqo_metals_test_ZN.pdb

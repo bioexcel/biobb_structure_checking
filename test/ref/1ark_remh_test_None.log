@@ -20,6 +20,7 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 
-Running remh. Options: --remove No 
+Running rem_hydrogen. Options: --remove No 
 900 Residues containing H atoms detected
+No
 Structure not modified, not saving. Override with --force_save

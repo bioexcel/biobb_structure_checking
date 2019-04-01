@@ -49,13 +49,13 @@ AC2 A1
 HOH A779
   O    A (1.00)
 Running  check_only. Nothing else to do.
-Running remh.
+Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
-Running addH.
+Running add_hydrogen.
 148 Residues requiring selection on adding H atoms
 Running  check_only. Nothing else to do.
-Running remwat.
+Running water.
 292 Water molecules detected
 Running  check_only. Nothing else to do.
 Running metals.

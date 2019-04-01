@@ -23,6 +23,7 @@ Running chiral. Options: --fix All
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    
+All
 Chiral side chains fixed All (2)
 Checking for steric clashes
 No severe clashes detected
@@ -31,7 +32,6 @@ No polar_acceptor clashes detected
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
-Structure saved on 1ubq_chi_chiral_test.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134
@@ -40,3 +40,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  658
+Structure saved on 1ubq_chi_chiral_test.pdb

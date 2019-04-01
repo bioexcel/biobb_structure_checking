@@ -27,16 +27,17 @@ ADP A400/2
 TMP A500/2
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 2 Model(s) detected
 Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
+1
 Selecting model num. 1
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 1 Chain(s) detected
  A: Protein
 
@@ -45,9 +46,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
@@ -61,17 +62,19 @@ Running ligands. Options: --remove SO4
 2 Ligands detected
  ADP A400
  TMP A500
+SO4
 Input not valid (SO4)
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 52 Water molecules detected
+Yes
 52 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -79,6 +82,7 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  PRO A153.O   GLN A349.OE1    3.093 A
+All
 Amide residues fixed All (1)
 Rechecking
 1 unusual contact(s) involving amide atoms found
@@ -108,6 +112,7 @@ Running backbone. Options: --fix All
 2 Backbone breaks found
  SER A149   - PRO A153   
  GLY A264   - PRO A280   
+All
 Adding missing backbone atoms
 SER A149
   Adding new atom OXT
@@ -156,13 +161,13 @@ No severe clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
 No negative clashes detected
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 76 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Command list completed
-Structure saved on 1vtk_1_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  315
@@ -174,4 +179,5 @@ Final Num. atoms:  4855
 Small mol ligands found
 ADP A400
 TMP A500
+Structure saved on 1vtk_1_all_test.pdb
 Summary data saved on 1vtk_1_all_test.json

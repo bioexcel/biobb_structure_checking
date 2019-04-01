@@ -35,18 +35,19 @@ Small mol ligands found
 N25 B401
 
 
-Step 1: models --select_model 1
+Step 1: models --select 1
 
-Running models. Options: --select_model 1 
+Running models. Options: --select 1 
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select_chain All
+Step 2: chains --select All
 
-Running chains. Options: --select_chain All 
+Running chains. Options: --select All 
 2 Chain(s) detected
  A: Protein
  B: Protein
+All
 Selecting all chains
 
 Step 3: inscodes
@@ -54,9 +55,9 @@ Step 3: inscodes
 Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select_altloc occupancy
+Step 4: altloc --select occupancy
 
-Running altloc. Options: --select_altloc occupancy 
+Running altloc. Options: --select occupancy 
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
@@ -73,6 +74,7 @@ Running metals. Options: --remove ZN
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
+ZN
 Metal Atoms removed ZN (4)
 
 Step 6: ligands --remove SO4
@@ -86,17 +88,19 @@ Running ligands. Options: --remove SO4
   CA B304
   CA B305
  N25 B401
+SO4
 Input not valid (SO4)
 
-Step 7: remwat --remove Yes
+Step 7: water --remove Yes
 
-Running remwat. Options: --remove Yes 
+Running water. Options: --remove Yes 
 75 Water molecules detected
+Yes
 75 Water molecules removed
 
-Step 8: remh --remove Yes
+Step 8: rem_hydrogen --remove Yes
 
-Running remh. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes 
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
@@ -104,6 +108,7 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  GLN B236.O   ASN B240.OD1    2.980 A
+All
 Amide residues fixed All (1)
 Rechecking
 1 unusual contact(s) involving amide atoms found
@@ -129,6 +134,7 @@ Step 13: backbone --fix All
 Running backbone. Options: --fix All 
 1 Residues with missing backbone atoms found
  ASP A251   OXT
+All
 Adding missing backbone atoms
 ASP A251
   Adding new atom OXT
@@ -186,13 +192,13 @@ No positive clashes detected
  ASP B107.OD2 ASP B182.OD1    3.482 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
 
-Step 17: addH --mode auto
+Step 17: add_hydrogen --add_mode auto
 
-Running addH. Options: --mode auto 
+Running add_hydrogen. Options: --add_mode auto 
 107 Residues requiring selection on adding H atoms
+auto
 Selection: auto
 Command list completed
-Structure saved on 1bqo_all_test.pdb
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  349
@@ -210,4 +216,5 @@ Metal/Ion residues found
  CA B305
 Small mol ligands found
 N25 B401
+Structure saved on 1bqo_all_test.pdb
 Summary data saved on 1bqo_all_test.json
