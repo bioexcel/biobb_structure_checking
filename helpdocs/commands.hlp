@@ -1,0 +1,52 @@
+
+BioBB's check_structure.py performs MDWeb structure checking set as a command line
+utility.
+
+Available commands:
+
+commands:     this help
+command_list: Run all tests from conf file
+checkall:     Perform all checks without fixes
+fixall:       Performs a default fix
+load:         Stores structure on local cache and provide basic statistics
+
+1. System Configuration 
+=======================
+models [--select model_num]     
+    Detect/Select Models
+chains [--select chain_ids]    
+    Detect/Select Chains 
+inscodes 
+    Detects residues with insertion codes (no fix)
+altloc [--select occupancy| alt_id | list of res_id:alt_id]
+    Detect/Select Alternative Locations 
+metals [--remove All | None | Met_ids_list | Residue_list]   
+    Detect/Remove Metals 
+ligands [--remove All | None | Res_type_list | Residue_list]
+    Detect/Remove Ligands 
+water [--remove Yes|No]
+    Remove Water molecules
+rem_hydrogen [remh --remove Yes|No]
+    Remove Hydrogen atoms from structure 
+mutateside [--mut mutation_list]
+    Mutate side chain with minimal atom replacement. Allows multiple mutations
+add_hydrogen [--add_mode auto | pH | interactive | interactive_his]
+    Add Hydrogen Atoms
+
+2. Fix Structure Errors
+
+amide  [--fix All|None|Residue List]    
+    Detect/Fix Amide atoms Assignment
+chiral [--fix All|None|Residue List]
+    Detect/Fix Improper quirality
+fixside [--fix All |None|Residue List]    
+    Complete side chains 
+backbone [--fix All|None|Residue List]   
+    Analyze main chain missing atoms and fragments. O, OXT atoms can be fixed
+
+3. Structure Warnings
+
+cistransbck Analyzes cis-trans dihedrals on backbone atoms
+getss      Detect SS Bonds 
+clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
+           Ionic Positive, Ionic Negative)

@@ -1,0 +1,3 @@
+Detects hydrogen atoms and allows to remove them
+
+Usage: check_structure.py rem_hydrogen --remove Yes|No

@@ -1,11 +1,11 @@
-models --select_model 1
-chains --select_chain All
+models --select 1
+chains --select All
 inscodes
-altloc --select_altloc occupancy
+altloc --select occupancy
 metals --remove ZN
 ligands --remove SO4
-remwat --remove Yes
-remh --remove Yes
+water --remove Yes
+rem_hydrogen --remove Yes
 amide --fix All
 chiral --fix All
 chiral_bck
@@ -14,4 +14,4 @@ backbone --fix All
 cistransbck
 getss
 clashes
-addH --mode auto
+add_hydrogen --add_mode auto

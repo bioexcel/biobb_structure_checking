@@ -1,19 +1,20 @@
 
-MDWeb checkStruc.py performs MDWeb structure checking set as a command line
+BioBB's check_structure.py performs MDWeb structure checking set as a command line
 utility.
 
 It includes some structure manipulation options like selecting models or chains,
-removing components of the system, completing missing atoms, and some quality
+removing components of the system, completing missing atoms, and quality
 checking as residue quirality, amide orientation, or vdw clashes.
 
-Missing parameters will be prompted in interactive sessions
+Missing parameters will be prompted on interactive sessions
 
-usage: checkStruc.py [-h] [-i INPUT_STRUCTURE_PATH] [-o OUTPUT_STRUCTURE_PATH]
-                     [--version] [--data_dir DATA_DIR]
-                     [--res_lib RES_LIB_PATH] [--data_lib DATA_LIBRARY_PATH]
-                     [--json JSON_OUTPUT_PATH] [--quiet] [--check_only]
-                     [--non_interactive] [--force_save]
-                     [--pdb_server PDB_SERVER]
+usage: check_structure.py [-h] [-i INPUT_STRUCTURE_PATH]
+                     [--file_format FILE_FORMAT] [--cache_dir CACHE_DIR]
+                     [--pdb_server PDB_SERVER] [-o OUTPUT_STRUCTURE_PATH]
+                     [--json JSON_OUTPUT_PATH] [--quiet] [--force_save]
+                     [--data_dir DATA_DIR] [--res_lib RES_LIB_PATH]
+                     [--data_lib DATA_LIBRARY_PATH] [--check_only]
+                     [--non_interactive] [--version]
                      command ...
 
 positional arguments:
@@ -24,54 +25,59 @@ optional arguments:
   -h, --help            show this help message and exit
   -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH
                         Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}
+  --file_format FILE_FORMAT
+                        Format for retrieving structures
+                        (default=mmCif|pdb|xml)
+  --cache_dir CACHE_DIR
+                        Path for structure's cache directory (default:
+                        ./tmpPDB)
+  --pdb_server PDB_SERVER
+                        Server for retrieving structures (default=RCSB|MMB)
   -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
-                        Output structure. Format PDB
-  --version             show program's version number and exit
+                        Output structure. PDB Format.
+  --json JSON_OUTPUT_PATH
+                        Summary checking results on a json file
+  --quiet               Reduces output, removing labels and progress info
+  --force_save          Force saving an output file even if no modification
   --data_dir DATA_DIR   Override settings default data dir
   --res_lib RES_LIB_PATH
                         Override settings default residue library (AMBER prep
                         format)
   --data_lib DATA_LIBRARY_PATH
                         Override settings default data library
-  --json JSON_OUTPUT_PATH
-                        Cummulated checking results on a json file
-  --quiet               Reduces output, removing labels and progress info
-  --check_only          Perform checks, structure is not modified
+  --check_only          Perform checks only, structure is not modified
   --non_interactive     Do not prompt for missing parameters
-  --force_save          Force saving an output file even if no modification
-  --pdb_server PDB_SERVER
-                        Server for retrieving structures (default: RCSB|mmb)
-  --load                Loads structure from PDB server into the local cache
-                        and get basic statistics and headers
+  --version             show program's version number and exit
 
 Available commands:
 
-commands:  This help
-command_list:      Run all tests from conf file
-checkall:   Perform all checks without fixes
-load: Stores structure on local cache and provide basic statistics
+commands:     Help on available commands
+command_list: Run all tests from conf file
+checkall:     Perform all checks without fixes
+fixall:       Performs a default fix
+load:         Stores structure on local cache and provide basic statistics
 
 1. System Configuration 
 =======================
-models [--select_model model_num]     
+models [--select model_num]     
     Detect/Select Models
-chains [--select_chains chain_ids]    
+chains [--select chain_ids]    
     Detect/Select Chains 
 inscodes 
     Detects residues with insertion codes (no fix)
-altloc [--select_altloc occupancy| alt_id | list of res_id:alt_id]
+altloc [--select occupancy| alt_id | list of res_id:alt_id]
     Detect/Select Alternative Locations 
 metals [--remove All | None | Met_ids_list | Residue_list]   
     Detect/Remove Metals 
 ligands [--remove All | None | Res_type_list | Residue_list]
     Detect/Remove Ligands 
-remwat [--remove Yes|No]
+water [--remove Yes|No]
     Remove Water molecules
-remh [remh --remove Yes|No]
+rem_hydrogen [remh --remove Yes|No]
     Remove Hydrogen atoms from structure 
 mutateside [--mut mutation_list]
     Mutate side chain with minimal atom replacement. Allows multiple mutations
-addH [--mode auto | pH | interactive | interactive_his]
+add_hydrogen [--add_mode auto | pH | interactive | interactive_his]
     Add Hydrogen Atoms
 
 2. Fix Structure Errors

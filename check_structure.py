@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 
 """
- structureCheck: Command line replacement for MDWeb structure check
+ check_structure: Command line replacement for MDWeb structure check
 """
 
 __author__ = "gelpi"
@@ -19,7 +19,7 @@ from structure_checking.default_settings import DefaultSettings
 VERSION = 'v1.0.5'
 
 def main():
-    """Command-line version of MDWeb's structure checking facility"""
+    """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""
 
     sets = DefaultSettings(os.path.dirname(__file__))
 #

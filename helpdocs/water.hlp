@@ -1,3 +1,3 @@
 Detects water molecules and allows to remove them
 
-Usage: checkStruct.py remwat --remove Yes|No
+Usage: check_structure.py water --remove Yes|No

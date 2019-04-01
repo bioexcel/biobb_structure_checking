@@ -2,4 +2,4 @@ Checks for the presence of models in the structure.
 MD simulations require a single structure, although some structures (e.g. biounits) 
 may be defined as a series of models, in such case all of them are usually required.
 
-Usage: checkStruct.py models --select_model model_num
+Usage: check_structure.py models --select model_num

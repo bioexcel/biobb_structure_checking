@@ -1,4 +1,0 @@
-Add Hydrogen Atoms with selection of ionized states
-
-Usage: checkStruct.py addH --mode auto | ph | interactive | interactive_his
-

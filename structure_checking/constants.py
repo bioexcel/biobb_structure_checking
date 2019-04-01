@@ -7,16 +7,16 @@ DIALOGS = Dialog()
 
 #DIALOGS.add_option(command, prompt, destinmore ation, help_text, type(str))
 DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
-DIALOGS.add_option('models', '--select_model', 'select_model', \
+DIALOGS.add_option('models', '--select', 'select_model', \
     'Select model to keep', int)
-DIALOGS.add_option('chains', '--select_chains', 'select_chains',\
+DIALOGS.add_option('chains', '--select', 'select_chains',\
     'Chains (All | Chain list comma separated)')
-DIALOGS.add_option('altloc', '--select_altloc', 'select_altloc', \
+DIALOGS.add_option('altloc', '--select', 'select_altloc', \
     'Select altloc occupancy|alt_id')
 DIALOGS.add_option('metals', '--remove', 'remove_metals', 'Remove Metal ions')
-DIALOGS.add_option('remwat', '--remove', 'remove_wat', 'Remove Water molecules')
+DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove Water molecules')
 DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
-DIALOGS.add_option('remh', '--remove', 'remove_h', 'Remove Hydrogen atoms')
+DIALOGS.add_option('rem_hydrogen', '--remove', 'remove_h', 'Remove Hydrogen atoms')
 DIALOGS.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
@@ -27,13 +27,13 @@ DIALOGS.add_option('backbone', '--fix', 'fix_back',\
     'Add missing O atoms to backbone (All | None | List)')
 DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
-DIALOGS.add_option('addH', '--mode', 'mode',\
+DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | interactive | interactive_his | ph )')
 
 AVAILABLE_METHODS = [
-    'models', 'chains', 'inscodes', 'altloc', 'remh', 'addH', 'remwat', 'metals', 'ligands',
-    'getss', 'amide', 'chiral', 'chiral_bck', 'fixside', 'backbone', 'cistransbck',
-    'clashes']
+    'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogens', 
+    'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck', 
+    'fixside', 'backbone', 'cistransbck', 'clashes']
 
 MSGS = {
     #management

@@ -28,7 +28,7 @@ class StructureChecking():
         self.cache_dir = self.args['cache_dir']
 
         try:
-            self.strucm = self._load_structure()
+            self.strucm = self._load_structure(self.args['input_structure_path'])
         except IOError:
             print('ERROR: fetching structure from {}'.format(self.args['input_structure_path']), file=sys.stderr)
             sys.exit(2)
@@ -66,11 +66,11 @@ class StructureChecking():
                 self.strucm.print_stats('Final')
                 self.summary['final_stats'] = self.strucm.get_stats()
                 try:
-                    output_structure_path = self._save_structure()
+                    output_structure_path = self._save_structure(self.args['output_structure_path'])
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
                 except OSError:
-                    print ('ERROR: unable to save PDB data on ', self.args['output_structure_path'], file=sys.stderr)
+                    print ('ERROR: unable to save PDB data on ', output_structure_path, file=sys.stderr)
                 except stm.OutputPathNotProvidedError as err:
                     print (err.message, file=sys.stderr)
             elif not self.strucm.modified:
@@ -455,11 +455,11 @@ class StructureChecking():
         self.summary['metals']['n_removed'] = rmm_num
         return False
 # =============================================================================
-    def remwat(self, opts=None):
-        """ run remwat command """
-        self._run_method('remwat', opts)
+    def water(self, opts=None):
+        """ Run water command """
+        self._run_method('water', opts)
 
-    def _remwat_check(self):
+    def _water_check(self):
         lig_list = mu.get_ligands(self._get_structure(), incl_water=True)
         wat_list = []
         for res in lig_list:
@@ -472,11 +472,11 @@ class StructureChecking():
             return {}
 
         print(cts.MSGS['WATERS_FOUND'].format(len(wat_list)))
-        self.summary['remwat']['n_detected'] = len(wat_list)
+        self.summary['water']['n_detected'] = len(wat_list)
 
         return {'wat_list': wat_list}
 
-    def _remwat_fix(self, remove_wat, fix_data=None):
+    def _water_fix(self, remove_wat, fix_data=None):
         input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_yes_no()
         [input_option, remove_wat] = input_line.run(remove_wat)
@@ -487,14 +487,15 @@ class StructureChecking():
         if input_option == 'yes':
             rmw_num = 0
             for res in fix_data['wat_list']:
-                self.strucm.remove_residue(res)
+                self.strucm.remove_residue(res, False)
                 rmw_num += 1
+            self.strucm._update_internals()
             print(cts.MSGS['WATER_REMOVED'].format(rmw_num))
-            self.summary['remwat']['n_removed'] = rmw_num
+            self.summary['water']['n_removed'] = rmw_num
         return False
 # =============================================================================
     def ligands(self, opts=None):
-        """ run ligands command """
+        """ Run ligands command """
         self._run_method('ligands', opts)
 
     def _ligands_check(self):
@@ -577,11 +578,11 @@ class StructureChecking():
         return False
 
 # =============================================================================
-    def remh(self, opts=None):
-        """ Run remh command """
-        self._run_method('remh', opts)
+    def rem_hydrogen(self, opts=None):
+        """ Run rem_hydrogen command """
+        self._run_method('rem_hydrogen', opts)
 
-    def _remh_check(self):
+    def _rem_hydrogen_check(self):
 
         remh_list = mu.get_residues_with_H(self._get_structure())
 
@@ -591,10 +592,10 @@ class StructureChecking():
             return {}
 
         print(cts.MSGS['RESIDUES_H_FOUND'].format(len(remh_list)))
-        self.summary['remh']['n_detected'] = len(remh_list)
+        self.summary['rem_hydrogen']['n_detected'] = len(remh_list)
         return {'remh_list': remh_list}
 
-    def _remh_fix(self, remove_h, fix_data=None):
+    def _rem_hydrogen_fix(self, remove_h, fix_data=None):
         input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
         input_line.add_option_yes_no()
         [input_option, remove_h] = input_line.run(remove_h)
@@ -609,7 +610,7 @@ class StructureChecking():
                 rmh_num += 1
             print(cts.MSGS['REMOVED_H'].format(rmh_num))
             self.strucm.modified = True
-            self.summary['remh']['n_removed'] = rmh_num
+            self.summary['rem_hydrogen']['n_removed'] = rmh_num
         return False
 
 # =============================================================================
@@ -1044,11 +1045,11 @@ class StructureChecking():
             self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
         return False
 # =============================================================================
-    def addH(self, opts=None):
-        """ Run addH command """
-        self._run_method('addH', opts)
+    def add_hydrogen(self, opts=None):
+        """ Run add_hydrogen command """
+        self._run_method('add_hydrogen', opts)
 
-    def _addH_check(self):
+    def _add_hydrogen_check(self):
 
         ion_res_list = self.strucm.get_ion_res_list()
 
@@ -1061,16 +1062,16 @@ class StructureChecking():
             'ion_res_list': ion_res_list,
             'add_h_rnums' : []
         }
-        self.summary['addH']['detected'] = {}
+        self.summary['add_hydrogen']['detected'] = {}
         print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
         for r_at in ion_res_list:
             [res, at_list] = r_at
             #print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
             fix_data['add_h_rnums'].append(mu.residue_num(res))
-            self.summary['addH']['detected'][mu.residue_id(res)] = at_list
+            self.summary['add_hydrogen']['detected'][mu.residue_id(res)] = at_list
         return fix_data
 
-    def _addH_fix(self, mode, fix_data=None):
+    def _add_hydrogen_fix(self, mode, fix_data=None):
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_list('auto', ['auto'], case="lower")
@@ -1329,13 +1330,13 @@ class StructureChecking():
 #    def _cistransbck_fix(self, option):
 #        pass
 #===============================================================================
-    def _load_structure(self, verbose=True, print_stats=True):
+    def _load_structure(self, input_structure_path, verbose=True, print_stats=True):
         
         input_line = ParamInput(
             "Enter input structure path (PDB, mmcif | pdb:pdbid)", 
             self.args['non_interactive']
         )
-        input_structure_path = input_line.run(self.args['input_structure_path'])
+        input_structure_path = input_line.run(input_structure_path)
 
         strucm = stm.StructureManager(
             input_structure_path,
@@ -1363,12 +1364,12 @@ class StructureChecking():
     def _get_structure(self):
         return self.strucm.get_structure()
 
-    def _save_structure(self):
+    def _save_structure(self, output_structure_path):
         input_line = ParamInput(
             "Enter output structure path", 
             self.args['non_interactive']
         )
-        output_structure_path = input_line.run(self.args['output_structure_path'])
+        output_structure_path = input_line.run(output_structure_path)
         self.strucm.save_structure(output_structure_path)
         return output_structure_path
 

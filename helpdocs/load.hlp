@@ -1,4 +1,4 @@
 Download structure from server and stores in a local cache. 
 Structure statistics are provided.
 
-Usage: checkStruct.py load
+Usage: check_structure.py load

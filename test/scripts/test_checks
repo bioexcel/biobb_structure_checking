@@ -1,6 +1,6 @@
-models --select_model 10
-chains --select_chain A
-altloc --select_altloc occupancy
+models --select 10
+chains --select A
+altloc --select occupancy
 metals --remove All
 ligands --remove All
 na --remove All
@@ -8,11 +8,11 @@ remwat --remove Yes
 remh  --remove Yes
 amide --fix All
 quiral --fix All
-inscode --renum Yes
+#inscode --renum Yes
 fixside --fix Yes
 getss   
 cisbck
-nonconres
-bckgaps
+#nonconres
+#bckgaps
 clashes
 

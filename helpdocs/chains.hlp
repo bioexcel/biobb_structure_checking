@@ -3,4 +3,4 @@ MD simulations are usually performed with complete structures.However input stru
 may contain several copies of the system, or additional chains like peptides or
 nucleic acids that may be removed. 
 
-Options: --select_chains chain_ids 
+Usage: check_structure.py --select chain_ids 
