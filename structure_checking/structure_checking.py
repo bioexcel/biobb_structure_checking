@@ -159,6 +159,8 @@ class StructureChecking():
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
                     opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
+                    print (opts)
+                    
                 else:
                     opts = ''
             error_status = f_fix(opts, data_to_fix)
@@ -203,7 +205,7 @@ class StructureChecking():
         [input_option, select_model] = input_line.run(select_model)
 
         if input_option == 'error':
-            return [cts.MSGS['UNKNOWN_MODEL'], select_model]
+            return [cts.MSGS['UNKNOWN_SELECTION'], select_model]
         
         print(cts.MSGS['SELECT_MODEL'], select_model)
 
@@ -247,7 +249,7 @@ class StructureChecking():
         [input_option, select_chains] = input_line.run(select_chains)
 
         if input_option == 'error':
-            return [cts.MSGS['SELECTION_NOT_VALID'], select_chains]
+            return [cts.MSGS['UNKNOWN_SELECTION'], select_chains]
 
         if input_option == 'all':
             print(cts.MSGS['SELECT_ALL_CHAINS'])
@@ -344,7 +346,7 @@ class StructureChecking():
         [input_option, select_altloc] = input_line.run(select_altloc)
 
         if input_option == 'error':
-            return [cts.MSGS['UNKNOWN_ALTLOC_SELECTION'], select_altloc]
+            return [cts.MSGS['UNKNOWN_SELECTION'], select_altloc]
 
         print('Selecting location {}'.format(select_altloc))
         if input_option in ('occup', 'altids'):
@@ -482,7 +484,7 @@ class StructureChecking():
         [input_option, remove_wat] = input_line.run(remove_wat)
 
         if input_option == 'error':
-            return [cts.MSGS['UNKNOWN_OPTION'], remove_wat]
+            return [cts.MSGS['UNKNOWN_SELECTION'], remove_wat]
 
         if input_option == 'yes':
             rmw_num = 0
@@ -736,7 +738,7 @@ class StructureChecking():
             [input_option, amide_fix] = input_line.run(amide_fix)
 
             if input_option == 'error':
-                return [cts.MSGS['UNKNOWN_OPTION'], amide_fix]
+                return [cts.MSGS['UNKNOWN_SELECTION'], amide_fix]
 
             if input_option == 'none':
                 if not self.args['quiet']:
@@ -821,7 +823,7 @@ class StructureChecking():
         [input_option, chiral_fix] = input_line.run(chiral_fix)
 
         if input_option == 'error':
-            return [cts.MSGS['UNKNOWN_OPTION'], chiral_fix]
+            return [cts.MSGS['UNKNOWN_SELECTION'], chiral_fix]
 
         if input_option == 'none':
             if not self.args['quiet']:
@@ -1007,7 +1009,7 @@ class StructureChecking():
         [input_option, fix_side] = input_line.run(fix_side)
 
         if input_option == 'error':
-            return [cts.MSGS['INVALID_OPTION'], fix_side]
+            return [cts.MSGS['UNKNOWN_SELECTION'], fix_side]
 
         self.summary['fixside']['selected'] = fix_side
 
@@ -1083,7 +1085,7 @@ class StructureChecking():
         [input_option, add_h_mode] = input_line.run(mode)
 
         if input_option == 'error':
-            return [cts.MSGS['INVALID_OPTION'], add_h_mode]
+            return [cts.MSGS['UNKNOWN_SELECTION'], add_h_mode]
 
         if input_option == "none":
             if not self.args['quiet']:
@@ -1244,7 +1246,7 @@ class StructureChecking():
         [input_option, fix_back] = input_line.run(fix_back)
 
         if input_option == 'error':
-            return [cts.MSGS['INVALID_OPTION'], fix_back]
+            return [cts.MSGS['UNKNOWN_SELECTION'], fix_back]
 
         self.summary['backbone']['missing_atoms']['selected'] = fix_back
 

@@ -31,7 +31,7 @@ DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | interactive | interactive_his | ph )')
 
 AVAILABLE_METHODS = [
-    'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogens', 
+    'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen', 
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck', 
     'fixside', 'backbone', 'cistransbck', 'clashes']
 
@@ -44,8 +44,6 @@ MSGS = {
     'JSON_NOT_SAVED': 'Unable to save JSON data on ',
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
-    #Param input
-    'INPUT_NOT_VALID' : 'Input not valid ({})',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
@@ -57,13 +55,11 @@ MSGS = {
     'MODELS_FOUND': '{} Model(s) detected',
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',
     'SINGLE_MODEL': 'Single model found',
-    'UNKNOWN_MODEL': 'Unknown model',
     'SELECT_MODEL': 'Selecting model num.',
     #chains
     'CHAINS_DETECTED': '{} Chain(s) detected',
     'UNKNOWN_CHAINS':   ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} ' +\
                         'RNA: {s[2]:4.2f} Other: {s[3]:4.2f})',
-    'SELECTION_NOT_VALID': 'Selection not valid',
     'SELECT_ALL_CHAINS': 'Selecting all chains',
     'SELECT_CHAINS': 'Selecting chain(s)',
     #inscodes
@@ -84,7 +80,6 @@ MSGS = {
     'LIGANDS_DETECTED' : '{} Ligands detected',
     'NO_LIGANDS_FOUND': 'No ligands found',
     'LIGANDS_REMOVED' : 'Ligands removed {} ({})',
-
     # Hydrogens
     'RESIDUES_H_FOUND' : '{} Residues containing H atoms detected',
     'NO_RESIDUES_H_FOUND': 'No residues with Hydrogen atoms found',
