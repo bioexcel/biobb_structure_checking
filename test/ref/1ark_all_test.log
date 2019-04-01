@@ -26,7 +26,6 @@ Step 1: models --select 1
 Running models. Options: --select 1 
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
-1
 Selecting model num. 1
 
 Step 2: chains --select All
@@ -64,7 +63,6 @@ Step 8: rem_hydrogen --remove Yes
 
 Running rem_hydrogen. Options: --remove Yes 
 60 Residues containing H atoms detected
-Yes
 Hydrogen atoms removed from 60 residues
 
 Step 9: amide --fix All
@@ -72,7 +70,6 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ASN A30.OD1  GLN A32.O       2.598 A
-All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
@@ -128,7 +125,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 18 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Command list completed
 Final Num. models: 1

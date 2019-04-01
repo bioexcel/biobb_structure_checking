@@ -55,7 +55,6 @@ Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
-All
 Selecting all chains
 
 Step 3: inscodes
@@ -109,7 +108,6 @@ GLN B418
   CD   A (0.38) B (0.62)
   OE1  A (0.38) B (0.62)
   NE2  A (0.38) B (0.62)
-occupancy
 Selecting location occupancy
 
 Step 5: metals --remove ZN
@@ -141,14 +139,12 @@ Running ligands. Options: --remove SO4
  MAN B507
  FUL B508
  NAG B509
-SO4
 Input not valid (SO4)
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 148 Water molecules detected
-Yes
 148 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -182,7 +178,6 @@ Running backbone. Options: --fix All
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT
-All
 Adding missing backbone atoms
 LEU A443
   Adding new atom OXT
@@ -238,7 +233,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 134 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Command list completed
 Final Num. models: 1

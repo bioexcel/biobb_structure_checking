@@ -32,7 +32,6 @@ Running ligands. Options: --remove SO4
  AC2 A1
  SO4 B3
  AC2 B2
-SO4
 Ligands removed SO4 (2)
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

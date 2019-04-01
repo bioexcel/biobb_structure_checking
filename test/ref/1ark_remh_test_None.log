@@ -22,5 +22,4 @@ Structure pdb:1ark loaded
 
 Running rem_hydrogen. Options: --remove No 
 900 Residues containing H atoms detected
-No
 Structure not modified, not saving. Override with --force_save

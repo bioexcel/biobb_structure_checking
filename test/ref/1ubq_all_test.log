@@ -58,7 +58,6 @@ Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 58 Water molecules detected
-Yes
 58 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -71,7 +70,6 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
-All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
@@ -121,7 +119,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 24 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Command list completed
 Final Num. models: 1

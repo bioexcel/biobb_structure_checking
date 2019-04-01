@@ -22,7 +22,6 @@ Structure pdb:1ark loaded
 
 Running rem_hydrogen. Options: --remove Yes 
 900 Residues containing H atoms detected
-Yes
 Hydrogen atoms removed from 900 residues
 Final Num. models: 15 (type: BioUnit,   35.032 A)
 Final Num. chains: 1 (A: Protein)

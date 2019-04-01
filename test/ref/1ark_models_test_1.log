@@ -23,7 +23,6 @@ Structure pdb:1ark loaded
 Running models. Options: --select 1 
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
-1
 Selecting model num. 1
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)

@@ -47,7 +47,6 @@ Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
-All
 Selecting all chains
 
 Step 3: inscodes
@@ -74,7 +73,6 @@ Running metals. Options: --remove ZN
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
-ZN
 Metal Atoms removed ZN (4)
 
 Step 6: ligands --remove SO4
@@ -88,14 +86,12 @@ Running ligands. Options: --remove SO4
   CA B304
   CA B305
  N25 B401
-SO4
 Input not valid (SO4)
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 75 Water molecules detected
-Yes
 75 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -108,7 +104,6 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  GLN B236.O   ASN B240.OD1    2.980 A
-All
 Amide residues fixed All (1)
 Rechecking
 1 unusual contact(s) involving amide atoms found
@@ -134,7 +129,6 @@ Step 13: backbone --fix All
 Running backbone. Options: --fix All 
 1 Residues with missing backbone atoms found
  ASP A251   OXT
-All
 Adding missing backbone atoms
 ASP A251
   Adding new atom OXT
@@ -196,7 +190,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 107 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Command list completed
 Final Num. models: 1

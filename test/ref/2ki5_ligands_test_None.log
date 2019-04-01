@@ -32,6 +32,5 @@ Running ligands. Options: --remove None
  AC2 A1
  SO4 B3
  AC2 B2
-None
 Nothing to do
 Structure not modified, not saving. Override with --force_save

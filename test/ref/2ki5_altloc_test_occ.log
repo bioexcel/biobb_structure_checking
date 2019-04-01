@@ -36,7 +36,6 @@ AC2 A1
   C1'  A (1.00) B (0.01)
 HOH A779
   O    A (1.00)
-occupancy
 Selecting location occupancy
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

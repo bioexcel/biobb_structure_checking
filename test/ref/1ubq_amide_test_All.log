@@ -24,7 +24,6 @@ Structure pdb:1ubq loaded
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
-All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found

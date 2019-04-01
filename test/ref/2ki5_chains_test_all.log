@@ -30,6 +30,5 @@ Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
-All
 Selecting all chains
 Structure not modified, not saving. Override with --force_save

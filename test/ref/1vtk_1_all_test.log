@@ -32,7 +32,6 @@ Step 1: models --select 1
 Running models. Options: --select 1 
 2 Model(s) detected
 Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
-1
 Selecting model num. 1
 
 Step 2: chains --select All
@@ -62,14 +61,12 @@ Running ligands. Options: --remove SO4
 2 Ligands detected
  ADP A400
  TMP A500
-SO4
 Input not valid (SO4)
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 52 Water molecules detected
-Yes
 52 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -82,7 +79,6 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  PRO A153.O   GLN A349.OE1    3.093 A
-All
 Amide residues fixed All (1)
 Rechecking
 1 unusual contact(s) involving amide atoms found
@@ -112,7 +108,6 @@ Running backbone. Options: --fix All
 2 Backbone breaks found
  SER A149   - PRO A153   
  GLY A264   - PRO A280   
-All
 Adding missing backbone atoms
 SER A149
   Adding new atom OXT
@@ -165,7 +160,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 76 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Command list completed
 Final Num. models: 1

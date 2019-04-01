@@ -34,7 +34,6 @@ Running chains. Options: --select All
 2 Chain(s) detected
  D: DNA
  P: Protein
-All
 Selecting all chains
 
 Step 3: inscodes
@@ -61,7 +60,6 @@ Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 63 Water molecules detected
-Yes
 63 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -74,7 +72,6 @@ Step 9: amide --fix All
 Running amide. Options: --fix All 
 1 unusual contact(s) involving amide atoms found
  GLN P180.NE2 ARG P231.NH1    2.845 A
-All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
@@ -99,7 +96,6 @@ Step 13: backbone --fix All
 Running backbone. Options: --fix All 
 1 Residues with missing backbone atoms found
  GLU P353   OXT
-All
 Adding missing backbone atoms
 GLU P353
   Adding new atom OXT
@@ -163,7 +159,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 106 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Warning: Add backbone hydrogens not implemented for residue   DA D1
 Warning: Add side chain hydrogens not implemented for residue  DA

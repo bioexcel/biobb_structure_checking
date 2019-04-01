@@ -39,7 +39,6 @@ Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
-All
 Selecting all chains
 
 Step 3: inscodes
@@ -59,7 +58,6 @@ AC2 A1
   C1'  A (1.00) B (0.01)
 HOH A779
   O    A (1.00)
-occupancy
 Selecting location occupancy
 
 Step 5: metals --remove ZN
@@ -75,14 +73,12 @@ Running ligands. Options: --remove SO4
  AC2 A1
  SO4 B3
  AC2 B2
-SO4
 Ligands removed SO4 (2)
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes 
 292 Water molecules detected
-Yes
 292 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -127,7 +123,6 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
-All
 "Fixing side chains"
 MET A46
   Adding new atom CG
@@ -191,7 +186,6 @@ Running backbone. Options: --fix All
  GLY B73    - ASP B77    
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
-All
 Adding missing backbone atoms
 VAL A70
   Warning: not enough backbone to reconstruct missing atoms
@@ -275,7 +269,6 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 148 Residues requiring selection on adding H atoms
-auto
 Selection: auto
 Warning: not enough atoms to build backbone H atoms on  VAL A70
 Warning: not enough atoms to build side chain H atoms on  VAL A70

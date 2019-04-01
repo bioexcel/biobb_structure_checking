@@ -46,6 +46,5 @@ Running metals. Options: --remove None
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
-None
 Nothing to do
 Structure not modified, not saving. Override with --force_save

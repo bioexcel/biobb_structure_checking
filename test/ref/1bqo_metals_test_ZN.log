@@ -46,7 +46,6 @@ Running metals. Options: --remove ZN
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
-ZN
 Metal Atoms removed ZN (4)
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
