@@ -96,7 +96,8 @@ class ParamInput():
                         (opt['case'] == 'sensitive' and val in opt['opt_list'])\
                         or (opt['case'] == 'upper' and val.upper() in opt['opt_list'])\
                         or (opt['case'] == 'lower' and val.lower() in opt['opt_list'])\
-                        or (not opt['case'] and val.lower() in list(map(lambda x: x.lower(), opt['opt_list'])))
+                        or (not opt['case'] and val.lower() in\
+                        list(map(lambda x: x.lower(), opt['opt_list'])))
 
                     if opt['type'] == 'pair_list':
                         input_ok = input_ok and val_sp[1] in opt['list2']
@@ -160,7 +161,7 @@ class Dialog():
         """Generate Dialog"""
         dialog = self.options[command]
         if not dialog:
-            raise exc.NoDialogAvailableError(command)
+            raise NoDialogAvailableError(command)
             return None
         opts_parser = argparse.ArgumentParser(prog=dialog['command'])
         opts_parser.add_argument(
@@ -185,5 +186,5 @@ class Error(Exception):
     pass
 
 class NoDialogAvailableError(Error):
-    def __init__(self,command):
-        self.message = 'ERROR: no dialog available for {}".format(command)'
+    def __init__(self, command):
+        self.message = 'ERROR: no dialog available for {}'.format(command)

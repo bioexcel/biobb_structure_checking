@@ -11,7 +11,7 @@ import numpy as np
 import structure_checking.constants as cts
 
 from structure_checking.json_writer import JSONWriter
-from structure_checking.param_input import ParamInput
+from structure_checking.param_input import ParamInput, NoDialogAvailableError
 
 import structure_manager.structure_manager as stm
 import structure_manager.model_utils as mu
@@ -30,11 +30,15 @@ class StructureChecking():
         try:
             self.strucm = self._load_structure(self.args['input_structure_path'])
         except IOError:
-            print('ERROR: fetching structure from {}'.format(self.args['input_structure_path']), file=sys.stderr)
+            print(
+                'ERROR: fetching/parsing structure from {}'.format(
+                    self.args['input_structure_path']
+                ), file=sys.stderr
+            )
             sys.exit(2)
-        except OSError:
-            print("ERROR: parsing PDB", file=sys.stderr)
-            sys.exit(2)
+#        except OSError:
+#            print("ERROR: parsing PDB", file=sys.stderr)
+#            sys.exit(2)
         except (stm.WrongServerError, stm.UnknownFileTypeError) as err:
             print(err.message, file=sys.stderr)
             sys.exit(1)
@@ -50,7 +54,7 @@ class StructureChecking():
         """main method to run checking"""
         if self.args['command'] == 'load':
             sys.exit()
-        
+
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
@@ -66,13 +70,19 @@ class StructureChecking():
                 self.strucm.print_stats('Final')
                 self.summary['final_stats'] = self.strucm.get_stats()
                 try:
-                    output_structure_path = self._save_structure(self.args['output_structure_path'])
+                    output_structure_path = self._save_structure(
+                        self.args['output_structure_path']
+                    )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
                 except OSError:
-                    print ('ERROR: unable to save PDB data on ', output_structure_path, file=sys.stderr)
+                    print(
+                        'ERROR: unable to save PDB data on ',
+                        output_structure_path,
+                        file=sys.stderr
+                    )
                 except stm.OutputPathNotProvidedError as err:
-                    print (err.message, file=sys.stderr)
+                    print(err.message, file=sys.stderr)
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
 
@@ -92,7 +102,7 @@ class StructureChecking():
             opts = cts.DIALOGS.get_parameter('command_list', opts)
             op_list = opts[cts.DIALOGS.get_dialog('command_list')['dest']]
         except NoDialogAvailableError as err:
-            print (err.message)
+            print(err.message)
 
         op_list = ParamInput('Command List File', False).run(op_list)
 
@@ -159,8 +169,6 @@ class StructureChecking():
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
                     opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
-                    print (opts)
-                    
                 else:
                     opts = ''
             error_status = f_fix(opts, data_to_fix)
@@ -206,7 +214,7 @@ class StructureChecking():
 
         if input_option == 'error':
             return [cts.MSGS['UNKNOWN_SELECTION'], select_model]
-        
+
         print(cts.MSGS['SELECT_MODEL'], select_model)
 
         if input_option != 'all':
@@ -449,7 +457,7 @@ class StructureChecking():
             self.summary['metals']['removed'].append(mu.residue_id(atm.get_parent()))
             self.strucm.remove_residue(atm.get_parent(), False)
             rmm_num += 1
-        self.strucm._update_internals()
+        self.strucm.update_internals()
         print(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
         self.summary['metals']['n_removed'] = rmm_num
         return False
@@ -488,7 +496,7 @@ class StructureChecking():
             for res in fix_data['wat_list']:
                 self.strucm.remove_residue(res, False)
                 rmw_num += 1
-            self.strucm._update_internals()
+            self.strucm.update_internals()
             print(cts.MSGS['WATER_REMOVED'].format(rmw_num))
             self.summary['water']['n_removed'] = rmw_num
         return False
@@ -569,7 +577,7 @@ class StructureChecking():
             )
             self.strucm.remove_residue(res, False)
             rl_num += 1
-        self.strucm._update_internals()
+        self.strucm.update_internals()
         print(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
         self.summary['ligands']['n_removed'] = rl_num
         return False
@@ -759,7 +767,7 @@ class StructureChecking():
             if recheck:
                 if not self.args['quiet']:
                     print(cts.MSGS['AMIDES_RECHECK'])
-                fix = self._amide_check() 
+                fix = self._amide_check()
                 amide_fix = ''
                 if no_int_recheck:
                     fix = {}
@@ -832,7 +840,7 @@ class StructureChecking():
                     to_fix.append(res)
         fix_num = 0
         for res in to_fix:
-            self.strucm.fix_chiral_chains (res)
+            self.strucm.fix_chiral_chains(res)
             fix_num += 1
         print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
@@ -879,7 +887,7 @@ class StructureChecking():
                 'chiral_bck_res_to_fix': chiral_bck_res_to_fix,
                 'chiral_bck_rnums': chiral_bck_rnums
             }
-        
+
         return {}
 
 #    def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
@@ -888,7 +896,7 @@ class StructureChecking():
 #        input_line = ParamInput('Fix CA chiralities', self.args['non_interactive'])
 #        input_line.add_option_all()
 #        input_line.add_option_none()
-#        input_line.add_option_list('resnum', self.chiral_bck_rnums, 
+#        input_line.add_option_list('resnum', self.chiral_bck_rnums,
 #            case='sensitive', multiple=True)
 #        [input_option, chiral_fix] = input_line.run(chiral_fix)
 #        if input_option == 'error':
@@ -1268,7 +1276,8 @@ class StructureChecking():
         # Checking new clashes
         if check_clashes:
             print(cts.MSGS['CHECKING_CLASHES'])
-            self.summary['backbone']['missing_atoms']['clashes'] = self._check_report_clashes(fixed_res)
+            self.summary['backbone']['missing_atoms']['clashes'] =\
+                self._check_report_clashes(fixed_res)
 
         #TODO Chain fix
         return False
@@ -1323,9 +1332,9 @@ class StructureChecking():
 #        pass
 #===============================================================================
     def _load_structure(self, input_structure_path, verbose=True, print_stats=True):
-        
+
         input_line = ParamInput(
-            "Enter input structure path (PDB, mmcif | pdb:pdbid)", 
+            "Enter input structure path (PDB, mmcif | pdb:pdbid)",
             self.args['non_interactive']
         )
         input_structure_path = input_line.run(input_structure_path)
@@ -1358,7 +1367,7 @@ class StructureChecking():
 
     def _save_structure(self, output_structure_path):
         input_line = ParamInput(
-            "Enter output structure path", 
+            "Enter output structure path",
             self.args['non_interactive']
         )
         output_structure_path = input_line.run(output_structure_path)
@@ -1402,6 +1411,3 @@ class StructureChecking():
 #===============================================================================
 def _key_sort_atom_pairs(at_pair):
     return at_pair[0].serial_number * 10000 + at_pair[1].serial_number
-
-
-        

@@ -31,8 +31,8 @@ DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | interactive | interactive_his | ph )')
 
 AVAILABLE_METHODS = [
-    'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen', 
-    'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck', 
+    'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
+    'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
     'fixside', 'backbone', 'cistransbck', 'clashes']
 
 MSGS = {
