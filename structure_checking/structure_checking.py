@@ -245,7 +245,7 @@ class StructureChecking():
                     )
                 )
         self.summary['chains'] = {'ids':self.strucm.chain_ids}
-        return len(self.strucm.chains_ids) > 1
+        return len(self.strucm.chain_ids) > 1
 
     def _chains_fix(self, select_chains, fix_data=None):
         self.summary['chains']['selected'] = {}
@@ -275,15 +275,15 @@ class StructureChecking():
         self._run_method('inscodes', opts)
 
     def _inscodes_check(self):
-        self.strucm.get_ins_codes()
-        if not self.strucm.ins_codes_list:
+        ins_codes_list = self.strucm.get_ins_codes()
+        if not ins_codes_list:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_INSCODES_FOUND'])
             return {}
 
-        print(cts.MSGS['INSCODES_FOUND'].format(len(self.strucm.ins_codes_list)))
+        print(cts.MSGS['INSCODES_FOUND'].format(len(ins_codes_list)))
         self.summary['inscodes'] = []
-        for res in self.strucm.ins_codes_list:
+        for res in ins_codes_list:
             print(mu.residue_id(res))
             self.summary['inscodes'].append(mu.residue_id(res))
         return {}
@@ -1171,11 +1171,11 @@ class StructureChecking():
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
 
         #Not bound consecutive residues
-        self.strucm.get_backbone_breaks()
-        if self.strucm.bck_breaks_list:
-            print(cts.MSGS['BACKBONE_BREAKS'].format(len(self.strucm.bck_breaks_list)))
+        bck_check  = self.strucm.get_backbone_breaks()
+        if bck_check['bck_breaks_list']:
+            print(cts.MSGS['BACKBONE_BREAKS'].format(len(bck_check['bck_breaks_list'])))
             self.summary['backbone']['breaks'] = []
-            for brk in self.strucm.bck_breaks_list:
+            for brk in bck_check['bck_breaks_list']:
                 print(
                     " {:10} - {:10} ".format(
                         mu.residue_id(brk[0]),
@@ -1186,10 +1186,10 @@ class StructureChecking():
                     mu.residue_id(brk[0]), mu.residue_id(brk[1])
                 ])
             fix_data['bck_breaks_list'] = True
-        if self.strucm.wrong_link_list:
+        if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
             self.summary['backbone']['wrong_links'] = []
-            for brk in self.strucm.wrong_link_list:
+            for brk in bck_check['wrong_link_list']:
                 print(
                     " {:10} linked to {:10}, expected {:10} ".format(
                         mu.residue_id(brk[0]),
@@ -1204,10 +1204,10 @@ class StructureChecking():
                 ])
             fix_data['wrong_link_list'] = True
 
-        if self.strucm.not_link_seq_list:
+        if bck_check['not_link_seq_list']:
             print(cts.MSGS['CONSEC_RES_FAR'])
             self.summary['backbone']['long_links'] = []
-            for brk in self.strucm.not_link_seq_list:
+            for brk in bck_check['not_link_seq_list']:
                 print(
                     " {:10} - {:10}, bond distance {:8.3f} ".format(
                         mu.residue_id(brk[0]),
