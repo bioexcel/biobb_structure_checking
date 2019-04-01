@@ -281,6 +281,7 @@ class StructureChecking():
         return {}
 
 #    def _inscodes_fix(self, select_codes, fix_data=None):
+#        Renumber residues??
 #        pass
 # =============================================================================
     def altloc(self, opts=None):
@@ -445,14 +446,10 @@ class StructureChecking():
 
         rmm_num = 0
         for atm in to_remove:
-            self.summary['metals']['removed'].append(
-                mu.residue_id(
-                    atm.get_parent(), self.strucm.has_models()
-                )
-            )
-            self.strucm.remove_residue(atm.get_parent())
+            self.summary['metals']['removed'].append(mu.residue_id(atm.get_parent()))
+            self.strucm.remove_residue(atm.get_parent(), False)
             rmm_num += 1
-
+        self.strucm._update_internals()
         print(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
         self.summary['metals']['n_removed'] = rmm_num
         return False
@@ -524,9 +521,7 @@ class StructureChecking():
             else:
                 print(' {}'.format(mu.residue_id(res, False)))
 
-            self.summary['ligands']['detected'].append(
-                mu.residue_id(res, self.strucm.has_models())
-            )
+            self.summary['ligands']['detected'].append(mu.residue_id(res))
             fix_data['ligand_rids'].add(res.get_resname())
             fix_data['ligand_rnums'].append(mu.residue_num(res))
 
@@ -572,9 +567,9 @@ class StructureChecking():
             self.summary['ligands']['removed']['lst'].append(
                 mu.residue_id(res, self.strucm.has_models())
             )
-            self.strucm.remove_residue(res)
+            self.strucm.remove_residue(res, False)
             rl_num += 1
-
+        self.strucm._update_internals()
         print(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
         self.summary['ligands']['n_removed'] = rl_num
         return False
@@ -764,7 +759,7 @@ class StructureChecking():
             if recheck:
                 if not self.args['quiet']:
                     print(cts.MSGS['AMIDES_RECHECK'])
-                fix = self._amide_check() #TODO reduce check to fixed residues if necessary
+                fix = self._amide_check() 
                 amide_fix = ''
                 if no_int_recheck:
                     fix = {}
@@ -812,8 +807,6 @@ class StructureChecking():
 
     def _chiral_fix(self, chiral_fix, fix_data=None, check_clashes=True):
 
-        chiral_res = self.strucm.data_library.get_chiral_data()
-
         input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -839,10 +832,7 @@ class StructureChecking():
                     to_fix.append(res)
         fix_num = 0
         for res in to_fix:
-            mu.invert_side_atoms(res, chiral_res)
-            if res.get_resname() == 'ILE':
-                mu.delete_atom(res, 'CD1')
-                mu.build_atom(res, 'CD1', self.strucm.res_library, 'ILE')
+            self.strucm.fix_chiral_chains (res)
             fix_num += 1
         print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
