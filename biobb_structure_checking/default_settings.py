@@ -3,7 +3,7 @@ Class to initialize global settings like data file path.
 """
 class DefaultSettings():
     def __init__(self, base_dir):
-        self.base_dir_path = base_dir
+        self.base_dir_path = base_dir + '/../biobb_structure_checking'
 #Default locations
         self.help_dir_path = self.base_dir_path + "/helpdocs"
         self.data_dir_path = self.base_dir_path + "/dat"

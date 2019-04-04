@@ -8,13 +8,13 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import numpy as np
 
-import structure_checking.constants as cts
+import biobb_structure_checking.constants as cts
 
-from structure_checking.json_writer import JSONWriter
-from structure_checking.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.json_writer import JSONWriter
+from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableError
 
-import structure_manager.structure_manager as stm
-import structure_manager.model_utils as mu
+import biobb_structure_manager.structure_manager as stm
+import biobb_structure_manager.model_utils as mu
 
 # Main class
 class StructureChecking():
@@ -882,10 +882,10 @@ class StructureChecking():
                 print(' {:10}'.format(mu.residue_id(res)))
                 self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
-            return {
-                'chiral_bck_res_to_fix': chiral_bck_res_to_fix,
-                'chiral_bck_rnums': chiral_bck_rnums
-            }
+#            return {
+#                'chiral_bck_res_to_fix': chiral_bck_res_to_fix,
+#                'chiral_bck_rnums': chiral_bck_rnums
+#            }
 
         return {}
 

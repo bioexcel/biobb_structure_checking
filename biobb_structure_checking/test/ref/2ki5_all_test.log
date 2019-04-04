@@ -188,29 +188,22 @@ Running backbone. Options: --fix All
  SER B263   - ALA B278   
 Adding missing backbone atoms
 VAL A70
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 GLY A148
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 GLY A264
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 ALA A375
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 GLY B73
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 GLY B148
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 SER B263
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 ALA B375
-  Warning: not enough backbone to reconstruct missing atoms
+Warning: not enough backbone to build missing atoms
 Fixed 0 backbone atom(s)
-Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
 
 Step 14: cistransbck
 
@@ -270,18 +263,18 @@ Step 17: add_hydrogen --add_mode auto
 Running add_hydrogen. Options: --add_mode auto 
 148 Residues requiring selection on adding H atoms
 Selection: auto
-Warning: not enough atoms to build backbone H atoms on  VAL A70
-Warning: not enough atoms to build side chain H atoms on  VAL A70
-Warning: not enough atoms to build backbone H atoms on  GLY A148
-Warning: not enough atoms to build backbone H atoms on  GLY A264
-Warning: not enough atoms to build backbone H atoms on  ALA A375
-Warning: not enough atoms to build side chain H atoms on  ALA A375
-Warning: not enough atoms to build backbone H atoms on  GLY B73
-Warning: not enough atoms to build backbone H atoms on  GLY B148
-Warning: not enough atoms to build backbone H atoms on  SER B263
-Warning: not enough atoms to build side chain H atoms on  SER B263
-Warning: not enough atoms to build backbone H atoms on  ALA B375
-Warning: not enough atoms to build side chain H atoms on  ALA B375
+Warning: not enough atoms to build backbone hydrogen atoms on VAL A70
+Warning: not enough atoms to build side chain hydrogen atoms on VAL A70
+Warning: not enough atoms to build backbone hydrogen atoms on GLY A148
+Warning: not enough atoms to build backbone hydrogen atoms on GLY A264
+Warning: not enough atoms to build backbone hydrogen atoms on ALA A375
+Warning: not enough atoms to build side chain hydrogen atoms on ALA A375
+Warning: not enough atoms to build backbone hydrogen atoms on GLY B73
+Warning: not enough atoms to build backbone hydrogen atoms on GLY B148
+Warning: not enough atoms to build backbone hydrogen atoms on SER B263
+Warning: not enough atoms to build side chain hydrogen atoms on SER B263
+Warning: not enough atoms to build backbone hydrogen atoms on ALA B375
+Warning: not enough atoms to build side chain hydrogen atoms on ALA B375
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

@@ -3045,14 +3045,6 @@
     "O",
     "OXT"
    ],
-   "clashes": {
-    "apolar": [],
-    "negative": [],
-    "polar_acceptor": [],
-    "polar_donor": [],
-    "positive": [],
-    "severe": []
-   },
    "fixed": [
     "VAL A70",
     "GLY A148",

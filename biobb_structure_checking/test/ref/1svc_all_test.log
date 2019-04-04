@@ -160,44 +160,44 @@ Step 17: add_hydrogen --add_mode auto
 Running add_hydrogen. Options: --add_mode auto 
 106 Residues requiring selection on adding H atoms
 Selection: auto
-Warning: Add backbone hydrogens not implemented for residue   DA D1
-Warning: Add side chain hydrogens not implemented for residue  DA
-Warning: Add backbone hydrogens not implemented for residue   DG D2
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DA D3
-Warning: Add side chain hydrogens not implemented for residue  DA
-Warning: Add backbone hydrogens not implemented for residue   DT D4
-Warning: Add side chain hydrogens not implemented for residue  DT
-Warning: Add backbone hydrogens not implemented for residue   DG D5
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DG D6
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DG D7
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DG D8
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DA D9
-Warning: Add side chain hydrogens not implemented for residue  DA
-Warning: Add backbone hydrogens not implemented for residue   DA D10
-Warning: Add side chain hydrogens not implemented for residue  DA
-Warning: Add backbone hydrogens not implemented for residue   DT D11
-Warning: Add side chain hydrogens not implemented for residue  DT
-Warning: Add backbone hydrogens not implemented for residue   DC D12
-Warning: Add side chain hydrogens not implemented for residue  DC
-Warning: Add backbone hydrogens not implemented for residue   DC D13
-Warning: Add side chain hydrogens not implemented for residue  DC
-Warning: Add backbone hydrogens not implemented for residue   DC D14
-Warning: Add side chain hydrogens not implemented for residue  DC
-Warning: Add backbone hydrogens not implemented for residue   DC D15
-Warning: Add side chain hydrogens not implemented for residue  DC
-Warning: Add backbone hydrogens not implemented for residue   DT D16
-Warning: Add side chain hydrogens not implemented for residue  DT
-Warning: Add backbone hydrogens not implemented for residue   DA D17
-Warning: Add side chain hydrogens not implemented for residue  DA
-Warning: Add backbone hydrogens not implemented for residue   DG D18
-Warning: Add side chain hydrogens not implemented for residue  DG
-Warning: Add backbone hydrogens not implemented for residue   DA D19
-Warning: Add side chain hydrogens not implemented for residue  DA
+Warning: Residue not valid in this context   DA D1
+Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DG D2
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D3
+Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DT D4
+Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DG D5
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D6
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D7
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D8
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D9
+Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DA D10
+Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DT D11
+Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DC D12
+Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D13
+Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D14
+Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D15
+Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DT D16
+Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DA D17
+Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DG D18
+Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D19
+Warning: DA is not a valid residue in this context
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (D: DNA, P: Protein)

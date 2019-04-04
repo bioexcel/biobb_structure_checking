@@ -1,6 +1,6 @@
 """ Global constants for structure_checking module
 """
-from structure_checking.param_input import Dialog
+from biobb_structure_checking.param_input import Dialog
 
 # Interactive DIALOGS to complete command_line missing parameters
 DIALOGS = Dialog()
