@@ -297,7 +297,7 @@ class StructureChecking():
         self._run_method('altloc', opts)
 
     def _altloc_check(self): #TODO improve output
-        alt_loc_res = mu.get_altloc_residues(self._get_structure())
+        alt_loc_res = self.strucm.get_altloc_residues()
         if not alt_loc_res:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_ALTLOC_FOUND'])
@@ -467,7 +467,7 @@ class StructureChecking():
         self._run_method('water', opts)
 
     def _water_check(self):
-        lig_list = mu.get_ligands(self._get_structure(), incl_water=True)
+        lig_list = mu.get_ligands(self.strucm.st, incl_water=True)
         wat_list = []
         for res in lig_list:
             if mu.is_wat(res):
@@ -506,7 +506,7 @@ class StructureChecking():
         self._run_method('ligands', opts)
 
     def _ligands_check(self):
-        lig_list = mu.get_ligands(self._get_structure(), incl_water=False)
+        lig_list = mu.get_ligands(self.strucm.st, incl_water=False)
 
         if not lig_list:
             if not self.args['quiet']:
@@ -589,7 +589,7 @@ class StructureChecking():
 
     def _rem_hydrogen_check(self):
 
-        remh_list = mu.get_residues_with_H(self._get_structure())
+        remh_list = mu.get_residues_with_H(self.strucm.st)
 
         if not remh_list:
             if not self.args['quiet']:
@@ -657,50 +657,22 @@ class StructureChecking():
         self._run_method('amide', opts)
 
     def _amide_check(self):
-
-        amide_atoms = self.strucm.data_library.get_amide_data()[1]
-
-        amide_list = self.strucm.get_amide_list()
-
-        self.summary['amide']['n_amides'] = len(amide_list)
-
-        if not amide_list:
+        amide_check = self.strucm.check_amide_contacts()
+        if 'amide_list' not in amide_check:
             if not self.args['quiet']:
-                print('NO_AMIDES')
+                print(cts.MSGS['NO_AMIDES'])
             return {}
+        self.summary['amide']['n_amides'] = len(amide_check['amide_list'])
 
-        c_list = self.strucm.check_r_list_clashes(
-            amide_list,
-            stm.AMIDE_CONTACT_TYPES
-        )
-        amide_res_to_fix = []
-        amide_rnums = []
-        amide_cont_list = []
-        for cls in c_list:
-            for rkey in c_list[cls]:
-                [at1, at2] = c_list[cls][rkey][0:2]
-                res1 = at1.get_parent()
-                res2 = at2.get_parent()
-                add_pair = False
-                if at1.id in amide_atoms and res1 in amide_list:
-                    amide_res_to_fix.append(res1)
-                    amide_rnums.append(mu.residue_num(res1))
-                    add_pair = True
-                if at2.id in amide_atoms and res2 in amide_list:
-                    amide_res_to_fix.append(res2)
-                    amide_rnums.append(mu.residue_num(res2))
-                    add_pair = True
-                if add_pair:
-                    amide_cont_list.append(c_list[cls][rkey])
-
-        if not amide_cont_list:
+        if not amide_check['amide_cont_list']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_UNUSUAL_AMIDES'])
             return {}
 
-        print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_cont_list)))
+        print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_check['amide_cont_list'])))
+
         self.summary['amide']['detected'] = []
-        for at_pair in sorted(amide_cont_list, key=_key_sort_atom_pairs):
+        for at_pair in sorted(amide_check['amide_cont_list'], key=_key_sort_atom_pairs):
             print(
                 ' {:12} {:12} {:8.3f} A'.format(
                     mu.atom_id(at_pair[0]),
@@ -715,13 +687,7 @@ class StructureChecking():
                     'dist': round(float(np.sqrt(at_pair[2])), 4)
                 }
             )
-        return {
-            'amide_list':  amide_list,
-            'amide_res_to_fix': amide_res_to_fix,
-            'amide_cont_list': amide_cont_list,
-            'amide_rnums': amide_rnums
-        }
-
+        return amide_check
 # =============================================================================
     def _amide_fix(self, amide_fix, fix_data=None, recheck=True):
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
@@ -780,38 +746,29 @@ class StructureChecking():
 
     def _chiral_check(self):
 
-        chiral_list = self.strucm.get_chiral_list()
+        chiral_check = self.strucm.check_chiral_sides()
+        
+        self.summary['chiral']['n_chirals'] = len(chiral_check['chiral_list'])
 
-        self.summary['chiral']['n_chirals'] = len(chiral_list)
-
-        if not chiral_list:
+        if not chiral_check['chiral_list']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_CHIRALS'])
             return {}
 
-        chiral_res = self.strucm.data_library.get_chiral_data()
 
-        chiral_res_to_fix = []
-        chiral_rnums = []
-
-        for res in chiral_list:
-            if not mu.check_chiral_residue(res, chiral_res):
-                chiral_res_to_fix.append(res)
-                chiral_rnums.append(mu.residue_num(res))
-
-        if not chiral_res_to_fix:
+        if not chiral_check['chiral_res_to_fix']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_WRONG_CHIRAL_SIDE'])
             return {}
 
-        print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_res_to_fix)))
+        print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_check['chiral_res_to_fix'])))
         self.summary['chiral']['detected'] = []
-        for res in chiral_res_to_fix:
+        for res in chiral_check['chiral_res_to_fix']:
             print(' {:10}'.format(mu.residue_id(res)))
             self.summary['chiral']['detected'].append(mu.residue_id(res))
 
-        return {'chiral_res_to_fix': chiral_res_to_fix, 'chiral_rnums' : chiral_rnums}
-
+        return chiral_check
+    
     def _chiral_fix(self, chiral_fix, fix_data=None, check_clashes=True):
 
         input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
@@ -859,34 +816,27 @@ class StructureChecking():
 
     def _chiral_bck_check(self):
 
-        chiral_bck_list = self.strucm.get_chiral_bck_list()
+        check = self.strucm.get_chiral_bck_list()
 
-        self.summary['chiral_bck']['n_chirals'] = len(chiral_bck_list)
+        self.summary['chiral_bck']['n_chirals'] = len(check['chiral_bck_list'])
 
-        if chiral_bck_list:
-            chiral_bck_res_to_fix = []
-            chiral_bck_rnums = []
-            for res in chiral_bck_list:
-                if not mu.check_chiral_ca(res):
-                    chiral_bck_res_to_fix.append(res)
-                    chiral_bck_rnums.append(mu.residue_num(res))
+        if not check['chiral_bck_list']:
+            if not self.args['quiet']:
+                print (cts.MSGS['NO_BCK_CHIRALS'])
+            return {}
 
-            if not chiral_bck_res_to_fix:
-                if not self.args['quiet']:
-                    print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
-                return {}
+        if not check['chiral_bck_res_to_fix']:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
+            return {}
 
-            print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(chiral_bck_res_to_fix)))
-            self.summary['chiral_bck']['detected'] = []
-            for res in chiral_bck_res_to_fix:
-                print(' {:10}'.format(mu.residue_id(res)))
-                self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
+        print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check['chiral_bck_res_to_fix'])))
+        self.summary['chiral_bck']['detected'] = []
+        for res in check['chiral_bck_res_to_fix']:
+            print(' {:10}'.format(mu.residue_id(res)))
+            self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
-#            return {
-#                'chiral_bck_res_to_fix': chiral_bck_res_to_fix,
-#                'chiral_bck_rnums': chiral_bck_rnums
-#            }
-
+#       return check
         return {}
 
 #    def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
@@ -938,12 +888,7 @@ class StructureChecking():
 
         #Recalc when models are separated molecules
         if not self.strucm.has_superimp_models():
-            rr_dist = mu.get_all_r2r_distances(
-                self._get_structure(),
-                'all',
-                self.strucm.data_library.get_distances('R_R_CUTOFF'),
-                join_models=True #not self.strucm.has_superimp_models()
-            )
+            rr_dist = self.strucm.get_all_r2r_distances('all', True)
         else:
             rr_dist = self.strucm.rr_dist
 
@@ -1090,7 +1035,7 @@ class StructureChecking():
             return False
 
         to_fix = []
-        std_ion = self.strucm.data_library.get_ion_data()
+        std_ion = self.strucm.data_library.std_ion
         if input_option == 'auto':
             if not self.args['quiet']:
                 print('Selection: auto')
@@ -1365,9 +1310,6 @@ class StructureChecking():
         self.summary['stats'] = strucm.get_stats()
 
         return strucm
-
-    def _get_structure(self):
-        return self.strucm.get_structure()
 
     def _save_structure(self, output_structure_path):
         input_line = ParamInput(

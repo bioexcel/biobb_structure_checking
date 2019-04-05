@@ -1,4 +1,4 @@
-BASEDIR = /data/DEVEL/BioExcel/biobb_structure_checking
+BASEDIR = /data/DEVEL/BioExcel/biobb/biobb_structure_checking
 APPDIR = ${BASEDIR}/bin
 TESTDIR = ${BASEDIR}/biobb_structure_checking/test
 SHELL = /bin/csh
@@ -11,7 +11,7 @@ update:
 	cp *pdb *log *json ref
 
 all: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
-  backbone cistransbck biounits all_checks diffs ;
+  backbone cistransbck biounits all_checks ;
 
 models: 
 	echo "Running models on 1ark"
