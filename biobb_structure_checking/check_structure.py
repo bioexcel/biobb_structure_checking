@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 
 """
  check_structure: Command line replacement for MDWeb structure check
@@ -10,7 +10,7 @@ __date__ = "$13-jul-2018 15:52:55$"
 
 import os
 import sys
-
+import biobb_structure_checking
 from biobb_structure_checking.cmd_line import CmdLine
 from biobb_structure_checking.help_manager import HelpManager
 from biobb_structure_checking.structure_checking import StructureChecking
@@ -21,7 +21,7 @@ VERSION = 'v1.0.5'
 def main():
     """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""
 
-    sets = DefaultSettings(os.path.dirname(__file__))
+    sets = DefaultSettings(biobb_structure_checking.__path__[0])
 #
     help_manager = HelpManager(sets.help_dir_path)
     cmd_line = CmdLine(defaults={'version': VERSION})
