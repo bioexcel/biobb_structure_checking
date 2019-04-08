@@ -745,14 +745,12 @@ class StructureChecking():
     def _chiral_check(self):
 
         chiral_check = self.strucm.check_chiral_sides()
-        
-        self.summary['chiral']['n_chirals'] = len(chiral_check['chiral_list'])
 
-        if not chiral_check['chiral_list']:
+        if 'chiral_list' not in chiral_check:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_CHIRALS'])
             return {}
-
+        self.summary['chiral']['n_chirals'] = len(chiral_check['chiral_list']) 
 
         if not chiral_check['chiral_res_to_fix']:
             if not self.args['quiet']:
@@ -816,12 +814,13 @@ class StructureChecking():
 
         check = self.strucm.get_chiral_bck_list()
 
-        self.summary['chiral_bck']['n_chirals'] = len(check['chiral_bck_list'])
-
-        if not check['chiral_bck_list']:
+        if 'chiral_bck_list' not in check:
             if not self.args['quiet']:
                 print (cts.MSGS['NO_BCK_CHIRALS'])
+            self.summary['chiral_bck']['n_chirals'] = 0
             return {}
+
+        self.summary['chiral_bck']['n_chirals'] = len(check['chiral_bck_list'])
 
         if not check['chiral_bck_res_to_fix']:
             if not self.args['quiet']:
