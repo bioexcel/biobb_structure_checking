@@ -51,7 +51,7 @@ class StructureChecking():
             self.args['check_only'] = False
 
     def launch(self):
-        """main method to run checking"""
+        """ Main method to run checking"""
         if self.args['command'] == 'load':
             sys.exit()
 
@@ -309,14 +309,12 @@ class StructureChecking():
 
         fix_data = {
             'alt_loc_res' : alt_loc_res,
-            'alt_loc_rnums' : [],
             'altlocs' : {}
         }
 
         for res in sorted(alt_loc_res, key=lambda x: x.index):
             rid = mu.residue_id(res)
             print(rid)
-            fix_data['alt_loc_rnums'].append(mu.residue_num(res))
             self.summary['altloc'][rid] = {}
             fix_data['altlocs'][res] = sorted(alt_loc_res[res][0].child_dict)
             for atm in alt_loc_res[res]:
@@ -325,8 +323,8 @@ class StructureChecking():
                 for alt in sorted(atm.child_dict):
                     alt_str += ' {} ({:4.2f})'.format(alt, atm.child_dict[alt].occupancy)
                     self.summary['altloc'][rid][atm.id].append({
-                        'loc_label':alt,
-                        'occupancy':atm.child_dict[alt].occupancy
+                        'loc_label': alt,
+                        'occupancy': atm.child_dict[alt].occupancy
                     })
                 print(alt_str)
 
@@ -346,7 +344,7 @@ class StructureChecking():
         input_line.add_option_list('altids', altlocs, case='upper')
         input_line.add_option_list(
             'resnum',
-            fix_data['alt_loc_rnums'],
+            mu.prep_rnums_list(fix_data['altlocs']),
             opt_type='pair_list',
             list2=altlocs,
             case='sensitive',
@@ -381,8 +379,10 @@ class StructureChecking():
                     }
 
         self.summary['altloc']['selected'] = select_altloc
+
         for res in to_fix:
-                self.strucm.select_altloc_residue(res, to_fix[res])
+            self.strucm.select_altloc_residue(res, to_fix[res])
+
         return False
 # =============================================================================
     def metals(self, opts=None):
@@ -656,21 +656,21 @@ class StructureChecking():
 
     def _amide_check(self):
         amide_check = self.strucm.check_amide_contacts()
-        if 'amide_list' not in amide_check:
+        if 'list' not in amide_check:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_AMIDES'])
             return {}
-        self.summary['amide']['n_amides'] = len(amide_check['amide_list'])
+        self.summary['amide']['n_amides'] = len(amide_check['list'])
 
-        if not amide_check['amide_cont_list']:
+        if not amide_check['cont_list']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_UNUSUAL_AMIDES'])
             return {}
 
-        print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_check['amide_cont_list'])))
+        print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_check['cont_list'])))
 
         self.summary['amide']['detected'] = []
-        for at_pair in sorted(amide_check['amide_cont_list'], key=_key_sort_atom_pairs):
+        for at_pair in sorted(amide_check['cont_list'], key=_key_sort_atom_pairs):
             print(
                 ' {:12} {:12} {:8.3f} A'.format(
                     mu.atom_id(at_pair[0]),
@@ -688,16 +688,21 @@ class StructureChecking():
         return amide_check
 # =============================================================================
     def _amide_fix(self, amide_fix, fix_data=None, recheck=True):
+        if not fix_data:
+            return False
+
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
 
         while fix_data:
-            input_line = ParamInput(
-                'Fix amide atoms', self.args['non_interactive']
-            )
+
+            input_line = ParamInput('Fix amide atoms', self.args['non_interactive'])
             input_line.add_option_all()
             input_line.add_option_none()
             input_line.add_option_list(
-                'resnum', sorted(fix_data['amide_rnums']), case='sensitive', multiple=True
+                'resnum',
+                sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
+                case='sensitive',
+                multiple=True
             )
             [input_option, amide_fix] = input_line.run(amide_fix)
 
@@ -710,7 +715,7 @@ class StructureChecking():
                 return False
 
             to_fix = []
-            for res in fix_data['amide_res_to_fix']:
+            for res in fix_data['res_to_fix']:
                 if mu.residue_num(res) in amide_fix.split(',')\
                         or input_option == 'all':
                     to_fix.append(res)
@@ -724,7 +729,7 @@ class StructureChecking():
                         return [err.message]
                     done.add(res) # To avoid double change
                     fix_num += 1
-                    
+
             print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
             self.strucm.modified = True
             fix_data = {}
@@ -746,32 +751,38 @@ class StructureChecking():
 
         chiral_check = self.strucm.check_chiral_sides()
 
-        if 'chiral_list' not in chiral_check:
+        if 'list' not in chiral_check:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_CHIRALS'])
             return {}
-        self.summary['chiral']['n_chirals'] = len(chiral_check['chiral_list']) 
+        self.summary['chiral']['n_chirals'] = len(chiral_check['list'])
 
-        if not chiral_check['chiral_res_to_fix']:
+        if not chiral_check['res_to_fix']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_WRONG_CHIRAL_SIDE'])
             return {}
 
-        print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_check['chiral_res_to_fix'])))
+        print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_check['res_to_fix'])))
         self.summary['chiral']['detected'] = []
-        for res in chiral_check['chiral_res_to_fix']:
+        for res in chiral_check['res_to_fix']:
             print(' {:10}'.format(mu.residue_id(res)))
             self.summary['chiral']['detected'].append(mu.residue_id(res))
 
         return chiral_check
-    
+
     def _chiral_fix(self, chiral_fix, fix_data=None, check_clashes=True):
+
+        if not fix_data:
+            return False
 
         input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list(
-            'resnum', fix_data['chiral_rnums'], case='sensitive', multiple=True
+            'resnum',
+            mu.prep_rnums_list(fix_data['res_to_fix']),
+            case='sensitive',
+            multiple=True
         )
         [input_option, chiral_fix] = input_line.run(chiral_fix)
 
@@ -784,10 +795,10 @@ class StructureChecking():
             return False
 
         if input_option == 'all':
-            to_fix = fix_data['chiral_res_to_fix']
+            to_fix = fix_data['res_to_fix']
         else:
             to_fix = []
-            for res in fix_data['chiral_res_to_fix']:
+            for res in fix_data['res_to_fix']:
                 if mu.residue_num(res) in chiral_fix.split(','):
                     to_fix.append(res)
         fix_num = 0
@@ -814,22 +825,22 @@ class StructureChecking():
 
         check = self.strucm.get_chiral_bck_list()
 
-        if 'chiral_bck_list' not in check:
+        if 'list' not in check:
             if not self.args['quiet']:
-                print (cts.MSGS['NO_BCK_CHIRALS'])
+                print(cts.MSGS['NO_BCK_CHIRALS'])
             self.summary['chiral_bck']['n_chirals'] = 0
             return {}
 
-        self.summary['chiral_bck']['n_chirals'] = len(check['chiral_bck_list'])
+        self.summary['chiral_bck']['n_chirals'] = len(check['list'])
 
-        if not check['chiral_bck_res_to_fix']:
+        if not check['res_to_fix']:
             if not self.args['quiet']:
                 print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
             return {}
 
-        print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check['chiral_bck_res_to_fix'])))
+        print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check['res_to_fix'])))
         self.summary['chiral_bck']['detected'] = []
-        for res in check['chiral_bck_res_to_fix']:
+        for res in check['res_to_fix']:
             print(' {:10}'.format(mu.residue_id(res)))
             self.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
@@ -925,7 +936,6 @@ class StructureChecking():
 
         fix_data = {
             'miss_at_list': miss_at_list,
-            'fixside_rnums': []
         }
 
         self.summary['fixside']['detected'] = {}
@@ -933,17 +943,23 @@ class StructureChecking():
         for r_at in miss_at_list:
             [res, at_list] = r_at
             print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-            fix_data['fixside_rnums'].append(mu.residue_num(res))
             self.summary['fixside']['detected'][mu.residue_id(res)] = at_list
 
         return fix_data
 
     def _fixside_fix(self, fix_side, fix_data=None, check_clashes=True):
+        if not fix_data:
+            return False
+
+        fixside_rnums = []
+        for r_at in fix_data['miss_at_list']:
+            fixside_rnums.append(mu.residue_num(r_at[0]))
+
         input_line = ParamInput('fixside', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list(
-            'resnum', fix_data['fixside_rnums'], case='sensitive', multiple=True
+            'resnum', fixside_rnums, case='sensitive', multiple=True
         )
         [input_option, fix_side] = input_line.run(fix_side)
 
@@ -1001,18 +1017,23 @@ class StructureChecking():
 
         fix_data = {
             'ion_res_list': ion_res_list,
-            'add_h_rnums' : []
         }
         self.summary['add_hydrogen']['detected'] = {}
         print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
         for r_at in ion_res_list:
-            [res, at_list] = r_at
             #print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-            fix_data['add_h_rnums'].append(mu.residue_num(res))
-            self.summary['add_hydrogen']['detected'][mu.residue_id(res)] = at_list
+            self.summary['add_hydrogen']['detected'][mu.residue_id(r_at[0])] = r_at[1]
         return fix_data
 
     def _add_hydrogen_fix(self, mode, fix_data=None):
+
+        if not fix_data:
+            return False
+
+        add_h_rnums = []
+        for r_at in fix_data['ion_res_list']:
+            add_h_rnums.append(mu.residue_num(r_at[0]))
+
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_list('auto', ['auto'], case="lower")
@@ -1112,7 +1133,7 @@ class StructureChecking():
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
 
         #Not bound consecutive residues
-        bck_check  = self.strucm.get_backbone_breaks()
+        bck_check = self.strucm.get_backbone_breaks()
         if bck_check['bck_breaks_list']:
             print(cts.MSGS['BACKBONE_BREAKS'].format(len(bck_check['bck_breaks_list'])))
             self.summary['backbone']['breaks'] = []
@@ -1176,11 +1197,16 @@ class StructureChecking():
     def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True):
         if 'miss_bck_at_list' not in fix_data:
             return False
+
+        fixbck_rnums = []
+        for r_at in fix_data['miss_bck_at_list']:
+            fixbck_rnums.append(mu.residue_num(r_at[0]))
+
         input_line = ParamInput('fixbck', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list(
-            'resnum', fix_data['fixbck_rnums'], case='sensitive', multiple=True
+            'resnum', fixbck_rnums, case='sensitive', multiple=True
         )
         [input_option, fix_back] = input_line.run(fix_back)
 
@@ -1193,16 +1219,16 @@ class StructureChecking():
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
-        
+
         to_fix = []
         for r_at in fix_data['miss_bck_at_list']:
             if mu.residue_num(r_at[0]) in fix_back.split(',')\
                     or input_option == 'all':
                 to_fix.append(r_at)
-        
+
         if not self.args['quiet']:
             print(cts.MSGS['ADDING_BCK_ATOMS'])
-        
+
         fix_num = 0
         self.summary['backbone']['missing_atoms']['fixed'] = []
         fixed_res = []

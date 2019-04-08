@@ -162,7 +162,6 @@ class Dialog():
         dialog = self.options[command]
         if not dialog:
             raise NoDialogAvailableError(command)
-            return None
         opts_parser = argparse.ArgumentParser(prog=dialog['command'])
         opts_parser.add_argument(
             dialog['prompt'],
@@ -186,5 +185,6 @@ class Error(Exception):
     pass
 
 class NoDialogAvailableError(Error):
+    """ Error on no Dialog available for **command**"""
     def __init__(self, command):
         self.message = 'ERROR: no dialog available for {}'.format(command)

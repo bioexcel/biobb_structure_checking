@@ -101,6 +101,7 @@ MSGS = {
     #chiral Backbone
     'CHIRAL_BCK_RESIDUES': '{} residues with incorrect backbone chirality found',
     'NO_CHIRAL_BCK_RESIDUES': 'No residues with incorrect backbone chirality found',
+    'NO_BCK_CHIRALS': 'No residues with chiral backbone found',
     #fixside
     'MISSING_SIDE_ATOMS': '{} Residues with missing side chain atoms found',
     'FIXING_SIDE_CHAINS': '"Fixing side chains"',
