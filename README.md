@@ -99,7 +99,7 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 
 ```
 ### Dependencies
-* python 3.x
-* biopython
+* python 3.6
+* biopython 1.72
 * numpy
-* biobb_model (structure_manager)
+* biobb_structure_manager
