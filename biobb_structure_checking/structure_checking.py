@@ -192,7 +192,7 @@ class StructureChecking():
 
         self.summary['models']['type'] = self.strucm.models_type
         supimp = ''
-        if self.strucm.models_type['type'] == mu.BUNIT:
+        if not self.strucm.has_superimp_models():
             supimp = 'do not'
         print(
             cts.MSGS['MODELS_GUESS'].format(
@@ -572,9 +572,7 @@ class StructureChecking():
                     to_remove.append(res)
         rl_num = 0
         for res in to_remove:
-            self.summary['ligands']['removed']['lst'].append(
-                mu.residue_id(res, self.strucm.has_models())
-            )
+            self.summary['ligands']['removed']['lst'].append(mu.residue_id(res))
             self.strucm.remove_residue(res, False)
             rl_num += 1
         self.strucm.update_internals()
