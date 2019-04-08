@@ -8,14 +8,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_checking",
-    version="0.0.1",
+    version="1.0.5",
     author="Biobb developers",
     author_email="josep.gelpi@bsc.es",
     description="BioBB_structure_checking performs MDWeb structure checking set as a command line utility.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords="Bioinformatics Workflows BioExcel Compatibility",
-    url="https://github.com/bioexcel/biobb_analysis",
+    url="https://github.com/bioexcel/biobb_structure_checking",
     project_urls={
         "Documentation": "http://BioBB_structure_checking.readthedocs.io/en/latest/",
         "Bioexcel": "https://bioexcel.eu/"
