@@ -4,7 +4,7 @@
 shopt -s nullglob
 
 
-CLI="checkStruc"
+CLI="check_structure"
 
 #Get bash script directory
 SOURCE="${BASH_SOURCE[0]}"
