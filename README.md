@@ -1,7 +1,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/376891e43cab4cc591fb78ea43dfd380)](https://www.codacy.com/app/jlgelpi/structureChecking?utm_source=mmb.irbbarcelona.org&amp;utm_medium=referral&amp;utm_content=gitlab/BioExcel/structureChecking&amp;utm_campaign=Badge_Grade)
 # Structure Checking from MDWeb
 
-checkStruc.py performs MDWeb structure checking set as a command line
+check_structure performs MDWeb structure checking set as a command line
 utility.
 
 It includes some structure manipulation options like selecting models or chains,
@@ -56,24 +56,24 @@ command_list:      Run all tests from conf file
 checkall:   Perform all checks without fixes
 load: Stores structure on local cache and provide basic statistics
 
-1. System Configuration 
+1. System Configuration
 =======================
 models [--select_model model_num]     
     Detect/Select Models
 chains [--select_chains chain_ids]    
-    Detect/Select Chains 
-inscodes 
+    Detect/Select Chains
+inscodes
     Detects residues with insertion codes (no fix)
 altloc [--select_altloc occupancy| alt_id | list of res_id:alt_id]
-    Detect/Select Alternative Locations 
+    Detect/Select Alternative Locations
 metals [--remove All | None | Met_ids_list | Residue_list]   
-    Detect/Remove Metals 
+    Detect/Remove Metals
 ligands [--remove All | None | Res_type_list | Residue_list]
-    Detect/Remove Ligands 
+    Detect/Remove Ligands
 remwat [--remove Yes|No]
     Remove Water molecules
 remh [remh --remove Yes|No]
-    Remove Hydrogen atoms from structure 
+    Remove Hydrogen atoms from structure
 mutateside [--mut mutation_list]
     Mutate side chain with minimal atom replacement. Allows multiple mutations
 addH [--mode auto | pH | interactive | interactive_his]
@@ -86,21 +86,20 @@ amide  [--fix All|None|Residue List]
 chiral [--fix All|None|Residue List]
     Detect/Fix Improper quirality
 fixside [--fix All |None|Residue List]    
-    Complete side chains 
+    Complete side chains
 backbone [--fix All|None|Residue List]   
     Analyze main chain missing atoms and fragments. O, OXT atoms can be fixed
 
 3. Structure Warnings
 
 cistransbck Analyzes cis-trans dihedrals on backbone atoms
-getss      Detect SS Bonds 
-clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
+getss      Detect SS Bonds
+clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
            Ionic Positive, Ionic Negative)
 
 ```
 ### Dependencies
 * python 3.x
-* biopython 
+* biopython
 * numpy
 * biobb_model (structure_manager)
-
