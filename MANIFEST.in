@@ -1,0 +1,2 @@
+recursive-include biobb_structure_checking/dat *.in *.json
+recursive-include biobb_structure_checking/helpdocs *.hlp
