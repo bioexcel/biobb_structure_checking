@@ -22,8 +22,7 @@ class HelpManager():
             with open(self.help_dir_path + "/" + what + ".hlp") as help_file:
                 help_str += help_file.read()
         else:
-            print("Error: no help available for " + what)
-            sys.exit()
+            sys.exit("Error: no help available for " + what)
 
         return help_str
 

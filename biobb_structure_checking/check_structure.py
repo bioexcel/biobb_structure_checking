@@ -16,7 +16,7 @@ from biobb_structure_checking.help_manager import HelpManager
 from biobb_structure_checking.structure_checking import StructureChecking
 from biobb_structure_checking.default_settings import DefaultSettings
 
-VERSION = 'v1.0.5'
+VERSION = 'v1.0.6'
 
 def main():
     """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""

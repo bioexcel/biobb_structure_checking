@@ -1,4 +1,4 @@
-BASEDIR = /data/DEVEL/BioExcel/biobb/biobb_structure_checking
+BASEDIR = ~/DEVEL/BioExcel/biobb/biobb_structure_checking
 APPDIR = ${BASEDIR}/bin
 TESTDIR = ${BASEDIR}/biobb_structure_checking/test
 SHELL = /bin/csh

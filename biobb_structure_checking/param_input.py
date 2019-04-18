@@ -18,7 +18,6 @@ class ParamInput():
         self.non_interactive = non_interactive
         self.prefix = prefix
 
-
     def add_option_all(self):
         """ Add 'All' option to dialog"""
         self.add_option_list('all', ['All'])
@@ -110,7 +109,7 @@ class ParamInput():
             if not input_ok:
                 iopt += 1
 
-        return [input_ok, iopt, opt_value]
+        return input_ok, iopt, opt_value
 
     def run(self, opt_value):
         """ Build and execute dialog"""
@@ -121,7 +120,7 @@ class ParamInput():
             if not self.options:
                 return opt_value
             # Check input
-            (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
+            input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
                 print('Input not valid ({})'.format(opt_value))
                 self.options.append({'label':'error'})
@@ -136,11 +135,11 @@ class ParamInput():
         input_ok = False
         while not input_ok:
             opt_value = _get_input(opt_value, prompt_str)
-            (input_ok, iopt, opt_value) = self._check_dialog_value(opt_value)
+            input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
                 print('Input not valid ({})'.format(opt_value))
                 opt_value = ''
-        return [self.options[iopt]['label'], opt_value]
+        return self.options[iopt]['label'], opt_value
 
 class Dialog():
     """Dialog to complete command options"""

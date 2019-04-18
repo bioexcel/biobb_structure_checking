@@ -1,6 +1,6 @@
 #!/bin/csh
 echo "Calculating diffs"
-foreach f (*pdb *json *log)
+foreach f (*log *json *pdb)
 diff $f ref/$f > $f.diff
 if !(-z $f.diff) then
 	echo $f.diff
