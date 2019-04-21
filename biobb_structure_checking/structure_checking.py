@@ -684,6 +684,7 @@ class StructureChecking():
                 case='sensitive',
                 multiple=True
             )
+            input_line.default = 'All'
             input_option, amide_fix = input_line.run(amide_fix)
 
             if input_option == 'error':
@@ -1028,7 +1029,7 @@ class StructureChecking():
             if not self.args['quiet']:
                 print('Selection: auto')
             to_fix = [
-                (r_at[0], std_ion[r_at[0].get_resname()]['std']) 
+                (r_at[0], std_ion[r_at[0].get_resname()]['std'])
                 for r_at in fix_data['ion_res_list']
             ]
         elif input_option == 'ph':
@@ -1058,10 +1059,11 @@ class StructureChecking():
             for r_at in res_list:
                 rcode = r_at[0].get_resname()
                 input_line = ParamInput(
-                    "Select residue form for " + mu.residue_id(r_at[0]), 
+                    "Select residue form for " + mu.residue_id(r_at[0]),
                     self.args['non_interactive']
                 )
                 input_line.add_option_list('list',r_at[1].keys())
+                input_line.default = std_ion[rcode]['std']
                 form = None
                 input_option, form = input_line.run(form)
                 form = form.upper()
