@@ -1,4 +1,5 @@
-""" Global constants for structure_checking module
+""" 
+    Global constants for structure_checking module
 """
 from biobb_structure_checking.param_input import Dialog
 

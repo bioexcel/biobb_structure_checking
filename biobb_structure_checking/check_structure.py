@@ -8,7 +8,6 @@ __author__ = "gelpi"
 __date__ = "$13-jul-2018 15:52:55$"
 
 
-import os
 import sys
 import biobb_structure_checking
 from biobb_structure_checking.cmd_line import CmdLine

@@ -105,7 +105,7 @@ class ParamInput():
                 opt_value = float(opt_value)
                 if opt['type'] == "int":
                     opt_value = int(opt_value)
-                input_ok = opt_value >= opt['min'] and opt_value <= opt['max']
+                input_ok = (opt_value >= opt['min']) and (opt_value <= opt['max'])
             if not input_ok:
                 iopt += 1
 

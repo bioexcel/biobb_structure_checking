@@ -12,7 +12,7 @@ class HelpManager():
         self.files = os.listdir(help_dir_path)
 
     def get(self, what, header=False):
-        """get help text"""
+        """ Get help text"""
         help_str = ''
         if header:
             if 'header.hlp' in self.files:
@@ -27,7 +27,7 @@ class HelpManager():
         return help_str
 
     def print_help(self, what, header=False, pager=False):
-        """print help text"""
+        """ Print help text"""
         if pager:
             pydoc.pager(self.get(what, header))
         else:

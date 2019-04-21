@@ -25,6 +25,5 @@ class JSONWriter:
 
     def save(self, file):
         """save json data"""
-        jsout = open(file, "w+")
-        jsout.write(self.__str__())
-        jsout.close()
+        with open(file, "w+") as jsout:
+            jsout.write(self.__str__())
