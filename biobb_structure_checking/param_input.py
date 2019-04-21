@@ -77,9 +77,8 @@ class ParamInput():
                 opt_strs.append('?')
         prompt = self.prefix + ' (' + ' | '.join(opt_strs) + ') '
         if self.default is not None:
-            prompt += '(default:' + self.default + '):'
-        else:
-            prompt += ":"
+            prompt += '(' + self.default + ')'
+        prompt += ":"
         return prompt
 
     def _check_dialog_value(self, opt_value):

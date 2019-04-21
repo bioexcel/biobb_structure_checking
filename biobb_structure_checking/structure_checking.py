@@ -684,6 +684,7 @@ class StructureChecking():
                 case='sensitive',
                 multiple=True
             )
+            input_line.default = 'All'
             input_option, amide_fix = input_line.run(amide_fix)
 
             if input_option == 'error':
@@ -1062,6 +1063,7 @@ class StructureChecking():
                     self.args['non_interactive']
                 )
                 input_line.add_option_list('list',r_at[1].keys())
+                input_line.default = std_ion[rcode]['std']
                 form = None
                 input_option, form = input_line.run(form)
                 form = form.upper()
