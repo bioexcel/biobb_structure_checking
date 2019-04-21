@@ -3,10 +3,12 @@
 """
 import argparse
 
-def _get_input(value, prompt_text):
+def _get_input(value, prompt_text, default=None):
     """ Get input data """
     while value is None or value == '':
         value = input(prompt_text)
+        if value == '' and default is not None:
+            value = default
     if isinstance(value, str):
         value = value.replace(' ', '')
     return value
@@ -17,6 +19,7 @@ class ParamInput():
         self.options = []
         self.non_interactive = non_interactive
         self.prefix = prefix
+        self.default = None
 
     def add_option_all(self):
         """ Add 'All' option to dialog"""
@@ -72,7 +75,12 @@ class ParamInput():
                 opt_strs.append(','.join(str_opt))
             else:
                 opt_strs.append('?')
-        return self.prefix + ' (' + ' | '.join(opt_strs) + '): '
+        prompt = self.prefix + ' (' + ' | '.join(opt_strs) + ') '
+        if self.default is not None:
+            prompt += '(default:' + self.default + '):'
+        else:
+            prompt += ":"
+        return prompt
 
     def _check_dialog_value(self, opt_value):
         if opt_value is None:
@@ -130,11 +138,11 @@ class ParamInput():
         prompt_str = self._build_dialog()
         # No options, simple input
         if not self.options:
-            return _get_input(opt_value, prompt_str)
+            return _get_input(opt_value, prompt_str, self.default)
         # Prompt repeats until valid
         input_ok = False
         while not input_ok:
-            opt_value = _get_input(opt_value, prompt_str)
+            opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
                 print('Input not valid ({})'.format(opt_value))
