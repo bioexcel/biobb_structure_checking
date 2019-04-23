@@ -994,6 +994,11 @@ class StructureChecking():
         }
         self.summary['add_hydrogen']['detected'] = {}
         print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
+        for res_type in self.strucm.data_library.residue_codes['protein']:
+            residue_list = [mu.residue_num(r_at[0]) for r_at in ion_res_list if r_at[0].get_resname() == res_type]
+            if residue_list:
+                print(res_type, residue_list)
+        
         self.summary['add_hydrogen']['ionic_detected'] = [
             mu.residue_id(r_at[0]) for r_at in ion_res_list
         ]
@@ -1012,6 +1017,7 @@ class StructureChecking():
         if fix_data['ion_res_list']:
             input_line.add_option_list('inter', ['interactive'], case="lower")
             input_line.add_option_list('inter_His', ['interactive_his'], case="lower")
+            input_line.add_option_list('list', ['Enter list'])
         input_option, add_h_mode = input_line.run(mode)
 
         if input_option == 'error':
@@ -1022,16 +1028,14 @@ class StructureChecking():
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
-        to_fix = []
+        to_fix = {}
         std_ion = self.strucm.data_library.std_ion
         print(input_option)
         if input_option == 'auto':
             if not self.args['quiet']:
                 print('Selection: auto')
-            to_fix = [
-                (r_at[0], std_ion[r_at[0].get_resname()]['std'])
-                for r_at in fix_data['ion_res_list']
-            ]
+            to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
+            
         elif input_option == 'ph':
             ph_value = None
             input_line = ParamInput("pH Value", self.args['non_interactive'])
@@ -1043,10 +1047,11 @@ class StructureChecking():
                 res = r_at[0]
                 rcode = res.get_resname()
                 if ph_value <= std_ion[rcode]['pK']:
-                    to_fix.append([res, std_ion[rcode]['lowpH']])
+                    to_fix[res] = std_ion[rcode]['lowpH']
                 else:
-                    to_fix.append([res, std_ion[rcode]['highpH']])
+                    to_fix[res] = std_ion[rcode]['highpH']
         else:
+            to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
             if input_option == 'inter':
                 if not self.args['quiet']:
                     print('Selection: interactive')
@@ -1055,7 +1060,7 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print('Selection: interactive-his')
                 res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
-            to_fix = []
+          
             for r_at in res_list:
                 rcode = r_at[0].get_resname()
                 input_line = ParamInput(
@@ -1067,7 +1072,7 @@ class StructureChecking():
                 form = None
                 input_option, form = input_line.run(form)
                 form = form.upper()
-                to_fix.append([r_at[0], form])
+                to_fix[r_at[0]] = form
 
         self.strucm.add_hydrogens(to_fix)
         return False
