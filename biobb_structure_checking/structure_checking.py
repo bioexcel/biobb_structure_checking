@@ -997,7 +997,7 @@ class StructureChecking():
         for res_type in self.strucm.data_library.residue_codes['protein']:
             residue_list = [mu.residue_num(r_at[0]) for r_at in ion_res_list if r_at[0].get_resname() == res_type]
             if residue_list:
-                print(res_type, residue_list)
+                print(res_type, ','.join(residue_list))
         
         self.summary['add_hydrogen']['ionic_detected'] = [
             mu.residue_id(r_at[0]) for r_at in ion_res_list
@@ -1012,12 +1012,10 @@ class StructureChecking():
 
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
-        input_line.add_option_list('auto', ['auto'], case="lower")
-        input_line.add_option_list('ph', ['pH'])
+        sel_options = ['auto']
         if fix_data['ion_res_list']:
-            input_line.add_option_list('inter', ['interactive'], case="lower")
-            input_line.add_option_list('inter_His', ['interactive_his'], case="lower")
-            input_line.add_option_list('list', ['Enter list'])
+            sel_options += ['pH', 'interactive', 'His_only', 'list']
+        input_line.add_option_list('selection', sel_options)
         input_option, add_h_mode = input_line.run(mode)
 
         if input_option == 'error':
@@ -1029,52 +1027,70 @@ class StructureChecking():
             return False
 
         to_fix = {}
+        
         std_ion = self.strucm.data_library.std_ion
-        print(input_option)
-        if input_option == 'auto':
+        
+        add_h_mode = add_h_mode.lower()
+
+        ion_to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
+
+        if add_h_mode == 'auto':
             if not self.args['quiet']:
                 print('Selection: auto')
-            to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
-            
-        elif input_option == 'ph':
-            ph_value = None
-            input_line = ParamInput("pH Value", self.args['non_interactive'])
-            input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
-            input_option, ph_value = input_line.run(ph_value)
-            if not self.args['quiet']:
-                print('Selection: pH', ph_value)
-            for r_at in fix_data['ion_res_list']:
-                res = r_at[0]
-                rcode = res.get_resname()
-                if ph_value <= std_ion[rcode]['pK']:
-                    to_fix[res] = std_ion[rcode]['lowpH']
-                else:
-                    to_fix[res] = std_ion[rcode]['highpH']
         else:
-            to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
-            if input_option == 'inter':
+            if add_h_mode == 'ph':
+                ph_value = None
+                input_line = ParamInput("pH Value", self.args['non_interactive'])
+                input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
+                input_option, ph_value = input_line.run(ph_value)
                 if not self.args['quiet']:
-                    print('Selection: interactive')
-                res_list = fix_data['ion_res_list']
+                    print('Selection: pH', ph_value)
+                for r_at in fix_data['ion_res_list']:
+                    res = r_at[0]
+                    rcode = res.get_resname()
+                    if ph_value <= std_ion[rcode]['pK']:
+                        ion_to_fix[res] = std_ion[rcode]['lowpH']
+                    else:
+                        ion_to_fix[res] = std_ion[rcode]['highpH']
             else:
-                if not self.args['quiet']:
-                    print('Selection: interactive-his')
-                res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
-          
-            for r_at in res_list:
-                rcode = r_at[0].get_resname()
-                input_line = ParamInput(
-                    "Select residue form for " + mu.residue_id(r_at[0]),
-                    self.args['non_interactive']
-                )
-                input_line.add_option_list('list',r_at[1].keys())
-                input_line.default = std_ion[rcode]['std']
-                form = None
-                input_option, form = input_line.run(form)
-                form = form.upper()
-                to_fix[r_at[0]] = form
+                if add_h_mode == 'list':
+                    if not self.args['quiet']:
+                        print('Selection: list')
+                    ions_list = None
+                    input_line = ParamInput(
+                            "Enter Forms list", self.args['non_interactive']
+                        )
+                    ions_list = input_line.run(ions_list)
+                    
+                    # Changes in tautomeric forms made as mutationts eg.HisXXHip
+                    mutations = self.strucm.prepare_mutations(ions_list)
+                    for mut in mutations.mutation_list:
+                        for mut_res in mut.mutations:
+                            ion_to_fix[mut_res['resobj']] = mut_res['new_id']
+                else:
+                    if add_h_mode == 'interactive':
+                        if not self.args['quiet']:
+                            print('Selection: interactive')
+                        res_list = fix_data['ion_res_list']
+                    elif add_h_mode == 'His_only':
+                        if not self.args['quiet']:
+                            print('Selection: His_only')
+                        res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
+                
+                    for r_at in res_list:
+                        rcode = r_at[0].get_resname()
+                        input_line = ParamInput(
+                            "Select residue form for " + mu.residue_id(r_at[0]),
+                            self.args['non_interactive']
+                        )
+                        input_line.add_option_list('list',r_at[1].keys())
+                        input_line.default = std_ion[rcode]['std']
 
-        self.strucm.add_hydrogens(to_fix)
+                        form = None
+                        input_option, form = input_line.run(form)
+                        ion_to_fix[r_at[0]] = form.upper()
+                
+        self.strucm.add_hydrogens(ion_to_fix)
         return False
 # =============================================================================
     def mutateside(self, mut_list):
