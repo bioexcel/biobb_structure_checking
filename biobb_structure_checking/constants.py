@@ -105,6 +105,7 @@ MSGS = {
     'NO_BCK_CHIRALS': 'No residues with chiral backbone found',
     #fixside
     'MISSING_SIDE_ATOMS': '{} Residues with missing side chain atoms found',
+    'UNKNOWN_SIDE_ATOMS': '{} Residues with unknown atoms found',
     'FIXING_SIDE_CHAINS': '"Fixing side chains"',
     'SIDE_CHAIN_FIXED': 'Fixed {} side chain(s)',
     #add hydrogens

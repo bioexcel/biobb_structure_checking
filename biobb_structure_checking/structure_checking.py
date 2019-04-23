@@ -904,22 +904,31 @@ class StructureChecking():
 
     def _fixside_check(self):
         miss_at_list = self.strucm.get_missing_atoms('side')
+        extra_at_list = self.strucm.check_extra_atoms()
 
-        if not miss_at_list:
+        if not miss_at_list and not extra_at_list:
             if not self.args['quiet']:
-                print("No residues with missing side chain atoms found")
+                print("No residues with missing or unknown side chain atoms found")
             return {}
 
         fix_data = {
             'miss_at_list': miss_at_list,
+            'extra_at_list': extra_at_list
         }
-
-        self.summary['fixside']['detected'] = {}
-        print(cts.MSGS['MISSING_SIDE_ATOMS'].format(len(miss_at_list)))
-        for r_at in miss_at_list:
-            res, at_list = r_at
-            print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-            self.summary['fixside']['detected'][mu.residue_id(res)] = at_list
+        if miss_at_list:
+            self.summary['fixside']['detected_missing'] = {}
+            print(cts.MSGS['MISSING_SIDE_ATOMS'].format(len(miss_at_list)))
+            for r_at in miss_at_list:
+                res, at_list = r_at
+                print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+                self.summary['fixside']['detected_missing'][mu.residue_id(res)] = at_list
+        if extra_at_list:
+            self.summary['fixside']['detected_unknown'] = {}
+            print(cts.MSGS['UNKNOWN_SIDE_ATOMS'].format(len(extra_at_list)))
+            for r_at in extra_at_list:
+                res, at_list = r_at
+                print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+                self.summary['fixside']['detected_unknown'][mu.residue_id(res)] = at_list
 
         return fix_data
 
