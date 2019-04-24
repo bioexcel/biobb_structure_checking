@@ -957,11 +957,18 @@ class StructureChecking():
             return False
 
         if input_option == 'all':
-            to_fix = fix_data['miss_at_list']
+            to_add = fix_data['miss_at_list']
+            to_remove = fix_data['extra_at_list']
         else:
-            to_fix = [
+            to_add = [
                 r_at
                 for r_at in fix_data['miss_at_list']
+                if mu.residue_num(r_at[0]) in fix_side.split(',')
+            ]
+            
+            to_remove = [
+                r_at
+                for r_at in fix_data['extra_at_list']
                 if mu.residue_num(r_at[0]) in fix_side.split(',')
             ]
 
@@ -969,9 +976,20 @@ class StructureChecking():
             print(cts.MSGS['FIXING_SIDE_CHAINS'])
 
         fix_num = 0
+        rem_num = 0
         self.summary['fixside']['fixed'] = []
+        self.summary['fixside']['removed'] = []
         fixed_res = []
-        for r_at in to_fix:
+        for r_at in to_remove:
+            print(mu.residue_id(r_at[0]))
+            for at_id in r_at[1]:
+                print("  Removing", at_id)
+                mu.remove_atom_from_res(r_at[0], at_id)
+                rem_num += 1
+            self.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
+            fixed_res.append(r_at[0])
+
+        for r_at in to_add:
             mu.remove_H_from_r(r_at[0], verbose=True)
             self.strucm.fix_side_chain(r_at)
             fix_num += 1
