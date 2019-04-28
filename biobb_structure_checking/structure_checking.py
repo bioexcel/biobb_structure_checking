@@ -1055,20 +1055,22 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print('Selection: interactive-his')
                 res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
-            to_fix = []
-            for r_at in res_list:
-                rcode = r_at[0].get_resname()
-                input_line = ParamInput(
-                    "Select residue form for " + mu.residue_id(r_at[0]),
-                    self.args['non_interactive']
-                )
-                input_line.add_option_list('list',r_at[1].keys())
-                input_line.default = std_ion[rcode]['std']
-                form = None
-                input_option, form = input_line.run(form)
-                form = form.upper()
-                to_fix.append([r_at[0], form])
-
+            for r_at in fix_data['ion_res_list']:
+                if r_at in res_list:
+                    rcode = r_at[0].get_resname()
+                    input_line = ParamInput(
+                        "Select residue form for " + mu.residue_id(r_at[0]),
+                        self.args['non_interactive']
+                    )
+                    input_line.add_option_list('list',r_at[1].keys())
+                    input_line.default = std_ion[rcode]['std']
+                    form = None
+                    input_option, form = input_line.run(form)
+                    form = form.upper()
+                    to_fix.append([r_at[0], form])
+                else:
+                    to_fix.append([r_at[0], std_ion[r_at[0].get_resname()]['std']])
+                    
         self.strucm.add_hydrogens(to_fix)
         return False
 # =============================================================================
@@ -1116,14 +1118,13 @@ class StructureChecking():
             for r_at in miss_bck_at_list:
                 [res, at_list] = r_at
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
-                fix_data['fixbck_rnums'].append(mu.residue_num(res))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
 
         #Not bound consecutive residues
         bck_check = self.strucm.get_backbone_breaks()
         if bck_check['bck_breaks_list']:
             print(cts.MSGS['BACKBONE_BREAKS'].format(len(bck_check['bck_breaks_list'])))
-            self.summary['backbone']['breaks'] = []
+            self.summary['backbone']['breaks'] = {'detected': []}
             for brk in bck_check['bck_breaks_list']:
                 print(
                     " {:10} - {:10} ".format(
@@ -1131,10 +1132,11 @@ class StructureChecking():
                         mu.residue_id(brk[1])
                     )
                 )
-                self.summary['backbone']['breaks'].append([
+                self.summary['backbone']['breaks']['detected'].append([
                     mu.residue_id(brk[0]), mu.residue_id(brk[1])
                 ])
-            fix_data['bck_breaks_list'] = True
+            fix_data['bck_breaks_list'] = bck_check['bck_breaks_list']
+            
         if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
             self.summary['backbone']['wrong_links'] = []
@@ -1181,11 +1183,57 @@ class StructureChecking():
             fix_data['modified_residue_list'] = True
         return fix_data
 
-    def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True):
-        if 'miss_bck_at_list' not in fix_data:
-            return False
-        fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_data['miss_bck_at_list']]
-        input_line = ParamInput('fixbck', self.args['non_interactive'])
+    def _backbone_fix(self, fix_back, fix_data=None, check_clashes=True, recheck=True):
+        
+        no_int_recheck = fix_back is not None or self.args['non_interactive']
+        
+        while fix_data['bck_breaks_list']:
+            fixed = self._backbone_fix_main_chain(fix_back, fix_data['bck_breaks_list'], check_clashes)
+            if no_int_recheck or fixed is None or not recheck:
+                fix_data['bck_breaks_list'] = []
+            else:
+                if not self.args['quiet']:
+                    print('BACKBONE_RECHECK')
+                fix_data = self._backbone_check()
+        
+        if fix_data['miss_bck_at_list']:
+            self._backbone_fix_missing(fix_back, fix_data['miss_bck_at_list'], check_clashes)
+        return False
+    
+    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, check_clashes=True, recheck=True):
+        print("Main chain fixes (TODO)")
+               
+        brk_rnums = [(mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ','') for resp in breaks_list]
+        input_line = ParamInput('Fix Main Breaks', self.args['non_interactive'])
+        input_line.add_option_none()
+        input_line.add_option_all()
+        input_line.add_option_list(
+            'brk', brk_rnums, case='sensitive', multiple=True
+        )
+        
+        input_option, fix_main_bck = input_line.run(fix_main_bck)
+        
+        if input_option == 'error':
+            return cts.MSGS['UNKNOWN_SELECTION'], fix_main_bck
+
+        self.summary['backbone']['breaks']['option_selected'] = fix_main_bck
+        
+        if input_option == 'none':
+            if not self.args['quiet']:
+                print(cts.MSGS['DO_NOTHING'])
+            return None
+
+        to_fix = [
+            rpair
+            for rpair in breaks_list 
+            if (mu.residue_num(rpair[0])+'-'+mu.residue_num(rpair[1])).replace(' ','') in fix_main_bck.split(',') or input_option == 'all'
+        ]
+
+        return self.strucm.fix_backbone_chain(to_fix)
+        
+    def _backbone_fix_missing(self, fix_back, fix_at_list, check_clashes):
+        fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
+        input_line = ParamInput('Fix bck missing', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list(
@@ -1205,7 +1253,7 @@ class StructureChecking():
 
         to_fix = [
             r_at
-            for r_at in fix_data['miss_bck_at_list']
+            for r_at in fix_at_list 
             if mu.residue_num(r_at[0]) in fix_back.split(',') or input_option == 'all'
         ]
 
@@ -1234,7 +1282,6 @@ class StructureChecking():
             self.summary['backbone']['missing_atoms']['clashes'] =\
                 self._check_report_clashes(fixed_res)
 
-        #TODO Chain fix
         return False
 #===============================================================================
     def cistransbck(self, opts):
