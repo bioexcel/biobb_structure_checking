@@ -89,7 +89,7 @@ No residues with incorrect backbone chirality found
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
-No residues with missing side chain atoms found
+No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix All
 
@@ -100,13 +100,6 @@ Adding missing backbone atoms
 GLU P353
   Adding new atom OXT
 Fixed 1 backbone atom(s)
-Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
 
 Step 14: cistransbck
 
@@ -159,45 +152,42 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 106 Residues requiring selection on adding H atoms
+CYS P88,P119,P124,P162,P262,P273
+ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
+GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344,P353
+HIS P67,P108,P110,P112,P118,P144,P173,P307
+LYS P52,P77,P79,P80,P86,P95,P105,P117,P131,P147,P148,P149,P194,P206,P244,P252,P275,P278,P315,P318,P320,P326,P337,P346
+ARG P54,P57,P59,P157,P164,P187,P192,P198,P214,P230,P231,P255,P258,P284,P308,P335,P336
+TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
+WARNING: side chains not yet fixed
 Selection: auto
-Warning: Residue not valid in this context   DA D1
 Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DG D2
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D3
 Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DT D4
 Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DG D5
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D6
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D7
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D8
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D9
 Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DA D10
 Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DT D11
 Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DC D12
 Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D13
 Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D14
 Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D15
 Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DT D16
 Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DA D17
 Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DG D18
 Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D19
 Warning: DA is not a valid residue in this context
+Replacing HIS P67 by HIE
+Replacing HIS P108 by HIE
+Replacing HIS P110 by HIE
+Replacing HIS P112 by HIE
+Replacing HIS P118 by HIE
+Replacing HIS P144 by HIE
+Replacing HIS P173 by HIE
+Replacing HIS P307 by HIE
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (D: DNA, P: Protein)

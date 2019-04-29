@@ -162,13 +162,14 @@ class Dialog():
 
     def add_option(self, command, opt_prompt, opt_dest, opt_help, opt_type=str):
         """add Dialog option"""
-        self.options[command] = {
-            'command':command,
+        if command not in self.options:
+            self.options[command] = {'command': command, 'args':[]}
+        self.options[command]['args'].append({
             'prompt': opt_prompt,
             'dest':   opt_dest,
             'help':   opt_help,
             'type':   opt_type
-        }
+        })
 
     def get_parameter(self, command, opts):
         """Generate Dialog"""
@@ -176,12 +177,13 @@ class Dialog():
         if not dialog:
             raise NoDialogAvailableError(command)
         opts_parser = argparse.ArgumentParser(prog=dialog['command'])
-        opts_parser.add_argument(
-            dialog['prompt'],
-            dest=dialog['dest'],
-            help=dialog['help'],
-            type=dialog['type']
-        )
+        for opt in dialog['args']:
+            opts_parser.add_argument(
+                opt['prompt'],
+                dest=opt['dest'],
+                help=opt['help'],
+                type=opt['type']
+            )
         return vars(opts_parser.parse_args(opts))
 
     def get_dialog(self, command):

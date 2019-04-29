@@ -24,13 +24,22 @@ DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | Non
 DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules')
 DIALOGS.add_option('fixside', '--fix', 'fix_side',\
     'Add missing atoms to side chains (All | None | List)')
+DIALOGS.add_option('fixside', '--remove_extra', 'fix_extra',\
+    'Remvoe unknown atoms (Yes | No)')
 DIALOGS.add_option('backbone', '--fix', 'fix_back',\
     'Add missing O atoms to backbone (All | None | List)')
+DIALOGS.add_option('backbone', '--check_clashes', 'check_clashes',\
+    'Check new clashes (Yes|No)')
+DIALOGS.add_option('backbone', '--recheck', 'recheck',\
+    'Re-check after modification (Yes|No)')
 DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
-    'Selection mode (None | auto | interactive | interactive_his | ph )')
-
+    'Selection mode (None | auto | list | ph )')
+DIALOGS.add_option('add_hydrogen', '--pH', 'pH_value',\
+    'pH (0-14)')
+DIALOGS.add_option('add_hydrogen', '--list', 'ions_list',\
+    'Ionic form selection (list as [*:]his234hip)')
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',

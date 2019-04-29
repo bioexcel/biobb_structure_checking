@@ -122,7 +122,7 @@ No residues with incorrect backbone chirality found
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
-No residues with missing side chain atoms found
+No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix All
 
@@ -133,13 +133,6 @@ Adding missing backbone atoms
 ASP A251
   Adding new atom OXT
 Fixed 1 backbone atom(s)
-Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
 
 Step 14: cistransbck
 
@@ -190,7 +183,30 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 107 Residues requiring selection on adding H atoms
+ASP A107,A111,A114,A141,A153,A158,A177,A181,A182,A183,A189,A228,A237,A238,A251,B107,B111,B114,B141,B153,B158,B177,B181,B182,B183,B189,B228,B237,B238,B251
+GLU A118,A125,A126,A137,A139,A150,A184,A202,A216,B118,B125,B126,B137,B139,B150,B184,B202,B216,B254
+HIS A96,A151,A166,A179,A201,A205,A211,A224,B96,B151,B166,B179,B201,B205,B211,B224
+LYS A91,A94,A110,A119,A122,A188,B91,B94,B110,B119,B122,B188
+ARG A84,A93,A100,A134,A149,A231,A233,B84,B93,B100,B134,B149,B231,B233
+TYR A99,A104,A136,A155,A168,A220,A223,A246,B99,B104,B136,B155,B168,B220,B223,B246
+WARNING: side chains not yet fixed
 Selection: auto
+Replacing HIS A96 by HIE
+Replacing HIS A151 by HIE
+Replacing HIS A166 by HIE
+Replacing HIS A179 by HIE
+Replacing HIS A201 by HIE
+Replacing HIS A205 by HIE
+Replacing HIS A211 by HIE
+Replacing HIS A224 by HIE
+Replacing HIS B96 by HIE
+Replacing HIS B151 by HIE
+Replacing HIS B166 by HIE
+Replacing HIS B179 by HIE
+Replacing HIS B201 by HIE
+Replacing HIS B205 by HIE
+Replacing HIS B211 by HIE
+Replacing HIS B224 by HIE
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

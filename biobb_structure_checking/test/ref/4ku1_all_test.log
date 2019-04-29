@@ -170,7 +170,7 @@ No residues with incorrect backbone chirality found
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
-No residues with missing side chain atoms found
+No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix All
 
@@ -184,13 +184,6 @@ LEU A443
 SER B444
   Adding new atom OXT
 Fixed 2 backbone atom(s)
-Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
 
 Step 14: cistransbck
 
@@ -233,7 +226,27 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 134 Residues requiring selection on adding H atoms
+CYS A261,A321,A367,A425,B261,B321,B367,B425
+ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
+GLU A258,A269,A272,A283,A293,A294,A318,A333,A345,A357,A380,A382,A388,A430,B258,B269,B272,B283,B293,B294,B318,B333,B345,B357,B380,B382,B388,B430
+HIS A268,A285,A310,A429,A433,A435,B268,B285,B310,B429,B433,B435
+LYS A246,A248,A274,A288,A290,A317,A320,A322,A326,A334,A338,A340,A360,A370,A392,A409,A414,A439,B246,B248,B274,B288,B290,B317,B320,B322,B326,B334,B338,B340,B360,B370,B392,B409,B414,B439
+ARG A255,A292,A301,A344,A355,A416,B255,B292,B301,B344,B355,B416
+TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
+WARNING: side chains not yet fixed
 Selection: auto
+Replacing HIS A268 by HIE
+Replacing HIS A285 by HIE
+Replacing HIS A310 by HIE
+Replacing HIS A429 by HIE
+Replacing HIS A433 by HIE
+Replacing HIS A435 by HIE
+Replacing HIS B268 by HIE
+Replacing HIS B285 by HIE
+Replacing HIS B310 by HIE
+Replacing HIS B429 by HIE
+Replacing HIS B433 by HIE
+Replacing HIS B435 by HIE
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

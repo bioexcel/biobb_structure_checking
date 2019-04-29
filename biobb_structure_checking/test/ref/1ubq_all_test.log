@@ -87,7 +87,7 @@ No residues with incorrect backbone chirality found
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All 
-No residues with missing side chain atoms found
+No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix All
 
@@ -119,7 +119,15 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto 
 24 Residues requiring selection on adding H atoms
+ASP A21,A32,A39,A52,A58
+GLU A16,A18,A24,A34,A51,A64
+HIS A68
+LYS A6,A11,A27,A29,A33,A48,A63
+ARG A42,A54,A72,A74
+TYR A59
+WARNING: side chains not yet fixed
 Selection: auto
+Replacing HIS A68 by HIE
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
