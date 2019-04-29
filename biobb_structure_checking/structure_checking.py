@@ -1156,16 +1156,15 @@ class StructureChecking():
         fix_data = {}
         # Residues with missing backbone
         miss_bck_at_list = self.strucm.get_missing_atoms('backbone')
+        fix_data['miss_bck_at_list'] = miss_bck_at_list
         if miss_bck_at_list:
-            fix_data['miss_bck_at_list'] = miss_bck_at_list
             self.summary['backbone']['missing_atoms'] = {}
-            fix_data['fixbck_rnums'] = []
             print(cts.MSGS['BCK_MISSING_RESIDUES'].format(len(miss_bck_at_list)))
             for r_at in miss_bck_at_list:
                 [res, at_list] = r_at
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
-
+                
         #Not bound consecutive residues
         bck_check = self.strucm.get_backbone_breaks()
         if bck_check['bck_breaks_list']:
@@ -1182,6 +1181,8 @@ class StructureChecking():
                     mu.residue_id(brk[0]), mu.residue_id(brk[1])
                 ])
             fix_data['bck_breaks_list'] = bck_check['bck_breaks_list']
+        else:
+            fix_data['bck_breaks_list'] = []
             
         if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
