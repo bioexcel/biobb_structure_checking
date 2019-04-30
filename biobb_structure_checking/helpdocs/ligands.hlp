@@ -1,4 +1,0 @@
-Detects HETATM (excluding Water molecules) to selectively remove them 
-options: All, None, Residue List (by id, by num)
-
-Usage: check_structure.py ligands --remove All | None | type_list | residue_list

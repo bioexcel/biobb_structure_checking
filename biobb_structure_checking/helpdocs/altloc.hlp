@@ -1,6 +1,0 @@
-Checks for the presence of residues with alternative locations. 
-Atoms with alternative coordinates and their occupancy are reported.  
-MD simulations requires a single position for each atom.  
-
-Usage: check_structure.py altloc --select occupancy| alt_id | list of res_id:alt_id
-

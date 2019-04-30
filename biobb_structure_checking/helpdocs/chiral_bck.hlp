@@ -1,3 +1,0 @@
-Detects unusual chirality on CA Backbone atoms, and allows to fix (To be implemented)
-
-Usage: check_structure.py chiral_bck --fix All | None | List

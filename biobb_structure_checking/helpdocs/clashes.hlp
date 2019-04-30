@@ -1,4 +1,0 @@
-Detects Possible Steric clashes classified according to atom types involved.
-Water molecules are discarded bu default
-
-Usage: check_structure.py clashes [--no_wat]

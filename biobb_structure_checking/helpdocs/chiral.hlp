@@ -1,3 +1,0 @@
-Detects wrong quirality on Thr and Ile side chains and allows to fix them
-
-Usage: check_structure.py chiral --fix All|None|Residue List

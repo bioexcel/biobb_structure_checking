@@ -1,6 +1,0 @@
-Checks for chains (also obtained from structure stats), and allow to select one or more.
-MD simulations are usually performed with complete structures.However input structure 
-may contain several copies of the system, or additional chains like peptides or
-nucleic acids that may be removed. 
-
-Usage: check_structure.py --select chain_ids 

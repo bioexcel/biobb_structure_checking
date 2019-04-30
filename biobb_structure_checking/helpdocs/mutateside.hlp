@@ -1,4 +1,0 @@
-Mutate side chain with minimal atom replacement. 
-Allows multiple mutations
-
-Usage: check_structure.py mutateside --mut mutation_list (as [*|A,B:]Arg23Ala)
