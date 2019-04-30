@@ -13,12 +13,14 @@
 2.2.1 Detect Improper quirality on CAs (chiral_ca) DONE
 2.3. Detect insertion codes/Renum (inscode) DONE detection, no fix
 2.4. Complete side chains (fixside) DONE detection
-2.5. Mutate residues (mutate)
+2.5. Mutate residues (mutate) DONE
+2.6. Add hydrogens DONE
+2.7. Complete backbone DONE missing Ox
 3. Structure Warnings
 3.1. Detect SS Bonds (getss) DONE
-3.2. Unusual cis/trans backbone (cisbck)
-3.3. Non Consecutive residues (nonconres)
-3.4. Possible Sequence Gaps (bckgaps)
+3.2. Unusual cis/trans backbone (cisbck) DONE
+3.3. Non Consecutive residues (nonconres) DONE
+3.4. Possible Sequence Gaps (bckgaps) DONE
 3.5. Steric clashes (clashes) DONE
 3.5.1. Severe Steric clashes
 3.5.2. CA Steric Clashes NO

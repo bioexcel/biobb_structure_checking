@@ -1,3 +1,0 @@
-Detects missign atoms in amino-acid side chains. Rebuilds side chains on request
-
-Usage: check_structure.py fixside --fix All |None|Residue List
