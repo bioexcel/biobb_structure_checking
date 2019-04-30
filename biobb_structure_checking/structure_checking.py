@@ -53,6 +53,8 @@ class StructureChecking():
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
             self.checkall(self.args['options'])
+        elif self.args['command'] == 'fixall':
+            self.fixall(self.args['options'])
         else:
             self._run_method(self.args['command'], self.args['options'])
 
@@ -124,6 +126,10 @@ class StructureChecking():
         for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
 
+    def fixall(self, opts):
+        #TODO
+        print("Fixall not implemented (yet)")
+    
     def _run_method(self, command, opts):
         """ Run check and fix methods for specific command"""
         try:
@@ -282,11 +288,12 @@ class StructureChecking():
         for res in ins_codes_list:
             print(mu.residue_id(res))
             self.summary['inscodes'].append(mu.residue_id(res))
-        return {}
+        return {'ins_codes_list': ins_codes_list}
 
-#    def _inscodes_fix(self, select_codes, fix_data=None):
-#        Renumber residues??
-#        pass
+    def _inscodes_fix(self, opts, fix_data=None):
+        if opts['renum']:
+            print("--renum option not implemented (yet)")
+        return False
 # =============================================================================
     def altloc(self, opts=None):
         """ run altloc command """
@@ -513,6 +520,11 @@ class StructureChecking():
             self.summary['water']['n_removed'] = rmw_num
         return False
 # =============================================================================
+    def hetatm(self, opts=None):
+        """ Run hetatm command """
+        print("Warning: hatatm function not implemented yet, running ligands instead")
+        self._run_method('ligands', opts)
+
     def ligands(self, opts=None):
         """ Run ligands command """
         self._run_method('ligands', opts)
@@ -1191,12 +1203,12 @@ class StructureChecking():
     def _mutateside_check(self):
         return True
 
-    def _mutateside_fix(self, opts, fix_data=None, check_clashes=True):
+    def _mutateside_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             mut_list = opts
         else:
             mut_list = opts['mut_list']
-
+        
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
 
@@ -1208,7 +1220,7 @@ class StructureChecking():
 
         mutated_res = self.strucm.apply_mutations(mutations)
 
-        if check_clashes:
+        if not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
@@ -1301,9 +1313,9 @@ class StructureChecking():
 
     def _backbone_fix(self, opts, fix_data=None, check_clashes=True, recheck=True):
         
-        check_clashes = opts['check_clashes'] is not None
+        check_clashes = opts['check_clashes']
         
-        recheck = opts['recheck'] is not None
+        recheck = opts['recheck']
         
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 

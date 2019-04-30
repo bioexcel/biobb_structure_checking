@@ -14,6 +14,7 @@ from biobb_structure_checking.cmd_line import CmdLine
 from biobb_structure_checking.help_manager import HelpManager
 from biobb_structure_checking.structure_checking import StructureChecking
 from biobb_structure_checking.default_settings import DefaultSettings
+import biobb_structure_checking.constants as cts
 
 VERSION = 'v1.0.6'
 
@@ -35,9 +36,8 @@ def main():
         sys.exit(0)
 
     if '-h' in args.options or '--help' in args.options:
-        help_manager.print_help('header')
-        help_manager.print_help(args.command)
-        sys.exit(0)
+        opts = cts.DIALOGS.get_parameter(args.command, args.options)
+
 
     help_manager.print_help('header')
     print()

@@ -159,16 +159,23 @@ class Dialog():
     """Dialog to complete command options"""
     def __init__(self):
         self.options = {}
-
-    def add_option(self, command, opt_prompt, opt_dest, opt_help, opt_type=str):
-        """add Dialog option"""
+    def add_entry(self, command, description=None):
         if command not in self.options:
-            self.options[command] = {'command': command, 'args':[]}
+            self.options[command] = {
+                'command': command, 
+                'description': description,
+                'args':[]
+            }
+   
+    def add_option(self, command, opt_prompt, opt_dest, opt_help, opt_type=str, default=None):
+        """add Dialog option"""
+        self.add_entry(command)
         self.options[command]['args'].append({
             'prompt': opt_prompt,
             'dest':   opt_dest,
             'help':   opt_help,
-            'type':   opt_type
+            'type':   opt_type,
+            'default': default            
         })
 
     def get_parameter(self, command, opts):
@@ -176,14 +183,23 @@ class Dialog():
         dialog = self.options[command]
         if not dialog:
             raise NoDialogAvailableError(command)
-        opts_parser = argparse.ArgumentParser(prog=dialog['command'])
+        opts_parser = argparse.ArgumentParser(prog=dialog['command'], description=dialog['description'])
         for opt in dialog['args']:
-            opts_parser.add_argument(
-                opt['prompt'],
-                dest=opt['dest'],
-                help=opt['help'],
-                type=opt['type']
-            )
+            if opt['type'] == 'bool':
+                opts_parser.add_argument(
+                    opt['prompt'],
+                    dest=opt['dest'],
+                    help=opt['help'],
+                    action='store_true'
+                )
+            else:         
+                opts_parser.add_argument(
+                    opt['prompt'],
+                    dest=opt['dest'],
+                    help=opt['help'],
+                    type=opt['type'],
+                    default=opt['default']
+                )
         return vars(opts_parser.parse_args(opts))
 
     def get_dialog(self, command):

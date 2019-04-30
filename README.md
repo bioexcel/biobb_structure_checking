@@ -51,50 +51,70 @@ Available commands:
 ## Available commands:
 
 ```
-commands:  This help
-command_list:      Run all tests from conf file
-checkall:   Perform all checks without fixes
-load: Stores structure on local cache and provide basic statistics
+commands:     Help on available commands
+command_list: Run all tests from conf file
+checkall:     Perform all checks without fixes
+fixall:       Performs a default fix (v1.1)
+load:         Stores structure on local cache and provide basic statistics
 
-1. System Configuration
+1. System Configuration 
 =======================
-models [--select_model model_num]     
+models [--select model_num]     
     Detect/Select Models
-chains [--select_chains chain_ids]    
-    Detect/Select Chains
-inscodes
-    Detects residues with insertion codes (no fix)
-altloc [--select_altloc occupancy| alt_id | list of res_id:alt_id]
-    Detect/Select Alternative Locations
+chains [--select chain_ids]    
+    Detect/Select Chains 
+inscodes [--renum]
+    Detects residues with insertion codes. --renum (v1.1) renums residues
+altloc [--select occupancy| alt_id | list of res_id:alt_id]
+    Detect/Select Alternative Locations 
 metals [--remove All | None | Met_ids_list | Residue_list]   
-    Detect/Remove Metals
+    Detect/Remove Metals 
 ligands [--remove All | None | Res_type_list | Residue_list]
-    Detect/Remove Ligands
-remwat [--remove Yes|No]
+    Detect/Remove Ligands 
+hetatm [--remove All | None | Res_type_list | Residue_list] (v1.1)
+    Detect/Remove Ligands, revert modified residues
+water [--remove Yes|No]
     Remove Water molecules
-remh [remh --remove Yes|No]
-    Remove Hydrogen atoms from structure
-mutateside [--mut mutation_list]
-    Mutate side chain with minimal atom replacement. Allows multiple mutations
-addH [--mode auto | pH | interactive | interactive_his]
-    Add Hydrogen Atoms
+rem_hydrogen [--remove Yes|No]
+    Remove Hydrogen atoms from structure 
+mutateside [--mut mutation_list] [--no_check_clashes]
+    Mutate side chain with minimal atom replacement. Allows multiple mutations.
+    Check generated clashes except --no_check_clashes set (v1.1)
+add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h]
+    Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
+    list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
+    Fixes missing side chain atoms unless --no_fix_side is set
+    Existing hydrogen atoms are remove before adding new ones unless --keep_h set. 
 
 2. Fix Structure Errors
 
-amide  [--fix All|None|Residue List]    
+amide  [--fix All|None|Residue List] [--no_recheck]    
     Detect/Fix Amide atoms Assignment
-chiral [--fix All|None|Residue List]
+    Amide contacts are recheck unless --no_recheck
+chiral [--fix All|None|Residue List] [--no_check_clashes]
     Detect/Fix Improper quirality
-fixside [--fix All |None|Residue List]    
-    Complete side chains
-backbone [--fix All|None|Residue List]   
-    Analyze main chain missing atoms and fragments. O, OXT atoms can be fixed
+    Checks generated clashes unless --no_check_clashes set
+fixside [--fix All |None|Residue List] [--no_check_clashes]
+    Complete side chains 
+    Checks generated clashes unless --no_check_clashes set
+backbone [--fix_atoms All|None|Residue List]
+         [--fill_main All|None|Break List] (v1.1)
+         [--add_caps All|None|Break list] (v1.1)
+         [--no_recheck]
+         [--no_check_clashes]
+    Analyze main chain missing atoms and fragments.
+    --fix_atoms O, OXT atoms can be fixed
+    --fill_main Missing fragments filled using comparative modelling (Modeller License needed)
+    --add_caps Adds ACE and NME residues as necessary
+    Rechecks beckbone on each op unless --no_recheck is set.
+    Generated clashes are checked unless --no_check_clashes
+    
 
 3. Structure Warnings
 
 cistransbck Analyzes cis-trans dihedrals on backbone atoms
-getss      Detect SS Bonds
-clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
+getss      Detect SS Bonds 
+clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors, 
            Ionic Positive, Ionic Negative)
 
 ```
