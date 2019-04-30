@@ -129,7 +129,7 @@ class StructureChecking():
     def fixall(self, opts):
         #TODO
         print("Fixall not implemented (yet)")
-    
+
     def _run_method(self, command, opts):
         """ Run check and fix methods for specific command"""
         try:
@@ -256,6 +256,7 @@ class StructureChecking():
         input_line.add_option_list(
             'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
         )
+        input_line.default='All'
         input_option, select_chains = input_line.run(select_chains)
 
         if input_option == 'error':
@@ -359,6 +360,7 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
+        input_line.default='occupancy'
         input_option, select_altloc = input_line.run(select_altloc)
 
         if input_option == 'error':
@@ -432,17 +434,18 @@ class StructureChecking():
         else:
             remove_metals = opts['remove_metals']
 
-        input_sess = ParamInput("Remove", self.args['non_interactive'])
-        input_sess.add_option_all()
-        input_sess.add_option_none()
-        input_sess.add_option_list(
+        input_line = ParamInput("Remove", self.args['non_interactive'])
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option_list(
             'atids',
             sorted(fix_data['at_groups']),
             case='sensitive',
             multiple=True
         )
-        input_sess.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
-        input_option, remove_metals = input_sess.run(remove_metals)
+        input_line.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
+        input_line.default = 'All'
+        input_option, remove_metals = input_line.run(remove_metals)
 
         if input_option == "error":
             return cts.MSGS['UNKNOWN_SELECTION'], remove_metals
@@ -505,6 +508,7 @@ class StructureChecking():
             remove_wat = opts['remove_wat']
         input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_yes_no()
+        input_line.default = 'yes'
         input_option, remove_wat = input_line.run(remove_wat)
 
         if input_option == 'error':
@@ -573,6 +577,7 @@ class StructureChecking():
         input_line.add_option_list(
             'byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True
         )
+        input_line.default = 'all'
         input_option, remove_ligands = input_line.run(remove_ligands)
 
         if input_option == 'error':
@@ -631,6 +636,7 @@ class StructureChecking():
             remove_h = opts['remove_h']
         input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
         input_line.add_option_yes_no()
+        input_line.default = 'yes'
         input_option, remove_h = input_line.run(remove_h)
 
         if input_option == 'error':
@@ -714,7 +720,7 @@ class StructureChecking():
             )
         return amide_check
 # =============================================================================
-    def _amide_fix(self, opts, fix_data=None, recheck=True):
+    def _amide_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
         if isinstance(opts, str):
@@ -761,7 +767,7 @@ class StructureChecking():
             print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
             self.strucm.modified = True
             fix_data = {}
-            if recheck:
+            if not opts['no_recheck']:
                 if not self.args['quiet']:
                     print(cts.MSGS['AMIDES_RECHECK'])
                 fix_data = self._amide_check()
@@ -797,7 +803,7 @@ class StructureChecking():
 
         return chiral_check
 
-    def _chiral_fix(self, opts, fix_data=None, check_clashes=True):
+    def _chiral_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
         if isinstance(opts, str):
@@ -813,6 +819,7 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
+        input_line.default = 'all'
         input_option, chiral_fix = input_line.run(chiral_fix)
 
         if input_option == 'error':
@@ -837,7 +844,7 @@ class StructureChecking():
             fix_num += 1
         print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
-        if check_clashes:
+        if not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
@@ -982,17 +989,16 @@ class StructureChecking():
 
         return fix_data
 
-    def _fixside_fix(self, opts, fix_data=None, check_clashes=True):
+    def _fixside_fix(self, opts, fix_data=None):
+        
         if not fix_data:
             return False
         if isinstance(opts, str):
             fix_side = opts
         else:
             fix_side = opts['fix_side']
-            fix_extra = opts['fix_extra']
 
         fixside_rnums = [mu.residue_num(r_at[0]) for r_at in fix_data['miss_at_list']]
-        extraside_rnums = [mu.residue_num(r_at[0]) for r_at in fix_data['extra_at_list']]
 
         input_line = ParamInput('fixside', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1000,23 +1006,13 @@ class StructureChecking():
         input_line.add_option_list(
             'resnum', fixside_rnums, case='sensitive', multiple=True
         )
+        input_line.default = 'all'
         input_option_fix, fix_side = input_line.run(fix_side)
-
-#        input_line = ParamInput('remove_extra', self.args['non_interactive'])
-#        input_line.add_option_all()
-#        input_line.add_option_none()
-#        input_line.add_option_list(
-#            'resnum', extraside_rnums, case='sensitive', multiple=True
-#        )
-#        input_option_rm, fix_extra = input_line.run(fix_extra)
 
         if input_option_fix == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], fix_side
-#        if input_option_rm == 'error':
-#            return cts.MSGS['UNKNOWN_SELECTION'], fix_extra
 
         self.summary['fixside']['fix'] = fix_side
-#        self.summary['fixside']['remove'] = fix_extra
 
         if input_option_fix == 'none':
             if not self.args['quiet']:
@@ -1047,14 +1043,15 @@ class StructureChecking():
         self.summary['fixside']['fixed'] = []
         self.summary['fixside']['removed'] = []
         fixed_res = []
-        for r_at in to_remove:
-            print(mu.residue_id(r_at[0]))
-            for at_id in r_at[1]:
-                print("  Removing", at_id)
-                mu.remove_atom_from_res(r_at[0], at_id)
-                rem_num += 1
-            self.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
-            fixed_res.append(r_at[0])
+        if not opts['no_rem_extra']:
+            for r_at in to_remove:
+                print(mu.residue_id(r_at[0]))
+                for at_id in r_at[1]:
+                    print("  Removing", at_id)
+                    mu.remove_atom_from_res(r_at[0], at_id)
+                    rem_num += 1
+                self.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
+                fixed_res.append(r_at[0])
 
         for r_at in to_add:
             mu.remove_H_from_r(r_at[0], verbose=True)
@@ -1066,7 +1063,7 @@ class StructureChecking():
         print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
         self.strucm.fixed_side = True
         # Checking new clashes
-        if check_clashes:
+        if not opts['no_check_clashes']:
             print(cts.MSGS['CHECKING_CLASHES'])
             self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
         return False
@@ -1104,13 +1101,9 @@ class StructureChecking():
 
         if not fix_data:
             return False
-        if not self.strucm.fixed_side:
-            print("WARNING: side chains not yet fixed")
-            fix_side = ParamInput(
-                "Fix (Yes, No)", self.args['non_interactive']
-            ).run(None)
-            if fix_side is not None and fix_side.lower() == "yes":
-                self.fixside(['--fix', 'all'])
+        if not self.strucm.fixed_side and not opts['no_fix_side']:
+            print("WARNING: fixing side chains, override with --no_fix_side")
+            self.fixside(['--fix', 'all'])
         if isinstance(opts, str):
             add_h_mode = opts
         else:
@@ -1120,8 +1113,9 @@ class StructureChecking():
         input_line.add_option_none()
         sel_options = ['auto']
         if fix_data['ion_res_list']:
-            sel_options += ['pH', 'list']
+            sel_options += ['pH', 'list', 'int', 'int_his']
         input_line.add_option_list('selection', sel_options)
+        input_line.default = 'auto'
         input_option, add_h_mode = input_line.run(add_h_mode)
 
         if input_option == 'error':
@@ -1171,13 +1165,13 @@ class StructureChecking():
                         for mut_res in mut.mutations:
                             ion_to_fix[mut_res['resobj']] = mut_res['new_id']
                 else:
-                    if add_h_mode == 'interactive':
+                    if add_h_mode == 'int':
                         if not self.args['quiet']:
                             print('Selection: interactive')
                         res_list = fix_data['ion_res_list']
-                    elif add_h_mode == 'His_only':
+                    elif add_h_mode == 'int_his':
                         if not self.args['quiet']:
-                            print('Selection: His_only')
+                            print('Selection: int_his')
                         res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
 
                     for r_at in res_list:
@@ -1208,7 +1202,7 @@ class StructureChecking():
             mut_list = opts
         else:
             mut_list = opts['mut_list']
-        
+
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
 
@@ -1311,28 +1305,35 @@ class StructureChecking():
             fix_data['modified_residue_list'] = True
         return fix_data
 
-    def _backbone_fix(self, opts, fix_data=None, check_clashes=True, recheck=True):
-        
-        check_clashes = opts['check_clashes']
-        
-        recheck = opts['recheck']
-        
+    def _backbone_fix(self, opts, fix_data=None):
+
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 
         while fix_data['bck_breaks_list']:
-            fixed = self._backbone_fix_main_chain(opts['fix_back'], fix_data['bck_breaks_list'], check_clashes)
-            if no_int_recheck or fixed is None or not recheck:
+            fixed = self._backbone_fix_main_chain(
+                opts['fix_back'], 
+                fix_data['bck_breaks_list']
+            )
+            if no_int_recheck or fixed is None or opts['no_recheck']:
                 fix_data['bck_breaks_list'] = []
             else:
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
                 fix_data = self._backbone_check()
-
+        fixed_res=[]
         if fix_data['miss_bck_at_list']:
-            self._backbone_fix_missing(opts['fix_back'], fix_data['miss_bck_at_list'], check_clashes)
+            fixed_res = self._backbone_fix_missing(
+                opts['fix_back'], 
+                fix_data['miss_bck_at_list']
+            )
+        if fixed_res and not opts['no_check_clashes']:
+            if not self.args['quiet']:
+                print(cts.MSGS['CHECKING_CLASHES'])
+            self.summary['backbone']['clashes'] = self._check_report_clashes(fixed_res)
+
         return False
 
-    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, check_clashes=True, recheck=True):
+    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list):
         print("Main chain fixes (TODO)")
 
         brk_rnums = [(mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ','') for resp in breaks_list]
@@ -1342,7 +1343,7 @@ class StructureChecking():
         input_line.add_option_list(
             'brk', brk_rnums, case='sensitive', multiple=True
         )
-
+        input_line.default = 'all'
         input_option, fix_main_bck = input_line.run(fix_main_bck)
 
         if input_option == 'error':
@@ -1358,12 +1359,12 @@ class StructureChecking():
         to_fix = [
             rpair
             for rpair in breaks_list
-            if (mu.residue_num(rpair[0])+'-'+mu.residue_num(rpair[1])).replace(' ','') in fix_main_bck.split(',') or input_option == 'all'
+            if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ','') in fix_main_bck.split(',') or input_option == 'all'
         ]
-
+        
         return self.strucm.fix_backbone_chain(to_fix)
 
-    def _backbone_fix_missing(self, fix_back, fix_at_list, check_clashes):
+    def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
         input_line = ParamInput('Fix bck missing', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1371,6 +1372,7 @@ class StructureChecking():
         input_line.add_option_list(
             'resnum', fixbck_rnums, case='sensitive', multiple=True
         )
+        input_line.default = 'none'
         input_option, fix_back = input_line.run(fix_back)
 
         if input_option == 'error':
@@ -1408,13 +1410,8 @@ class StructureChecking():
             fixed_res.append(r_at[0])
 
         print(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
-        # Checking new clashes
-        if fix_num and check_clashes:
-            print(cts.MSGS['CHECKING_CLASHES'])
-            self.summary['backbone']['missing_atoms']['clashes'] =\
-                self._check_report_clashes(fixed_res)
-
-        return False
+ 
+        return fixed_res
 #===============================================================================
     def cistransbck(self, opts):
         """ Run cistransbck command """

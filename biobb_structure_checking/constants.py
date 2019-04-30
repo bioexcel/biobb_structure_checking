@@ -1,4 +1,4 @@
-""" 
+"""
     Global constants for structure_checking module
 """
 from biobb_structure_checking.param_input import Dialog
@@ -40,11 +40,13 @@ DIALOGS.add_option('rem_hydrogen', '--remove', 'remove_h', 'Remove Hydrogen atom
 
 DIALOGS.add_entry('amide','Checks and optionally fixes wrong amide contacts')
 DIALOGS.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
-DIALOGS.add_option('amide', '--recheck', 'recheck',\
+DIALOGS.add_option('amide', '--no_recheck', 'no_recheck',\
     'Re-check after modification', 'bool')
-    
+
 DIALOGS.add_entry('chiral','Checks and optionally fixes side chains with wrong chirality')
 DIALOGS.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
+DIALOGS.add_option('chiral', '--no_check_clashes', 'no_check_clashes',\
+    'Do not check for new clashes', 'bool')
 
 DIALOGS.add_entry('chiral_bck','Checks residues with wrong CA quiral')
 #DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
@@ -52,8 +54,10 @@ DIALOGS.add_entry('chiral_bck','Checks residues with wrong CA quiral')
 DIALOGS.add_entry('fixside','Checks and fixes missing side chain atoms')
 DIALOGS.add_option('fixside', '--fix', 'fix_side',\
     'Add missing atoms to side chains (All | None | List)')
-DIALOGS.add_option('fixside', '--no_rem', 'fix_extra',\
+DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
     'Do not remove unknown atoms', 'bool')
+DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
+    'Do not check for new clashes', 'bool')
 
 DIALOGS.add_entry('backbone','Checks and fixes several backbone issues')
 DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
@@ -67,12 +71,12 @@ DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
 DIALOGS.add_option('backbone', '--no_recheck', 'recheck',\
     'Do not re-check after modification', 'bool')
 
-DIALOGS.add_entry('mutateside','Performs side chain mutations')        
+DIALOGS.add_entry('mutateside','Performs side chain mutations')
 DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
-    
+
 DIALOGS.add_entry('add_hydrogen','Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
@@ -168,7 +172,7 @@ MSGS = {
     #fixside
     'MISSING_SIDE_ATOMS': '{} Residues with missing side chain atoms found',
     'UNKNOWN_SIDE_ATOMS': '{} Residues with unknown atoms found',
-    'FIXING_SIDE_CHAINS': '"Fixing side chains"',
+    'FIXING_SIDE_CHAINS': 'Fixing side chains',
     'SIDE_CHAIN_FIXED': 'Fixed {} side chain(s)',
     #add hydrogens
     'NO_SELECT_ADDH' : 'No residues requiring selection on adding H atoms',
