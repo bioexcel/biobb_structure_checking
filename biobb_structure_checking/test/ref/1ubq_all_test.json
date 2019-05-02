@@ -109,7 +109,7 @@
  "fixside": {
   "opts": [
    "--fix",
-   "All"
+   "all"
   ]
  },
  "getss": {},

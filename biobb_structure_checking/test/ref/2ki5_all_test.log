@@ -123,7 +123,7 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
-"Fixing side chains"
+Fixing side chains
 MET A46
   Adding new atom CG
   Adding new atom SD
@@ -205,6 +205,13 @@ Warning: not enough backbone to build missing atoms
 ALA B375
 Warning: not enough backbone to build missing atoms
 Fixed 0 backbone atom(s)
+Checking for steric clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 

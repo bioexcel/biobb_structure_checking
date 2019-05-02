@@ -136,6 +136,14 @@
   ]
  },
  "backbone": {
+  "clashes": {
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  },
   "missing_atoms": {
    "ASP A251": [
     "OXT"
@@ -325,7 +333,7 @@
  "fixside": {
   "opts": [
    "--fix",
-   "All"
+   "all"
   ]
  },
  "getss": {},

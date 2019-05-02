@@ -256,6 +256,14 @@
    ],
    "option_selected": "All"
   },
+  "clashes": {
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  },
   "missing_atoms": {
    "ALA A375": [
     "CA",

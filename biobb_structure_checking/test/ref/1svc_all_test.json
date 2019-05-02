@@ -135,6 +135,14 @@
   ]
  },
  "backbone": {
+  "clashes": {
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  },
   "missing_atoms": {
    "GLU P353": [
     "OXT"
@@ -332,7 +340,7 @@
  "fixside": {
   "opts": [
    "--fix",
-   "All"
+   "all"
   ]
  },
  "getss": {},

@@ -125,7 +125,9 @@ HIS A68
 LYS A6,A11,A27,A29,A33,A48,A63
 ARG A42,A54,A72,A74
 TYR A59
-WARNING: side chains not yet fixed
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all 
+No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A68 by HIE
 Command list completed

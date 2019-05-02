@@ -130,7 +130,9 @@ GLU A19,A36,A58
 LYS A4,A23
 ARG A7,A45,A48
 TYR A10,A12,A40,A56
-WARNING: side chains not yet fixed
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all 
+No residues with missing or unknown side chain atoms found
 Selection: auto
 Command list completed
 Final Num. models: 1

@@ -133,6 +133,13 @@ Adding missing backbone atoms
 ASP A251
   Adding new atom OXT
 Fixed 1 backbone atom(s)
+Checking for steric clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 
@@ -189,7 +196,9 @@ HIS A96,A151,A166,A179,A201,A205,A211,A224,B96,B151,B166,B179,B201,B205,B211,B22
 LYS A91,A94,A110,A119,A122,A188,B91,B94,B110,B119,B122,B188
 ARG A84,A93,A100,A134,A149,A231,A233,B84,B93,B100,B134,B149,B231,B233
 TYR A99,A104,A136,A155,A168,A220,A223,A246,B99,B104,B136,B155,B168,B220,B223,B246
-WARNING: side chains not yet fixed
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all 
+No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A96 by HIE
 Replacing HIS A151 by HIE

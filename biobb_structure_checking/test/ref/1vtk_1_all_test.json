@@ -118,6 +118,20 @@
    ],
    "option_selected": "All"
   },
+  "clashes": {
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [
+    {
+     "at1": "SER A149.OXT",
+     "at2": "GLN A349.OE1",
+     "dist": 2.8269
+    }
+   ],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  },
   "missing_atoms": {
    "GLY A264": [
     "OXT"
@@ -245,7 +259,7 @@
  "fixside": {
   "opts": [
    "--fix",
-   "All"
+   "all"
   ]
  },
  "getss": {},

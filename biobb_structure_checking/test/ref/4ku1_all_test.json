@@ -525,6 +525,14 @@
   ]
  },
  "backbone": {
+  "clashes": {
+   "apolar": [],
+   "negative": [],
+   "polar_acceptor": [],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  },
   "missing_atoms": {
    "LEU A443": [
     "OXT"
@@ -659,7 +667,7 @@
  "fixside": {
   "opts": [
    "--fix",
-   "All"
+   "all"
   ]
  },
  "getss": [
