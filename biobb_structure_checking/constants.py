@@ -3,6 +3,11 @@
 """
 from biobb_structure_checking.param_input import Dialog
 
+# Default locations
+DATA_DIR_DEFAULT = 'dat'
+RES_LIBRARY_DEFAULT = 'all_amino03.in'
+DATA_LIBRARY_DEFAULT = 'data_lib.json'
+
 # Interactive DIALOGS to complete command_line missing parameters
 DIALOGS = Dialog()
 

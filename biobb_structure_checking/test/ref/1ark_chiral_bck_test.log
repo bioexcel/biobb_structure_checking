@@ -1,8 +1,7 @@
 ===============================================================================
-=                     MDWeb structure checking utility                        =
-=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
+=                   MDWeb structure checking utility v1.0.7a                  =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
-
 
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Title: 

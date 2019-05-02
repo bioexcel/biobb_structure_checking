@@ -1,8 +1,7 @@
 ===============================================================================
-=                     MDWeb structure checking utility                        =
-=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
+=                   MDWeb structure checking utility v1.0.7a                  =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
-
 
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Structure pdb:1ldn.1 loaded

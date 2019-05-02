@@ -23,8 +23,8 @@ class StructureChecking():
         self.sets = sets
         self.summary = {}
 
-        self.pdb_server = self.args['pdb_server']
-        self.cache_dir = self.args['cache_dir']
+#        self.pdb_server = self.args['pdb_server']
+#        self.cache_dir = self.args['cache_dir']
 
         try:
             self.strucm = self._load_structure(self.args['input_structure_path'])
@@ -1486,10 +1486,10 @@ class StructureChecking():
 
         strucm = stm.StructureManager(
             input_structure_path,
-            self.sets.data_library_path,
-            self.sets.res_library_path,
-            pdb_server=self.pdb_server,
-            cache_dir=self.cache_dir,
+            self.sets['data_library_path'],
+            self.sets['res_library_path'],
+            pdb_server=self.args['pdb_server'],
+            cache_dir=self.args['cache_dir'],
             file_format=self.args['file_format']
         )
 

@@ -1,8 +1,7 @@
 ===============================================================================
-=                     MDWeb structure checking utility                        =
-=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
+=                   MDWeb structure checking utility v1.0.7a                  =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
-
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
@@ -187,6 +186,7 @@ Running backbone. Options: --fix All
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
 Main chain fixes (TODO)
+Input not valid (None)
 Adding missing backbone atoms
 VAL A70
 Warning: not enough backbone to build missing atoms

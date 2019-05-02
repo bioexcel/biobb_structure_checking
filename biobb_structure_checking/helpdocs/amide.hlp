@@ -1,3 +1,0 @@
-Detects Amide residues with wrong labelling and allows to fix them.
-
-Usage: check_structure.py amide --fix All|None|Residue List

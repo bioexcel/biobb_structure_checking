@@ -105,7 +105,7 @@ class CmdLine():
 
         self.argparser.add_argument(
             'command',
-            help="Command to execute (help: checkStruc commands) ",
+            help="Command to execute (help: check_structure commands) ",
             default="interactive"
         )
 

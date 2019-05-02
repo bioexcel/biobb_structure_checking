@@ -1,8 +1,7 @@
 ===============================================================================
-=                     MDWeb structure checking utility                        =
-=                   A. Hospital, P. Andrio, J.L. Gelpi 2018                   =
+=                   MDWeb structure checking utility v1.0.7a                  =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
-
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
@@ -109,6 +108,7 @@ Running backbone. Options: --fix All
  SER A149   - PRO A153   
  GLY A264   - PRO A280   
 Main chain fixes (TODO)
+Input not valid (None)
 Adding missing backbone atoms
 SER A149
   Adding new atom OXT
