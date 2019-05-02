@@ -1,18 +1,127 @@
 """
     Global constants for structure_checking module
 """
+import argparse
 from biobb_structure_checking.param_input import Dialog
+
+VERSION = '1.0.7a'
 
 # Default locations
 DATA_DIR_DEFAULT = 'dat'
 RES_LIBRARY_DEFAULT = 'all_amino03.in'
 DATA_LIBRARY_DEFAULT = 'data_lib.json'
 
+# Main Command Line
+CMD_LINE = argparse.ArgumentParser(
+    description='Basic Structure checking based on MDWeb'
+)
+
+## Input
+CMD_LINE.add_argument(
+    '-i', '--input',
+    dest='input_structure_path',
+    help='Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}'
+)
+
+CMD_LINE.add_argument(
+    '--file_format',
+    dest='file_format',
+    default='mmCif',
+    help='Format for retrieving structures (default=mmCif|pdb|xml)'
+)
+
+CMD_LINE.add_argument(
+    '--cache_dir',
+    dest='cache_dir',
+    default='tmpPDB',
+    help='Path for structure\'s cache directory (default: ./tmpPDB)'
+)
+
+CMD_LINE.add_argument(
+    '--pdb_server',
+    dest='pdb_server',
+    default='ftp://ftp.wwpdb.org',
+    help='Server for retrieving structures (default|MMB)'
+)
+
+#output
+CMD_LINE.add_argument(
+    '-o', '--output',
+    dest='output_structure_path',
+    help='Output structure. Format PDB'
+)
+
+CMD_LINE.add_argument(
+    '--json',
+    dest='json_output_path',
+    help='Summary checking results on a json file'
+)
+
+CMD_LINE.add_argument(
+    '--quiet',
+    action="store_true",
+    dest='quiet',
+    help='Reduces output, removing labels and progress info'
+)
+
+CMD_LINE.add_argument(
+    '--force_save',
+    action='store_true',
+    dest='force_save',
+    help='Force saving an output file even if no modification'
+)
+
+#Settings, reference data
+CMD_LINE.add_argument(
+    '--res_lib',
+    dest='res_library_path',
+    help="Override settings default residue library (AMBER prep format)",
+)
+
+CMD_LINE.add_argument(
+    '--data_lib',
+    dest='data_library_path',
+    help="Override settings default data library"
+)
+
+#Operations
+CMD_LINE.add_argument(
+    '--check_only',
+    action="store_true",
+    dest='check_only',
+    help='Perform checks only, structure is not modified'
+)
+
+CMD_LINE.add_argument(
+    '--non_interactive',
+    action='store_true',
+    dest='non_interactive',
+    help='Do not prompt for missing parameters'
+)
+
+CMD_LINE.add_argument(
+    'command',
+    help="Command to execute (help: check_structure commands) ",
+)
+
+CMD_LINE.add_argument(
+    'options',
+    nargs=argparse.REMAINDER,
+    help="Specific command options"
+)
+
+CMD_LINE.add_argument(
+    '--version',
+    action='version',
+    version="%(prog)s " + VERSION
+)
+
 # Interactive DIALOGS to complete command_line missing parameters
 DIALOGS = Dialog()
 
-#DIALOGS.add_option(command, prompt, destinmore ation, help_text, type(str))
+#DIALOGS.add_option(command, prompt, destination, help_text, type(str))
 #Multiple parameters should come as separate lines with a unique "command"
+
 DIALOGS.add_entry('command_list', 'Runs a list of commands')
 DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
 
@@ -37,7 +146,7 @@ DIALOGS.add_option('metals', '--remove', 'remove_metals', 'Remove Metal ions')
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove All Water molecules')
 
-DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'
+DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'\
     ' (will be deprecated in v1.1)')
 DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
 
