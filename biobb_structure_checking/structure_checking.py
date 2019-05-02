@@ -6,6 +6,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
 import numpy as np
+from os.path import join as opj
 
 import biobb_structure_checking.constants as cts
 
@@ -18,9 +19,18 @@ import biobb_structure_manager.model_utils as mu
 # Main class
 class StructureChecking():
     """Main class to control structure checking front end"""
-    def __init__(self, sets, args):
+
+    def __init__(self, base_dir_path, args):
         self.args = args
-        self.sets = sets
+
+        data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT)
+
+        if self.args['res_lib_path'] is None:
+            self.args['res_library_path'] = opj(data_dir_path, cts.RES_LIBRARY_DEFAULT)
+
+        if self.args['data_library_path'] is None:
+            self.args['data_library_path'] = opj(data_dir_path, cts.DATA_LIBRARY_DEFAULT)
+
         self.summary = {}
 
 #        self.pdb_server = self.args['pdb_server']
@@ -1486,8 +1496,8 @@ class StructureChecking():
 
         strucm = stm.StructureManager(
             input_structure_path,
-            self.sets['data_library_path'],
-            self.sets['res_library_path'],
+            self.args['data_library_path'],
+            self.args['res_library_path'],
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir'],
             file_format=self.args['file_format']
