@@ -1321,7 +1321,7 @@ class StructureChecking():
 
         while fix_data['bck_breaks_list']:
             fixed = self._backbone_fix_main_chain(
-                opts['fix_back'],
+                opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
             if no_int_recheck or fixed is None or opts['no_recheck']:
