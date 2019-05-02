@@ -162,11 +162,11 @@ class Dialog():
     def add_entry(self, command, description=None):
         if command not in self.options:
             self.options[command] = {
-                'command': command, 
+                'command': command,
                 'description': description,
                 'args':[]
             }
-   
+
     def add_option(self, command, opt_prompt, opt_dest, opt_help, opt_type=str, default=None):
         """add Dialog option"""
         self.add_entry(command)
@@ -175,7 +175,7 @@ class Dialog():
             'dest':   opt_dest,
             'help':   opt_help,
             'type':   opt_type,
-            'default': default            
+            'default': default
         })
 
     def get_parameter(self, command, opts):
@@ -183,7 +183,9 @@ class Dialog():
         dialog = self.options[command]
         if not dialog:
             raise NoDialogAvailableError(command)
-        opts_parser = argparse.ArgumentParser(prog=dialog['command'], description=dialog['description'])
+        opts_parser = argparse.ArgumentParser(
+            prog=dialog['command'], description=dialog['description']
+        )
         for opt in dialog['args']:
             if opt['type'] == 'bool':
                 opts_parser.add_argument(
@@ -192,7 +194,7 @@ class Dialog():
                     help=opt['help'],
                     action='store_true'
                 )
-            else:         
+            else:
                 opts_parser.add_argument(
                     opt['prompt'],
                     dest=opt['dest'],

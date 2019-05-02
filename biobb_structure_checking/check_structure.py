@@ -35,12 +35,12 @@ def main():
         help_manager.print_help(args.command, header=True)
         sys.exit(0)
 
-    if '-h' in args.options or '--help' in args.options:
-        opts = cts.DIALOGS.get_parameter(args.command, args.options)
-
-
     help_manager.print_help('header')
     print()
+
+    if '-h' in args.options or '--help' in args.options:
+        cts.DIALOGS.get_parameter(args.command, args.options)
+
 
     StructureChecking(sets, vars(args)).launch()
 

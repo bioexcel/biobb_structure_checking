@@ -6,7 +6,6 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
 import numpy as np
-from pprint import pprint
 
 import biobb_structure_checking.constants as cts
 
@@ -256,7 +255,7 @@ class StructureChecking():
         input_line.add_option_list(
             'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
         )
-        input_line.default='All'
+        input_line.default = 'All'
         input_option, select_chains = input_line.run(select_chains)
 
         if input_option == 'error':
@@ -360,7 +359,7 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
-        input_line.default='occupancy'
+        input_line.default = 'occupancy'
         input_option, select_altloc = input_line.run(select_altloc)
 
         if input_option == 'error':
@@ -990,7 +989,7 @@ class StructureChecking():
         return fix_data
 
     def _fixside_fix(self, opts, fix_data=None):
-        
+
         if not fix_data:
             return False
         if isinstance(opts, str):
@@ -1087,7 +1086,11 @@ class StructureChecking():
         self.summary['add_hydrogen']['detected'] = {}
         print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
         for res_type in self.strucm.data_library.residue_codes['protein']:
-            residue_list = [mu.residue_num(r_at[0]) for r_at in ion_res_list if r_at[0].get_resname() == res_type]
+            residue_list = [
+                mu.residue_num(r_at[0])
+                for r_at in ion_res_list
+                if r_at[0].get_resname() == res_type
+            ]
             if residue_list:
                 print(res_type, ','.join(residue_list))
 
@@ -1130,7 +1133,10 @@ class StructureChecking():
 
         add_h_mode = add_h_mode.lower()
 
-        ion_to_fix = {r_at[0]: std_ion[r_at[0].get_resname()]['std'] for r_at in fix_data['ion_res_list']}
+        ion_to_fix = {
+            r_at[0]: std_ion[r_at[0].get_resname()]['std']
+            for r_at in fix_data['ion_res_list']
+        }
 
         if add_h_mode == 'auto':
             if not self.args['quiet']:
@@ -1156,8 +1162,9 @@ class StructureChecking():
                     if not self.args['quiet']:
                         print('Selection: list')
                     ions_list = ParamInput(
-                            "Enter Forms list as [*:]his22hip", self.args['non_interactive']
-                        ).run(ions_list)
+                        "Enter Forms list as [*:]his22hip",
+                        self.args['non_interactive']
+                    ).run(ions_list)
 
                     # Changes in tautomeric forms made as mutationts eg.HisXXHip
                     mutations = self.strucm.prepare_mutations(ions_list)
@@ -1172,7 +1179,10 @@ class StructureChecking():
                     elif add_h_mode == 'int_his':
                         if not self.args['quiet']:
                             print('Selection: int_his')
-                        res_list = [r_at for r_at in fix_data['ion_res_list'] if r_at[0].get_resname() == 'HIS']
+                        res_list = [
+                            r_at for r_at in fix_data['ion_res_list']
+                            if r_at[0].get_resname() == 'HIS'
+                        ]
 
                     for r_at in res_list:
                         rcode = r_at[0].get_resname()
@@ -1180,7 +1190,7 @@ class StructureChecking():
                             "Select residue form for " + mu.residue_id(r_at[0]),
                             self.args['non_interactive']
                         )
-                        input_line.add_option_list('list',r_at[1].keys())
+                        input_line.add_option_list('list', r_at[1].keys())
                         input_line.default = std_ion[rcode]['std']
 
                         form = None
@@ -1311,7 +1321,7 @@ class StructureChecking():
 
         while fix_data['bck_breaks_list']:
             fixed = self._backbone_fix_main_chain(
-                opts['fix_back'], 
+                opts['fix_back'],
                 fix_data['bck_breaks_list']
             )
             if no_int_recheck or fixed is None or opts['no_recheck']:
@@ -1320,10 +1330,10 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
                 fix_data = self._backbone_check()
-        fixed_res=[]
+        fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
-                opts['fix_back'], 
+                opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
         if fixed_res and not opts['no_check_clashes']:
@@ -1336,7 +1346,10 @@ class StructureChecking():
     def _backbone_fix_main_chain(self, fix_main_bck, breaks_list):
         print("Main chain fixes (TODO)")
 
-        brk_rnums = [(mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ','') for resp in breaks_list]
+        brk_rnums = [
+            (mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ', '')
+            for resp in breaks_list
+        ]
         input_line = ParamInput('Fix Main Breaks', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_all()
@@ -1359,9 +1372,10 @@ class StructureChecking():
         to_fix = [
             rpair
             for rpair in breaks_list
-            if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ','') in fix_main_bck.split(',') or input_option == 'all'
+            if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
+                in fix_main_bck.split(',') or input_option == 'all'
         ]
-        
+
         return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
@@ -1410,7 +1424,7 @@ class StructureChecking():
             fixed_res.append(r_at[0])
 
         print(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
- 
+
         return fixed_res
 #===============================================================================
     def cistransbck(self, opts):

@@ -8,50 +8,51 @@ DIALOGS = Dialog()
 
 #DIALOGS.add_option(command, prompt, destinmore ation, help_text, type(str))
 #Multiple parameters should come as separate lines with a unique "command"
-DIALOGS.add_entry('command_list','Runs a list of commands')
+DIALOGS.add_entry('command_list', 'Runs a list of commands')
 DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
 
-DIALOGS.add_entry('models','Checks and selects models')
+DIALOGS.add_entry('models', 'Checks and selects models')
 DIALOGS.add_option('models', '--select', 'select_model', \
     'Select model to keep', int)
 
-DIALOGS.add_entry('chains','Checks and selects chains')
+DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select_chains',\
     'Chains (All | Chain list comma separated)')
 
-DIALOGS.add_entry('altloc','Checks and selects alternative locations')
+DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option('altloc', '--select', 'select_altloc', \
     'Select altloc occupancy|alt_id')
 
-DIALOGS.add_entry('inscodes','Checks residues with insertion codes')
+DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
 DIALOGS.add_option('inscodes', '--renum', 'renum', 'Renumber residues', 'bool')
 
-DIALOGS.add_entry('metals','Checks and optionally removes metal atoms (will be deprecated in v1.1')
+DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated in v1.1')
 DIALOGS.add_option('metals', '--remove', 'remove_metals', 'Remove Metal ions')
 
-DIALOGS.add_entry('water','Checks and optionally removes water molecules')
+DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove All Water molecules')
 
-DIALOGS.add_entry('ligands','Checks and optionally removes ligand residues (will be deprecated in v1.1')
+DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'
+    ' (will be deprecated in v1.1)')
 DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
 
-DIALOGS.add_entry('rem_hydrogen','Checks and optionally removes hydrogen atoms')
+DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms')
 DIALOGS.add_option('rem_hydrogen', '--remove', 'remove_h', 'Remove Hydrogen atoms')
 
-DIALOGS.add_entry('amide','Checks and optionally fixes wrong amide contacts')
+DIALOGS.add_entry('amide', 'Checks and optionally fixes wrong amide contacts')
 DIALOGS.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('amide', '--no_recheck', 'no_recheck',\
     'Re-check after modification', 'bool')
 
-DIALOGS.add_entry('chiral','Checks and optionally fixes side chains with wrong chirality')
+DIALOGS.add_entry('chiral', 'Checks and optionally fixes side chains with wrong chirality')
 DIALOGS.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('chiral', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
 
-DIALOGS.add_entry('chiral_bck','Checks residues with wrong CA quiral')
+DIALOGS.add_entry('chiral_bck', 'Checks residues with wrong CA quiral')
 #DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
 
-DIALOGS.add_entry('fixside','Checks and fixes missing side chain atoms')
+DIALOGS.add_entry('fixside', 'Checks and fixes missing side chain atoms')
 DIALOGS.add_option('fixside', '--fix', 'fix_side',\
     'Add missing atoms to side chains (All | None | List)')
 DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
@@ -59,7 +60,7 @@ DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
 DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
 
-DIALOGS.add_entry('backbone','Checks and fixes several backbone issues')
+DIALOGS.add_entry('backbone', 'Checks and fixes several backbone issues')
 DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
     'Add missing Oxygen atoms to backbone (All | None | List)')
 DIALOGS.add_option('backbone', '--fill_main', 'fix_main',\
@@ -71,13 +72,13 @@ DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
 DIALOGS.add_option('backbone', '--no_recheck', 'recheck',\
     'Do not re-check after modification', 'bool')
 
-DIALOGS.add_entry('mutateside','Performs side chain mutations')
+DIALOGS.add_entry('mutateside', 'Performs side chain mutations')
 DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
 
-DIALOGS.add_entry('add_hydrogen','Add hydrogen atoms with tautomer/ion selection')
+DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
 DIALOGS.add_option('add_hydrogen', '--pH', 'pH_value',\
