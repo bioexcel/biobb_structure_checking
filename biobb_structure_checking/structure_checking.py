@@ -1334,7 +1334,7 @@ class StructureChecking():
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
-            if no_int_recheck or fixed is None or opts['no_recheck']:
+            if no_int_recheck or fixed is None or 'no_recheck' in opts:
                 fix_data['bck_breaks_list'] = []
             else:
                 if not self.args['quiet']:
