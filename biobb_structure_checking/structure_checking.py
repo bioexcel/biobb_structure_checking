@@ -1500,7 +1500,8 @@ class StructureChecking():
             self.args['res_library_path'],
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir'],
-            file_format=self.args['file_format']
+            file_format=self.args['file_format'],
+            fasta_sequence_path=self.args['fasta_seq']
         )
 
         if verbose:

@@ -31,6 +31,12 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--sequence',
+    dest = 'fasta_seq',
+    help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'
+)
+
+CMD_LINE.add_argument(
     '--cache_dir',
     dest='cache_dir',
     default='tmpPDB',
@@ -115,6 +121,7 @@ CMD_LINE.add_argument(
     action='version',
     version="%(prog)s " + VERSION
 )
+
 
 # Interactive DIALOGS to complete command_line missing parameters
 DIALOGS = Dialog()
