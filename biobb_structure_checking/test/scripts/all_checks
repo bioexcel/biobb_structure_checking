@@ -10,7 +10,7 @@ amide --fix All
 chiral --fix All
 chiral_bck
 fixside --fix All
-backbone --fix All
+backbone --fix_atoms All --fix_chain All --no_recheck
 cistransbck
 getss
 clashes

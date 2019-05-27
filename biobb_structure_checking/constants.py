@@ -184,13 +184,13 @@ DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
 DIALOGS.add_entry('backbone', 'Checks and fixes several backbone issues')
 DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
     'Add missing Oxygen atoms to backbone (All | None | List)')
-DIALOGS.add_option('backbone', '--fill_main', 'fix_main',\
+DIALOGS.add_option('backbone', '--fix_chain', 'fix_main',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
     'Adds ACE and NME caps to missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
-DIALOGS.add_option('backbone', '--no_recheck', 'recheck',\
+DIALOGS.add_option('backbone', '--no_recheck', 'no_recheck',\
     'Do not re-check after modification', 'bool')
 
 DIALOGS.add_entry('mutateside', 'Performs side chain mutations')

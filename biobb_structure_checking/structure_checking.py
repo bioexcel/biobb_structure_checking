@@ -5,8 +5,9 @@ __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
-import numpy as np
 from os.path import join as opj
+
+import numpy as np
 
 import biobb_structure_checking.constants as cts
 
@@ -1334,12 +1335,14 @@ class StructureChecking():
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
-            if no_int_recheck or fixed is None or 'no_recheck' in opts:
+            # Force re-checking to update modified residues pointers
+            fix_data = self._backbone_check()
+            if no_int_recheck or not fixed or opts['no_recheck']:
                 fix_data['bck_breaks_list'] = []
             else:
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
-                fix_data = self._backbone_check()
+
         fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
@@ -1354,7 +1357,7 @@ class StructureChecking():
         return False
 
     def _backbone_fix_main_chain(self, fix_main_bck, breaks_list):
-        print("Main chain fixes (TODO)")
+        print("Main chain fixes")
 
         brk_rnums = [
             (mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ', '')
@@ -1385,8 +1388,11 @@ class StructureChecking():
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
+        fixed_main = self.strucm.fix_backbone_chain(to_fix)
 
-        return self.strucm.fix_backbone_chain(to_fix)
+        #self.summary['backbone']['main_chain_fix'] = fixed_main
+
+        return fixed_main
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
