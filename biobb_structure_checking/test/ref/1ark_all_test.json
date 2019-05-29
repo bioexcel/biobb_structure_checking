@@ -48,8 +48,11 @@
  },
  "backbone": {
   "opts": [
-   "--fix",
-   "All"
+   "--fix_atoms",
+   "All",
+   "--fix_chain",
+   "All",
+   "--no_recheck"
   ]
  },
  "chains": {

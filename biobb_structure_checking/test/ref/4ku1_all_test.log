@@ -171,9 +171,9 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All 
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix All
+Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
 
-Running backbone. Options: --fix All 
+Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck 
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT

@@ -3,6 +3,7 @@
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
 
+Warning: sequence features only available in mmCIF format or with external fasta input
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Title:  structure of ubiquitin refined at 1.8 angstroms resolution
  Experimental method: x-ray diffraction

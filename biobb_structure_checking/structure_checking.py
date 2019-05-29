@@ -1331,10 +1331,13 @@ class StructureChecking():
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 
         while fix_data['bck_breaks_list']:
-            fixed = self._backbone_fix_main_chain(
+            fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
+            self.summary['backbone']['main_chain_fix'] = fixed_main
+            print('Fixed segments: ' + ', '.join(fixed_main))
+
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
             if no_int_recheck or not fixed or opts['no_recheck']:
@@ -1360,15 +1363,15 @@ class StructureChecking():
         print("Main chain fixes")
 
         brk_rnums = [
-            (mu.residue_num(resp[0])+'-'+mu.residue_num(resp[1])).replace(' ', '')
+            (mu.residue_num(resp[0]) + '-' + mu.residue_num(resp[1])).replace(' ', '')
             for resp in breaks_list
         ]
         input_line = ParamInput('Fix Main Breaks', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_all()
-        input_line.add_option_list(
-            'brk', brk_rnums, case='sensitive', multiple=True
-        )
+#        input_line.add_option_list(
+#            'brk', brk_rnums, case='sensitive', multiple=True
+#        )
         input_line.default = 'all'
         input_option, fix_main_bck = input_line.run(fix_main_bck)
 
@@ -1388,11 +1391,8 @@ class StructureChecking():
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
-        fixed_main = self.strucm.fix_backbone_chain(to_fix)
 
-        #self.summary['backbone']['main_chain_fix'] = fixed_main
-
-        return fixed_main
+        return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]

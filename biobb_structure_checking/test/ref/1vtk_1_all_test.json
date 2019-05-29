@@ -25,6 +25,7 @@
    "ASP A136",
    "HIS A142",
    "GLU A146",
+   "HIS A151",
    "ASP A162",
    "ARG A163",
    "HIS A164",
@@ -53,6 +54,7 @@
    "ARG A256",
    "GLU A257",
    "ASP A258",
+   "GLU A273",
    "ARG A281",
    "HIS A283",
    "ASP A286",
@@ -115,38 +117,27 @@
      "GLY A264",
      "PRO A280"
     ]
-   ]
-  },
-  "clashes": {
-   "apolar": [],
-   "negative": [],
-   "polar_acceptor": [
-    {
-     "at1": "SER A149.OXT",
-     "at2": "GLN A349.OE1",
-     "dist": 2.8269
-    }
    ],
-   "polar_donor": [],
-   "positive": [],
-   "severe": []
+   "option_selected": "All"
   },
+  "main_chain_fix": [
+   "A149-A153/1",
+   "A264-A280/1"
+  ],
   "missing_atoms": {
    "GLY A264": [
     "OXT"
    ],
    "SER A149": [
     "OXT"
-   ],
-   "fixed": [
-    "SER A149",
-    "GLY A264"
-   ],
-   "selected": "All"
+   ]
   },
   "opts": [
-   "--fix",
-   "All"
+   "--fix_atoms",
+   "All",
+   "--fix_chain",
+   "All",
+   "--no_recheck"
   ]
  },
  "chains": {
@@ -164,7 +155,15 @@
  "chiral_bck": {
   "n_chirals": 287
  },
- "cistransbck": {},
+ "cistransbck": {
+  "cis": [
+   [
+    "GLY A264",
+    "THR A265",
+    0.849
+   ]
+  ]
+ },
  "clashes": {
   "detected": {
    "apolar": [
@@ -177,6 +176,21 @@
      "at1": "ALA A118.CA",
      "at2": "SER A181.O",
      "dist": 2.8897
+    },
+    {
+     "at1": "SER A149.O",
+     "at2": "ALA A152.CB",
+     "dist": 2.7199
+    },
+    {
+     "at1": "ALA A152.CB",
+     "at2": "GLN A349.OE1",
+     "dist": 2.8018
+    },
+    {
+     "at1": "ARG A247.NH2",
+     "at2": "GLY A279.CA",
+     "dist": 2.2408
     }
    ],
    "negative": [],
@@ -192,14 +206,9 @@
      "dist": 3.0609
     },
     {
-     "at1": "SER A149.OXT",
-     "at2": "GLN A349.OE1",
-     "dist": 2.8269
-    },
-    {
      "at1": "PRO A153.O",
      "at2": "GLN A349.OE1",
-     "dist": 2.8022
+     "dist": 3.0372
     },
     {
      "at1": "LEU A217.O",
@@ -212,6 +221,11 @@
      "at1": "ARG A220.NH1",
      "at2": "ARG A222.NH1",
      "dist": 2.9914
+    },
+    {
+     "at1": "ARG A247.NH2",
+     "at2": "PRO A280.N",
+     "dist": 2.6368
     },
     {
      "at1": "TRP A259.NE1",
@@ -248,8 +262,8 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 4855,
-  "num_res": 315,
+  "num_ats": 5079,
+  "num_res": 333,
   "num_wat": 0,
   "res_hetats": 2,
   "res_insc": 0,

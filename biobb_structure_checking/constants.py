@@ -187,7 +187,7 @@ DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
 DIALOGS.add_option('backbone', '--fix_chain', 'fix_main',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
-    'Adds ACE and NME caps to missing main chain segments (All | None | List)')
+    'Adds ACE and NME caps to missing main chain segments (All | None)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
 DIALOGS.add_option('backbone', '--no_recheck', 'no_recheck',\
