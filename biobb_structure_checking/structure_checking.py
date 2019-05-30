@@ -1340,7 +1340,7 @@ class StructureChecking():
 
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
-            if no_int_recheck or not fixed or opts['no_recheck']:
+            if no_int_recheck or not fixed_main or opts['no_recheck']:
                 fix_data['bck_breaks_list'] = []
             else:
                 if not self.args['quiet']:
