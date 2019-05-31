@@ -1336,7 +1336,7 @@ class StructureChecking():
                 fix_data['bck_breaks_list']
             )
             self.summary['backbone']['main_chain_fix'] = fixed_main
-            print('Fixed segments: ' + ', '.join(fixed_main))
+            print('Fixed segments: ', fixed_main)
 
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
@@ -1369,9 +1369,9 @@ class StructureChecking():
         input_line = ParamInput('Fix Main Breaks', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_all()
-#        input_line.add_option_list(
-#            'brk', brk_rnums, case='sensitive', multiple=True
-#        )
+        input_line.add_option_list(
+            'brk', brk_rnums, case='sensitive', multiple=True
+        )
         input_line.default = 'all'
         input_option, fix_main_bck = input_line.run(fix_main_bck)
 
@@ -1391,7 +1391,6 @@ class StructureChecking():
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
-
         return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
