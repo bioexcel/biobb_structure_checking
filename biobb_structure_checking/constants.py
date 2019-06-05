@@ -36,7 +36,7 @@ def set_defaults(base_dir_path, args):
         args['data_library_path'] = opj(data_dir_path, DATA_LIBRARY_DEFAULT_PATH)
 
     if 'cache_dir_path' not in args or args['cache_dir_path'] is None:
-        args['cache_dir_path'] = opj(base_dir_path, CACHE_DIR_DEFAULT_PATH)
+        args['cache_dir_path'] = CACHE_DIR_DEFAULT_PATH
 
     if 'commands_help_path' not in args or args['commands_help_path'] is None:
         args['commands_help_path'] = opj(base_dir_path, COMMANDS_HELP_PATH)

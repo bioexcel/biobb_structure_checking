@@ -152,15 +152,19 @@ class StructureChecking():
         msg = 'Running {}.'.format(command)
 
         if opts:
-            self.summary[command]['opts'] = opts
-            if isinstance(opts, str):
-                msg += ' Options: {} '.format(opts)
+            if isinstance(opts, list):
+                opts_str = ' '.join(opts)
             else:
-                msg += ' Options: {} '.format(' '.join(opts))
+                opts_str = opts
+            msg += ' Options: ' + opts_str
+            self.summary[command]['opts'] = opts_str
+                
         if not self.args['quiet']:
             print(msg)
+    
     #Running checking method
         data_to_fix = f_check()
+    
     #Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
@@ -174,10 +178,11 @@ class StructureChecking():
             if not self.args['Notebook']:
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
-                    #opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
                 else:
                     opts = {}
+    
             error_status = f_fix(opts, data_to_fix)
+
             if error_status:
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
@@ -1334,6 +1339,16 @@ class StructureChecking():
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
         fix_done = not fix_data['bck_breaks_list']
         while not fix_done:
+            #Check for canonical sequence
+            if not self.strucm.canonical_sequence:
+                input_line = ParamInput(
+                    "Enter canonical sequence path (FASTA)",
+                    self.args['non_interactive']
+                )
+                self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
+                self.strucm.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                self.strucm.get_canonical_seqs()
+            
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
