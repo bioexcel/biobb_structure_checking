@@ -5,7 +5,6 @@ __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
-from os.path import join as opj
 
 import numpy as np
 
@@ -17,28 +16,23 @@ from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableEr
 import biobb_structure_manager.structure_manager as stm
 import biobb_structure_manager.model_utils as mu
 
+
 # Main class
 class StructureChecking():
     """Main class to control structure checking front end"""
 
     def __init__(self, base_dir_path, args):
-        self.args = args
+        
+        if args is None:
+            args = {}
+        
+        self.args = cts.set_defaults(base_dir_path, args)
 
-        data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT)
-
-        if self.args['res_library_path'] is None:
-            self.args['res_library_path'] = opj(data_dir_path, cts.RES_LIBRARY_DEFAULT)
-
-        if self.args['data_library_path'] is None:
-            self.args['data_library_path'] = opj(data_dir_path, cts.DATA_LIBRARY_DEFAULT)
 
         self.summary = {}
 
-#        self.pdb_server = self.args['pdb_server']
-#        self.cache_dir = self.args['cache_dir']
-
         try:
-            self.strucm = self._load_structure(self.args['input_structure_path'])
+            self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         except IOError:
             sys.exit(
                 'ERROR: fetching/parsing structure from {}'.format(
@@ -139,6 +133,11 @@ class StructureChecking():
     def fixall(self, opts):
         #TODO
         print("Fixall not implemented (yet)")
+        
+    def revert_changes(self):
+        self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
+        self.summary = {}
+        print(cts.MSGS['ALL_UNDO'])
 
     def _run_method(self, command, opts):
         """ Run check and fix methods for specific command"""
@@ -154,8 +153,10 @@ class StructureChecking():
 
         if opts:
             self.summary[command]['opts'] = opts
-            msg += ' Options: {} '.format(' '.join(opts))
-
+            if isinstance(opts, str):
+                msg += ' Options: {} '.format(opts)
+            else:
+                msg += ' Options: {} '.format(' '.join(opts))
         if not self.args['quiet']:
             print(msg)
     #Running checking method
@@ -260,6 +261,8 @@ class StructureChecking():
             select_chains = opts
         else:
             select_chains = opts['select_chains']
+            
+        print(select_chains)
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1244,7 +1247,7 @@ class StructureChecking():
         self.strucm.modified = True
         return False
 #===============================================================================
-    def backbone(self, opts):
+    def backbone(self, opts=None):
         """ Run backbone command """
         self._run_method('backbone', opts)
 
@@ -1442,7 +1445,7 @@ class StructureChecking():
 
         return fixed_res
 #===============================================================================
-    def cistransbck(self, opts):
+    def cistransbck(self, opts=None):
         """ Run cistransbck command """
         self._run_method('cistransbck', opts)
 
@@ -1491,7 +1494,7 @@ class StructureChecking():
 #    def _cistransbck_fix(self, option):
 #        pass
 #===============================================================================
-    def _load_structure(self, input_structure_path, verbose=True, print_stats=True):
+    def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
 
         input_line = ParamInput(
             "Enter input structure path (PDB, mmcif | pdb:pdbid)",
@@ -1504,9 +1507,9 @@ class StructureChecking():
             self.args['data_library_path'],
             self.args['res_library_path'],
             pdb_server=self.args['pdb_server'],
-            cache_dir=self.args['cache_dir'],
+            cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
-            fasta_sequence_path=self.args['fasta_seq']
+            fasta_sequence_path=fasta_seq_path
         )
 
         if verbose:
