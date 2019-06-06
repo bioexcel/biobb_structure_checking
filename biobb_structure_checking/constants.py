@@ -346,6 +346,7 @@ MSGS = {
     'MODIF_RESIDUES': 'Modified residues found',
     'ADDING_BCK_ATOMS': 'Adding missing backbone atoms',
     'BCK_ATOMS_FIXED': 'Fixed {} backbone atom(s)',
+    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, skipping backbone rebuilding',
     #cistrasnbck
     'CIS_BONDS': '{} cis peptide bonds',
     'NO_CIS_BONDS': 'No cis peptide bonds found',

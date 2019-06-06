@@ -1346,6 +1346,10 @@ class StructureChecking():
                     self.args['non_interactive']
                 )
                 self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
+                if not self.args['fasta_seq_path']:
+                    print(cts.MSGS['FASTA_MISSING'])
+                    fix_done = True
+                    continue
                 self.strucm.load_sequence_from_fasta(self.args['fasta_seq_path'])
                 self.strucm.get_canonical_seqs()
             
@@ -1363,6 +1367,7 @@ class StructureChecking():
             else:
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
+                fix_done = not fix_data['bck_breaks_list']
         
         #Add CAPS
         if fix_data['bck_breaks_list']:
