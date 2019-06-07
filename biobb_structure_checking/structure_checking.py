@@ -22,10 +22,10 @@ class StructureChecking():
     """Main class to control structure checking front end"""
 
     def __init__(self, base_dir_path, args):
-        
+
         if args is None:
             args = {}
-        
+
         self.args = cts.set_defaults(base_dir_path, args)
 
 
@@ -133,7 +133,7 @@ class StructureChecking():
     def fixall(self, opts):
         #TODO
         print("Fixall not implemented (yet)")
-        
+
     def revert_changes(self):
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
@@ -158,13 +158,13 @@ class StructureChecking():
                 opts_str = opts
             msg += ' Options: ' + opts_str
             self.summary[command]['opts'] = opts_str
-                
+
         if not self.args['quiet']:
-            print(msg)
-    
+            print(msg.strip())
+
     #Running checking method
         data_to_fix = f_check()
-    
+
     #Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
@@ -180,7 +180,7 @@ class StructureChecking():
                     opts = cts.DIALOGS.get_parameter(command, opts)
                 else:
                     opts = {}
-    
+
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:
@@ -266,8 +266,7 @@ class StructureChecking():
             select_chains = opts
         else:
             select_chains = opts['select_chains']
-            
-        print(select_chains)
+
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1352,13 +1351,13 @@ class StructureChecking():
                     continue
                 self.strucm.load_sequence_from_fasta(self.args['fasta_seq_path'])
                 self.strucm.get_canonical_seqs()
-            
+
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
             self.summary['backbone']['main_chain_fix'] = fixed_main
-            print('Fixed segments: ', fixed_main)
+            print('Fixed segments: ', ', '.join(fixed_main))
 
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
@@ -1368,7 +1367,7 @@ class StructureChecking():
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
                 fix_done = not fix_data['bck_breaks_list']
-        
+
         #Add CAPS
         if fix_data['bck_breaks_list']:
             fixed_caps = self._backbone_add_caps(
@@ -1449,11 +1448,11 @@ class StructureChecking():
             for pair in term_res
             if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
         ]
-        
+
         return self.strucm.add_main_chain_caps(to_fix)
-        
-        
-        
+
+
+
     def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
         input_line = ParamInput('Fix bck missing', self.args['non_interactive'])

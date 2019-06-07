@@ -81,16 +81,10 @@
    "GLU A371",
    "GLU A374"
   ],
-  "opts": [
-   "--add_mode",
-   "auto"
-  ]
+  "opts": "--add_mode auto"
  },
  "altloc": {
-  "opts": [
-   "--select",
-   "occupancy"
-  ]
+  "opts": "--select occupancy"
  },
  "amide": {
   "detected": [
@@ -101,10 +95,7 @@
    }
   ],
   "n_amides": 17,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "backbone": {
   "breaks": {
@@ -132,13 +123,7 @@
     "OXT"
    ]
   },
-  "opts": [
-   "--fix_atoms",
-   "All",
-   "--fix_chain",
-   "All",
-   "--no_recheck"
-  ]
+  "opts": "--fix_atoms All --fix_chain All --no_recheck"
  },
  "chains": {
   "ids": {
@@ -147,10 +132,7 @@
  },
  "chiral": {
   "n_chirals": 42,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "chiral_bck": {
   "n_chirals": 287
@@ -160,7 +142,7 @@
    [
     "GLY A264",
     "THR A265",
-    0.849
+    -0.849
    ]
   ]
  },
@@ -270,10 +252,7 @@
   "res_ligands": 2
  },
  "fixside": {
-  "opts": [
-   "--fix",
-   "all"
-  ]
+  "opts": "--fix all"
  },
  "getss": {},
  "headers": {
@@ -292,10 +271,7 @@
   "error": "Unknown selection SO4"
  },
  "metals": {
-  "opts": [
-   "--remove",
-   "ZN"
-  ]
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 2,
@@ -306,10 +282,7 @@
   }
  },
  "rem_hydrogen": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  },
  "stats": {
   "biounit": "1",
@@ -333,9 +306,6 @@
  "water": {
   "n_detected": 52,
   "n_removed": 52,
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  }
 }

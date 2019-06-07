@@ -23,13 +23,13 @@ Structure pdb:1svc loaded
 
 Step 1: models --select 1
 
-Running models. Options: --select 1 
+Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
 Step 2: chains --select All
 
-Running chains. Options: --select All 
+Running chains. Options: --select All
 2 Chain(s) detected
  D: DNA
  P: Protein
@@ -42,33 +42,33 @@ No residues with insertion codes found
 
 Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy 
+Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN 
+Running metals. Options: --remove ZN
 No metal ions found
 
 Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4 
+Running ligands. Options: --remove SO4
 No ligands found
 
 Step 7: water --remove Yes
 
-Running water. Options: --remove Yes 
+Running water. Options: --remove Yes
 63 Water molecules detected
 63 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
 
-Running amide. Options: --fix All 
+Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  GLN P180.NE2 ARG P231.NH1    2.845 A
 Amide residues fixed All (1)
@@ -77,7 +77,7 @@ No unusual contact(s) involving amide atoms found
 
 Step 10: chiral --fix All
 
-Running chiral. Options: --fix All 
+Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
 Step 11: chiral_bck
@@ -87,12 +87,12 @@ No residues with incorrect backbone chirality found
 
 Step 12: fixside --fix All
 
-Running fixside. Options: --fix All 
+Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck 
+Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
 1 Residues with missing backbone atoms found
  GLU P353   OXT
 Adding missing backbone atoms
@@ -156,7 +156,7 @@ No severe clashes detected
 
 Step 17: add_hydrogen --add_mode auto
 
-Running add_hydrogen. Options: --add_mode auto 
+Running add_hydrogen. Options: --add_mode auto
 106 Residues requiring selection on adding H atoms
 CYS P88,P119,P124,P162,P262,P273
 ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
@@ -166,7 +166,7 @@ LYS P52,P77,P79,P80,P86,P95,P105,P117,P131,P147,P148,P149,P194,P206,P244,P252,P2
 ARG P54,P57,P59,P157,P164,P187,P192,P198,P214,P230,P231,P255,P258,P284,P308,P335,P336
 TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
 WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all 
+Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Warning: DA is not a valid residue in this context

@@ -20,7 +20,7 @@ Structure pdb:1ubq loaded
  Num. water mol.:  58
  Num. atoms:  660
 
-Running amide. Options: --fix None 
+Running amide. Options: --fix None
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
 Nothing to do

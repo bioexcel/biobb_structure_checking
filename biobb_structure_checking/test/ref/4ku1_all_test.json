@@ -137,10 +137,7 @@
    "TYR B436",
    "LYS B439"
   ],
-  "opts": [
-   "--add_mode",
-   "auto"
-  ]
+  "opts": "--add_mode auto"
  },
  "altloc": {
   "ASN A361": {
@@ -519,10 +516,7 @@
  },
  "amide": {
   "n_amides": 40,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "backbone": {
   "clashes": {
@@ -546,13 +540,7 @@
    ],
    "selected": "All"
   },
-  "opts": [
-   "--fix_atoms",
-   "All",
-   "--fix_chain",
-   "All",
-   "--no_recheck"
-  ]
+  "opts": "--fix_atoms All --fix_chain All --no_recheck"
  },
  "chains": {
   "ids": {
@@ -563,10 +551,7 @@
  },
  "chiral": {
   "n_chirals": 36,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "chiral_bck": {
   "n_chirals": 399
@@ -668,10 +653,7 @@
   "res_ligands": 20
  },
  "fixside": {
-  "opts": [
-   "--fix",
-   "all"
-  ]
+  "opts": "--fix all"
  },
  "getss": [
   {
@@ -729,19 +711,13 @@
   "error": "Unknown selection SO4"
  },
  "metals": {
-  "opts": [
-   "--remove",
-   "ZN"
-  ]
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
  "rem_hydrogen": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  },
  "stats": {
   "biounit": false,
@@ -763,9 +739,6 @@
  "water": {
   "n_detected": 148,
   "n_removed": 148,
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  }
 }

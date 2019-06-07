@@ -49,7 +49,7 @@ fixside [--fix All |None|Residue List] [--no_check_clashes]
     Complete side chains
     Checks generated clashes unless --no_check_clashes set
 backbone [--fix_atoms All|None|Residue List]
-         [--fix_main All|None] (v1.1)
+         [--fix_main All|None|Break list] (v1.1)
          [--add_caps All|None|Break list] (v1.1)
          [--no_recheck]
          [--no_check_clashes]

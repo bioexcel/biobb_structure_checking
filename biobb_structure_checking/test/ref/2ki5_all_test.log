@@ -28,13 +28,13 @@ AC2 B2
 
 Step 1: models --select 1
 
-Running models. Options: --select 1 
+Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
 Step 2: chains --select All
 
-Running chains. Options: --select All 
+Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
@@ -47,7 +47,7 @@ No residues with insertion codes found
 
 Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy 
+Running altloc. Options: --select occupancy
 Detected 2 residues with alternative location labels
 AC2 A1
   C3'  A (1.00) B (0.01)
@@ -61,12 +61,12 @@ Selecting location occupancy
 
 Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN 
+Running metals. Options: --remove ZN
 No metal ions found
 
 Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4 
+Running ligands. Options: --remove SO4
 4 Ligands detected
  SO4 A4
  AC2 A1
@@ -76,23 +76,23 @@ Ligands removed SO4 (2)
 
 Step 7: water --remove Yes
 
-Running water. Options: --remove Yes 
+Running water. Options: --remove Yes
 292 Water molecules detected
 292 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
 
-Running amide. Options: --fix All 
+Running amide. Options: --fix All
 No unusual contact(s) involving amide atoms found
 
 Step 10: chiral --fix All
 
-Running chiral. Options: --fix All 
+Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
 Step 11: chiral_bck
@@ -114,7 +114,7 @@ No residues with incorrect backbone chirality found
 
 Step 12: fixside --fix All
 
-Running fixside. Options: --fix All 
+Running fixside. Options: --fix All
 6 Residues with missing side chain atoms found
  MET A46    CG,SD,CE
  PRO A154   CG,CD
@@ -168,7 +168,7 @@ No negative clashes detected
 
 Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck 
+Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
 8 Residues with missing backbone atoms found
  VAL A70    CA,C,O,OXT
  GLY A148   CA,C,O,OXT
@@ -208,10 +208,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 4.12.14-lp150.12.61-default x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux bscls054 4.12.14-lp150.12.61-default x86_64
 Date and time of compilation         : 2018/12/06 09:58:12
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2019/05/29 19:48:00
+Job starting time (YY/MM/DD HH:MM:SS): 2019/06/07 11:55:51
 
 Fixing backbone of chain A
 The following 1 residues contain 6-membered rings with poor geometries
@@ -313,7 +313,7 @@ Adding SER B276
 Adding ASN B277
 Adding ALA B278
 
-Fixed segments: A70-A77/1, A148-A154/1, A264-A280/1, B73-B77/1, B148-B154/1, B263-B278/1
+Fixed segments:  A70-A77/1, A148-A154/1, A264-A280/1, B73-B77/1, B148-B154/1, B263-B278/1
 4 Residues with missing backbone atoms found
  PRO A280   OXT
  ALA A375   CA,C,O,OXT
@@ -325,6 +325,8 @@ Fixed segments: A70-A77/1, A148-A154/1, A264-A280/1, B73-B77/1, B148-B154/1, B26
 Consecutive residues too far away to be covalently linked
  PRO A280   - ARG A281  , bond distance    5.748 
  LEU B262   - SER B263  , bond distance    4.467 
+Capping fragments
+Input not valid (None)
 Adding missing backbone atoms
 PRO A280
   Adding new atom OXT
@@ -419,7 +421,7 @@ No negative clashes detected
 
 Step 17: add_hydrogen --add_mode auto
 
-Running add_hydrogen. Options: --add_mode auto 
+Running add_hydrogen. Options: --add_mode auto
 156 Residues requiring selection on adding H atoms
 CYS A171,A251,A336,A362,B171,B251,B336,B362
 ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B76,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363

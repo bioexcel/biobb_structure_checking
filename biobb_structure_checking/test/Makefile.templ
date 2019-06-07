@@ -1,4 +1,4 @@
-BASEDIR = ~/DEVEL/BioExcel/biobb/biobb_structure_checking
+BASEDIR = ##BIOBB_STRUCTURE_CHECKING_BASEDIR##
 APPDIR = ${BASEDIR}/bin
 TESTDIR = ${BASEDIR}/biobb_structure_checking/test
 SHELL = /bin/csh
@@ -115,7 +115,7 @@ all_checks:
 	echo -n " 1svc"
 	${COMMON};${APPDIR}/check_structure -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 	echo " 1vtk.1"
-	${COMMON};${APPDIR}/check_structure -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_all_test.log
+	${COMMON};${APPDIR}/check_structure -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive --sequence scripts/1vtk.fasta command_list --list scripts/all_checks > 1vtk_1_all_test.log
     
 diffs:
 	cd ${TESTDIR};scripts/calcDiffs.csh

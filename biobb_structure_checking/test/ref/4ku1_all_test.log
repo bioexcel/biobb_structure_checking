@@ -44,13 +44,13 @@ NAG B509
 
 Step 1: models --select 1
 
-Running models. Options: --select 1 
+Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
 Step 2: chains --select All
 
-Running chains. Options: --select All 
+Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
@@ -63,7 +63,7 @@ No residues with insertion codes found
 
 Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy 
+Running altloc. Options: --select occupancy
 Detected 6 residues with alternative location labels
 LYS A340
   N    A (0.50) B (0.50)
@@ -111,12 +111,12 @@ Selecting location occupancy
 
 Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN 
+Running metals. Options: --remove ZN
 No metal ions found
 
 Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4 
+Running ligands. Options: --remove SO4
 20 Ligands detected
  NAG A501
  NAG A502
@@ -142,23 +142,23 @@ Input not valid (SO4)
 
 Step 7: water --remove Yes
 
-Running water. Options: --remove Yes 
+Running water. Options: --remove Yes
 148 Water molecules detected
 148 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
 Step 9: amide --fix All
 
-Running amide. Options: --fix All 
+Running amide. Options: --fix All
 No unusual contact(s) involving amide atoms found
 
 Step 10: chiral --fix All
 
-Running chiral. Options: --fix All 
+Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
 Step 11: chiral_bck
@@ -168,12 +168,12 @@ No residues with incorrect backbone chirality found
 
 Step 12: fixside --fix All
 
-Running fixside. Options: --fix All 
+Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck 
+Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT
@@ -230,7 +230,7 @@ No positive clashes detected
 
 Step 17: add_hydrogen --add_mode auto
 
-Running add_hydrogen. Options: --add_mode auto 
+Running add_hydrogen. Options: --add_mode auto
 134 Residues requiring selection on adding H atoms
 CYS A261,A321,A367,A425,B261,B321,B367,B425
 ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
@@ -240,7 +240,7 @@ LYS A246,A248,A274,A288,A290,A317,A320,A322,A326,A334,A338,A340,A360,A370,A392,A
 ARG A255,A292,A301,A344,A355,A416,B255,B292,B301,B344,B355,B416
 TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
 WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all 
+Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A268 by HIE
