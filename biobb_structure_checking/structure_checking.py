@@ -1348,7 +1348,7 @@ class StructureChecking():
         fix_done = not fix_data['bck_breaks_list']
         while not fix_done:
             #Check for canonical sequence
-            if not self.strucm.canonical_sequence:
+            if not self.strucm.sequences.has_canonical:
                 input_line = ParamInput(
                     "Enter canonical sequence path (FASTA)",
                     self.args['non_interactive']
