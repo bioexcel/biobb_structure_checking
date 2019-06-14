@@ -21,6 +21,7 @@ DEFAULTS = {
     'force_save' : False,
     'check_only' : False,
     'non_interactive' : False,
+    'atom_limit': 1000000,
     'options' : ''
 }
 
@@ -117,6 +118,12 @@ CMD_LINE.add_argument(
     action="store_true",
     dest='quiet',
     help='Reduces output, removing labels and progress info'
+)
+
+CMD_LINE.add_argument(
+    '--limit',
+    dest='atom_limit',
+    help='Limit on number of atoms,0:nolimit'
 )
 
 CMD_LINE.add_argument(
@@ -270,6 +277,7 @@ MSGS = {
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
     'ALL_UNDO': 'All changes reverted to original structure',
+    'ATOM_LIMIT': 'Number of atoms limit exceeded ({}), use --limit to adjust',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
