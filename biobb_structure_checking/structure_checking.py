@@ -40,7 +40,7 @@ class StructureChecking():
                     self.args['input_structure_path']
                 )
             )
-        except (stm.WrongServerError, stm.UnknownFileTypeError) as err:
+        except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
         
         process = psutil.Process(os.getpid())
