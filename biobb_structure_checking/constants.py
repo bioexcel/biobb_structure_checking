@@ -22,6 +22,7 @@ DEFAULTS = {
     'check_only' : False,
     'non_interactive' : False,
     'atom_limit': 1000000,
+    'mem_check': False,
     'options' : ''
 }
 
@@ -124,6 +125,12 @@ CMD_LINE.add_argument(
     '--limit',
     dest='atom_limit',
     help='Limit on number of atoms,0:nolimit'
+)
+CMD_LINE.add_argument(
+    '--mem_check',
+    dest='mem_check',
+    action='store_true',
+    help='Check memory usage after operations'
 )
 
 CMD_LINE.add_argument(

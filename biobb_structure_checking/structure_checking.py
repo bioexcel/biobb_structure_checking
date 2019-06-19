@@ -43,8 +43,9 @@ class StructureChecking():
         except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
         
-        process = psutil.Process(os.getpid())
-        print("Memory used after structure load: {:f} MB ".format(process.memory_info().rss/1024/1024))  # in bytes 
+        if self.args['mem_check']:
+            process = psutil.Process(os.getpid())
+            print("Memory used after structure load: {:f} MB ".format(process.memory_info().rss/1024/1024))  # in bytes 
 
         if self.args['atom_limit'] and self.strucm.num_ats > int(self.args['atom_limit']):
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
