@@ -45,9 +45,13 @@ class StructureChecking():
         
         if self.args['mem_check']:
             process = psutil.Process(os.getpid())
-            print("Memory used after structure load: {:f} MB ".format(process.memory_info().rss/1024/1024))  # in bytes 
+            print(
+                "Memory used after structure load: {:f} MB ".format(
+                    process.memory_info().rss/1024/1024
+                ), file=sys.stderr
+            )  # in bytes 
 
-        if self.args['atom_limit'] and self.strucm.num_ats > int(self.args['atom_limit']):
+        if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
 
         if 'Notebook' not in self.args:
@@ -195,8 +199,13 @@ class StructureChecking():
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
         
-        process = psutil.Process(os.getpid())
-        print("Memory used after {}: {:f} MB ".format(command, process.memory_info().rss/1024/1024))  # in bytes 
+        if self.args['mem_check']:
+            process = psutil.Process(os.getpid())
+            print(
+                "Memory used after {}: {:f} MB ".format(
+                    command, process.memory_info().rss/1024/1024
+                ), file=sys.stderr
+            ) 
 # ==============================================================================q
     def models(self, opts=None):
         """ direct entry to run models command """

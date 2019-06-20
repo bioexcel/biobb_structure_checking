@@ -124,6 +124,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--limit',
     dest='atom_limit',
+    type=int,
     help='Limit on number of atoms,0:nolimit'
 )
 CMD_LINE.add_argument(
