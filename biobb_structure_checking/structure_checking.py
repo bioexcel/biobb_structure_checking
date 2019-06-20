@@ -42,14 +42,14 @@ class StructureChecking():
             )
         except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
-        
+
         if self.args['mem_check']:
             process = psutil.Process(os.getpid())
             print(
                 "Memory used after structure load: {:f} MB ".format(
                     process.memory_info().rss/1024/1024
                 ), file=sys.stderr
-            )  # in bytes 
+            )  # in bytes
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
@@ -198,14 +198,14 @@ class StructureChecking():
             if error_status:
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
-        
+
         if self.args['mem_check']:
             process = psutil.Process(os.getpid())
             print(
                 "Memory used after {}: {:f} MB ".format(
                     command, process.memory_info().rss/1024/1024
                 ), file=sys.stderr
-            ) 
+            )
 # ==============================================================================q
     def models(self, opts=None):
         """ direct entry to run models command """
@@ -1368,8 +1368,8 @@ class StructureChecking():
                     print(cts.MSGS['FASTA_MISSING'])
                     fix_done = True
                     continue
-                self.strucm.load_sequence_from_fasta(self.args['fasta_seq_path'])
-                self.strucm.get_canonical_seqs()
+                self.strucm.sequences.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                self.strucm.sequences.read_canonical_seqs(self.strucm)
 
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
@@ -1443,7 +1443,7 @@ class StructureChecking():
         return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_add_caps(self, add_caps, bck_breaks_list, miss_bck_at_list):
-        print ("Capping fragments")
+        print("Capping fragments")
         term_res = self.strucm.get_term_res()
         term_rnums = [mu.residue_num(p[1]) for p in term_res]
         input_line = ParamInput('Cap residues', self.args['non_interactive'])

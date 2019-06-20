@@ -160,6 +160,7 @@ class Dialog():
     def __init__(self):
         self.options = {}
     def add_entry(self, command, description=None):
+        """ Add Dialog entry **command** """
         if command not in self.options:
             self.options[command] = {
                 'command': command,

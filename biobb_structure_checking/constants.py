@@ -30,7 +30,7 @@ def set_defaults(base_dir_path, args):
     """ Checks input args and complete with defaults if necessary """
 
     data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
-    
+
     if 'res_library_path' not in args or args['res_library_path'] is None:
         args['res_library_path'] = opj(data_dir_path, RES_LIBRARY_DEFAULT_PATH)
 
@@ -42,16 +42,16 @@ def set_defaults(base_dir_path, args):
 
     if 'commands_help_path' not in args or args['commands_help_path'] is None:
         args['commands_help_path'] = opj(base_dir_path, COMMANDS_HELP_PATH)
-        
+
     if 'fasta_seq_path' not in args:
         args['fasta_seq_path'] = None
 
     for param in DEFAULTS:
         if param not in args or args[param] is None:
             args[param] = DEFAULTS[param]
-    
+
     return args
-    
+
 # Main Command Line
 CMD_LINE = argparse.ArgumentParser(
     description='Basic Structure checking based on MDWeb'
@@ -72,7 +72,7 @@ CMD_LINE.add_argument(
 
 CMD_LINE.add_argument(
     '--sequence',
-    dest = 'fasta_seq_path',
+    dest='fasta_seq_path',
     help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'
 )
 
