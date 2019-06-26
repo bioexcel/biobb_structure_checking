@@ -1358,7 +1358,7 @@ class StructureChecking():
         fix_done = not fix_data['bck_breaks_list']
         while not fix_done:
             #Check for canonical sequence
-            if not self.strucm.sequences.has_canonical:
+            if not self.strucm.sequence_data.has_canonical:
                 input_line = ParamInput(
                     "Enter canonical sequence path (FASTA)",
                     self.args['non_interactive']
@@ -1376,7 +1376,10 @@ class StructureChecking():
                 fix_data['bck_breaks_list']
             )
             self.summary['backbone']['main_chain_fix'] = fixed_main
-            print('Fixed segments: ', ', '.join(fixed_main))
+            if fixed_main:
+                print('Fixed segments: ', ', '.join(list(fixed_main)))
+            else:
+                print('No segments fixed')
 
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
