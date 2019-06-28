@@ -135,14 +135,14 @@ class StructureChecking():
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
-    def checkall(self, opts):
+    def checkall(self, opts=None):
         """ Predefined workflow for complete checking"""
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
 
-    def fixall(self, opts):
+    def fixall(self, opts=None):
         #TODO
         print("Fixall not implemented (yet)")
 
