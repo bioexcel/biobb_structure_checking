@@ -128,10 +128,10 @@ CMD_LINE.add_argument(
     help='Limit on number of atoms,0:nolimit'
 )
 CMD_LINE.add_argument(
-    '--mem_check',
-    dest='mem_check',
+    '--debug',
+    dest='debug',
     action='store_true',
-    help='Check memory usage after operations'
+    help='Add debug information'
 )
 
 CMD_LINE.add_argument(

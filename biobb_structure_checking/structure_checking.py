@@ -7,6 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import psutil
+import time
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -29,8 +30,12 @@ class StructureChecking():
 
         self.args = cts.set_defaults(base_dir_path, args)
 
-
         self.summary = {}
+
+        if self.args['debug']:
+            self.start_time = time.time()
+            self.summary['timings'] = []
+            self.summary['memsize'] = []
 
         try:
             self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
@@ -43,13 +48,14 @@ class StructureChecking():
         except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
 
-        if self.args['mem_check']:
+        if self.args['debug']:
+            self.summary['timings'].append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())
+            memsize = process.memory_info().rss/1024/1024
+            self.summary['memsize'].append(['load', memsize])
             print(
-                "Memory used after structure load: {:f} MB ".format(
-                    process.memory_info().rss/1024/1024
-                ), file=sys.stderr
-            )  # in bytes
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), file=sys.stderr
+            )
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
@@ -106,6 +112,29 @@ class StructureChecking():
                 print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
             except IOError:
                 print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
+        if self.args['debug']:
+            total = time.time() - self.start_time
+            print ("#DEBUG TIMINGS")
+            print ("#DEBUG =======")
+            ant = 0.
+            for op,timing in self.summary['timings']:
+                elapsed = timing - ant
+                print ('#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
+                    op,
+                    elapsed,
+                    elapsed / total * 100.)
+                )
+                ant = timing
+            print ('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
+            print ()
+            print ("#DEBUG MEMORY USAGE EVOLUTION")
+            print ("#DEBUG ======================")
+            for op,memsize in self.summary['memsize']:
+                print ('#DEBUG {:15s}: {:.2f} MB'.format(
+                    op,
+                    memsize
+                    )
+                )
 
     def command_list(self, opts):
         """ Manages command_list workflows"""
@@ -199,11 +228,14 @@ class StructureChecking():
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
 
-        if self.args['mem_check']:
+        if self.args['debug']:
+            self.summary['timings'].append([command, time.time() - self.start_time])
             process = psutil.Process(os.getpid())
+            memsize = process.memory_info().rss/1024/1024
+            self.summary['memsize'].append([command, memsize])
             print(
-                "Memory used after {}: {:f} MB ".format(
-                    command, process.memory_info().rss/1024/1024
+                "#DEBUG Memory used after {}: {:f} MB ".format(
+                    command, memsize
                 ), file=sys.stderr
             )
 # ==============================================================================q
