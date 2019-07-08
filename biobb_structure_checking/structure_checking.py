@@ -34,7 +34,8 @@ class StructureChecking():
 
         if self.args['debug']:
             self.start_time = time.time()
-            self.summary['timings'] = []
+            self.timings = []
+            self.summary['elapsed_times'] = {}
             self.summary['memsize'] = []
 
         try:
@@ -49,7 +50,7 @@ class StructureChecking():
             sys.exit(err.message)
 
         if self.args['debug']:
-            self.summary['timings'].append(['load', time.time() - self.start_time])
+            self.timings.append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
@@ -104,21 +105,16 @@ class StructureChecking():
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
 
-        if self.args['json_output_path'] is not None:
-            json_writer = JSONWriter()
-            json_writer.data = self.summary
-            try:
-                json_writer.save(self.args['json_output_path'])
-                print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
-            except IOError:
-                print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
+
         if self.args['debug']:
             total = time.time() - self.start_time
+            self.summary['elapsed_times']['total'] = total
             print ("#DEBUG TIMINGS")
             print ("#DEBUG =======")
             ant = 0.
-            for op,timing in self.summary['timings']:
+            for op,timing in self.timings:
                 elapsed = timing - ant
+                self.summary['elapsed_times'][op] = elapsed
                 print ('#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
                     op,
                     elapsed,
@@ -135,6 +131,14 @@ class StructureChecking():
                     memsize
                     )
                 )
+        if self.args['json_output_path'] is not None:
+            json_writer = JSONWriter()
+            json_writer.data = self.summary
+            try:
+                json_writer.save(self.args['json_output_path'])
+                print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
+            except IOError:
+                print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
 
     def command_list(self, opts):
         """ Manages command_list workflows"""
@@ -229,14 +233,14 @@ class StructureChecking():
                 self.summary[command]['error'] = ' '.join(error_status)
 
         if self.args['debug']:
-            self.summary['timings'].append([command, time.time() - self.start_time])
+            self.timings.append([command, time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append([command, memsize])
             print(
                 "#DEBUG Memory used after {}: {:f} MB ".format(
                     command, memsize
-                ), file=sys.stderr
+                )
             )
 # ==============================================================================q
     def models(self, opts=None):
