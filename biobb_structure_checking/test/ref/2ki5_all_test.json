@@ -397,8 +397,8 @@
     },
     {
      "at1": "MET B46.CE",
-     "at2": "VAL B352.O",
-     "dist": 0.9206
+     "at2": "VAL B352.C",
+     "dist": 1.8614
     },
     {
      "at1": "HIS B58.CD2",
@@ -678,8 +678,8 @@
    },
    {
     "at1": "MET B46.CE",
-    "at2": "VAL B352.O",
-    "dist": 0.9206
+    "at2": "VAL B352.C",
+    "dist": 1.8614
    },
    {
     "at1": "GLY B61.CA",
