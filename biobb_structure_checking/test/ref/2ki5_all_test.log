@@ -149,7 +149,8 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
-No severe clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
 4 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
@@ -187,12 +188,12 @@ Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
  SER B263   - ALA B278   
 Main chain fixes
 
-                         MODELLER 9.21, 2018/12/06, r11301
+                         MODELLER 9.22, 2019/06/19, r11413
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2018 Andrej Sali
+                     Copyright(c) 1989-2019 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -208,10 +209,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux bscls054 4.12.14-lp150.12.61-default x86_64
-Date and time of compilation         : 2018/12/06 09:58:12
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg5 4.4.0-17134-Microsoft x86_64
+Date and time of compilation         : 2019/06/19 13:37:10
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2019/06/07 11:55:51
+Job starting time (YY/MM/DD HH:MM:SS): 2019/07/22 15:27:33
 
 Fixing backbone of chain A
 The following 1 residues contain 6-membered rings with poor geometries
@@ -363,7 +364,8 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
 24 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A

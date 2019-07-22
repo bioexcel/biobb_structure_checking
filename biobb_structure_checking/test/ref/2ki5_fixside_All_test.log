@@ -60,7 +60,8 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
-No severe clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
 5 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
