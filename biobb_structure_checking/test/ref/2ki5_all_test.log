@@ -149,11 +149,12 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
-No severe clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
 4 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
- MET B46.CE   VAL B352.O      0.921 A
+ MET B46.CE   VAL B352.C      1.861 A
  GLY B61.CA   ARG B220.NH1    2.301 A
 3 Steric polar_acceptor clashes detected
  MET A46.SD   VAL A352.O      2.171 A
@@ -187,12 +188,12 @@ Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
  SER B263   - ALA B278   
 Main chain fixes
 
-                         MODELLER 9.21, 2018/12/06, r11301
+                         MODELLER 9.22, 2019/06/19, r11413
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2018 Andrej Sali
+                     Copyright(c) 1989-2019 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -208,10 +209,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux bscls054 4.12.14-lp150.12.61-default x86_64
-Date and time of compilation         : 2018/12/06 09:58:12
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.61-default x86_64
+Date and time of compilation         : 2019/06/19 13:37:10
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2019/06/07 11:55:51
+Job starting time (YY/MM/DD HH:MM:SS): 2019/07/22 11:04:24
 
 Fixing backbone of chain A
 The following 1 residues contain 6-membered rings with poor geometries
@@ -363,7 +364,8 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
+1 Steric severe clashes detected
+ MET B46.CE   VAL B352.O      0.921 A
 24 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
@@ -376,7 +378,7 @@ No severe clashes detected
  ALA A272.CB  ARG A281.NH2    2.389 A
  MET A372.SD  VAL B307.CG1    2.777 A
  MET B46.O    HIS B151.CE1    2.642 A
- MET B46.CE   VAL B352.O      0.921 A
+ MET B46.CE   VAL B352.C      1.861 A
  HIS B58.CD2  TYR B172.OH     2.675 A
  GLY B61.CA   ARG B220.NH1    2.301 A
  LYS B62.O    THR B66.CG2     2.878 A

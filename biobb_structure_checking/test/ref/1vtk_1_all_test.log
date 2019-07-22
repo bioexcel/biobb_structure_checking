@@ -109,12 +109,12 @@ Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
  GLY A264   - PRO A280   
 Main chain fixes
 
-                         MODELLER 9.21, 2018/12/06, r11301
+                         MODELLER 9.22, 2019/06/19, r11413
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2018 Andrej Sali
+                     Copyright(c) 1989-2019 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -130,10 +130,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux bscls054 4.12.14-lp150.12.61-default x86_64
-Date and time of compilation         : 2018/12/06 09:58:12
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.61-default x86_64
+Date and time of compilation         : 2019/06/19 13:37:10
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2019/06/07 11:56:40
+Job starting time (YY/MM/DD HH:MM:SS): 2019/07/22 11:05:28
 
 Fixing backbone of chain A
 0 atoms in HETATM/BLK residues constrained
@@ -179,7 +179,7 @@ Step 14: cistransbck
 
 Running cistransbck.
 1 cis peptide bonds
-GLY A264   THR A265   Dihedral:   -0.849
+GLY A264   THR A265   Dihedral:    0.849
 No trans peptide bonds with unusual omega dihedrals found
 
 Step 15: getss
