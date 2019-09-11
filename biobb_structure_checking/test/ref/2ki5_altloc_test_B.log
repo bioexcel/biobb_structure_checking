@@ -25,7 +25,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 
-Running altloc. Options: --select B 
+Running altloc. Options: --select B
 Detected 2 residues with alternative location labels
 AC2 A1
   C3'  A (1.00) B (0.01)

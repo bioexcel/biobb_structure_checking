@@ -21,16 +21,10 @@
    "TYR A56",
    "GLU A58"
   ],
-  "opts": [
-   "--add_mode",
-   "auto"
-  ]
+  "opts": "--add_mode auto"
  },
  "altloc": {
-  "opts": [
-   "--select",
-   "occupancy"
-  ]
+  "opts": "--select occupancy"
  },
  "amide": {
   "detected": [
@@ -41,19 +35,10 @@
    }
   ],
   "n_amides": 4,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "backbone": {
-  "opts": [
-   "--fix_atoms",
-   "All",
-   "--fix_chain",
-   "All",
-   "--no_recheck"
-  ]
+  "opts": "--fix_atoms All --fix_chain All --no_recheck"
  },
  "chains": {
   "ids": {
@@ -62,10 +47,7 @@
  },
  "chiral": {
   "n_chirals": 9,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "chiral_bck": {
   "n_chirals": 54
@@ -135,10 +117,7 @@
   "res_ligands": 0
  },
  "fixside": {
-  "opts": [
-   "--fix",
-   "all"
-  ]
+  "opts": "--fix all"
  },
  "getss": {},
  "headers": {
@@ -149,16 +128,10 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": [
-   "--remove",
-   "SO4"
-  ]
+  "opts": "--remove SO4"
  },
  "metals": {
-  "opts": [
-   "--remove",
-   "ZN"
-  ]
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 15,
@@ -171,10 +144,7 @@
  "rem_hydrogen": {
   "n_detected": 60,
   "n_removed": 60,
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  },
  "stats": {
   "biounit": false,
@@ -196,9 +166,6 @@
   "res_ligands": 0
  },
  "water": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  }
 }

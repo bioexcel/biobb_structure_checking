@@ -5,8 +5,9 @@ __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
-from os.path import join as opj
-
+import os
+import psutil
+import time
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -17,36 +18,48 @@ from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableEr
 import biobb_structure_manager.structure_manager as stm
 import biobb_structure_manager.model_utils as mu
 
+
 # Main class
 class StructureChecking():
     """Main class to control structure checking front end"""
 
     def __init__(self, base_dir_path, args):
-        self.args = args
 
-        data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT)
+        if args is None:
+            args = {}
 
-        if self.args['res_library_path'] is None:
-            self.args['res_library_path'] = opj(data_dir_path, cts.RES_LIBRARY_DEFAULT)
-
-        if self.args['data_library_path'] is None:
-            self.args['data_library_path'] = opj(data_dir_path, cts.DATA_LIBRARY_DEFAULT)
+        self.args = cts.set_defaults(base_dir_path, args)
 
         self.summary = {}
 
-#        self.pdb_server = self.args['pdb_server']
-#        self.cache_dir = self.args['cache_dir']
+        if self.args['debug']:
+            self.start_time = time.time()
+            self.timings = []
+            self.summary['elapsed_times'] = {}
+            self.summary['memsize'] = []
 
         try:
-            self.strucm = self._load_structure(self.args['input_structure_path'])
+            self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         except IOError:
             sys.exit(
                 'ERROR: fetching/parsing structure from {}'.format(
                     self.args['input_structure_path']
                 )
             )
-        except (stm.WrongServerError, stm.UnknownFileTypeError) as err:
+        except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
+
+        if self.args['debug']:
+            self.timings.append(['load', time.time() - self.start_time])
+            process = psutil.Process(os.getpid())
+            memsize = process.memory_info().rss/1024/1024
+            self.summary['memsize'].append(['load', memsize])
+            print(
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), file=sys.stderr
+            )
+
+        if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
+            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
 
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
@@ -92,6 +105,32 @@ class StructureChecking():
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
 
+
+        if self.args['debug']:
+            total = time.time() - self.start_time
+            self.summary['elapsed_times']['total'] = total
+            print ("#DEBUG TIMINGS")
+            print ("#DEBUG =======")
+            ant = 0.
+            for op,timing in self.timings:
+                elapsed = timing - ant
+                self.summary['elapsed_times'][op] = elapsed
+                print ('#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
+                    op,
+                    elapsed,
+                    elapsed / total * 100.)
+                )
+                ant = timing
+            print ('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
+            print ()
+            print ("#DEBUG MEMORY USAGE EVOLUTION")
+            print ("#DEBUG ======================")
+            for op,memsize in self.summary['memsize']:
+                print ('#DEBUG {:15s}: {:.2f} MB'.format(
+                    op,
+                    memsize
+                    )
+                )
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             json_writer.data = self.summary
@@ -129,16 +168,21 @@ class StructureChecking():
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
-    def checkall(self, opts):
+    def checkall(self, opts=None):
         """ Predefined workflow for complete checking"""
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
 
-    def fixall(self, opts):
+    def fixall(self, opts=None):
         #TODO
         print("Fixall not implemented (yet)")
+
+    def revert_changes(self):
+        self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
+        self.summary = {}
+        print(cts.MSGS['ALL_UNDO'])
 
     def _run_method(self, command, opts):
         """ Run check and fix methods for specific command"""
@@ -153,13 +197,19 @@ class StructureChecking():
         msg = 'Running {}.'.format(command)
 
         if opts:
-            self.summary[command]['opts'] = opts
-            msg += ' Options: {} '.format(' '.join(opts))
+            if isinstance(opts, list):
+                opts_str = ' '.join(opts)
+            else:
+                opts_str = opts
+            msg += ' Options: ' + opts_str
+            self.summary[command]['opts'] = opts_str
 
         if not self.args['quiet']:
-            print(msg)
+            print(msg.strip())
+
     #Running checking method
         data_to_fix = f_check()
+
     #Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
@@ -173,14 +223,25 @@ class StructureChecking():
             if not self.args['Notebook']:
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
-                    #opts = opts[cts.DIALOGS.get_dialog(command)['dest']]
                 else:
                     opts = {}
+
             error_status = f_fix(opts, data_to_fix)
+
             if error_status:
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
 
+        if self.args['debug']:
+            self.timings.append([command, time.time() - self.start_time])
+            process = psutil.Process(os.getpid())
+            memsize = process.memory_info().rss/1024/1024
+            self.summary['memsize'].append([command, memsize])
+            print(
+                "#DEBUG Memory used after {}: {:f} MB ".format(
+                    command, memsize
+                )
+            )
 # ==============================================================================q
     def models(self, opts=None):
         """ direct entry to run models command """
@@ -260,6 +321,7 @@ class StructureChecking():
             select_chains = opts
         else:
             select_chains = opts['select_chains']
+
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1244,7 +1306,7 @@ class StructureChecking():
         self.strucm.modified = True
         return False
 #===============================================================================
-    def backbone(self, opts):
+    def backbone(self, opts=None):
         """ Run backbone command """
         self._run_method('backbone', opts)
 
@@ -1329,23 +1391,49 @@ class StructureChecking():
     def _backbone_fix(self, opts, fix_data=None):
 
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
+        fix_done = not fix_data['bck_breaks_list']
+        while not fix_done:
+            #Check for canonical sequence
+            if not self.strucm.sequence_data.has_canonical:
+                input_line = ParamInput(
+                    "Enter canonical sequence path (FASTA)",
+                    self.args['non_interactive']
+                )
+                self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
+                if not self.args['fasta_seq_path']:
+                    print(cts.MSGS['FASTA_MISSING'])
+                    fix_done = True
+                    continue
+                self.strucm.sequences.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                self.strucm.sequences.read_canonical_seqs(self.strucm)
 
-        while fix_data['bck_breaks_list']:
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
             self.summary['backbone']['main_chain_fix'] = fixed_main
-            print('Fixed segments: ' + ', '.join(fixed_main))
+            if fixed_main:
+                print('Fixed segments: ', ', '.join(list(fixed_main)))
+            else:
+                print('No segments fixed')
 
             # Force re-checking to update modified residues pointers
             fix_data = self._backbone_check()
-            if no_int_recheck or not fixed or opts['no_recheck']:
-                fix_data['bck_breaks_list'] = []
+            if no_int_recheck or not fixed_main or opts['no_recheck']:
+                fix_done = True
             else:
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
+                fix_done = not fix_data['bck_breaks_list']
 
+        #Add CAPS
+        if fix_data['bck_breaks_list']:
+            fixed_caps = self._backbone_add_caps(
+                opts['add_caps'],
+                fix_data['bck_breaks_list'],
+                fix_data['miss_bck_at_list']
+            )
+        #Add atoms
         fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
@@ -1369,9 +1457,9 @@ class StructureChecking():
         input_line = ParamInput('Fix Main Breaks', self.args['non_interactive'])
         input_line.add_option_none()
         input_line.add_option_all()
-#        input_line.add_option_list(
-#            'brk', brk_rnums, case='sensitive', multiple=True
-#        )
+        input_line.add_option_list(
+            'brk', brk_rnums, case='sensitive', multiple=True
+        )
         input_line.default = 'all'
         input_option, fix_main_bck = input_line.run(fix_main_bck)
 
@@ -1391,8 +1479,37 @@ class StructureChecking():
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
-
         return self.strucm.fix_backbone_chain(to_fix)
+
+    def _backbone_add_caps(self, add_caps, bck_breaks_list, miss_bck_at_list):
+        print("Capping fragments")
+        term_res = self.strucm.get_term_res()
+        term_rnums = [mu.residue_num(p[1]) for p in term_res]
+        input_line = ParamInput('Cap residues', self.args['non_interactive'])
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option_list(
+            'resnum', term_rnums, case='sensitive', multiple=True
+        )
+        input_line.default = 'none'
+        input_option, add_caps = input_line.run(add_caps)
+        if input_option == 'error':
+            return cts.MSGS['UNKNOWN_SELECTION'], add_caps
+
+        self.summary['backbone']['add_caps'] = add_caps
+        if input_option == 'none':
+            if not self.args['quiet']:
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+        to_fix = [
+            pair
+            for pair in term_res
+            if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
+        ]
+
+        return self.strucm.add_main_chain_caps(to_fix)
+
+
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
@@ -1443,7 +1560,7 @@ class StructureChecking():
 
         return fixed_res
 #===============================================================================
-    def cistransbck(self, opts):
+    def cistransbck(self, opts=None):
         """ Run cistransbck command """
         self._run_method('cistransbck', opts)
 
@@ -1492,7 +1609,7 @@ class StructureChecking():
 #    def _cistransbck_fix(self, option):
 #        pass
 #===============================================================================
-    def _load_structure(self, input_structure_path, verbose=True, print_stats=True):
+    def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
 
         input_line = ParamInput(
             "Enter input structure path (PDB, mmcif | pdb:pdbid)",
@@ -1505,9 +1622,9 @@ class StructureChecking():
             self.args['data_library_path'],
             self.args['res_library_path'],
             pdb_server=self.args['pdb_server'],
-            cache_dir=self.args['cache_dir'],
+            cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
-            fasta_sequence_path=self.args['fasta_seq']
+            fasta_sequence_path=fasta_seq_path
         )
 
         if verbose:

@@ -159,10 +159,7 @@
    "GLU B371",
    "GLU B374"
   ],
-  "opts": [
-   "--add_mode",
-   "auto"
-  ]
+  "opts": "--add_mode auto"
  },
  "altloc": {
   "AC2 A1": {
@@ -229,10 +226,7 @@
  },
  "amide": {
   "n_amides": 32,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "backbone": {
   "breaks": {
@@ -308,13 +302,7 @@
    ],
    "selected": "All"
   },
-  "opts": [
-   "--fix_atoms",
-   "All",
-   "--fix_chain",
-   "All",
-   "--no_recheck"
-  ]
+  "opts": "--fix_atoms All --fix_chain All --no_recheck"
  },
  "chains": {
   "ids": {
@@ -325,10 +313,7 @@
  },
  "chiral": {
   "n_chirals": 84,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "chiral_bck": {
   "n_chirals": 561
@@ -412,8 +397,8 @@
     },
     {
      "at1": "MET B46.CE",
-     "at2": "VAL B352.O",
-     "dist": 0.9206
+     "at2": "VAL B352.C",
+     "dist": 1.8614
     },
     {
      "at1": "HIS B58.CD2",
@@ -608,7 +593,13 @@
      "dist": 2.977
     }
    ],
-   "severe": []
+   "severe": [
+    {
+     "at1": "MET B46.CE",
+     "at2": "VAL B352.O",
+     "dist": 0.9206
+    }
+   ]
   }
  },
  "final_stats": {
@@ -670,10 +661,7 @@
    "PRO B154",
    "ARG B220"
   ],
-  "opts": [
-   "--fix",
-   "All"
-  ],
+  "opts": "--fix All",
   "removed": []
  },
  "fixside_clashes": {
@@ -690,8 +678,8 @@
    },
    {
     "at1": "MET B46.CE",
-    "at2": "VAL B352.O",
-    "dist": 0.9206
+    "at2": "VAL B352.C",
+    "dist": 1.8614
    },
    {
     "at1": "GLY B61.CA",
@@ -736,7 +724,13 @@
     "dist": 2.977
    }
   ],
-  "severe": []
+  "severe": [
+   {
+    "at1": "MET B46.CE",
+    "at2": "VAL B352.O",
+    "dist": 0.9206
+   }
+  ]
  },
  "getss": {},
  "headers": {
@@ -764,19 +758,13 @@
   }
  },
  "metals": {
-  "opts": [
-   "--remove",
-   "ZN"
-  ]
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
  "rem_hydrogen": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  },
  "stats": {
   "biounit": false,
@@ -798,9 +786,6 @@
  "water": {
   "n_detected": 292,
   "n_removed": 292,
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  }
 }

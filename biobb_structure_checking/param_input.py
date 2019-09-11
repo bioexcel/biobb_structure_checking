@@ -160,6 +160,7 @@ class Dialog():
     def __init__(self):
         self.options = {}
     def add_entry(self, command, description=None):
+        """ Add Dialog entry **command** """
         if command not in self.options:
             self.options[command] = {
                 'command': command,
@@ -183,6 +184,7 @@ class Dialog():
         dialog = self.options[command]
         if not dialog:
             raise NoDialogAvailableError(command)
+
         opts_parser = argparse.ArgumentParser(
             prog=dialog['command'], description=dialog['description']
         )
@@ -202,6 +204,12 @@ class Dialog():
                     type=opt['type'],
                     default=opt['default']
                 )
+        if isinstance(opts, str): # Notebook direct call
+            if '--' not in opts:
+                opts = [dialog['args'][0]['prompt'], opts]
+            else:
+                opts = opts.split(' ')
+
         return vars(opts_parser.parse_args(opts))
 
     def get_dialog(self, command):

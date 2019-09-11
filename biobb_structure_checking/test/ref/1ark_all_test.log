@@ -22,14 +22,14 @@ Structure pdb:1ark loaded
 
 Step 1: models --select 1
 
-Running models. Options: --select 1 
+Running models. Options: --select 1
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
 
 Step 2: chains --select All
 
-Running chains. Options: --select All 
+Running chains. Options: --select All
 1 Chain(s) detected
  A: Protein
 
@@ -40,33 +40,33 @@ No residues with insertion codes found
 
 Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy 
+Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
 
 Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN 
+Running metals. Options: --remove ZN
 No metal ions found
 
 Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4 
+Running ligands. Options: --remove SO4
 No ligands found
 
 Step 7: water --remove Yes
 
-Running water. Options: --remove Yes 
+Running water. Options: --remove Yes
 No water molecules found
 
 Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes 
+Running rem_hydrogen. Options: --remove Yes
 60 Residues containing H atoms detected
 Hydrogen atoms removed from 60 residues
 
 Step 9: amide --fix All
 
-Running amide. Options: --fix All 
+Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ASN A30.OD1  GLN A32.O       2.598 A
 Amide residues fixed All (1)
@@ -75,7 +75,7 @@ No unusual contact(s) involving amide atoms found
 
 Step 10: chiral --fix All
 
-Running chiral. Options: --fix All 
+Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
 Step 11: chiral_bck
@@ -85,12 +85,12 @@ No residues with incorrect backbone chirality found
 
 Step 12: fixside --fix All
 
-Running fixside. Options: --fix All 
+Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
 Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck 
+Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
 
 Step 14: cistransbck
 
@@ -122,7 +122,7 @@ No negative clashes detected
 
 Step 17: add_hydrogen --add_mode auto
 
-Running add_hydrogen. Options: --add_mode auto 
+Running add_hydrogen. Options: --add_mode auto
 18 Residues requiring selection on adding H atoms
 ASP A11,A16,A18,A24,A26,A35
 GLU A19,A36,A58
@@ -130,7 +130,7 @@ LYS A4,A23
 ARG A7,A45,A48
 TYR A10,A12,A40,A56
 WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all 
+Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Command list completed

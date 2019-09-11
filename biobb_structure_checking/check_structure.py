@@ -15,14 +15,13 @@ import biobb_structure_checking
 import biobb_structure_checking.constants as cts
 from biobb_structure_checking.structure_checking import StructureChecking
 
+BANNER = "===============================================================================\n"\
+    "=                   MDWeb structure checking utility v{}                  =\n"\
+    "=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =\n"\
+    "===============================================================================\n"
 def header():
     """ Prints general application headers"""
-    return (
-        "===============================================================================\n"
-        "=                   MDWeb structure checking utility v{}                  =\n"
-        "=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =\n"
-        "===============================================================================\n".format(cts.VERSION)
-    )
+    return BANNER.format(cts.VERSION)
 
 def main():
     """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""
@@ -33,7 +32,7 @@ def main():
 
     if args.command == 'commands':
         help_str = header()
-        with open(base_dir_path + "/" + "commands.hlp") as help_file:
+        with open(base_dir_path + "/" + cts.COMMANDS_HELP_PATH) as help_file:
             help_str += help_file.read()
         pydoc.pager(help_str)
         sys.exit(0)

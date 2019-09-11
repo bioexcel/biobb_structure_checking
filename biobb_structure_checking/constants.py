@@ -2,14 +2,55 @@
     Global constants for structure_checking module
 """
 import argparse
+from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
 VERSION = '1.0.7a'
 
-# Default locations
-DATA_DIR_DEFAULT = 'dat'
-RES_LIBRARY_DEFAULT = 'all_amino03.in'
-DATA_LIBRARY_DEFAULT = 'data_lib.json'
+# Default locations and settings
+DATA_DIR_DEFAULT_PATH = 'dat'
+RES_LIBRARY_DEFAULT_PATH = 'all_amino03.in'
+DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
+CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
+COMMANDS_HELP_PATH = 'commands.hlp'
+
+DEFAULTS = {
+    'file_format' : 'mmCif',
+    'pdb_server' : 'ftp://ftp.wwpdb.org',
+    'quiet' : False,
+    'force_save' : False,
+    'check_only' : False,
+    'non_interactive' : False,
+    'atom_limit': 1000000,
+    'mem_check': False,
+    'options' : ''
+}
+
+def set_defaults(base_dir_path, args):
+    """ Checks input args and complete with defaults if necessary """
+
+    data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
+
+    if 'res_library_path' not in args or args['res_library_path'] is None:
+        args['res_library_path'] = opj(data_dir_path, RES_LIBRARY_DEFAULT_PATH)
+
+    if 'data_library_path' not in args or args['data_library_path'] is None:
+        args['data_library_path'] = opj(data_dir_path, DATA_LIBRARY_DEFAULT_PATH)
+
+    if 'cache_dir_path' not in args or args['cache_dir_path'] is None:
+        args['cache_dir_path'] = CACHE_DIR_DEFAULT_PATH
+
+    if 'commands_help_path' not in args or args['commands_help_path'] is None:
+        args['commands_help_path'] = opj(base_dir_path, COMMANDS_HELP_PATH)
+
+    if 'fasta_seq_path' not in args:
+        args['fasta_seq_path'] = None
+
+    for param in DEFAULTS:
+        if param not in args or args[param] is None:
+            args[param] = DEFAULTS[param]
+
+    return args
 
 # Main Command Line
 CMD_LINE = argparse.ArgumentParser(
@@ -26,28 +67,38 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    default='mmCif',
     help='Format for retrieving structures (default=mmCif|pdb|xml)'
 )
 
 CMD_LINE.add_argument(
     '--sequence',
-    dest = 'fasta_seq',
+    dest='fasta_seq_path',
     help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'
-)
-
-CMD_LINE.add_argument(
-    '--cache_dir',
-    dest='cache_dir',
-    default='tmpPDB',
-    help='Path for structure\'s cache directory (default: ./tmpPDB)'
 )
 
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    default='ftp://ftp.wwpdb.org',
     help='Server for retrieving structures (default|MMB)'
+)
+
+CMD_LINE.add_argument(
+    '--cache_dir',
+    dest='cache_dir_path',
+    help='Path for structure\'s cache directory (default: ./tmpPDB)'
+)
+
+#Settings, reference data
+CMD_LINE.add_argument(
+    '--res_lib',
+    dest='res_library_path',
+    help="Override settings default residue library (AMBER prep format)",
+)
+
+CMD_LINE.add_argument(
+    '--data_lib',
+    dest='data_library_path',
+    help="Override settings default data library"
 )
 
 #output
@@ -71,23 +122,23 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--limit',
+    dest='atom_limit',
+    type=int,
+    help='Limit on number of atoms,0:nolimit'
+)
+CMD_LINE.add_argument(
+    '--debug',
+    dest='debug',
+    action='store_true',
+    help='Add debug information'
+)
+
+CMD_LINE.add_argument(
     '--force_save',
     action='store_true',
     dest='force_save',
     help='Force saving an output file even if no modification'
-)
-
-#Settings, reference data
-CMD_LINE.add_argument(
-    '--res_lib',
-    dest='res_library_path',
-    help="Override settings default residue library (AMBER prep format)",
-)
-
-CMD_LINE.add_argument(
-    '--data_lib',
-    dest='data_library_path',
-    help="Override settings default data library"
 )
 
 #Operations
@@ -233,6 +284,8 @@ MSGS = {
     'JSON_NOT_SAVED': 'Unable to save JSON data on ',
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
+    'ALL_UNDO': 'All changes reverted to original structure',
+    'ATOM_LIMIT': 'Number of atoms limit exceeded ({}), use --limit to adjust',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
@@ -309,6 +362,7 @@ MSGS = {
     'MODIF_RESIDUES': 'Modified residues found',
     'ADDING_BCK_ATOMS': 'Adding missing backbone atoms',
     'BCK_ATOMS_FIXED': 'Fixed {} backbone atom(s)',
+    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, skipping backbone rebuilding',
     #cistrasnbck
     'CIS_BONDS': '{} cis peptide bonds',
     'NO_CIS_BONDS': 'No cis peptide bonds found',

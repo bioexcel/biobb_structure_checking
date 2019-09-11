@@ -27,16 +27,10 @@
    "ARG A72",
    "ARG A74"
   ],
-  "opts": [
-   "--add_mode",
-   "auto"
-  ]
+  "opts": "--add_mode auto"
  },
  "altloc": {
-  "opts": [
-   "--select",
-   "occupancy"
-  ]
+  "opts": "--select occupancy"
  },
  "amide": {
   "detected": [
@@ -47,19 +41,10 @@
    }
   ],
   "n_amides": 8,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "backbone": {
-  "opts": [
-   "--fix_atoms",
-   "All",
-   "--fix_chain",
-   "All",
-   "--no_recheck"
-  ]
+  "opts": "--fix_atoms All --fix_chain All --no_recheck"
  },
  "chains": {
   "ids": {
@@ -68,10 +53,7 @@
  },
  "chiral": {
   "n_chirals": 14,
-  "opts": [
-   "--fix",
-   "All"
-  ]
+  "opts": "--fix All"
  },
  "chiral_bck": {
   "n_chirals": 70
@@ -110,10 +92,7 @@
   "res_ligands": 0
  },
  "fixside": {
-  "opts": [
-   "--fix",
-   "all"
-  ]
+  "opts": "--fix all"
  },
  "getss": {},
  "headers": {
@@ -125,25 +104,16 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": [
-   "--remove",
-   "SO4"
-  ]
+  "opts": "--remove SO4"
  },
  "metals": {
-  "opts": [
-   "--remove",
-   "ZN"
-  ]
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
  "rem_hydrogen": {
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  },
  "stats": {
   "biounit": false,
@@ -164,9 +134,6 @@
  "water": {
   "n_detected": 58,
   "n_removed": 58,
-  "opts": [
-   "--remove",
-   "Yes"
-  ]
+  "opts": "--remove Yes"
  }
 }

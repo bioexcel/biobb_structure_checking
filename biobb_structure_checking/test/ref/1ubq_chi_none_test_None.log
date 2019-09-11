@@ -19,7 +19,7 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. water mol.:  58
  Num. atoms:  658
 
-Running chiral. Options: --fix None 
+Running chiral. Options: --fix None
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    
