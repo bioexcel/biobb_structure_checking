@@ -1404,8 +1404,8 @@ class StructureChecking():
                     print(cts.MSGS['FASTA_MISSING'])
                     fix_done = True
                     continue
-                self.strucm.sequences.load_sequence_from_fasta(self.args['fasta_seq_path'])
-                self.strucm.sequences.read_canonical_seqs(self.strucm)
+                self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                self.strucm.sequence_data.read_canonical_seqs(self.strucm)
 
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
