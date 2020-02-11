@@ -1134,6 +1134,7 @@ class StructureChecking():
 
         print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
         self.strucm.fixed_side = True
+        self.strucm.modified = True
         # Checking new clashes
         if not opts['no_check_clashes']:
             print(cts.MSGS['CHECKING_CLASHES'])
@@ -1271,6 +1272,7 @@ class StructureChecking():
                         ion_to_fix[r_at[0]] = form.upper()
 
         self.strucm.add_hydrogens(ion_to_fix)
+        self.strucm.modified = True
         return False
 # =============================================================================
     def mutateside(self, mut_list):
@@ -1391,29 +1393,21 @@ class StructureChecking():
     def _backbone_fix(self, opts, fix_data=None):
 
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
+        
         fix_done = not fix_data['bck_breaks_list']
+        
         while not fix_done:
-            #Check for canonical sequence
-            if not self.strucm.sequence_data.has_canonical:
-                input_line = ParamInput(
-                    "Enter canonical sequence path (FASTA)",
-                    self.args['non_interactive']
-                )
-                self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
-                if not self.args['fasta_seq_path']:
-                    print(cts.MSGS['FASTA_MISSING'])
-                    fix_done = True
-                    continue
-                self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
-                self.strucm.sequence_data.read_canonical_seqs(self.strucm)
-
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list']
             )
+            if not fixed_main:
+                fix_done= True
+                continue
             self.summary['backbone']['main_chain_fix'] = fixed_main
             if fixed_main:
                 print('Fixed segments: ', ', '.join(list(fixed_main)))
+                self.strucm.modified = True
             else:
                 print('No segments fixed')
 
@@ -1427,19 +1421,29 @@ class StructureChecking():
                 fix_done = not fix_data['bck_breaks_list']
 
         #Add CAPS
-        if fix_data['bck_breaks_list']:
-            fixed_caps = self._backbone_add_caps(
-                opts['add_caps'],
-                fix_data['bck_breaks_list'],
-                fix_data['miss_bck_at_list']
-            )
-        #Add atoms
+        fixed_caps = self._backbone_add_caps(
+            opts['add_caps'],
+            fix_data['bck_breaks_list'],
+            fix_data['miss_bck_at_list']
+        )
+
+        self.summary['backbone']['added_caps']= fixed_caps
+
+        if fixed_caps:
+            print ('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
+            self.strucm.modified = True
+            fix_data = self._backbone_check()
+        else:
+            print ('No caps added')
+
+        #Add missing atoms
         fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
                 opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
+        
         if fixed_res and not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
@@ -1472,6 +1476,19 @@ class StructureChecking():
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
             return None
+        
+        #Checking for canonical sequence
+        if not self.strucm.sequence_data.has_canonical:
+            input_line = ParamInput(
+                "Enter canonical sequence path (FASTA)",
+                self.args['non_interactive']
+            )
+            self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
+            if not self.args['fasta_seq_path']:
+                print(cts.MSGS['FASTA_MISSING'])
+                return None
+            self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+            self.strucm.sequence_data.read_canonical_seqs(self.strucm)
 
         to_fix = [
             rpair
@@ -1496,7 +1513,9 @@ class StructureChecking():
 
         print("Capping fragments")
         print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
-        print("Remaining backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
+        if bck_breaks_list:
+            print("Remaining backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
+
         input_line = ParamInput('Cap residues', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -1529,8 +1548,6 @@ class StructureChecking():
             ]
             
         return self.strucm.add_main_chain_caps(to_fix)
-
-
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
