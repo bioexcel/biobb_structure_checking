@@ -5,26 +5,10 @@
                 "HIS", "ILE", "LYS", "LEU", "MET", "ASN", "PRO",
                 "GLN", "ARG", "SER", "THR", "VAL", "TRP", "TYR"],
             "protein1": {
-                "A": "ALA",
-                "C": "CYS",
-                "D": "ASP",
-                "E": "GLU",
-                "F": "PHE",
-                "G": "GLY",
-                "H": "HIS",
-                "I": "ILE",
-                "K": "LYS",
-                "L": "LEU",
-                "M": "MET",
-                "N": "ASN",
-                "P": "PRO",
-                "Q": "GLN",
-                "R": "ARG",
-                "S": "SER",
-                "T": "THR",
-                "V": "VAL",
-                "W": "TRP",
-                "Y": "TYR"
+                "A": "ALA", "C": "CYS", "D": "ASP", "E": "GLU", "F": "PHE",
+                "G": "GLY", "H": "HIS", "I": "ILE", "K": "LYS", "L": "LEU",
+                "M": "MET", "N": "ASN", "P": "PRO", "Q": "GLN", "R": "ARG",
+                "S": "SER", "T": "THR", "V": "VAL", "W": "TRP", "Y": "TYR"
             },
             "dna": ["DA", "DC", "DG", "DT"],
             "rna": ["A", "C", "G", "U"]
@@ -101,105 +85,63 @@
                     }
                 },
                 "mutation_rules": {
-                    "ALA": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
-                    },
+                    "ALA": {},
                     "CYS": {
-                        "Add": ["SG"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
-                        "Add": ["CG", "OD1", "OD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "OD1", "OD2"]                    
                     },
                     "GLU": {
-                        "Add": ["CG", "CD", "OE1", "OE2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD", "OE1", "OE2"]
                     },
                     "PHE": {
-                        "Add": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB"]
                     },
                     "HIS": {
-                        "Add": ["CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
-                        "Add": ["CG1", "CG2", "CD1"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG1", "CG2", "CD1"]
                     },
                     "LYS": {
-                        "Add": ["CG", "CD", "CE", "NZ"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD", "CE", "NZ"]
                     },
                     "LEU": {
-                        "Add": ["CG", "CD1", "CD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CD2"]
                     },
                     "MET": {
-                        "Add": ["CG", "SD", "CE"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "SD", "CE"]
                     },
                     "ASN": {
-                        "Add": ["CG", "OD1", "ND2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "OD1", "ND2"]
                     },
                     "PRO": {
-                        "Add": ["CD", "CG"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CD", "CG"]
                     },
                     "GLN": {
-                        "Add": ["CG", "CD", "OE1", "NE2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD", "OE1", "NE2"]
                     },
                     "ARG": {
-                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
-                        "Add": ["OG"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["OG"]
                     },
                     "THR": {
-                        "Add": ["CG2", "OG1"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG2", "OG1"]
                     },
                     "VAL": {
-                        "Add": ["CG1", "CG2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG1", "CG2"]
                     },
                     "TRP": {
-                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
-                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Del": [],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -243,104 +185,79 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["SG"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["SG"]
                     },
-                    "CYS": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
-                    },
+                    "CYS": {},
                     "ASP": {
-                        "Mov": [],
                         "Add": ["CG", "OD1", "OD2"],
                         "Del": ["SG"]
                     },
                     "GLU": {
-                        "Mov": [],
                         "Add": ["CG", "CD", "OE1", "OE2"],
                         "Del": ["SG"]
                     },
                     "PHE": {
-                        "Mov": [],
                         "Add": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
                         "Del": ["SG"]
                     },
                     "GLY": {
-                        "Del": ["CB", "SG"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "SG"]
                     },
                     "HIS": {
-                        "Mov": [],
                         "Add": ["CG", "ND1", "CE1", "NE2", "CD2"],
                         "Del": ["SG"]
                     },
                     "ILE": {
                         "Del": ["SG"],
-                        "Add": ["CG2", "CG1", "CD1"],
-                        "Mov": []
+                        "Add": ["CG2", "CG1", "CD1"]
                     },
                     "LYS": {
-                        "Mov": [],
                         "Add": ["CG", "CD", "CE", "NZ"],
                         "Del": ["SG"]
                     },
                     "LEU": {
                         "Del": ["SG"],
-                        "Add": ["CG", "CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["SG"],
-                        "Add": ["CG", "SD", "CE"],
-                        "Mov": []
+                        "Add": ["CG", "SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["SG"],
-                        "Add": ["CG", "OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["CG", "OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["SG"],
-                        "Add": ["CD", "CG"],
-                        "Mov": []
+                        "Add": ["CD", "CG"]
                     },
                     "GLN": {
                         "Del": ["SG"],
-                        "Add": ["CG", "CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["SG"],
-                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Del": ["SG"],
-                        "Add": ["OG"],
-                        "Mov": []
+                        "Add": ["OG"]
                     },
                     "THR": {
                         "Del": ["SG"],
-                        "Add": ["CG2", "OG1"],
-                        "Mov": []
+                        "Add": ["CG2", "OG1"]
                     },
                     "VAL": {
                         "Del": ["SG"],
-                        "Add": ["CG1", "CG2"],
-                        "Mov": []
+                        "Add": ["CG1", "CG2"]
                     },
                     "TRP": {
                         "Del": ["SG"],
-                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["SG"],
-                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -376,39 +293,28 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "OD1", "OD2"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CG", "OD1", "OD2"]
                     },
                     "CYS": {
                         "Del": ["CG", "OD1", "OD2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "GLU": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "OD1", "OD2"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CB", "CG", "OD1", "OD2"]
                     },
                     "HIS": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["OD1", "OD2"],
@@ -417,43 +323,34 @@
                     },
                     "LYS": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
-                        "Mov": ["OD2-ND2"],
-                        "Add": [],
-                        "Del": []
+                        "Mov": ["OD2-ND2"]
                     },
                     "PRO": {
                         "Del": ["OD1", "OD2", "CG"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Del": ["OD1", "OD2"],
-                        "Mov": ["CG-OG"],
-                        "Add": []
+                        "Mov": ["CG-OG"]
                     },
                     "THR": {
                         "Del": ["OD1", "OD2"],
@@ -467,13 +364,11 @@
                     },
                     "TRP": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["OD1", "OD2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_acceptor_atoms": ["OD1", "OD2"],
@@ -522,39 +417,27 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD", "OE1", "OE2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD", "OE1", "OE2"]
                     },
                     "CYS": {
-                        "Del": ["CG", "CD", "OE1", "OE2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Del": ["CG", "CD", "OE1", "OE2"]
                     },
                     "ASP": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "PHE": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD", "OE1", "OE2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD", "OE1", "OE2"]
                     },
                     "HIS": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["CD", "OE1", "OE2"],
@@ -563,8 +446,7 @@
                     },
                     "LYS": {
                         "Del": ["OE1", "OE2"],
-                        "Add": ["CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CE", "NZ"]
                     },
                     "LEU": {
                         "Mov": ["CD-CD2"],
@@ -573,33 +455,26 @@
                     },
                     "MET": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CD", "OE1", "OE2", "CG"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
-                        "Mov": ["OE2-NE2"],
-                        "Add": [],
-                        "Del": []
+                        "Mov": ["OE2-NE2"]
                     },
                     "ARG": {
                         "Del": ["OE1", "OE2"],
-                        "Add": ["NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD", "OE1", "OE2"],
-                        "Add": []
+                        "Del": ["CD", "OE1", "OE2"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -613,13 +488,11 @@
                     },
                     "TRP": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD", "OE1", "OE2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_acceptor_atoms": ["OE1", "OE2"],
@@ -643,39 +516,28 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "HIS": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG1"],
@@ -684,43 +546,35 @@
                     },
                     "LYS": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "CG"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": []
+                        "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -734,13 +588,10 @@
                     },
                     "TRP": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
-                        "Add": ["OH"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["OH"]
                     }
                 }
             },
@@ -749,104 +600,63 @@
                 "apolar_atoms": [],
                 "mutation_rules": {
                     "ALA": {
-                        "Add": ["CB"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB"]
                     },
                     "CYS": {
-                        "Add": ["CB", "SG"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "SG"]
                     },
                     "ASP": {
-                        "Add": ["CB", "CG", "OD1", "OD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "OD1", "OD2"]
                     },
                     "GLU": {
-                        "Add": ["CB", "CG", "CD", "OE1", "OE2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD", "OE1", "OE2"]
                     },
                     "PHE": {
-                        "Add": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "HIS": {
-                        "Add": ["CB", "CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
-                        "Add": ["CB", "CG2", "CG1", "CD1"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG2", "CG1", "CD1"]
                     },
                     "LYS": {
-                        "Add": ["CB", "CG", "CD", "CE", "NZ"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD", "CE", "NZ"]
                     },
                     "LEU": {
-                        "Add": ["CB", "CG", "CD1", "CD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD1", "CD2"]
                     },
                     "MET": {
-                        "Add": ["CB", "CG", "SD", "CE"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "SD", "CE"]
                     },
                     "ASN": {
-                        "Add": ["CB", "CG", "OD1", "ND2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "OD1", "ND2"]
                     },
                     "PRO": {
-                        "Add": ["CB", "CG", "CD"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD"]
                     },
                     "GLN": {
-                        "Add": ["CB", "CG", "CD", "OE1", "NE2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD", "OE1", "NE2"]
                     },
                     "ARG": {
-                        "Add": ["CB", "CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
-                        "Add": ["CB", "OG"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "OG"]
                     },
                     "THR": {
-                        "Add": ["CB", "CG2", "OG1"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG2", "OG1"]
                     },
                     "VAL": {
-                        "Add": ["CB", "CG1", "CG2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG1", "CG2"]
                     },
                     "TRP": {
-                        "Add": ["CB", "CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
-                        "Add": ["CB", "CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": [],
-                        "Del": []
+                        "Add": ["CB", "CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -899,84 +709,64 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "ND1", "CE1", "NE2", "CD2"]
                     },
                     "CYS": {
                         "Del": ["CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "ND1", "CE1", "NE2", "CD2"]
                     },
                     "HIS": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "ILE": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CG2", "CG1", "CD1"],
-                        "Mov": []
+                        "Add": ["CG2", "CG1", "CD1"]
                     },
                     "LYS": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["ND1", "CE1", "NE2", "CD2", "CG"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": ["CG-OG"],
-                        "Add": []
+                        "Mov": ["CG-OG"]
                     },
                     "THR": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
@@ -990,13 +780,11 @@
                     },
                     "TRP": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["ND1", "CE1", "NE2", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -1024,14 +812,11 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG2", "CG1", "CD1"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG2", "CG1", "CD1"]
                     },
                     "CYS": {
                         "Del": ["CG2", "CG1", "CD1"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Mov": ["CG1-CG"],
@@ -1049,9 +834,7 @@
                         "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG2", "CG1", "CD1"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG2", "CG1", "CD1"]
                     },
                     "HIS": {
                         "Mov": ["CG1-CG"],
@@ -1059,9 +842,6 @@
                         "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "LYS": {
                         "Mov": ["CG1-CG", "CD1-CD"],
@@ -1084,7 +864,6 @@
                         "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
-                        "Mov": [],
                         "Del": ["CG1", "CG2", "CD1"],
                         "Add": ["CG", "CD"]
                     },
@@ -1100,18 +879,14 @@
                     },
                     "SER": {
                         "Mov": ["CG1-OG"],
-                        "Del": ["CG2", "CD1"],
-                        "Add": []
+                        "Del": ["CG2", "CD1"]
                     },
                     "THR": {
                         "Mov": ["CG2-OG1", "CG1-CG2"],
-                        "Del": ["CD1"],
-                        "Add": []
+                        "Del": ["CD1"]
                     },
                     "VAL": {
-                        "Del": ["CD1"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CD1"]
                     },
                     "TRP": {
                         "Mov": ["CG1-CG"],
@@ -1197,39 +972,30 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD", "CE", "NZ"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD", "CE", "NZ"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD", "CE", "NZ"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["CE", "NZ"],
-                        "Add": ["OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD", "CE", "NZ"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD", "CE", "NZ"]
                     },
                     "HIS": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG1", "CD-CD1"],
@@ -1237,9 +1003,6 @@
                         "Add": ["CG2"]
                     },
                     "LYS": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "LEU": {
                         "Mov": ["CD-CD2"],
@@ -1248,23 +1011,19 @@
                     },
                     "MET": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD", "CE", "NZ"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["CE", "NZ"],
-                        "Add": ["OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["OE1", "NE2"]
                     },
                     "ARG": {
                         "Mov": ["CE-NE"],
@@ -1287,13 +1046,11 @@
                     },
                     "TRP": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD", "CE", "NZ"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_donor_atoms": ["NZ"],
@@ -1323,19 +1080,15 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD1", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD1", "CD2"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD1", "CD2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Mov": ["CD1-CD"],
@@ -1344,18 +1097,14 @@
                     },
                     "PHE": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD1", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD1", "CD2"]
                     },
                     "HIS": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG1"],
@@ -1368,24 +1117,18 @@
                         "Add": ["CE", "NZ"]
                     },
                     "LEU": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "MET": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD1", "CD2"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Mov": ["CD1-CD"],
@@ -1414,13 +1157,11 @@
                     },
                     "TRP": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD1", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -1448,39 +1189,30 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "SD", "CE"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "SD", "CE"]
                     },
                     "CYS": {
                         "Del": ["CG", "SD", "CE"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["SD", "CE"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "SD", "CE"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "SD", "CE"]
                     },
                     "HIS": {
                         "Del": ["SD", "CE"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG2"],
@@ -1489,43 +1221,33 @@
                     },
                     "LYS": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "ASN": {
                         "Del": ["SD", "CE"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "SD", "CE"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["SD", "CE"],
-                        "Add": []
+                        "Del": ["SD", "CE"]
                     },
                     "THR": {
                         "Mov": ["CG-OG1"],
@@ -1539,13 +1261,11 @@
                     },
                     "TRP": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["SD", "CE"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_acceptor_atoms": ["SD"]
@@ -1568,39 +1288,29 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "OD1", "ND2"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CG", "OD1", "ND2"]
                     },
                     "CYS": {
                         "Del": ["CG", "OD1", "ND2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
-                        "Add": [],
-                        "Del": [],
                         "Mov": ["ND2-OD2"]
                     },
                     "GLU": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "OD1", "ND2"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CB", "CG", "OD1", "ND2"]
                     },
                     "HIS": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["OD1", "ND2"],
@@ -1609,43 +1319,33 @@
                     },
                     "LYS": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
-                        "Mov": [],
-                        "Add": [],
-                        "Del": []
                     },
                     "PRO": {
                         "Del": ["CG", "OD1", "ND2"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Del": ["OD1", "ND2"],
-                        "Mov": ["CG-OG"],
-                        "Add": []
+                        "Mov": ["CG-OG"]
                     },
                     "THR": {
                         "Del": ["OD1", "ND2"],
@@ -1659,13 +1359,11 @@
                     },
                     "TRP": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["OD1", "ND2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_acceptor_atoms": ["OD1"],
@@ -1698,104 +1396,80 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CD", "CG"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CD", "CG"]
                     },
                     "CYS": {
                         "Del": ["CD", "CG"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["CG", "OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CD", "CG", "CB"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CD", "CG", "CB"]
                     },
                     "HIS": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG2", "CG1", "CD1"],
-                        "Mov": []
+                        "Add": ["CG2", "CG1", "CD1"]
                     },
                     "LYS": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "SD", "CE"],
-                        "Mov": []
+                        "Add": ["CG", "SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["CG", "OD1", "ND2"]
                     },
                     "PRO": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "GLN": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Del": ["CD", "CG"],
-                        "Add": ["OG"],
-                        "Mov": []
+                        "Add": ["OG"]
                     },
                     "THR": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG2", "OG1"],
-                        "Mov": []
+                        "Add": ["CG2", "OG1"]
                     },
                     "VAL": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG1", "CG2"],
-                        "Mov": []
+                        "Add": ["CG1", "CG2"]
                     },
                     "TRP": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD", "CG"],
-                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CG", "CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -1824,39 +1498,29 @@
 
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD", "OE1", "NE2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD", "OE1", "NE2"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD", "OE1", "NE2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
-                        "Add": [],
-                        "Del": [],
                         "Mov": ["NE2-OE2"]
                     },
                     "PHE": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD", "OE1", "NE2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD", "OE1", "NE2"]
                     },
                     "HIS": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["CD", "OE1", "NE2"],
@@ -1865,8 +1529,7 @@
                     },
                     "LYS": {
                         "Del": ["OE1", "NE2"],
-                        "Add": ["CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CE", "NZ"]
                     },
                     "LEU": {
                         "Mov": ["CD-CD2"],
@@ -1875,33 +1538,25 @@
                     },
                     "MET": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD", "OE1", "NE2"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
-                        "Mov": [],
-                        "Add": [],
-                        "Del": []
                     },
                     "ARG": {
                         "Del": ["OE1", "NE2"],
-                        "Add": ["NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD", "OE1", "NE2"],
-                        "Add": []
+                        "Del": ["CD", "OE1", "NE2"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -1915,13 +1570,11 @@
                     },
                     "TRP": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD", "OE1", "NE2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_acceptor_atoms": ["OE1"],
@@ -1993,39 +1646,30 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["NE", "CZ", "NH1", "NH2"],
-                        "Add": ["OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "HIS": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG1", "CD-CD1"],
@@ -2034,8 +1678,7 @@
                     },
                     "LYS": {
                         "Del": ["NE", "CZ", "NH1", "NH2"],
-                        "Add": ["CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CE", "NZ"]
                     },
                     "LEU": {
                         "Mov": ["CD-CD2"],
@@ -2044,33 +1687,25 @@
                     },
                     "MET": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["NE", "CZ", "NH1", "NH2"],
-                        "Add": ["OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["OE1", "NE2"]
                     },
                     "ARG": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": []
+                        "Del": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -2084,13 +1719,11 @@
                     },
                     "TRP": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Del": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "positive_atoms": ["NE", "NH1", "NH2"],
@@ -2114,104 +1747,80 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["OG"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["OG"]
                     },
                     "CYS": {
                         "Del": ["OG"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Mov": ["OG-CG"],
-                        "Add": ["OD1", "OD2"],
-                        "Del": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Del": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Del": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "OG"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "OG"]
                     },
                     "HIS": {
                         "Mov": ["OG-CG"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Del": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["OG-CG1"],
-                        "Add": ["CG2", "CD1"],
-                        "Del": []
+                        "Add": ["CG2", "CD1"]
                     },
                     "LYS": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Del": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD1", "CD2"],
-                        "Del": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Mov": ["OG-CG"],
-                        "Add": ["SD", "CE"],
-                        "Del": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Mov": ["OG-CG"],
-                        "Add": ["OD1", "ND2"],
-                        "Del": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["OG"],
-                        "Add": ["CD", "CG"],
-                        "Mov": []
+                        "Add": ["CD", "CG"]
                     },
                     "GLN": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Del": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Del": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "THR": {
                         "Mov": ["OG-OG1"],
-                        "Add": ["CG2"],
-                        "Del": []
+                        "Add": ["CG2"]
                     },
                     "VAL": {
                         "Mov": ["OG-CG1"],
-                        "Add": ["CG2"],
-                        "Del": []
+                        "Add": ["CG2"]
                     },
                     "TRP": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Del": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
                         "Mov": ["OG-CG"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Del": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 }
             },
@@ -2233,14 +1842,11 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG2", "OG1"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG2", "OG1"]
                     },
                     "CYS": {
                         "Del": ["CG2", "OG1"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Mov": ["CG2-CG"],
@@ -2258,9 +1864,7 @@
                         "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG2", "OG1"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CB", "CG2", "OG1"]
                     },
                     "HIS": {
                         "Mov": ["CG2-CG"],
@@ -2269,8 +1873,7 @@
                     },
                     "ILE": {
                         "Mov": ["OG1-CG1"],
-                        "Add": ["CD1"],
-                        "Del": []
+                        "Add": ["CD1"]
                     },
                     "LYS": {
                         "Mov": ["CG2-CG"],
@@ -2294,8 +1897,7 @@
                     },
                     "PRO": {
                         "Del": ["CG2", "OG1"],
-                        "Add": ["CD", "CG"],
-                        "Mov": []
+                        "Add": ["CD", "CG"]
                     },
                     "GLN": {
                         "Mov": ["CG2-CG"],
@@ -2309,18 +1911,12 @@
                     },
                     "SER": {
                         "Mov": ["OG1-OG"],
-                        "Del": ["CG2"],
-                        "Add": []
+                        "Del": ["CG2"]
                     },
                     "THR": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "VAL": {
-                        "Mov": ["OG1-CG1"],
-                        "Del": [],
-                        "Add": []
+                        "Mov": ["OG1-CG1"]
                     },
                     "TRP": {
                         "Mov": ["CG2-CG"],
@@ -2353,14 +1949,11 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG1", "CG2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG1", "CG2"]
                     },
                     "CYS": {
                         "Del": ["CG1", "CG2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Mov": ["CG1-CG"],
@@ -2378,9 +1971,7 @@
                         "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG1", "CG2"],
-                        "Mov": [],
-                        "Add": []
+                        "Del": ["CB", "CG1", "CG2"]
                     },
                     "HIS": {
                         "Mov": ["CG1-CG"],
@@ -2388,8 +1979,6 @@
                         "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
-                        "Mov": [],
-                        "Del": [],
                         "Add": ["CD1"]
                     },
                     "LYS": {
@@ -2413,7 +2002,6 @@
                         "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
-                        "Mov": [],
                         "Del": ["CG1", "CG2"],
                         "Add": ["CD", "CG"]
                     },
@@ -2429,18 +2017,12 @@
                     },
                     "SER": {
                         "Mov": ["CG1-OG"],
-                        "Del": ["CG2"],
-                        "Add": []
+                        "Del": ["CG2"]
                     },
                     "THR": {
-                        "Mov": ["CG1-OG1"],
-                        "Add": [],
-                        "Del": []
+                        "Mov": ["CG1-OG1"]
                     },
                     "VAL": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "TRP": {
                         "Mov": ["CG1-CG"],
@@ -2472,39 +2054,30 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "CE2", "CD2"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "HIS": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
@@ -2513,43 +2086,35 @@
                     },
                     "LYS": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": []
+                        "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -2562,14 +2127,10 @@
                         "Add": ["CG2"]
                     },
                     "TRP": {
-                        "Add": [],
-                        "Del": [],
-                        "Mov": []
                     },
                     "TYR": {
                         "Del": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CE1", "CZ", "OH", "CE2", "CD2"]
                     }
                 },
                 "polar_donor_atoms": ["NE1"]
@@ -2609,39 +2170,29 @@
                 },
                 "mutation_rules": {
                     "ALA": {
-                        "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"]
                     },
                     "CYS": {
                         "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["SG"],
-                        "Mov": []
+                        "Add": ["SG"]
                     },
                     "ASP": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["OD1", "OD2"],
-                        "Mov": []
+                        "Add": ["OD1", "OD2"]
                     },
                     "GLU": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD", "OE1", "OE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "OE2"]
                     },
                     "PHE": {
-                        "Add": [],
-                        "Del": ["OH"],
-                        "Mov": []
+                        "Del": ["OH"]
                     },
                     "GLY": {
-                        "Del": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": [],
-                        "Mov": []
+                        "Del": ["CB", "CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"]
                     },
                     "HIS": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["ND1", "CE1", "NE2", "CD2"],
-                        "Mov": []
+                        "Add": ["ND1", "CE1", "NE2", "CD2"]
                     },
                     "ILE": {
                         "Mov": ["CG-CG1"],
@@ -2650,43 +2201,35 @@
                     },
                     "LYS": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD", "CE", "NZ"],
-                        "Mov": []
+                        "Add": ["CD", "CE", "NZ"]
                     },
                     "LEU": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD1", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "CD2"]
                     },
                     "MET": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["SD", "CE"],
-                        "Mov": []
+                        "Add": ["SD", "CE"]
                     },
                     "ASN": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["OD1", "ND2"],
-                        "Mov": []
+                        "Add": ["OD1", "ND2"]
                     },
                     "PRO": {
                         "Del": ["CG", "CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CG", "CD"],
-                        "Mov": []
+                        "Add": ["CG", "CD"]
                     },
                     "GLN": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD", "OE1", "NE2"],
-                        "Mov": []
+                        "Add": ["CD", "OE1", "NE2"]
                     },
                     "ARG": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"],
-                        "Mov": []
+                        "Add": ["CD", "NE", "CZ", "NH1", "NH2"]
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": []
+                        "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"]
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
@@ -2700,13 +2243,9 @@
                     },
                     "TRP": {
                         "Del": ["CD1", "CE1", "CZ", "CE2", "CD2", "OH"],
-                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"],
-                        "Mov": []
+                        "Add": ["CD1", "NE1", "CE2", "CZ2", "CH2", "CZ3", "CE3", "CD2"]
                     },
                     "TYR": {
-                        "Add": [],
-                        "Mov": [],
-                        "Del": []
                     }
                 }
             },
