@@ -1399,7 +1399,8 @@
                     },
                     "SER": {
                         "Mov": ["CG-OG"],
-                        "Del": ["CD1", "CD2"]
+                        "Del": ["CD1", "CD2"],
+                        "Add": []
                     },
                     "THR": {
                         "Mov": ["CG-CG2"],
