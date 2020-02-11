@@ -1482,31 +1482,52 @@ class StructureChecking():
         return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_add_caps(self, add_caps, bck_breaks_list, miss_bck_at_list):
-        print("Capping fragments")
         term_res = self.strucm.get_term_res()
         term_rnums = [mu.residue_num(p[1]) for p in term_res]
+        brk_res = set()
+        
+        for r0,r1 in bck_breaks_list:
+            brk_res.add(r0)
+            brk_res.add(r1)
+        true_term=[]
+        for r in term_res:
+            if r[1] not in brk_res:
+                true_term.append(r)
+
+        print("Capping fragments")
+        print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
+        print("Remaining backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
         input_line = ParamInput('Cap residues', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
+        input_line.add_option_list('terms', ['Terms'])
+        input_line.add_option_list('brks', ['Breaks'])
         input_line.add_option_list(
             'resnum', term_rnums, case='sensitive', multiple=True
         )
         input_line.default = 'none'
         input_option, add_caps = input_line.run(add_caps)
+        
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], add_caps
 
         self.summary['backbone']['add_caps'] = add_caps
+        
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
-        to_fix = [
-            pair
-            for pair in term_res
-            if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
-        ]
-
+        elif input_option == 'terms':
+            to_fix = true_term
+        elif input_option == 'brks':
+            to_fix = [pair for pair in term_res if pair[1] in brk_res]
+        else:
+            to_fix = [
+                pair
+                for pair in term_res
+                if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
+            ]
+            
         return self.strucm.add_main_chain_caps(to_fix)
 
 
