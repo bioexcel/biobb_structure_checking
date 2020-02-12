@@ -7,7 +7,7 @@ utility.
 It includes some structure manipulation options like selecting models or chains,
 removing components of the system, completing missing atoms, and some quality
 checking as residue quirality, amide orientation, or vdw clashes.
-
+```
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
                        [--file_format FILE_FORMAT] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
@@ -25,40 +25,32 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-
   -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}. 
-                       Biounits pdb:{pdbid}.{bn}. Biounits require MMB server
-  
-  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH Output structure. PDB Format
-
-  --json JSON_OUTPUT_PATH Summary activities on a json file
-
-  --file_format FILE_FORMAT Format for retrieving structures (default=mmCif|pdb|xml)
-
-  --sequence FASTA_SEQ_PATH Canonical sequence in FASTA format, pdb_chain[,chain] in header
-
-  --pdb_server PDB_SERVER Remote server for retrieving structures (default|MMB)
-
-  --cache_dir CACHE_DIR_PATH Path for structure's cache directory (default: ./tmpPDB)
-
-  --res_lib RES_LIBRARY_PATH Override settings default residue library (AMBER prep format)
-
-  --data_lib DATA_LIBRARY_PATH Override settings default data library
-
+                        Biounits pdb:{pdbid}.{bn}. Biounits require MMB server
+  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH 
+                        Output structure. PDB Format
+  --json JSON_OUTPUT_PATH 
+                        Summary activities on a json file
+  --file_format FILE_FORMAT 
+                        Format for retrieving structures (default=mmCif|pdb|xml)
+  --sequence FASTA_SEQ_PATH 
+                        Canonical sequence in FASTA format, pdb_chain[,chain] in header
+  --pdb_server PDB_SERVER 
+                        Remote server for retrieving structures (default|MMB)
+  --cache_dir CACHE_DIR_PATH 
+                        Path for structure's cache directory (default: ./tmpPDB)
+  --res_lib RES_LIBRARY_PATH 
+                        Override settings default residue library (AMBER prep format)
+  --data_lib DATA_LIBRARY_PATH 
+                        Override settings default data library
   --quiet               Reduces output, removing labels and progress info
-
   --limit ATOM_LIMIT    Limit on number of atoms, 0: nolimit
-
   --debug               Add debug information
-
   --force_save          Force saving an output file even if no modification
-
   --check_only          Perform checks only, structure is not modified
-
   --non_interactive     Do not prompt for missing parameters
-
   --version             show program's version number and exit
-
+```
 
 ## Available commands:
 
