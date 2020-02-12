@@ -229,6 +229,8 @@
   "opts": "--fix All"
  },
  "backbone": {
+  "add_caps": "none",
+  "added_caps": false,
   "breaks": {
    "detected": [
     [
@@ -302,7 +304,7 @@
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --no_recheck"
+  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -397,8 +399,8 @@
     },
     {
      "at1": "MET B46.CE",
-     "at2": "VAL B352.C",
-     "dist": 1.8614
+     "at2": "VAL B352.O",
+     "dist": 0.9206
     },
     {
      "at1": "HIS B58.CD2",
@@ -678,8 +680,8 @@
    },
    {
     "at1": "MET B46.CE",
-    "at2": "VAL B352.C",
-    "dist": 1.8614
+    "at2": "VAL B352.O",
+    "dist": 0.9206
    },
    {
     "at1": "GLY B61.CA",

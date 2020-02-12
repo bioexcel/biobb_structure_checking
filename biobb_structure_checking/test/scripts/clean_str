@@ -1,0 +1,7 @@
+models --select 1
+chains --select all
+altloc --select occupancy
+ligands --remove all
+water --remove yes
+rem_hydrogen --remove yes
+

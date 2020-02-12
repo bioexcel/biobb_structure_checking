@@ -88,9 +88,13 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Capping terminal ends
+True terminal residues:  A1,A60
+Nothing to do
+No caps added
 
 Step 14: cistransbck
 
