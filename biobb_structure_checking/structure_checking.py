@@ -1499,6 +1499,7 @@ class StructureChecking():
         return self.strucm.fix_backbone_chain(to_fix)
 
     def _backbone_add_caps(self, add_caps, bck_breaks_list, miss_bck_at_list):
+        print("Capping terminal ends")
         term_res = self.strucm.get_term_res()
         term_rnums = [mu.residue_num(p[1]) for p in term_res]
         brk_res = set()
@@ -1511,10 +1512,9 @@ class StructureChecking():
             if r[1] not in brk_res:
                 true_term.append(r)
 
-        print("Capping fragments")
         print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
         if bck_breaks_list:
-            print("Remaining backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
+            print("Terminal residues from backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
 
         input_line = ParamInput('Cap residues', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1550,6 +1550,7 @@ class StructureChecking():
         return self.strucm.add_main_chain_caps(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
+        print("Fixing missing backbone atoms")
         fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
         input_line = ParamInput('Fix bck missing', self.args['non_interactive'])
         input_line.add_option_all()

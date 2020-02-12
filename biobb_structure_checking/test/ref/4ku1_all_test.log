@@ -171,12 +171,17 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT
+Capping terminal ends
+True terminal residues:  A237,A443,B237,B444
+Nothing to do
+No caps added
+Fixing missing backbone atoms
 Adding missing backbone atoms
 LEU A443
   Adding new atom OXT
