@@ -88,6 +88,12 @@ CMD_LINE.add_argument(
     help='Path for structure\'s cache directory (default: ./tmpPDB)'
 )
 
+CMD_LINE.add_argument(
+    '--modeller_key',
+    dest='modeller_key',
+    help='User key for modeller, required for backbone fix, register at https://salilab.org/modeller/registration.html'
+)
+
 #Settings, reference data
 CMD_LINE.add_argument(
     '--res_lib',
