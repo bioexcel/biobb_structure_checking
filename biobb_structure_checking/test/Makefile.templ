@@ -7,11 +7,12 @@ COMMON = setenv PYTHONPATH ${BASEDIR}; cd ${TESTDIR}
 
 clean:
 	rm *pdb *log *json *diff 
+
 update:
 	cp *pdb *log *json ref
 
 all: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
-  backbone cistransbck biounits all_checks ;
+  backbone backbone_main backbone_caps cistransbck biounits all_checks ;
 
 models: 
 	echo "Running models on 1ark"
@@ -88,6 +89,14 @@ chiral_bck:
 backbone:
 	echo "Running backbone on 2ki5"
 	${COMMON};${APPDIR}/check_structure -i pdb:2ki5  -o 1ki5_backbone_test.pdb --non_interactive --check_only backbone > 2ki5_ibackbone_test.log
+
+backbone_main:
+	echo "Running backbone_main on 1ubq_caps"
+	${COMMON};${APPDIR}/check_structure -i backbone_test/1ubq_caps.pdb -o 1ubq_backbone_main_test.pdb --sequence backbone_test/1ubq.fasta --non_interactive  backbone --no_recheck --fix_chain all --add_caps none --fix_atoms none > 1ubq_backbone_main_test.log
+
+backbone_caps:
+	echo "Running backbone_caps on 1ubq_caps"
+	${COMMON};${APPDIR}/check_structure -i backbone_test/1ubq_caps.pdb -o 1ubq_backbone_caps_test.pdb --non_interactive  backbone --no_recheck --fix_chain none --add_caps all --fix_atoms all > 1ubq_backbone_caps_test.log
 
 cistransbck:
 	echo "Running cistransbck on 4mdh"

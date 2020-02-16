@@ -44,7 +44,9 @@
   "opts": "--fix All"
  },
  "backbone": {
-  "opts": "--fix_atoms All --fix_chain All --no_recheck"
+  "add_caps": "none",
+  "added_caps": false,
+  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {

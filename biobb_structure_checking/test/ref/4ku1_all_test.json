@@ -519,6 +519,8 @@
   "opts": "--fix All"
  },
  "backbone": {
+  "add_caps": "none",
+  "added_caps": false,
   "clashes": {
    "apolar": [],
    "negative": [],
@@ -540,7 +542,7 @@
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --no_recheck"
+  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {

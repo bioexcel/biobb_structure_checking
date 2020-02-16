@@ -5,7 +5,7 @@ import argparse
 from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '1.0.7a'
+VERSION = '1.1'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -86,6 +86,12 @@ CMD_LINE.add_argument(
     '--cache_dir',
     dest='cache_dir_path',
     help='Path for structure\'s cache directory (default: ./tmpPDB)'
+)
+
+CMD_LINE.add_argument(
+    '--modeller_key',
+    dest='modeller_key',
+    help='User key for modeller, required for backbone fix, register at https://salilab.org/modeller/registration.html'
 )
 
 #Settings, reference data
