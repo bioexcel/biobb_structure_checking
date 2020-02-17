@@ -32,7 +32,7 @@ class StructureChecking():
         self.summary = {}
 
         if self.args['debug']:
-            
+
             import psutil
 
             self.start_time = time.time()
@@ -111,28 +111,26 @@ class StructureChecking():
         if self.args['debug']:
             total = time.time() - self.start_time
             self.summary['elapsed_times']['total'] = total
-            print ("#DEBUG TIMINGS")
-            print ("#DEBUG =======")
+            print("#DEBUG TIMINGS")
+            print("#DEBUG =======")
             ant = 0.
-            for op,timing in self.timings:
+            for op, timing in self.timings:
                 elapsed = timing - ant
                 self.summary['elapsed_times'][op] = elapsed
-                print ('#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
-                    op,
-                    elapsed,
-                    elapsed / total * 100.)
-                )
-                ant = timing
-            print ('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
-            print ()
-            print ("#DEBUG MEMORY USAGE EVOLUTION")
-            print ("#DEBUG ======================")
-            for op,memsize in self.summary['memsize']:
-                print ('#DEBUG {:15s}: {:.2f} MB'.format(
-                    op,
-                    memsize
+                print(
+                    '#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
+                        op,
+                        elapsed,
+                        elapsed / total * 100.
                     )
                 )
+                ant = timing
+            print('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
+            print()
+            print("#DEBUG MEMORY USAGE EVOLUTION")
+            print("#DEBUG ======================")
+            for op, memsize in self.summary['memsize']:
+                print('#DEBUG {:15s}: {:.2f} MB'.format(op, memsize))
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             json_writer.data = self.summary
@@ -1395,9 +1393,9 @@ class StructureChecking():
     def _backbone_fix(self, opts, fix_data=None):
 
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
-        
+
         fix_done = not fix_data['bck_breaks_list']
-        
+
         while not fix_done:
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
@@ -1405,7 +1403,7 @@ class StructureChecking():
                 self.args['modeller_key']
             )
             if not fixed_main:
-                fix_done= True
+                fix_done = True
                 continue
             self.summary['backbone']['main_chain_fix'] = fixed_main
             if fixed_main:
@@ -1426,18 +1424,17 @@ class StructureChecking():
         #Add CAPS
         fixed_caps = self._backbone_add_caps(
             opts['add_caps'],
-            fix_data['bck_breaks_list'],
-            fix_data['miss_bck_at_list']
+            fix_data['bck_breaks_list']
         )
 
-        self.summary['backbone']['added_caps']= fixed_caps
+        self.summary['backbone']['added_caps'] = fixed_caps
 
         if fixed_caps:
-            print ('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
+            print('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
             self.strucm.modified = True
             fix_data = self._backbone_check()
         else:
-            print ('No caps added')
+            print('No caps added')
 
         #Add missing atoms
         fixed_res = []
@@ -1446,7 +1443,7 @@ class StructureChecking():
                 opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
-        
+
         if fixed_res and not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
@@ -1479,7 +1476,7 @@ class StructureChecking():
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
             return None
-        
+
         #Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
             input_line = ParamInput(
@@ -1501,23 +1498,31 @@ class StructureChecking():
         ]
         return self.strucm.fix_backbone_chain(to_fix, modeller_key)
 
-    def _backbone_add_caps(self, add_caps, bck_breaks_list, miss_bck_at_list):
+    def _backbone_add_caps(self, add_caps, bck_breaks_list):
         print("Capping terminal ends")
         term_res = self.strucm.get_term_res()
         term_rnums = [mu.residue_num(p[1]) for p in term_res]
         brk_res = set()
-        
-        for r0,r1 in bck_breaks_list:
+
+        for r0, r1 in bck_breaks_list:
             brk_res.add(r0)
             brk_res.add(r1)
-        true_term=[]
+        true_term = []
         for r in term_res:
             if r[1] not in brk_res:
                 true_term.append(r)
 
         print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
         if bck_breaks_list:
-            print("Terminal residues from backbone breaks: ", ','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0,r1 in bck_breaks_list]))
+            print(
+                "Terminal residues from backbone breaks: ",
+                ','.join(
+                    [
+                        mu.residue_num(r0) + '-' + mu.residue_num(r1)
+                        for r0, r1 in bck_breaks_list
+                    ]
+                )
+            )
 
         input_line = ParamInput('Cap residues', self.args['non_interactive'])
         input_line.add_option_all()
@@ -1529,12 +1534,12 @@ class StructureChecking():
         )
         input_line.default = 'none'
         input_option, add_caps = input_line.run(add_caps)
-        
+
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], add_caps
 
         self.summary['backbone']['add_caps'] = add_caps
-        
+
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
@@ -1549,7 +1554,7 @@ class StructureChecking():
                 for pair in term_res
                 if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
             ]
-            
+
         return self.strucm.add_main_chain_caps(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
