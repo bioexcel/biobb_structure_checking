@@ -6,7 +6,6 @@ __date__ = "$26-jul-2018 14:34:51$"
 
 import sys
 import os
-import psutil
 import time
 import numpy as np
 
@@ -33,6 +32,9 @@ class StructureChecking():
         self.summary = {}
 
         if self.args['debug']:
+            
+            import psutil
+
             self.start_time = time.time()
             self.timings = []
             self.summary['elapsed_times'] = {}
