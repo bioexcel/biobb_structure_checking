@@ -25,23 +25,23 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}. 
+  -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}.
                         Biounits pdb:{pdbid}.{bn}. Biounits require MMB server
-  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH 
+  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
                         Output structure. PDB Format
-  --json JSON_OUTPUT_PATH 
+  --json JSON_OUTPUT_PATH
                         Summary activities on a json file
-  --file_format FILE_FORMAT 
+  --file_format FILE_FORMAT
                         Format for retrieving structures (default=mmCif|pdb|xml)
-  --sequence FASTA_SEQ_PATH 
+  --sequence FASTA_SEQ_PATH
                         Canonical sequence in FASTA format, pdb_chain[,chain] in header
-  --pdb_server PDB_SERVER 
+  --pdb_server PDB_SERVER
                         Remote server for retrieving structures (default|MMB)
-  --cache_dir CACHE_DIR_PATH 
+  --cache_dir CACHE_DIR_PATH
                         Path for structure's cache directory (default: ./tmpPDB)
-  --res_lib RES_LIBRARY_PATH 
+  --res_lib RES_LIBRARY_PATH
                         Override settings default residue library (AMBER prep format)
-  --data_lib DATA_LIBRARY_PATH 
+  --data_lib DATA_LIBRARY_PATH
                         Override settings default data library
   --quiet               Reduces output, removing labels and progress info
   --limit ATOM_LIMIT    Limit on number of atoms, 0: nolimit
@@ -100,8 +100,8 @@ fixside [--fix All |None|Residue List] [--no_check_clashes]
     Complete side chains
     Checks generated clashes unless --no_check_clashes set
 backbone [--fix_atoms All|None|Residue List]
-         [--fix_main All|None|Break list] 
-         [--add_caps All|None|Break list] 
+         [--fix_main All|None|Break list]
+         [--add_caps All|None|Break list]
          [--no_recheck]
          [--no_check_clashes]
     Analyze main chain missing atoms and fragments.
@@ -120,7 +120,7 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 ```
 ### Dependencies
 * python 3.6
-* biopython 1.72
+* biopython 1.73
 * numpy
 * biobb_structure_manager
 * modeller
