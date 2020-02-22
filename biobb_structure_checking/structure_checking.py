@@ -1489,8 +1489,7 @@ class StructureChecking():
                 print(cts.MSGS['FASTA_MISSING'])
                 return None
             self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
-            self.strucm.sequence_data.read_canonical_seqs(self.strucm)
-
+            self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
         to_fix = [
             rpair
             for rpair in breaks_list
