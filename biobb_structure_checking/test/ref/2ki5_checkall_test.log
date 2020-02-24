@@ -3,7 +3,7 @@
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
 
-Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
+Downloading PDB structure '2KI5.1'...
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:2ki5.1 loaded
  Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution

@@ -3,7 +3,7 @@
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
+Downloading PDB structure '1VTK.1'...
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
  Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate

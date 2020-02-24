@@ -123,10 +123,18 @@
  },
  "getss": {},
  "headers": {
-  "entry_id": "1ARK",
-  "keywords": "TRANSFERASE",
-  "method": "SOLUTION NMR",
-  "title": "SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES"
+  "entry_id": [
+   "1ARK"
+  ],
+  "keywords": [
+   "TRANSFERASE"
+  ],
+  "method": [
+   "SOLUTION NMR"
+  ],
+  "title": [
+   "SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES"
+  ]
  },
  "inscodes": {},
  "ligands": {

@@ -329,11 +329,21 @@
  },
  "getss": {},
  "headers": {
-  "entry_id": "1SVC",
-  "keywords": "TRANSCRIPTION/DNA",
-  "method": "X-RAY DIFFRACTION",
-  "resolution": "2.600",
-  "title": "NFKB P50 HOMODIMER BOUND TO DNA"
+  "entry_id": [
+   "1SVC"
+  ],
+  "keywords": [
+   "TRANSCRIPTION/DNA"
+  ],
+  "method": [
+   "X-RAY DIFFRACTION"
+  ],
+  "resolution": [
+   "2.600"
+  ],
+  "title": [
+   "NFKB P50 HOMODIMER BOUND TO DNA"
+  ]
  },
  "inscodes": {},
  "ligands": {
