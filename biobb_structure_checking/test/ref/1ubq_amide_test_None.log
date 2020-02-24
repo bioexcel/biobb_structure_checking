@@ -3,13 +3,13 @@
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
 ===============================================================================
 
-Structure exists: 'tmpPDB/ub/1ubq.cif' 
+Downloading PDB structure '1UBQ'...
 Structure pdb:1ubq loaded
- PDB id: 1UBQ
- Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
- Experimental method: X-RAY DIFFRACTION
- Keywords: CHROMOSOMAL PROTEIN
- Resolution: 1.8 A
+ PDB id: ['1UBQ']
+ Title: ['STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION']
+ Experimental method: ['X-RAY DIFFRACTION']
+ Keywords: ['CHROMOSOMAL PROTEIN']
+ Resolution: ['1.8'] A
 
  Num. models: 1
  Num. chains: 1 (A: Protein)
