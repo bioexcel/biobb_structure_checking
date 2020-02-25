@@ -16,8 +16,8 @@ import biobb_structure_checking.constants as cts
 from biobb_structure_checking.structure_checking import StructureChecking
 
 BANNER = "===============================================================================\n"\
-    "=                   MDWeb structure checking utility v{}                  =\n"\
-    "=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =\n"\
+    "=                   MDWeb structure checking utility v{}                     =\n"\
+    "=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =\n"\
     "===============================================================================\n"
 def header():
     """ Prints general application headers"""
