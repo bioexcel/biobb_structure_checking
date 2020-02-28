@@ -22,11 +22,11 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['biobb_structure_manager==1.0.0', 'modeller==9.22', 'psutil', 'biopython==1.76'],
+    install_requires=['biobb_structure_manager==1.1.0', 'modeller==9.22', 'psutil', 'biopython==1.76'],
     python_requires='==3.6.*',
     classifiers=(
         "Development Status :: 3 - Alpha",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: POSIX",
