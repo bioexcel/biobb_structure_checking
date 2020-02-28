@@ -119,8 +119,8 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
            Ionic Positive, Ionic Negative)
 ```
 ### Dependencies
-* python 3.6
-* biopython 1.73
+* python 3.7 (<3.8)
+* biopython 1.76
 * numpy
-* biobb_structure_manager
-* modeller
+* biobb_structure_manager 1.1
+* modeller 9.22
