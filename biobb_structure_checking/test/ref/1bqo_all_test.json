@@ -322,21 +322,11 @@
  },
  "getss": {},
  "headers": {
-  "entry_id": [
-   "1BQO"
-  ],
-  "keywords": [
-   "METALLOPROTEASE"
-  ],
-  "method": [
-   "X-RAY DIFFRACTION"
-  ],
-  "resolution": [
-   "2.3"
-  ],
-  "title": [
-   "DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS"
-  ]
+  "entry_id": "1BQO",
+  "keywords": "METALLOPROTEASE",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "2.3",
+  "title": "DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS"
  },
  "inscodes": {},
  "ligands": {

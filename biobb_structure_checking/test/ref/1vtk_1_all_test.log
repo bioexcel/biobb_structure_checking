@@ -1,6 +1,6 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                  =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
+=                   MDWeb structure checking utility v1.1                     =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
@@ -133,7 +133,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.82-default x86_64
 Date and time of compilation         : 2019/06/19 13:37:10
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2020/02/24 14:51:15
+Job starting time (YY/MM/DD HH:MM:SS): 2020/02/28 15:43:42
 
 Fixing backbone of chain A
 0 atoms in HETATM/BLK residues constrained

@@ -1,9 +1,9 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                  =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
+=                   MDWeb structure checking utility v1.1                     =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
-Downloading PDB structure '1LDN.1'...
+Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1ldn.1 loaded
  Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution

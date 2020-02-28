@@ -680,21 +680,11 @@
   }
  ],
  "headers": {
-  "entry_id": [
-   "4KU1"
-  ],
-  "keywords": [
-   "IMMUNE SYSTEM"
-  ],
-  "method": [
-   "X-RAY DIFFRACTION"
-  ],
-  "resolution": [
-   "1.90"
-  ],
-  "title": [
-   "Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering"
-  ]
+  "entry_id": "4KU1",
+  "keywords": "IMMUNE SYSTEM",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.90",
+  "title": "Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering"
  },
  "inscodes": {},
  "ligands": {

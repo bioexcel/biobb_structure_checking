@@ -98,21 +98,11 @@
  },
  "getss": {},
  "headers": {
-  "entry_id": [
-   "1UBQ"
-  ],
-  "keywords": [
-   "CHROMOSOMAL PROTEIN"
-  ],
-  "method": [
-   "X-RAY DIFFRACTION"
-  ],
-  "resolution": [
-   "1.8"
-  ],
-  "title": [
-   "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION"
-  ]
+  "entry_id": "1UBQ",
+  "keywords": "CHROMOSOMAL PROTEIN",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.8",
+  "title": "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION"
  },
  "inscodes": {},
  "ligands": {

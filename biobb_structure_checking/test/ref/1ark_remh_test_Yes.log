@@ -1,14 +1,14 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                  =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
+=                   MDWeb structure checking utility v1.1                     =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
- PDB id: ['1ARK']
- Title: ['SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES']
- Experimental method: ['SOLUTION NMR']
- Keywords: ['TRANSFERASE']
+ PDB id: 1ARK
+ Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
+ Experimental method: SOLUTION NMR
+ Keywords: TRANSFERASE
 
  Num. models: 15 (type: BioUnit,   35.032 A)
  Num. chains: 1 (A: Protein)

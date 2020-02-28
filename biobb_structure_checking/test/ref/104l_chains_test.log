@@ -1,15 +1,15 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                  =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-19                  =
+=                   MDWeb structure checking utility v1.1                     =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
-Downloading PDB structure '104L'...
+Structure exists: 'tmpPDB/04/104l.cif' 
 Structure pdb:104l loaded
- PDB id: ['104L']
- Title: ['HOW AMINO-ACID INSERTIONS ARE ALLOWED IN AN ALPHA-HELIX OF T4 LYSOZYME']
- Experimental method: ['X-RAY DIFFRACTION']
- Keywords: ['HYDROLASE(O-GLYCOSYL)']
- Resolution: ['2.8'] A
+ PDB id: 104L
+ Title: HOW AMINO-ACID INSERTIONS ARE ALLOWED IN AN ALPHA-HELIX OF T4 LYSOZYME
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: HYDROLASE(O-GLYCOSYL)
+ Resolution: 2.8 A
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
