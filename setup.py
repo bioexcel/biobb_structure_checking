@@ -23,6 +23,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
     install_requires=['biobb_structure_manager==1.0.0'],
+    scripts=['bin/check_structure'],
     python_requires='==3.6.*',
     classifiers=(
         "Development Status :: 3 - Alpha",
