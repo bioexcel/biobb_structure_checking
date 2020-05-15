@@ -174,24 +174,43 @@ WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
+Warning: Residue not valid in this context   DA D1
 Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DG D2
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D3
 Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DT D4
 Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DG D5
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D6
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D7
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DG D8
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D9
 Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DA D10
 Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DT D11
 Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DC D12
 Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D13
 Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D14
 Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DC D15
 Warning: DC is not a valid residue in this context
+Warning: Residue not valid in this context   DT D16
 Warning: DT is not a valid residue in this context
+Warning: Residue not valid in this context   DA D17
 Warning: DA is not a valid residue in this context
+Warning: Residue not valid in this context   DG D18
 Warning: DG is not a valid residue in this context
+Warning: Residue not valid in this context   DA D19
 Warning: DA is not a valid residue in this context
 Replacing HIS P67 by HIE
 Replacing HIS P108 by HIE
