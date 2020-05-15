@@ -14,8 +14,8 @@ import biobb_structure_checking.constants as cts
 from biobb_structure_checking.json_writer import JSONWriter
 from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableError
 
-import biobb_structure_manager.structure_manager as stm
-import biobb_structure_manager.model_utils as mu
+import biobb_structure_checking.structure_manager as stm
+import biobb_structure_checking.model_utils as mu
 
 
 # Main class
