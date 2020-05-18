@@ -15,6 +15,7 @@ class MutationManager():
     """ Class to manage list of mutations. """
     def __init__(self, id_list):
         self.mutation_list = []
+        print(id_list)
 
         if 'file:' in id_list:
             #Load from file
@@ -25,7 +26,6 @@ class MutationManager():
             ]
         else:
             self.id_list = id_list.replace(' ', '').split(',')
-
         #convert to list ids to MutationSet instances and make the list
         self.mutation_list = list(map(MutationSet, self.id_list))
 

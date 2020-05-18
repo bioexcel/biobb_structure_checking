@@ -1124,13 +1124,16 @@ class StructureChecking():
                     rem_num += 1
                 self.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
                 fixed_res.append(r_at[0])
-
-        for r_at in to_add:
-            mu.remove_H_from_r(r_at[0], verbose=True)
+        if not opts['rebuild']:
+            for r_at in to_add:
+                mu.remove_H_from_r(r_at[0], verbose=True)
             self.strucm.fix_side_chain(r_at)
             fix_num += 1
             self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
             fixed_res.append(r_at[0])
+        else:
+            self.strucm.rebuild_side_chains(to_add)
+            fixed_res = [r_at[0] for r_at in to_add]
 
         print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
         self.strucm.fixed_side = True
@@ -1296,9 +1299,10 @@ class StructureChecking():
         print(cts.MSGS['MUTATIONS_TO_DO'])
         for mut in mutations.mutation_list:
             print(mut)
-
-        mutated_res = self.strucm.apply_mutations(mutations)
-
+        if opts['rebuild']:
+            mutated_res = self.strucm.rebuild_mutations(mutations)
+        else:
+            mutated_res = self.strucm.apply_mutations(mutations)
         if not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])

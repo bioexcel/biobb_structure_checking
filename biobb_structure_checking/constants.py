@@ -237,6 +237,8 @@ DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
     'Do not remove unknown atoms', 'bool')
 DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
+DIALOGS.add_option('fixside', '--rebuild', 'rebuild',\
+    'Rebuild complete side chain', 'bool')
 
 DIALOGS.add_entry('backbone', 'Checks and fixes several backbone issues')
 DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
@@ -255,6 +257,8 @@ DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
+DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
+    'Rebuild complete side chain', 'bool')
 
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\

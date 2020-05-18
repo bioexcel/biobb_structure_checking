@@ -662,8 +662,8 @@ def add_ACE_cap_at_res(res, next_res=None):
         if 'O' not in res:
             print("  Adding new atom O")
             add_new_atom_to_residue(
-                res, 
-                'O', 
+                res,
+                'O',
                 build_coords_SP2(OINTERNALS[0], res['C'], res['CH3'], next_res['N'])
             )
         res.resname = 'ACE'

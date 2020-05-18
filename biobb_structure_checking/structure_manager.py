@@ -2,6 +2,8 @@
 """
 import warnings
 import os
+import sys
+import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 
@@ -47,13 +49,13 @@ class StructureManager:
     """
 
     def __init__(
-        self, 
-        input_pdb_path: str, 
-        data_library_path: str, 
-        res_library_path: str, 
-        pdb_server: str = 'ftp://ftp.wwpdb.org', 
-        cache_dir: str = 'tmpPDB', 
-        file_format: str = 'mmCif', 
+        self,
+        input_pdb_path: str,
+        data_library_path: str,
+        res_library_path: str,
+        pdb_server: str = 'ftp://ftp.wwpdb.org',
+        cache_dir: str = 'tmpPDB',
+        file_format: str = 'mmCif',
         fasta_sequence_path: str = '') -> None:
         """Class constructor. Sets an empty object and loads a structure
         according to parameters
@@ -877,19 +879,46 @@ class StructureManager:
         self.atom_renumbering()
         self.modified = True
 
+    def rebuild_side_chains(self, r_list: Iterable[str]) -> None:
+        """ Rebuild side chain as mutation to same residue using Modeller """
+        mut_list = [
+            r_at[0].get_parent().id + ':' +\
+            r_at[0].get_resname()+\
+            str(r_at[0].id[1])+\
+            r_at[0].get_resname()
+            for r_at in r_list
+        ]
+
+        self.rebuild_mutations(self.prepare_mutations(','.join(mut_list)))
+
+        self.atom_renumbering()
+        self.modified = True
+
+
     def fix_backbone_chain(self, brk_list: Iterable[Atom], modeller_key: str = '') -> str:
         """ Fixes backbone breaks using Modeller """
+        ch_to_fix = set()
+        #print(brk_list)
+        for brk in brk_list:
+            ch_to_fix.add(brk[0].get_parent().id)
+
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key)
+
+        self.update_internals()
+
+        return modeller_result
+
+    def run_modeller(self, ch_to_fix, brk_list, modeller_key = '', sequence_data = None):
         # environ var depends on MODELLER version!!!
         if modeller_key:
             os.environ['KEY_MODELLER9v23'] = modeller_key
         from biobb_structure_checking.modeller_manager import ModellerManager
 
-        ch_to_fix = set()
-        for brk in brk_list:
-            ch_to_fix.add(brk[0].get_parent().id)
-
         mod_mgr = ModellerManager()
-        mod_mgr.sequences = self.sequence_data
+        if not sequence_data:
+            sequence_data = self.sequence_data
+
+        mod_mgr.sequences = sequence_data
 
         fixed_segments = []
 
@@ -902,9 +931,9 @@ class StructureManager:
             for ch_id in self.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
-                if self.sequence_data.data[ch_id]['pdb']['wrong_order']:
+                if sequence_data.data[ch_id]['pdb']['wrong_order']:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
-                print("Fixing backbone of chain " + ch_id)
+                print("Fixing chain " + ch_id)
                 model_pdb = mod_mgr.build(mod.id, ch_id)
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
@@ -912,19 +941,18 @@ class StructureManager:
                     mod_mgr.tmpdir + "/" + model_pdb['name']
                 )
                 fixed_gaps = self.merge_structure(
+                    sequence_data,
                     model_st,
                     mod.id,
                     ch_id,
                     brk_list,
-                    self.sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start
+                    sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start
                 )
                 fixed_segments += fixed_gaps
 
-        self.update_internals()
-
         return fixed_segments
 
-    def merge_structure(self, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int) -> str:
+    def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int) -> str:
         spimp = Superimposer()
         fixed_ats = [atm for atm in self.st[mod_id][ch_id].get_atoms() if atm.id == 'CA']
         moving_ats = []
@@ -935,9 +963,9 @@ class StructureManager:
 
         list_res = self.st[mod_id][ch_id].get_list()
         fixed_gaps = []
-        for i in range(0, len(self.sequence_data.data[ch_id]['pdb'][mod_id])-1):
-            gap_start = self.sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location.end
-            gap_end = self.sequence_data.data[ch_id]['pdb'][mod_id][i+1].features[0].location.start
+        for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id])-1):
+            gap_start = sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location.end
+            gap_end = sequence_data.data[ch_id]['pdb'][mod_id][i+1].features[0].location.start
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 continue
@@ -1089,6 +1117,44 @@ class StructureManager:
         self.residue_renumbering()
         self.atom_renumbering()
         self.modified = True
+        return mutated_res
+
+    def rebuild_mutations(self, mutations: MutationManager, modeller_key: str = '') -> Residue:
+        """ Perform mutations Rebuilding side chain"""
+        ch_to_fix = set()
+        brk_list = []
+        for mut_set in mutations.mutation_list:
+            for mut in mut_set.mutations:
+                ch_to_fix.add(mut['chain'])
+                start_res = mut['resobj']
+                if start_res in self.prev_residue:
+                    start_res = self.prev_residue[start_res]
+                end_res = mut['resobj']
+                if end_res in self.next_residue:
+                    end_res = self.next_residue[end_res]
+                brk = [start_res, end_res]
+                brk_list.append(brk)
+
+        mutated_sequence_data = SequenceData()
+        mutated_sequence_data.fake_canonical_sequence(self, mutations)
+        for mut_set in mutations.mutation_list:
+            for mut in mut_set.mutations:
+                mu.remove_residue(mut['resobj'])
+        mutated_sequence_data.read_structure_seqs(self)
+
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, mutated_sequence_data)
+
+        self.update_internals()
+        mutated_res = []
+        for frag in (modeller_result):
+            m = re.search('(.*)-(.*)/(.*)', frag)
+            mod, ch, start_res, end_res  = \
+                int(m.group(3)) - 1, \
+                m.group(1)[:1], \
+                int(m.group(1)[1:]), \
+                int(m.group(2)[1:])
+            for i in range(start_res, end_res + 1):
+                mutated_res.append(self.st[mod][ch][i])
         return mutated_res
 
     def invert_amide_atoms(self, res: Residue):

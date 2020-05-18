@@ -91,7 +91,8 @@ class ModellerManager():
         return amdl.outputs[0]
 
     def __del__(self):
-        shutil.rmtree(self.tmpdir)
+        #shutil.rmtree(self.tmpdir)
+        print(self.tmpdir)
 
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(

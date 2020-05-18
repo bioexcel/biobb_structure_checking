@@ -5,7 +5,8 @@
 import sys
 from Bio.PDB.Polypeptide import PPBuilder
 
-from Bio.Seq import Seq, IUPAC
+from Bio.Seq import Seq, IUPAC, MutableSeq
+from Bio.SeqUtils import IUPACData
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
@@ -129,3 +130,41 @@ class SequenceData():
                     self.add_empty_chain(ch_id)
                 self.data[ch_id]['pdb'][mod.id] = seqs
                 self.data[ch_id]['pdb']['wrong_order'] = wrong_order
+
+    def fake_canonical_sequence(self, strucm, mutations):
+        self.read_structure_seqs(strucm)
+        for ch_id in strucm.chain_ids:
+            if strucm.chain_ids[ch_id] != PROTEIN:
+                continue
+            #build sequence from frags filling gaps with G
+            seq = MutableSeq('', IUPAC.protein)
+            last_pos = 0
+            start_pos = 0
+            for frag in self.data[ch_id]['pdb'][0]:
+                if not start_pos:
+                    start_pos = frag.features[0].location.start
+                if last_pos:
+                    seq += 'G'*(frag.features[0].location.start - last_pos-1)
+
+                seq += frag.seq
+                last_pos = frag.features[0].location.end
+            for mut_set in mutations.mutation_list:
+                for mut in mut_set.mutations:
+                    if mut['chain'] != ch_id:
+                        continue
+                    res_num = mut['residue'][1]
+                    seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
+            if ch_id not in self.data:
+                self.add_empty_chain(ch_id)
+            self.data[ch_id]['can'] = SeqRecord(
+                Seq(str(seq).replace('\n', ''), IUPAC.protein),
+                'csq_' + ch_id,
+                'csq_' + ch_id,
+                'canonical sequence chain ' + ch_id
+            )
+            self.data[ch_id]['can'].features.append(
+                SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
+            )
+            self.data[ch_id]['chains'].append(ch_id)
+
+        self.has_canonical = True
