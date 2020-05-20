@@ -22,7 +22,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['biobb_structure_manager==3.0.0', 'modeller==9.23', 'psutil', 'biopython==1.76'],
+    install_requires=['biobb_structure_manager==3.0.1', 'modeller==9.23', 'psutil', 'biopython==1.76'],
     python_requires='==3.7.*',
     classifiers=(
         "Development Status :: 3 - Alpha",

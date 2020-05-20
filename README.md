@@ -122,5 +122,5 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 * python 3.7
 * biopython 1.76
 * numpy
-* biobb_structure_manager 3.0.0
+* biobb_structure_manager 3.0.01
 * modeller 9.23 (optional)
