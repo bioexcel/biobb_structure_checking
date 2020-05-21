@@ -7,6 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
+import psutil
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -176,7 +177,7 @@ class StructureChecking():
             self._run_method(meth, opts)
 
     def fixall(self, opts=None):
-        #TODO
+        # TODO Implement method fixall
         print("Fixall not implemented (yet)")
 
     def revert_changes(self):
@@ -207,10 +208,10 @@ class StructureChecking():
         if not self.args['quiet']:
             print(msg.strip())
 
-    #Running checking method
+    # Running checking method
         data_to_fix = f_check()
 
-    #Running fix method if needed
+    # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if not self.args['quiet']:
                 print(cts.MSGS['CHECK_ONLY_DONE'])
@@ -242,7 +243,8 @@ class StructureChecking():
                     command, memsize
                 )
             )
-# ==============================================================================q
+# ==============================================================================
+
     def models(self, opts=None):
         """ direct entry to run models command """
         self._run_method('models', opts)
@@ -294,6 +296,7 @@ class StructureChecking():
 
         return False
 # =============================================================================
+
     def chains(self, opts=None):
         """ Run chains command """
         self._run_method('chains', opts)
@@ -363,11 +366,13 @@ class StructureChecking():
             self.summary['inscodes'].append(mu.residue_id(res))
         return {'ins_codes_list': ins_codes_list}
 
-    def _inscodes_fix(self, opts, fix_data=None):
+    def _inscodes_fix(opts, fix_data=None):
+        # TODO implement method _inscodes_fix
         if opts['renum']:
             print("--renum option not implemented (yet)")
         return False
 # =============================================================================
+
     def altloc(self, opts=None):
         """ run altloc command """
         self._run_method('altloc', opts)
@@ -413,7 +418,7 @@ class StructureChecking():
         else:
             select_altloc = opts['select_altloc']
 
-        #Prepare the longest possible list of alternatives
+        # Prepare the longest possible list of alternatives
         altlocs = []
         max_al_len = 0
         for res in fix_data['altlocs']:
@@ -470,6 +475,7 @@ class StructureChecking():
 
         return False
 # =============================================================================
+
     def metals(self, opts=None):
         """ Run metals command """
         self._run_method('metals', opts)
@@ -552,6 +558,7 @@ class StructureChecking():
         self.summary['metals']['n_removed'] = rmm_num
         return False
 # =============================================================================
+
     def water(self, opts=None):
         """ Run water command """
         self._run_method('water', opts)
@@ -596,6 +603,7 @@ class StructureChecking():
             self.summary['water']['n_removed'] = rmw_num
         return False
 # =============================================================================
+
     def hetatm(self, opts=None):
         """ Run hetatm command """
         print("Warning: hatatm function not implemented yet, running ligands instead")
@@ -635,6 +643,7 @@ class StructureChecking():
 
         return fix_data
 # =============================================================================
+
     def _ligands_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             remove_ligands = opts
@@ -686,6 +695,7 @@ class StructureChecking():
         self.summary['ligands']['n_removed'] = rl_num
         return False
 # =============================================================================
+
     def rem_hydrogen(self, opts=None):
         """ Run rem_hydrogen command """
         self._run_method('rem_hydrogen', opts)
@@ -724,6 +734,7 @@ class StructureChecking():
             self.summary['rem_hydrogen']['n_removed'] = rmh_num
         return False
 # =============================================================================
+
     def getss(self, opts=None):
         """ run getss command """
         self._run_method('getss', opts)
@@ -792,6 +803,7 @@ class StructureChecking():
             )
         return amide_check
 # =============================================================================
+
     def _amide_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
@@ -848,6 +860,7 @@ class StructureChecking():
                     fix_data = {}
         return False
 # =============================================================================
+
     def chiral(self, opts=None):
         """ run chiral command """
         self._run_method('chiral', opts)
@@ -925,6 +938,7 @@ class StructureChecking():
         self.strucm.modified = True
         return False
 # =============================================================================
+
     def chiral_bck(self, opts=None):
         """ run chiral_bck command """
         self._run_method('chiral_bck', opts)
@@ -955,7 +969,7 @@ class StructureChecking():
 
 #    def _chiral_bck_fix(self, chiral_fix, fix_data=None, check_clashes=True):
 #        return False
-#TODO chiral_bck_fix
+# TODO chiral_bck_fix
 #        input_line = ParamInput('Fix CA chiralities', self.args['non_interactive'])
 #        input_line.add_option_all()
 #        input_line.add_option_none()
@@ -999,7 +1013,7 @@ class StructureChecking():
         for cls in stm.ALL_CONTACT_TYPES:
             clash_list[cls] = {}
 
-        #Recalc when models are separated molecules
+        # Recalc when models are separated molecules
         if not self.strucm.has_superimp_models():
             rr_dist = self.strucm.get_all_r2r_distances('all', True)
         else:
@@ -1144,6 +1158,7 @@ class StructureChecking():
             self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
         return False
 # =============================================================================
+
     def add_hydrogen(self, opts=None):
         """ Run add_hydrogen command """
         self._run_method('add_hydrogen', opts)
@@ -1174,7 +1189,7 @@ class StructureChecking():
         self.summary['add_hydrogen']['ionic_detected'] = [
             mu.residue_id(r_at[0]) for r_at in ion_res_list
         ]
-        #print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+        # print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
         return fix_data
 
     def _add_hydrogen_fix(self, opts, fix_data=None):
@@ -1278,11 +1293,13 @@ class StructureChecking():
         self.strucm.modified = True
         return False
 # =============================================================================
+
     def mutateside(self, mut_list):
         """ Run mutateside command """
         self._run_method('mutateside', mut_list)
 
     def _mutateside_check(self):
+        # TODO Check _mutateside_check function
         return True
 
     def _mutateside_fix(self, opts, fix_data=None):
@@ -1312,6 +1329,7 @@ class StructureChecking():
         self.strucm.modified = True
         return False
 #===============================================================================
+
     def backbone(self, opts=None):
         """ Run backbone command """
         self._run_method('backbone', opts)
@@ -1383,14 +1401,14 @@ class StructureChecking():
                     round(float(brk[2]), 5)
                 ])
             fix_data['not_link_seq_list'] = True
-        #TODO move this section to ligands
+        # TODO move this section to ligands
         if self.strucm.modified_residue_list:
             print(cts.MSGS['MODIF_RESIDUES'])
             self.summary['backbone']['mod_residues'] = []
             for brk in self.strucm.modified_residue_list:
                 print(" {:10} ".format(mu.residue_id(brk)))
                 self.summary['backbone']['mod_residues'].append(mu.residue_id(brk))
-        #Provisional only missing atoms can be fixed
+        # Provisional only missing atoms can be fixed
             fix_data['modified_residue_list'] = True
         return fix_data
 
@@ -1425,7 +1443,7 @@ class StructureChecking():
                     print('BACKBONE_RECHECK')
                 fix_done = not fix_data['bck_breaks_list']
 
-        #Add CAPS
+        # Add CAPS
         fixed_caps = self._backbone_add_caps(
             opts['add_caps'],
             fix_data['bck_breaks_list']
@@ -1440,7 +1458,7 @@ class StructureChecking():
         else:
             print('No caps added')
 
-        #Add missing atoms
+        # Add missing atoms
         fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
@@ -1481,7 +1499,7 @@ class StructureChecking():
                 print(cts.MSGS['DO_NOTHING'])
             return None
 
-        #Checking for canonical sequence
+        # Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
             input_line = ParamInput(
                 "Enter canonical sequence path (FASTA)",
@@ -1610,6 +1628,7 @@ class StructureChecking():
 
         return fixed_res
 #===============================================================================
+
     def cistransbck(self, opts=None):
         """ Run cistransbck command """
         self._run_method('cistransbck', opts)
