@@ -39,6 +39,11 @@ optional arguments:
                         Remote server for retrieving structures (default|MMB)
   --cache_dir CACHE_DIR_PATH
                         Path for structure's cache directory (default: ./tmpPDB)
+  --modeller_key MODELLER_KEY
+                        User key for modeller, required for backbone fix,
+                        register at
+                        https://salilab.org/modeller/registration.html
+
   --res_lib RES_LIBRARY_PATH
                         Override settings default residue library (AMBER prep format)
   --data_lib DATA_LIBRARY_PATH
@@ -58,7 +63,6 @@ optional arguments:
 commands:     Help on available commands
 command_list: Run all tests from conf file
 checkall:     Perform all checks without fixes
-fixall:       Performs a default fix (v1.2)
 load:         Stores structure on local cache and provide basic statistics
 
 1. System Configuration
@@ -75,13 +79,16 @@ metals [--remove All | None | Met_ids_list | Residue_list]
     Detect/Remove Metals
 ligands [--remove All | None | Res_type_list | Residue_list]
     Detect/Remove Ligands
+hetatm [--remove All | None | Res_type_list | Residue_list] (v3.1)
+    Detect/Remove Ligands, revert modified residues
 water [--remove Yes|No]
     Remove Water molecules
 rem_hydrogen [--remove Yes|No]
     Remove Hydrogen atoms from structure
-mutateside [--mut mutation_list] [--no_check_clashes]
+mutateside [--mut mutation_list] [--no_check_clashes] [-rebuild]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     Check generated clashes except --no_check_clashes set
+    --rebuild Optimize side chains using Modeller. 
 add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
@@ -96,9 +103,11 @@ amide  [--fix All|None|Residue List] [--no_recheck]
 chiral [--fix All|None|Residue List] [--no_check_clashes]
     Detect/Fix Improper quirality
     Checks generated clashes unless --no_check_clashes set
-fixside [--fix All |None|Residue List] [--no_check_clashes]
+fixside [--fix All |None|Residue List] [--no_check_clashes] [--no_rem] [--rebuild]
     Complete side chains
     Checks generated clashes unless --no_check_clashes set
+    --no_rem   Do not remove unknown atoms
+    --rebuild  Rebuild complete side chain using Modeller 
 backbone [--fix_atoms All|None|Residue List]
          [--fix_main All|None|Break list]
          [--add_caps All|None|Break list]
@@ -122,5 +131,5 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 * python 3.7
 * biopython 1.76
 * numpy
-* biobb_structure_manager 3.0.1
 * modeller 9.23 (optional)
+* psutil (for performance debug, optional)
