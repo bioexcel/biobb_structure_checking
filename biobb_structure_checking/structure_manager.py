@@ -954,10 +954,16 @@ class StructureManager:
 
     def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int) -> str:
         spimp = Superimposer()
-        fixed_ats = [atm for atm in self.st[mod_id][ch_id].get_atoms() if atm.id == 'CA']
-        moving_ats = []
-        for atm in fixed_ats:
-            moving_ats.append(new_st[0][' '][atm.get_parent().id[1] - offset + 1]['CA'])
+        fixed_ats = [
+            atm for atm in self.st[mod_id][ch_id].get_atoms() 
+            if atm.id == 'CA' and atm.get_parent().id[1]< sequence_data.data[ch_id]['pdb'][mod_id][0].features[0].location.end]
+        moving_ats = [atm for atm in new_st[0][' '].get_atoms() if atm.id == 'CA']
+        moving_ats = moving_ats[:len(fixed_ats)]
+        print(len(fixed_ats),len(moving_ats))
+#        moving_ats = []
+#        for atm in fixed_ats:
+#            #moving_ats.append(new_st[0][' '][atm.get_parent().id[1] - offset + 1]['CA'])
+#            moving_ats.append(new_st[0][' '][atm.get_parent().index]['CA'])
         spimp.set_atoms(fixed_ats, moving_ats)
         spimp.apply(new_st.get_atoms())
 
@@ -966,6 +972,7 @@ class StructureManager:
         for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id])-1):
             gap_start = sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location.end
             gap_end = sequence_data.data[ch_id]['pdb'][mod_id][i+1].features[0].location.start
+            print(gap_start, gap_end)
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 continue
@@ -973,14 +980,25 @@ class StructureManager:
             pos = 0
             while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start:
                 pos += 1
+            index_start = self.st[0][ch_id][gap_start].index
             self.remove_residue(self.st[mod_id][ch_id][gap_start], update_int=False)
             self.remove_residue(self.st[mod_id][ch_id][gap_end], update_int=False)
-            for nres in range(gap_start, gap_end + 1):
-                res = new_st[0][' '][nres - offset + 1].copy()
-                res.id = (' ', nres, ' ')
-                self.st[mod_id][ch_id].insert(pos, res)
-                pos += 1
-                print("Adding " + mu.residue_id(res))
+            index = index_start
+            end_struc=False
+            while not end_struc:
+                nres = gap_start + index - index_start
+                print(nres, index)
+                #res = new_st[0][' '][nres - offset + 1].copy()
+                if index in new_st[0][' ']:
+                    res = new_st[0][' '][index].copy()
+                    res.id = (' ', nres, ' ')
+                    print(pos)
+                    self.st[mod_id][ch_id].insert(pos, res)
+                    pos += 1
+                    print("Adding " + mu.residue_id(res))
+                else:
+                    end_struc=True
+                index += 1
             fixed_gaps.append(
                 '{}{}-{}{}/{}'.format(ch_id, gap_start, ch_id, gap_end, mod_id + 1)
             )

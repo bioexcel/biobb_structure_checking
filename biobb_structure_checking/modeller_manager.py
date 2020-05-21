@@ -6,6 +6,9 @@ import uuid
 import shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
+from Bio import pairwise2
+from Bio.pairwise2 import format_alignment
+from Bio.Seq import Seq, IUPAC, MutableSeq
 
 try:
     from modeller import environ, log
@@ -43,12 +46,18 @@ class ModellerManager():
             if ch_id == target_chain:
                 nt_pos = tgt_seq.find(pdb_seq)
                 tgt_seq = tgt_seq[nt_pos:]
-            # Make alignment gaps from breaks
             for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
-                gap_len = self.sequences.data[ch_id]['pdb'][target_model][i].features[0].location.start\
-                    - self.sequences.data[ch_id]['pdb'][target_model][i-1].features[0].location.end - 1
-                pdb_seq += '-'*gap_len
                 pdb_seq += self.sequences.data[ch_id]['pdb'][target_model][i].seq
+            alignment = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+            
+            pdb_seq = Seq(alignment[0][1],IUPAC.protein)
+            # Make alignment gaps from breaks
+#            for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
+#                gap_len = self.sequences.data[ch_id]['pdb'][target_model][i].features[0].location.start\
+#                    - self.sequences.data[ch_id]['pdb'][target_model][i-1].features[0].location.end - 1
+#                pdb_seq += '-'*gap_len
+#                pdb_seq += self.sequences.data[ch_id]['pdb'][target_model][i].seq
+            
             templs.append(
                 SeqRecord(
                     pdb_seq,
