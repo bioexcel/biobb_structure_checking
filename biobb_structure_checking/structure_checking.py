@@ -366,7 +366,7 @@ class StructureChecking():
             self.summary['inscodes'].append(mu.residue_id(res))
         return {'ins_codes_list': ins_codes_list}
 
-    def _inscodes_fix(opts, fix_data=None):
+    def _inscodes_fix(self, opts, fix_data=None):
         # TODO implement method _inscodes_fix
         if opts['renum']:
             print("--renum option not implemented (yet)")
@@ -1141,10 +1141,10 @@ class StructureChecking():
         if not opts['rebuild']:
             for r_at in to_add:
                 mu.remove_H_from_r(r_at[0], verbose=True)
-            self.strucm.fix_side_chain(r_at)
-            fix_num += 1
-            self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
-            fixed_res.append(r_at[0])
+                self.strucm.fix_side_chain(r_at)
+                fix_num += 1
+                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
+                fixed_res.append(r_at[0])
         else:
             self.strucm.rebuild_side_chains(to_add)
             fixed_res = [r_at[0] for r_at in to_add]
