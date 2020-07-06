@@ -561,7 +561,6 @@ def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
     if 'N' not in res or 'CA' not in res or 'C' not in res:
         return "Warning: not enough atoms to build side chain hydrogen atoms on"
-
     for key_rule in rules.keys():
         rule = rules[key_rule]
         if rule['mode'] == 'B2':
