@@ -142,6 +142,15 @@ def seq_consecutive(res1, res2):
     rnum2 = res2.id[1]
     return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
+def seq_consecutive_index(res1, res2):
+    """
+    Checks whether residues belong to the same chain and are consecutive in sequences,
+    taken from internal residue index
+    """
+    rnum1 = res1.index
+    rnum2 = res2.index
+    return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
+
 def is_wat(res):
     """
     Shortcut to check for water residues

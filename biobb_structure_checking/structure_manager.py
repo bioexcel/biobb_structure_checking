@@ -895,21 +895,20 @@ class StructureManager:
         self.modified = True
 
 
-    def fix_backbone_chain(self, brk_list: Iterable[Atom], modeller_key: str = '') -> str:
+    def fix_backbone_chain(self, brk_list: Iterable[Atom], modeller_key: str = '', extra_gap: int=0) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
-        #print(brk_list)
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap)
 
         self.update_internals()
 
         return modeller_result
 
-    def run_modeller(self, ch_to_fix, brk_list, modeller_key = '', sequence_data = None):
-        # environ var depends on MODELLER version!!!
+    def run_modeller(self, ch_to_fix, brk_list, modeller_key = '', extra_gap = 0, sequence_data = None):
+        # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
         if modeller_key:
             os.environ['KEY_MODELLER9v23'] = modeller_key
         from biobb_structure_checking.modeller_manager import ModellerManager
@@ -928,77 +927,81 @@ class StructureManager:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
             else:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
+        
             for ch_id in self.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb']['wrong_order']:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain " + ch_id)
+                
                 model_pdb = mod_mgr.build(mod.id, ch_id)
+                
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
                     'model_st',
                     mod_mgr.tmpdir + "/" + model_pdb['name']
                 )
+                
+                
                 fixed_gaps = self.merge_structure(
                     sequence_data,
                     model_st,
                     mod.id,
                     ch_id,
                     brk_list,
-                    sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start
+                    sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start,
+                    extra_gap
                 )
                 fixed_segments += fixed_gaps
 
         return fixed_segments
 
-    def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int) -> str:
+    def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int, extra_gap: int=0) -> str:
+
         spimp = Superimposer()
-        fixed_ats = [
-            atm for atm in self.st[mod_id][ch_id].get_atoms() 
-            if atm.id == 'CA' and atm.get_parent().id[1]< sequence_data.data[ch_id]['pdb'][mod_id][0].features[0].location.end]
-        moving_ats = [atm for atm in new_st[0][' '].get_atoms() if atm.id == 'CA']
-        moving_ats = moving_ats[:len(fixed_ats)]
-        print(len(fixed_ats),len(moving_ats))
-#        moving_ats = []
-#        for atm in fixed_ats:
-#            #moving_ats.append(new_st[0][' '][atm.get_parent().id[1] - offset + 1]['CA'])
-#            moving_ats.append(new_st[0][' '][atm.get_parent().index]['CA'])
-        spimp.set_atoms(fixed_ats, moving_ats)
-        spimp.apply(new_st.get_atoms())
 
         list_res = self.st[mod_id][ch_id].get_list()
-        fixed_gaps = []
-        for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id])-1):
-            gap_start = sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location.end
-            gap_end = sequence_data.data[ch_id]['pdb'][mod_id][i+1].features[0].location.start
-            print(gap_start, gap_end)
 
+        fixed_gaps = []
+
+        for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id])-1):
+            loc_i = sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location
+            loc_ii = sequence_data.data[ch_id]['pdb'][mod_id][i+1].features[0].location
+
+            gap_start = loc_i.end
+            gap_end = loc_ii.start
+        
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 continue
+            
+            fixed_ats = []
+            moving_ats = []
+            for nres in range(loc_i.start, loc_i.end):
+                fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
+                moving_ats.append(new_st[0][' '][nres - offset + 1]['CA'])
+            for nres in range(loc_ii.start, loc_ii.end):
+                fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
+                moving_ats.append(new_st[0][' '][nres - offset + 1]['CA'])
+            moving_ats = moving_ats[:len(fixed_ats)]
+            spimp.set_atoms(fixed_ats, moving_ats)
+            spimp.apply(new_st.get_atoms())
 
             pos = 0
-            while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start:
+            while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
-            index_start = self.st[0][ch_id][gap_start].index
-            self.remove_residue(self.st[mod_id][ch_id][gap_start], update_int=False)
-            self.remove_residue(self.st[mod_id][ch_id][gap_end], update_int=False)
-            index = index_start
-            end_struc=False
-            while not end_struc:
-                nres = gap_start + index - index_start
-                print(nres, index)
-                #res = new_st[0][' '][nres - offset + 1].copy()
-                if index in new_st[0][' ']:
-                    res = new_st[0][' '][index].copy()
-                    res.id = (' ', nres, ' ')
-                    print(pos)
-                    self.st[mod_id][ch_id].insert(pos, res)
-                    pos += 1
+            
+            for nres in range(gap_start - extra_gap, gap_end + extra_gap + 1):
+                if nres in self.st[mod_id][ch_id]:
+                    self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
+                res = new_st[0][' '][nres - offset + 1].copy()
+                res.id = (' ', nres, ' ')
+                self.st[mod_id][ch_id].insert(pos, res)
+                pos += 1
+                if nres < gap_start or nres > gap_end:
+                    print("Replacing " + mu.residue_id(res))
+                else: 
                     print("Adding " + mu.residue_id(res))
-                else:
-                    end_struc=True
-                index += 1
             fixed_gaps.append(
                 '{}{}-{}{}/{}'.format(ch_id, gap_start, ch_id, gap_end, mod_id + 1)
             )
@@ -1160,7 +1163,7 @@ class StructureManager:
                 mu.remove_residue(mut['resobj'])
         mutated_sequence_data.read_structure_seqs(self)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, mutated_sequence_data)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, mutated_sequence_data)
 
         self.update_internals()
         mutated_res = []

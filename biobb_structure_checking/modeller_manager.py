@@ -11,8 +11,8 @@ from Bio.pairwise2 import format_alignment
 from Bio.Seq import Seq, IUPAC, MutableSeq
 
 try:
-    from modeller import environ, log
-    from modeller.automodel import automodel, assess
+    from modeller import *
+    from modeller.automodel import *
 except:
     sys.exit("Error importing modeller")
 
@@ -38,26 +38,31 @@ class ModellerManager():
         """ Prepares Modeller input and builds the model """
         alin_file = self.tmpdir + "/alin.pir"
         tgt_seq = self.sequences.data[target_chain]['can'].seq
+        ranges = []
         templs = []
         knowns = []
+
         for ch_id in self.sequences.data[target_chain]['chains']:
             pdb_seq = self.sequences.data[ch_id]['pdb'][target_model][0].seq
             # Check N-term
             if ch_id == target_chain:
                 nt_pos = tgt_seq.find(pdb_seq)
                 tgt_seq = tgt_seq[nt_pos:]
+                
+            prev_pos = len(pdb_seq)
             for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
-                pdb_seq += self.sequences.data[ch_id]['pdb'][target_model][i].seq
+                frag_seq = self.sequences.data[ch_id]['pdb'][target_model][i].seq
+                
+#                if ch_id == target_chain:
+#                    pos = tgt_seq.find(frag_seq)
+#                    ranges.append([prev_pos, pos])
+#                    prev_pos = pos + len(frag_seq)
+                pdb_seq += frag_seq
+
             alignment = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
             
             pdb_seq = Seq(alignment[0][1],IUPAC.protein)
-            # Make alignment gaps from breaks
-#            for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
-#                gap_len = self.sequences.data[ch_id]['pdb'][target_model][i].features[0].location.start\
-#                    - self.sequences.data[ch_id]['pdb'][target_model][i-1].features[0].location.end - 1
-#                pdb_seq += '-'*gap_len
-#                pdb_seq += self.sequences.data[ch_id]['pdb'][target_model][i].seq
-            
+
             templs.append(
                 SeqRecord(
                     pdb_seq,
@@ -73,16 +78,17 @@ class ModellerManager():
                 )
             )
             knowns.append('templ' + ch_id)
+            
             if ch_id == target_chain:
                 tgt_seq = tgt_seq[0:len(pdb_seq)]
 
         _write_alin(tgt_seq, templs, alin_file)
 
-        return self._automodel_run(alin_file, knowns)
+        return self._loopmodel_run(alin_file, knowns, ranges)
 
-
-    def _automodel_run(self, alin_file, knowns):
-        amdl = automodel(
+        
+    def _loopmodel_run(self, alin_file, knowns, ranges):
+        amdl = loopmodel(
             self.env,
             alnfile=alin_file,
             knowns=knowns,
@@ -91,6 +97,11 @@ class ModellerManager():
         )
         amdl.starting_model = 1
         amdl.ending_model = 1
+        #amdl.md_level = None
+        
+        amdl.loop.starting_model = 1
+        amdl.loop.ending_model = 1
+        amdl.loop.md_level = refine.slow
 
         orig_dir = os.getcwd()
         os.chdir(self.tmpdir)
@@ -98,10 +109,11 @@ class ModellerManager():
         os.chdir(orig_dir)
 
         return amdl.outputs[0]
+    
 
     def __del__(self):
-        shutil.rmtree(self.tmpdir)
-        #print(self.tmpdir)
+        #shutil.rmtree(self.tmpdir)
+        print(self.tmpdir)
 
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(

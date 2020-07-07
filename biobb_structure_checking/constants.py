@@ -249,6 +249,8 @@ DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
     'Adds ACE and NME caps to missing main chain segments (All | None)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
+DIALOGS.add_option('backbone', '--extra_gap', 'extra_gap',\
+    'Replace extra_gap additional flanking residues', int)
 DIALOGS.add_option('backbone', '--no_recheck', 'no_recheck',\
     'Do not re-check after modification', 'bool')
 

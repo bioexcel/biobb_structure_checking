@@ -110,8 +110,10 @@ class SequenceData():
                 wrong_order = False
                 for frag in ppb.build_peptides(chn):
                     start = frag[0].get_id()[1]
+                    start_index = frag[0].index
                     end = frag[-1].get_id()[1]
-                    frid = '{}:{}-{}'.format(ch_id, start, end)
+                    end_index = frag[-1].index
+                    frid = '{}:{}-{}:{}-{}'.format(ch_id, start, end, start_index, end_index)
                     sqr = SeqRecord(
                         frag.get_sequence(),
                         'pdbsq_' + frid,
@@ -120,6 +122,7 @@ class SequenceData():
                     )
                     if start < end:
                         sqr.features.append(SeqFeature(FeatureLocation(start, end)))
+                        sqr.features.append(SeqFeature(FeatureLocation(start_index, end_index)))
                     else:
                         print("Warning: unusual residue numbering at chain ", ch_id)
                         print("Warning: chain reconstruction may not be available")

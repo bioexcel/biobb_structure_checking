@@ -1422,7 +1422,8 @@ class StructureChecking():
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list'],
-                self.args['modeller_key']
+                self.args['modeller_key'],
+                opts['extra_gap']
             )
             if not fixed_main:
                 fix_done = True
@@ -1473,7 +1474,7 @@ class StructureChecking():
 
         return False
 
-    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, modeller_key):
+    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, modeller_key, extra_gap):
         print("Main chain fixes")
 
         brk_rnums = [
@@ -1517,7 +1518,7 @@ class StructureChecking():
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
-        return self.strucm.fix_backbone_chain(to_fix, modeller_key)
+        return self.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
 
     def _backbone_add_caps(self, add_caps, bck_breaks_list):
         print("Capping terminal ends")
