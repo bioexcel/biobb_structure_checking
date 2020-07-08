@@ -1346,7 +1346,10 @@ class StructureChecking():
                 [res, at_list] = r_at
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
-
+        else:
+            if not self.args['quiet']: 
+                print(cts.MSGS['NO_BCK_MISSING'])
+                
         #Not bound consecutive residues
         bck_check = self.strucm.get_backbone_breaks()
         if bck_check['bck_breaks_list']:
@@ -1365,6 +1368,9 @@ class StructureChecking():
             fix_data['bck_breaks_list'] = bck_check['bck_breaks_list']
         else:
             fix_data['bck_breaks_list'] = []
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_BCK_BREAKS'])
+    
 
         if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
@@ -1383,6 +1389,9 @@ class StructureChecking():
                     mu.residue_id(brk[2])
                 ])
             fix_data['wrong_link_list'] = True
+        else:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_BCK_LINKS'])
 
         if bck_check['not_link_seq_list']:
             print(cts.MSGS['CONSEC_RES_FAR'])
@@ -1433,20 +1442,18 @@ class StructureChecking():
             else:
                 fixed_main_res += fixed_main
  
-            self.summary['backbone']['main_chain_fix'] = fixed_main
+            self.summary['backbone']['main_chain_fix'] = fixed_main_res
             if fixed_main:
-                #print('Fixed segments: ', ', '.join(fix_data['bck_breaks_list']))
                 self.strucm.modified = True
-            else:
-                print('No segments fixed')
 
-            # Force re-checking to update modified residues pointers
-            fix_data = self._backbone_check()
             if no_int_recheck or not fixed_main or opts['no_recheck']:
                 fix_done = True
+                # Force silent re-checking to update modified residue pointers
+                fix_data = self._backbone_check()
             else:
                 if not self.args['quiet']:
                     print('BACKBONE_RECHECK')
+                fix_data = self._backbone_check()
                 fix_done = not fix_data['bck_breaks_list']
 
         # Add CAPS
@@ -1555,7 +1562,8 @@ class StructureChecking():
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list('terms', ['Terms'])
-        input_line.add_option_list('brks', ['Breaks'])
+        if bck_breaks_list:
+            input_line.add_option_list('brks', ['Breaks'])
         input_line.add_option_list(
             'resnum', term_rnums, case='sensitive', multiple=True
         )

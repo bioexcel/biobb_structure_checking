@@ -34,29 +34,27 @@ class ModellerManager():
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
-    def build(self, target_model, target_chain):
+    def build(self, target_model, target_chain, extra_Nterm_res=0):
         """ Prepares Modeller input and builds the model """
         alin_file = self.tmpdir + "/alin.pir"
         tgt_seq = self.sequences.data[target_chain]['can'].seq
+        #triming N-term of canonical seq
+        pdb_seq = self.sequences.data[target_chain]['pdb'][target_model][0].seq
+        nt_pos = tgt_seq.find(pdb_seq) - extra_NTerm_res
+        tgt_seq = tgt_seq[nt_pos:]
+        
+        #TODO trim trailing residues in tgt_seq
+        
         templs = []
         knowns = []
+        
         for ch_id in self.sequences.data[target_chain]['chains']:
             pdb_seq = self.sequences.data[ch_id]['pdb'][target_model][0].seq
-            # Check N-term
-            if ch_id == target_chain:
-                nt_pos = tgt_seq.find(pdb_seq)
-                tgt_seq = tgt_seq[nt_pos:]
-
             prev_pos = len(pdb_seq)
             for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
                 frag_seq = self.sequences.data[ch_id]['pdb'][target_model][i].seq
-
-#                if ch_id == target_chain:
-#                    pos = tgt_seq.find(frag_seq)
-#                    ranges.append([prev_pos, pos])
-#                    prev_pos = pos + len(frag_seq)
                 pdb_seq += frag_seq
-
+            # tuned to open gaps on missing loops
             alignment = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
             pdb_seq = Seq(alignment[0][1],IUPAC.protein)
