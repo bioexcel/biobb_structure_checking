@@ -34,7 +34,7 @@ class ModellerManager():
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
-    def build(self, target_model, target_chain, extra_Nterm_res=0):
+    def build(self, target_model, target_chain, extra_NTerm_res):
         """ Prepares Modeller input and builds the model """
         alin_file = self.tmpdir + "/alin.pir"
         tgt_seq = self.sequences.data[target_chain]['can'].seq

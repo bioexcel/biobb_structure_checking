@@ -888,26 +888,40 @@ class StructureManager:
             r_at[0].get_resname()
             for r_at in r_list
         ]
-
+        
         self.rebuild_mutations(self.prepare_mutations(','.join(mut_list)))
 
         self.atom_renumbering()
         self.modified = True
 
 
-    def fix_backbone_chain(self, brk_list: Iterable[Atom], modeller_key: str = '', extra_gap: int=0) -> str:
+    def fix_backbone_chain(
+            self, 
+            brk_list: Iterable[Atom], 
+            modeller_key: str = '', 
+            extra_gap: int=0
+        ) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
 
         self.update_internals()
 
         return modeller_result
 
-    def run_modeller(self, ch_to_fix, brk_list, modeller_key = '', extra_gap = 0, sequence_data = None):
+    def run_modeller(
+            self, 
+            ch_to_fix, 
+            brk_list, 
+            modeller_key = '', 
+            extra_gap: int = 0, 
+            extra_NTerm: int = 0, 
+            sequence_data = None
+        ):
+        """ Runs modeller """
         # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
         if modeller_key:
             os.environ['KEY_MODELLER9v23'] = modeller_key
@@ -935,7 +949,7 @@ class StructureManager:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain " + ch_id)
 
-                model_pdb = mod_mgr.build(mod.id, ch_id)
+                model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
 
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
@@ -949,15 +963,26 @@ class StructureManager:
                     mod.id,
                     ch_id,
                     brk_list,
-                    sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start,
+                    sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start - extra_NTerm,
                     extra_gap
                 )
                 modif_residues += modif_set_residues
 
         return modif_residues
 
-    def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int, extra_gap: int=0) -> str:
-
+    def merge_structure(
+            self, 
+            sequence_data, 
+            new_st: Structure, 
+            mod_id: str, 
+            ch_id: str, 
+            brk_list: Iterable[Atom], 
+            offset: int, 
+            extra_gap: int=0
+        ) -> str:
+        """ Merges the required fragments of Modeller results"""
+        
+        print(ch_id, brk_list)
         spimp = Superimposer()
 
         list_res = self.st[mod_id][ch_id].get_list()
@@ -970,16 +995,37 @@ class StructureManager:
 
             gap_start = loc_i.end
             gap_end = loc_ii.start
-
+            
+            
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
-                continue
+                #Checking for incomplete gap build needed for fixing side chains with rebuild
+                n_br = 0
+                while n_br < len(brk_list) - 1 and \
+                        (self.st[mod_id][ch_id][gap_start] != brk_list[n_br][0]) and\
+                        (self.st[mod_id][ch_id][gap_end] != brk_list[n_br][1]):
+                    n_br += 1
+                if self.st[mod_id][ch_id][gap_start] == brk_list[n_br][0] or\
+                        self.st[mod_id][ch_id][gap_end] == brk_list[n_br][1]: 
+                    # adjusting gap ends to existint residues
+                    gap_start = brk_list[n_br][0].id[1]
+                    while gap_start not in self.st[mod_id][ch_id]:
+                        gap_start += 1
+
+                    gap_end = brk_list[n_br][1].id[1]
+                    while gap_end not in self.st[mod_id][ch_id]:
+                        gap_end -= 1
+
+                    extra_gap = 0
+
+                else:
+                    continue
 
             print('Fixing {} - {}'.format(
                 mu.residue_id(self.st[mod_id][ch_id][gap_start]),
                 mu.residue_id(self.st[mod_id][ch_id][gap_end]))
             )
-
-
+            
+            # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
             moving_ats = []
             for nres in range(loc_i.start, loc_i.end):
@@ -991,7 +1037,8 @@ class StructureManager:
             moving_ats = moving_ats[:len(fixed_ats)]
             spimp.set_atoms(fixed_ats, moving_ats)
             spimp.apply(new_st.get_atoms())
-
+            
+            # Find position if the 1st residue in the internal residue list
             pos = 0
             while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
@@ -1159,27 +1206,29 @@ class StructureManager:
                     end_res = self.next_residue[end_res]
                 brk = [start_res, end_res]
                 brk_list.append(brk)
-
+        print(brk_list)
         mutated_sequence_data = SequenceData()
         mutated_sequence_data.fake_canonical_sequence(self, mutations)
         for mut_set in mutations.mutation_list:
             for mut in mut_set.mutations:
                 mu.remove_residue(mut['resobj'])
         mutated_sequence_data.read_structure_seqs(self)
-
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, mutated_sequence_data)
+        
+        #Provisional to be used on changes in the NTerm residue
+        extra_NTerm = 0
+        mutated_res = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, extra_NTerm, mutated_sequence_data)
 
         self.update_internals()
-        mutated_res = []
-        for frag in (modeller_result):
-            m = re.search('(.*)-(.*)/(.*)', frag)
-            mod, ch, start_res, end_res  = \
-                int(m.group(3)) - 1, \
-                m.group(1)[:1], \
-                int(m.group(1)[1:]), \
-                int(m.group(2)[1:])
-            for i in range(start_res, end_res + 1):
-                mutated_res.append(self.st[mod][ch][i])
+#        mutated_res = []
+#        for frag in (modeller_result):
+#            m = re.search('(.*)-(.*)/(.*)', frag)
+#            mod, ch, start_res, end_res  = \
+#                int(m.group(3)) - 1, \
+#                m.group(1)[:1], \
+#                int(m.group(1)[1:]), \
+#                int(m.group(2)[1:])
+#            for i in range(start_res, end_res + 1):
+#                mutated_res.append(self.st[mod][ch][i])
         return mutated_res
 
     def invert_amide_atoms(self, res: Residue):
