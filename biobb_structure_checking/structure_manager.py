@@ -919,7 +919,7 @@ class StructureManager:
 
         mod_mgr.sequences = sequence_data
 
-        fixed_segments = []
+        modif_residues = []
 
         for mod in self.st:
             if self.has_models():
@@ -927,24 +927,23 @@ class StructureManager:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
             else:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
-        
+
             for ch_id in self.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb']['wrong_order']:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain " + ch_id)
-                
+
                 model_pdb = mod_mgr.build(mod.id, ch_id)
-                
+
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
                     'model_st',
                     mod_mgr.tmpdir + "/" + model_pdb['name']
                 )
-                
-                
-                fixed_gaps = self.merge_structure(
+
+                modif_set_residues = self.merge_structure(
                     sequence_data,
                     model_st,
                     mod.id,
@@ -953,9 +952,9 @@ class StructureManager:
                     sequence_data.data[ch_id]['pdb'][mod.id][0].features[0].location.start,
                     extra_gap
                 )
-                fixed_segments += fixed_gaps
+                modif_residues += modif_set_residues
 
-        return fixed_segments
+        return modif_residues
 
     def merge_structure(self, sequence_data, new_st: Structure, mod_id: str, ch_id: str, brk_list: Iterable[Atom], offset: int, extra_gap: int=0) -> str:
 
@@ -963,7 +962,7 @@ class StructureManager:
 
         list_res = self.st[mod_id][ch_id].get_list()
 
-        fixed_gaps = []
+        modif_residues = []
 
         for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id])-1):
             loc_i = sequence_data.data[ch_id]['pdb'][mod_id][i].features[0].location
@@ -971,10 +970,16 @@ class StructureManager:
 
             gap_start = loc_i.end
             gap_end = loc_ii.start
-        
+
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 continue
-            
+
+            print('Fixing {} - {}'.format(
+                mu.residue_id(self.st[mod_id][ch_id][gap_start]),
+                mu.residue_id(self.st[mod_id][ch_id][gap_end]))
+            )
+
+
             fixed_ats = []
             moving_ats = []
             for nres in range(loc_i.start, loc_i.end):
@@ -990,7 +995,7 @@ class StructureManager:
             pos = 0
             while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
-            
+
             for nres in range(gap_start - extra_gap, gap_end + extra_gap + 1):
                 if nres in self.st[mod_id][ch_id]:
                     self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
@@ -999,14 +1004,13 @@ class StructureManager:
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1
                 if nres < gap_start or nres > gap_end:
-                    print("Replacing " + mu.residue_id(res))
-                else: 
-                    print("Adding " + mu.residue_id(res))
-            fixed_gaps.append(
-                '{}{}-{}{}/{}'.format(ch_id, gap_start, ch_id, gap_end, mod_id + 1)
-            )
+                    print("  Replacing " + mu.residue_id(res))
+                else:
+                    print("  Adding " + mu.residue_id(res))
+                modif_residues.append(self.st[mod_id][ch_id][nres])
             print()
-        return fixed_gaps
+
+        return modif_residues
 
     def add_main_chain_caps(self, caps_list: Iterable[Iterable[str]]) -> List[str]:
         # print(caps_list)

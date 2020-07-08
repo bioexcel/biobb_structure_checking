@@ -1417,8 +1417,10 @@ class StructureChecking():
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 
         fix_done = not fix_data['bck_breaks_list']
-
+        fixed_main_res = []
         while not fix_done:
+            if not opts['extra_gap']:
+                opts['extra_gap'] = 0
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list'],
@@ -1428,9 +1430,12 @@ class StructureChecking():
             if not fixed_main:
                 fix_done = True
                 continue
+            else:
+                fixed_main_res += fixed_main
+ 
             self.summary['backbone']['main_chain_fix'] = fixed_main
             if fixed_main:
-                print('Fixed segments: ', ', '.join(list(fixed_main)))
+                #print('Fixed segments: ', ', '.join(fix_data['bck_breaks_list']))
                 self.strucm.modified = True
             else:
                 print('No segments fixed')
@@ -1466,11 +1471,11 @@ class StructureChecking():
                 opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
-
-        if fixed_res and not opts['no_check_clashes']:
+        res_to_check = fixed_res + fixed_caps + fixed_main_res
+        if res_to_check and not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
-            self.summary['backbone']['clashes'] = self._check_report_clashes(fixed_res)
+            self.summary['backbone']['clashes'] = self._check_report_clashes(res_to_check)
 
         return False
 
@@ -1498,7 +1503,7 @@ class StructureChecking():
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return None
+            return []
 
         # Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
@@ -1509,7 +1514,7 @@ class StructureChecking():
             self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
             if not self.args['fasta_seq_path']:
                 print(cts.MSGS['FASTA_MISSING'])
-                return None
+                return []
             self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
         to_fix = [
@@ -1565,7 +1570,7 @@ class StructureChecking():
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return False
+            return []
         elif input_option == 'terms':
             to_fix = true_term
         elif input_option == 'brks':
@@ -1599,7 +1604,7 @@ class StructureChecking():
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return False
+            return []
 
         to_fix = [
             r_at
