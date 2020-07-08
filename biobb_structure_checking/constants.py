@@ -378,6 +378,7 @@ MSGS = {
     'NO_BCK_MISSING': 'No residues with missing backbone atoms found',
     'NO_BCK_LINKS': 'No unexpected backbone links',
     'NO_BCK_BREAKS': 'No backbone breaks',
+    'BACKBONE_RECHECK': 'Updating backbone check',
     #cistrasnbck
     'CIS_BONDS': '{} cis peptide bonds',
     'NO_CIS_BONDS': 'No cis peptide bonds found',

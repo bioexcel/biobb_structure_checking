@@ -1452,7 +1452,7 @@ class StructureChecking():
                 fix_data = self._backbone_check()
             else:
                 if not self.args['quiet']:
-                    print('BACKBONE_RECHECK')
+                    print(cts.MSGS['BACKBONE_RECHECK'])
                 fix_data = self._backbone_check()
                 fix_done = not fix_data['bck_breaks_list']
 
