@@ -994,12 +994,13 @@ class StructureManager:
             seq_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
             seq_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
 
-#            print(loc_i, loc_ii)
-#            print(seq_i, seq_ii)
-#            
             gap_start = loc_i.end
             gap_end = loc_ii.start
-
+            # Gap length taken from sequence gap to avoid PDB numbering issues
+            gap_length = seq_ii.start - seq_i.end - 1
+            # Offset to account for breaks in PDB residue numbering
+            seq_off_i_ii =  gap_end - seq_ii.start - gap_start + seq_i.end
+            
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 #Checking for incomplete gap build needed for fixing side chains with rebuild
                 n_br = 0
@@ -1019,7 +1020,6 @@ class StructureManager:
                         gap_end -= 1
 
                     extra_gap = 0
-
                 else:
                     continue
 
@@ -1033,14 +1033,16 @@ class StructureManager:
             moving_ats = []
 
             for nres in range(loc_i.start, loc_i.end):
-                if nres in self.st[mod_id][ch_id] and nres - offset + 1 in new_st[0][' ']:
+                mod_nres = nres - offset + 1
+                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][nres - offset + 1]['CA'])
+                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
 
             for nres in range(loc_ii.start, loc_ii.end):
-                if nres in self.st[mod_id][ch_id] and nres - offset + 1 - loc_i.end + seq_i.end in new_st[0][' ']:
+                mod_nres = nres - offset + 1 - seq_off_i_ii
+                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][nres - offset + 1]['CA'])
+                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
 
             moving_ats = moving_ats[:len(fixed_ats)]
             spimp.set_atoms(fixed_ats, moving_ats)
@@ -1050,21 +1052,29 @@ class StructureManager:
             pos = 0
             while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
+            
+            res_pairs = []
+            for nres in range(gap_start - extra_gap, gap_start + gap_length + 1):
+                res_pairs.append([nres, nres - offset + 1])
+            for nres in range(gap_end, gap_end + extra_gap + 1):
+                res_pairs.append([nres, nres - offset + 1 - seq_off_i_ii])
 
-            for nres in range(gap_start - extra_gap, gap_end + extra_gap + 1):
-                #print(offset, nres, nres - offset + 1, nres - loc_i.start + seq_i.start)
-                if nres - offset + 1 in new_st[0][' '] and nres - loc_i.start + seq_i.start < seq_ii.start + extra_gap:
-                    if nres in self.st[mod_id][ch_id]:
-                        self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
-                    res = new_st[0][' '][nres - offset + 1].copy()
-                    res.id = (' ', nres, ' ')
-                    self.st[mod_id][ch_id].insert(pos, res)
-                    pos += 1
-                    if nres < gap_start or nres > gap_end:
-                        print("  Replacing " + mu.residue_id(res))
-                    else:
-                        print("  Adding " + mu.residue_id(res))
-                    modif_residues.append(self.st[mod_id][ch_id][nres])
+            for res_pair in res_pairs:
+                nres, mod_nres = res_pair
+                if nres in self.st[mod_id][ch_id]:
+                    self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
+                   
+                res = new_st[0][' '][mod_nres].copy()
+                res.id = (' ', nres, ' ')
+                self.st[mod_id][ch_id].insert(pos, res)
+                pos += 1
+                if nres < gap_start or nres > gap_end:
+                    print("  Replacing " + mu.residue_id(res))
+                else:
+                    print("  Adding " + mu.residue_id(res))
+                
+                modif_residues.append(self.st[mod_id][ch_id][nres])
+            
             print()
 
         return modif_residues

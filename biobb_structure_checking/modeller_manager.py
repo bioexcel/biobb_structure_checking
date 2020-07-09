@@ -93,6 +93,9 @@ class ModellerManager():
         )
         amdl.starting_model = 1
         amdl.ending_model = 1
+        
+        #amdl.loop.starting_model = 1
+        #amdl.loop.ending_model = 1
 
         orig_dir = os.getcwd()
         os.chdir(self.tmpdir)
