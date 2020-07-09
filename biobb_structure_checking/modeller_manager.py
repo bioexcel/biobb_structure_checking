@@ -39,20 +39,20 @@ class ModellerManager():
         alin_file = self.tmpdir + "/alin.pir"
         tgt_seq = self.sequences.data[target_chain]['can'].seq
         #triming N-term of canonical seq
-        pdb_seq = self.sequences.data[target_chain]['pdb'][target_model][0].seq
-        nt_pos = tgt_seq.find(pdb_seq) - extra_NTerm_res
+        pdb_seq = self.sequences.data[target_chain]['pdb'][target_model]['frgs'][0].seq
+        nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
         tgt_seq = tgt_seq[nt_pos:]
-        
+
         #TODO trim trailing residues in tgt_seq
-        
+
         templs = []
         knowns = []
-        
+
         for ch_id in self.sequences.data[target_chain]['chains']:
-            pdb_seq = self.sequences.data[ch_id]['pdb'][target_model][0].seq
+            pdb_seq = self.sequences.data[ch_id]['pdb'][target_model]['frgs'][0].seq
             prev_pos = len(pdb_seq)
-            for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model])):
-                frag_seq = self.sequences.data[ch_id]['pdb'][target_model][i].seq
+            for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model]['frgs'])):
+                frag_seq = self.sequences.data[ch_id]['pdb'][target_model]['frgs'][i].seq
                 pdb_seq += frag_seq
             # tuned to open gaps on missing loops
             alignment = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
@@ -66,9 +66,9 @@ class ModellerManager():
                     '',
                     'structureX:{}:{}:{}:{}:{}:::-1.00: -1.00'.format(
                         self.templ_file,
-                        self.sequences.data[ch_id]['pdb'][target_model][0].features[0].location.start,
+                        self.sequences.data[ch_id]['pdb'][target_model]['frgs'][0].features[0].location.start,
                         ch_id,
-                        self.sequences.data[ch_id]['pdb'][target_model][-1].features[0].location.end,
+                        self.sequences.data[ch_id]['pdb'][target_model]['frgs'][-1].features[0].location.end,
                         ch_id
                     )
                 )

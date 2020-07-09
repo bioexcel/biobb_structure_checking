@@ -1524,6 +1524,7 @@ class StructureChecking():
                 return []
             self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
+            self.strucm.sequence_data.match_sequence_numbering()
         to_fix = [
             rpair
             for rpair in breaks_list

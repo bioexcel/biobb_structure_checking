@@ -41,6 +41,7 @@ class SequenceData():
             self.read_canonical_seqs(strucm, cif_warn)
 
         self.read_structure_seqs(strucm)
+        self.match_sequence_numbering()
 
     def read_canonical_seqs(self, strucm, cif_warn):
         """ Prepare canonical sequences """
@@ -105,7 +106,6 @@ class SequenceData():
             ppb = PPBuilder()
             for chn in mod.get_chains():
                 seqs = []
-                #self.sequences[ch_id]['pdb'][mod.id] = [1]
                 ch_id = chn.id
                 wrong_order = False
                 for frag in ppb.build_peptides(chn):
@@ -131,8 +131,26 @@ class SequenceData():
                     seqs.append(sqr)
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
-                self.data[ch_id]['pdb'][mod.id] = seqs
-                self.data[ch_id]['pdb']['wrong_order'] = wrong_order
+                self.data[ch_id]['pdb'][mod.id] = {
+                    'frgs': seqs,
+                    'wrong_order': wrong_order
+                }
+
+    def match_sequence_numbering(self):
+        """ Assign canonical sequence numbering to structural fragments """
+        if not self.has_canonical:
+            return False
+        for ch_id in self.data:
+            for mod_id in self.data[ch_id]['pdb']:
+                self.data[ch_id]['pdb'][mod_id]['match_numbering'] = True
+                for nfrag in range(0, len(self.data[ch_id]['pdb'][mod_id]['frgs'])):
+                    inic = self.data[ch_id]['can'].seq.find(self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].seq) + 1
+                    fin = inic + len(self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].seq) - 1
+                    self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features.append(SeqFeature(FeatureLocation(inic, fin)))
+                    if inic != self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features[0].location.start or\
+                        fin != self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features[0].location.end:
+                        self.data[ch_id]['pdb'][mod_id]['match_numbering'] = False
+        return True
 
     def fake_canonical_sequence(self, strucm, mutations):
         self.read_structure_seqs(strucm)
@@ -143,7 +161,7 @@ class SequenceData():
             seq = MutableSeq('', IUPAC.protein)
             last_pos = 0
             start_pos = 0
-            for frag in self.data[ch_id]['pdb'][0]:
+            for frag in self.data[ch_id]['pdb'][0]['frgs']:
                 if not start_pos:
                     start_pos = frag.features[0].location.start
                 if last_pos:
@@ -171,3 +189,4 @@ class SequenceData():
             self.data[ch_id]['chains'].append(ch_id)
 
         self.has_canonical = True
+        
