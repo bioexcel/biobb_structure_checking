@@ -1000,7 +1000,7 @@ class StructureManager:
             gap_length = seq_ii.start - seq_i.end - 1
             # Offset to account for breaks in PDB residue numbering
             seq_off_i_ii =  gap_end - seq_ii.start - gap_start + seq_i.end
-            
+
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 #Checking for incomplete gap build needed for fixing side chains with rebuild
                 n_br = 0
@@ -1040,7 +1040,9 @@ class StructureManager:
 
             for nres in range(loc_ii.start, loc_ii.end):
                 mod_nres = nres - offset + 1 - seq_off_i_ii
-                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
+                if nres in self.st[mod_id][ch_id] and\
+                        'CA' in self.st[mod_id][ch_id][nres] and\
+                        mod_nres in new_st[0][' ']:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
                     moving_ats.append(new_st[0][' '][mod_nres]['CA'])
 
@@ -1052,7 +1054,7 @@ class StructureManager:
             pos = 0
             while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
-            
+
             res_pairs = []
             for nres in range(gap_start - extra_gap, gap_start + gap_length + 1):
                 res_pairs.append([nres, nres - offset + 1])
@@ -1063,7 +1065,7 @@ class StructureManager:
                 nres, mod_nres = res_pair
                 if nres in self.st[mod_id][ch_id]:
                     self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
-                   
+
                 res = new_st[0][' '][mod_nres].copy()
                 res.id = (' ', nres, ' ')
                 self.st[mod_id][ch_id].insert(pos, res)
@@ -1072,9 +1074,9 @@ class StructureManager:
                     print("  Replacing " + mu.residue_id(res))
                 else:
                     print("  Adding " + mu.residue_id(res))
-                
+
                 modif_residues.append(self.st[mod_id][ch_id][nres])
-            
+
             print()
 
         return modif_residues
@@ -1234,7 +1236,7 @@ class StructureManager:
                 mu.remove_residue(mut['resobj'])
         mutated_sequence_data.read_structure_seqs(self)
         mutated_sequence_data.match_sequence_numbering()
-        
+
         #TODO Not tested, to be used on changes in the NTerm residue
         extra_NTerm = 0
         mutated_res = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, extra_NTerm, mutated_sequence_data)
