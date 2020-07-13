@@ -1040,7 +1040,9 @@ class StructureManager:
 
             for nres in range(loc_ii.start, loc_ii.end):
                 mod_nres = nres - offset + 1 - seq_off_i_ii
-                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
+                if nres in self.st[mod_id][ch_id] and\
+                    'CA' in self.st[mod_id][ch_id][nres] and\
+                    mod_nres in new_st[0][' ']:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
                     moving_ats.append(new_st[0][' '][mod_nres]['CA'])
 
