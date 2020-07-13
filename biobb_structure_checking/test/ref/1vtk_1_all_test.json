@@ -99,31 +99,131 @@
  },
  "backbone": {
   "add_caps": "none",
-  "added_caps": false,
+  "added_caps": [],
   "breaks": {
    "detected": [
     [
-     "SER A149",
-     "PRO A153"
-    ],
-    [
-     "GLY A264",
-     "PRO A280"
+     "SER A263",
+     "GLY A264"
     ]
-   ],
-   "option_selected": "All"
+   ]
   },
+  "clashes": {
+   "apolar": [
+    {
+     "at1": "SER A149.O",
+     "at2": "ALA A152.CB",
+     "dist": 2.7548
+    },
+    {
+     "at1": "SER A150.CB",
+     "at2": "SER A345.O",
+     "dist": 2.3787
+    },
+    {
+     "at1": "GLN A261.OE1",
+     "at2": "ALA A278.CA",
+     "dist": 2.0988
+    },
+    {
+     "at1": "ALA A278.O",
+     "at2": "HIS A283.CD2",
+     "dist": 1.6643
+    },
+    {
+     "at1": "GLY A279.C",
+     "at2": "PRO A282.O",
+     "dist": 2.8067
+    },
+    {
+     "at1": "GLY A279.O",
+     "at2": "HIS A283.CG",
+     "dist": 0.9079
+    },
+    {
+     "at1": "PRO A280.CA",
+     "at2": "HIS A283.CE1",
+     "dist": 2.6901
+    }
+   ],
+   "negative": [],
+   "polar_acceptor": [
+    {
+     "at1": "PRO A153.O",
+     "at2": "GLN A349.OE1",
+     "dist": 3.0228
+    },
+    {
+     "at1": "GLN A261.OE1",
+     "at2": "ALA A278.O",
+     "dist": 3.0084
+    },
+    {
+     "at1": "PRO A269.O",
+     "at2": "ALA A272.O",
+     "dist": 2.8938
+    },
+    {
+     "at1": "PRO A280.O",
+     "at2": "PRO A282.O",
+     "dist": 2.0644
+    }
+   ],
+   "polar_donor": [
+    {
+     "at1": "GLY A279.N",
+     "at2": "ILE A284.N",
+     "dist": 2.6113
+    }
+   ],
+   "positive": [],
+   "severe": [
+    {
+     "at1": "GLY A279.O",
+     "at2": "HIS A283.CG",
+     "dist": 0.9079
+    }
+   ]
+  },
+  "long_links": [
+   [
+    "SER A263",
+    "GLY A264",
+    5.15248
+   ]
+  ],
   "main_chain_fix": [
-   "A149-A153/1",
-   "A264-A280/1"
+   "SER A149",
+   "SER A150",
+   "HIS A151",
+   "ALA A152",
+   "PRO A153",
+   "GLY A264",
+   "THR A265",
+   "ALA A266",
+   "VAL A267",
+   "PRO A268",
+   "PRO A269",
+   "GLN A270",
+   "GLY A271",
+   "ALA A272",
+   "GLU A273",
+   "PRO A274",
+   "GLN A275",
+   "SER A276",
+   "ASN A277",
+   "ALA A278",
+   "GLY A279",
+   "PRO A280"
   ],
   "missing_atoms": {
-   "GLY A264": [
+   "SER A263": [
     "OXT"
    ],
-   "SER A149": [
-    "OXT"
-   ]
+   "fixed": [
+    "SER A263"
+   ],
+   "selected": "All"
   },
   "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
  },
@@ -140,11 +240,11 @@
   "n_chirals": 287
  },
  "cistransbck": {
-  "cis": [
+  "unusual_trans": [
    [
-    "GLY A264",
-    "THR A265",
-    0.849
+    "PRO A280",
+    "ARG A281",
+    108.619
    ]
   ]
  },
@@ -164,17 +264,37 @@
     {
      "at1": "SER A149.O",
      "at2": "ALA A152.CB",
-     "dist": 2.7199
+     "dist": 2.7548
     },
     {
-     "at1": "ALA A152.CB",
-     "at2": "GLN A349.OE1",
-     "dist": 2.8018
+     "at1": "SER A150.CB",
+     "at2": "SER A345.O",
+     "dist": 2.3787
     },
     {
-     "at1": "ARG A247.NH2",
-     "at2": "GLY A279.CA",
-     "dist": 2.2408
+     "at1": "GLN A261.OE1",
+     "at2": "ALA A278.CA",
+     "dist": 2.0988
+    },
+    {
+     "at1": "ALA A278.O",
+     "at2": "HIS A283.CD2",
+     "dist": 1.6643
+    },
+    {
+     "at1": "GLY A279.C",
+     "at2": "PRO A282.O",
+     "dist": 2.8067
+    },
+    {
+     "at1": "GLY A279.O",
+     "at2": "HIS A283.CG",
+     "dist": 0.9079
+    },
+    {
+     "at1": "PRO A280.CA",
+     "at2": "HIS A283.CE1",
+     "dist": 2.6901
     }
    ],
    "negative": [],
@@ -192,12 +312,27 @@
     {
      "at1": "PRO A153.O",
      "at2": "GLN A349.OE1",
-     "dist": 3.0372
+     "dist": 3.0228
     },
     {
      "at1": "LEU A217.O",
      "at2": "ARG A220.O",
      "dist": 2.8619
+    },
+    {
+     "at1": "GLN A261.OE1",
+     "at2": "ALA A278.O",
+     "dist": 3.0084
+    },
+    {
+     "at1": "PRO A269.O",
+     "at2": "ALA A272.O",
+     "dist": 2.8938
+    },
+    {
+     "at1": "PRO A280.O",
+     "at2": "PRO A282.O",
+     "dist": 2.0644
     }
    ],
    "polar_donor": [
@@ -207,14 +342,14 @@
      "dist": 2.9914
     },
     {
-     "at1": "ARG A247.NH2",
-     "at2": "PRO A280.N",
-     "dist": 2.6368
-    },
-    {
      "at1": "TRP A259.NE1",
      "at2": "ARG A293.NH1",
      "dist": 3.0938
+    },
+    {
+     "at1": "GLY A279.N",
+     "at2": "ILE A284.N",
+     "dist": 2.6113
     }
    ],
    "positive": [
@@ -234,7 +369,13 @@
      "dist": 2.9914
     }
    ],
-   "severe": []
+   "severe": [
+    {
+     "at1": "GLY A279.O",
+     "at2": "HIS A283.CG",
+     "dist": 0.9079
+    }
+   ]
   }
  },
  "final_stats": {
@@ -246,7 +387,7 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 5079,
+  "num_ats": 5082,
   "num_res": 333,
   "num_wat": 0,
   "res_hetats": 2,

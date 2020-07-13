@@ -127,7 +127,7 @@
  },
  "backbone": {
   "add_caps": "none",
-  "added_caps": false,
+  "added_caps": [],
   "clashes": {
    "apolar": [],
    "negative": [],

@@ -1442,7 +1442,7 @@ class StructureChecking():
             else:
                 fixed_main_res += fixed_main
  
-            self.summary['backbone']['main_chain_fix'] = fixed_main_res
+            self.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
             if fixed_main:
                 self.strucm.modified = True
 
@@ -1462,7 +1462,7 @@ class StructureChecking():
             fix_data['bck_breaks_list']
         )
 
-        self.summary['backbone']['added_caps'] = fixed_caps
+        self.summary['backbone']['added_caps'] = [mu.residue_id(r) for r in fixed_caps]
 
         if fixed_caps:
             print('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))

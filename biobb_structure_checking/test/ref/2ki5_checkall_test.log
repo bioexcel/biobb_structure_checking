@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.0.3                     =
+=                   BioBB structure checking utility v3.0.3                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -125,6 +125,7 @@ Running backbone.
  GLY B73    - ASP B77    
  GLY B148   - PRO B154   
  SER B263   - ALA B278   
+No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
 No cis peptide bonds found

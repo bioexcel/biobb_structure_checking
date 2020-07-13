@@ -17,12 +17,15 @@ except:
     sys.exit("Error importing modeller")
 
 TMP_BASE_DIR = '/tmp'
+DEBUG = False
 
 class ModellerManager():
     """ Class to handle Modeller calculations """
     def __init__(self):
         self.tmpdir = TMP_BASE_DIR + "/mod" + str(uuid.uuid4())
         #self.tmpdir = "/tmp/modtest"
+        if DEBUG:
+            print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
         self.templ_file = 'templ.pdb'
@@ -105,8 +108,8 @@ class ModellerManager():
         return amdl.outputs[0]
 
     def __del__(self):
-        #shutil.rmtree(self.tmpdir)
-        print(self.tmpdir)
+        if not DEBUG:
+            shutil.rmtree(self.tmpdir)
 
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(
