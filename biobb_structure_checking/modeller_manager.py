@@ -7,8 +7,7 @@ import shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio import pairwise2
-from Bio.pairwise2 import format_alignment
-from Bio.Seq import Seq, IUPAC, MutableSeq
+from Bio.Seq import Seq, IUPAC
 
 try:
     from modeller import *
@@ -52,15 +51,15 @@ class ModellerManager():
         knowns = []
 
         for ch_id in self.sequences.data[target_chain]['chains']:
-            pdb_seq = self.sequences.data[ch_id]['pdb'][target_model]['frgs'][0].seq
-            prev_pos = len(pdb_seq)
-            for i in range(1, len(self.sequences.data[ch_id]['pdb'][target_model]['frgs'])):
-                frag_seq = self.sequences.data[ch_id]['pdb'][target_model]['frgs'][i].seq
+            frgs = self.sequences.data[ch_id]['pdb'][target_model]['frgs']
+            pdb_seq = frgs[0].seq
+            for i in range(1, len(frgs)):
+                frag_seq = frgs[i].seq
                 pdb_seq += frag_seq
             # tuned to open gaps on missing loops
-            alignment = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+            alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
-            pdb_seq = Seq(alignment[0][1],IUPAC.protein)
+            pdb_seq = Seq(alin[0][1], IUPAC.protein)
 
             templs.append(
                 SeqRecord(
@@ -69,9 +68,9 @@ class ModellerManager():
                     '',
                     'structureX:{}:{}:{}:{}:{}:::-1.00: -1.00'.format(
                         self.templ_file,
-                        self.sequences.data[ch_id]['pdb'][target_model]['frgs'][0].features[0].location.start,
+                        frgs[0].features[0].location.start,
                         ch_id,
-                        self.sequences.data[ch_id]['pdb'][target_model]['frgs'][-1].features[0].location.end,
+                        frgs[-1].features[0].location.end,
                         ch_id
                     )
                 )
@@ -96,7 +95,7 @@ class ModellerManager():
         )
         amdl.starting_model = 1
         amdl.ending_model = 1
-        
+
         #amdl.loop.starting_model = 1
         #amdl.loop.ending_model = 1
 

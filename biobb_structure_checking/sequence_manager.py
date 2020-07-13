@@ -1,7 +1,6 @@
 
 """ Module to manage sequence information for structures """
 
-
 import sys
 from Bio.PDB.Polypeptide import PPBuilder
 
@@ -13,12 +12,14 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation
 from biobb_structure_checking.model_utils import PROTEIN
 
 class SequenceData():
+    """ Class to manage sequence data """
     def __init__(self):
         self.data = {}
         self.has_canonical = False
         self.fasta = []
 
     def add_empty_chain(self, ch_id):
+        """ Add base structure for a new chain """
         self.data[ch_id] = {'can':None, 'chains': [], 'pdb':{}}
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
@@ -32,7 +33,7 @@ class SequenceData():
                 sys.exit("Error loading FASTA")
 
     def read_sequences(self, strucm, clean=True, cif_warn=False):
-        """ Extracts sequences"""
+        """ Extracts sequences """
         if clean:
             self.data = {}
             self.has_canonical = False
@@ -100,7 +101,7 @@ class SequenceData():
         return 0
 
     def read_structure_seqs(self, strucm):
-        """ Extracts sequences from structure"""
+        """ Extracts sequences from structure fragments """
         # PDB extrated sequences
         for mod in strucm.st:
             ppb = PPBuilder()
@@ -142,17 +143,22 @@ class SequenceData():
             return False
         for ch_id in self.data:
             for mod_id in self.data[ch_id]['pdb']:
+                frgs = self.data[ch_id]['pdb'][mod_id]['frgs']
                 self.data[ch_id]['pdb'][mod_id]['match_numbering'] = True
-                for nfrag in range(0, len(self.data[ch_id]['pdb'][mod_id]['frgs'])):
-                    inic = self.data[ch_id]['can'].seq.find(self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].seq) + 1
-                    fin = inic + len(self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].seq) - 1
-                    self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features.append(SeqFeature(FeatureLocation(inic, fin)))
-                    if inic != self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features[0].location.start or\
-                        fin != self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features[0].location.end:
+                for nfrag in range(0, len(frgs)):
+                    inic = self.data[ch_id]['can'].seq.find(frgs[nfrag].seq) + 1
+                    fin = inic + len(frgs[nfrag].seq) - 1
+                    self.data[ch_id]['pdb'][mod_id]['frgs'][nfrag].features.append(
+                        SeqFeature(FeatureLocation(inic, fin))
+                    )
+                    if inic != frgs[nfrag].features[0].location.start or\
+                        fin != frgs[nfrag].features[0].location.end:
                         self.data[ch_id]['pdb'][mod_id]['match_numbering'] = False
         return True
 
     def fake_canonical_sequence(self, strucm, mutations):
+        """ Fakes a canonical sequence to support modeller use
+            in fixside and mutateside --rebuild """
         self.read_structure_seqs(strucm)
         for ch_id in strucm.chain_ids:
             if strucm.chain_ids[ch_id] != PROTEIN:
@@ -189,4 +195,4 @@ class SequenceData():
             self.data[ch_id]['chains'].append(ch_id)
 
         self.has_canonical = True
-        
+

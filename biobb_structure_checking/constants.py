@@ -91,7 +91,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--modeller_key',
     dest='modeller_key',
-    help='User key for modeller, required for backbone fix, register at https://salilab.org/modeller/registration.html'
+    help='User key for modeller, required for backbone fix, ' +\
+        'register at https://salilab.org/modeller/registration.html'
 )
 
 #Settings, reference data
@@ -374,7 +375,8 @@ MSGS = {
     'MODIF_RESIDUES': 'Modified residues found',
     'ADDING_BCK_ATOMS': 'Adding missing backbone atoms',
     'BCK_ATOMS_FIXED': 'Fixed {} backbone atom(s)',
-    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, skipping backbone rebuilding',
+    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, ' +\
+        'skipping backbone rebuilding',
     'NO_BCK_MISSING': 'No residues with missing backbone atoms found',
     'NO_BCK_LINKS': 'No unexpected backbone links',
     'NO_BCK_BREAKS': 'No backbone breaks',

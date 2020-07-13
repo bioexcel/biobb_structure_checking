@@ -7,7 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
-import psutil
+#import psutil
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -58,7 +58,8 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
             print(
-                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), file=sys.stderr
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), 
+                file=sys.stderr
             )
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
@@ -177,10 +178,12 @@ class StructureChecking():
             self._run_method(meth, opts)
 
     def fixall(self, opts=None):
+        """ Fix all using defaults """
         # TODO Implement method fixall
         print("Fixall not implemented (yet)")
 
     def revert_changes(self):
+        """ revert to original structure, used in Notebooks """
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
         print(cts.MSGS['ALL_UNDO'])
@@ -234,6 +237,7 @@ class StructureChecking():
                 self.summary[command]['error'] = ' '.join(error_status)
 
         if self.args['debug']:
+            import psutil
             self.timings.append([command, time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
@@ -1347,9 +1351,9 @@ class StructureChecking():
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
         else:
-            if not self.args['quiet']: 
+            if not self.args['quiet']:
                 print(cts.MSGS['NO_BCK_MISSING'])
-                
+
         #Not bound consecutive residues
         bck_check = self.strucm.get_backbone_breaks()
         if bck_check['bck_breaks_list']:
@@ -1370,7 +1374,7 @@ class StructureChecking():
             fix_data['bck_breaks_list'] = []
             if not self.args['quiet']:
                 print(cts.MSGS['NO_BCK_BREAKS'])
-    
+
 
         if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
@@ -1441,7 +1445,7 @@ class StructureChecking():
                 continue
             else:
                 fixed_main_res += fixed_main
- 
+
             self.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
             if fixed_main:
                 self.strucm.modified = True
