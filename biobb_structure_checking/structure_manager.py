@@ -13,7 +13,8 @@ from Bio.PDB.Structure import Structure
 from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
-from Bio.PDB.PDBIO import PDBIO
+#from Bio.PDB.PDBIO import PDBIO
+from PDBIO_extended import PDBIO_extended
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
@@ -705,7 +706,7 @@ class StructureManager:
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
 
-    def save_structure(self, output_pdb_path: str, mod_id: str = None):
+    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool=False):
         """
         Saves structure on disk in PDB format
 
@@ -716,9 +717,12 @@ class StructureManager:
         Errors:
             OSError: Error saving the file
         """
+        if rename_terms:
+            self.rename_terms(self.get_term_res())
+
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO()
+        pdbio = PDBIO_extended()
 
         if mod_id is None:
             pdbio.set_structure(self.st)
@@ -1188,6 +1192,11 @@ class StructureManager:
         self.atom_renumbering()
         self.modified = True
 
+    def rename_terms(self, term_res):
+        for t in term_res:
+            if t[1].resname not in ('ACE', 'NME'):
+                t[1].resname = t[0] + t[1].resname
+                
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
         return res not in self.prev_residue

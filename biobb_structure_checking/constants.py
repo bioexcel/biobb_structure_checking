@@ -23,6 +23,7 @@ DEFAULTS = {
     'non_interactive' : False,
     'atom_limit': 1000000,
     'mem_check': False,
+    'rename_terms': False,
     'options' : ''
 }
 
@@ -115,6 +116,12 @@ CMD_LINE.add_argument(
     help='Output structure. Format PDB'
 )
 
+CMD_LINE.add_argument(
+    '--rename_terms',
+    action="store_true",
+    dest='rename_terms',
+    help='Renames terminal residues to NXXX, CXXX'
+)
 CMD_LINE.add_argument(
     '--json',
     dest='json_output_path',
