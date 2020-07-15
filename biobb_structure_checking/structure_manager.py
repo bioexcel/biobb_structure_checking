@@ -50,16 +50,18 @@ class StructureManager:
     """
 
     def __init__(
-        self,
-        input_pdb_path: str,
-        data_library_path: str,
-        res_library_path: str,
-        pdb_server: str = 'ftp://ftp.wwpdb.org',
-        cache_dir: str = 'tmpPDB',
-        file_format: str = 'mmCif',
-        fasta_sequence_path: str = '') -> None:
-        """Class constructor. Sets an empty object and loads a structure
-        according to parameters
+            self,
+            input_pdb_path: str,
+            data_library_path: str,
+            res_library_path: str,
+            pdb_server: str = 'ftp://ftp.wwpdb.org',
+            cache_dir: str = 'tmpPDB',
+            file_format: str = 'mmCif',
+            fasta_sequence_path: str = ''
+        ) -> None:
+        """ 
+            Class constructor. Sets an empty object and loads a structure
+            according to parameters
 
         Args:
             **input_pdb_path** (str): path to input structure either in pdb or mmCIF format. Format is taken from file extension. Alternatively **pdb:pdbId** fetches the mmCIF file from RCSB
@@ -87,6 +89,7 @@ class StructureManager:
                 "ca_only" (boolead): Flag to indicate a possible CA-only structure
                 "modified_residue_list" []: List of residues being connected HETATM as PDB.Bio.Residue
                 "backbone_links" []: List of found canonical backbone links as [at1, at2] tuples, according to a distance criterium
+            TODO Update and complete
         """
 
         self.chain_ids = {}
@@ -292,7 +295,7 @@ class StructureManager:
         """ Makes a list of possible metal atoms"""
         return mu.get_metal_atoms(self.st, self.data_library.atom_data['metal_atoms'])
 
-    def get_SS_bonds(self) -> List[List[Union[Atom, Atom, float]]]:
+    def get_SS_bonds(self) -> List[Union[Atom, Atom, float]]:
         """ Stores and returns possible SS Bonds by distance"""
         self.ss_bonds = mu.get_all_at2at_distances(
                                                    self.st,
@@ -302,7 +305,7 @@ class StructureManager:
                                                    )
         return self.ss_bonds
 
-    def check_chiral_sides(self) -> Dict[str, List[Residue]]:
+    def check_chiral_sides(self) -> Dict[List[Residue], List[Residue]]:
         """ Returns a list of wrong chiral side chains"""
         chiral_res = self.data_library.get_chiral_data()
         chiral_list = [
@@ -323,7 +326,7 @@ class StructureManager:
             ]
         }
 
-    def get_chiral_bck_list(self) -> Dict[str, List[Residue]]:
+    def get_chiral_bck_list(self) -> Dict[List[Residue], List[Residue]]:
         """ Returns a list of residues with chiral CAs"""
         prot_chains = 0
         chiral_bck_list = []
@@ -340,7 +343,7 @@ class StructureManager:
 
         if not chiral_bck_list:
             print("No residues with chiral CA found, skipping")
-            return {'chiral_bck_list': []}
+            return {}
 
         return {
             'list': chiral_bck_list,
@@ -385,7 +388,7 @@ class StructureManager:
                 miss_at = mu.check_all_at_in_r(
                     res, residue_data[res.get_resname().replace(' ', '')]
                 )
-                if self.is_C_term(res) and 'OXT' not in res:
+                if self.is_C_term(res) and res.get_resname() != 'NME' and 'OXT' not in res:
                     if 'backbone' not in miss_at:
                         miss_at['backbone'] = []
                     miss_at['backbone'].append('OXT')
@@ -403,6 +406,7 @@ class StructureManager:
         # TODO Nucleic acids
         valid_codes = self.data_library.get_valid_codes('protein')
         residue_data = self.data_library.get_all_atom_lists()
+
         extra_at_list = []
         for res in self.st.get_residues():
             if res.get_resname() in valid_codes and not mu.is_hetatm(res):
@@ -1154,7 +1158,12 @@ class StructureManager:
             else:
                 prev_residue = self.prev_residue[res]
 
-            error_msg = mu.add_hydrogens_backbone(res, prev_residue)
+            if res not in self.next_residue:
+                next_residue = None
+            else:
+                next_residue = self.next_residue[res]
+
+            error_msg = mu.add_hydrogens_backbone(res, prev_residue, next_residue)
 
             if error_msg:
                 print(error_msg, mu.residue_id(res))

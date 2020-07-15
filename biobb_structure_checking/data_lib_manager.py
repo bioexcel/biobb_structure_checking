@@ -42,7 +42,12 @@ class DataLibManager:
             }
             for rcode in self.residue_codes['protein']
         }
+
+        for rcode in self.residue_codes['cap_residues']:
+            atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
+        
         return atom_lists
+        
 
     def get_atom_feature_list(self, feature):
         """ Gets a residue list with a specific section of data . """

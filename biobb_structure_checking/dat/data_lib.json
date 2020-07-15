@@ -3,7 +3,8 @@
         "residue_codes": {
             "protein": ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY",
                 "HIS", "ILE", "LYS", "LEU", "MET", "ASN", "PRO",
-                "GLN", "ARG", "SER", "THR", "VAL", "TRP", "TYR"],
+                "GLN", "ARG", "SER", "THR", "VAL", "TRP", "TYR",
+                "ACE", "NME"],
             "protein1": {
                 "A": "ALA", "C": "CYS", "D": "ASP", "E": "GLU", "F": "PHE",
                 "G": "GLY", "H": "HIS", "I": "ILE", "K": "LYS", "L": "LEU",
@@ -11,7 +12,8 @@
                 "S": "SER", "T": "THR", "V": "VAL", "W": "TRP", "Y": "TYR"
             },
             "dna": ["DA", "DC", "DG", "DT"],
-            "rna": ["A", "C", "G", "U"]
+            "rna": ["A", "C", "G", "U"],
+            "cap_residues" : ["ACE", "NME"]
         },
         "addH_check_residues": ["ASP", "GLU", "HIS", "LYS", "ARG", "CYS", "TYR"],
         "addH_std_ion": {
@@ -73,6 +75,22 @@
                 "polar_acceptor_atoms": ["O", "O4'", "05'", "OXT"],
                 "negative_atoms": ["OXT", "OP1", "OP2"],
                 "apolar_atoms": ["CA", "C"]
+            },
+            "ACE": {
+                "bck_atoms" : ["CA", "C", "O"],
+                "side_atoms": [],
+                "apolar_atoms": [],
+                "hydrogen_atoms": [],
+                "addH_rules": {},
+                "mutation_rules": {}
+            },
+            "NME": {
+                "bck_atoms" : ["N", "CA"],
+                "side_atoms": [],
+                "apolar_atoms": [],
+                "hydrogen_atoms": [],
+                "addH_rules": {},
+                "mutation_rules": {}
             },
             "ALA": {
                 "side_atoms": ["CB"],

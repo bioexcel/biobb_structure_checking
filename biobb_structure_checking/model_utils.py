@@ -7,6 +7,8 @@ import sys
 import numpy as np
 from numpy import arccos, clip, cos, dot, pi, sin, sqrt
 from numpy.linalg import norm
+from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
+
 
 from Bio.PDB.Atom import Atom
 from Bio.PDB.Residue import Residue
@@ -56,7 +58,8 @@ ONE_LETTER_RESIDUE_CODE = {
     'TRP':'W', 'TYR':'Y',
     'HID':'H', 'HIE':'H', 'HIP':'H',
     'ARN':'R', 'LYN':'K', 'ASH':'D', 'GLH':'E',
-    'CYX':'C', 'CYM':'C', 'TYM':'Y'
+    'CYX':'C', 'CYM':'C', 'TYM':'Y',
+    'ACE': '', 'NME': ''
 }
 
 THREE_LETTER_RESIDUE_CODE = {
@@ -72,14 +75,12 @@ NA_RESIDUE_CODE = DNA_RESIDUE_CODE.union(RNA_RESIDUE_CODE)
 
 # Residue & Atom friendly ids
 def residue_id(res, models='auto'):
-    """
-    Friendly replacement for residue ids like ASN A324/0
-    """
+    """  Friendly replacement for residue ids like ASN A324/0 """
     return '{:>3} {}'.format(res.get_resname(), residue_num(res, models))
 
 def residue_num(res, models='auto'):
     """
-    Shortcut for getting residue num including chain id, includes model number if any
+        Shortcut for getting residue num including chain id, includes model number if any
     """
     if models == 'auto':
         models = len(res.get_parent().get_parent().get_parent()) > 1
@@ -93,9 +94,7 @@ def residue_num(res, models='auto'):
     return rnum
 
 def atom_id(atm, models='auto'):
-    """
-    Friendly replacement for atom ids like ASN A324/0.CA
-    """
+    """ Friendly replacement for atom ids like ASN A324/0.CA """
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
 # Id Checks
@@ -503,7 +502,7 @@ def rename_atom(res, old_at, new_at):
 def delete_atom(res, at_id):
     res.detach_child(at_id)
 
-def add_hydrogens_backbone(res, res_1):
+def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
 
     # only proteins
@@ -513,10 +512,13 @@ def add_hydrogens_backbone(res, res_1):
 
     error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
 
-    if 'N' not in res or 'CA' not in res:
+    if res.get_resname() not in ('ACE', 'NME'):
+        if 'N' not in res:
+            return error_msg
+    if 'CA' not in res:
         return error_msg
 
-    if res_1 is None:
+    if prev_res is None:
         # Nterminal TODO  Neutral NTerm
         if res.get_resname() == 'PRO':
             if 'CD' not in res:
@@ -527,6 +529,12 @@ def add_hydrogens_backbone(res, res_1):
                 'H',
                 build_coords_SP2(HDIS, res['N'], res['CA'], res['CD'])
             )
+        elif res.get_resname() == 'ACE':
+            crs = build_coords_3xSP3(HDIS, res['CA'], next_res['N'], res['C'])
+            add_new_atom_to_residue(res, 'HA1', crs[0])
+            add_new_atom_to_residue(res, 'HA2', crs[1])
+            add_new_atom_to_residue(res, 'HA3', crs[2])
+            return False
         else:
             if 'C' not in res:
                 return error_msg
@@ -535,17 +543,17 @@ def add_hydrogens_backbone(res, res_1):
             add_new_atom_to_residue(res, 'H1', crs[0])
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
-
+            
     elif res.get_resname() != 'PRO':
-        if 'C' not in res_1:
+        if 'C' not in prev_res:
             return error_msg
 
         add_new_atom_to_residue(
             res,
             'H',
-            build_coords_SP2(HDIS, res['N'], res['CA'], res_1['C'])
+            build_coords_SP2(HDIS, res['N'], res['CA'], prev_res['C'])
         )
-
+        
     if res.get_resname() == 'GLY':
         if 'C' not in res:
             return error_msg
@@ -553,7 +561,13 @@ def add_hydrogens_backbone(res, res_1):
         crs = build_coords_2xSP3(HDIS, res['CA'], res['N'], res['C'])
         add_new_atom_to_residue(res, 'HA2', crs[0])
         add_new_atom_to_residue(res, 'HA3', crs[1])
-
+    
+    elif res.get_resname() == 'NME':
+        crs = build_coords_3xSP3(HDIS, res['CA'], res['N'], prev_res['C'])
+        add_new_atom_to_residue(res, 'HA1', crs[0])
+        add_new_atom_to_residue(res, 'HA2', crs[1])
+        add_new_atom_to_residue(res, 'HA3', crs[2])
+    
     else:
         if 'C' not in res or 'CB' not in res:
             return error_msg
@@ -568,6 +582,9 @@ def add_hydrogens_backbone(res, res_1):
 
 def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
+    if res.get_resname() in ('ACE', 'NME', 'GLY'):
+        return False
+        
     if 'N' not in res or 'CA' not in res or 'C' not in res:
         return "Warning: not enough atoms to build side chain hydrogen atoms on"
     for key_rule in rules.keys():
@@ -620,10 +637,10 @@ def add_ACE_cap_at_res(res, next_res=None):
             build_coords_from_ats_internal(res['N'], res['CA'], res['C'], [PEPDIS, SP2ANGLE, 180.])
         )
 
-        print("  Adding new atom CH3")
+        print("  Adding new atom CA")
         add_new_atom_to_residue(
             new_res,
-            'CH3',
+            'CA',
             build_coords_trans_CA(new_res['C'], res['N'], res['CA'])
         )
 
@@ -631,7 +648,7 @@ def add_ACE_cap_at_res(res, next_res=None):
         add_new_atom_to_residue(
             new_res,
             'O',
-            build_coords_SP2(OINTERNALS[0], new_res['C'], new_res['CH3'], res['N'])
+            build_coords_SP2(OINTERNALS[0], new_res['C'], new_res['CA'], res['N'])
         )
 
         # Checking position to insert new res
@@ -647,7 +664,7 @@ def add_ACE_cap_at_res(res, next_res=None):
                 remove_atom_from_res(res, atm.id)
                 print("  Removing atom {}".format(atm.id))
             if atm.id == 'CA':
-                rename_atom(res, 'CA', 'CH3')
+                rename_atom(res, 'CA', 'CA')
         res.resname = 'ACE'
     else:
         # Mutate to ACE
@@ -664,7 +681,7 @@ def add_ACE_cap_at_res(res, next_res=None):
         print("  Adding new atom CA")
         add_new_atom_to_residue(
             res,
-            'CH3',
+            'CA',
             build_coords_trans_CA(res['C'], next_res['N'], next_res['CA'])
         )
         if 'O' not in res:
@@ -672,12 +689,15 @@ def add_ACE_cap_at_res(res, next_res=None):
             add_new_atom_to_residue(
                 res,
                 'O',
-                build_coords_SP2(OINTERNALS[0], res['C'], res['CH3'], next_res['N'])
+                build_coords_SP2(OINTERNALS[0], res['C'], res['CA'], next_res['N'])
             )
         res.resname = 'ACE'
     return False
 
 def add_NME_cap_at_res(res, prev_res=None):
+    # removing OXT if any
+    if 'OXT' in res:
+        delete_atom(res, 'OXT')
     if 'C' in res:
         #ADD NME residue
         print(residue_id(res), "Adding extra NME residue")
@@ -698,7 +718,7 @@ def add_NME_cap_at_res(res, prev_res=None):
         print("  Adding new atom CA")
         add_new_atom_to_residue(
             new_res,
-            'CH3',
+            'CA',
             build_coords_trans_CA(new_res['N'], res['C'], res['CA'])
         )
 
@@ -713,8 +733,6 @@ def add_NME_cap_at_res(res, prev_res=None):
                 print(residue_id(res), "Replacing by NME residue")
                 remove_atom_from_res(res, atm.id)
                 print("  Removing atom {}".format(atm.id))
-            if atm.id == 'CA':
-                rename_atom(res, 'CA', 'CH3')
         res.resname = 'NME'
     else:
         # Mutate to NME
@@ -730,7 +748,7 @@ def add_NME_cap_at_res(res, prev_res=None):
         print("  Adding new atom CA")
         add_new_atom_to_residue(
             res,
-            'CH3',
+            'CA',
             build_coords_trans_CA(res['N'], prev_res['C'], prev_res['CA'])
         )
         res.resname = 'NME'
@@ -924,10 +942,13 @@ def calc_bond_dihedral(at1, at2, at3, at4):
         pass
     return angle_uv
 
-def get_all_at2at_distances(struc, at_ids='all', d_cutoff=0., join_models=False):
-    """
-    Gets a list of all at-at distances below a cutoff, at ids can be limited
-    """
+def get_all_at2at_distances(
+        struc, 
+        at_ids='all', 
+        d_cutoff=0., 
+        join_models=False
+        ):
+    """ Gets a list of all at-at distances below a cutoff, at ids can be limited """
     if not isinstance(at_ids, list):
         at_ids = at_ids.split(',')
 
