@@ -111,6 +111,7 @@ fixside [--fix All |None|Residue List] [--no_check_clashes] [--no_rem] [--rebuil
 backbone [--fix_atoms All|None|Residue List]
          [--fix_main All|None|Break list]
          [--add_caps All|None|Break list]
+         [--extra_gap]
          [--no_recheck]
          [--no_check_clashes]
     Analyze main chain missing atoms and fragments.
