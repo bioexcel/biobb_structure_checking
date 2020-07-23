@@ -3,6 +3,7 @@
 
 import sys
 from Bio.PDB.Polypeptide import PPBuilder
+from typing import List, Dict
 
 from Bio.Seq import Seq, IUPAC, MutableSeq
 from Bio.SeqUtils import IUPACData
@@ -18,9 +19,13 @@ class SequenceData():
         self.has_canonical = False
         self.fasta = []
 
-    def add_empty_chain(self, ch_id):
+    def add_empty_chain(self, ch_id:str):
         """ Add base structure for a new chain """
-        self.data[ch_id] = {'can':None, 'chains': [], 'pdb':{}}
+        self.data[ch_id] = {
+            'can':None,
+            'chains': [],
+            'pdb':{}
+        }
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
         """ Loads canonical sequence from external FASTA file"""
@@ -61,7 +66,7 @@ class SequenceData():
                 if cif_warn:
                     print("Warning: sequence features only available in mmCIF" +\
                     " format or with external fasta input")
-                return 1
+                return True
             #TODO check for NA
             if '_entity_poly.pdbx_strand_id' in strucm.headers:
                 if not isinstance(strucm.headers['_entity_poly.pdbx_strand_id'], list):
@@ -73,7 +78,7 @@ class SequenceData():
             else:
                 if cif_warn:
                     print("Warning: sequence data unavailable on cif data")
-                return 1
+                return True
 
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
@@ -98,7 +103,7 @@ class SequenceData():
                         self.data[ch_id]['chains'].append(chn)
 
         self.has_canonical = True
-        return 0
+        return False
 
     def read_structure_seqs(self, strucm):
         """ Extracts sequences from structure fragments """
@@ -195,4 +200,3 @@ class SequenceData():
             self.data[ch_id]['chains'].append(ch_id)
 
         self.has_canonical = True
-

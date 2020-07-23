@@ -7,8 +7,10 @@ import sys
 
 from Bio.PDB.PDBList import PDBList
 
-from Bio._py3k import urlcleanup as _urlcleanup
-from Bio._py3k import urlretrieve as _urlretrieve
+#from Bio._py3k import urlcleanup as _urlcleanup
+#from Bio._py3k import urlretrieve as _urlretrieve
+from urllib.request import urlretrieve
+from urllib.request import urlcleanup
 
 URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
 
