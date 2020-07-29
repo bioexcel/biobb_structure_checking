@@ -123,7 +123,8 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         self.res_library = ResidueLib(res_library_path)
-
+        
+        
         self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
@@ -185,7 +186,7 @@ class StructureManager:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
-
+        
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -238,6 +239,17 @@ class StructureManager:
                 atm.selected_child.serial_number = i
             i += 1
 
+    def update_atom_charges(self):
+        print("Updating partial charges")
+        tot_chrg = 0
+        for res in self.st.get_residues():
+            for atm in res.get_atoms():
+                atm.charge = self.res_library.get_atom_def(res.get_resname(), atm.id).chrg
+                tot_chrg += atm.charge
+        print("Total charge: {:10.2f}".format(tot_chrg))
+        self.has_charges = True
+                
+                
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
         """
@@ -721,12 +733,12 @@ class StructureManager:
         Errors:
             OSError: Error saving the file
         """
-        if rename_terms:
-            self.rename_terms(self.get_term_res())
-
         if not output_pdb_path:
             raise OutputPathNotProvidedError
         pdbio = PDBIO_extended()
+
+        if rename_terms:
+            self.rename_terms(self.get_term_res())
 
         if mod_id is None:
             pdbio.set_structure(self.st)
@@ -1136,7 +1148,7 @@ class StructureManager:
         self.modified = True
         return True
 
-    def add_hydrogens(self, ion_res_list, remove_h: bool = True):
+    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: bool = False):
         """
         Add hydrogens considering selections in ion_res_list
 
@@ -1199,6 +1211,9 @@ class StructureManager:
 
         self.residue_renumbering()
         self.atom_renumbering()
+        if add_charges:
+            self.rename_terms(self.get_term_res())
+            self.update_atom_charges()
         self.modified = True
 
     def rename_terms(self, term_res):

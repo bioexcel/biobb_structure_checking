@@ -29,7 +29,7 @@ class ResidueLib():
             if line == '':
                 continue
 
-            elif line == "DONE":
+            elif re.match('DONE', line):
                 self.residues[res.id] = res
                 at_group = False
                 ch_group = False
@@ -44,9 +44,9 @@ class ResidueLib():
                 ch_group = False
                 im_group = True
 
-            elif re.match(' (...)  INT', line):
-                resid_str = re.match(' (...)  INT', line)
-                res.id = resid_str.group(1)
+            elif re.match('^(....)  INT', line):
+                resid_str = re.match('(....)  INT', line)
+                res.id = resid_str.group(1).replace(" ","")
                 at_group = True
 
             elif at_group:

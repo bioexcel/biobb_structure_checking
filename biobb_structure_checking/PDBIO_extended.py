@@ -5,19 +5,22 @@
 from Bio.PDB.PDBIO import PDBIO
 
 class PDBIO_extended (PDBIO):
-
+    
     def _get_atom_line( 
-          self, 
-          atom, 
-          hetfield, 
-          segid, 
-          atom_number, 
-          resname, 
-          resseq, 
-          icode, 
-          chain_id, 
-          charge="  ", 
-    ):
+        self, 
+        atom, 
+        hetfield, 
+        segid, 
+        atom_number, 
+        resname, 
+        resseq, 
+        icode, 
+        chain_id, 
+        charge="   "):
+        
+        if hasattr(atom, "charge"):
+            charge = atom.charge
+            
         
         line = super()._get_atom_line(
             atom, 

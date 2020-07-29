@@ -281,6 +281,8 @@ DIALOGS.add_option('add_hydrogen', '--no_fix_side', 'no_fix_side',\
     'Do not fix side chains', 'bool')
 DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
+DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
+    'Update atom partial charges', 'bool')
 
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')

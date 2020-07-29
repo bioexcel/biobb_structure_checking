@@ -543,6 +543,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             add_new_atom_to_residue(res, 'H1', crs[0])
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
+
             
     elif res.get_resname() != 'PRO':
         if 'C' not in prev_res:
