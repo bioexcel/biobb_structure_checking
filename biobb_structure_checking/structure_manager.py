@@ -240,13 +240,25 @@ class StructureManager:
             i += 1
 
     def update_atom_charges(self):
-        print("Updating partial charges")
+        print("Updating partial charges and atom types")
         tot_chrg = 0
         for res in self.st.get_residues():
+            rcode = self.data_library.get_canonical_resname(res.get_resname())
+            if len(rcode) == 4:
+                rcode3 = rcode[1:]
+            else:
+                rcode3 = rcode
             for atm in res.get_atoms():
-                atm.charge = self.res_library.get_atom_def(res.get_resname(), atm.id).chrg
+                atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
+                if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
+                    atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
+                elif atm.id in self.data_library.residue_data['*']['ADT_type']:
+                    atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
+                else:
+                    atm.ADT_type = atm.element
                 tot_chrg += atm.charge
         print("Total charge: {:10.2f}".format(tot_chrg))
+        
         self.has_charges = True
                 
                 

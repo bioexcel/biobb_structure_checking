@@ -15,6 +15,7 @@ class DataLibManager:
             data_file_h = open(file_path)
             json_map = json.load(data_file_h)
             self.residue_codes = json_map['data_library']['residue_codes']
+            self.canonical_codes = json_map['data_library']['canonical_codes']
             self.atom_data = json_map['data_library']['atom_data']
             self.residue_data = json_map['data_library']['residue_data']
             self.distances = json_map['data_library']['distances']
@@ -99,3 +100,10 @@ class DataLibManager:
                 mut_rules[rcode] = self.residue_data[rcode]['mutation_rules']
                 mut_rules[rcode]['side_atoms'] = self.residue_data[rcode]['side_atoms']
         return mut_rules
+    
+    def get_canonical_resname(self, rcode):
+        if rcode in self.canonical_codes:
+            return self.canonical_codes[rcode]
+        else:
+            return rcode
+            
