@@ -11,11 +11,12 @@ checking as residue quirality, amide orientation, or vdw clashes.
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
                        [--file_format FILE_FORMAT] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
+                       [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
                        [-o OUTPUT_STRUCTURE_PATH] [--json JSON_OUTPUT_PATH]
                        [--quiet] [--limit ATOM_LIMIT] [--debug] [--force_save]
-                       [--check_only] [--non_interactive] [--version]
+                       [--rename_terms] [--check_only] [--non_interactive] [--version]
                        command ...
 
 
