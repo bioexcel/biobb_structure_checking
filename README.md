@@ -34,15 +34,15 @@ optional arguments:
   --file_format FILE_FORMAT
                         Format for retrieving structures (default=mmCif|pdb|xml)
   --sequence FASTA_SEQ_PATH
-                        Canonical sequence in FASTA format, pdb_chain[,chain] in header
+                        Canonical sequence in FASTA format, pdb_chain[,chain] in header, 
+                        may be required for backbone rebuilding
   --pdb_server PDB_SERVER
                         Remote server for retrieving structures (default|MMB)
   --cache_dir CACHE_DIR_PATH
                         Path for structure's cache directory (default: ./tmpPDB)
   --modeller_key MODELLER_KEY
-                        User key for modeller, required for backbone fix,
-                        register at
-                        https://salilab.org/modeller/registration.html
+                        User key for modeller, required for backbone rebuilding,
+                        register at https://salilab.org/modeller/registration.html
 
   --res_lib RES_LIBRARY_PATH
                         Override settings default residue library (AMBER prep format)
@@ -52,6 +52,7 @@ optional arguments:
   --limit ATOM_LIMIT    Limit on number of atoms, 0: nolimit
   --debug               Add debug information
   --force_save          Force saving an output file even if no modification
+  --rename_terms        Label N-term and C-term as NXXX and CXXX residues (for Amber compatibility)
   --check_only          Perform checks only, structure is not modified
   --non_interactive     Do not prompt for missing parameters
   --version             show program's version number and exit
@@ -89,11 +90,12 @@ mutateside [--mut mutation_list] [--no_check_clashes] [-rebuild]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     Check generated clashes except --no_check_clashes set
     --rebuild Optimize side chains using Modeller. 
-add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h]
+add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
     Fixes missing side chain atoms unless --no_fix_side is set
     Existing hydrogen atoms are remove before adding new ones unless --keep_h set.
+    --add_charges adds partial charges (from RES_LIBRARY) and autodock atom types, forces PDBQT output
 
 2. Fix Structure Errors
 
@@ -110,7 +112,7 @@ fixside [--fix All |None|Residue List] [--no_check_clashes] [--no_rem] [--rebuil
     --rebuild  Rebuild complete side chain using Modeller 
 backbone [--fix_atoms All|None|Residue List]
          [--fix_main All|None|Break list]
-         [--add_caps All|None|Break list]
+         [--add_caps All|None|Terms|Breaks|list]
          [--extra_gap]
          [--no_recheck]
          [--no_check_clashes]
@@ -118,6 +120,7 @@ backbone [--fix_atoms All|None|Residue List]
     --fix_atoms O, OXT atoms can be fixed
     --fix_main Missing fragments filled using comparative modelling (Modeller License needed)
     --add_caps Adds ACE and NME residues as necessary, preserving existing atoms
+    --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections
     Rechecks beckbone on each op unless --no_recheck is set.
     Generated clashes are checked unless --no_check_clashes
 
