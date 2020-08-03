@@ -252,7 +252,10 @@ class StructureManager:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
                     atm.charge = 0.
-                    atm.ADT_type = atm.element
+                    if atm.id in self.data_library.atom_data['metal_atoms']:
+                        atm.ADT_type = atm.id.lower().capitalize()
+                    else:
+                        atm.ADT_type = atm.element
             else:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
