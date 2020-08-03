@@ -2410,10 +2410,7 @@
             "U": {
                 "polar_acceptor_atoms": ["O4"],
                 "polar_donor_atoms": ["N3"]
-            },
-            "HOH":{
-                "ADT_type" : {}
-            }            
+            }  
         },
         "distances": {
             "SS_DIST": 2.5,

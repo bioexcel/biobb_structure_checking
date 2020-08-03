@@ -248,16 +248,29 @@ class StructureManager:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
-            for atm in res.get_atoms():
-                atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
-                if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
-                    atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
-                elif atm.id in self.data_library.residue_data['*']['ADT_type']:
-                    atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
-                else:
+            if rcode not in self.res_library.residues:
+                print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
+                for atm in res.get_atoms():
+                    atm.charge = 0.
                     atm.ADT_type = atm.element
-                tot_chrg += atm.charge
-        print("Total charge: {:10.2f}".format(tot_chrg))
+            else:
+                oxt_ok = rcode[0] != 'C' or len(rcode) != 4
+                res_chr = 0.
+                for atm in res.get_atoms():
+                    atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
+                    if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
+                        atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
+                    elif atm.id in self.data_library.residue_data['*']['ADT_type']:
+                        atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
+                    else:
+                        atm.ADT_type = atm.element
+                    res_chr += atm.charge
+                    tot_chrg += atm.charge
+                    if atm.id == 'OXT':
+                        oxt_ok = True
+                if not oxt_ok:
+                    print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
+        print("Total assigned charge: {:10.2f}".format(tot_chrg))
         
         self.has_charges = True
                 
