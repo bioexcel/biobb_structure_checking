@@ -91,8 +91,8 @@ class MMBPDBList(PDBList):
             else:
                 print("Downloading PDB structure '%s'..." % pdb_code)
         try:
-            _urlcleanup()
-            _urlretrieve(url, final_file)
+            urlcleanup()
+            urlretrieve(url, final_file)
         except IOError:
             print("Desired structure doesn't exists")
         return final_file
