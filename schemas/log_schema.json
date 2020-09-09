@@ -1,0 +1,180 @@
+{
+    "add_hydrogen": {
+        "detected": {},
+        "ionic_detected": ["#residue_id"],
+        "opts": "",
+        "error": ""
+    },
+    "altloc": {
+        "r_id": {
+            "#atom_id": [
+                {
+                    "loc_label": "", 
+                    "occupancy": 0.0
+                }
+            ]
+        },
+        "selected": "",
+        "opts": "",
+        "error": ""
+    },
+    "amide": {
+        "n_amides": 0,
+        "detected": [
+            {
+                "at1": "#atom_id",
+                "at2": "#atom_id",
+                "dist": 0.0
+            }
+        ],
+        "opts": "",
+        "error": ""
+    },
+    "backbone": {
+        "missing_atoms": {
+            "selected": {
+                "#residue_id": ["#atom_name"]
+            },
+            "fixed": ["#residue_id"]
+        },
+        "breaks": {
+            "detected": ["#residue_id", "#residue_id"],
+            "option_selected": []
+        },
+        "selected": "",
+        "wrong_links": [],
+        "long_links": [
+            ["#residue_id", "#residue_id", 0.0]
+        ],
+        "mod_residues": [],
+        "main_chain_fix": ["#residue_id"],
+        "added_caps": [],
+        "clashes": "#clashes_report",
+        "add_caps": "",
+        "opts": "",
+        "error": ""
+    },
+    "chains": {
+        "ids": {
+            "chain_id": "chain_type"
+        },
+        "selected": "",
+        "opts": "",
+        "error": ""
+    },
+    "chiral": {
+        "n_chirals": 0,
+        "detected": [],
+        "chiral_clashes": [],
+        "opts": "",
+        "error": ""
+    },
+    "chiral_bck": {
+        "n_chirals": 0
+    },
+    "cistransbck": {
+        "cis": [
+            ["#residue_id", "#residue_id", 0.0]
+        ],
+        "unusual_trans": [
+            ["#residue_id", "#residue_id", 0.0]
+        ]
+    },
+    "clashes": "#clash_report",
+    "fixside": {
+        "detected_missing": {
+            "#residue_id": ["#atom_name"]
+        },
+        "detected_unknown": [],
+        "fix": "",
+        "fixed": ["#residue_id"],
+        "removed": [],
+        "opts": "",
+        "error": "",
+        "clashes": "TODO fixside_clashes"
+    },
+    "fixside_clashes": "#clash_report",
+    "getss": {},
+    "headers": {
+        "entry_id": "",
+        "keywords": "",
+        "method": "",
+        "title": "",
+        "resolution": 0.0
+    },
+    "inscodes": {},
+    "ligands": {
+        "detected": ["#residue_id"],
+        "removed": {
+            "lst": ["#residue_id"]
+        },
+        "n_removed": 0,
+        "opts": "",
+        "error": ""
+    },
+    "metals": {
+        "detected": ["#residue_id"],
+        "removed": ["#residue_id"],
+        "n_removed": 0,
+        "opts": "",
+        "error": ""
+    },
+    "models": {
+        "nmodels": 0,
+        "selected": 0,
+        "type": {
+            "rmsd": 0.0,
+            "type": 0
+        },
+        "opts": "",
+        "error": ""
+    },
+    "mutateside":{
+        "opts": "",
+        "error": "",
+        "clashes" : "#clash_report TODO"
+    },
+    "mutateside_clashes": "#clash_report",
+    "rem_hydrogen": {
+        "n_detected": 0,
+        "n_removed": 0,
+        "opts": "",
+        "error": ""
+    },
+    "water": {
+        "n_detected": 0,
+        "n_removed": 0,
+        "opts": "",
+        "error": ""
+    },
+
+    "stats": {
+        "biounit": false,
+        "ca_only": false,
+        "chain_ids": {
+            "chain_id": 0
+        },
+        "models_type": {
+            "rmsd": 0.0,
+            "type": 0
+        },
+        "nchains": 0,
+        "nmodels": 0,
+        "num_ats": 0,
+        "num_res": 0,
+        "num_wat": 0,
+        "res_hetats": 0,
+        "res_insc": 0,
+        "res_ligands": 0
+    },
+    "final_stats": "#stats",
+    "elapsed_times": {
+        "load":0.0,
+        "total": 0.0,
+        "#command": 0.0
+    },
+    "memsize": [
+        ["load", 0.0],
+        ["#command", 0.0]
+    ]
+}
