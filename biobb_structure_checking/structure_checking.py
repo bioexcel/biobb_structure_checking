@@ -38,8 +38,7 @@ class StructureChecking():
 
             self.start_time = time.time()
             self.timings = []
-            self.summary['elapsed_times'] = {}
-            self.summary['memsize'] = []
+            self.memsize = []
 
         try:
             self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
@@ -56,7 +55,7 @@ class StructureChecking():
             self.timings.append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
-            self.summary['memsize'].append(['load', memsize])
+            self.memsize.append(['load', memsize])
             print(
                 "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), 
                 file=sys.stderr
@@ -112,6 +111,7 @@ class StructureChecking():
 
 
         if self.args['debug']:
+            self.summary['elapsed_times'] = {}
             total = time.time() - self.start_time
             self.summary['elapsed_times']['total'] = total
             print("#DEBUG TIMINGS")
@@ -132,8 +132,11 @@ class StructureChecking():
             print()
             print("#DEBUG MEMORY USAGE EVOLUTION")
             print("#DEBUG ======================")
-            for op, memsize in self.summary['memsize']:
+            self.summary['mem_sizes'] = {}
+            for op, memsize in self.memsize:
+                self.summary['mem_sizes'][op] = memsize
                 print('#DEBUG {:15s}: {:.2f} MB'.format(op, memsize))
+
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             json_writer.data = self.summary
@@ -242,7 +245,7 @@ class StructureChecking():
             self.timings.append([command, time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
-            self.summary['memsize'].append([command, memsize])
+            self.memsize.append([command, memsize])
             print(
                 "#DEBUG Memory used after {}: {:f} MB ".format(
                     command, memsize
@@ -759,15 +762,12 @@ class StructureChecking():
                 )
             )
             self.summary['getss'].append(
-                {
-                    'at1':mu.atom_id(ssb[0]),
-                    'at2':mu.atom_id(ssb[1]),
-                    'dist': round(float(ssb[2]), 4)
-                }
+                [mu.atom_id(ssb[0]), mu.atom_id(ssb[1]),round(float(ssb[2]), 4)]
             )
         return {}
 
 #    def _getss_fix(self):
+#     TODO: adapt residue names
 #        pass
 
 # =============================================================================
@@ -800,11 +800,11 @@ class StructureChecking():
                 )
             )
             self.summary['amide']['detected'].append(
-                {
-                    'at1': mu.atom_id(at_pair[0]),
-                    'at2': mu.atom_id(at_pair[1]),
-                    'dist': round(float(np.sqrt(at_pair[2])), 4)
-                }
+                [
+                    mu.atom_id(at_pair[0]), 
+                    mu.atom_id(at_pair[1]),
+                    round(float(np.sqrt(at_pair[2])), 4)
+                ]
             )
         return amide_check
 # =============================================================================
@@ -854,6 +854,8 @@ class StructureChecking():
                     fix_num += 1
 
             print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
+            self.summary['amide']['fixed'] = [mu.residue_id(r) for r in to_fix]
+            self.summary['amide']['n_fixed'] = fix_num
             self.strucm.modified = True
             fix_data = {}
             if not opts['no_recheck']:
@@ -938,7 +940,7 @@ class StructureChecking():
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
-            self.summary['chiral_clashes'] = self._check_report_clashes(to_fix)
+            self.summary['chiral']['clashes'] = self._check_report_clashes(to_fix)
 
         self.strucm.modified = True
         return False
@@ -1160,7 +1162,7 @@ class StructureChecking():
         # Checking new clashes
         if not opts['no_check_clashes']:
             print(cts.MSGS['CHECKING_CLASHES'])
-            self.summary['fixside_clashes'] = self._check_report_clashes(fixed_res)
+            self.summary['fixside']['clashes'] = self._check_report_clashes(fixed_res)
         return False
 # =============================================================================
 
@@ -1180,7 +1182,6 @@ class StructureChecking():
         fix_data = {
             'ion_res_list': ion_res_list,
         }
-        self.summary['add_hydrogen']['detected'] = {}
         print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
         for res_type in self.strucm.data_library.residue_codes['protein']:
             residue_list = [
@@ -1234,6 +1235,7 @@ class StructureChecking():
             r_at[0]: std_ion[r_at[0].get_resname()]['std']
             for r_at in fix_data['ion_res_list']
         }
+        self.summary['add_hydrogen']['mode'] = add_h_mode
 
         if add_h_mode == 'auto':
             if not self.args['quiet']:
@@ -1246,6 +1248,7 @@ class StructureChecking():
                 input_option, ph_value = input_line.run(ph_value)
                 if not self.args['quiet']:
                     print('Selection: pH', ph_value)
+                self.summary['add_hydrogen']['pH'] = ph_value
                 for r_at in fix_data['ion_res_list']:
                     res = r_at[0]
                     rcode = res.get_resname()
@@ -1293,6 +1296,10 @@ class StructureChecking():
                         form = None
                         input_option, form = input_line.run(form)
                         ion_to_fix[r_at[0]] = form.upper()
+        self.summary['add_hydrogen']['modified'] = {
+                mu.residue_id(res) : ion_to_fix[res] for res in ion_to_fix if res.get_resname() != ion_to_fix[res]
+        }
+        self.summary['add_hydrogen']['charges'] = opts['add_charges']
         self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'])
         self.strucm.modified = True
         return False
@@ -1316,19 +1323,22 @@ class StructureChecking():
         mut_list = input_line.run(mut_list)
 
         mutations = self.strucm.prepare_mutations(mut_list)
+        self.summary['mutateside']['mutations'] = []
 
         print(cts.MSGS['MUTATIONS_TO_DO'])
         for mut in mutations.mutation_list:
             print(mut)
+            self.summary['mutateside']['mutations'].append(str(mut))
         if opts['rebuild']:
             mutated_res = self.strucm.rebuild_mutations(mutations)
         else:
             mutated_res = self.strucm.apply_mutations(mutations)
+        self.summary['mutateside']['mutated_res'] = [mu.residue_id(r) for r in mutated_res]
         if not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
-            self.summary['mutateside_clashes'] = self._check_report_clashes(mutated_res)
+            self.summary['mutateside']['clashes'] = self._check_report_clashes(mutated_res)
 
         self.strucm.modified = True
         return False
@@ -1519,7 +1529,7 @@ class StructureChecking():
         # Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
             input_line = ParamInput(
-                "Enter canonical sequence path (FASTA)",
+                "Enter ca nonical sequence path (FASTA)",
                 self.args['non_interactive']
             )
             self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])

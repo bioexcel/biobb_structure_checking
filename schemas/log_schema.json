@@ -1,7 +1,7 @@
 {
     "add_hydrogen": {
-        "detected": {},
         "ionic_detected": ["#residue_id"],
+        "mode": "",
         "opts": "",
         "error": ""
     },
@@ -21,14 +21,12 @@
     "amide": {
         "n_amides": 0,
         "detected": [
-            {
-                "at1": "#atom_id",
-                "at2": "#atom_id",
-                "dist": 0.0
-            }
+            ["#atom_id", "#atom_id", 0.0]
         ],
         "opts": "",
-        "error": ""
+        "error": "",
+        "fixed": ["#residue_id#"],
+        "n_fixed": 1
     },
     "backbone": {
         "missing_atoms": {
@@ -67,7 +65,7 @@
     "chiral": {
         "n_chirals": 0,
         "detected": ["#residue_id"],
-        "chiral_clashes": "#clash_report",
+        "clashes": "#clash_report",
         "opts": "",
         "error": ""
     },
@@ -96,15 +94,10 @@
         "removed": [],
         "opts": "",
         "error": "",
-        "clashes": "TODO move fixside_clashes"
+        "clashes": "#clash_report"
     },
-    "fixside_clashes": "#clash_report",
     "getss": [
-        {
-            "at1" : "#atom_id",
-            "at2" : "#atom_id",
-            "dist": 0.0
-        }
+        ["#atom_id", "#atom_id", 0.0]
     ],
     "headers": {
         "entry_id": "",
@@ -141,11 +134,12 @@
         "error": ""
     },
     "mutateside":{
+        "mutated_res": ["#residue_id"],
+        "mutations": [""],
         "opts": "",
         "error": "",
-        "clashes" : "#clash_report TODO"
+        "clashes" : "#clash_report"
     },
-    "mutateside_clashes": "#clash_report",
     "rem_hydrogen": {
         "n_detected": 0,
         "n_removed": 0,
@@ -184,8 +178,8 @@
         "total": 0.0,
         "#command": 0.0
     },
-    "memsize": [
-        ["load", 0.0],
-        ["#command", 0.0]
-    ]
+    "mem_sizes": {
+        "load": 0.0,
+        "#command": 0.0
+    }
 }
