@@ -6,7 +6,7 @@
         "error": ""
     },
     "altloc": {
-        "r_id": {
+        "#residue_id": {
             "#atom_id": [
                 {
                     "loc_label": "", 
@@ -42,13 +42,15 @@
             "option_selected": []
         },
         "selected": "",
-        "wrong_links": [],
+        "wrong_links": [
+            ["#residue_id", "#residue_id", 0.0]
+        ],
         "long_links": [
             ["#residue_id", "#residue_id", 0.0]
         ],
-        "mod_residues": [],
+        "mod_residues": ["#residue_id"],
         "main_chain_fix": ["#residue_id"],
-        "added_caps": [],
+        "added_caps": ["#residue_id"],
         "clashes": "#clashes_report",
         "add_caps": "",
         "opts": "",
@@ -64,13 +66,14 @@
     },
     "chiral": {
         "n_chirals": 0,
-        "detected": [],
-        "chiral_clashes": [],
+        "detected": ["#residue_id"],
+        "chiral_clashes": "#clash_report",
         "opts": "",
         "error": ""
     },
     "chiral_bck": {
-        "n_chirals": 0
+        "n_chirals": 0,
+        "detected": ["#residue_id"]
     },
     "cistransbck": {
         "cis": [
@@ -85,16 +88,24 @@
         "detected_missing": {
             "#residue_id": ["#atom_name"]
         },
-        "detected_unknown": [],
+        "detected_unknown": {
+            "#residue_id": ["#atom_name"]
+        },
         "fix": "",
         "fixed": ["#residue_id"],
         "removed": [],
         "opts": "",
         "error": "",
-        "clashes": "TODO fixside_clashes"
+        "clashes": "TODO move fixside_clashes"
     },
     "fixside_clashes": "#clash_report",
-    "getss": {},
+    "getss": [
+        {
+            "at1" : "#atom_id",
+            "at2" : "#atom_id",
+            "dist": 0.0
+        }
+    ],
     "headers": {
         "entry_id": "",
         "keywords": "",
@@ -102,7 +113,7 @@
         "title": "",
         "resolution": 0.0
     },
-    "inscodes": {},
+    "inscodes": ["#residue_id"],
     "ligands": {
         "detected": ["#residue_id"],
         "removed": {

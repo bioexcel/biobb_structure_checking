@@ -1,5 +1,5 @@
 {
-    "residue_id" : "#residue_name + ' ' + chain_name + residue_num",
+    "residue_id" : "#residue_name + ' ' + chain_name + residue_num + '[/' + model_num + ']'",
     "atom_id": "#residue_id + '.' + #atom_name",
     "atom_name" : "a valid PDB atom name",
     "residue_name" : "a valid residue name",
