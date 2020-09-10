@@ -1,30 +1,28 @@
 {
     "add_hydrogen": {
         "ionic_detected": ["#residue_id"],
-        "mode": "",
-        "opts": "",
-        "error": ""
+        "mode": "string",
+        "opts": "string",
+        "error": "string"
     },
     "altloc": {
         "#residue_id": {
             "#atom_id": [
                 {
-                    "loc_label": "", 
-                    "occupancy": 0.0
+                    "loc_label": "string", 
+                    "occupancy": "float"
                 }
             ]
         },
-        "selected": "",
-        "opts": "",
-        "error": ""
+        "selected": "string",
+        "opts": "string",
+        "error": "string"
     },
     "amide": {
-        "n_amides": 0,
-        "detected": [
-            ["#atom_id", "#atom_id", 0.0]
-        ],
-        "opts": "",
-        "error": "",
+        "n_amides": "integer",
+        "detected": ["#atom_pair"],
+        "opts": "string",
+        "error": "string",
         "fixed": ["#residue_id#"],
         "n_fixed": 1
     },
@@ -37,49 +35,40 @@
         },
         "breaks": {
             "detected": ["#residue_id", "#residue_id"],
-            "option_selected": []
+            "option_selected": "string"
         },
-        "selected": "",
-        "wrong_links": [
-            ["#residue_id", "#residue_id", 0.0]
-        ],
-        "long_links": [
-            ["#residue_id", "#residue_id", 0.0]
-        ],
+        "selected": "string",
+        "wrong_links": ["#residue_pair"],
+        "long_links": ["#residue_pair"],
         "mod_residues": ["#residue_id"],
         "main_chain_fix": ["#residue_id"],
         "added_caps": ["#residue_id"],
         "clashes": "#clashes_report",
-        "add_caps": "",
-        "opts": "",
-        "error": ""
+        "add_caps": "string",
+        "opts": "string",
+        "error": "string"
     },
     "chains": {
         "ids": {
-            "chain_id": "chain_type"
+            "#chain_id": "#chain_type"
         },
-        "selected": "",
-        "opts": "",
-        "error": ""
+        "selected": "string",
+        "opts": "string",
+        "error": "string"
     },
     "chiral": {
-        "n_chirals": 0,
+        "n_chirals": "integer",
         "detected": ["#residue_id"],
         "clashes": "#clash_report",
-        "opts": "",
-        "error": ""
+        "opts": "string",
+        "error": "string"
     },
     "chiral_bck": {
-        "n_chirals": 0,
+        "n_chirals": "integer",
         "detected": ["#residue_id"]
     },
     "cistransbck": {
-        "cis": [
-            ["#residue_id", "#residue_id", 0.0]
-        ],
-        "unusual_trans": [
-            ["#residue_id", "#residue_id", 0.0]
-        ]
+        "cis": ["#residue_pair"]
     },
     "clashes": "#clash_report",
     "fixside": {
@@ -89,97 +78,75 @@
         "detected_unknown": {
             "#residue_id": ["#atom_name"]
         },
-        "fix": "",
+        "fix": "string",
         "fixed": ["#residue_id"],
         "removed": [],
-        "opts": "",
-        "error": "",
+        "opts": "string",
+        "error": "string",
         "clashes": "#clash_report"
     },
-    "getss": [
-        ["#atom_id", "#atom_id", 0.0]
-    ],
+    "getss": ["#atom_pair"],
     "headers": {
-        "entry_id": "",
-        "keywords": "",
-        "method": "",
-        "title": "",
-        "resolution": 0.0
+        "entry_id": "string",
+        "keywords": "string",
+        "method": "string",
+        "title": "string",
+        "resolution": "float"
     },
     "inscodes": ["#residue_id"],
     "ligands": {
         "detected": ["#residue_id"],
-        "removed": {
-            "lst": ["#residue_id"]
-        },
-        "n_removed": 0,
-        "opts": "",
-        "error": ""
+        "removed": ["#residue_id"],
+        "n_removed": "integer",
+        "opts": "string",
+        "error": "string"
     },
     "metals": {
         "detected": ["#residue_id"],
         "removed": ["#residue_id"],
-        "n_removed": 0,
-        "opts": "",
-        "error": ""
+        "n_removed": "integer",
+        "opts": "string",
+        "error": "string"
     },
     "models": {
-        "nmodels": 0,
-        "selected": 0,
+        "nmodels": "integer",
+        "selected": "integer",
         "type": {
-            "rmsd": 0.0,
-            "type": 0
+            "rmsd": "float",
+            "type": "integer"
         },
-        "opts": "",
-        "error": ""
+        "opts": "string",
+        "error": "string"
     },
     "mutateside":{
         "mutated_res": ["#residue_id"],
-        "mutations": [""],
-        "opts": "",
-        "error": "",
+        "mutations": ["string"],
+        "opts": "string",
+        "error": "string",
         "clashes" : "#clash_report"
     },
     "rem_hydrogen": {
-        "n_detected": 0,
-        "n_removed": 0,
-        "opts": "",
-        "error": ""
+        "n_detected": "integer",
+        "n_removed": "integer",
+        "opts": "string",
+        "error": "string"
     },
     "water": {
-        "n_detected": 0,
-        "n_removed": 0,
-        "opts": "",
-        "error": ""
+        "n_detected": "integer",
+        "n_removed": "integer",
+        "opts": "string",
+        "error": "string"
     },
 
-    "stats": {
-        "biounit": false,
-        "ca_only": false,
-        "chain_ids": {
-            "chain_id": 0
-        },
-        "models_type": {
-            "rmsd": 0.0,
-            "type": 0
-        },
-        "nchains": 0,
-        "nmodels": 0,
-        "num_ats": 0,
-        "num_res": 0,
-        "num_wat": 0,
-        "res_hetats": 0,
-        "res_insc": 0,
-        "res_ligands": 0
-    },
+    "stats": "#stats",
     "final_stats": "#stats",
     "elapsed_times": {
-        "load":0.0,
-        "total": 0.0,
-        "#command": 0.0
+        "load":"float",
+        "total": "float",
+        "#command": "float"
     },
     "mem_sizes": {
-        "load": 0.0,
-        "#command": 0.0
+        "load": "float",
+        "#command": "float"
     }
 }

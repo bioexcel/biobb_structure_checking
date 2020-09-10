@@ -672,7 +672,7 @@ class StructureChecking():
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], remove_ligands
 
-        self.summary['ligands']['removed'] = {'opt':remove_ligands, 'lst':[]}
+        self.summary['ligands']['removed'] = []
 
         if input_option == 'none':
             if not self.args['quiet']:
@@ -695,7 +695,7 @@ class StructureChecking():
             ]
         rl_num = 0
         for res in to_remove:
-            self.summary['ligands']['removed']['lst'].append(mu.residue_id(res))
+            self.summary['ligands']['removed'].append(mu.residue_id(res))
             self.strucm.remove_residue(res, False)
             rl_num += 1
         self.strucm.update_internals()
