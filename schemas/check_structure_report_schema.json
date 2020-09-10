@@ -10,34 +10,32 @@
                 "ionic_detected": {
                     "description": "List of ionizable residues",
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref": "#/definitions/residue_id"}
                 },
                 "mode": {"type": "string", "enum":["auto","pH", "list", "int", "int_his"]},
-                "pH": {"type": "float"},
+                "pH": {"type": "number"},
                 "opts": {"type": "string"},
                 "error": {"type": "string"}
             }
         },
         "altloc": {
             "type": "object",
-            "propertyNames" : {"type": "#ref residue_id"},
-            "properties": {
-                "*": {
-                    "type": "object",
-                    "propertyNames": {"type": "#ref atom_name"},
-                    "properties": {
-                        "*": {
-                            "type": "array",
-                            "items": { 
-                                "type": "object",
-                                "properties": {
-                                    "loc_label": {"type": "string", "pattern": "A-Z"},                                             
-                                    "occupancy": {"type": "float"}
-                                }
-                            }
+            "propertyNames" : {"$ref": "#/definitions/residue_id"},
+            "additionalProperties": {
+                "type": "object",
+                "propertyNames": {"$ref": "#/definitions/atom_name"},
+                "additionalProperties": {
+                    "type": "array",
+                    "items": { 
+                        "type": "object",
+                        "properties": {
+                            "loc_label": {"type": "string", "pattern": "A-Z"},                                             
+                            "occupancy": {"type": "number"}
                         }
                     }
-                },
+                }
+            },
+            "properties": {
                 "selected": {"type": "string"},
                 "opts": {"type": "string"},
                 "error": {"type": "string"}
@@ -51,14 +49,14 @@
                     "type": "array",
                     "items": { 
                         "type": "array",
-                        "items": {"type" : "#ref atom_pair "}
+                        "items": {"$ref" : "#/definitions/atom_pair "}
                     }
                 },
                 "opts": {"type": "string"},
                 "error": {"type": "string"},
                 "fixed": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id#ref "}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "n_fixed": {"type": "integer"}
             }
@@ -69,48 +67,46 @@
                 "missing_atoms": {
                     "selected": {
                         "type": "object",
-                        "propertyNames": {"type" : "#ref residue_id"},
-                        "properties": {
-                            "*": {
-                                "type": "array",
-                                "items": {"type": "#ref atom_name"}
-                            }
+                        "propertyNames": {"$ref" : "#/definitions/residue_id"},
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {"$ref" : "#/definitions/atom_name"}
                         }
                     },
                     "fixed": {
                         "type": "array",
-                        "items": {"type": "#ref residue_id"}
+                        "items": {"$ref" : "#/definitions/residue_id"}
                     }
                 },
                 "breaks": {
                     "detected": {
                         "type": "array",
-                        "items": {"type": "#ref residue_pair"}
+                        "items": {"$ref" : "#/definitions/residue_pair"}
                     },
                     "option_selected": "string"
                 },
                 "selected": {"type": "string"},
                 "wrong_links": {
                     "type": "array",
-                    "items": {"type": "#ref residue_pair"}
+                    "items": {"$ref" : "#/definitions/residue_pair"}
                 },
                 "long_links": {
                     "type": "array",
-                    "items": {"type": "#ref residue_pair"}
+                    "items": {"$ref" : "#/definitions/residue_pair"}
                 },
                 "mod_residues": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "main_chain_fix": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "added_caps": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
-                "clashes": "#ref clash_report",
+                "clashes": {"$ref" : "#/definitions/clash_report"},
                 "add_caps": {"type": "string"},
                 "opts": {"type": "string"},
                 "error": {"type": "string"}
@@ -121,10 +117,8 @@
             "properties": {
                 "ids": {
                     "type": "object",
-                    "propertyNames": {"pattern": "(A-z){1-2}"},
-                    "properties" : {
-                        "*" : {"type": "integer"}
-                    }
+                    "propertyNames": {"pattern": "(A-z){1,2}"},
+                    "additionalProperties" : {"type": "integer"}
                 },
                 "selected": {"type": "string"},
                 "opts": {"type": "string"},
@@ -137,9 +131,9 @@
                 "n_chirals": {"type": "integer"},
                 "detected": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
-                "clashes": "#ref clash_report",
+                "clashes": {"$ref" : "#/definitions/clash_report"},
                 "opts": {"type": "string"},
                 "error": {"type": "string"}
             }
@@ -150,7 +144,7 @@
                 "n_chirals": {"type": "integer"},
                 "detected": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 }
             }
         },
@@ -159,55 +153,51 @@
             "properties": {
                 "cis": {
                     "type": "array",
-                    "items": {"type": "#ref residue_pair"}
+                    "items": {"$ref" : "#/definitions/residue_pair"}
                 },
                 "unusual_trans": {
                     "type": "array",
-                    "items": {"type": "#ref residue_pair"}
+                    "items": {"$ref" : "#/definitions/residue_pair"}
                 }
             }
         },
-        "clashes": {"type": "#ref clash_report"},
+        "clashes": {"$ref" : "#/definitions/clash_report"},
         "fixside": {
             "type": "object",
             "properties": {
                 "detected_missing": {
                     "type":"object",
-                    "propertyNames": {"type": "#ref residue_id"},
-                    "properties": {
-                        "*": {
-                            "type": "array",
-                            "items": {"type": "#ref atom_name"}
-                        }
+                    "propertyNames": {"$ref" : "#/definitions/residue_id"},
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {"$ref" : "#/definitions/atom_name"}
                     }
                 },
                 "detected_unknown": {
                    "type":"object",
-                    "propertyNames": {"type": "#ref residue_id"},
-                    "properties": {
-                        "*": {
-                            "type": "array",
-                            "items": {"type": "#ref atom_name"}
-                        }
+                    "propertyNames": {"$ref" : "#/definitions/residue_id"},
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {"$ref" : "#/definitions/atom_name"}
                     }
                 },
                 "fix": {"type": "string"},
                 "fixed": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "removed": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "opts": {"type": "string"},
                 "error": {"type": "string"},
-                "clashes": {"type": "#ref clash_report"}
+                "clashes": {"$ref" : "#/definitions/clash_report"}
             }
         },
         "getss":{
             "type": "array",
-            "items": {"type": "#ref atom_pair"}
+            "items": {"$ref" : "#/definitions/atom_pair"}
         },
         "headers": {
             "type": "object",
@@ -216,23 +206,23 @@
                 "keywords": {"type": "string"},
                 "method": {"type": "string"},
                 "title": {"type": "string"},
-                "resolution": {"type": "float"}
+                "resolution": {"type": "number"}
             }
         },
         "inscodes": {
             "type": "array",
-            "items": {"type": "#ref residue_id"}
+            "items": {"$ref" : "#/definitions/residue_id"}
         },
         "ligands": {
             "type": "object",
             "properties": {
                 "detected": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "removed": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "n_removed": {"type": "integer"},
                 "opts": {"type": "string"},
@@ -244,11 +234,11 @@
             "properties": {
                 "detected": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "removed": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "n_removed": {"type": "integer"},
                 "opts": {"type": "string"},
@@ -263,7 +253,7 @@
                 "type": {
                     "type": "object",
                     "properties": {
-                        "rmsd": {"type": "float"},
+                        "rmsd": {"type": "number"},
                         "type": {"type": "integer"}
                     }
                 },
@@ -276,7 +266,7 @@
             "properties": {
                 "mutated_res": {
                     "type": "array",
-                    "items": {"type": "#ref residue_id"}
+                    "items": {"$ref" : "#/definitions/residue_id"}
                 },
                 "mutations": {
                     "type": "array",
@@ -284,7 +274,7 @@
                 },
                 "opts": {"type": "string"},
                 "error": {"type": "string"},
-                "clashes": {"type": "#ref clash_report"}
+                "clashes": {"$ref" : "#/definitions/clash_report"}
             }
         },
         "rem_hydrogen": {
@@ -305,21 +295,26 @@
                 "error": {"type": "string"}
             }
         },
-        "stats": {"type": "#ref stats"},
-        "final_stats": {"type": "#ref stats"},
+        "stats": {"$ref" : "#/definitions/stats"},
+        "final_stats": {"$ref" : "#/definitions/stats"},
         "elapsed_times": {
             "type": "object",
-            "propertyNames": {"type": "string", "enum": ["load", "total", "#ref commands"]},
             "properties": {
-                    "*": {"type": "float"}
-            }
+                "load": {"type": "number"},
+                "total": {"type": "number"}
+            },
+            "propertyNames" : {"$ref": "#/definitions/command"},
+            "additionalProperties": {"type": "number"}
         },
         "mem_sizes": {
             "type": "object",
-            "propertyNames": {"type": "string", "enum": ["load", "total", "#ref commands"]},
             "properties": {
-                "*": {"type": "float"}
-            }
+                "load": {"type": "number"}
+            },
+            "propertyNames" : {"$ref": "#/definitions/command"},
+            "additionalProperties": {"type": "number"}
         }
     }
 }
+
+ 

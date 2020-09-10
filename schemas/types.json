@@ -1,28 +1,99 @@
 {
-    "residue_id" : "#residue_name + ' ' + chain_name + residue_num + '[/' + model_num + ']'",
-    "atom_id": "#residue_id + '.' + #atom_name",
-    "atom_name" : "a valid PDB atom name",
-    "residue_name" : "a valid residue name",
-    "command" : "a valid check_structure command",
-    "atom_pair" : ["#atom_id", "#atom_id", "float"],
-    "residue_pair" : ["#residue_id", "#residue_id", "float"],
-    "stats" : {
-        "biounit": "bool",
-        "ca_only": "bool",
-        "chain_ids": {
-            "chain_id": "chain_type"
+    "definitions": {
+        "residue_id": {
+            "type": "string",
+            "pattern": "^(ALA|CYS|ASP|GLU|PHE|GLY|...) [A-z]{1,2}[0..9]{1,5}"
         },
-        "models_type": {
-            "rmsd": "float",
-            "type": "integer"
+        "residue_name": {
+            "type": "string",
+            "enum": ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "..."]
         },
-        "nchains": "integer",
-        "nmodels": "integer",
-        "num_ats": "integer",
-        "num_res": "integer",
-        "num_wat": "integer",
-        "res_hetats": "integer",
-        "res_insc": "integer",
-        "res_ligands": "integer"
+        "atom_id": {
+            "type": "string",
+            "pattern": "^(ALA|CYS|ASP|GLU|PHE|GLY|...) [A-z]{1,2}[0..9]{1,5}\\.[A-Z0-9]{1,2}$"
+        },
+        "command": {
+            "type": "string",
+            "enum": ["models", "chains", "inscodes", "altloc", "rem_hydrogen", "add_hydrogen", "water", "metals", "ligands", "getss", "amide", "chiral", "chiral_bck", "fixside", "backbone", "cistransbck", "clashes"]
+        },
+        "atom_pair": {
+            "title": "Pair of atoms with optional distance",
+            "type": "array",
+            "items": [
+                {"$ref": "#/definitions/atom_id"},
+                {"$ref": "#/definitions/atom_id"}
+            ],
+            "additionalItems": {"type": "number"},
+            "minItems": 2,
+            "maxItems": 3
+        },
+        "residue_pair": {
+            "description": "Pair of residues with optional distance",
+            "type": "array",
+            "items": [
+                {"$ref": "#/definitions/residue_id"},
+                {"$ref": "#/definitions/residue_id"}
+            ],
+            "additionaItems": {"type": "number"},
+            "minItems": 2,
+            "maxItems": 3
+        },
+        "stats": {
+            "description": "Structure statistics",
+            "type": "object",
+            "properties": {
+                "biounit": "bool",
+                "ca_only": "bool",
+                "chain_ids": {
+                    "type": "object",
+                    "propertyNames": {"pattern": "[A-z]{1,2}"},
+                    "additionalProperties": {"type": "integer"}
+                },
+                "models_type": {
+                    "type": "object",
+                    "properties": {
+                        "rmsd": "number",
+                        "type": "integer"
+                    }
+                },
+                "nchains": "integer",
+                "nmodels": "integer",
+                "num_ats": "integer",
+                "num_res": "integer",
+                "num_wat": "integer",
+                "res_hetats": "integer",
+                "res_insc": "integer",
+                "res_ligands": "integer"
+            }
+        },
+        "clash_report": {
+            "type": "object",
+            "properties": {
+                "apolar": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                },
+                "polar_donor": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                },
+                "polar_acceptor": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                },
+                "positive": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                },
+                "negative": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                },
+                "severe": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/atom_pair"}
+                }
+            }
+        }
     }
 }
