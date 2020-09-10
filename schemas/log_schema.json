@@ -7,7 +7,7 @@
     },
     "altloc": {
         "#residue_id": {
-            "#atom_id": [
+            "#atom_names": [
                 {
                     "loc_label": "string", 
                     "occupancy": "float"

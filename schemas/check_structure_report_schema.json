@@ -1,0 +1,325 @@
+{
+    "id": "https://bioexcel.org/biobb/structure_checking_report",
+    "$schema": "http://json-schema.org/draft-07/schema#ref ",
+    "title": "Structure of the report fo biobb_structure_checking module",
+    "type": "object",
+    "properties":{               
+        "add_hydrogen": {
+            "type": "object",
+            "properties": {
+                "ionic_detected": {
+                    "description": "List of ionizable residues",
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "mode": {"type": "string", "enum":["auto","pH", "list", "int", "int_his"]},
+                "pH": {"type": "float"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "altloc": {
+            "type": "object",
+            "propertyNames" : {"type": "#ref residue_id"},
+            "properties": {
+                "*": {
+                    "type": "object",
+                    "propertyNames": {"type": "#ref atom_name"},
+                    "properties": {
+                        "*": {
+                            "type": "array",
+                            "items": { 
+                                "type": "object",
+                                "properties": {
+                                    "loc_label": {"type": "string", "pattern": "A-Z"},                                             
+                                    "occupancy": {"type": "float"}
+                                }
+                            }
+                        }
+                    }
+                },
+                "selected": {"type": "string"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "amide": {
+            "type": "object",
+            "properties": {
+                "n_amides": {"type": "integer"},
+                "detected": {
+                    "type": "array",
+                    "items": { 
+                        "type": "array",
+                        "items": {"type" : "#ref atom_pair "}
+                    }
+                },
+                "opts": {"type": "string"},
+                "error": {"type": "string"},
+                "fixed": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id#ref "}
+                },
+                "n_fixed": {"type": "integer"}
+            }
+        },
+        "backbone": {
+            "type": "object",
+            "properties": {
+                "missing_atoms": {
+                    "selected": {
+                        "type": "object",
+                        "propertyNames": {"type" : "#ref residue_id"},
+                        "properties": {
+                            "*": {
+                                "type": "array",
+                                "items": {"type": "#ref atom_name"}
+                            }
+                        }
+                    },
+                    "fixed": {
+                        "type": "array",
+                        "items": {"type": "#ref residue_id"}
+                    }
+                },
+                "breaks": {
+                    "detected": {
+                        "type": "array",
+                        "items": {"type": "#ref residue_pair"}
+                    },
+                    "option_selected": "string"
+                },
+                "selected": {"type": "string"},
+                "wrong_links": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_pair"}
+                },
+                "long_links": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_pair"}
+                },
+                "mod_residues": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "main_chain_fix": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "added_caps": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "clashes": "#ref clash_report",
+                "add_caps": {"type": "string"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "chains": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "object",
+                    "propertyNames": {"pattern": "(A-z){1-2}"},
+                    "properties" : {
+                        "*" : {"type": "integer"}
+                    }
+                },
+                "selected": {"type": "string"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "chiral": {
+            "type": "object",
+            "properties": {
+                "n_chirals": {"type": "integer"},
+                "detected": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "clashes": "#ref clash_report",
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "chiral_bck": {
+            "type": "object",
+            "properties": {
+                "n_chirals": {"type": "integer"},
+                "detected": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                }
+            }
+        },
+        "cistransbck": {
+            "type": "object",
+            "properties": {
+                "cis": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_pair"}
+                },
+                "unusual_trans": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_pair"}
+                }
+            }
+        },
+        "clashes": {"type": "#ref clash_report"},
+        "fixside": {
+            "type": "object",
+            "properties": {
+                "detected_missing": {
+                    "type":"object",
+                    "propertyNames": {"type": "#ref residue_id"},
+                    "properties": {
+                        "*": {
+                            "type": "array",
+                            "items": {"type": "#ref atom_name"}
+                        }
+                    }
+                },
+                "detected_unknown": {
+                   "type":"object",
+                    "propertyNames": {"type": "#ref residue_id"},
+                    "properties": {
+                        "*": {
+                            "type": "array",
+                            "items": {"type": "#ref atom_name"}
+                        }
+                    }
+                },
+                "fix": {"type": "string"},
+                "fixed": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "removed": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "opts": {"type": "string"},
+                "error": {"type": "string"},
+                "clashes": {"type": "#ref clash_report"}
+            }
+        },
+        "getss":{
+            "type": "array",
+            "items": {"type": "#ref atom_pair"}
+        },
+        "headers": {
+            "type": "object",
+            "properties": {
+                "entry_id": {"type": "string"},
+                "keywords": {"type": "string"},
+                "method": {"type": "string"},
+                "title": {"type": "string"},
+                "resolution": {"type": "float"}
+            }
+        },
+        "inscodes": {
+            "type": "array",
+            "items": {"type": "#ref residue_id"}
+        },
+        "ligands": {
+            "type": "object",
+            "properties": {
+                "detected": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "removed": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "n_removed": {"type": "integer"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "metals": {
+            "type": "object",
+            "properties": {
+                "detected": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "removed": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "n_removed": {"type": "integer"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "models": {
+            "type": "object",
+            "properties": {
+                "nmodels": {"type": "integer"},
+                "selected": {"type": "integer"},
+                "type": {
+                    "type": "object",
+                    "properties": {
+                        "rmsd": {"type": "float"},
+                        "type": {"type": "integer"}
+                    }
+                },
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "mutateside": {
+            "type": "object",
+            "properties": {
+                "mutated_res": {
+                    "type": "array",
+                    "items": {"type": "#ref residue_id"}
+                },
+                "mutations": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "opts": {"type": "string"},
+                "error": {"type": "string"},
+                "clashes": {"type": "#ref clash_report"}
+            }
+        },
+        "rem_hydrogen": {
+            "type": "object",
+            "properties": {
+                "n_detected": {"type": "integer"},
+                "n_removed": {"type": "integer"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "water": {
+            "type": "object",
+            "properties": {
+                "n_detected": {"type": "integer"},
+                "n_removed": {"type": "integer"},
+                "opts": {"type": "string"},
+                "error": {"type": "string"}
+            }
+        },
+        "stats": {"type": "#ref stats"},
+        "final_stats": {"type": "#ref stats"},
+        "elapsed_times": {
+            "type": "object",
+            "propertyNames": {"type": "string", "enum": ["load", "total", "#ref commands"]},
+            "properties": {
+                    "*": {"type": "float"}
+            }
+        },
+        "mem_sizes": {
+            "type": "object",
+            "propertyNames": {"type": "string", "enum": ["load", "total", "#ref commands"]},
+            "properties": {
+                "*": {"type": "float"}
+            }
+        }
+    }
+}
