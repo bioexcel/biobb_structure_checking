@@ -1,417 +1,704 @@
 {
-    "id": "https://bioexcel.org/biobb/structure_checking_report",
-    "$schema": "http://json-schema.org/draft-07/schema#ref ",
-    "title": "Structure of the report fo biobb_structure_checking module",
-    "type": "object",
-    "properties":{               
-        "add_hydrogen": {
-            "type": "object",
-            "properties": {
-                "ionic_detected": {
-                    "description": "List of ionizable residues",
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/residue_id"}
-                },
-                "mode": {"type": "string", "enum":["auto","pH", "list", "int", "int_his"]},
-                "pH": {"type": "number"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
+  "id": "https://bioexcel.org/biobb/structure_checking_report",
+  "$schema": "http://json-schema.org/draft-07/schema#ref ",
+  "title": "Structure of the report fo biobb_structure_checking module",
+  "type": "object",
+  "properties": {
+    "add_hydrogen": {
+      "type": "object",
+      "properties": {
+        "ionic_detected": {
+          "description": "List of ionizable residues",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
         },
-        "altloc": {
-            "type": "object",
-            "propertyNames" : {"$ref": "#/definitions/residue_id"},
-            "additionalProperties": {
-                "type": "object",
-                "propertyNames": {"$ref": "#/definitions/atom_name"},
-                "additionalProperties": {
-                    "type": "array",
-                    "items": { 
-                        "type": "object",
-                        "properties": {
-                            "loc_label": {"type": "string", "pattern": "A-Z"},                                             
-                            "occupancy": {"type": "number"}
-                        }
-                    }
-                }
-            },
-            "properties": {
-                "selected": {"type": "string"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
+        "mode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "pH",
+            "list",
+            "int",
+            "int_his"
+          ]
         },
-        "amide": {
-            "type": "object",
-            "properties": {
-                "n_amides": {"type": "integer"},
-                "detected": {
-                    "type": "array",
-                    "items": { 
-                        "type": "array",
-                        "items": {"$ref" : "#/definitions/atom_pair "}
-                    }
-                },
-                "opts": {"type": "string"},
-                "error": {"type": "string"},
-                "fixed": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "n_fixed": {"type": "integer"}
-            }
+        "pH": {
+          "type": "number"
         },
-        "backbone": {
-            "type": "object",
-            "properties": {
-                "missing_atoms": {
-                    "selected": {
-                        "type": "object",
-                        "propertyNames": {"$ref" : "#/definitions/residue_id"},
-                        "additionalProperties": {
-                            "type": "array",
-                            "items": {"$ref" : "#/definitions/atom_name"}
-                        }
-                    },
-                    "fixed": {
-                        "type": "array",
-                        "items": {"$ref" : "#/definitions/residue_id"}
-                    }
-                },
-                "breaks": {
-                    "detected": {
-                        "type": "array",
-                        "items": {"$ref" : "#/definitions/residue_pair"}
-                    },
-                    "option_selected": "string"
-                },
-                "selected": {"type": "string"},
-                "wrong_links": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_pair"}
-                },
-                "long_links": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_pair"}
-                },
-                "mod_residues": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "main_chain_fix": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "added_caps": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "clashes": {"$ref" : "#/definitions/clash_report"},
-                "add_caps": {"type": "string"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
+        "opts": {
+          "type": "string"
         },
-        "chains": {
-            "type": "object",
-            "properties": {
-                "ids": {
-                    "type": "object",
-                    "propertyNames": {"pattern": "(A-z){1,2}"},
-                    "additionalProperties" : {"type": "integer"}
-                },
-                "selected": {"type": "string"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "chiral": {
-            "type": "object",
-            "properties": {
-                "n_chirals": {"type": "integer"},
-                "detected": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "clashes": {"$ref" : "#/definitions/clash_report"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "chiral_bck": {
-            "type": "object",
-            "properties": {
-                "n_chirals": {"type": "integer"},
-                "detected": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                }
-            }
-        },
-        "cistransbck": {
-            "type": "object",
-            "properties": {
-                "cis": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_pair"}
-                },
-                "unusual_trans": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_pair"}
-                }
-            }
-        },
-        "clashes": {"$ref" : "#/definitions/clash_report"},
-        "fixside": {
-            "type": "object",
-            "properties": {
-                "detected_missing": {
-                    "type":"object",
-                    "propertyNames": {"$ref" : "#/definitions/residue_id"},
-                    "additionalProperties": {
-                        "type": "array",
-                        "items": {"$ref" : "#/definitions/atom_name"}
-                    }
-                },
-                "detected_unknown": {
-                   "type":"object",
-                    "propertyNames": {"$ref" : "#/definitions/residue_id"},
-                    "additionalProperties": {
-                        "type": "array",
-                        "items": {"$ref" : "#/definitions/atom_name"}
-                    }
-                },
-                "fix": {"type": "string"},
-                "fixed": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "removed": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "opts": {"type": "string"},
-                "error": {"type": "string"},
-                "clashes": {"$ref" : "#/definitions/clash_report"}
-            }
-        },
-        "getss":{
-            "type": "array",
-            "items": {"$ref" : "#/definitions/atom_pair"}
-        },
-        "headers": {
-            "type": "object",
-            "properties": {
-                "entry_id": {"type": "string"},
-                "keywords": {"type": "string"},
-                "method": {"type": "string"},
-                "title": {"type": "string"},
-                "resolution": {"type": "number"}
-            }
-        },
-        "inscodes": {
-            "type": "array",
-            "items": {"$ref" : "#/definitions/residue_id"}
-        },
-        "ligands": {
-            "type": "object",
-            "properties": {
-                "detected": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "removed": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "n_removed": {"type": "integer"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "metals": {
-            "type": "object",
-            "properties": {
-                "detected": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "removed": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "n_removed": {"type": "integer"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "models": {
-            "type": "object",
-            "properties": {
-                "nmodels": {"type": "integer"},
-                "selected": {"type": "integer"},
-                "type": {
-                    "type": "object",
-                    "properties": {
-                        "rmsd": {"type": "number"},
-                        "type": {"type": "integer"}
-                    }
-                },
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "mutateside": {
-            "type": "object",
-            "properties": {
-                "mutated_res": {
-                    "type": "array",
-                    "items": {"$ref" : "#/definitions/residue_id"}
-                },
-                "mutations": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                },
-                "opts": {"type": "string"},
-                "error": {"type": "string"},
-                "clashes": {"$ref" : "#/definitions/clash_report"}
-            }
-        },
-        "rem_hydrogen": {
-            "type": "object",
-            "properties": {
-                "n_detected": {"type": "integer"},
-                "n_removed": {"type": "integer"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "water": {
-            "type": "object",
-            "properties": {
-                "n_detected": {"type": "integer"},
-                "n_removed": {"type": "integer"},
-                "opts": {"type": "string"},
-                "error": {"type": "string"}
-            }
-        },
-        "stats": {"$ref" : "#/definitions/stats"},
-        "final_stats": {"$ref" : "#/definitions/stats"},
-        "elapsed_times": {
-            "type": "object",
-            "properties": {
-                "load": {"type": "number"},
-                "total": {"type": "number"}
-            },
-            "propertyNames" : {"$ref": "#/definitions/command"},
-            "additionalProperties": {"type": "number"}
-        },
-        "mem_sizes": {
-            "type": "object",
-            "properties": {
-                "load": {"type": "number"}
-            },
-            "propertyNames" : {"$ref": "#/definitions/command"},
-            "additionalProperties": {"type": "number"}
+        "error": {
+          "type": "string"
         }
+      }
     },
-    "definitions": {
-        "residue_id": {
-            "type": "string",
-            "pattern": "^(ALA|CYS|ASP|GLU|PHE|GLY|...) [A-z]{1,2}[0..9]{1,5}"
+    "altloc": {
+      "type": "object",
+      "properties": {
+        "selected": {
+          "type": "string"
         },
-        "residue_name": {
-            "type": "string",
-            "enum": ["ALA", "CYS", "ASP", "GLU", "PHE", "GLY", "..."]
+        "opts": {
+          "type": "string"
         },
-        "atom_id": {
-            "type": "string",
-            "pattern": "^(ALA|CYS|ASP|GLU|PHE|GLY|...) [A-z]{1,2}[0..9]{1,5}\\.[A-Z0-9]{1,2}$"
+        "error": {
+          "type": "string"
         },
-        "command": {
-            "type": "string",
-            "enum": ["models", "chains", "inscodes", "altloc", "rem_hydrogen", "add_hydrogen", "water", "metals", "ligands", "getss", "amide", "chiral", "chiral_bck", "fixside", "backbone", "cistransbck", "clashes"]
-        },
-        "atom_pair": {
-            "title": "Pair of atoms with optional distance",
-            "type": "array",
-            "items": [
-                {"$ref": "#/definitions/atom_id"},
-                {"$ref": "#/definitions/atom_id"}
-            ],
-            "additionalItems": {"type": "number"},
-            "minItems": 2,
-            "maxItems": 3
-        },
-        "residue_pair": {
-            "description": "Pair of residues with optional distance",
-            "type": "array",
-            "items": [
-                {"$ref": "#/definitions/residue_id"},
-                {"$ref": "#/definitions/residue_id"}
-            ],
-            "additionaItems": {"type": "number"},
-            "minItems": 2,
-            "maxItems": 3
-        },
-        "stats": {
-            "description": "Structure statistics",
+        "detected": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/residue_id"
+          },
+          "additionalProperties": {
             "type": "object",
-            "properties": {
-                "biounit": "bool",
-                "ca_only": "bool",
-                "chain_ids": {
-                    "type": "object",
-                    "propertyNames": {"pattern": "[A-z]{1,2}"},
-                    "additionalProperties": {"type": "integer"}
-                },
-                "models_type": {
-                    "type": "object",
-                    "properties": {
-                        "rmsd": "number",
-                        "type": "integer"
-                    }
-                },
-                "nchains": "integer",
-                "nmodels": "integer",
-                "num_ats": "integer",
-                "num_res": "integer",
-                "num_wat": "integer",
-                "res_hetats": "integer",
-                "res_insc": "integer",
-                "res_ligands": "integer"
-            }
-        },
-        "clash_report": {
-            "type": "object",
-            "properties": {
-                "apolar": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
-                },
-                "polar_donor": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
-                },
-                "polar_acceptor": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
-                },
-                "positive": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
-                },
-                "negative": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
-                },
-                "severe": {
-                    "type": "array",
-                    "items": {"$ref": "#/definitions/atom_pair"}
+            "propertyNames": {
+              "$ref": "#/definitions/atom_name"
+            },
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "loc_label": {
+                    "type": "string",
+                    "pattern": "[A-Z]"
+                  },
+                  "occupancy": {
+                    "type": "number"
+                  }
                 }
+              }
             }
+          }
         }
+      }
+    },
+    "amide": {
+      "type": "object",
+      "properties": {
+        "n_amides": {
+          "type": "integer"
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/atom_pair "
+            }
+          }
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "fixed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "n_fixed": {
+          "type": "integer"
+        }
+      }
+    },
+    "backbone": {
+      "type": "object",
+      "properties": {
+        "missing_atoms": {
+          "selected": {
+            "type": "object",
+            "propertyNames": {
+              "$ref": "#/definitions/residue_id"
+            },
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/atom_name"
+              }
+            }
+          },
+          "fixed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/residue_id"
+            }
+          }
+        },
+        "breaks": {
+          "detected": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/residue_pair"
+            }
+          },
+          "option_selected": "string"
+        },
+        "selected": {
+          "type": "string"
+        },
+        "wrong_links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_pair"
+          }
+        },
+        "long_links": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_pair"
+          }
+        },
+        "mod_residues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "main_chain_fix": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "added_caps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "clashes": {
+          "$ref": "#/definitions/clash_report"
+        },
+        "add_caps": {
+          "type": "string"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "chains": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "[A-z]{1,2}"
+          },
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "selected": {
+          "type": "string"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "chiral": {
+      "type": "object",
+      "properties": {
+        "n_chirals": {
+          "type": "integer"
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "clashes": {
+          "$ref": "#/definitions/clash_report"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "chiral_bck": {
+      "type": "object",
+      "properties": {
+        "n_chirals": {
+          "type": "integer"
+        },
+        "detected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        }
+      }
+    },
+    "cistransbck": {
+      "type": "object",
+      "properties": {
+        "cis": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_pair"
+          }
+        },
+        "unusual_trans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_pair"
+          }
+        }
+      }
+    },
+    "clashes": {
+      "$ref": "#/definitions/clash_report"
+    },
+    "fixside": {
+      "type": "object",
+      "properties": {
+        "detected_missing": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/residue_id"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/atom_name"
+            }
+          }
+        },
+        "detected_unknown": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/residue_id"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/atom_name"
+            }
+          }
+        },
+        "fix": {
+          "type": "string"
+        },
+        "fixed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "clashes": {
+          "$ref": "#/definitions/clash_report"
+        }
+      }
+    },
+    "getss": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/atom_pair"
+      }
+    },
+    "headers": {
+      "type": "object",
+      "properties": {
+        "entry_id": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "resolution": {
+          "type": "number"
+        }
+      }
+    },
+    "inscodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/residue_id"
+      }
+    },
+    "ligands": {
+      "type": "object",
+      "properties": {
+        "detected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "n_removed": {
+          "type": "integer"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "metals": {
+      "type": "object",
+      "properties": {
+        "detected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "removed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "n_removed": {
+          "type": "integer"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "models": {
+      "type": "object",
+      "properties": {
+        "nmodels": {
+          "type": "integer"
+        },
+        "selected": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "object",
+          "properties": {
+            "rmsd": {
+              "type": "number"
+            },
+            "type": {
+              "type": "integer"
+            }
+          }
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "mutateside": {
+      "type": "object",
+      "properties": {
+        "mutated_res": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/residue_id"
+          }
+        },
+        "mutations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "clashes": {
+          "$ref": "#/definitions/clash_report"
+        }
+      }
+    },
+    "rem_hydrogen": {
+      "type": "object",
+      "properties": {
+        "n_detected": {
+          "type": "integer"
+        },
+        "n_removed": {
+          "type": "integer"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "water": {
+      "type": "object",
+      "properties": {
+        "n_detected": {
+          "type": "integer"
+        },
+        "n_removed": {
+          "type": "integer"
+        },
+        "opts": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "stats": {
+      "$ref": "#/definitions/stats"
+    },
+    "final_stats": {
+      "$ref": "#/definitions/stats"
+    },
+    "elapsed_times": {
+      "type": "object",
+      "properties": {
+        "load": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "propertyNames": {
+        "$ref": "#/definitions/command"
+      },
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "mem_sizes": {
+      "type": "object",
+      "properties": {
+        "load": {
+          "type": "number"
+        }
+      },
+      "propertyNames": {
+        "$ref": "#/definitions/command"
+      },
+      "additionalProperties": {
+        "type": "number"
+      }
     }
-}
-
- 
+  },
+  "definitions": {
+    "residue_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{1,4} [A-z]{1,2}[0-9]{1,4}$"
+    },
+    "residue_name": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{1,4}$"
+    },
+    "atom_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{1,4} [A-z]{1,2}[0-9]{1,5}\\.[A-Z]{1,2}[0-9']{0,2}$"
+    },
+    "atom_name": {
+      "type": "string",
+      "pattern": "^[A-Z]{1,2}[0-9']{0,2}$"
+    },
+    "command": {
+      "type": "string",
+      "enum": [
+        "models",
+        "chains",
+        "inscodes",
+        "altloc",
+        "rem_hydrogen",
+        "add_hydrogen",
+        "water",
+        "metals",
+        "ligands",
+        "getss",
+        "amide",
+        "chiral",
+        "chiral_bck",
+        "fixside",
+        "backbone",
+        "cistransbck",
+        "clashes"
+      ]
+    },
+    "atom_pair": {
+      "title": "Pair of atoms with optional distance",
+      "type": "array",
+      "items": [
+        {
+          "$ref": "#/definitions/atom_id"
+        },
+        {
+          "$ref": "#/definitions/atom_id"
+        }
+      ],
+      "additionalItems": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "residue_pair": {
+      "description": "Pair of residues with optional distance",
+      "type": "array",
+      "items": [
+        {
+          "$ref": "#/definitions/residue_id"
+        },
+        {
+          "$ref": "#/definitions/residue_id"
+        }
+      ],
+      "additionaItems": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 3
+    },
+    "stats": {
+      "description": "Structure statistics",
+      "type": "object",
+      "properties": {
+        "biounit": {
+          "type": "boolean"
+        },
+        "ca_only": {
+          "type": "boolean"
+        },
+        "chain_ids": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "[A-z]{1,2}"
+          },
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "models_type": {
+          "type": "object",
+          "properties": {
+            "rmsd": {
+              "type": "number"
+            },
+            "type": {
+              "type": "integer"
+            }
+          }
+        },
+        "nchains": {
+          "type": "integer"
+        },
+        "nmodels": {
+          "type": "integer"
+        },
+        "num_ats": {
+          "type": "integer"
+        },
+        "num_res": {
+          "type": "integer"
+        },
+        "num_wat": {
+          "type": "integer"
+        },
+        "res_hetats": {
+          "type": "integer"
+        },
+        "res_insc": {
+          "type": "integer"
+        },
+        "res_ligands": {
+          "type": "integer"
+        }
+      }
+    },
+    "clash_report": {
+      "type": "object",
+      "properties": {
+        "apolar": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        },
+        "polar_donor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        },
+        "polar_acceptor": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        },
+        "positive": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        },
+        "negative": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        },
+        "severe": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/atom_pair"
+          }
+        }
+      }
+    }
+  }
+} 
