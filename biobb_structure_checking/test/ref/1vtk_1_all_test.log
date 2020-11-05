@@ -1,5 +1,5 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                     =
+=                   BioBB structure checking utility v3.0.3                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -107,9 +107,10 @@ Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_
 2 Backbone breaks found
  SER A149   - PRO A153   
  GLY A264   - PRO A280   
+No unexpected backbone links
 Main chain fixes
 
-                         MODELLER 9.22, 2019/06/19, r11413
+                         MODELLER 9.23, 2019/10/22, r11522
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
@@ -130,61 +131,95 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.82-default x86_64
-Date and time of compilation         : 2019/06/19 13:37:10
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 4.12.14-lp150.12.82-default x86_64
+Date and time of compilation         : 2019/10/22 22:09:02
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2020/02/28 15:43:42
+Job starting time (YY/MM/DD HH:MM:SS): 2020/07/31 16:47:35
 
-Fixing backbone of chain A
+Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
 to protein atoms within 2.30 angstroms
 and protein CA atoms within 10.00 angstroms
 0 atoms in residues without defined topology
 constrained to be rigid bodies
 >> Model assessment by DOPE potential
-DOPE score               : -39386.593750
+DOPE score               : -39012.562500
 
 >> Summary of successfully produced models:
 Filename                          molpdf     DOPE score    GA341 score
 ----------------------------------------------------------------------
-target.B99990001.pdb          1373.91992   -39386.59375        1.00000
+target.B99990001.pdb          1981.94690   -39012.56250        1.00000
 
-Adding SER A149
-Adding SER A150
-Adding HIS A151
-Adding ALA A152
-Adding PRO A153
+Fixing SER A149 - PRO A153
+  Adding SER A149
+  Adding SER A150
+  Adding HIS A151
+  Adding ALA A152
+  Adding PRO A153
 
-Adding GLY A264
-Adding THR A265
-Adding ALA A266
-Adding VAL A267
-Adding PRO A268
-Adding PRO A269
-Adding GLN A270
-Adding GLY A271
-Adding ALA A272
-Adding GLU A273
-Adding PRO A274
-Adding GLN A275
-Adding SER A276
-Adding ASN A277
-Adding ALA A278
-Adding GLY A279
-Adding PRO A280
+Fixing GLY A264 - PRO A280
+  Adding GLY A264
+  Adding THR A265
+  Adding ALA A266
+  Adding VAL A267
+  Adding PRO A268
+  Adding PRO A269
+  Adding GLN A270
+  Adding GLY A271
+  Adding ALA A272
+  Adding GLU A273
+  Adding PRO A274
+  Adding GLN A275
+  Adding SER A276
+  Adding ASN A277
+  Adding ALA A278
+  Adding GLY A279
+  Adding PRO A280
 
-Fixed segments:  A149-A153/1, A264-A280/1
+1 Residues with missing backbone atoms found
+ SER A263   OXT
+1 Backbone breaks found
+ SER A263   - GLY A264   
+No unexpected backbone links
+Consecutive residues too far away to be covalently linked
+ SER A263   - GLY A264  , bond distance    5.152 
 Capping terminal ends
 True terminal residues:  A46,A376
+Terminal residues from backbone breaks:  A263-A264
 Nothing to do
 No caps added
+Fixing missing backbone atoms
+Adding missing backbone atoms
+SER A263
+  Adding new atom OXT
+Fixed 1 backbone atom(s)
+Checking for steric clashes
+1 Steric severe clashes detected
+ GLY A279.O   HIS A283.CG     0.908 A
+7 Steric apolar clashes detected
+ SER A149.O   ALA A152.CB     2.755 A
+ SER A150.CB  SER A345.O      2.379 A
+ GLN A261.OE1 ALA A278.CA     2.099 A
+ ALA A278.O   HIS A283.CD2    1.664 A
+ GLY A279.C   PRO A282.O      2.807 A
+ GLY A279.O   HIS A283.CG     0.908 A
+ PRO A280.CA  HIS A283.CE1    2.690 A
+4 Steric polar_acceptor clashes detected
+ PRO A153.O   GLN A349.OE1    3.023 A
+ GLN A261.OE1 ALA A278.O      3.008 A
+ PRO A269.O   ALA A272.O      2.894 A
+ PRO A280.O   PRO A282.O      2.064 A
+1 Steric polar_donor clashes detected
+ GLY A279.N   ILE A284.N      2.611 A
+No positive clashes detected
+No negative clashes detected
 
 Step 14: cistransbck
 
 Running cistransbck.
-1 cis peptide bonds
-GLY A264   THR A265   Dihedral:    0.849
-No trans peptide bonds with unusual omega dihedrals found
+No cis peptide bonds found
+1 trans peptide bonds with unusual omega dihedrals
+PRO A280   ARG A281   Dihedral:  108.619
 
 Step 15: getss
 
@@ -194,22 +229,30 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-5 Steric apolar clashes detected
+1 Steric severe clashes detected
+ GLY A279.O   HIS A283.CG     0.908 A
+9 Steric apolar clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A
  ALA A118.CA  SER A181.O      2.890 A
- SER A149.O   ALA A152.CB     2.720 A
- ALA A152.CB  GLN A349.OE1    2.802 A
- ARG A247.NH2 GLY A279.CA     2.241 A
-4 Steric polar_acceptor clashes detected
+ SER A149.O   ALA A152.CB     2.755 A
+ SER A150.CB  SER A345.O      2.379 A
+ GLN A261.OE1 ALA A278.CA     2.099 A
+ ALA A278.O   HIS A283.CD2    1.664 A
+ GLY A279.C   PRO A282.O      2.807 A
+ GLY A279.O   HIS A283.CG     0.908 A
+ PRO A280.CA  HIS A283.CE1    2.690 A
+7 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
- PRO A153.O   GLN A349.OE1    3.037 A
+ PRO A153.O   GLN A349.OE1    3.023 A
  LEU A217.O   ARG A220.O      2.862 A
+ GLN A261.OE1 ALA A278.O      3.008 A
+ PRO A269.O   ALA A272.O      2.894 A
+ PRO A280.O   PRO A282.O      2.064 A
 3 Steric polar_donor clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
- ARG A247.NH2 PRO A280.N      2.637 A
  TRP A259.NE1 ARG A293.NH1    3.094 A
+ GLY A279.N   ILE A284.N      2.611 A
 3 Steric positive clashes detected
  LYS A62.NZ   ARG A163.NH1    3.439 A
  ARG A212.NH2 ARG A216.NH2    3.171 A
@@ -248,7 +291,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
-Final Num. atoms:  5079
+Final Num. atoms:  5082
 Small mol ligands found
 ADP A400
 TMP A500

@@ -1,0 +1,37 @@
+{
+    "severe": [
+        {
+            "at1": "#atom_id",
+            "at2": "#atom_id",
+            "dist": 0.0
+        }
+    ],
+    "negative": [
+        {
+            "at1": "#atom_id",
+            "at2": "#atom_id",
+            "dist": 0.0
+        }
+    ],
+    "positive": [
+        {
+            "at1": "#atom_id",
+            "at2": "#atom_id",
+            "dist": 0.0
+        }
+    ],
+    "polar_acceptor": [
+        {
+            "at1": "#atom_id",
+            "at2": "#atom_id",
+            "dist": 0.0
+        }
+    ],
+    "polar_donor": [
+        {
+            "at1": "#atom_id",
+            "at2": "#atom_id",
+            "dist": 0.0
+        }
+    ]
+}
