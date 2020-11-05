@@ -186,7 +186,6 @@ class StructureManager:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
-        
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
