@@ -1,5 +1,5 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                     =
+=                   BioBB structure checking utility v3.0.3                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -91,6 +91,9 @@ No residues with missing or unknown side chain atoms found
 Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+No residues with missing backbone atoms found
+No backbone breaks
+No unexpected backbone links
 Capping terminal ends
 True terminal residues:  A1,A76
 Nothing to do

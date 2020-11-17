@@ -5,7 +5,7 @@ import argparse
 from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.0.2'
+VERSION = '3.0.3'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -23,6 +23,7 @@ DEFAULTS = {
     'non_interactive' : False,
     'atom_limit': 1000000,
     'mem_check': False,
+    'rename_terms': False,
     'options' : ''
 }
 
@@ -91,7 +92,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--modeller_key',
     dest='modeller_key',
-    help='User key for modeller, required for backbone fix, register at https://salilab.org/modeller/registration.html'
+    help='User key for modeller, required for backbone fix, ' +\
+        'register at https://salilab.org/modeller/registration.html'
 )
 
 #Settings, reference data
@@ -114,6 +116,12 @@ CMD_LINE.add_argument(
     help='Output structure. Format PDB'
 )
 
+CMD_LINE.add_argument(
+    '--rename_terms',
+    action="store_true",
+    dest='rename_terms',
+    help='Renames terminal residues to NXXX, CXXX'
+)
 CMD_LINE.add_argument(
     '--json',
     dest='json_output_path',
@@ -237,6 +245,8 @@ DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
     'Do not remove unknown atoms', 'bool')
 DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
+DIALOGS.add_option('fixside', '--rebuild', 'rebuild',\
+    'Rebuild complete side chain', 'bool')
 
 DIALOGS.add_entry('backbone', 'Checks and fixes several backbone issues')
 DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
@@ -247,6 +257,8 @@ DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
     'Adds ACE and NME caps to missing main chain segments (All | None)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
+DIALOGS.add_option('backbone', '--extra_gap', 'extra_gap',\
+    'Replace extra_gap additional flanking residues', int)
 DIALOGS.add_option('backbone', '--no_recheck', 'no_recheck',\
     'Do not re-check after modification', 'bool')
 
@@ -255,6 +267,8 @@ DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
+DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
+    'Rebuild complete side chain', 'bool')
 
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
@@ -267,6 +281,8 @@ DIALOGS.add_option('add_hydrogen', '--no_fix_side', 'no_fix_side',\
     'Do not fix side chains', 'bool')
 DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
+DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
+    'Update atom partial charges', 'bool')
 
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
@@ -368,7 +384,12 @@ MSGS = {
     'MODIF_RESIDUES': 'Modified residues found',
     'ADDING_BCK_ATOMS': 'Adding missing backbone atoms',
     'BCK_ATOMS_FIXED': 'Fixed {} backbone atom(s)',
-    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, skipping backbone rebuilding',
+    'FASTA_MISSING': 'Canonical sequence unavailable, use --sequence seq.fasta, ' +\
+        'skipping backbone rebuilding',
+    'NO_BCK_MISSING': 'No residues with missing backbone atoms found',
+    'NO_BCK_LINKS': 'No unexpected backbone links',
+    'NO_BCK_BREAKS': 'No backbone breaks',
+    'BACKBONE_RECHECK': 'Updating backbone check',
     #cistrasnbck
     'CIS_BONDS': '{} cis peptide bonds',
     'NO_CIS_BONDS': 'No cis peptide bonds found',

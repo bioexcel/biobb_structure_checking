@@ -1,5 +1,5 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                     =
+=                   BioBB structure checking utility v3.0.3                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -157,6 +157,8 @@ Running backbone.
  THR B330   OXT
  THR C330   OXT
  THR D330   OXT
+No backbone breaks
+No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
 4 cis peptide bonds

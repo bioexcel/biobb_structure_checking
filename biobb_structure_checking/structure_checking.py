@@ -7,7 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
-import psutil
+#import psutil
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -15,8 +15,8 @@ import biobb_structure_checking.constants as cts
 from biobb_structure_checking.json_writer import JSONWriter
 from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableError
 
-import biobb_structure_manager.structure_manager as stm
-import biobb_structure_manager.model_utils as mu
+import biobb_structure_checking.structure_manager as stm
+import biobb_structure_checking.model_utils as mu
 
 
 # Main class
@@ -58,7 +58,8 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
             print(
-                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), file=sys.stderr
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), 
+                file=sys.stderr
             )
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
@@ -93,7 +94,8 @@ class StructureChecking():
                 self.summary['final_stats'] = self.strucm.get_stats()
                 try:
                     output_structure_path = self._save_structure(
-                        self.args['output_structure_path']
+                        self.args['output_structure_path'],
+                        self.args['rename_terms']
                     )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
@@ -177,10 +179,12 @@ class StructureChecking():
             self._run_method(meth, opts)
 
     def fixall(self, opts=None):
+        """ Fix all using defaults """
         # TODO Implement method fixall
         print("Fixall not implemented (yet)")
 
     def revert_changes(self):
+        """ revert to original structure, used in Notebooks """
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
         print(cts.MSGS['ALL_UNDO'])
@@ -234,6 +238,7 @@ class StructureChecking():
                 self.summary[command]['error'] = ' '.join(error_status)
 
         if self.args['debug']:
+            import psutil
             self.timings.append([command, time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
@@ -366,7 +371,7 @@ class StructureChecking():
             self.summary['inscodes'].append(mu.residue_id(res))
         return {'ins_codes_list': ins_codes_list}
 
-    def _inscodes_fix(opts, fix_data=None):
+    def _inscodes_fix(self, opts, fix_data=None):
         # TODO implement method _inscodes_fix
         if opts['renum']:
             print("--renum option not implemented (yet)")
@@ -1138,13 +1143,16 @@ class StructureChecking():
                     rem_num += 1
                 self.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
                 fixed_res.append(r_at[0])
-
-        for r_at in to_add:
-            mu.remove_H_from_r(r_at[0], verbose=True)
-            self.strucm.fix_side_chain(r_at)
-            fix_num += 1
-            self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
-            fixed_res.append(r_at[0])
+        if not opts['rebuild']:
+            for r_at in to_add:
+                mu.remove_H_from_r(r_at[0], verbose=True)
+                self.strucm.fix_side_chain(r_at)
+                fix_num += 1
+                self.summary['fixside']['fixed'].append(mu.residue_id(r_at[0]))
+                fixed_res.append(r_at[0])
+        else:
+            self.strucm.rebuild_side_chains(to_add)
+            fixed_res = [r_at[0] for r_at in to_add]
 
         print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
         self.strucm.fixed_side = True
@@ -1285,8 +1293,7 @@ class StructureChecking():
                         form = None
                         input_option, form = input_line.run(form)
                         ion_to_fix[r_at[0]] = form.upper()
-
-        self.strucm.add_hydrogens(ion_to_fix)
+        self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'])
         self.strucm.modified = True
         return False
 # =============================================================================
@@ -1313,9 +1320,10 @@ class StructureChecking():
         print(cts.MSGS['MUTATIONS_TO_DO'])
         for mut in mutations.mutation_list:
             print(mut)
-
-        mutated_res = self.strucm.apply_mutations(mutations)
-
+        if opts['rebuild']:
+            mutated_res = self.strucm.rebuild_mutations(mutations)
+        else:
+            mutated_res = self.strucm.apply_mutations(mutations)
         if not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
@@ -1342,6 +1350,9 @@ class StructureChecking():
                 [res, at_list] = r_at
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
+        else:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_BCK_MISSING'])
 
         #Not bound consecutive residues
         bck_check = self.strucm.get_backbone_breaks()
@@ -1361,6 +1372,9 @@ class StructureChecking():
             fix_data['bck_breaks_list'] = bck_check['bck_breaks_list']
         else:
             fix_data['bck_breaks_list'] = []
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_BCK_BREAKS'])
+
 
         if bck_check['wrong_link_list']:
             print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
@@ -1379,6 +1393,9 @@ class StructureChecking():
                     mu.residue_id(brk[2])
                 ])
             fix_data['wrong_link_list'] = True
+        else:
+            if not self.args['quiet']:
+                print(cts.MSGS['NO_BCK_LINKS'])
 
         if bck_check['not_link_seq_list']:
             print(cts.MSGS['CONSEC_RES_FAR'])
@@ -1413,30 +1430,34 @@ class StructureChecking():
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 
         fix_done = not fix_data['bck_breaks_list']
-
+        fixed_main_res = []
         while not fix_done:
+            if not opts['extra_gap']:
+                opts['extra_gap'] = 0
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_main'],
                 fix_data['bck_breaks_list'],
-                self.args['modeller_key']
+                self.args['modeller_key'],
+                opts['extra_gap']
             )
             if not fixed_main:
                 fix_done = True
                 continue
-            self.summary['backbone']['main_chain_fix'] = fixed_main
-            if fixed_main:
-                print('Fixed segments: ', ', '.join(list(fixed_main)))
-                self.strucm.modified = True
             else:
-                print('No segments fixed')
+                fixed_main_res += fixed_main
 
-            # Force re-checking to update modified residues pointers
-            fix_data = self._backbone_check()
+            self.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
+            if fixed_main:
+                self.strucm.modified = True
+
             if no_int_recheck or not fixed_main or opts['no_recheck']:
                 fix_done = True
+                # Force silent re-checking to update modified residue pointers
+                fix_data = self._backbone_check()
             else:
                 if not self.args['quiet']:
-                    print('BACKBONE_RECHECK')
+                    print(cts.MSGS['BACKBONE_RECHECK'])
+                fix_data = self._backbone_check()
                 fix_done = not fix_data['bck_breaks_list']
 
         # Add CAPS
@@ -1445,7 +1466,7 @@ class StructureChecking():
             fix_data['bck_breaks_list']
         )
 
-        self.summary['backbone']['added_caps'] = fixed_caps
+        self.summary['backbone']['added_caps'] = [mu.residue_id(r) for r in fixed_caps]
 
         if fixed_caps:
             print('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
@@ -1461,15 +1482,15 @@ class StructureChecking():
                 opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
-
-        if fixed_res and not opts['no_check_clashes']:
+        res_to_check = fixed_res + fixed_caps + fixed_main_res
+        if res_to_check and not opts['no_check_clashes']:
             if not self.args['quiet']:
                 print(cts.MSGS['CHECKING_CLASHES'])
-            self.summary['backbone']['clashes'] = self._check_report_clashes(fixed_res)
+            self.summary['backbone']['clashes'] = self._check_report_clashes(res_to_check)
 
         return False
 
-    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, modeller_key):
+    def _backbone_fix_main_chain(self, fix_main_bck, breaks_list, modeller_key, extra_gap):
         print("Main chain fixes")
 
         brk_rnums = [
@@ -1493,7 +1514,7 @@ class StructureChecking():
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return None
+            return []
 
         # Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
@@ -1504,16 +1525,17 @@ class StructureChecking():
             self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
             if not self.args['fasta_seq_path']:
                 print(cts.MSGS['FASTA_MISSING'])
-                return None
+                return []
             self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
+            self.strucm.sequence_data.match_sequence_numbering()
         to_fix = [
             rpair
             for rpair in breaks_list
             if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
-        return self.strucm.fix_backbone_chain(to_fix, modeller_key)
+        return self.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
 
     def _backbone_add_caps(self, add_caps, bck_breaks_list):
         print("Capping terminal ends")
@@ -1545,7 +1567,8 @@ class StructureChecking():
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list('terms', ['Terms'])
-        input_line.add_option_list('brks', ['Breaks'])
+        if bck_breaks_list:
+            input_line.add_option_list('brks', ['Breaks'])
         input_line.add_option_list(
             'resnum', term_rnums, case='sensitive', multiple=True
         )
@@ -1556,11 +1579,11 @@ class StructureChecking():
             return cts.MSGS['UNKNOWN_SELECTION'], add_caps
 
         self.summary['backbone']['add_caps'] = add_caps
-
+        
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return False
+            return []
         elif input_option == 'terms':
             to_fix = true_term
         elif input_option == 'brks':
@@ -1571,7 +1594,7 @@ class StructureChecking():
                 for pair in term_res
                 if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
             ]
-
+            
         return self.strucm.add_main_chain_caps(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
@@ -1594,7 +1617,7 @@ class StructureChecking():
         if input_option == 'none':
             if not self.args['quiet']:
                 print(cts.MSGS['DO_NOTHING'])
-            return False
+            return []
 
         to_fix = [
             r_at
@@ -1706,13 +1729,13 @@ class StructureChecking():
 
         return strucm
 
-    def _save_structure(self, output_structure_path):
+    def _save_structure(self, output_structure_path, rename_terms=False):
         input_line = ParamInput(
             "Enter output structure path",
             self.args['non_interactive']
         )
         output_structure_path = input_line.run(output_structure_path)
-        self.strucm.save_structure(output_structure_path)
+        self.strucm.save_structure(output_structure_path, rename_terms=rename_terms)
         return output_structure_path
 
     def _check_report_clashes(self, residue_list, contact_types=None):

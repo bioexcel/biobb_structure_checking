@@ -1,5 +1,5 @@
 ===============================================================================
-=                   MDWeb structure checking utility v1.1                     =
+=                   BioBB structure checking utility v3.0.3                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -92,6 +92,7 @@ Running backbone.
  GLY A264/1 - PRO A280/1 
  SER A149/2 - PRO A153/2 
  GLY A264/2 - PRO A280/2 
+No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
 No cis peptide bonds found
