@@ -15,6 +15,7 @@ try:
 except:
     sys.exit("Error importing modeller")
 
+# Check for back-compatiblity with biopython < 1.77
 try:
     from Bio.Seq import IUPAC
     has_IUPAC = True
@@ -22,7 +23,7 @@ except ImportError:
     has_IUPAC = False
 
 TMP_BASE_DIR = '/tmp'
-DEBUG = True
+DEBUG = False
 
 class ModellerManager():
     """ Class to handle Modeller calculations """
@@ -90,7 +91,7 @@ class ModellerManager():
                 tgt_seq = tgt_seq[0:len(pdb_seq)]
 
         _write_alin(tgt_seq, templs, alin_file)
-        print(alin_file, knowns)
+
         return self._automodel_run(alin_file, knowns)
 
 

@@ -10,6 +10,8 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 from biobb_structure_checking.model_utils import PROTEIN
+
+# Check for back-compatiblity with biopython < 1.77
 try:
     from Bio.Seq import IUPAC
     has_IUPAC = True
@@ -179,7 +181,10 @@ class SequenceData():
             if strucm.chain_ids[ch_id] != PROTEIN:
                 continue
             #build sequence from frags filling gaps with G
-            seq = MutableSeq('', IUPAC.protein)
+            if has_IUPAC:
+                seq = MutableSeq('', IUPAC.protein)
+            else:
+                seq = MutableSeq('')
             last_pos = 0
             start_pos = 0
             for frag in self.data[ch_id]['pdb'][0]['frgs']:
