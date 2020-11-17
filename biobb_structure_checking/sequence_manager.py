@@ -4,13 +4,17 @@
 import sys
 from Bio.PDB.Polypeptide import PPBuilder
 from typing import List, Dict
-
-from Bio.Seq import Seq, IUPAC, MutableSeq
+from Bio.Seq import Seq, MutableSeq
 from Bio.SeqUtils import IUPACData
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 from biobb_structure_checking.model_utils import PROTEIN
+try:
+    from Bio.Seq import IUPAC
+    has_IUPAC = True
+except ImportError:
+    has_IUPAC = False
 
 class SequenceData():
     """ Class to manage sequence data """
@@ -80,6 +84,8 @@ class SequenceData():
                     print("Warning: sequence data unavailable on cif data")
                 return True
 
+
+
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
@@ -88,12 +94,16 @@ class SequenceData():
                     continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
+                if has_IUPAC:
+                    new_seq = Seq(seqs[i].replace('\n', ''), IUPAC.protein)
+                else:
+                    new_seq = Seq(seqs[i].replace('\n', ''))
                 self.data[ch_id]['can'] = SeqRecord(
-                    Seq(seqs[i].replace('\n', ''), IUPAC.protein),
-                    'csq_' + ch_id,
-                    'csq_' + ch_id,
-                    'canonical sequence chain ' + ch_id
-                )
+                        new_seq,
+                        'csq_' + ch_id,
+                        'csq_' + ch_id,
+                        'canonical sequence chain ' + ch_id
+                    )
                 self.data[ch_id]['can'].features.append(
                     SeqFeature(FeatureLocation(1, len(seqs[i])))
                 )
@@ -188,11 +198,16 @@ class SequenceData():
                     seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
+            if has_IUPAC:
+                new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
+            else:
+                new_seq = Seq(str(seq).replace('\n', ''))
             self.data[ch_id]['can'] = SeqRecord(
-                Seq(str(seq).replace('\n', ''), IUPAC.protein),
+                new_seq,
                 'csq_' + ch_id,
                 'csq_' + ch_id,
-                'canonical sequence chain ' + ch_id
+                'canonical sequence chain ' + ch_id,
+                annotations = {'molecule_type':'protein'}
             )
             self.data[ch_id]['can'].features.append(
                 SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
