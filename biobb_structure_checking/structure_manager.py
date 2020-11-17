@@ -14,7 +14,7 @@ from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
 #from Bio.PDB.PDBIO import PDBIO
-from PDBIO_extended import PDBIO_extended
+from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
