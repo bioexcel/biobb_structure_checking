@@ -84,7 +84,6 @@ class StructureChecking():
             self.fixall(self.args['options'])
         else:
             self._run_method(self.args['command'], self.args['options'])
-
         if not self.args['check_only']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
