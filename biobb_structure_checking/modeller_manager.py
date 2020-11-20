@@ -82,7 +82,7 @@ class ModellerManager():
                         frgs[-1].features[0].location.end,
                         ch_id
                     ),
-                    annotations = {'molecule_type':'protein'}
+                    annotations = {'molecule_type':'protein'} # required for writing PIR aligment
                 )
             )
             knowns.append('templ' + ch_id)
