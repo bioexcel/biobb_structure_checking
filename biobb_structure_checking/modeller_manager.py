@@ -7,13 +7,20 @@ import shutil
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio import pairwise2
-from Bio.Seq import Seq, IUPAC
+from Bio.Seq import Seq
 
 try:
     from modeller import *
     from modeller.automodel import *
 except:
     sys.exit("Error importing modeller")
+
+# Check for back-compatiblity with biopython < 1.77
+try:
+    from Bio.Seq import IUPAC
+    has_IUPAC = True
+except ImportError:
+    has_IUPAC = False
 
 TMP_BASE_DIR = '/tmp'
 DEBUG = False
@@ -23,8 +30,7 @@ class ModellerManager():
     def __init__(self):
         self.tmpdir = TMP_BASE_DIR + "/mod" + str(uuid.uuid4())
         #self.tmpdir = "/tmp/modtest"
-        if DEBUG:
-            print("Using temporary working dir " + self.tmpdir)
+        print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
         self.templ_file = 'templ.pdb'
@@ -59,7 +65,10 @@ class ModellerManager():
             # tuned to open gaps on missing loops
             alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
-            pdb_seq = Seq(alin[0][1], IUPAC.protein)
+            if has_IUPAC:
+                pdb_seq = Seq(alin[0][1], IUPAC.protein)
+            else:
+                pdb_seq = Seq(alin[0][1])
 
             templs.append(
                 SeqRecord(
@@ -72,7 +81,8 @@ class ModellerManager():
                         ch_id,
                         frgs[-1].features[0].location.end,
                         ch_id
-                    )
+                    ),
+                    annotations = {'molecule_type':'protein'} # required for writing PIR aligment
                 )
             )
             knowns.append('templ' + ch_id)
@@ -117,7 +127,8 @@ def _write_alin(tgt_seq, templs, alin_file):
                 tgt_seq,
                 'target',
                 '',
-                'sequence:target:::::::0.00: 0.00'
+                'sequence:target:::::::0.00: 0.00',
+                annotations = {'molecule_type':'protein'}
             )
         ] + templs,
         alin_file,
