@@ -13,16 +13,13 @@ from Bio.PDB.Structure import Structure
 from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
-#from Bio.PDB.PDBIO import PDBIO
-from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
 from biobb_structure_checking.mmb_server import MMBPDBList
-from biobb_structure_checking.mutation_manager import MutationManager
-from biobb_structure_checking.mutation_manager import MutationSet
+from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
