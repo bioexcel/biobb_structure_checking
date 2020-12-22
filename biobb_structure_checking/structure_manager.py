@@ -245,6 +245,7 @@ class StructureManager:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
+            rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():

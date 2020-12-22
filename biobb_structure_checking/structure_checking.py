@@ -84,13 +84,14 @@ class StructureChecking():
             self.fixall(self.args['options'])
         else:
             self._run_method(self.args['command'], self.args['options'])
-        if not self.args['check_only']:
+        if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
                     print(cts.MSGS['FORCE_SAVE_STRUCTURE'])
-                self.strucm.calc_stats()
-                self.strucm.print_stats('Final')
-                self.summary['final_stats'] = self.strucm.get_stats()
+                if not self.args['check_only']:
+                    self.strucm.calc_stats()
+                    self.strucm.print_stats('Final')
+                    self.summary['final_stats'] = self.strucm.get_stats()
                 try:
                     output_structure_path = self._save_structure(
                         self.args['output_structure_path'],
