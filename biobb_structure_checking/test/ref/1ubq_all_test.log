@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.0.3                   =
+=                   BioBB structure checking utility v3.7.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -125,12 +125,12 @@ Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto
 24 Residues requiring selection on adding H atoms
-ASP A21,A32,A39,A52,A58
-GLU A16,A18,A24,A34,A51,A64
-HIS A68
-LYS A6,A11,A27,A29,A33,A48,A63
-ARG A42,A54,A72,A74
-TYR A59
+ ASP A21,A32,A39,A52,A58
+ GLU A16,A18,A24,A34,A51,A64
+ HIS A68
+ LYS A6,A11,A27,A29,A33,A48,A63
+ ARG A42,A54,A72,A74
+ TYR A59
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found

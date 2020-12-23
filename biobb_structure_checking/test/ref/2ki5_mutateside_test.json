@@ -1,0 +1,75 @@
+{
+ "final_stats": {
+  "biounit": false,
+  "ca_only": false,
+  "chain_ids": {
+   "A": 1,
+   "B": 1
+  },
+  "models_type": 0,
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 4959,
+  "num_res": 908,
+  "num_wat": 292,
+  "res_hetats": 296,
+  "res_insc": 0,
+  "res_ligands": 4
+ },
+ "headers": {
+  "entry_id": "2KI5",
+  "keywords": "TRANSFERASE",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.90",
+  "title": "HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION"
+ },
+ "mutateside": {
+  "opts": "--mut Leu49Ile,B:arg51Lys"
+ },
+ "mutateside_clashes": {
+  "apolar": [
+   {
+    "at1": "ILE A49.CG2",
+    "at2": "THR A350.OG1",
+    "dist": 2.8152
+   },
+   {
+    "at1": "ILE B49.CG2",
+    "at2": "THR B350.OG1",
+    "dist": 2.6109
+   },
+   {
+    "at1": "LYS B51.NZ",
+    "at2": "LEU B139.CG",
+    "dist": 2.4031
+   },
+   {
+    "at1": "LYS B51.NZ",
+    "at2": "ILE B143.CD1",
+    "dist": 2.3187
+   }
+  ],
+  "negative": [],
+  "polar_acceptor": [],
+  "polar_donor": [],
+  "positive": [],
+  "severe": []
+ },
+ "stats": {
+  "biounit": false,
+  "ca_only": false,
+  "chain_ids": {
+   "A": 1,
+   "B": 1
+  },
+  "models_type": 0,
+  "nchains": 2,
+  "nmodels": 1,
+  "num_ats": 4961,
+  "num_res": 908,
+  "num_wat": 292,
+  "res_hetats": 296,
+  "res_insc": 0,
+  "res_ligands": 4
+ }
+}

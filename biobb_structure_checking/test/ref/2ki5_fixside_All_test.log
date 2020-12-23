@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.0.3                   =
+=                   BioBB structure checking utility v3.7.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -91,4 +91,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Structure saved on 1ki5_fixside_All_test.pdb
+Structure saved on 2ki5_fixside_All_test.pdb

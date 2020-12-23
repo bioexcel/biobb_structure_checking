@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.0.3                   =
+=                   BioBB structure checking utility v3.7.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
 ===============================================================================
 
@@ -23,6 +23,7 @@ Running models. Options: --select 5
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 5
+#DEBUG Memory used after models: 87.078125 MB 
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  60
@@ -32,3 +33,13 @@ Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  905
 Structure saved on 1ark_models_5_test.pdb
+#DEBUG TIMINGS
+#DEBUG =======
+#DEBUG load           :     1.2259 s ( 98.26%)
+#DEBUG models         :     0.0138 s (  1.10%)
+#DEBUG TOTAL          :     1.2476 s
+
+#DEBUG MEMORY USAGE EVOLUTION
+#DEBUG ======================
+#DEBUG load           : 87.77 MB
+#DEBUG models         : 87.08 MB
