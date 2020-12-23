@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_checking",
-    version="3.7.0",
+    version="3.7.1",
     author="Biobb developers",
     author_email="josep.gelpi@bsc.es",
     description="BioBB_structure_checking performs MDWeb structure checking tool set as a command line utility.",
@@ -23,7 +23,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
     install_requires=['psutil', 'biopython'],
-    python_requires='>=3.5',
+    python_requires='>=3.6',
     classifiers=(
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
