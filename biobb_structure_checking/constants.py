@@ -132,14 +132,14 @@ CMD_LINE.add_argument(
     '-nv', '--quiet',
     action="store_true",
     dest='quiet',
-    help='Reduces output, removing labels and progress info'
+    help='Minimal output, removing labels and progress info'
 )
 
 CMD_LINE.add_argument(
     '-v', '--verbose',
     action="store_true",
     dest='verbose',
-    help='Add labels and progress info'
+    help='Add extra progress info'
 )
 
 
@@ -153,7 +153,7 @@ CMD_LINE.add_argument(
     '--debug',
     dest='debug',
     action='store_true',
-    help='Add debug information'
+    help='Add debug information (timings, resources)'
 )
 
 CMD_LINE.add_argument(

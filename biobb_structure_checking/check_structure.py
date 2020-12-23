@@ -43,7 +43,7 @@ def main():
     if '-h' in args.options or '--help' in args.options:
         cts.DIALOGS.get_parameter(args.command, args.options)    
 
-    args.quiet = not args.verbose
+#    args.quiet = not args.verbose
 
     StructureChecking(base_dir_path, vars(args)).launch()
 
