@@ -10,6 +10,7 @@ __date__ = "$13-jul-2018 15:52:55$"
 
 import sys
 import pydoc
+from os.path import join as opj
 
 import biobb_structure_checking
 import biobb_structure_checking.constants as cts
@@ -32,7 +33,7 @@ def main():
 
     if args.command == 'commands':
         help_str = header()
-        with open(base_dir_path + "/" + cts.COMMANDS_HELP_PATH) as help_file:
+        with open(opj(base_dir_path, cts.COMMANDS_HELP_PATH)) as help_file:
             help_str += help_file.read()
         pydoc.pager(help_str)
         sys.exit(0)

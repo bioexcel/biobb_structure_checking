@@ -42,7 +42,7 @@ def set_defaults(base_dir_path, args):
         args['cache_dir_path'] = CACHE_DIR_DEFAULT_PATH
 
     if 'commands_help_path' not in args or args['commands_help_path'] is None:
-        args['commands_help_path'] = opj(base_dir_path, COMMANDS_HELP_PATH)
+        args['commands_help_path'] = opj(data_dir_path, COMMANDS_HELP_PATH)
 
     if 'fasta_seq_path' not in args:
         args['fasta_seq_path'] = None

@@ -30,7 +30,7 @@ class ModellerManager():
     def __init__(self):
         self.tmpdir = TMP_BASE_DIR + "/mod" + str(uuid.uuid4())
         #self.tmpdir = "/tmp/modtest"
-        print("Using temporary working dir " + self.tmpdir)
+        #print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
         self.templ_file = 'templ.pdb'
