@@ -818,15 +818,15 @@ class StructureChecking():
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
         while fix_data:
             input_line = ParamInput('Fix amide atoms', self.args['non_interactive'])
-        input_line.add_option_all()
-        input_line.add_option_none()
-        input_line.add_option_list(
-            'resnum',
-            sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
-            case='sensitive',
-            multiple=True
-        )
-        input_line.default = 'All'
+            input_line.add_option_all()
+            input_line.add_option_none()
+            input_line.add_option_list(
+                'resnum',
+                sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
+                case='sensitive',
+                multiple=True
+            )
+            input_line.default = 'All'
             input_option, amide_fix = input_line.run(amide_fix)
         
             if input_option == 'error':
