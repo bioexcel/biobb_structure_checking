@@ -41,13 +41,9 @@ def main():
     print(header())
 
     if '-h' in args.options or '--help' in args.options:
-        cts.DIALOGS.get_parameter(args.command, args.options)
-    
-    #Changed default to quiet unless verbose
-    if args.verbose:
-        args.quiet = False
-    if args.quiet is None:
-        args.quiet = True
+        cts.DIALOGS.get_parameter(args.command, args.options)    
+
+    args.quiet = not args.verbose
 
     StructureChecking(base_dir_path, vars(args)).launch()
 

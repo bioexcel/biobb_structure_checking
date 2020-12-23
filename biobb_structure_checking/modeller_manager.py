@@ -30,7 +30,7 @@ DEBUG = False
 class ModellerManager():
     """ Class to handle Modeller calculations """
     def __init__(self):
-        self.tmpdir = opj(TMP_BASE_DIR, "/mod" + str(uuid.uuid4()))
+        self.tmpdir = TMP_BASE_DIR +  "/mod" + str(uuid.uuid4())
         #self.tmpdir = "/tmp/modtest"
         #print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
