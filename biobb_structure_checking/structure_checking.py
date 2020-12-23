@@ -225,12 +225,11 @@ class StructureChecking():
             except AttributeError:
                 sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
 
-            if not self.args['Notebook']:
-                if cts.DIALOGS.exists(command):
-                    opts = cts.DIALOGS.get_parameter(command, opts)
-                else:
-                    opts = {}
-
+            if cts.DIALOGS.exists(command):
+                opts = cts.DIALOGS.get_parameter(command, opts)
+            else:
+                opts = {}
+            
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:
@@ -274,7 +273,7 @@ class StructureChecking():
             )
         )
         return True
-
+    
     def _models_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             select_model = opts
@@ -288,7 +287,7 @@ class StructureChecking():
         )
 
         input_option, select_model = input_line.run(select_model)
-
+        
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], select_model
 
@@ -415,7 +414,7 @@ class StructureChecking():
                 print(alt_str)
 
         return fix_data
-
+    
     def _altloc_fix(self, opts, fix_data=None):
 
         if isinstance(opts, str):
@@ -510,7 +509,7 @@ class StructureChecking():
             self.summary['metals']['detected'].append(mu.residue_num(res))
 
         return fix_data
-
+    
     def _metals_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             remove_metals = opts
@@ -648,7 +647,7 @@ class StructureChecking():
 
         return fix_data
 # =============================================================================
-
+    
     def _ligands_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             remove_ligands = opts
@@ -665,7 +664,7 @@ class StructureChecking():
         )
         input_line.default = 'all'
         input_option, remove_ligands = input_line.run(remove_ligands)
-
+        
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], remove_ligands
 
@@ -725,7 +724,7 @@ class StructureChecking():
         input_line.add_option_yes_no()
         input_line.default = 'yes'
         input_option, remove_h = input_line.run(remove_h)
-
+        
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], remove_h
 
@@ -808,7 +807,7 @@ class StructureChecking():
             )
         return amide_check
 # =============================================================================
-
+    
     def _amide_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
@@ -819,17 +818,17 @@ class StructureChecking():
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
         while fix_data:
             input_line = ParamInput('Fix amide atoms', self.args['non_interactive'])
-            input_line.add_option_all()
-            input_line.add_option_none()
-            input_line.add_option_list(
-                'resnum',
-                sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
-                case='sensitive',
-                multiple=True
-            )
-            input_line.default = 'All'
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option_list(
+            'resnum',
+            sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
+            case='sensitive',
+            multiple=True
+        )
+        input_line.default = 'All'
             input_option, amide_fix = input_line.run(amide_fix)
-
+        
             if input_option == 'error':
                 return cts.MSGS['UNKNOWN_SELECTION'], amide_fix
 
@@ -911,7 +910,7 @@ class StructureChecking():
         )
         input_line.default = 'all'
         input_option, chiral_fix = input_line.run(chiral_fix)
-
+    
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], chiral_fix
 
@@ -1198,7 +1197,7 @@ class StructureChecking():
         return fix_data
 
     def _add_hydrogen_fix(self, opts, fix_data=None):
-
+        
         if not fix_data:
             return False
         if not self.strucm.fixed_side and not opts['no_fix_side']:
@@ -1208,7 +1207,7 @@ class StructureChecking():
             add_h_mode = opts
         else:
             add_h_mode = opts['mode']
-
+        
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
         sel_options = ['auto']
@@ -1314,7 +1313,7 @@ class StructureChecking():
 
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
-
+        
         mutations = self.strucm.prepare_mutations(mut_list)
 
         print(cts.MSGS['MUTATIONS_TO_DO'])
