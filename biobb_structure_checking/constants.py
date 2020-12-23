@@ -227,7 +227,7 @@ DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove All Water molecules')
 
 DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'\
-    ' (will be deprecated in v1.1)')
+    ' (will be deprecated)')
 DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
 
 DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms')
