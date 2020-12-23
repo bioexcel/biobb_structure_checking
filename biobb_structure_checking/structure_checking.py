@@ -161,7 +161,7 @@ class StructureChecking():
         for line in list_file_h:
             if line == "\n" or line[0:1] == '#':
                 continue
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print("\nStep {}: {}".format(i, line))
             data = line.split()
             command = data[0]
@@ -209,7 +209,7 @@ class StructureChecking():
             msg += ' Options: ' + opts_str
             self.summary[command]['opts'] = opts_str
 
-        if not self.args['quiet']:
+        if not self.args['quiet'] or self.args['verbose']:
             print(msg.strip())
 
     # Running checking method
@@ -217,7 +217,7 @@ class StructureChecking():
 
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['CHECK_ONLY_DONE'])
         elif data_to_fix:
             try:
@@ -258,7 +258,7 @@ class StructureChecking():
         print(cts.MSGS['MODELS_FOUND'].format(self.strucm.nmodels))
         self.summary['models'] = {'nmodels': self.strucm.nmodels}
         if self.strucm.nmodels == 1:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['SINGLE_MODEL'])
             return {}
 
@@ -360,7 +360,7 @@ class StructureChecking():
     def _inscodes_check(self):
         ins_codes_list = self.strucm.get_ins_codes()
         if not ins_codes_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_INSCODES_FOUND'])
             return {}
 
@@ -385,7 +385,7 @@ class StructureChecking():
     def _altloc_check(self): #TODO improve output
         alt_loc_res = self.strucm.get_altloc_residues()
         if not alt_loc_res:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_ALTLOC_FOUND'])
             return {}
 
@@ -489,7 +489,7 @@ class StructureChecking():
         met_list = self.strucm.get_metal_atoms()
 
         if not met_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_METALS_FOUND'])
             return {}
 
@@ -534,7 +534,7 @@ class StructureChecking():
             return cts.MSGS['UNKNOWN_SELECTION'], remove_metals
 
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
@@ -576,7 +576,7 @@ class StructureChecking():
         ]
 
         if not wat_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_WATERS'])
             return {}
 
@@ -622,7 +622,7 @@ class StructureChecking():
         lig_list = mu.get_ligands(self.strucm.st, incl_water=False)
 
         if not lig_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_LIGANDS_FOUND'])
             return {}
 
@@ -672,7 +672,7 @@ class StructureChecking():
         self.summary['ligands']['removed'] = {'opt':remove_ligands, 'lst':[]}
 
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
@@ -708,7 +708,7 @@ class StructureChecking():
     def _rem_hydrogen_check(self):
         remh_list = mu.get_residues_with_H(self.strucm.st)
         if not remh_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_RESIDUES_H_FOUND'])
             return {}
 
@@ -747,7 +747,7 @@ class StructureChecking():
     def _getss_check(self):
         SS_bonds = self.strucm.get_SS_bonds()
         if not SS_bonds:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_SS'])
             return {}
         print(cts.MSGS['POSSIBLE_SS'].format(len(SS_bonds)))
@@ -778,13 +778,13 @@ class StructureChecking():
     def _amide_check(self):
         amide_check = self.strucm.check_amide_contacts()
         if 'list' not in amide_check:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_AMIDES'])
             return {}
         self.summary['amide']['n_amides'] = len(amide_check['list'])
 
         if not amide_check['cont_list']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_UNUSUAL_AMIDES'])
             return {}
 
@@ -834,7 +834,7 @@ class StructureChecking():
                 return cts.MSGS['UNKNOWN_SELECTION'], amide_fix
 
             if input_option == 'none':
-                if not self.args['quiet']:
+                if not self.args['quiet'] or self.args['verbose']:
                     print(cts.MSGS['DO_NOTHING'])
                 return False
             to_fix = [
@@ -857,7 +857,7 @@ class StructureChecking():
             self.strucm.modified = True
             fix_data = {}
             if not opts['no_recheck']:
-                if not self.args['quiet']:
+                if not self.args['quiet'] or self.args['verbose']:
                     print(cts.MSGS['AMIDES_RECHECK'])
                 fix_data = self._amide_check()
                 amide_fix = ''
@@ -875,13 +875,13 @@ class StructureChecking():
         chiral_check = self.strucm.check_chiral_sides()
 
         if 'list' not in chiral_check:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_CHIRALS'])
             return {}
         self.summary['chiral']['n_chirals'] = len(chiral_check['list'])
 
         if not chiral_check['res_to_fix']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_WRONG_CHIRAL_SIDE'])
             return {}
 
@@ -916,7 +916,7 @@ class StructureChecking():
             return cts.MSGS['UNKNOWN_SELECTION'], chiral_fix
 
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
@@ -935,7 +935,7 @@ class StructureChecking():
         print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
         if not opts['no_check_clashes']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
             self.summary['chiral_clashes'] = self._check_report_clashes(to_fix)
@@ -951,7 +951,7 @@ class StructureChecking():
     def _chiral_bck_check(self):
         check = self.strucm.get_chiral_bck_list()
         if 'list' not in check:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_BCK_CHIRALS'])
             self.summary['chiral_bck']['n_chirals'] = 0
             return {}
@@ -959,7 +959,7 @@ class StructureChecking():
         self.summary['chiral_bck']['n_chirals'] = len(check['list'])
 
         if not check['res_to_fix']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
             return {}
 
@@ -987,7 +987,7 @@ class StructureChecking():
 #            return
 #
 #        if input_option == 'none':
-#            if not self.args['quiet']:
+#            if not self.args['quiet'] or self.args['verbose']:
 #                print("Nothing to do")
 #        else:
 #            if input_option == 'all':
@@ -1003,7 +1003,7 @@ class StructureChecking():
 #                n += 1
 #            print('Quiral residues fixed {} ({})'.format(chiral_fix, n))
 #            if check_clashes:
-#                if not self.args['quiet']:
+#                if not self.args['quiet'] or self.args['verbose']:
 #                    print("Checking new steric clashes")
 #
 #            self.strucm.modified = True
@@ -1055,7 +1055,7 @@ class StructureChecking():
         extra_at_list = self.strucm.check_extra_atoms()
 
         if not miss_at_list and not extra_at_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print("No residues with missing or unknown side chain atoms found")
             return {}
 
@@ -1106,7 +1106,7 @@ class StructureChecking():
         self.summary['fixside']['fix'] = fix_side
 
         if input_option_fix == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
@@ -1126,7 +1126,7 @@ class StructureChecking():
                 if mu.residue_num(r_at[0]) in fix_side.split(',')
             ]
 
-        if not self.args['quiet']:
+        if not self.args['quiet'] or self.args['verbose']:
             print(cts.MSGS['FIXING_SIDE_CHAINS'])
 
         fix_num = 0
@@ -1173,7 +1173,7 @@ class StructureChecking():
         ion_res_list = self.strucm.get_ion_res_list()
 
         if not ion_res_list:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_SELECT_ADDH'])
             return {'ion_res_list':[]}
 
@@ -1222,7 +1222,7 @@ class StructureChecking():
             return cts.MSGS['UNKNOWN_SELECTION'], add_h_mode
 
         if input_option == "none":
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
 
@@ -1236,7 +1236,7 @@ class StructureChecking():
         }
 
         if add_h_mode == 'auto':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print('Selection: auto')
         else:
             if add_h_mode == 'ph':
@@ -1244,7 +1244,7 @@ class StructureChecking():
                 input_line = ParamInput("pH Value", self.args['non_interactive'])
                 input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
                 input_option, ph_value = input_line.run(ph_value)
-                if not self.args['quiet']:
+                if not self.args['quiet'] or self.args['verbose']:
                     print('Selection: pH', ph_value)
                 for r_at in fix_data['ion_res_list']:
                     res = r_at[0]
@@ -1256,7 +1256,7 @@ class StructureChecking():
             else:
                 if add_h_mode == 'list':
                     ions_list = opts['ions_list']
-                    if not self.args['quiet']:
+                    if not self.args['quiet'] or self.args['verbose']:
                         print('Selection: list')
                     ions_list = ParamInput(
                         "Enter Forms list as [*:]his22hip",
@@ -1270,11 +1270,11 @@ class StructureChecking():
                             ion_to_fix[mut_res['resobj']] = mut_res['new_id']
                 else:
                     if add_h_mode == 'int':
-                        if not self.args['quiet']:
+                        if not self.args['quiet'] or self.args['verbose']:
                             print('Selection: interactive')
                         res_list = fix_data['ion_res_list']
                     elif add_h_mode == 'int_his':
-                        if not self.args['quiet']:
+                        if not self.args['quiet'] or self.args['verbose']:
                             print('Selection: int_his')
                         res_list = [
                             r_at for r_at in fix_data['ion_res_list']
@@ -1325,7 +1325,7 @@ class StructureChecking():
         else:
             mutated_res = self.strucm.apply_mutations(mutations)
         if not opts['no_check_clashes']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['CHECKING_CLASHES'])
 
             self.summary['mutateside_clashes'] = self._check_report_clashes(mutated_res)
@@ -1351,7 +1351,7 @@ class StructureChecking():
                 print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
                 self.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
         else:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_BCK_MISSING'])
 
         #Not bound consecutive residues
@@ -1372,7 +1372,7 @@ class StructureChecking():
             fix_data['bck_breaks_list'] = bck_check['bck_breaks_list']
         else:
             fix_data['bck_breaks_list'] = []
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_BCK_BREAKS'])
 
 
@@ -1394,7 +1394,7 @@ class StructureChecking():
                 ])
             fix_data['wrong_link_list'] = True
         else:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_BCK_LINKS'])
 
         if bck_check['not_link_seq_list']:
@@ -1455,7 +1455,7 @@ class StructureChecking():
                 # Force silent re-checking to update modified residue pointers
                 fix_data = self._backbone_check()
             else:
-                if not self.args['quiet']:
+                if not self.args['quiet'] or self.args['verbose']:
                     print(cts.MSGS['BACKBONE_RECHECK'])
                 fix_data = self._backbone_check()
                 fix_done = not fix_data['bck_breaks_list']
@@ -1484,7 +1484,7 @@ class StructureChecking():
             )
         res_to_check = fixed_res + fixed_caps + fixed_main_res
         if res_to_check and not opts['no_check_clashes']:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['CHECKING_CLASHES'])
             self.summary['backbone']['clashes'] = self._check_report_clashes(res_to_check)
 
@@ -1512,7 +1512,7 @@ class StructureChecking():
         self.summary['backbone']['breaks']['option_selected'] = fix_main_bck
 
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return []
 
@@ -1581,7 +1581,7 @@ class StructureChecking():
         self.summary['backbone']['add_caps'] = add_caps
         
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return []
         elif input_option == 'terms':
@@ -1615,7 +1615,7 @@ class StructureChecking():
         self.summary['backbone']['missing_atoms']['selected'] = fix_back
 
         if input_option == 'none':
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return []
 
@@ -1625,7 +1625,7 @@ class StructureChecking():
             if mu.residue_num(r_at[0]) in fix_back.split(',') or input_option == 'all'
         ]
 
-        if not self.args['quiet']:
+        if not self.args['quiet'] or self.args['verbose']:
             print(cts.MSGS['ADDING_BCK_ATOMS'])
 
         fix_num = 0
@@ -1672,7 +1672,7 @@ class StructureChecking():
                     round(float(dih), 3)
                 ])
         else:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_CIS_BONDS'])
 
         if lowtrans_backbone_list:
@@ -1689,7 +1689,7 @@ class StructureChecking():
                     mu.residue_id(res1), mu.residue_id(res2), round(float(dih), 3)
                 ])
         else:
-            if not self.args['quiet']:
+            if not self.args['quiet'] or self.args['verbose']:
                 print(cts.MSGS['NO_LOWTRANS_BONDS'])
 
         return {}
@@ -1768,7 +1768,7 @@ class StructureChecking():
                         'dist': round(float(np.sqrt(clash_list[cls][rkey][2])), 4)
                     })
             else:
-                if not self.args['quiet']:
+                if not self.args['quiet'] or self.args['verbose']:
                     print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 

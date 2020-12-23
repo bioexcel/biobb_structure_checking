@@ -129,11 +129,19 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
-    '--quiet',
+    '-nv', '--quiet',
     action="store_true",
     dest='quiet',
     help='Reduces output, removing labels and progress info'
 )
+
+CMD_LINE.add_argument(
+    '-v', '--verbose',
+    action="store_true",
+    dest='verbose',
+    help='Add labels and progress info'
+)
+
 
 CMD_LINE.add_argument(
     '--limit',

@@ -4,6 +4,8 @@ import sys
 import os
 import uuid
 import shutil
+from os.path import join as opj
+
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio import pairwise2
@@ -28,7 +30,7 @@ DEBUG = False
 class ModellerManager():
     """ Class to handle Modeller calculations """
     def __init__(self):
-        self.tmpdir = TMP_BASE_DIR + "/mod" + str(uuid.uuid4())
+        self.tmpdir = opj(TMP_BASE_DIR, "/mod" + str(uuid.uuid4()))
         #self.tmpdir = "/tmp/modtest"
         #print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
@@ -44,7 +46,7 @@ class ModellerManager():
 
     def build(self, target_model, target_chain, extra_NTerm_res):
         """ Prepares Modeller input and builds the model """
-        alin_file = self.tmpdir + "/alin.pir"
+        alin_file = opj(self.tmpdir, "alin.pir")
         tgt_seq = self.sequences.data[target_chain]['can'].seq
         #triming N-term of canonical seq
         pdb_seq = self.sequences.data[target_chain]['pdb'][target_model]['frgs'][0].seq
