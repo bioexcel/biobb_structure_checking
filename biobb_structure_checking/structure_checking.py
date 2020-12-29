@@ -1482,6 +1482,12 @@ class StructureChecking():
                 opts['fix_back'],
                 fix_data['miss_bck_at_list']
             )
+        if not isinstance(fixed_res, list):
+            fixed_res = []
+        if not isinstance(fixed_caps, list):
+            fixed_caps = []
+        if not isinstance(fixed_main_res, list):
+            fixed_main_res = []
         res_to_check = fixed_res + fixed_caps + fixed_main_res
         if res_to_check and not opts['no_check_clashes']:
             if not self.args['quiet']:
@@ -1530,9 +1536,13 @@ class StructureChecking():
                     
                 read_ok =self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
                 if not read_ok:
-                        self.args['fasta_seq_path'] = None
+                    self.args['fasta_seq_path'] = None
+                if self.args['non_interactive'] and not read_ok:
+                    print(cts.MSGS['FASTA_MISSING'])
+                    return []
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
             self.strucm.sequence_data.match_sequence_numbering()
+        
         to_fix = [
             rpair
             for rpair in breaks_list
