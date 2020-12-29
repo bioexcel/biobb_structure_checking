@@ -953,7 +953,7 @@ class StructureManager:
             ch_to_fix.add(brk[0].get_parent().id)
 
         modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
-
+        
         self.update_internals()
 
         return modeller_result
@@ -970,8 +970,8 @@ class StructureManager:
         """ Runs modeller """
         # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
         if modeller_key:
-            os.environ['KEY_MODELLER9v23'] = modeller_key
-        from biobb_structure_checking.modeller_manager import ModellerManager
+            os.environ['KEY_MODELLER9v25'] = modeller_key
+        from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -995,7 +995,11 @@ class StructureManager:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain/model {}/{}".format(ch_id, mod.id))
 
-                model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                try:
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                except NoCanSeqError as e:
+                    print(e.message)
+                    continue
 
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
@@ -1372,3 +1376,4 @@ class NotEnoughAtomsError(Error):
 class ParseError(Error):
     def __init__(self, err_id, err_txt):
         self.message = '{} ({}) found when parsing input structure'.format(err_id, err_txt)
+

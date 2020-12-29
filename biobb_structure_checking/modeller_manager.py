@@ -46,8 +46,13 @@ class ModellerManager():
 
     def build(self, target_model, target_chain, extra_NTerm_res):
         """ Prepares Modeller input and builds the model """
-        alin_file = opj(self.tmpdir, "alin.pir")
+        alin_file = self.tmpdir + "/alin.pir"
+        
+        if not self.sequences.has_canonical[target_chain]:
+            raise NoCanSeqError(target_chain)
+        
         tgt_seq = self.sequences.data[target_chain]['can'].seq
+        
         #triming N-term of canonical seq
         pdb_seq = self.sequences.data[target_chain]['pdb'][target_model]['frgs'][0].seq
         nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
@@ -136,3 +141,7 @@ def _write_alin(tgt_seq, templs, alin_file):
         alin_file,
         'pir'
     )
+
+class NoCanSeqError(Exception):
+    def __init__(self, ch_id):
+        self.message = 'No canonical sequence found for chain {}. Check it is defined in FASTA header (>anyId_A,B,...) or use mmCif input'.format(ch_id)
