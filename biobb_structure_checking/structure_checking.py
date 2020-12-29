@@ -1518,15 +1518,19 @@ class StructureChecking():
 
         # Checking for canonical sequence
         if not self.strucm.sequence_data.has_canonical:
-            input_line = ParamInput(
-                "Enter canonical sequence path (FASTA)",
-                self.args['non_interactive']
-            )
-            self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
-            if not self.args['fasta_seq_path']:
-                print(cts.MSGS['FASTA_MISSING'])
-                return []
-            self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+            read_ok = False
+            while not read_ok:
+                input_line = ParamInput(
+                    "Enter canonical sequence path (FASTA)",
+                    self.args['non_interactive']
+                )
+                self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
+                if not self.args['fasta_seq_path']:
+                    print(cts.MSGS['FASTA_MISSING'])
+                    
+                read_ok =self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                if not read_ok:
+                        self.args['fasta_seq_path'] = None
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
             self.strucm.sequence_data.match_sequence_numbering()
         to_fix = [

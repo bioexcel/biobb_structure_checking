@@ -38,6 +38,7 @@ class SequenceData():
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
         """ Loads canonical sequence from external FASTA file"""
+        read_ok = True
         self.fasta = []
         if fasta_sequence_path:
             try:
@@ -45,6 +46,11 @@ class SequenceData():
                     self.fasta.append(record)
             except IOError:
                 sys.exit("Error loading FASTA")
+        if not self.fasta:
+            print("WARNING: No valid FASTA formatted sequences found in {} ".format(fasta_sequence_path))
+            read_ok = False
+        return read_ok
+        
 
     def read_sequences(self, strucm, clean=True, cif_warn=False):
         """ Extracts sequences """
