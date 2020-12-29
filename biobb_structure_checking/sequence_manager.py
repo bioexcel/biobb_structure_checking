@@ -50,7 +50,7 @@ class SequenceData():
         """ Extracts sequences """
         if clean:
             self.data = {}
-            self.has_canonical = False
+            self.has_canonical = {}
 
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
@@ -116,8 +116,14 @@ class SequenceData():
                 for chn in chids[i].split(','):
                     if chn in strucm.chain_ids:
                         self.data[ch_id]['chains'].append(chn)
-
-        self.has_canonical = True
+        
+        self.has_canonical = {}
+        for ch_id in strucm.chain_ids:
+            if strucm.chain_ids[ch_id] != PROTEIN:
+                continue
+            self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
+            if not self.has_canonical[ch_id]:
+                print("Warning, no canonical sequence available for chain {}".format(ch_id))
         return False
 
     def read_structure_seqs(self, strucm):
@@ -159,9 +165,11 @@ class SequenceData():
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """
-        if not self.has_canonical:
+        if not hasattr(self, 'has_canonical'):
             return False
         for ch_id in self.data:
+            if ch_id not in self.has_canonical or not self.has_canonical[ch_id]:
+                continue
             for mod_id in self.data[ch_id]['pdb']:
                 frgs = self.data[ch_id]['pdb'][mod_id]['frgs']
                 self.data[ch_id]['pdb'][mod_id]['match_numbering'] = True
@@ -180,6 +188,7 @@ class SequenceData():
         """ Fakes a canonical sequence to support modeller use
             in fixside and mutateside --rebuild """
         self.read_structure_seqs(strucm)
+        self.has_canonical = {}
         for ch_id in strucm.chain_ids:
             if strucm.chain_ids[ch_id] != PROTEIN:
                 continue
@@ -223,5 +232,4 @@ class SequenceData():
                 SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
             )
             self.data[ch_id]['chains'].append(ch_id)
-
-        self.has_canonical = True
+            self.has_canonical[ch_id] = True
