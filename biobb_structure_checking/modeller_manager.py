@@ -30,8 +30,7 @@ DEBUG = False
 class ModellerManager():
     """ Class to handle Modeller calculations """
     def __init__(self):
-        self.tmpdir = TMP_BASE_DIR +  "/mod" + str(uuid.uuid4())
-        #self.tmpdir = "/tmp/modtest"
+        self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
         #print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
@@ -46,7 +45,7 @@ class ModellerManager():
 
     def build(self, target_model, target_chain, extra_NTerm_res):
         """ Prepares Modeller input and builds the model """
-        alin_file = self.tmpdir + "/alin.pir"
+        alin_file = opj(self.tmpdir, "alin.pir")
         
         if not self.sequences.has_canonical[target_chain]:
             raise NoCanSeqError(target_chain)

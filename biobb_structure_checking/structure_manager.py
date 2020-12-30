@@ -2,6 +2,7 @@
 """
 import warnings
 import os
+from os.path import join as opj
 import sys
 import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
@@ -55,7 +56,8 @@ class StructureManager:
             pdb_server: str = 'ftp://ftp.wwpdb.org',
             cache_dir: str = 'tmpPDB',
             file_format: str = 'mmCif',
-            fasta_sequence_path: str = ''
+            fasta_sequence_path: str = '',
+            templates = None
         ) -> None:
         """ 
             Class constructor. Sets an empty object and loads a structure
@@ -123,12 +125,42 @@ class StructureManager:
         self.res_library = ResidueLib(res_library_path)
         
         
-        self.input_format = self._load_structure_file(
+        self.st, self.headers, self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
-
+        
         if fasta_sequence_path:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
+
+        if templates:
+            template_list = templates.split(',')
+            print("Loading requested templates")
+            self.templates = {}
+            for templ in template_list:
+                st, headers, input_format = self._load_structure_file(
+                    templ,
+                    cache_dir,
+                    pdb_server,
+                    file_format
+                )
+                i = 1
+                for res in st.get_residues():
+                    res.index = i
+                    if type(res).__name__ == 'DisorderedResidue':
+                        for ch_r in res.child_dict:
+                            res.child_dict[ch_r].index = i
+                    i += 1
+                sequence_data = SequenceData()
+                sequence_data.read_structure_seqs(st)
+                self.templates[templ] = {
+                    'st': st,
+                    'sequence_data':sequence_data,
+                    'headers': headers,
+                    'format': file_format
+                }
+                print(templ)
+                print(vars(sequence_data))
+
 
         # Checking models type according to RMS among models
         self.nmodels = len(self.st)
@@ -175,16 +207,16 @@ class StructureManager:
         warnings.simplefilter('ignore', BiopythonWarning)
 
         try:
-            self.st = parser.get_structure('st', real_pdb_path)
+            st = parser.get_structure('st', real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
         if input_format == 'pdb':
-            self.headers = parse_pdb_header(real_pdb_path)
+            headers = parse_pdb_header(real_pdb_path)
         else:
-            self.headers = MMCIF2Dict(real_pdb_path)
-        return input_format
+            headers = MMCIF2Dict(real_pdb_path)
+        return st, headers, input_format
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """
@@ -505,7 +537,7 @@ class StructureManager:
         self.modified_residue_list = []
         for i in range(0, len(self.all_residues)-1):
             res1 = self.all_residues[i]
-            res2 = self.all_residues[i+1]
+            res2 = self.all_residues[i + 1]
             if not mu.same_chain(res1, res2):
                 continue
             if mu.is_hetatm(res1) or mu.is_hetatm(res2):
@@ -945,18 +977,23 @@ class StructureManager:
             self,
             brk_list: Iterable[Atom],
             modeller_key: str = '',
-            extra_gap: int=0
+            extra_gap: int=0,
+            templates=None
         ) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0, templates=templates)
         
         self.update_internals()
 
         return modeller_result
+    
+    def _load_bck_template(templ_path):
+        pass
+
 
     def run_modeller(
             self,
@@ -965,7 +1002,8 @@ class StructureManager:
             modeller_key = '',
             extra_gap: int = 0,
             extra_NTerm: int = 0,
-            sequence_data = None
+            sequence_data = None,
+            templates = None
         ):
         """ Runs modeller """
         # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
@@ -978,6 +1016,7 @@ class StructureManager:
             sequence_data = self.sequence_data
 
         mod_mgr.sequences = sequence_data
+        
 
         modif_residues = []
 
@@ -1004,7 +1043,7 @@ class StructureManager:
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
                     'model_st',
-                    mod_mgr.tmpdir + "/" + model_pdb['name']
+                    opj(mod_mgr.tmpdir, model_pdb['name'])
                 )
 
                 modif_set_residues = self.merge_structure(
@@ -1305,16 +1344,6 @@ class StructureManager:
         mutated_res = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, extra_NTerm, mutated_sequence_data)
 
         self.update_internals()
-#        mutated_res = []
-#        for frag in (modeller_result):
-#            m = re.search('(.*)-(.*)/(.*)', frag)
-#            mod, ch, start_res, end_res  = \
-#                int(m.group(3)) - 1, \
-#                m.group(1)[:1], \
-#                int(m.group(1)[1:]), \
-#                int(m.group(2)[1:])
-#            for i in range(start_res, end_res + 1):
-#                mutated_res.append(self.st[mod][ch][i])
         return mutated_res
 
     def invert_amide_atoms(self, res: Residue):

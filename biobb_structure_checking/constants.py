@@ -78,6 +78,12 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--use_templates',
+    dest='templates',
+    help='Additional template(s) for backbone reconstruction (comma separated, format as -i)'
+)
+
+CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
     help='Server for retrieving structures (default|MMB)'

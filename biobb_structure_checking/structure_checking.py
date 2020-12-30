@@ -1725,7 +1725,8 @@ class StructureChecking():
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
-            fasta_sequence_path=fasta_seq_path
+            fasta_sequence_path=fasta_seq_path,
+            templates=self.args['templates']
         )
 
         if verbose:
