@@ -5,7 +5,9 @@ import sys
 from Bio.PDB.Polypeptide import PPBuilder
 from typing import List, Dict
 
-from Bio.Seq import Seq, IUPAC, MutableSeq
+from Bio.Seq import Seq, MutableSeq
+#Deprecated in Biopython 1.78
+from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
@@ -169,6 +171,7 @@ class SequenceData():
             if strucm.chain_ids[ch_id] != PROTEIN:
                 continue
             #build sequence from frags filling gaps with G
+            #Warning IUPAC deprecated in Biopython 1.78
             seq = MutableSeq('', IUPAC.protein)
             last_pos = 0
             start_pos = 0
@@ -188,6 +191,7 @@ class SequenceData():
                     seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
+            #Warning IUPAC deprecated in Biopython 1.78
             self.data[ch_id]['can'] = SeqRecord(
                 Seq(str(seq).replace('\n', ''), IUPAC.protein),
                 'csq_' + ch_id,

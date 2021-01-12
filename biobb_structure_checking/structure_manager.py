@@ -14,7 +14,6 @@ from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
 #from Bio.PDB.PDBIO import PDBIO
-from PDBIO_extended import PDBIO_extended
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
@@ -26,6 +25,7 @@ from biobb_structure_checking.mutation_manager import MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
+from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 
 CISTHRES = 20  # TODO check vaules with pdb checking
