@@ -74,15 +74,13 @@ class StructureChecking():
 
     def launch(self):
         """ Main method to run checking"""
-        if self.args['command'] == 'load':
-            sys.exit()
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
             self.checkall(self.args['options'])
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
-        else:
+        elif self.args['command'] != 'load':
             self._run_method(self.args['command'], self.args['options'])
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
@@ -249,6 +247,27 @@ class StructureChecking():
             )
 # ==============================================================================
 
+    def sequences(self, opts=None):
+        """ direct entry to run sequences """
+        self._run_method('sequences', opts)
+        
+    def _sequences_check(self):
+        if self.strucm.sequence_data.has_canonical:
+            print('Canonical sequence')
+            can_seq = self.strucm.sequence_data.get_canonical()
+            print(can_seq)
+            pdb_seq = self.strucm.sequence_data.get_pdbseq()
+            print('Structure sequence')
+            print(pdb_seq)
+            self.summary['FASTA'] = {
+                'canonical': can_seq,
+                'structure': pdb_seq
+            }
+        else:
+            print(cts.MSGS['NO_CANONICAL'])
+            
+        return {}
+        
     def models(self, opts=None):
         """ direct entry to run models command """
         self._run_method('models', opts)

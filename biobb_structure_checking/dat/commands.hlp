@@ -10,6 +10,8 @@ load:         Stores structure on local cache and provide basic statistics
 
 1. System Configuration
 =======================
+sequences 
+    Print canonical and structure sequences in FASTA format
 models [--select model_num]
     Detect/Select Models
 chains [--select chain_ids]

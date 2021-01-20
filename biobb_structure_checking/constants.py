@@ -300,10 +300,12 @@ DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
+DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
+
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
 
 MSGS = {
     #management
@@ -323,6 +325,8 @@ MSGS = {
     'COMMAND_NOT_FOUND': 'Error: {} command unknown or not implemented',
     'FIX_COMMAND_NOT_FOUND': 'Error: {} command fix not implemented',
     'CHECK_ONLY_DONE': 'Running  check_only. Nothing else to do.',
+    #sequences
+    'NO_CANONICAL': 'Sequences command requires either mmCIF input or --sequence',
     #models
     'MODELS_FOUND': '{} Model(s) detected',
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',
