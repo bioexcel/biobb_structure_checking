@@ -619,7 +619,7 @@ class StructureManager:
 
     def get_stats(self) -> Dict[str, Union[int, Union[int, Dict[str, Union[int, float]]], Dict[str, Residue], bool]]:
         """
-         Returns a dict with calculates statistics
+         Returns a dict with calculated statistics
 
          Returns:
             Dict as {}
@@ -638,7 +638,7 @@ class StructureManager:
             'ca_only': self.ca_only,
             'biounit': self.biounit
         }
-
+    
     def get_term_res(self) -> List[Tuple[str, Residue]]:
         term_res = []
         for res in self.all_residues:
