@@ -9,7 +9,7 @@ VERSION = '3.7.3'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
-RES_LIBRARY_DEFAULT_PATH = 'all_amino03.in'
+RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'

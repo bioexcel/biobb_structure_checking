@@ -21,7 +21,7 @@
             "HIE": "HIS",
             "HID": "HIS",
             "HIP": "HIS",
-            "CYx": "CYS",
+            "CYX": "CYS",
             "CYM": "CYM",
             "ARN": "ARG",
             "LYN": "LYS",
@@ -2381,35 +2381,198 @@
             },
             "DG": {
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
-                "polar_donor_atoms": ["N2"]
+                "polar_donor_atoms": ["N2"],
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
+                "mutation_rules": {
+                    "DA":{
+                        "Del": ["N2", "O6"],
+                        "Add": ["N6"],
+                        "Mov": []
+                    },
+                    "DC":{
+                        "Del": ["N1","C2","N3","C4","C5","C6","O6","N2","N7"],
+                        "Add": ["C2","O2","N3","C4","N4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    },
+                    "DG":{},
+                    "DT":{
+                        "Del": ["N1","C2","N3","C4","C5","C6","O6","N2","N7"],
+                        "Add": ["C2","O2","N3","C4","O4","C5","C7"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    }
+                }
             },
             "DC": {
                 "polar_acceptor_atoms": ["N3"],
-                "polar_donor_atoms": ["N4"]
+                "polar_donor_atoms": ["N4"],
+                "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6"],
+                "mutation_rules": {
+                    "DA":{
+                        "Del": ["C2","O2","N3","C4","O4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","N6"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "DC":{},
+                    "DG":{
+                        "Del": ["C2","O2","N3","C4","O4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","O6","N2"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "DT":{
+                        "Mov": ["N4-O4"],
+                        "Add": ["C7"],
+                        "Del": []
+                    }
+                }
             },
             "DA": {
                 "polar_acceptor_atoms": ["N7", "N3", "N1"],
-                "polar_donor_atoms": ["N6"]
+                "polar_donor_atoms": ["N6"],
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N7","C8","N9"],
+                "mutation_rules": {
+                    "DA":{},
+                    "DC":{
+                        "Del": ["C2","N3","C4","C5","C6","N6","N7"],
+                        "Add": ["C2","O2","N3","C4","N4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    },
+                    "DG":{
+                        "Del": ["N6"],
+                        "Add": ["N2", "O6"],
+                        "Mov": []
+                    },
+                    "DT":{
+                        "Del": ["C2","N3","C4","C5","C6","N6","N7"],
+                        "Add": ["C2","O2","N3","C4","O4","C5","C7"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    }
+                }
             },
             "DT": {
                 "polar_acceptor_atoms": ["O4"],
-                "polar_donor_atoms": ["N3"]
+                "polar_donor_atoms": ["N3"],
+                "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6","C7"],
+                "mutation_rules": {
+                    "DA":{
+                        "Del": ["C2","O2","N3","C4","N4","C5","C7"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","N6"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "DC":{
+                        "Mov": ["O4-N4"],
+                        "Del": ["C7"],
+                        "Add": []
+                    },
+                    "DG":{
+                        "Del": ["C2","O2","N3","C4","N4","C5","C7"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","O6","N2"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "DT":{},
+                    "DU":{
+                        "Del": ["C7"],
+                        "Add": [],
+                        "Mov": []
+                    }
+                }
             },
             "G": {
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
-                "polar_donor_atoms": ["N2"]
+                "polar_donor_atoms": ["N2"],
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
+                "mutation_rules": {
+                    "A":{
+                        "Del": ["N2", "O6"],
+                        "Add": ["N6"],
+                        "Mov": []
+                    },
+                    "C":{
+                        "Del": ["N1","C2","N3","C4","C5","C6","O6","N2","N7"],
+                        "Add": ["C2","O2","N3","C4","N4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    },
+                    "G":{},
+                    "U":{
+                        "Del": ["N1","C2","N3","C4","C5","C6","O6","N2","N7"],
+                        "Add": ["C2","O2","N3","C4","O4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    }
+                }
             },
             "C": {
                 "polar_acceptor_atoms": ["N3"],
-                "polar_donor_atoms": ["N4"]
+                "polar_donor_atoms": ["N4"],
+                "side_atoms":  ["C1","C2","O2","N3","C4","O4","C5","C6"],
+                "mutation_rules": {
+                    "A":{
+                        "Del": ["C2","O2","N3","C4","O4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","N6"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "C":{},
+                    "G":{
+                        "Del": ["C2","O2","N3","C4","O4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","O6","N2"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "U":{
+                        "Mov": ["N4-O4"],
+                        "Add": [],
+                        "Del": []
+                    }
+
+                }
             },
             "A": {
                 "polar_acceptor_atome": ["N7", "N3", "N1"],
-                "polar_donor_atoms": ["N6"]
+                "polar_donor_atoms": ["N6"],
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N2","N7","C8","N9"],
+                "mutation_rules": {
+                    "A":{},
+                    "C":{
+                        "Del": ["C2","N3","C4","C5","C6","N6","N7"],
+                        "Add": ["C2","O2","N3","C4","N4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    },
+                    "G":{
+                        "Del": ["N6"],
+                        "Add": ["N2", "O6"],
+                        "Mov": []
+                    },
+                    "U":{
+                        "Del": ["C2","N3","C4","C5","C6","N6","N7"],
+                        "Add": ["C2","O2","N3","C4","O4","C5"],
+                        "Mov": ["N9-N1","C8-C6"]
+                    }
+                }
             },
             "U": {
                 "polar_acceptor_atoms": ["O4"],
-                "polar_donor_atoms": ["N3"]
+                "polar_donor_atoms": ["N3"],
+                "side_atoms":  ["C1","C2","O2","N3","C4","N4","C5","C6"],
+                "mutation_rules": {
+                    "A":{
+                        "Del": ["C2","O2","N3","C4","N4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","N6"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "C":{
+                        "Mov": ["N4-O4"],
+                        "Del": [],
+                        "Add": []
+                    },
+                    "G":{
+                        "Del": ["C2","O2","N3","C4","N4","C5"],
+                        "Add": ["N1","C2","N3","C4","C5","C6","N7","O6","N2"],
+                        "Mov": ["N1-N9", "C6-C8"]
+                    },
+                    "U":{},
+                    "T":{
+                        "Add": ["C7"],
+                        "Del": [],
+                        "Mov": []
+                    }
+                 }
             }  
         },
         "distances": {

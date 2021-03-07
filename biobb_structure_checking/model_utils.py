@@ -98,21 +98,45 @@ def atom_id(atm, models='auto'):
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
 # Id Checks
-def protein_residue_check(res):
+def _protein_residue_check(res_id):
     """
     Checks whether is a valid protein residue id, either one or three letter code
     return upper case three-letter code
     """
-    res = res.upper()
+    res_id = res_id.upper()
     rid = ''
-    if res in THREE_LETTER_RESIDUE_CODE.keys():
+    if res_id in THREE_LETTER_RESIDUE_CODE.keys():
         rid = THREE_LETTER_RESIDUE_CODE[res]
-    elif res in ONE_LETTER_RESIDUE_CODE.keys():
-        rid = res
+    elif res_id in ONE_LETTER_RESIDUE_CODE.keys():
+        rid = res_id
     else:
         return False
 
     return rid
+
+def _na_residue_check(rid):
+    rid = rid.upper()
+    if rid in DNA_RESIDUE_CODE or rid in RNA_RESIDUE_CODE:
+        return rid
+    else:
+        return False
+    
+def residue_check(res):
+    """
+    Checks whether is a valid residue id, 
+    """
+    res_ok = _protein_residue_check(res)
+    if not res_ok:
+        res_ok = _na_residue_check(res)
+    return res_ok
+
+def is_protein(res):
+    rid = res.get_resname()
+    return (res in THREE_LETTER_RESIDUE_CODE or res in ONE_LETTER_RESIDUE_CODE)
+
+def is_na(res):
+    rid = res.get_resname()
+    return (res in DNA_RESIDUE_CODE or res in RNA_RESIDUE_CODE)
 
 def same_residue(at1, at2):
     """
