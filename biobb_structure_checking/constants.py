@@ -305,7 +305,7 @@ DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences','na_topology']
 
 MSGS = {
     #management
@@ -412,5 +412,7 @@ MSGS = {
     'CLASHES_DETECTED': '{} Steric {} clashes detected',
     'NO_CLASHES_DETECTED': 'No {} clashes detected',
     #load
-    'STRUCTURE_LOADED': 'Structure {} loaded'
+    'STRUCTURE_LOADED': 'Structure {} loaded',
+    #NA related
+    'NO_NA': 'No NA chains found, skipping'
 }
