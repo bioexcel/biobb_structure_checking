@@ -315,7 +315,7 @@ def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=Tr
     clash_list['severe'] = {}
     for r_pair in rr_list:
         res1, res2 = r_pair[0:2]
-
+        
         if (res1 in r_list or res2 in r_list) and not is_wat(res1) and not is_wat(res2):
             c_list = check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models, severe)
             rkey = residue_id(res1) + '-' + residue_id(res2)

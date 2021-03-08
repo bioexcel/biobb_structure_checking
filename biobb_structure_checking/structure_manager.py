@@ -219,6 +219,7 @@ class StructureManager:
         self.all_residues = []
         for res in self.st.get_residues():
             res.index = i
+            res.resname = res.resname.strip()
             if type(res).__name__ == 'DisorderedResidue':
                 for ch_r in res.child_dict:
                     res.child_dict[ch_r].index = i

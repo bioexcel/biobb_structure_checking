@@ -123,7 +123,6 @@ class MutationSet():
                 else:
                     bck_atoms.append(atm.id)
             if mu.is_protein(res):
-                print("PPPP")
                 for at_id in ['N', 'CA', 'C']:
                     if at_id not in bck_atoms:
                         sys.exit(
