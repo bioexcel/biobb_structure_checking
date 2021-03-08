@@ -118,12 +118,12 @@ class MutationSet():
             side_atoms = []
             bck_atoms = []
             for atm in res.get_atoms():
-                print(atm.id)
                 if atm.id in mut_map[rname]['side_atoms']:
                     side_atoms.append(atm.id)
                 else:
                     bck_atoms.append(atm.id)
             if mu.is_protein(res):
+                print("PPPP")
                 for at_id in ['N', 'CA', 'C']:
                     if at_id not in bck_atoms:
                         sys.exit(
@@ -148,6 +148,19 @@ class MutationSet():
             print("Replacing " + mu.residue_id(res) + " into " + self.new_id)
             in_rules = []
             extra_adds = []
+             # Deleting atoms
+            if DEL in mut_map[rname][self.new_id]:
+                for at_id in mut_map[rname][self.new_id][DEL]:
+                    print('  Deleting {}'.format(at_id))
+                    if at_id in side_atoms:
+                        mu.delete_atom(res, at_id)
+                    else:
+                        print(
+                            '#WARNING: atom {} already missing in {}'.format(
+                                at_id, mu.residue_id(res)
+                            )
+                        )
+                    in_rules.append(at_id)
             # Renaming ats
             if MOV in mut_map[rname][self.new_id]:
                 for rule in mut_map[rname][self.new_id][MOV]:
@@ -163,19 +176,7 @@ class MutationSet():
                         )
                         extra_adds.append(new_at)
                     in_rules.append(old_at)
-            # Deleting atoms
-            if DEL in mut_map[rname][self.new_id]:
-                for at_id in mut_map[rname][self.new_id][DEL]:
-                    print('  Deleting {}'.format(at_id))
-                    if at_id in side_atoms:
-                        mu.delete_atom(res, at_id)
-                    else:
-                        print(
-                            '#WARNING: atom {} already missing in {}'.format(
-                                at_id, mu.residue_id(res)
-                            )
-                        )
-                    in_rules.append(at_id)
+
             # Adding atoms (new_id required as r.resname is still the original)
             # Adding missing atoms that keep name
             for at_id in mut_map[rname]['side_atoms']:

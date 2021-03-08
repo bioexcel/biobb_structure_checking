@@ -26,7 +26,6 @@ class ResidueLib():
         res = ResidueDef()
         for line in lib_file_h:
             line = line.replace("\n", "").replace("\r", "")
-            print(line)
             if line == '':
                 continue
 

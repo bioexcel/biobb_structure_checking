@@ -132,7 +132,7 @@ def residue_check(res):
 
 def is_protein(res):
     rid = res.get_resname()
-    return (res in THREE_LETTER_RESIDUE_CODE or res in ONE_LETTER_RESIDUE_CODE)
+    return (rid in THREE_LETTER_RESIDUE_CODE or rid in ONE_LETTER_RESIDUE_CODE)
 
 def is_na(res):
     rid = res.get_resname()
@@ -350,7 +350,6 @@ def check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models=True, sever
         for cls in atom_lists:
             if is_at_in_list(atm, atom_lists[cls], res2.get_resname()):
                 ats_list2[cls].add(atm.id)
-
     if res1 != res2 and not seq_consecutive(res1, res2) \
                 and (join_models or same_model(res1, res2)):
         for at_pair in get_all_rr_distances(res1, res2):
