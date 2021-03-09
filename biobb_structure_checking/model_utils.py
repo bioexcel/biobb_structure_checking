@@ -72,6 +72,7 @@ THREE_LETTER_RESIDUE_CODE = {
 DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
 RNA_RESIDUE_CODE = {'A', 'C', 'G', 'U'}
 NA_RESIDUE_CODE = DNA_RESIDUE_CODE.union(RNA_RESIDUE_CODE)
+COMPLEMENT_TAB = str.maketrans('ACGTU','TGCAA')
 
 # Residue & Atom friendly ids
 def residue_id(res, models='auto'):
@@ -116,10 +117,14 @@ def _protein_residue_check(res_id):
 
 def _na_residue_check(rid):
     rid = rid.upper()
-    if rid in DNA_RESIDUE_CODE or rid in RNA_RESIDUE_CODE:
+    if rid in NA_RESIDUE_CODE:
         return rid
     else:
         return False
+    
+def complement_na_seq(s):
+    return s.translate(COMPLEMENT_TAB)[::-1]
+    
     
 def residue_check(res):
     """

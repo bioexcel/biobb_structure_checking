@@ -1330,9 +1330,13 @@ class StructureChecking():
             mut_list = opts
         else:
             mut_list = opts['mut_list']
+            
+        if opts['na_seq']:
+            mut_list = self.strucm.prepare_mutations_from_na_seq(opts['na_seq'])
 
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
+        
         
         mutations = self.strucm.prepare_mutations(mut_list)
 
@@ -1340,6 +1344,8 @@ class StructureChecking():
         for mut in mutations.mutation_list:
             print(mut)
         if opts['rebuild']:
+            if self.strucm.has_NA:
+                print(cts.MSGS['WARN_NOBUILD_NA'])
             mutated_res = self.strucm.rebuild_mutations(mutations)
         else:
             mutated_res = self.strucm.apply_mutations(mutations)
@@ -1804,7 +1810,7 @@ class StructureChecking():
                     for s in top.intList[ch1][ch2].getSortedSets():
                         print ('#INTRES %i-%i %s' % (ch1.id, ch2.id,','.join(s.getResidueIdList())))
                 
-        #self.summary['na_topology']['interface'] = top.intList
+        # self.summary['na_topology']['interface'] = top.intList
         
         if not top.checkExistsNA():
             print()

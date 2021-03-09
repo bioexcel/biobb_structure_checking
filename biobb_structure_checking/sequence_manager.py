@@ -2,7 +2,7 @@
 """ Module to manage sequence information for structures """
 
 import sys
-from Bio.PDB.Polypeptide import PPBuilder
+from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from typing import List, Dict
 
 from Bio.Seq import Seq, MutableSeq
@@ -97,7 +97,6 @@ class SequenceData():
                 return True
 
 
-
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
@@ -142,14 +141,30 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
-                for frag in ppb.build_peptides(chn):
+                if strucm.chain_ids[ch_id] == 1:
+                    frags = ppb.build_peptides(chn)
+                else:
+                    #TODO use bnsTopLib
+                    frag = []
+                    for res in chn.get_residues():
+                        frag.append(res) #TODO skip HETATMs
+                    frags = [frag]
+
+                for frag in frags:
                     start = frag[0].get_id()[1]
                     start_index = frag[0].index
                     end = frag[-1].get_id()[1]
                     end_index = frag[-1].index
                     frid = '{}:{}-{}:{}-{}'.format(ch_id, start, end, start_index, end_index)
+                    if hasattr(frag, 'get_sequence'):
+                        seq = frag.get_sequence()
+                    else:
+                        seq = ''
+                        for r in frag:
+                            rn = r.get_resname()
+                            seq += rn[1:]
                     sqr = SeqRecord(
-                        frag.get_sequence(),
+                        seq,
                         'pdbsq_' + frid,
                         'pdbsq_' + frid,
                         'PDB sequence chain ' + frid
@@ -163,12 +178,15 @@ class SequenceData():
                         sqr.features.append(SeqFeature(FeatureLocation(end, start)))
                         wrong_order = True
                     seqs.append(sqr)
-                if ch_id not in self.data:
-                    self.add_empty_chain(ch_id)
-                self.data[ch_id]['pdb'][mod.id] = {
-                    'frgs': seqs,
-                    'wrong_order': wrong_order
-                }
+                    if ch_id not in self.data:
+                        self.add_empty_chain(ch_id)
+                    self.data[ch_id]['pdb'][mod.id] = {
+                        'frgs': seqs,
+                        'wrong_order': wrong_order,
+                        'type': strucm.chain_ids[ch_id]
+                    }
+                    
+                    
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """

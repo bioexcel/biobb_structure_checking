@@ -838,6 +838,12 @@ class StructureManager:
             if not self.biounit and chn.get_parent().id > 0:
                 continue
             self.chain_ids[chn.id] = mu.guess_chain_type(chn)
+            
+    def has_NA(self):
+        has_NA = False
+        for k,v in self.chain_ids.items():
+            has_NA = (has_NA or (v > 1))
+        return has_NA
 
     def select_chains(self, select_chains: str) -> None:
         """
@@ -1283,6 +1289,8 @@ class StructureManager:
         brk_list = []
         for mut_set in mutations.mutation_list:
             for mut in mut_set.mutations:
+                if self.chain_ids[mut['chain']] > 1:
+                    continue
                 ch_to_fix.add(mut['chain'])
                 start_res = mut['resobj']
                 if start_res in self.prev_residue:
@@ -1292,7 +1300,9 @@ class StructureManager:
                     end_res = self.next_residue[end_res]
                 brk = [start_res, end_res]
                 brk_list.append(brk)
-
+        if not ch_to_fix:
+            print("No proteins chains left, exiting")
+            return []
         mutated_sequence_data = SequenceData()
         mutated_sequence_data.fake_canonical_sequence(self, mutations)
         for mut_set in mutations.mutation_list:
@@ -1340,6 +1350,30 @@ class StructureManager:
         if res_type == 'ILE':
             mu.delete_atom(res, 'CD1')
             mu.build_atom(res, 'CD1', self.res_library, 'ILE')
+            
+    def prepare_mutations_from_na_seq(self, new_seq):
+        if new_seq.find(':') != -1:
+            mut_seq = new_seq.split(':')
+        else:
+            mut_seq = [new_seq, mu.complement_na_seq(new_seq)]
+        #Prepared for std Duplexes
+        mut_list = []
+        i=0
+        nch=0
+        for ch_id in self.sequence_data.data:
+           chn = self.sequence_data.data[ch_id]
+           start = chn['pdb'][0]['frgs'][0].features[0].location.start
+           seq = chn['pdb'][0]['frgs'][0].seq
+           if len(seq) != len(mut_seq[nch]):
+               sys.exit("Sequence lengths do not match")
+           prefix = ''
+           if chn['pdb'][0]['type'] == mu.DNA:
+               prefix = 'D'
+           for i,r in enumerate(seq):
+               mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix,r,start+i,prefix,mut_seq[nch][i]))
+           nch += 1
+        return ','.join(mut_list)
+        
 
 # ===============================================================================
 

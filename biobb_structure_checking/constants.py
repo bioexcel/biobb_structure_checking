@@ -277,7 +277,8 @@ DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
 DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
     'Rebuild complete side chain', 'bool')
-
+DIALOGS.add_option('mutateside', '--na_seq', 'na_seq',\
+    'Mutate DNA duplex to generate sequence')
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
@@ -301,6 +302,7 @@ DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
+
 
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
@@ -414,5 +416,6 @@ MSGS = {
     #load
     'STRUCTURE_LOADED': 'Structure {} loaded',
     #NA related
-    'NO_NA': 'No NA chains found, skipping'
+    'NO_NA': 'No NA chains found, skipping',
+    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
 }
