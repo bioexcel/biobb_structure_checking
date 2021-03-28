@@ -535,7 +535,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     # only proteins
 
-    if not protein_residue_check(res.get_resname()):
+    if not _protein_residue_check(res.get_resname()):
         return "Warning: Residue not valid in this context "
 
     error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
