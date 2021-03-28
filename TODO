@@ -26,6 +26,7 @@
 2.5. Mutate residues (mutate) DONE
 2.5.1 Add/remove modified residues 
 2.5.2 Mutate NA residues DONE
+2.5.2.1 Mutate NA from sequence DONE
 2.4.3 Rebuild side chains (modeller) DONE
 2.6. Add hydrogens (add_hydrogens) DONE
 2.6.1 Determine HIS from Hbond network
