@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.7.1                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
+=                   BioBB structure checking utility v3.8.0                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
@@ -407,4 +407,10 @@ No severe clashes detected
  ASP B166.OD2 GLU B197.OE1    2.318 A
  ASP C166.OD1 GLU C197.OE1    2.624 A
  ASP D166.OD2 GLU D197.OE1    2.608 A
+Running  check_only. Nothing else to do.
+Running sequences.
+Sequences command requires either mmCIF input or --sequence
+Running  check_only. Nothing else to do.
+Running na_topology.
+No NA chains found, skipping
 Running  check_only. Nothing else to do.

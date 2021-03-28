@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.7.1                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
+=                   BioBB structure checking utility v3.8.0                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
@@ -105,15 +105,17 @@ No severe clashes detected
  ALA A118/1.CA SER A181/1.O    2.890 A
  GLY A59/2.O  HIS A213/2.CD2    2.824 A
  ALA A118/2.CA SER A181/2.O    2.890 A
-8 Steric polar_acceptor clashes detected
+10 Steric polar_acceptor clashes detected
  SER A74/1.O  ASP A77/1.OD2    2.685 A
  GLN A104/1.O ASP A108/1.OD2    3.061 A
  PRO A153/1.O GLN A349/1.OE1    3.093 A
  LEU A217/1.O ARG A220/1.O    2.862 A
+ GLU A225/1.OE1 TMP A500/1.O3'    2.895 A
  SER A74/2.O  ASP A77/2.OD2    2.685 A
  GLN A104/2.O ASP A108/2.OD2    3.061 A
  PRO A153/2.O GLN A349/2.OE1    3.093 A
  LEU A217/2.O ARG A220/2.O    2.862 A
+ GLU A225/2.OE1 TMP A500/2.O3'    2.895 A
 4 Steric polar_donor clashes detected
  ARG A220/1.NH1 ARG A222/1.NH1    2.991 A
  TRP A259/1.NE1 ARG A293/1.NH1    3.094 A
@@ -127,4 +129,10 @@ No severe clashes detected
  ARG A212/2.NH2 ARG A216/2.NH2    3.171 A
  ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
 No negative clashes detected
+Running  check_only. Nothing else to do.
+Running sequences.
+Sequences command requires either mmCIF input or --sequence
+Running  check_only. Nothing else to do.
+Running na_topology.
+No NA chains found, skipping
 Running  check_only. Nothing else to do.

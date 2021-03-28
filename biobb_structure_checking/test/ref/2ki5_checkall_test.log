@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.7.1                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
+=                   BioBB structure checking utility v3.8.0                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
@@ -160,4 +160,10 @@ No severe clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
 No negative clashes detected
+Running  check_only. Nothing else to do.
+Running sequences.
+Sequences command requires either mmCIF input or --sequence
+Running  check_only. Nothing else to do.
+Running na_topology.
+No NA chains found, skipping
 Running  check_only. Nothing else to do.
