@@ -34,7 +34,7 @@ optional arguments:
   --file_format FILE_FORMAT
                         Format for retrieving structures (default=mmCif|pdb|xml)
   --sequence FASTA_SEQ_PATH
-                        Canonical sequence in FASTA format, pdb_chain[,chain] in header, 
+                        Canonical sequence in FASTA format, pdb_chain[,chain] in header,
                         may be required for backbone rebuilding
   --pdb_server PDB_SERVER
                         Remote server for retrieving structures (default|MMB)
@@ -89,7 +89,7 @@ rem_hydrogen [--remove Yes|No]
 mutateside [--mut mutation_list] [--no_check_clashes] [-rebuild]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     Check generated clashes except --no_check_clashes set
-    --rebuild Optimize side chains using Modeller. 
+    --rebuild Optimize side chains using Modeller.
 add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
@@ -109,7 +109,7 @@ fixside [--fix All |None|Residue List] [--no_check_clashes] [--no_rem] [--rebuil
     Complete side chains
     Checks generated clashes unless --no_check_clashes set
     --no_rem   Do not remove unknown atoms
-    --rebuild  Rebuild complete side chain using Modeller 
+    --rebuild  Rebuild complete side chain using Modeller
 backbone [--fix_atoms All|None|Residue List]
          [--fix_main All|None|Break list]
          [--add_caps All|None|Terms|Breaks|list]
@@ -132,8 +132,8 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
            Ionic Positive, Ionic Negative)
 ```
 ### Dependencies
-* python 3.7
-* biopython 1.76
+* python >=3.6
+* biopython
 * numpy
-* modeller 9.23 (optional)
+* modeller 9.25 (optional)
 * psutil (for performance debug, optional)

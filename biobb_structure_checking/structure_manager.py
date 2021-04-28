@@ -13,15 +13,13 @@ from Bio.PDB.Structure import Structure
 from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
-#from Bio.PDB.PDBIO import PDBIO
 from Bio.PDB.PDBParser import PDBParser
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
 from biobb_structure_checking.mmb_server import MMBPDBList
-from biobb_structure_checking.mutation_manager import MutationManager
-from biobb_structure_checking.mutation_manager import MutationSet
+from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
@@ -186,7 +184,6 @@ class StructureManager:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
-        
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -248,6 +245,7 @@ class StructureManager:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
+            rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
@@ -955,7 +953,7 @@ class StructureManager:
             ch_to_fix.add(brk[0].get_parent().id)
 
         modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
-
+        
         self.update_internals()
 
         return modeller_result
@@ -972,8 +970,8 @@ class StructureManager:
         """ Runs modeller """
         # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
         if modeller_key:
-            os.environ['KEY_MODELLER9v23'] = modeller_key
-        from biobb_structure_checking.modeller_manager import ModellerManager
+            os.environ['KEY_MODELLER9v25'] = modeller_key
+        from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -997,7 +995,11 @@ class StructureManager:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain/model {}/{}".format(ch_id, mod.id))
 
-                model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                try:
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                except NoCanSeqError as e:
+                    print(e.message)
+                    continue
 
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
@@ -1374,3 +1376,4 @@ class NotEnoughAtomsError(Error):
 class ParseError(Error):
     def __init__(self, err_id, err_txt):
         self.message = '{} ({}) found when parsing input structure'.format(err_id, err_txt)
+

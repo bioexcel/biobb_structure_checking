@@ -7,12 +7,19 @@ from typing import List, Dict
 
 from Bio.Seq import Seq, MutableSeq
 #Deprecated in Biopython 1.78
-from Bio.Seq import IUPAC
+#from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 from biobb_structure_checking.model_utils import PROTEIN
+
+# Check for back-compatiblity with biopython < 1.77
+try:
+    from Bio.Seq import IUPAC
+    has_IUPAC = True
+except ImportError:
+    has_IUPAC = False
 
 class SequenceData():
     """ Class to manage sequence data """
@@ -31,6 +38,7 @@ class SequenceData():
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
         """ Loads canonical sequence from external FASTA file"""
+        read_ok = True
         self.fasta = []
         if fasta_sequence_path:
             try:
@@ -38,12 +46,17 @@ class SequenceData():
                     self.fasta.append(record)
             except IOError:
                 sys.exit("Error loading FASTA")
+        if not self.fasta:
+            print("WARNING: No valid FASTA formatted sequences found in {} ".format(fasta_sequence_path))
+            read_ok = False
+        return read_ok
+        
 
     def read_sequences(self, strucm, clean=True, cif_warn=False):
         """ Extracts sequences """
         if clean:
             self.data = {}
-            self.has_canonical = False
+            self.has_canonical = {}
 
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
@@ -82,6 +95,8 @@ class SequenceData():
                     print("Warning: sequence data unavailable on cif data")
                 return True
 
+
+
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
@@ -90,12 +105,16 @@ class SequenceData():
                     continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
+                if has_IUPAC:
+                    new_seq = Seq(seqs[i].replace('\n', ''), IUPAC.protein)
+                else:
+                    new_seq = Seq(seqs[i].replace('\n', ''))
                 self.data[ch_id]['can'] = SeqRecord(
-                    Seq(seqs[i].replace('\n', ''), IUPAC.protein),
-                    'csq_' + ch_id,
-                    'csq_' + ch_id,
-                    'canonical sequence chain ' + ch_id
-                )
+                        new_seq,
+                        'csq_' + ch_id,
+                        'csq_' + ch_id,
+                        'canonical sequence chain ' + ch_id
+                    )
                 self.data[ch_id]['can'].features.append(
                     SeqFeature(FeatureLocation(1, len(seqs[i])))
                 )
@@ -103,8 +122,14 @@ class SequenceData():
                 for chn in chids[i].split(','):
                     if chn in strucm.chain_ids:
                         self.data[ch_id]['chains'].append(chn)
-
-        self.has_canonical = True
+        
+        self.has_canonical = {}
+        for ch_id in strucm.chain_ids:
+            if strucm.chain_ids[ch_id] != PROTEIN:
+                continue
+            self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
+            if not self.has_canonical[ch_id]:
+                print("Warning, no canonical sequence available for chain {}".format(ch_id))
         return False
 
     def read_structure_seqs(self, strucm):
@@ -146,9 +171,11 @@ class SequenceData():
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """
-        if not self.has_canonical:
+        if not hasattr(self, 'has_canonical'):
             return False
         for ch_id in self.data:
+            if ch_id not in self.has_canonical or not self.has_canonical[ch_id]:
+                continue
             for mod_id in self.data[ch_id]['pdb']:
                 frgs = self.data[ch_id]['pdb'][mod_id]['frgs']
                 self.data[ch_id]['pdb'][mod_id]['match_numbering'] = True
@@ -167,12 +194,16 @@ class SequenceData():
         """ Fakes a canonical sequence to support modeller use
             in fixside and mutateside --rebuild """
         self.read_structure_seqs(strucm)
+        self.has_canonical = {}
         for ch_id in strucm.chain_ids:
             if strucm.chain_ids[ch_id] != PROTEIN:
                 continue
             #build sequence from frags filling gaps with G
             #Warning IUPAC deprecated in Biopython 1.78
-            seq = MutableSeq('', IUPAC.protein)
+            if has_IUPAC:
+                seq = MutableSeq('', IUPAC.protein)
+            else:
+                seq = MutableSeq('')
             last_pos = 0
             start_pos = 0
             for frag in self.data[ch_id]['pdb'][0]['frgs']:
@@ -192,15 +223,19 @@ class SequenceData():
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
             #Warning IUPAC deprecated in Biopython 1.78
+            if has_IUPAC:
+                new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
+            else:
+                new_seq = Seq(str(seq).replace('\n', ''))
             self.data[ch_id]['can'] = SeqRecord(
-                Seq(str(seq).replace('\n', ''), IUPAC.protein),
+                new_seq,
                 'csq_' + ch_id,
                 'csq_' + ch_id,
-                'canonical sequence chain ' + ch_id
+                'canonical sequence chain ' + ch_id,
+                annotations = {'molecule_type':'protein'}
             )
             self.data[ch_id]['can'].features.append(
                 SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
             )
             self.data[ch_id]['chains'].append(ch_id)
-
-        self.has_canonical = True
+            self.has_canonical[ch_id] = True
