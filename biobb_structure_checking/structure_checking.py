@@ -1765,27 +1765,27 @@ class StructureChecking():
         args.format = self.strucm.input_format
         args.id = ''
         
-        top = bnsTopLib.Topology(args)
+        top = bnsTopLib.Topology(args) 
         
         #Detecting Covalent Pairs
         top.calcCovLinks(self.strucm.st)
         # Building Chains
         top.chList = bnsTopLib.ResidueSet.ResidueSetList(top.covLinkPairs)
-    
         print()
-        print ('#INFO: Found %i chain(s)'% (top.chList.n))
+        print("Topology analysis")
+        print('Found %i chain(s)'% (top.chList.n))
     
         for s in top.chList.getSortedSets():
-            print ("#CH", s)
+            print(s)
 
         #self.summary['na_topology']['chains'] = top.chList
 
         # Residue list
-        print ("\n#INFO: Residue Ids List")
+        print ("Residue Ids List")
     
         i=0
         for s in top.chList.getSortedSets():
-            print ('#CH', s.__str__(1))
+            print(s.__str__(1))
             i=i+1
 
         # Contacts & interfaces
@@ -1793,66 +1793,70 @@ class StructureChecking():
             top.calcContacts()
 
         if args.contacts:
-            print()
-            print ("#INFO: Getting interchain contacts")
+            print("Getting interchain contacts")
             for ch1 in top.conts:
                 for ch2 in top.conts[ch1]:
                     for c in top.conts[ch1][ch2]:
-                        print ("#CT", '%i-%i %-10s %-10s %6.4f' % (ch1.id, ch2.id, c[0].atid(True), c[1].atid(True),c[2]))
+                        print('%i-%i %-10s %-10s %6.4f' % (ch1.id, ch2.id, c[0].atid(True), c[1].atid(True),c[2]))
         
-        #self.summary['na_topology']['contacts'] = top.conts
+            #self.summary['na_topology']['contacts'] = top.conts
         
         if args.interface:
-            print()
-            print ("#INFO: Interface residues at "+ str(args.intdist) +"A")
-            for ch1 in top.intList:
-                for ch2 in top.intList[ch1]:
-                    for s in top.intList[ch1][ch2].getSortedSets():
-                        print ('#INTRES %i-%i %s' % (ch1.id, ch2.id,','.join(s.getResidueIdList())))
+            if top.intList:
+                print("Interface residues at "+ str(args.intdist) +"A")
+                for ch1 in top.intList:
+                    for ch2 in top.intList[ch1]:
+                        for s in top.intList[ch1][ch2].getSortedSets():
+                            print('%i-%i %s' % (ch1.id, ch2.id,','.join(s.getResidueIdList())))
                 
-        # self.summary['na_topology']['interface'] = top.intList
+            #self.summary['na_topology']['interface'] = top.intList
         
         if not top.checkExistsNA():
-            print()
-            print ("#WARNING: No WC atom(s) found, skipping NA topology")
+            print ("WARNING: No WC atom(s) found, skipping NA topology")
             return {}
         #Base Pairs
-        print()
-        print ("#INFO: Base pairs found")
+        print ("Base pairs found")
         top.calcBasePairs()
         for bp in sorted(top.bps):
-            print ("#BP ", bp.__str__(1))
+            print(bp.__str__(1))
         # Bpair steps from neighbour bps, relays on residue renumbering. TODO Check connectivity
-        print()
-
-        self.summary['na_topology']['bpairs'] = [bp.__str__(1) for bp in sorted(top.bps)]
-    
-        print ("#INFO: Base Pair steps")
+ 
+        self.summary['na_topology']['bpairs'] = [bp.json() for bp in sorted(top.bps)]
+        
+        print ("Base Pair steps")
         top.calcBPSteps()
         for bpstp in sorted(top.bpsteps):
-            print ("#BPST", bpstp.__str__(1))
+            print(bpstp.__str__(1))
             
-        self.summary['na_topology']['bpsteps'] = [bpstp.__str__(1) for bpstp   in sorted(top.bpsteps)]
+        self.summary['na_topology']['bpsteps'] = [bpstp.json() for bpstp in sorted(top.bpsteps)]
+        
 
 # Continuous helical segments from stretches of overlapping bsteps
-        print()
-        print ("#INFO: Helical segments")
         top.calcHelicalFrags()
-        for frs in top.HFSeqs:
-            print ("#HF", ','.join(frs))
-        print ()
+        if top.HFSeqs:
+            print("Helical segments")
+            for frs in top.HFSeqs:
+                print(','.join(frs))
+            #self.summary['na_topology']['helfrags'] = [','.join(frs) for frs in top.HFSeqs]
+            self.summary['na_topology']['helfrags'] = top.HFSeqs
+        else:            
+            if not self.args['quiet']:
+                print("No Helical segments found")
         
-        self.summary['na_topology']['helfrags'] = [','.join(frs) for frs in top.HFSeqs]
+
+        if top.notInHF:
+            print("Residues not in helical segments")
+            nhf =[]
+            for r in top.notInHF:
+                nhf.append(r.resid(1))
+            print (','.join(nhf))
+            self.summary['na_topology']['no_helfrags'] = top.notInHF
+        else:
+            if not self.args['quiet']:
+                print("All residues found in helical segments")
         
-        print ("#INFO: Residues not in helical segments")
-        nhf =[]
-        for r in top.notInHF:
-            nhf.append(r.resid(1))
-        print ("#NHF",','.join(nhf))
-        self.summary['na_topology']['no_helfrags'] = nhf
             
-        
-    
+            
 #===============================================================================
     def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
 
