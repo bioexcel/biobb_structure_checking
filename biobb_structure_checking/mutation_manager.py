@@ -56,11 +56,10 @@ class MutationSet():
         self.chain, mut = mut_id.split(':')
 
         mut_comps = re.match('([A-z]*)([0-9]*)([A-z]*)', mut)
-
-        self.old_id = mu.protein_residue_check(mut_comps.group(1))
-        self.new_id = mu.protein_residue_check(mut_comps.group(3))
+        self.old_id = mu.residue_check(mut_comps.group(1))
+        self.new_id = mu.residue_check(mut_comps.group(3))
         self.res_num = mut_comps.group(2)
-
+        
         self.id = ''.join([self.chain, ":", self.old_id, self.res_num, self.new_id])
         self.mutations = []
 
@@ -123,13 +122,23 @@ class MutationSet():
                     side_atoms.append(atm.id)
                 else:
                     bck_atoms.append(atm.id)
-            for at_id in ['N', 'CA', 'C']:
-                if at_id not in bck_atoms:
-                    sys.exit(
-                        '#ERROR: Backbone atoms missing for {}, aborting'.format(
-                            mu.residue_id(res)
+            if mu.is_protein(res):
+                for at_id in ['N', 'CA', 'C']:
+                    if at_id not in bck_atoms:
+                        sys.exit(
+                            '#ERROR: Backbone atoms missing for {}, aborting'.format(
+                                mu.residue_id(res)
+                            )
                         )
-                    )
+            else:
+                for at_id in ["C1'", "O4'", "C4'"]:
+                    if at_id not in bck_atoms:
+                        sys.exit(
+                            '#ERROR: Backbone atoms missing for {}, aborting'.format(
+                                mu.residue_id(res)
+                            )
+                        )
+                        
             missing_ats = [
                 at_id
                 for at_id in mut_map[rname]['side_atoms']
@@ -138,6 +147,19 @@ class MutationSet():
             print("Replacing " + mu.residue_id(res) + " into " + self.new_id)
             in_rules = []
             extra_adds = []
+             # Deleting atoms
+            if DEL in mut_map[rname][self.new_id]:
+                for at_id in mut_map[rname][self.new_id][DEL]:
+                    print('  Deleting {}'.format(at_id))
+                    if at_id in side_atoms:
+                        mu.delete_atom(res, at_id)
+                    else:
+                        print(
+                            '#WARNING: atom {} already missing in {}'.format(
+                                at_id, mu.residue_id(res)
+                            )
+                        )
+                    in_rules.append(at_id)
             # Renaming ats
             if MOV in mut_map[rname][self.new_id]:
                 for rule in mut_map[rname][self.new_id][MOV]:
@@ -153,19 +175,7 @@ class MutationSet():
                         )
                         extra_adds.append(new_at)
                     in_rules.append(old_at)
-            # Deleting atoms
-            if DEL in mut_map[rname][self.new_id]:
-                for at_id in mut_map[rname][self.new_id][DEL]:
-                    print('  Deleting {}'.format(at_id))
-                    if at_id in side_atoms:
-                        mu.delete_atom(res, at_id)
-                    else:
-                        print(
-                            '#WARNING: atom {} already missing in {}'.format(
-                                at_id, mu.residue_id(res)
-                            )
-                        )
-                    in_rules.append(at_id)
+
             # Adding atoms (new_id required as r.resname is still the original)
             # Adding missing atoms that keep name
             for at_id in mut_map[rname]['side_atoms']:

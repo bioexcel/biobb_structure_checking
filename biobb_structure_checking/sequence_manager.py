@@ -2,13 +2,14 @@
 """ Module to manage sequence information for structures """
 
 import sys
-from Bio.PDB.Polypeptide import PPBuilder
+from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from typing import List, Dict
 
 from Bio.Seq import Seq, MutableSeq
 #Deprecated in Biopython 1.78
 #from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
+from Bio import pairwise2
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
@@ -96,7 +97,6 @@ class SequenceData():
                 return True
 
 
-
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
@@ -111,8 +111,8 @@ class SequenceData():
                     new_seq = Seq(seqs[i].replace('\n', ''))
                 self.data[ch_id]['can'] = SeqRecord(
                         new_seq,
-                        'csq_' + ch_id,
-                        'csq_' + ch_id,
+                        'can_sq_' + ch_id,
+                        'can_sq_' + ch_id,
                         'canonical sequence chain ' + ch_id
                     )
                 self.data[ch_id]['can'].features.append(
@@ -141,14 +141,30 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
-                for frag in ppb.build_peptides(chn):
+                if strucm.chain_ids[ch_id] == 1:
+                    frags = ppb.build_peptides(chn)
+                else:
+                    #TODO use bnsTopLib
+                    frag = []
+                    for res in chn.get_residues():
+                        frag.append(res) #TODO skip HETATMs
+                    frags = [frag]
+
+                for frag in frags:
                     start = frag[0].get_id()[1]
                     start_index = frag[0].index
                     end = frag[-1].get_id()[1]
                     end_index = frag[-1].index
                     frid = '{}:{}-{}:{}-{}'.format(ch_id, start, end, start_index, end_index)
+                    if hasattr(frag, 'get_sequence'):
+                        seq = frag.get_sequence()
+                    else:
+                        seq = ''
+                        for r in frag:
+                            rn = r.get_resname()
+                            seq += rn[1:]
                     sqr = SeqRecord(
-                        frag.get_sequence(),
+                        seq,
                         'pdbsq_' + frid,
                         'pdbsq_' + frid,
                         'PDB sequence chain ' + frid
@@ -162,12 +178,15 @@ class SequenceData():
                         sqr.features.append(SeqFeature(FeatureLocation(end, start)))
                         wrong_order = True
                     seqs.append(sqr)
-                if ch_id not in self.data:
-                    self.add_empty_chain(ch_id)
-                self.data[ch_id]['pdb'][mod.id] = {
-                    'frgs': seqs,
-                    'wrong_order': wrong_order
-                }
+                    if ch_id not in self.data:
+                        self.add_empty_chain(ch_id)
+                    self.data[ch_id]['pdb'][mod.id] = {
+                        'frgs': seqs,
+                        'wrong_order': wrong_order,
+                        'type': strucm.chain_ids[ch_id]
+                    }
+                    
+                    
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """
@@ -239,3 +258,44 @@ class SequenceData():
             )
             self.data[ch_id]['chains'].append(ch_id)
             self.has_canonical[ch_id] = True
+
+    def get_canonical(self):
+        """ Prepares a FASTA string with the canonical sequence"""
+        outseq = ''
+        for ch_id in self.data:
+            if self.has_canonical[ch_id]:
+                outseq += SeqIO.FastaIO.as_fasta(self.data[ch_id]['can'])
+        return outseq
+    
+    def get_pdbseq(self):
+        """ Prepares a FASTA string with the structure sequence, and fragments """
+        #TODO re-use this on modeller_manager
+        outseq = ''
+        for ch_id in self.data:
+            if self.has_canonical[ch_id]:
+                tgt_seq = self.data[ch_id]['can'].seq
+                frgs = self.data[ch_id]['pdb'][0]['frgs']
+                frags_num = []
+                pdb_seq = frgs[0].seq
+                for i in range(1, len(frgs)):
+                    frag_seq = frgs[i].seq
+                    pdb_seq += frag_seq
+                    frags_num.append(
+                        '{}-{}'.format(frgs[i].features[0].location.start, frgs[i].features[0].location.end)
+                    )
+                # tuned to open gaps on missing loops
+                alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+
+                if has_IUPAC:
+                    pdb_seq = Seq(alin[0][1], IUPAC.protein)
+                else:
+                    pdb_seq = Seq(alin[0][1])
+
+                seq = SeqRecord(
+                    pdb_seq,
+                    'pdb_sq_' + ch_id,
+                    '',
+                    'Frags: ' + ','.join(frags_num)
+                )
+                outseq += SeqIO.FastaIO.as_fasta(seq)
+        return outseq

@@ -72,6 +72,7 @@ THREE_LETTER_RESIDUE_CODE = {
 DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
 RNA_RESIDUE_CODE = {'A', 'C', 'G', 'U'}
 NA_RESIDUE_CODE = DNA_RESIDUE_CODE.union(RNA_RESIDUE_CODE)
+COMPLEMENT_TAB = str.maketrans('ACGTU','TGCAA')
 
 # Residue & Atom friendly ids
 def residue_id(res, models='auto'):
@@ -98,21 +99,49 @@ def atom_id(atm, models='auto'):
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
 # Id Checks
-def protein_residue_check(res):
+def _protein_residue_check(res_id):
     """
     Checks whether is a valid protein residue id, either one or three letter code
     return upper case three-letter code
     """
-    res = res.upper()
+    res_id = res_id.upper()
     rid = ''
-    if res in THREE_LETTER_RESIDUE_CODE.keys():
+    if res_id in THREE_LETTER_RESIDUE_CODE.keys():
         rid = THREE_LETTER_RESIDUE_CODE[res]
-    elif res in ONE_LETTER_RESIDUE_CODE.keys():
-        rid = res
+    elif res_id in ONE_LETTER_RESIDUE_CODE.keys():
+        rid = res_id
     else:
         return False
 
     return rid
+
+def _na_residue_check(rid):
+    rid = rid.upper()
+    if rid in NA_RESIDUE_CODE:
+        return rid
+    else:
+        return False
+    
+def complement_na_seq(s):
+    return s.translate(COMPLEMENT_TAB)[::-1]
+    
+    
+def residue_check(res):
+    """
+    Checks whether is a valid residue id, 
+    """
+    res_ok = _protein_residue_check(res)
+    if not res_ok:
+        res_ok = _na_residue_check(res)
+    return res_ok
+
+def is_protein(res):
+    rid = res.get_resname()
+    return (rid in THREE_LETTER_RESIDUE_CODE or rid in ONE_LETTER_RESIDUE_CODE)
+
+def is_na(res):
+    rid = res.get_resname()
+    return (res in DNA_RESIDUE_CODE or res in RNA_RESIDUE_CODE)
 
 def same_residue(at1, at2):
     """
@@ -291,7 +320,7 @@ def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=Tr
     clash_list['severe'] = {}
     for r_pair in rr_list:
         res1, res2 = r_pair[0:2]
-
+        
         if (res1 in r_list or res2 in r_list) and not is_wat(res1) and not is_wat(res2):
             c_list = check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models, severe)
             rkey = residue_id(res1) + '-' + residue_id(res2)
@@ -326,7 +355,6 @@ def check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models=True, sever
         for cls in atom_lists:
             if is_at_in_list(atm, atom_lists[cls], res2.get_resname()):
                 ats_list2[cls].add(atm.id)
-
     if res1 != res2 and not seq_consecutive(res1, res2) \
                 and (join_models or same_model(res1, res2)):
         for at_pair in get_all_rr_distances(res1, res2):
@@ -507,7 +535,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     # only proteins
 
-    if not protein_residue_check(res.get_resname()):
+    if not _protein_residue_check(res.get_resname()):
         return "Warning: Residue not valid in this context "
 
     error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
