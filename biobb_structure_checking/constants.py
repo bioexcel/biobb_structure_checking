@@ -307,7 +307,7 @@ DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences','na_topology']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
 
 MSGS = {
     #management
