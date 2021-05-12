@@ -1737,6 +1737,7 @@ class StructureChecking():
 #        pass
 #===============================================================================
     def na_topology(self, opts=None):
+        """ Wrapper for bnsTopology analysis"""
         self._run_method('na_topology', opts)
         
     def _na_topology_check(self):
