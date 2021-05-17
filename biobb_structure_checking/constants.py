@@ -217,7 +217,7 @@ DIALOGS.add_option('models', '--select', 'select_model', \
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select_chains',\
-    'Chains (All | Chain list comma separated)')
+    'Chains (All | protein | na | dna | rna | Chain list comma separated)')
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option('altloc', '--select', 'select_altloc', \
@@ -313,7 +313,8 @@ DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences','na_topology']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
+
 
 MSGS = {
     #management

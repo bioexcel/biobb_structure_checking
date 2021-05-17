@@ -5,8 +5,8 @@ utility.
 commands:     Help on available commands
 command_list: Run all tests from conf file
 checkall:     Perform all checks without fixes
-fixall:       Performs a default fix (v1.2)
-load:         Stores structure on local cache and provide basic statistics
+fixall:	      Perform automatic fixes (v4.0)
+load:         Stores structure on local cache and provides basic statistics
 
 1. System Configuration
 =======================
@@ -24,7 +24,7 @@ metals [--remove All | None | Met_ids_list | Residue_list]
     Detect/Remove Metals
 ligands [--remove All | None | Res_type_list | Residue_list]
     Detect/Remove Ligands
-hetatm [--remove All | None | Res_type_list | Residue_list] (v1.2)
+hetatm [--remove All | None | Res_type_list | Residue_list] (v4.0)
     Detect/Remove Ligands, revert modified residues
 water [--remove Yes|No]
     Remove Water molecules
@@ -38,8 +38,8 @@ add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
     Fixes missing side chain atoms unless --no_fix_side is set
-    Existing hydrogen atoms are remove before adding new ones unless --keep_h set.
-    --add_charges adds partial charges (from RES_LIBRARY) and autodock atom types, forces PDBQT output
+    Existing hydrogen atoms are removed before adding new ones unless --keep_h set.
+    --add_charges adds partial charges (from RES_LIBRARY) and autodock atom types, forces PDBQT output (experimental)
 
 2. Fix Structure Errors
 
@@ -60,10 +60,10 @@ backbone [--fix_atoms All|None|Residue List]
          [--no_recheck]
          [--no_check_clashes]
     Analyze main chain missing atoms and fragments.
-    --fix_atoms O, OXT atoms can be fixed
+    --fix_atoms O, OXT atoms can be fixed 
     --fix_main Missing fragments filled using comparative modelling (Modeller License needed)
     --add_caps Adds ACE and NME residues as necessary, preserving existing atoms
-    --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections
+    --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections (experimental)
     Rechecks beckbone on each op unless --no_recheck is set.
     Generated clashes are checked unless --no_check_clashes
 

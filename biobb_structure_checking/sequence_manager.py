@@ -13,7 +13,7 @@ from Bio import pairwise2
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
-from biobb_structure_checking.model_utils import PROTEIN
+import biobb_structure_checking.model_utils as mu
 
 # Check for back-compatiblity with biopython < 1.77
 try:
@@ -96,12 +96,9 @@ class SequenceData():
                     print("Warning: sequence data unavailable on cif data")
                 return True
 
-
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
-                    continue
-                if strucm.chain_ids[ch_id] != PROTEIN:
                     continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
@@ -122,11 +119,10 @@ class SequenceData():
                 for chn in chids[i].split(','):
                     if chn in strucm.chain_ids:
                         self.data[ch_id]['chains'].append(chn)
-        
         self.has_canonical = {}
         for ch_id in strucm.chain_ids:
-            if strucm.chain_ids[ch_id] != PROTEIN:
-                continue
+#            if strucm.chain_ids[ch_id] != PROTEIN:
+#                continue
             self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
             if not self.has_canonical[ch_id]:
                 print("Warning, no canonical sequence available for chain {}".format(ch_id))
@@ -147,7 +143,9 @@ class SequenceData():
                     #TODO use bnsTopLib
                     frag = []
                     for res in chn.get_residues():
-                        frag.append(res) #TODO skip HETATMs
+                        if mu.is_hetatm(res):
+                            continue
+                        frag.append(res)
                     frags = [frag]
 
                 for frag in frags:
@@ -215,7 +213,7 @@ class SequenceData():
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
         for ch_id in strucm.chain_ids:
-            if strucm.chain_ids[ch_id] != PROTEIN:
+            if strucm.chain_ids[ch_id] != mu.PROTEIN:
                 continue
             #build sequence from frags filling gaps with G
             #Warning IUPAC deprecated in Biopython 1.78

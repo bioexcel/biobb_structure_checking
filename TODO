@@ -3,17 +3,17 @@
 1.1.1 Consider multiple, save split
 1.2. Detect/Select Chains (chains) DONE
 1.2.1 Detect mixed NA/protein chains
-1.2.1 Rebuild chains
+1.2.1 Rebuild/fix chains
 1.3. Detect/Select Alt Locations (altloc) DONE
 1.4. Detect Heavy Metals /Remove (metals) DONE
 1.5. Detect Ligands /Remove (ligands) DONE
-1.5.1 Process All Hetatms in a integrated wayz
+1.5.1 Process All Hetatms in a integrated way
 1.6. Detect DNA/RNA /Remove (na) DONE in chains
-1.6.1 Include NA Topology
+1.6.1 Include NA Topology WITHDRAWN Too much adaptation needed, use BNSTopology instead
 1.7. Remove Water (remwat) DONE
 1.8. Remove Hydrogen atoms (remh) DONE
 1.9. Get Sequences DONE
-1.9.1 Get sequence from PDB without canonical
+1.9.1 Get sequence from PDB without canonical 
 2. Fix Structure Errors
 2.1. Detect/Fix Amides Assignment (amide) DONE
 2.1.1 Automatic fix
@@ -27,22 +27,24 @@
 2.5.1 Add/remove modified residues 
 2.5.2 Mutate NA residues DONE
 2.5.2.1 Mutate NA from sequence DONE
-2.4.3 Rebuild side chains (modeller) DONE
+2.4.3 Rebuild side chains (modeller) DONE for protein
 2.6. Add hydrogens (add_hydrogens) DONE
 2.6.1 Determine HIS from Hbond network
 2.6.2 Consider -SS-
-2.6.3 PDBQT format
+2.6.3 PDBQT/PQR formats
+2.6.4 Add hydrogens for NA chains
+2.6.5 Prepare input for AutoDock with flexible residues
 2.7. Complete backbone (backbone) DONE 
 2.7.1 Complete main chains DONE
 2.7.2 Add ACE, NME caps DONE
-2.7.3 USe standard FASTA for sequence input
-2.7.4 Accept GROMACS Atom names OT?
+2.7.3 Use standard FASTA for sequence input
+2.7.4 Accept/recognize GROMACS (and other non Amber) Atom names OT?
 3. Structure Warnings
 3.1. Detect SS Bonds (getss) DONE
 3.2. Unusual cis/trans backbone (cisbck) DONE
 3.3. Non Consecutive residues (nonconres) DONE
 3.4. Possible Sequence Gaps (bckgaps) DONE
-3.4.1 Fix only-CA structures
+3.4.1 Fix only-CA structures (Modeller)
 3.5. Steric clashes (clashes) DONE
 3.5.1. Severe Steric clashes
 3.5.2. CA Steric Clashes NO
@@ -51,5 +53,10 @@
 3.5.5. Apolar Clashes DONE
 3.5.6. Ionic Positive Clashes DONE
 3.5.7. Ionic Negative Clashes DONE
-3.5.8
+4. Prepare alternative main scripts for specific functions 
+4.1 Check only
+4.2 Prepare autodock input
+4.3 Prepare CMIP input
+4.4 Convert from MD formats
+
 
