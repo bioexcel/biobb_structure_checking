@@ -108,7 +108,7 @@ sequences:
 dnamut:
 	echo "Running dnamut on 1D23"
 	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_mutateside_test.log
-	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --na_seq AAAAAAAAAA  > 1d23_poliA_test.log
+	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_poliA_test.pdb --non_interactive mutateside --na_seq AAAAAAAAAA  > 1d23_poliA_test.log
     
 biounits:
 	echo "Running all checks on 1ldn.1"
