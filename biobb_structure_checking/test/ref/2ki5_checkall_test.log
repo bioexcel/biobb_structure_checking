@@ -164,6 +164,3 @@ Running  check_only. Nothing else to do.
 Running sequences.
 Sequences command requires either mmCIF input or --sequence
 Running  check_only. Nothing else to do.
-Running na_topology.
-No NA chains found, skipping
-Running  check_only. Nothing else to do.
