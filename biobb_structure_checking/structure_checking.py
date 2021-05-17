@@ -353,6 +353,18 @@ class StructureChecking():
         input_line = ParamInput('Select chain', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_list(
+            'type', ['protein'], multiple=False
+        )
+        input_line.add_option_list(
+            'type', ['na'], multiple=False
+        )
+        input_line.add_option_list(
+            'type', ['dna'], multiple=False
+        )
+        input_line.add_option_list(
+            'type', ['rna'], multiple=False
+        )
+        input_line.add_option_list(
             'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
         )
         input_line.default = 'All'

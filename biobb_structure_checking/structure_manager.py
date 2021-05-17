@@ -849,18 +849,28 @@ class StructureManager:
         """
         Select one or more chains and remove the remaining.
         Args:
-            select_chains: Comma separated chain ids
+            select_chains: Comma separated chain ids, | protein | dna | rna | na
         """
         if not self.chain_ids:
             self.set_chain_ids()
-        ch_ok = select_chains.split(',')
-        for chn in ch_ok:
-            if chn not in self.chain_ids:
-                print('Warning: skipping unknown chain', chn)
+        
+        if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
+            if select_chains.lower()  == 'na':
+                ch_ok = [mu.DNA, mu.RNA]
+            else:
+                ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
+        else:
+            ch_ok = select_chains.split(',')
+            for chn in ch_ok:
+                if chn not in self.chain_ids:
+                    print('Warning: skipping unknown chain', chn)
         for mod in self.st:
             for chn in self.chain_ids:
-                if chn not in ch_ok:
+                if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
                     self.st[mod.id].detach_child(chn)
+        if not self.st[mod.id]:
+            print("ERROR: would remove all chains, exiting")
+            sys.exit()
         # Update internal data
         self.update_internals()
         self.modified = True
