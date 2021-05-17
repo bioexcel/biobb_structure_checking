@@ -121,7 +121,9 @@
  "fixside": {
   "opts": "--fix all"
  },
- "getss": {},
+ "getss": {
+  "opts": "--mark All"
+ },
  "headers": {
   "entry_id": "1ARK",
   "keywords": "TRANSFERASE",

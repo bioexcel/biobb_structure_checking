@@ -207,9 +207,9 @@ TYR A373   PRO A374   Dihedral:   -4.211
 1 trans peptide bonds with unusual omega dihedrals
 GLU B382   SER B383   Dihedral:  157.865
 
-Step 15: getss
+Step 15: getss --mark All
 
-Running getss.
+Running getss. Options: --mark All
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981
@@ -223,7 +223,7 @@ No severe clashes detected
 6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
  ASN A297.CG  NAG A501.C1     2.759 A
- CYS A367.SG  CYS A425.CB     2.881 A
+ CYX A367.SG  CYX A425.CB     2.881 A
  GLU A382.CB  GLN A386.O      2.894 A
  HIS B268.CE1 GLU B294.OE2    2.857 A
  ASN B297.CG  NAG B501.C1     2.433 A
@@ -238,8 +238,7 @@ No positive clashes detected
 Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto
-134 Residues requiring selection on adding H atoms
- CYS A261,A321,A367,A425,B261,B321,B367,B425
+126 Residues requiring selection on adding H atoms
  ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
  GLU A258,A269,A272,A283,A293,A294,A318,A333,A345,A357,A380,A382,A388,A430,B258,B269,B272,B283,B293,B294,B318,B333,B345,B357,B380,B382,B388,B430
  HIS A268,A285,A310,A429,A433,A435,B268,B285,B310,B429,B433,B435
@@ -270,7 +269,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  20
 Final Num. ligands or modified residues:  20
 Final Num. water mol.:  0
-Final Num. atoms:  6839
+Final Num. atoms:  6831
 Small mol ligands found
 NAG A501
 NAG A502

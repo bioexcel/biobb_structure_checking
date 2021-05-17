@@ -156,9 +156,9 @@ THR A191   GLY A192   Dihedral:  156.442
 ILE B203   GLY B204   Dihedral:  159.080
 ILE A203   GLY A204   Dihedral: -159.337
 
-Step 15: getss
+Step 15: getss --mark All
 
-Running getss.
+Running getss. Options: --mark All
 No SS bonds detected
 
 Step 16: clashes

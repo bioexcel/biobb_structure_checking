@@ -7,7 +7,6 @@
    "ASP A249",
    "ARG A255",
    "GLU A258",
-   "CYS A261",
    "ASP A265",
    "HIS A268",
    "GLU A269",
@@ -32,7 +31,6 @@
    "GLU A318",
    "TYR A319",
    "LYS A320",
-   "CYS A321",
    "LYS A322",
    "LYS A326",
    "GLU A333",
@@ -46,7 +44,6 @@
    "ASP A356",
    "GLU A357",
    "LYS A360",
-   "CYS A367",
    "LYS A370",
    "TYR A373",
    "ASP A376",
@@ -62,7 +59,6 @@
    "ASP A413",
    "LYS A414",
    "ARG A416",
-   "CYS A425",
    "HIS A429",
    "GLU A430",
    "HIS A433",
@@ -74,7 +70,6 @@
    "ASP B249",
    "ARG B255",
    "GLU B258",
-   "CYS B261",
    "ASP B265",
    "HIS B268",
    "GLU B269",
@@ -99,7 +94,6 @@
    "GLU B318",
    "TYR B319",
    "LYS B320",
-   "CYS B321",
    "LYS B322",
    "LYS B326",
    "GLU B333",
@@ -113,7 +107,6 @@
    "ASP B356",
    "GLU B357",
    "LYS B360",
-   "CYS B367",
    "LYS B370",
    "TYR B373",
    "ASP B376",
@@ -129,7 +122,6 @@
    "ASP B413",
    "LYS B414",
    "ARG B416",
-   "CYS B425",
    "HIS B429",
    "GLU B430",
    "HIS B433",
@@ -593,8 +585,8 @@
      "dist": 2.7592
     },
     {
-     "at1": "CYS A367.SG",
-     "at2": "CYS A425.CB",
+     "at1": "CYX A367.SG",
+     "at2": "CYX A425.CB",
      "dist": 2.8809
     },
     {
@@ -647,7 +639,7 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 6839,
+  "num_ats": 6831,
   "num_res": 435,
   "num_wat": 0,
   "res_hetats": 20,
@@ -657,28 +649,40 @@
  "fixside": {
   "opts": "--fix all"
  },
- "getss": [
-  {
-   "at1": "CYS A261.SG",
-   "at2": "CYS A321.SG",
-   "dist": 4.1413
-  },
-  {
-   "at1": "CYS A367.SG",
-   "at2": "CYS A425.SG",
-   "dist": 3.9808
-  },
-  {
-   "at1": "CYS B261.SG",
-   "at2": "CYS B321.SG",
-   "dist": 4.126
-  },
-  {
-   "at1": "CYS B367.SG",
-   "at2": "CYS B425.SG",
-   "dist": 4.1878
-  }
- ],
+ "getss": {
+  "found": [
+   {
+    "at1": "CYS A261.SG",
+    "at2": "CYS A321.SG",
+    "dist": 4.1413
+   },
+   {
+    "at1": "CYS A367.SG",
+    "at2": "CYS A425.SG",
+    "dist": 3.9808
+   },
+   {
+    "at1": "CYS B261.SG",
+    "at2": "CYS B321.SG",
+    "dist": 4.126
+   },
+   {
+    "at1": "CYS B367.SG",
+    "at2": "CYS B425.SG",
+    "dist": 4.1878
+   }
+  ],
+  "marked": [
+   "CYS A261",
+   "CYS A321",
+   "CYS A367",
+   "CYS A425",
+   "CYS B261",
+   "CYS B321",
+   "CYS B367",
+   "CYS B425"
+  ]
+ },
  "headers": {
   "entry_id": "4KU1",
   "keywords": "IMMUNE SYSTEM",

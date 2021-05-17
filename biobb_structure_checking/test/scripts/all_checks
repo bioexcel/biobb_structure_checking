@@ -12,6 +12,6 @@ chiral_bck
 fixside --fix All
 backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
 cistransbck
-getss
+getss --mark All
 clashes
 add_hydrogen --add_mode auto

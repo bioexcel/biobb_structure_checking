@@ -829,7 +829,9 @@
    }
   ]
  },
- "getss": {},
+ "getss": {
+  "opts": "--mark All"
+ },
  "headers": {
   "entry_id": "2KI5",
   "keywords": "TRANSFERASE",

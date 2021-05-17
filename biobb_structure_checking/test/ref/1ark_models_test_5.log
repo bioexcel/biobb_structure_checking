@@ -23,7 +23,7 @@ Running models. Options: --select 5
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 5
-#DEBUG Memory used after models: 88.562500 MB 
+#DEBUG Memory used after models: 88.128906 MB 
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  60
@@ -35,11 +35,11 @@ Final Num. atoms:  905
 Structure saved on 1ark_models_5_test.pdb
 #DEBUG TIMINGS
 #DEBUG =======
-#DEBUG load           :     0.9940 s ( 98.35%)
-#DEBUG models         :     0.0112 s (  1.11%)
-#DEBUG TOTAL          :     1.0106 s
+#DEBUG load           :     1.3249 s ( 98.08%)
+#DEBUG models         :     0.0179 s (  1.32%)
+#DEBUG TOTAL          :     1.3508 s
 
 #DEBUG MEMORY USAGE EVOLUTION
 #DEBUG ======================
-#DEBUG load           : 89.71 MB
-#DEBUG models         : 88.56 MB
+#DEBUG load           : 89.28 MB
+#DEBUG models         : 88.13 MB

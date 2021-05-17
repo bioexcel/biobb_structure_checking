@@ -105,9 +105,9 @@ Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss
+Step 15: getss --mark All
 
-Running getss.
+Running getss. Options: --mark All
 No SS bonds detected
 
 Step 16: clashes
