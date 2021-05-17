@@ -297,6 +297,8 @@ DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
 DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
+DIALOGS.add_option('getss', '--mark', 'getss_mark', 'Mark Cys pairs as SS bond (All | None | List)')
+
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')

@@ -645,6 +645,9 @@ class StructureManager:
         for res in self.all_residues:
             if mu.is_hetatm(res):
                 continue
+            #TODO NA
+            if res.get_resname() not in self.data_library.get_valid_codes('protein'):
+                continue
             if self.is_N_term(res):
                 term_res.append(('N', res))
             if self.is_C_term(res):
@@ -1204,7 +1207,7 @@ class StructureManager:
            **remove_h**: Remove Hydrogen atom before adding new ones
         """
         add_h_rules = self.data_library.get_add_h_rules()
-
+        
         for res in self.all_residues:
             if mu.is_hetatm(res):
                 continue
@@ -1231,10 +1234,20 @@ class StructureManager:
 
             if rcode == 'GLY':
                 continue
-
-            if rcode not in add_h_rules:
+            # Fixed for modified residues already in the original PDB
+            if rcode in self.data_library.canonical_codes:
+                rcode_can = self.data_library.canonical_codes[rcode]
+            else:
+                rcode_can = rcode
+            
+            if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
+
+            if rcode_can == rcode:
+                h_rules = add_h_rules[rcode]
+            else:
+                h_rules = add_h_rules[rcode_can][rcode]
 
             if res in ion_res_list:
                 if rcode != ion_res_list[res]:
@@ -1247,11 +1260,11 @@ class StructureManager:
                     res,
                     self.res_library,
                     ion_res_list[res],
-                    add_h_rules[rcode][ion_res_list[res]]
+                    h_rules[ion_res_list[res]]
                 )
                 res.resname = ion_res_list[res]
             else:
-                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, add_h_rules[rcode])
+                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules)
 
             if error_msg:
                 print(error_msg, mu.residue_id(res))
@@ -1262,7 +1275,14 @@ class StructureManager:
             self.rename_terms(self.get_term_res())
             self.update_atom_charges()
         self.modified = True
-
+        
+    def mark_ssbonds(self, cys_list):
+        for res in cys_list:
+            if 'HG' in res:
+                mu.remove_atom_from_res(res, 'HG')
+            res.resname = 'CYX'
+        self.modified = True
+    
     def rename_terms(self, term_res):
         for t in term_res:
             if t[1].resname not in ('ACE', 'NME'):

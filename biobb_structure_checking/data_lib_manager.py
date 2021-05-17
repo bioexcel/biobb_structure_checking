@@ -57,6 +57,11 @@ class DataLibManager:
             for rcode in self.residue_data
             if feature in self.residue_data[rcode]
         }
+        
+        for rcode in self.canonical_codes:
+            if feature in self.residue_data[self.canonical_codes[rcode]]:
+                f_list[rcode] = self.residue_data[self.canonical_codes[rcode]][feature]
+        
         if '*' not in f_list:
             f_list['*'] = []
         return f_list
@@ -80,6 +85,7 @@ class DataLibManager:
             for cls_type in contact_types
             if cls_type != 'severe'
         }
+
         return atom_lists
 
     def get_amide_data(self):

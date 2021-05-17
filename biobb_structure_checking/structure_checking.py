@@ -782,25 +782,55 @@ class StructureChecking():
                 print(cts.MSGS['NO_SS'])
             return {}
         print(cts.MSGS['POSSIBLE_SS'].format(len(SS_bonds)))
-        self.summary['getss'] = []
+        self.summary['getss'] = {'found':[]}
         for ssb in SS_bonds:
             print(
                 ' {:12} {:12} {:8.3f}'.format(
                     mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
                 )
             )
-            self.summary['getss'].append(
+            self.summary['getss']['found'].append(
                 {
                     'at1':mu.atom_id(ssb[0]),
                     'at2':mu.atom_id(ssb[1]),
                     'dist': round(float(ssb[2]), 4)
                 }
             )
-        return {}
+        return SS_bonds
 
-#    def _getss_fix(self):
-#        pass
-
+    def _getss_fix(self, opts, fix_data=None):
+        if not fix_data:
+            return False
+        if isinstance(opts, str):
+            getss_mark = opts
+        else:
+            getss_mark = opts['getss_mark']
+        pairs_list=[mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent()) for a in fix_data]
+        input_line = ParamInput('Mark SS', self.args['non_interactive'])
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option_list(
+            'bypair', pairs_list, multiple=True
+        )
+        input_line.default = 'all'
+        input_option, getss_mark = input_line.run(getss_mark)
+        
+        if input_option == 'error':
+            return cts.MSGS['UNKNOWN_SELECTION'], getss_mark
+        
+        if input_option == 'none':
+            if self.args['verbose']:
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+        cys_to_mark = []
+        for pair in fix_data:
+            if (input_option == 'all') or (mu.residue_num(pair[0].get_parent()) + "-" + mu.residue_num(pair[1].get_parent()) in getss_mark.split(',')):
+                cys_to_mark.append(pair[0].get_parent())         
+                cys_to_mark.append(pair[1].get_parent())         
+        self.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
+        self.strucm.mark_ssbonds(cys_to_mark)
+        self.strucm.update_internals()
+ 
 # =============================================================================
     def amide(self, opts=None):
         """ run amide command """
