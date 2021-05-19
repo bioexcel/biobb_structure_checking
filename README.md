@@ -82,10 +82,10 @@ metals [--remove All | None | Met_ids_list | Residue_list]
     Detect/Remove Metals
 ligands [--remove All | None | Res_type_list | Residue_list]
     Detect/Remove Ligands
-hetatm [--remove All | None | Res_type_list | Residue_list] (v3.1)
-    Detect/Remove Ligands, revert modified residues
 water [--remove Yes|No]
     Remove Water molecules
+getss [--mark]
+    Detect SS Bonds. Marks them as CYX for further commands
 rem_hydrogen [--remove Yes|No]
     Remove Hydrogen atoms from structure
 mutateside [--mut mutation_list] [--no_check_clashes] [-rebuild]
@@ -129,7 +129,6 @@ backbone [--fix_atoms All|None|Residue List]
 3. Structure Warnings
 
 cistransbck Analyzes cis-trans dihedrals on backbone atoms
-getss      Detect SS Bonds
 clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
            Ionic Positive, Ionic Negative)
 ```
