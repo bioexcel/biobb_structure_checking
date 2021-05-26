@@ -1075,33 +1075,7 @@ class StructureChecking():
         self._run_method('clashes', opts)
 
     def _clashes_check(self):
-        clash_list = {}
-        for cls in stm.ALL_CONTACT_TYPES:
-            clash_list[cls] = {}
-
-        # Recalc when models are separated molecules
-        if not self.strucm.has_superimp_models():
-            rr_dist = self.strucm.get_all_r2r_distances('all', True)
-        else:
-            rr_dist = self.strucm.rr_dist
-
-        for r_pair in rr_dist:
-            res1, res2 = r_pair[0:2]
-
-            if mu.is_wat(res1) or mu.is_wat(res2):
-                continue
-
-            c_list = self.strucm.check_rr_clashes(res1, res2, stm.ALL_CONTACT_TYPES)
-
-            rkey = mu.residue_id(res1) + '-' + mu.residue_id(res2)
-            for cls in c_list:
-                if c_list[cls]:
-                    clash_list[cls][rkey] = c_list[cls]
-
-        self.summary['clashes']['detected'] = self._clash_report(
-            stm.ALL_CONTACT_TYPES, clash_list
-        )
-
+        self.summary['clashes']['detected'] = self._check_report_clashes()
         return False
 
 #    def _clashes_fix(self, res_to_fix, fix_data=None):
@@ -1820,9 +1794,11 @@ class StructureChecking():
         self.strucm.save_structure(output_structure_path, rename_terms=rename_terms)
         return output_structure_path
 
-    def _check_report_clashes(self, residue_list, contact_types=None):
+    def _check_report_clashes(self, residue_list=None, contact_types=None):
         if contact_types is None:
             contact_types = stm.ALL_CONTACT_TYPES
+        if not residue_list:
+            residue_list = self.strucm.all_residues
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)
