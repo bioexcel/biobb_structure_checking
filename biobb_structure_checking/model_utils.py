@@ -22,12 +22,14 @@ PROTEIN = 1
 DNA = 2
 RNA = 3
 NA = 4
+UNKNOWN = 99
 
 TYPE_LABEL = {
     'protein': PROTEIN,
     'dna': DNA,
     'rna': RNA,
-    'na': NA
+    'na': NA,
+    'other': UNKNOWN
 }
 SEQ_THRESHOLD = 0.8
 CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown'}
