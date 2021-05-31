@@ -137,17 +137,20 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
+                print(strucm.chain_ids[ch_id])
                 if strucm.chain_ids[ch_id] == 1:
                     frags = ppb.build_peptides(chn)
-                else:
-                    #TODO use bnsTopLib
+                elif strucm.chain_ids[ch_id] != mu.UNKNOWN:
                     frag = []
                     for res in chn.get_residues():
                         if mu.is_hetatm(res):
                             continue
                         frag.append(res)
                     frags = [frag]
-
+                else:
+                    self.add_empty_chain(ch_id)
+                    return
+                    
                 for frag in frags:
                     start = frag[0].get_id()[1]
                     start_index = frag[0].index

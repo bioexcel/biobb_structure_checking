@@ -91,6 +91,7 @@ class StructureManager:
         """
 
         self.chain_ids = {}
+        self.chain_details = {}
 
         self.backbone_links = []
         self.modified_residue_list = []
@@ -630,6 +631,7 @@ class StructureManager:
             'models_type': self.models_type,
             'nchains': len(self.chain_ids),
             'chain_ids': self.chain_ids,
+            'chain_details' : self.chain_details,
             'num_res': self.num_res,
             'num_ats': self.num_ats,
             'res_insc': self.res_insc,
@@ -710,8 +712,8 @@ class StructureManager:
         """ Print chains info """
         chids = []
         for ch_id in sorted(self.chain_ids):
-            if isinstance(self.chain_ids[ch_id], list):
-                chids.append('{}: Unknown '.format(ch_id))
+            if ch_id in self.chain_details:
+                chids.append('{}: Unknown ({})'.format(ch_id, ','.join(map(str,self.chain_details[ch_id]))))
             else:
                 chids.append(
                     '{}: {}'.format(
@@ -840,7 +842,13 @@ class StructureManager:
         for chn in self.st.get_chains():
             if not self.biounit and chn.get_parent().id > 0:
                 continue
-            self.chain_ids[chn.id] = mu.guess_chain_type(chn)
+            guess = mu.guess_chain_type(chn)
+            if isinstance(guess, list):
+                self.chain_ids[chn.id] = mu.UNKNOWN
+                if chn.id not in self.chain_details:
+                    self.chain_details[chn.id] = guess 
+            else:
+                self.chain_ids[chn.id] = guess
             
     def has_NA(self):
         has_NA = False
