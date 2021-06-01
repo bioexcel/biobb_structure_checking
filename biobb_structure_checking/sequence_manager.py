@@ -83,7 +83,6 @@ class SequenceData():
                     print("Warning: sequence features only available in mmCIF" +\
                     " format or with external fasta input")
                 return True
-            #TODO check for NA
             if '_entity_poly.pdbx_strand_id' in strucm.headers:
                 if not isinstance(strucm.headers['_entity_poly.pdbx_strand_id'], list):
                     chids = [strucm.headers['_entity_poly.pdbx_strand_id']]
@@ -99,6 +98,8 @@ class SequenceData():
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
+                    continue
+                if strucm.chain_ids[ch_id] == mu.UNKNOWN:
                     continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)

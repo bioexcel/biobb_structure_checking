@@ -254,11 +254,11 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     dna = dna / total
     rna = rna / total
     other = 1 - prot - dna - rna
-    if prot > thres or prot > dna + rna:
+    if prot > thres or prot > dna + rna + other:
         return PROTEIN
-    elif dna > thres or dna > prot + rna:
+    elif dna > thres or dna > prot + rna + other:
         return DNA
-    elif rna > thres or rna > prot + dna:
+    elif rna > thres or rna > prot + dna + other:
         return RNA
     return [prot, dna, rna, other]
 
