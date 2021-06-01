@@ -702,7 +702,9 @@ class StructureManager:
         chids = []
         for ch_id in sorted(self.chain_ids):
             if ch_id in self.chain_details:
-                chids.append('{}: Unknown ({})'.format(ch_id, ','.join(map(str,self.chain_details[ch_id]))))
+                chids.append('{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
+                        ch_id, g=self.chain_details[ch_id])
+                    )
             else:
                 chids.append(
                     '{}: {}'.format(
