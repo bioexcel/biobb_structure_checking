@@ -137,7 +137,6 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
-                print(strucm.chain_ids[ch_id])
                 if strucm.chain_ids[ch_id] == 1:
                     frags = ppb.build_peptides(chn)
                 elif strucm.chain_ids[ch_id] != mu.UNKNOWN:
@@ -163,7 +162,11 @@ class SequenceData():
                         seq = ''
                         for r in frag:
                             rn = r.get_resname()
-                            seq += rn[1:]
+                            if strucm.chain_ids[ch_id] == mu.DNA:
+                                seq += rn[1:]
+                            else:
+                                seq += rn
+
                     sqr = SeqRecord(
                         seq,
                         'pdbsq_' + frid,
