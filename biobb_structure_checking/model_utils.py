@@ -414,6 +414,9 @@ def get_metal_atoms(struc, metal_ats):
     for atm in struc.get_atoms():
         if not re.match('H_', atm.get_parent().id[0]):
             continue
+        #Check for CA in modified amino acids
+        if 'N' in atm.get_parent() or 'C' in atm.get_parent():
+            continue
         if atm.id in metal_ats:
             met_list.append(atm)
     return met_list
