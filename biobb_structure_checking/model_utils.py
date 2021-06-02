@@ -22,6 +22,7 @@ PROTEIN = 1
 DNA = 2
 RNA = 3
 NA = 4
+ALLWAT = 10
 UNKNOWN = 99
 
 TYPE_LABEL = {
@@ -29,10 +30,11 @@ TYPE_LABEL = {
     'dna': DNA,
     'rna': RNA,
     'na': NA,
-    'other': UNKNOWN
+    'other': UNKNOWN,
+    'water': ALLWAT
 }
 SEQ_THRESHOLD = 0.8
-CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown'}
+CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown',ALLWAT:'Water'}
 
 #Model Types
 ENSM = 1
@@ -250,17 +252,20 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             dna += 1
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
-    prot = prot / total
-    dna = dna / total
-    rna = rna / total
-    other = 1. - prot - dna - rna
-    if prot > thres or prot > dna + rna + other:
-        return PROTEIN
-    elif dna > thres or dna > prot + rna + other:
-        return DNA
-    elif rna > thres or rna > prot + dna + other:
-        return RNA
-    return [prot, dna, rna, other]
+    if total > 0.:
+        prot = prot / total
+        dna = dna / total
+        rna = rna / total
+        other = 1. - prot - dna - rna
+        if prot > thres or prot > dna + rna + other:
+            return PROTEIN
+        elif dna > thres or dna > prot + rna + other:
+            return DNA
+        elif rna > thres or rna > prot + dna + other:
+            return RNA
+        return [prot, dna, rna, other]
+    else:
+        return ALLWAT
 
 #===============================================================================
 def check_chiral_residue(res, chiral_data):
