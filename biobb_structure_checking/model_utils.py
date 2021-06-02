@@ -240,10 +240,11 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     rna = 0.
     total = 0.
     for res in chn.get_residues():
-        total += 1
         if is_wat(res):
             continue
+        total += 1
         rname = res.get_resname().replace(' ', '')
+        print(res, rname)
         if rname in THREE_LETTER_RESIDUE_CODE.values():
             prot += 1
         elif rname in DNA_RESIDUE_CODE:
@@ -253,7 +254,7 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     prot = prot / total
     dna = dna / total
     rna = rna / total
-    other = 1 - prot - dna - rna
+    other = 1. - prot - dna - rna
     if prot > thres or prot > dna + rna + other:
         return PROTEIN
     elif dna > thres or dna > prot + rna + other:
