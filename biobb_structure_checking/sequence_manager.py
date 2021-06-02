@@ -142,7 +142,7 @@ class SequenceData():
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
-                elif strucm.chain_ids[ch_id] != mu.UNKNOWN:
+                elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
                     self.add_empty_chain(ch_id)
