@@ -138,19 +138,16 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
-                if strucm.chain_ids[ch_id] == 1:
+                if strucm.chain_ids[ch_id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
+                    if not frags:
+                        frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 elif strucm.chain_ids[ch_id] != mu.UNKNOWN:
-                    frag = []
-                    for res in chn.get_residues():
-                        if mu.is_hetatm(res):
-                            continue
-                        frag.append(res)
-                    frags = [frag]
+                    frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
                     self.add_empty_chain(ch_id)
-                    return
-                    
+                    frags = []
+                
                 for frag in frags:
                     start = frag[0].get_id()[1]
                     start_index = frag[0].index
@@ -163,7 +160,9 @@ class SequenceData():
                         seq = ''
                         for r in frag:
                             rn = r.get_resname()
-                            if strucm.chain_ids[ch_id] == mu.DNA:
+                            if strucm.chain_ids[ch_id] == mu.PROTEIN:
+                                seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                            elif strucm.chain_ids[ch_id] == mu.DNA:
                                 seq += rn[1:]
                             else:
                                 seq += rn
