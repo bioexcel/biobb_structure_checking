@@ -244,7 +244,6 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             continue
         total += 1
         rname = res.get_resname().replace(' ', '')
-        print(res, rname)
         if rname in THREE_LETTER_RESIDUE_CODE.values():
             prot += 1
         elif rname in DNA_RESIDUE_CODE:
