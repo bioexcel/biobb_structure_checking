@@ -15,8 +15,6 @@ from Bio.PDB.Residue import Residue
 from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
-UNKNOWN = 0
-
 #chain types
 PROTEIN = 1
 DNA = 2
@@ -70,14 +68,16 @@ ONE_LETTER_RESIDUE_CODE = {
     'HID':'H', 'HIE':'H', 'HIP':'H',
     'ARN':'R', 'LYN':'K', 'ASH':'D', 'GLH':'E',
     'CYX':'C', 'CYM':'C', 'TYM':'Y',
-    'ACE': '', 'NME': ''
+    'ACE':'X', 'NME': 'X',
+    'UNK':'X'
 }
 
 THREE_LETTER_RESIDUE_CODE = {
     'A':'ALA', 'C': 'CYS', 'D':'ASP', 'E':'GLU', 'F':'PHE', 'G':'GLY',
     'H':'HIS', 'I':'ILE', 'K':'LYS', 'L':'LEU', 'M':'MET', 'N':'ASN',
     'P':'PRO', 'Q':'GLN', 'R':'ARG', 'S':'SER',
-    'T':'THR', 'V':'VAL', 'W':'TRP', 'Y':'TYR'
+    'T':'THR', 'V':'VAL', 'W':'TRP', 'Y':'TYR',
+    'X':'UNK'
 }
 
 DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
