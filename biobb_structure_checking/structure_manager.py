@@ -1111,20 +1111,23 @@ class StructureManager:
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
             moving_ats = []
+            
+            #checking whether there is a chain id in the model (Support for Modeller >= 10)
+            new_ch_id = new_st[0].child_list[0].id
 
             for nres in range(loc_i.start, loc_i.end):
                 mod_nres = nres - offset + 1
-                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
+                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
             for nres in range(loc_ii.start, loc_ii.end):
                 mod_nres = nres - offset + 1 - seq_off_i_ii
                 if nres in self.st[mod_id][ch_id] and\
                         'CA' in self.st[mod_id][ch_id][nres] and\
-                        mod_nres in new_st[0][' ']:
+                        mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
             moving_ats = moving_ats[:len(fixed_ats)]
             spimp.set_atoms(fixed_ats, moving_ats)
@@ -1146,7 +1149,7 @@ class StructureManager:
                 if nres in self.st[mod_id][ch_id]:
                     self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
 
-                res = new_st[0][' '][mod_nres].copy()
+                res = new_st[0][new_ch_id][mod_nres].copy()
                 res.id = (' ', nres, ' ')
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1
