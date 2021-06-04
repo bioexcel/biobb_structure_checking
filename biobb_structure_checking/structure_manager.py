@@ -57,7 +57,7 @@ class StructureManager:
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
         ) -> None:
-        """ 
+        """
             Class constructor. Sets an empty object and loads a structure
             according to parameters
 
@@ -122,8 +122,8 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         self.res_library = ResidueLib(res_library_path)
-        
-        
+
+
         self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
@@ -274,10 +274,10 @@ class StructureManager:
                 if not oxt_ok:
                     print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
         print("Total assigned charge: {:10.2f}".format(tot_chrg))
-        
+
         self.has_charges = True
-                
-                
+
+
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
         """
@@ -641,7 +641,7 @@ class StructureManager:
             'ca_only': self.ca_only,
             'biounit': self.biounit
         }
-    
+
     def get_term_res(self) -> List[Tuple[str, Residue]]:
         term_res = []
         for res in self.all_residues:
@@ -848,10 +848,10 @@ class StructureManager:
             if isinstance(guess, list):
                 self.chain_ids[chn.id] = mu.UNKNOWN
                 if chn.id not in self.chain_details:
-                    self.chain_details[chn.id] = guess 
+                    self.chain_details[chn.id] = guess
             else:
                 self.chain_ids[chn.id] = guess
-            
+
     def has_NA(self):
         has_NA = False
         for k,v in self.chain_ids.items():
@@ -866,7 +866,7 @@ class StructureManager:
         """
         if not self.chain_ids:
             self.set_chain_ids()
-        
+
         if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
             if select_chains.lower()  == 'na':
                 ch_ok = [mu.DNA, mu.RNA]
@@ -983,7 +983,7 @@ class StructureManager:
             ch_to_fix.add(brk[0].get_parent().id)
 
         modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
-        
+
         self.update_internals()
 
         return modeller_result
@@ -1217,7 +1217,7 @@ class StructureManager:
            **remove_h**: Remove Hydrogen atom before adding new ones
         """
         add_h_rules = self.data_library.get_add_h_rules()
-        
+
         for res in self.all_residues:
             if mu.is_hetatm(res):
                 continue
@@ -1249,7 +1249,7 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-            
+
             if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
@@ -1285,19 +1285,19 @@ class StructureManager:
             self.rename_terms(self.get_term_res())
             self.update_atom_charges()
         self.modified = True
-        
+
     def mark_ssbonds(self, cys_list):
         for res in cys_list:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
             res.resname = 'CYX'
         self.modified = True
-    
+
     def rename_terms(self, term_res):
         for t in term_res:
             if t[1].resname not in ('ACE', 'NME'):
                 t[1].resname = t[0] + t[1].resname
-                
+
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
         return res not in self.prev_residue
@@ -1390,7 +1390,7 @@ class StructureManager:
         if res_type == 'ILE':
             mu.delete_atom(res, 'CD1')
             mu.build_atom(res, 'CD1', self.res_library, 'ILE')
-            
+
     def prepare_mutations_from_na_seq(self, new_seq):
         if new_seq.find(':') != -1:
             mut_seq = new_seq.split(':')
@@ -1413,7 +1413,7 @@ class StructureManager:
                mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix,r,start+i,prefix,mut_seq[nch][i]))
            nch += 1
         return ','.join(mut_list)
-        
+
 
 # ===============================================================================
 

@@ -132,14 +132,14 @@ def _na_residue_check(rid):
         return rid
     else:
         return False
-    
+
 def complement_na_seq(s):
     return s.translate(COMPLEMENT_TAB)[::-1]
-    
-    
+
+
 def residue_check(res):
     """
-    Checks whether is a valid residue id, 
+    Checks whether is a valid residue id,
     """
     res_ok = _protein_residue_check(res)
     if not res_ok:
@@ -334,7 +334,7 @@ def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=Tr
     clash_list['severe'] = {}
     for r_pair in rr_list:
         res1, res2 = r_pair[0:2]
-        
+
         if (res1 in r_list or res2 in r_list) and not is_wat(res1) and not is_wat(res2):
             c_list = check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models, severe)
             rkey = residue_id(res1) + '-' + residue_id(res2)
@@ -589,7 +589,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
 
-            
+
     elif res.get_resname() != 'PRO':
         if 'C' not in prev_res:
             return error_msg
@@ -599,7 +599,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             'H',
             build_coords_SP2(HDIS, res['N'], res['CA'], prev_res['C'])
         )
-        
+
     if res.get_resname() == 'GLY':
         if 'C' not in res:
             return error_msg
@@ -607,13 +607,13 @@ def add_hydrogens_backbone(res, prev_res, next_res):
         crs = build_coords_2xSP3(HDIS, res['CA'], res['N'], res['C'])
         add_new_atom_to_residue(res, 'HA2', crs[0])
         add_new_atom_to_residue(res, 'HA3', crs[1])
-    
+
     elif res.get_resname() == 'NME':
         crs = build_coords_3xSP3(HDIS, res['CA'], res['N'], prev_res['C'])
         add_new_atom_to_residue(res, 'HA1', crs[0])
         add_new_atom_to_residue(res, 'HA2', crs[1])
         add_new_atom_to_residue(res, 'HA3', crs[2])
-    
+
     else:
         if 'C' not in res or 'CB' not in res:
             return error_msg
@@ -988,9 +988,9 @@ def calc_bond_dihedral(at1, at2, at3, at4):
     return angle_uv
 
 def get_all_at2at_distances(
-        struc, 
-        at_ids='all', 
-        d_cutoff=0., 
+        struc,
+        at_ids='all',
+        d_cutoff=0.,
         join_models=False
         ):
     """ Gets a list of all at-at distances below a cutoff, at ids can be limited """
