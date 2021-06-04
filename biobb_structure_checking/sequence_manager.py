@@ -142,6 +142,9 @@ class SequenceData():
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
+                    if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
+                        print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id,mod.id))
+                        frags = [[res for res in chn.get_residues()]]
                 elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
@@ -161,7 +164,11 @@ class SequenceData():
                         for r in frag:
                             rn = r.get_resname()
                             if strucm.chain_ids[ch_id] == mu.PROTEIN:
-                                seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                                if rn in mu.ONE_LETTER_RESIDUE_CODE:
+                                    seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                                else:
+                                    print("Warning: unknown protein residue code", mu.residue_id(r))
+                                    seq += 'X'
                             elif strucm.chain_ids[ch_id] == mu.DNA:
                                 seq += rn[1:]
                             else:
