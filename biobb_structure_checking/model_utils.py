@@ -15,13 +15,12 @@ from Bio.PDB.Residue import Residue
 from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
-UNKNOWN = 0
-
 #chain types
 PROTEIN = 1
 DNA = 2
 RNA = 3
 NA = 4
+ALLWAT = 10
 UNKNOWN = 99
 
 TYPE_LABEL = {
@@ -29,10 +28,11 @@ TYPE_LABEL = {
     'dna': DNA,
     'rna': RNA,
     'na': NA,
-    'other': UNKNOWN
+    'other': UNKNOWN,
+    'water': ALLWAT
 }
 SEQ_THRESHOLD = 0.8
-CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown'}
+CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown',ALLWAT:'Water'}
 
 #Model Types
 ENSM = 1
@@ -68,14 +68,16 @@ ONE_LETTER_RESIDUE_CODE = {
     'HID':'H', 'HIE':'H', 'HIP':'H',
     'ARN':'R', 'LYN':'K', 'ASH':'D', 'GLH':'E',
     'CYX':'C', 'CYM':'C', 'TYM':'Y',
-    'ACE': '', 'NME': ''
+    'ACE':'X', 'NME': 'X',
+    'UNK':'X'
 }
 
 THREE_LETTER_RESIDUE_CODE = {
     'A':'ALA', 'C': 'CYS', 'D':'ASP', 'E':'GLU', 'F':'PHE', 'G':'GLY',
     'H':'HIS', 'I':'ILE', 'K':'LYS', 'L':'LEU', 'M':'MET', 'N':'ASN',
     'P':'PRO', 'Q':'GLN', 'R':'ARG', 'S':'SER',
-    'T':'THR', 'V':'VAL', 'W':'TRP', 'Y':'TYR'
+    'T':'THR', 'V':'VAL', 'W':'TRP', 'Y':'TYR',
+    'X':'UNK'
 }
 
 DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
@@ -130,14 +132,14 @@ def _na_residue_check(rid):
         return rid
     else:
         return False
-    
+
 def complement_na_seq(s):
     return s.translate(COMPLEMENT_TAB)[::-1]
-    
-    
+
+
 def residue_check(res):
     """
-    Checks whether is a valid residue id, 
+    Checks whether is a valid residue id,
     """
     res_ok = _protein_residue_check(res)
     if not res_ok:
@@ -250,17 +252,20 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             dna += 1
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
-    prot = prot / total
-    dna = dna / total
-    rna = rna / total
-    other = 1. - prot - dna - rna
-    if prot > thres or prot > dna + rna + other:
-        return PROTEIN
-    elif dna > thres or dna > prot + rna + other:
-        return DNA
-    elif rna > thres or rna > prot + dna + other:
-        return RNA
-    return [prot, dna, rna, other]
+    if total > 0.:
+        prot = prot / total
+        dna = dna / total
+        rna = rna / total
+        other = 1. - prot - dna - rna
+        if prot > thres or prot > dna + rna + other:
+            return PROTEIN
+        elif dna > thres or dna > prot + rna + other:
+            return DNA
+        elif rna > thres or rna > prot + dna + other:
+            return RNA
+        return [prot, dna, rna, other]
+    else:
+        return ALLWAT
 
 #===============================================================================
 def check_chiral_residue(res, chiral_data):
@@ -329,7 +334,7 @@ def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=Tr
     clash_list['severe'] = {}
     for r_pair in rr_list:
         res1, res2 = r_pair[0:2]
-        
+
         if (res1 in r_list or res2 in r_list) and not is_wat(res1) and not is_wat(res2):
             c_list = check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models, severe)
             rkey = residue_id(res1) + '-' + residue_id(res2)
@@ -584,7 +589,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
 
-            
+
     elif res.get_resname() != 'PRO':
         if 'C' not in prev_res:
             return error_msg
@@ -594,7 +599,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             'H',
             build_coords_SP2(HDIS, res['N'], res['CA'], prev_res['C'])
         )
-        
+
     if res.get_resname() == 'GLY':
         if 'C' not in res:
             return error_msg
@@ -602,13 +607,13 @@ def add_hydrogens_backbone(res, prev_res, next_res):
         crs = build_coords_2xSP3(HDIS, res['CA'], res['N'], res['C'])
         add_new_atom_to_residue(res, 'HA2', crs[0])
         add_new_atom_to_residue(res, 'HA3', crs[1])
-    
+
     elif res.get_resname() == 'NME':
         crs = build_coords_3xSP3(HDIS, res['CA'], res['N'], prev_res['C'])
         add_new_atom_to_residue(res, 'HA1', crs[0])
         add_new_atom_to_residue(res, 'HA2', crs[1])
         add_new_atom_to_residue(res, 'HA3', crs[2])
-    
+
     else:
         if 'C' not in res or 'CB' not in res:
             return error_msg
@@ -983,9 +988,9 @@ def calc_bond_dihedral(at1, at2, at3, at4):
     return angle_uv
 
 def get_all_at2at_distances(
-        struc, 
-        at_ids='all', 
-        d_cutoff=0., 
+        struc,
+        at_ids='all',
+        d_cutoff=0.,
         join_models=False
         ):
     """ Gets a list of all at-at distances below a cutoff, at ids can be limited """
