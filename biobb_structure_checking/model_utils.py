@@ -21,7 +21,7 @@ DNA = 2
 RNA = 3
 NA = 4
 ALLWAT = 10
-UNKNOWN = 99
+UNKNOWN = 0
 
 TYPE_LABEL = {
     'protein': PROTEIN,

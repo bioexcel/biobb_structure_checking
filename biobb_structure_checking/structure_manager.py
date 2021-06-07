@@ -196,13 +196,9 @@ class StructureManager:
         self.set_chain_ids()
         self.calc_stats()
         self.guess_hetatm()
-        # Pre_calc rr distances with separated models
-        self.rr_dist = mu.get_all_r2r_distances(
-            self.st,
-            'all',
-            self.data_library.distances['R_R_CUTOFF'],
-            join_models=False
-        )
+        
+        self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
+        
         # Precalc backbone . TODO Nucleic Acids
         self.check_backbone_connect(
             ('N', 'C'),
@@ -793,10 +789,14 @@ class StructureManager:
                 List of tupes (r1,r2,dist)
 
         """
+        if self.has_NA():
+            cutoff = self.data_library.distances['R_R_CUTOFF']['NA']
+        else:
+            cutoff = self.data_library.distances['R_R_CUTOFF']['PROT']
         return mu.get_all_r2r_distances(
             self.st,
             res_group,
-            self.data_library.distances['R_R_CUTOFF'],
+            cutoff,
             join_models=join_models
         )
 
