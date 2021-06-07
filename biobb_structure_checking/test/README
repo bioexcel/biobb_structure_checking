@@ -1,0 +1,10 @@
+Biobb_structure_checking test suite
+
+1) Copy Makefile.template as Makefile
+2) Edit Makefile to include the path to biobb_structure_checking root
+3) Run tests
+    make -s test_name diffs # Run a single test
+    make -s all diffs       # Run all tests
+    make clean              # Removes result files
+    make update             # Updates reference results with present ones
+
