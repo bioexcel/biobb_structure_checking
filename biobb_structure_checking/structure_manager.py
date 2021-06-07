@@ -668,7 +668,7 @@ class StructureManager:
         if 'keywords' in self.meta:
             print(' Keywords: {}'.format(self.meta['keywords']))
         if 'resolution' in self.meta:
-            print(' Resolution: {} A'.format(self.meta['resolution']))
+            print(' Resolution (A): {}'.format(self.meta['resolution']))
         if self.biounit:
             print(' Biounit no. {}'. format(self.meta['biounit']))
 
@@ -689,7 +689,9 @@ class StructureManager:
             self.meta['method'] = self.headers['structure_method']
             if 'keywords' in self.headers:
                 self.meta['keywords'] = self.headers['keywords']
-            if 'resolution' in self.headers:
+            if 'resolution' not in self.headers or not self.headers['resolution']:
+                self.meta['resolution'] = 'N.A.'
+            else:
                 self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
