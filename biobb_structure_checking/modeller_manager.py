@@ -40,7 +40,12 @@ class ModellerManager():
             os.mkdir(self.tmpdir)
         except IOError as err:
             sys.exit(err)
-        self.env = environ()
+        # Class changed in Modeller >= 10
+        try:
+            self.env = Environ()
+        except:
+            self.env = environ()
+        
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
