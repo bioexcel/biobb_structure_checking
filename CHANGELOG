@@ -1,4 +1,4 @@
-V3.8.0 (2021.2)
+V3.8.1 (2021.2)
 
 New functions
     sequences 
@@ -6,21 +6,24 @@ New functions
 
 Extended functions
     mutateside
-        Added support for mutation of DNA/RNA residues
-        --na_seq allows to set the final sequence (for DNA duplexes) 
+        added support for mutation of DNA/RNA residues
+        --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes) 
     chains 
-        Allows to select chains according to molecular type (protein | dna | rna | na)
+        allows to select chains according to molecular type (protein | dna | rna | na). 
+        Improved guess of chain type.
     getss 
         can now mark CYS residues as part of SSBonds. Further commands like add_hydrogen reacts accordingly
     load
         can now be used to convert downloaded cif to pdb format using --force_save
+    Modeller based commands
+        adapted to support Modeller >= 10.1
     several commands
         adapted to work with NA chains
 
 Extended support for verbosity
     Default verbosity has been reduced to errors and warnigs
     --nv --quiet removes all progress reports
-    -v Adds extra progress report (original default)
+    -v  adds extra progress report (original default)
  
 Bugs fixed
     - clashes, add_hydrogen did not work for modified or cap residues 
