@@ -1,15 +1,15 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:2ki5.1 loaded
- Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
+ Title: herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
  Experimental method: x-ray diffraction
  Keywords: transferase (phosphotransferase) thymid, transferase (phosphotransferase) thymidine kinase; viridae; ds-dna enveloped viruses; herpesviridae; alphaherpesvirinae antiviral drug (aciclovir)
- Resolution: 0.0 A
+ Resolution (A): N.A.
  Biounit no. 1
 
  Num. models: 1

@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -7,7 +7,7 @@ Warning: sequence features only available in mmCIF format or with external fasta
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Title: 
  Experimental method: unknown
- Resolution: 0.0 A
+ Resolution (A): N.A.
 
  Num. models: 1
  Num. chains: 1 (A: Protein)

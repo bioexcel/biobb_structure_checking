@@ -80,6 +80,7 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },
@@ -122,6 +123,7 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },

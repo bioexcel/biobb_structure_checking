@@ -386,6 +386,7 @@
  "final_stats": {
   "biounit": "1",
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },
@@ -409,8 +410,8 @@
   "biounit": "1",
   "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
   "method": "x-ray diffraction",
-  "resolution": 0.0,
-  "title": " thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
+  "resolution": "N.A.",
+  "title": "thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
  },
  "inscodes": {},
  "ligands": {
@@ -437,6 +438,7 @@
  "stats": {
   "biounit": "1",
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },
