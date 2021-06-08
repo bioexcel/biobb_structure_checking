@@ -167,9 +167,9 @@ Checking for steric clashes
  ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 
-Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 8 Residues with missing backbone atoms found
  VAL A70    CA,C,O,OXT
  GLY A148   CA,C,O,OXT
@@ -188,184 +188,35 @@ Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_
  SER B263   - ALA B278   
 No unexpected backbone links
 Main chain fixes
-
-                         MODELLER 10.1, 2021/03/12, r12156
-
-     PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
-
-
-                     Copyright(c) 1989-2021 Andrej Sali
-                            All Rights Reserved
-
-                             Written by A. Sali
-                               with help from
-              B. Webb, M.S. Madhusudhan, M-Y. Shen, G.Q. Dong,
-          M.A. Marti-Renom, N. Eswar, F. Alber, M. Topf, B. Oliva,
-             A. Fiser, R. Sanchez, B. Yerkovich, A. Badretdinov,
-                     F. Melo, J.P. Overington, E. Feyfant
-                 University of California, San Francisco, USA
-                    Rockefeller University, New York, USA
-                      Harvard University, Cambridge, USA
-                   Imperial Cancer Research Fund, London, UK
-              Birkbeck College, University of London, London, UK
-
-
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.82-default x86_64
-Date and time of compilation         : 2021/03/12 00:04:35
-MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2021/06/07 10:09:22
-
-Fixing chain/model A/0
-The following 1 residues contain 6-membered rings with poor geometries
-after transfer from templates. Rebuilding rings from internal coordinates:
-   <Residue 280:A (type PHE)>
-0 atoms in HETATM/BLK residues constrained
-to protein atoms within 2.30 angstroms
-and protein CA atoms within 10.00 angstroms
-0 atoms in residues without defined topology
-constrained to be rigid bodies
->> Model assessment by DOPE potential
-DOPE score               : -39938.207031
-
->> Summary of successfully produced models:
-Filename                          molpdf     DOPE score    GA341 score
-----------------------------------------------------------------------
-target.B99990001.pdb         10365.20215   -39938.20703        1.00000
-
-Fixing VAL A70 - ASP A77
-  Adding VAL A70
-  Adding ALA A71
-  Adding LEU A72
-  Adding GLY A73
-  Adding SER A74
-  Adding ARG A75
-  Adding ASP A76
-  Adding ASP A77
-
-Fixing GLY A148 - PRO A154
-  Adding GLY A148
-  Adding SER A149
-  Adding SER A150
-  Adding HIS A151
-  Adding ALA A152
-  Adding PRO A153
-  Adding PRO A154
-
-Fixing GLY A264 - PRO A280
-  Adding GLY A264
-  Adding THR A265
-  Adding ALA A266
-  Adding VAL A267
-  Adding PRO A268
-  Adding PRO A269
-  Adding GLN A270
-  Adding GLY A271
-  Adding ALA A272
-  Adding GLU A273
-  Adding PRO A274
-  Adding GLN A275
-  Adding SER A276
-  Adding ASN A277
-  Adding ALA A278
-  Adding GLY A279
-  Adding PRO A280
-
-Fixing chain/model B/0
-The following 1 residues contain 6-membered rings with poor geometries
-after transfer from templates. Rebuilding rings from internal coordinates:
-   <Residue 280:A (type PHE)>
-0 atoms in HETATM/BLK residues constrained
-to protein atoms within 2.30 angstroms
-and protein CA atoms within 10.00 angstroms
-0 atoms in residues without defined topology
-constrained to be rigid bodies
->> Model assessment by DOPE potential
-DOPE score               : -39713.507812
-
->> Summary of successfully produced models:
-Filename                          molpdf     DOPE score    GA341 score
-----------------------------------------------------------------------
-target.B99990001.pdb         10396.24609   -39713.50781        1.00000
-
-Fixing GLY B73 - ASP B77
-  Adding GLY B73
-  Adding SER B74
-  Adding ARG B75
-  Adding ASP B76
-  Adding ASP B77
-
-Fixing GLY B148 - PRO B154
-  Adding GLY B148
-  Adding SER B149
-  Adding SER B150
-  Adding HIS B151
-  Adding ALA B152
-  Adding PRO B153
-  Adding PRO B154
-
-Fixing SER B263 - ALA B278
-  Adding SER B263
-  Adding GLY B264
-  Adding THR B265
-  Adding ALA B266
-  Adding VAL B267
-  Adding PRO B268
-  Adding PRO B269
-  Adding GLN B270
-  Adding GLY B271
-  Adding ALA B272
-  Adding GLU B273
-  Adding PRO B274
-  Adding GLN B275
-  Adding SER B276
-  Adding ASN B277
-  Adding ALA B278
-
-4 Residues with missing backbone atoms found
- SER A263   OXT
- PRO A280   OXT
- ALA A375   CA,C,O,OXT
- ALA B375   CA,C,O,OXT
-2 Backbone breaks found
- SER A263   - GLY A264   
- PRO A280   - ARG A281   
-No unexpected backbone links
-Consecutive residues too far away to be covalently linked
- SER A263   - GLY A264  , bond distance    5.670 
- PRO A280   - ARG A281  , bond distance    5.598 
+Nothing to do
 Capping terminal ends
 True terminal residues:  A46,A375,B46,B375
-Terminal residues from backbone breaks:  A263-A264,A280-A281
+Terminal residues from backbone breaks:  A70-A77,A148-A154,A264-A280,B73-B77,B148-B154,B263-B278
 Nothing to do
 No caps added
 Fixing missing backbone atoms
 Adding missing backbone atoms
-SER A263
-  Adding new atom OXT
-PRO A280
-  Adding new atom OXT
+VAL A70
+Warning: not enough backbone to build missing atoms
+GLY A148
+Warning: not enough backbone to build missing atoms
+GLY A264
+Warning: not enough backbone to build missing atoms
 ALA A375
+Warning: not enough backbone to build missing atoms
+GLY B73
+Warning: not enough backbone to build missing atoms
+GLY B148
+Warning: not enough backbone to build missing atoms
+SER B263
 Warning: not enough backbone to build missing atoms
 ALA B375
 Warning: not enough backbone to build missing atoms
-Fixed 2 backbone atom(s)
+Fixed 0 backbone atom(s)
 Checking for steric clashes
 No severe clashes detected
-4 Steric apolar clashes detected
- ARG A247.CD  SER A276.O      2.572 A
- ARG A247.CD  ASN A277.O      2.100 A
- ALA B243.CB  SER B276.OG     2.834 A
- ARG B247.CD  SER B276.O      2.012 A
-9 Steric polar_acceptor clashes detected
- LEU A69.O    LEU A72.O       3.061 A
- VAL A70.O    LEU A72.O       3.084 A
- ASP A76.OD2  PRO A155.O      2.418 A
- PRO A153.O   GLN A349.OE1    2.544 A
- ASN A244.OD1 PRO A274.O      2.972 A
- SER A276.O   ALA A278.O      2.948 A
- GLY B73.O    ASP B76.OD1     2.539 A
- GLY B240.O   GLU B273.OE2    2.536 A
- LEU B262.O   GLY B264.O      3.098 A
+No apolar clashes detected
+No polar_acceptor clashes detected
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
@@ -374,10 +225,7 @@ Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
-3 trans peptide bonds with unusual omega dihedrals
-LEU B72    GLY B73    Dihedral:  155.995
-ALA B147   GLY B148   Dihedral: -145.731
-ALA A147   GLY A148   Dihedral:  156.769
+No trans peptide bonds with unusual omega dihedrals found
 
 Step 15: getss --mark All
 
@@ -389,15 +237,13 @@ Step 16: clashes
 Running clashes.
 1 Steric severe clashes detected
  MET B46.CE   VAL B352.O      0.921 A
-21 Steric apolar clashes detected
+17 Steric apolar clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
  ARG A89.CD   GLU A95.OE1     2.776 A
  LEU A232.O   ARG A236.CG     2.741 A
- ARG A247.CD  SER A276.O      2.572 A
- ARG A247.CD  ASN A277.O      2.100 A
  MET A372.SD  VAL B307.CG1    2.777 A
  MET B46.CE   VAL B352.O      0.921 A
  HIS B58.CD2  TYR B172.OH     2.675 A
@@ -408,25 +254,14 @@ Running clashes.
  HIS B105.CE1 GLN B109.OE1    2.773 A
  GLU B210.O   ILE B214.CG1    2.842 A
  ARG B212.CZ  ASP B330.OD1    2.875 A
- ALA B243.CB  SER B276.OG     2.834 A
- ARG B247.CD  SER B276.O      2.012 A
  SER B357.O   ILE B361.CG1    2.861 A
-17 Steric polar_acceptor clashes detected
+8 Steric polar_acceptor clashes detected
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
  ASP A55.O    VAL A204.O      3.035 A
- LEU A69.O    LEU A72.O       3.061 A
- VAL A70.O    LEU A72.O       3.084 A
- ASP A76.OD2  PRO A155.O      2.418 A
- PRO A153.O   GLN A349.OE1    2.544 A
- ASN A244.OD1 PRO A274.O      2.972 A
- SER A276.O   ALA A278.O      2.948 A
  MET B46.SD   VAL B352.O      2.291 A
- GLY B73.O    ASP B76.OD1     2.539 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
- GLY B240.O   GLU B273.OE2    2.536 A
- LEU B262.O   GLY B264.O      3.098 A
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
 4 Steric polar_donor clashes detected
@@ -443,32 +278,38 @@ No negative clashes detected
 Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto
-156 Residues requiring selection on adding H atoms
+148 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,B171,B251,B336,B362
- ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B76,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363
- GLU A83,A95,A111,A146,A210,A225,A257,A273,A296,A371,A374,B83,B95,B111,B146,B210,B225,B257,B273,B296,B371,B374
- HIS A58,A105,A142,A151,A164,A213,A283,A323,A351,B58,B105,B142,B151,B164,B213,B283,B323,B351
+ ASP A55,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363
+ GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,B83,B95,B111,B146,B210,B225,B257,B296,B371,B374
+ HIS A58,A105,A142,A164,A213,A283,A323,A351,B58,B105,B142,B164,B213,B283,B323,B351
  LYS A62,A219,A317,B62,B219,B317
- ARG A51,A75,A89,A106,A163,A176,A212,A216,A220,A222,A226,A236,A237,A247,A256,A281,A293,A318,A320,A337,A366,A370,B51,B75,B89,B106,B163,B176,B212,B216,B220,B222,B226,B236,B237,B247,B256,B281,B293,B318,B320,B337,B366,B370
+ ARG A51,A89,A106,A163,A176,A212,A216,A220,A222,A226,A236,A237,A247,A256,A281,A293,A318,A320,A337,A366,A370,B51,B89,B106,B163,B176,B212,B216,B220,B222,B226,B236,B237,B247,B256,B281,B293,B318,B320,B337,B366,B370
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329,B53,B80,B87,B101,B132,B172,B177,B239,B248,B305,B329
 Selection: auto
 Replacing HIS A58 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on VAL A70
+Warning: not enough atoms to build side chain hydrogen atoms on VAL A70
 Replacing HIS A105 by HIE
 Replacing HIS A142 by HIE
-Replacing HIS A151 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on GLY A148
 Replacing HIS A164 by HIE
 Replacing HIS A213 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on GLY A264
 Replacing HIS A283 by HIE
 Replacing HIS A323 by HIE
 Replacing HIS A351 by HIE
 Warning: not enough atoms to build backbone hydrogen atoms on ALA A375
 Warning: not enough atoms to build side chain hydrogen atoms on ALA A375
 Replacing HIS B58 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on GLY B73
 Replacing HIS B105 by HIE
 Replacing HIS B142 by HIE
-Replacing HIS B151 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on GLY B148
 Replacing HIS B164 by HIE
 Replacing HIS B213 by HIE
+Warning: not enough atoms to build backbone hydrogen atoms on SER B263
+Warning: not enough atoms to build side chain hydrogen atoms on SER B263
 Replacing HIS B283 by HIE
 Replacing HIS B323 by HIE
 Replacing HIS B351 by HIE
@@ -477,12 +318,12 @@ Warning: not enough atoms to build side chain hydrogen atoms on ALA B375
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
-Final Num. residues:  662
+Final Num. residues:  614
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
-Final Num. atoms:  10052
+Final Num. atoms:  9380
 Small mol ligands found
 AC2 A1
 AC2 B2

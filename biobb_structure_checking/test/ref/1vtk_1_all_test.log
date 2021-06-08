@@ -98,9 +98,9 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 2 Residues with missing backbone atoms found
  SER A149   OXT
  GLY A264   OXT
@@ -109,108 +109,25 @@ Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_
  GLY A264   - PRO A280   
 No unexpected backbone links
 Main chain fixes
-
-                         MODELLER 10.1, 2021/03/12, r12156
-
-     PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
-
-
-                     Copyright(c) 1989-2021 Andrej Sali
-                            All Rights Reserved
-
-                             Written by A. Sali
-                               with help from
-              B. Webb, M.S. Madhusudhan, M-Y. Shen, G.Q. Dong,
-          M.A. Marti-Renom, N. Eswar, F. Alber, M. Topf, B. Oliva,
-             A. Fiser, R. Sanchez, B. Yerkovich, A. Badretdinov,
-                     F. Melo, J.P. Overington, E. Feyfant
-                 University of California, San Francisco, USA
-                    Rockefeller University, New York, USA
-                      Harvard University, Cambridge, USA
-                   Imperial Cancer Research Fund, London, UK
-              Birkbeck College, University of London, London, UK
-
-
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 4.12.14-lp150.12.82-default x86_64
-Date and time of compilation         : 2021/03/12 00:04:35
-MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2021/06/07 10:11:02
-
-Fixing chain/model A/0
-0 atoms in HETATM/BLK residues constrained
-to protein atoms within 2.30 angstroms
-and protein CA atoms within 10.00 angstroms
-0 atoms in residues without defined topology
-constrained to be rigid bodies
->> Model assessment by DOPE potential
-DOPE score               : -39012.562500
-
->> Summary of successfully produced models:
-Filename                          molpdf     DOPE score    GA341 score
-----------------------------------------------------------------------
-target.B99990001.pdb          1981.94690   -39012.56250        1.00000
-
-Fixing SER A149 - PRO A153
-  Adding SER A149
-  Adding SER A150
-  Adding HIS A151
-  Adding ALA A152
-  Adding PRO A153
-
-Fixing GLY A264 - PRO A280
-  Adding GLY A264
-  Adding THR A265
-  Adding ALA A266
-  Adding VAL A267
-  Adding PRO A268
-  Adding PRO A269
-  Adding GLN A270
-  Adding GLY A271
-  Adding ALA A272
-  Adding GLU A273
-  Adding PRO A274
-  Adding GLN A275
-  Adding SER A276
-  Adding ASN A277
-  Adding ALA A278
-  Adding GLY A279
-  Adding PRO A280
-
-1 Residues with missing backbone atoms found
- SER A263   OXT
-1 Backbone breaks found
- SER A263   - GLY A264   
-No unexpected backbone links
-Consecutive residues too far away to be covalently linked
- SER A263   - GLY A264  , bond distance    5.152 
+Nothing to do
 Capping terminal ends
 True terminal residues:  A46,A376
-Terminal residues from backbone breaks:  A263-A264
+Terminal residues from backbone breaks:  A149-A153,A264-A280
 Nothing to do
 No caps added
 Fixing missing backbone atoms
 Adding missing backbone atoms
-SER A263
+SER A149
   Adding new atom OXT
-Fixed 1 backbone atom(s)
+GLY A264
+  Adding new atom OXT
+Fixed 2 backbone atom(s)
 Checking for steric clashes
-1 Steric severe clashes detected
- GLY A279.O   HIS A283.CG     0.908 A
-7 Steric apolar clashes detected
- SER A149.O   ALA A152.CB     2.755 A
- SER A150.CB  SER A345.O      2.379 A
- GLN A261.OE1 ALA A278.CA     2.099 A
- ALA A278.O   HIS A283.CD2    1.664 A
- GLY A279.C   PRO A282.O      2.807 A
- GLY A279.O   HIS A283.CG     0.908 A
- PRO A280.CA  HIS A283.CE1    2.690 A
-4 Steric polar_acceptor clashes detected
- PRO A153.O   GLN A349.OE1    3.023 A
- GLN A261.OE1 ALA A278.O      3.008 A
- PRO A269.O   ALA A272.O      2.894 A
- PRO A280.O   PRO A282.O      2.064 A
-1 Steric polar_donor clashes detected
- GLY A279.N   ILE A284.N      2.611 A
+No severe clashes detected
+No apolar clashes detected
+1 Steric polar_acceptor clashes detected
+ SER A149.OXT GLN A349.OE1    2.827 A
+No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
@@ -218,8 +135,7 @@ Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
-1 trans peptide bonds with unusual omega dihedrals
-PRO A280   ARG A281   Dihedral:  108.619
+No trans peptide bonds with unusual omega dihedrals found
 
 Step 15: getss --mark All
 
@@ -229,31 +145,20 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-1 Steric severe clashes detected
- GLY A279.O   HIS A283.CG     0.908 A
-9 Steric apolar clashes detected
+No severe clashes detected
+2 Steric apolar clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A
  ALA A118.CA  SER A181.O      2.890 A
- SER A149.O   ALA A152.CB     2.755 A
- SER A150.CB  SER A345.O      2.379 A
- GLN A261.OE1 ALA A278.CA     2.099 A
- ALA A278.O   HIS A283.CD2    1.664 A
- GLY A279.C   PRO A282.O      2.807 A
- GLY A279.O   HIS A283.CG     0.908 A
- PRO A280.CA  HIS A283.CE1    2.690 A
-8 Steric polar_acceptor clashes detected
+6 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
- PRO A153.O   GLN A349.OE1    3.023 A
+ SER A149.OXT GLN A349.OE1    2.827 A
+ PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
  GLU A225.OE1 TMP A500.O3'    2.895 A
- GLN A261.OE1 ALA A278.O      3.008 A
- PRO A269.O   ALA A272.O      2.894 A
- PRO A280.O   PRO A282.O      2.064 A
-3 Steric polar_donor clashes detected
+2 Steric polar_donor clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
  TRP A259.NE1 ARG A293.NH1    3.094 A
- GLY A279.N   ILE A284.N      2.611 A
 3 Steric positive clashes detected
  LYS A62.NZ   ARG A163.NH1    3.439 A
  ARG A212.NH2 ARG A216.NH2    3.171 A
@@ -263,11 +168,11 @@ No negative clashes detected
 Step 17: add_hydrogen --add_mode auto
 
 Running add_hydrogen. Options: --add_mode auto
-78 Residues requiring selection on adding H atoms
+76 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362
  ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363
- GLU A83,A95,A111,A146,A210,A225,A257,A273,A296,A371,A374
- HIS A58,A105,A142,A151,A164,A213,A283,A323,A351
+ GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374
+ HIS A58,A105,A142,A164,A213,A283,A323,A351
  LYS A62,A219,A317
  ARG A51,A75,A89,A106,A163,A176,A212,A216,A220,A222,A226,A236,A237,A247,A256,A281,A293,A318,A320,A337,A366,A370
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329
@@ -278,7 +183,6 @@ Selection: auto
 Replacing HIS A58 by HIE
 Replacing HIS A105 by HIE
 Replacing HIS A142 by HIE
-Replacing HIS A151 by HIE
 Replacing HIS A164 by HIE
 Replacing HIS A213 by HIE
 Replacing HIS A283 by HIE
@@ -287,12 +191,12 @@ Replacing HIS A351 by HIE
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
-Final Num. residues:  333
+Final Num. residues:  315
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  0
-Final Num. atoms:  5082
+Final Num. atoms:  4855
 Small mol ligands found
 ADP A400
 TMP A500

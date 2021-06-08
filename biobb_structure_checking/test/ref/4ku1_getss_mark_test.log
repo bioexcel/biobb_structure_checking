@@ -43,10 +43,41 @@ MAN D7
 NAG D8
 FUL D9
 
-Running getss.
+Running getss. Options: --mark all
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981
  CYS B261.SG  CYS B321.SG     4.126
  CYS B367.SG  CYS B425.SG     4.188
-Running  check_only. Nothing else to do.
+Warning, no canonical sequence available for chain C
+Warning, no canonical sequence available for chain D
+Final Num. models: 1
+Final Num. chains: 4 (A: Protein, B: Protein, C: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%), D: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%))
+Final Num. residues:  583
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  168
+Final Num. ligands or modified residues:  20
+Final Num. water mol.:  148
+Final Num. atoms:  3714
+Small mol ligands found
+PG4 A511
+NAG C1
+NAG C2
+BMA C3
+MAN C4
+NAG C5
+GAL C6
+MAN C7
+NAG C8
+GAL C9
+FUL C10
+NAG D1
+NAG D2
+BMA D3
+MAN D4
+NAG D5
+GAL D6
+MAN D7
+NAG D8
+FUL D9
+Structure saved on 4ku1_getss_mark_test.pdb

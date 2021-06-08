@@ -1,0 +1,37 @@
+===============================================================================
+=                   BioBB structure checking utility v3.8.1                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+===============================================================================
+
+Structure exists: 'tmpPDB/sv/1svc.cif' 
+Structure pdb:1svc loaded
+ PDB id: 1SVC
+ Title: NFKB P50 HOMODIMER BOUND TO DNA
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSCRIPTION/DNA
+ Resolution (A): 2.600
+
+ Num. models: 1
+ Num. chains: 2 (D: DNA, P: Protein)
+ Num. residues:  393
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  63
+ Num. ligands or modified residues:  0
+ Num. water mol.:  63
+ Num. atoms:  2903
+
+Running chains. Options: --select dna
+2 Chain(s) detected
+ D: DNA
+ P: Protein
+Warning: No backbone atoms defined
+Selecting chain(s) dna
+Final Num. models: 1
+Final Num. chains: 1 (D: DNA)
+Final Num. residues:  34
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  15
+Final Num. ligands or modified residues:  0
+Final Num. water mol.:  15
+Final Num. atoms:  406
+Structure saved on 1svc_chains_test_dna.pdb
