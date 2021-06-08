@@ -234,10 +234,6 @@
   "breaks": {
    "detected": [
     [
-     "SER A263",
-     "GLY A264"
-    ],
-    [
      "PRO A280",
      "ARG A281"
     ]
@@ -247,23 +243,33 @@
    "apolar": [
     {
      "at1": "ARG A247.CD",
-     "at2": "SER A276.O",
-     "dist": 2.5716
+     "at2": "ALA A278.O",
+     "dist": 2.7594
     },
     {
-     "at1": "ARG A247.CD",
-     "at2": "ASN A277.O",
-     "dist": 2.0996
+     "at1": "ARG A247.NH2",
+     "at2": "GLU A273.CD",
+     "dist": 2.5908
     },
     {
-     "at1": "ALA B243.CB",
-     "at2": "SER B276.OG",
-     "dist": 2.8338
+     "at1": "GLN A261.O",
+     "at2": "THR A265.CG2",
+     "dist": 2.6512
+    },
+    {
+     "at1": "THR A265.CG2",
+     "at2": "HIS A283.NE2",
+     "dist": 2.4854
+    },
+    {
+     "at1": "GLY B73.O",
+     "at2": "ASP B76.CG",
+     "dist": 2.7871
     },
     {
      "at1": "ARG B247.CD",
      "at2": "SER B276.O",
-     "dist": 2.012
+     "dist": 2.8132
     }
    ],
    "negative": [],
@@ -271,47 +277,32 @@
     {
      "at1": "LEU A69.O",
      "at2": "LEU A72.O",
-     "dist": 3.0606
+     "dist": 2.4256
     },
     {
-     "at1": "VAL A70.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0837
-    },
-    {
-     "at1": "ASP A76.OD2",
-     "at2": "PRO A155.O",
-     "dist": 2.4184
-    },
-    {
-     "at1": "PRO A153.O",
-     "at2": "GLN A349.OE1",
-     "dist": 2.5443
+     "at1": "SER A74.O",
+     "at2": "ASP A76.O",
+     "dist": 3.0792
     },
     {
      "at1": "ASN A244.OD1",
-     "at2": "PRO A274.O",
-     "dist": 2.9721
+     "at2": "GLU A273.OE2",
+     "dist": 2.3413
     },
     {
-     "at1": "SER A276.O",
-     "at2": "ALA A278.O",
-     "dist": 2.9478
+     "at1": "GLN A261.O",
+     "at2": "GLY A264.O",
+     "dist": 3.0922
     },
     {
      "at1": "GLY B73.O",
      "at2": "ASP B76.OD1",
-     "dist": 2.5389
+     "dist": 2.5409
     },
     {
-     "at1": "GLY B240.O",
-     "at2": "GLU B273.OE2",
-     "dist": 2.5361
-    },
-    {
-     "at1": "LEU B262.O",
-     "at2": "GLY B264.O",
-     "dist": 3.0976
+     "at1": "ASN B277.OD1",
+     "at2": "VAL B324.O",
+     "dist": 2.6546
     }
    ],
    "polar_donor": [],
@@ -320,14 +311,9 @@
   },
   "long_links": [
    [
-    "SER A263",
-    "GLY A264",
-    5.67032
-   ],
-   [
     "PRO A280",
     "ARG A281",
-    5.59772
+    5.86301
    ]
   ],
   "main_chain_fix": [
@@ -408,11 +394,7 @@
    "PRO A280": [
     "OXT"
    ],
-   "SER A263": [
-    "OXT"
-   ],
    "fixed": [
-    "SER A263",
     "PRO A280",
     "ALA A375",
     "ALA B375"
@@ -438,19 +420,19 @@
  "cistransbck": {
   "unusual_trans": [
    [
-    "LEU B72",
-    "GLY B73",
-    155.995
-   ],
-   [
     "ALA B147",
     "GLY B148",
-    -145.731
+    155.229
+   ],
+   [
+    "SER A263",
+    "GLY A264",
+    143.024
    ],
    [
     "ALA A147",
     "GLY A148",
-    156.769
+    145.922
    ]
   ]
  },
@@ -489,13 +471,23 @@
     },
     {
      "at1": "ARG A247.CD",
-     "at2": "SER A276.O",
-     "dist": 2.5716
+     "at2": "ALA A278.O",
+     "dist": 2.7594
     },
     {
-     "at1": "ARG A247.CD",
-     "at2": "ASN A277.O",
-     "dist": 2.0996
+     "at1": "ARG A247.NH2",
+     "at2": "GLU A273.CD",
+     "dist": 2.5908
+    },
+    {
+     "at1": "GLN A261.O",
+     "at2": "THR A265.CG2",
+     "dist": 2.6512
+    },
+    {
+     "at1": "THR A265.CG2",
+     "at2": "HIS A283.NE2",
+     "dist": 2.4854
     },
     {
      "at1": "MET A372.SD",
@@ -528,6 +520,11 @@
      "dist": 2.8901
     },
     {
+     "at1": "GLY B73.O",
+     "at2": "ASP B76.CG",
+     "dist": 2.7871
+    },
+    {
      "at1": "THR B86.OG1",
      "at2": "GLU B374.CB",
      "dist": 2.8918
@@ -548,14 +545,9 @@
      "dist": 2.8754
     },
     {
-     "at1": "ALA B243.CB",
-     "at2": "SER B276.OG",
-     "dist": 2.8338
-    },
-    {
      "at1": "ARG B247.CD",
      "at2": "SER B276.O",
-     "dist": 2.012
+     "dist": 2.8132
     },
     {
      "at1": "SER B357.O",
@@ -583,32 +575,22 @@
     {
      "at1": "LEU A69.O",
      "at2": "LEU A72.O",
-     "dist": 3.0606
+     "dist": 2.4256
     },
     {
-     "at1": "VAL A70.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0837
-    },
-    {
-     "at1": "ASP A76.OD2",
-     "at2": "PRO A155.O",
-     "dist": 2.4184
-    },
-    {
-     "at1": "PRO A153.O",
-     "at2": "GLN A349.OE1",
-     "dist": 2.5443
+     "at1": "SER A74.O",
+     "at2": "ASP A76.O",
+     "dist": 3.0792
     },
     {
      "at1": "ASN A244.OD1",
-     "at2": "PRO A274.O",
-     "dist": 2.9721
+     "at2": "GLU A273.OE2",
+     "dist": 2.3413
     },
     {
-     "at1": "SER A276.O",
-     "at2": "ALA A278.O",
-     "dist": 2.9478
+     "at1": "GLN A261.O",
+     "at2": "GLY A264.O",
+     "dist": 3.0922
     },
     {
      "at1": "MET B46.SD",
@@ -618,7 +600,7 @@
     {
      "at1": "GLY B73.O",
      "at2": "ASP B76.OD1",
-     "dist": 2.5389
+     "dist": 2.5409
     },
     {
      "at1": "ARG B89.O",
@@ -631,14 +613,9 @@
      "dist": 2.9139
     },
     {
-     "at1": "GLY B240.O",
-     "at2": "GLU B273.OE2",
-     "dist": 2.5361
-    },
-    {
-     "at1": "LEU B262.O",
-     "at2": "GLY B264.O",
-     "dist": 3.0976
+     "at1": "ASN B277.OD1",
+     "at2": "VAL B324.O",
+     "dist": 2.6546
     },
     {
      "at1": "ALA B334.O",
@@ -710,7 +687,7 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 10052,
+  "num_ats": 10049,
   "num_res": 662,
   "num_wat": 0,
   "res_hetats": 2,

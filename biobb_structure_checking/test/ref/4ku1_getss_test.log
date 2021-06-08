@@ -4,6 +4,8 @@
 ===============================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
+Warning, no canonical sequence available for chain C
+Warning, no canonical sequence available for chain D
 Structure pdb:4ku1 loaded
  PDB id: 4KU1
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
@@ -12,7 +14,7 @@ Structure pdb:4ku1 loaded
  Resolution (A): 1.90
 
  Num. models: 1
- Num. chains: 2 (A: Protein, B: Protein)
+ Num. chains: 4 (A: Protein, B: Protein, C: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%), D: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%))
  Num. residues:  583
  Num. residues with ins. codes:  0
  Num. HETATM residues:  168
@@ -20,26 +22,26 @@ Structure pdb:4ku1 loaded
  Num. water mol.:  148
  Num. atoms:  3714
 Small mol ligands found
-NAG A501
-NAG A502
-BMA A503
-MAN A504
-NAG A505
-GAL A506
-FUL A507
-MAN A508
-NAG A509
-GAL A510
 PG4 A511
-NAG B501
-NAG B502
-BMA B503
-MAN B504
-NAG B505
-GAL B506
-MAN B507
-FUL B508
-NAG B509
+NAG C1
+NAG C2
+BMA C3
+MAN C4
+NAG C5
+GAL C6
+MAN C7
+NAG C8
+GAL C9
+FUL C10
+NAG D1
+NAG D2
+BMA D3
+MAN D4
+NAG D5
+GAL D6
+MAN D7
+NAG D8
+FUL D9
 
 Running getss.
 4 Possible SS Bonds detected

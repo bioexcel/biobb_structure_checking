@@ -23,7 +23,7 @@ chains:
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select B > 2ki5_chains_test_B.log
 	@echo "Running chains on 1svc"
-        ${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_protein.pdb --non_interactive chains --select protein > 1svc_chains_test_protein.log
+	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_protein.pdb --non_interactive chains --select protein > 1svc_chains_test_protein.log
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_dna.pdb --non_interactive chains --select dna > 1svc_chains_test_dna.log
 
 inscodes:
