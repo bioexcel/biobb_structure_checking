@@ -25,7 +25,6 @@
    "ASP A136",
    "HIS A142",
    "GLU A146",
-   "HIS A151",
    "ASP A162",
    "ARG A163",
    "HIS A164",
@@ -54,7 +53,6 @@
    "ARG A256",
    "GLU A257",
    "ASP A258",
-   "GLU A273",
    "ARG A281",
    "HIS A283",
    "ASP A286",
@@ -111,102 +109,36 @@
      "PRO A280"
     ]
    ],
-   "option_selected": "All"
+   "option_selected": "none"
   },
   "clashes": {
-   "apolar": [
-    {
-     "at1": "SER A150.CB",
-     "at2": "SER A345.O",
-     "dist": 2.5327
-    },
-    {
-     "at1": "GLY A279.C",
-     "at2": "HIS A283.ND1",
-     "dist": 0.9622
-    },
-    {
-     "at1": "PRO A280.CD",
-     "at2": "HIS A283.CE1",
-     "dist": 0.8679
-    }
-   ],
+   "apolar": [],
    "negative": [],
    "polar_acceptor": [
     {
-     "at1": "SER A150.O",
-     "at2": "ALA A152.O",
-     "dist": 2.5528
-    },
-    {
-     "at1": "PRO A153.O",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
-     "dist": 3.0992
-    },
-    {
-     "at1": "GLN A261.O",
-     "at2": "GLY A264.O",
-     "dist": 2.9152
-    },
-    {
-     "at1": "GLY A279.O",
-     "at2": "ASP A286.OD2",
-     "dist": 2.8549
-    },
-    {
-     "at1": "PRO A280.O",
-     "at2": "PRO A282.O",
-     "dist": 2.0919
+     "dist": 2.8269
     }
    ],
    "polar_donor": [],
    "positive": [],
-   "severe": [
-    {
-     "at1": "GLY A279.C",
-     "at2": "HIS A283.ND1",
-     "dist": 0.9622
-    },
-    {
-     "at1": "PRO A280.N",
-     "at2": "HIS A283.ND1",
-     "dist": 0.4419
-    }
-   ]
+   "severe": []
   },
-  "main_chain_fix": [
-   "SER A149",
-   "SER A150",
-   "HIS A151",
-   "ALA A152",
-   "PRO A153",
-   "GLY A264",
-   "THR A265",
-   "ALA A266",
-   "VAL A267",
-   "PRO A268",
-   "PRO A269",
-   "GLN A270",
-   "GLY A271",
-   "ALA A272",
-   "GLU A273",
-   "PRO A274",
-   "GLN A275",
-   "SER A276",
-   "ASN A277",
-   "ALA A278",
-   "GLY A279",
-   "PRO A280"
-  ],
   "missing_atoms": {
    "GLY A264": [
     "OXT"
    ],
    "SER A149": [
     "OXT"
-   ]
+   ],
+   "fixed": [
+    "SER A149",
+    "GLY A264"
+   ],
+   "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -220,15 +152,7 @@
  "chiral_bck": {
   "n_chirals": 287
  },
- "cistransbck": {
-  "unusual_trans": [
-   [
-    "PRO A280",
-    "ARG A281",
-    155.383
-   ]
-  ]
- },
+ "cistransbck": {},
  "clashes": {
   "detected": {
    "apolar": [
@@ -241,21 +165,6 @@
      "at1": "ALA A118.CA",
      "at2": "SER A181.O",
      "dist": 2.8897
-    },
-    {
-     "at1": "SER A150.CB",
-     "at2": "SER A345.O",
-     "dist": 2.5327
-    },
-    {
-     "at1": "GLY A279.C",
-     "at2": "HIS A283.ND1",
-     "dist": 0.9622
-    },
-    {
-     "at1": "PRO A280.CD",
-     "at2": "HIS A283.CE1",
-     "dist": 0.8679
     }
    ],
    "negative": [],
@@ -271,14 +180,14 @@
      "dist": 3.0609
     },
     {
-     "at1": "SER A150.O",
-     "at2": "ALA A152.O",
-     "dist": 2.5528
+     "at1": "SER A149.OXT",
+     "at2": "GLN A349.OE1",
+     "dist": 2.8269
     },
     {
      "at1": "PRO A153.O",
      "at2": "GLN A349.OE1",
-     "dist": 3.0992
+     "dist": 2.8022
     },
     {
      "at1": "LEU A217.O",
@@ -289,21 +198,6 @@
      "at1": "GLU A225.OE1",
      "at2": "TMP A500.O3'",
      "dist": 2.8949
-    },
-    {
-     "at1": "GLN A261.O",
-     "at2": "GLY A264.O",
-     "dist": 2.9152
-    },
-    {
-     "at1": "GLY A279.O",
-     "at2": "ASP A286.OD2",
-     "dist": 2.8549
-    },
-    {
-     "at1": "PRO A280.O",
-     "at2": "PRO A282.O",
-     "dist": 2.0919
     }
    ],
    "polar_donor": [
@@ -335,18 +229,7 @@
      "dist": 2.9914
     }
    ],
-   "severe": [
-    {
-     "at1": "GLY A279.C",
-     "at2": "HIS A283.ND1",
-     "dist": 0.9622
-    },
-    {
-     "at1": "PRO A280.N",
-     "at2": "HIS A283.ND1",
-     "dist": 0.4419
-    }
-   ]
+   "severe": []
   }
  },
  "final_stats": {
@@ -359,8 +242,8 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 5079,
-  "num_res": 333,
+  "num_ats": 4855,
+  "num_res": 315,
   "num_wat": 0,
   "res_hetats": 2,
   "res_insc": 0,
