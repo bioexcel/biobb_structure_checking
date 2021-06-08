@@ -137,7 +137,7 @@ sequences:
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences > 2ki5_sequences_test.log
 dnamut:
 	echo "Running dnamut on 1D23"
-	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_mutateside_test.log
+	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_dnamut_test.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_poliA_test.pdb --non_interactive mutateside --na_seq AAAAAAAAAA  > 1d23_poliA_test.log
 
 biounits:
