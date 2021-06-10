@@ -265,7 +265,7 @@ Structure not modified, not saving. Override with --force_save
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1ldn.1 loaded
- Title: structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+ Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: oxidoreductase(choh(d)-nad(a))
  Resolution (A): N.A.
@@ -300,7 +300,7 @@ Structure not modified, not saving. Override with --force_save
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
- Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
  Resolution (A): N.A.
@@ -329,7 +329,7 @@ Structure not modified, not saving. Override with --force_save
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:2ki5.1 loaded
- Title: herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
+ Title:  herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
  Experimental method: x-ray diffraction
  Keywords: transferase (phosphotransferase) thymid, transferase (phosphotransferase) thymidine kinase; viridae; ds-dna enveloped viruses; herpesviridae; alphaherpesvirinae antiviral drug (aciclovir)
  Resolution (A): N.A.

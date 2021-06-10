@@ -6,7 +6,7 @@
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1ldn.1 loaded
- Title: structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+ Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: oxidoreductase(choh(d)-nad(a))
  Resolution (A): N.A.

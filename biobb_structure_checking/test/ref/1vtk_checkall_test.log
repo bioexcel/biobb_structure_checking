@@ -6,7 +6,7 @@
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
- Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
  Resolution (A): N.A.
