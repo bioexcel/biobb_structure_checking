@@ -322,7 +322,7 @@ MSGS = {
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
     'ALL_UNDO': 'All changes reverted to original structure',
-    'ATOM_LIMIT': 'Number of atoms limit exceeded ({}), use --limit to adjust',
+    'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), use --limit to adjust',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',

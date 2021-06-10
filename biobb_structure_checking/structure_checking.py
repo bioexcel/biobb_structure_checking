@@ -59,12 +59,11 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
             print(
-                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize),
-                file=sys.stderr
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize)
             )
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
-            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
+            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
 
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
