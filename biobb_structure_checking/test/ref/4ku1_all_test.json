@@ -534,12 +534,14 @@
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "selected": {}
  },
@@ -581,7 +583,7 @@
     },
     {
      "at1": "ASN A297.CG",
-     "at2": "NAG A501.C1",
+     "at2": "NAG C1.C1",
      "dist": 2.7592
     },
     {
@@ -601,7 +603,7 @@
     },
     {
      "at1": "ASN B297.CG",
-     "at2": "NAG B501.C1",
+     "at2": "NAG D1.C1",
      "dist": 2.4334
     }
    ],
@@ -632,12 +634,28 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {
+   "C": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "D": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
   "chain_ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "models_type": 0,
-  "nchains": 2,
+  "nchains": 4,
   "nmodels": 1,
   "num_ats": 6831,
   "num_res": 435,
@@ -693,26 +711,26 @@
  "inscodes": {},
  "ligands": {
   "detected": [
-   "NAG A501",
-   "NAG A502",
-   "BMA A503",
-   "MAN A504",
-   "NAG A505",
-   "GAL A506",
-   "FUL A507",
-   "MAN A508",
-   "NAG A509",
-   "GAL A510",
    "PG4 A511",
-   "NAG B501",
-   "NAG B502",
-   "BMA B503",
-   "MAN B504",
-   "NAG B505",
-   "GAL B506",
-   "MAN B507",
-   "FUL B508",
-   "NAG B509"
+   "NAG C1",
+   "NAG C2",
+   "BMA C3",
+   "MAN C4",
+   "NAG C5",
+   "GAL C6",
+   "MAN C7",
+   "NAG C8",
+   "GAL C9",
+   "FUL C10",
+   "NAG D1",
+   "NAG D2",
+   "BMA D3",
+   "MAN D4",
+   "NAG D5",
+   "GAL D6",
+   "MAN D7",
+   "NAG D8",
+   "FUL D9"
   ],
   "error": "Unknown selection SO4"
  },
@@ -728,12 +746,28 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {
+   "C": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "D": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
   "chain_ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "models_type": 0,
-  "nchains": 2,
+  "nchains": 4,
   "nmodels": 1,
   "num_ats": 3714,
   "num_res": 583,

@@ -57,7 +57,7 @@ class StructureManager:
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
         ) -> None:
-        """ 
+        """
             Class constructor. Sets an empty object and loads a structure
             according to parameters
 
@@ -122,8 +122,8 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         self.res_library = ResidueLib(res_library_path)
-        
-        
+
+
         self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
@@ -196,13 +196,9 @@ class StructureManager:
         self.set_chain_ids()
         self.calc_stats()
         self.guess_hetatm()
-        # Pre_calc rr distances with separated models
-        self.rr_dist = mu.get_all_r2r_distances(
-            self.st,
-            'all',
-            self.data_library.distances['R_R_CUTOFF'],
-            join_models=not self.has_superimp_models()
-        )
+        
+        self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
+        
         # Precalc backbone . TODO Nucleic Acids
         self.check_backbone_connect(
             ('N', 'C'),
@@ -274,10 +270,10 @@ class StructureManager:
                 if not oxt_ok:
                     print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
         print("Total assigned charge: {:10.2f}".format(tot_chrg))
-        
+
         self.has_charges = True
-                
-                
+
+
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
         """
@@ -630,7 +626,7 @@ class StructureManager:
             'ca_only': self.ca_only,
             'biounit': self.biounit
         }
-    
+
     def get_term_res(self) -> List[Tuple[str, Residue]]:
         term_res = []
         for res in self.all_residues:
@@ -657,7 +653,7 @@ class StructureManager:
         if 'keywords' in self.meta:
             print(' Keywords: {}'.format(self.meta['keywords']))
         if 'resolution' in self.meta:
-            print(' Resolution: {} A'.format(self.meta['resolution']))
+            print(' Resolution (A): {}'.format(self.meta['resolution']))
         if self.biounit:
             print(' Biounit no. {}'. format(self.meta['biounit']))
 
@@ -678,7 +674,9 @@ class StructureManager:
             self.meta['method'] = self.headers['structure_method']
             if 'keywords' in self.headers:
                 self.meta['keywords'] = self.headers['keywords']
-            if 'resolution' in self.headers:
+            if 'resolution' not in self.headers or not self.headers['resolution']:
+                self.meta['resolution'] = 'N.A.'
+            else:
                 self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
@@ -780,10 +778,14 @@ class StructureManager:
                 List of tupes (r1,r2,dist)
 
         """
+        if self.has_NA():
+            cutoff = self.data_library.distances['R_R_CUTOFF']['NA']
+        else:
+            cutoff = self.data_library.distances['R_R_CUTOFF']['PROT']
         return mu.get_all_r2r_distances(
             self.st,
             res_group,
-            self.data_library.distances['R_R_CUTOFF'],
+            cutoff,
             join_models=join_models
         )
 
@@ -837,10 +839,10 @@ class StructureManager:
             if isinstance(guess, list):
                 self.chain_ids[chn.id] = mu.UNKNOWN
                 if chn.id not in self.chain_details:
-                    self.chain_details[chn.id] = guess 
+                    self.chain_details[chn.id] = guess
             else:
                 self.chain_ids[chn.id] = guess
-            
+
     def has_NA(self):
         has_NA = False
         for k,v in self.chain_ids.items():
@@ -855,7 +857,7 @@ class StructureManager:
         """
         if not self.chain_ids:
             self.set_chain_ids()
-        
+
         if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
             if select_chains.lower()  == 'na':
                 ch_ok = [mu.DNA, mu.RNA]
@@ -972,7 +974,7 @@ class StructureManager:
             ch_to_fix.add(brk[0].get_parent().id)
 
         modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
-        
+
         self.update_internals()
 
         return modeller_result
@@ -1100,20 +1102,23 @@ class StructureManager:
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
             moving_ats = []
+            
+            #checking whether there is a chain id in the model (Support for Modeller >= 10)
+            new_ch_id = new_st[0].child_list[0].id
 
             for nres in range(loc_i.start, loc_i.end):
                 mod_nres = nres - offset + 1
-                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][' ']:
+                if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
             for nres in range(loc_ii.start, loc_ii.end):
                 mod_nres = nres - offset + 1 - seq_off_i_ii
                 if nres in self.st[mod_id][ch_id] and\
                         'CA' in self.st[mod_id][ch_id][nres] and\
-                        mod_nres in new_st[0][' ']:
+                        mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][' '][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
             moving_ats = moving_ats[:len(fixed_ats)]
             spimp.set_atoms(fixed_ats, moving_ats)
@@ -1135,7 +1140,7 @@ class StructureManager:
                 if nres in self.st[mod_id][ch_id]:
                     self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
 
-                res = new_st[0][' '][mod_nres].copy()
+                res = new_st[0][new_ch_id][mod_nres].copy()
                 res.id = (' ', nres, ' ')
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1
@@ -1206,7 +1211,7 @@ class StructureManager:
            **remove_h**: Remove Hydrogen atom before adding new ones
         """
         add_h_rules = self.data_library.get_add_h_rules()
-        
+
         for res in self.all_residues:
             if mu.is_hetatm(res):
                 continue
@@ -1238,7 +1243,7 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-            
+
             if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
@@ -1274,19 +1279,19 @@ class StructureManager:
             self.rename_terms(self.get_term_res())
             self.update_atom_charges()
         self.modified = True
-        
+
     def mark_ssbonds(self, cys_list):
         for res in cys_list:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
             res.resname = 'CYX'
         self.modified = True
-    
+
     def rename_terms(self, term_res):
         for t in term_res:
             if t[1].resname not in ('ACE', 'NME'):
                 t[1].resname = t[0] + t[1].resname
-                
+
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
         return res not in self.prev_residue
@@ -1379,7 +1384,7 @@ class StructureManager:
         if res_type == 'ILE':
             mu.delete_atom(res, 'CD1')
             mu.build_atom(res, 'CD1', self.res_library, 'ILE')
-            
+
     def prepare_mutations_from_na_seq(self, new_seq):
         if new_seq.find(':') != -1:
             mut_seq = new_seq.split(':')
@@ -1402,7 +1407,7 @@ class StructureManager:
                mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix,r,start+i,prefix,mut_seq[nch][i]))
            nch += 1
         return ','.join(mut_list)
-        
+
 
 # ===============================================================================
 

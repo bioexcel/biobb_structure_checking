@@ -51,7 +51,7 @@ class SequenceData():
             print("WARNING: No valid FASTA formatted sequences found in {} ".format(fasta_sequence_path))
             read_ok = False
         return read_ok
-        
+
 
     def read_sequences(self, strucm, clean=True, cif_warn=False):
         """ Extracts sequences """
@@ -142,12 +142,15 @@ class SequenceData():
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
+                    if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
+                        print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id,mod.id))
+                        frags = [[res for res in chn.get_residues()]]
                 elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
                     self.add_empty_chain(ch_id)
                     frags = []
-                
+
                 for frag in frags:
                     start = frag[0].get_id()[1]
                     start_index = frag[0].index
@@ -161,7 +164,11 @@ class SequenceData():
                         for r in frag:
                             rn = r.get_resname()
                             if strucm.chain_ids[ch_id] == mu.PROTEIN:
-                                seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                                if rn in mu.ONE_LETTER_RESIDUE_CODE:
+                                    seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                                else:
+                                    print("Warning: unknown protein residue code", mu.residue_id(r))
+                                    seq += 'X'
                             elif strucm.chain_ids[ch_id] == mu.DNA:
                                 seq += rn[1:]
                             else:
@@ -189,8 +196,8 @@ class SequenceData():
                         'wrong_order': wrong_order,
                         'type': strucm.chain_ids[ch_id]
                     }
-                    
-                    
+
+
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """
@@ -270,7 +277,7 @@ class SequenceData():
             if self.has_canonical[ch_id]:
                 outseq += SeqIO.FastaIO.as_fasta(self.data[ch_id]['can'])
         return outseq
-    
+
     def get_pdbseq(self):
         """ Prepares a FASTA string with the structure sequence, and fragments """
         #TODO re-use this on modeller_manager

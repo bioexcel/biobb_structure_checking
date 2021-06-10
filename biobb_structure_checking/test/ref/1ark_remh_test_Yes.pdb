@@ -6988,4 +6988,4 @@ ATOM    462  CD1 ILE A  60      10.970  11.652  -0.807  1.00  1.00           C
 ATOM    463  OXT ILE A  60       9.692   8.009   0.432  1.00  1.00           O
 TER     464      ILE A  60                                                       
 ENDMDL
-END
+END   

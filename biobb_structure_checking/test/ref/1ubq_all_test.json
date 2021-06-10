@@ -46,7 +46,7 @@
  "backbone": {
   "add_caps": "none",
   "added_caps": [],
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -80,6 +80,7 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },
@@ -122,6 +123,7 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },

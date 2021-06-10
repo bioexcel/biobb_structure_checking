@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -9,7 +9,7 @@ Structure pdb:1svc loaded
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA
- Resolution: 2.600 A
+ Resolution (A): 2.600
 
  Num. models: 1
  Num. chains: 2 (D: DNA, P: Protein)
@@ -90,9 +90,9 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 1 Residues with missing backbone atoms found
  GLU P353   OXT
 No backbone breaks
