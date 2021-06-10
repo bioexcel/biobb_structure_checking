@@ -3,7 +3,7 @@
 import warnings
 import os
 import sys
-import re
+#import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 
@@ -196,9 +196,9 @@ class StructureManager:
         self.set_chain_ids()
         self.calc_stats()
         self.guess_hetatm()
-        
+
         self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
-        
+
         # Precalc backbone . TODO Nucleic Acids
         self.check_backbone_connect(
             ('N', 'C'),
@@ -235,6 +235,7 @@ class StructureManager:
             i += 1
 
     def update_atom_charges(self):
+        """ Updats atom charges from data library """
         print("Updating partial charges and atom types")
         tot_chrg = 0
         for res in self.st.get_residues():
@@ -334,11 +335,11 @@ class StructureManager:
     def get_SS_bonds(self) -> List[Union[Atom, Atom, float]]:
         """ Stores and returns possible SS Bonds by distance"""
         self.ss_bonds = mu.get_all_at2at_distances(
-                                                   self.st,
-                                                   'SG',
-                                                   self.data_library.distances['SS_DIST'],
-                                                   not self.has_superimp_models()
-                                                   )
+            self.st,
+            'SG',
+            self.data_library.distances['SS_DIST'],
+            not self.has_superimp_models()
+        )
         return self.ss_bonds
 
     def check_chiral_sides(self) -> Dict[List[Residue], List[Residue]]:
@@ -639,6 +640,7 @@ class StructureManager:
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
+        """ Get terminal residues """
         term_res = []
         for res in self.all_residues:
             if mu.is_hetatm(res):
@@ -712,8 +714,7 @@ class StructureManager:
         for ch_id in sorted(self.chain_ids):
             if ch_id in self.chain_details:
                 chids.append('{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
-                        ch_id, g=self.chain_details[ch_id])
-                    )
+                    ch_id, g=self.chain_details[ch_id]))
             else:
                 chids.append(
                     '{}: {}'.format(
@@ -754,7 +755,7 @@ class StructureManager:
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
 
-    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool=False):
+    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False):
         """
         Saves structure on disk in PDB format
 
@@ -855,8 +856,9 @@ class StructureManager:
                 self.chain_ids[chn.id] = guess
 
     def has_NA(self):
+        """ Checks if any of the chains is NA"""
         has_NA = False
-        for k,v in self.chain_ids.items():
+        for k, v in self.chain_ids.items():
             has_NA = (has_NA or (v > 1))
         return has_NA
 
@@ -870,7 +872,7 @@ class StructureManager:
             self.set_chain_ids()
 
         if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
-            if select_chains.lower()  == 'na':
+            if select_chains.lower() == 'na':
                 ch_ok = [mu.DNA, mu.RNA]
             else:
                 ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
@@ -977,7 +979,7 @@ class StructureManager:
             self,
             brk_list: Iterable[Atom],
             modeller_key: str = '',
-            extra_gap: int=0
+            extra_gap: int = 0
         ) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
@@ -994,10 +996,10 @@ class StructureManager:
             self,
             ch_to_fix,
             brk_list,
-            modeller_key = '',
+            modeller_key='',
             extra_gap: int = 0,
             extra_NTerm: int = 0,
-            sequence_data = None
+            sequence_data=None
         ):
         """ Runs modeller """
         # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
@@ -1060,7 +1062,7 @@ class StructureManager:
             ch_id: str,
             brk_list: Iterable[Atom],
             offset: int,
-            extra_gap: int=0
+            extra_gap: int = 0
         ) -> str:
         """ Merges the required fragments of Modeller results"""
 
@@ -1081,7 +1083,7 @@ class StructureManager:
             # Gap length taken from sequence gap to avoid PDB numbering issues
             gap_length = seq_ii.start - seq_i.end - 1
             # Offset to account for breaks in PDB residue numbering
-            seq_off_i_ii =  gap_end - seq_ii.start - gap_start + seq_i.end
+            seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 #Checking for incomplete gap build needed for fixing side chains with rebuild
@@ -1107,13 +1109,12 @@ class StructureManager:
 
             print('Fixing {} - {}'.format(
                 mu.residue_id(self.st[mod_id][ch_id][gap_start]),
-                mu.residue_id(self.st[mod_id][ch_id][gap_end]))
-            )
+                mu.residue_id(self.st[mod_id][ch_id][gap_end])))
 
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
             moving_ats = []
-            
+
             #checking whether there is a chain id in the model (Support for Modeller >= 10)
             new_ch_id = new_st[0].child_list[0].id
 
@@ -1167,6 +1168,7 @@ class StructureManager:
         return modif_residues
 
     def add_main_chain_caps(self, caps_list: Iterable[Iterable[str]]) -> List[str]:
+        """ Adds ACE and NME caps """
         # print(caps_list)
         fixed = []
         for cap in caps_list:
@@ -1292,6 +1294,7 @@ class StructureManager:
         self.modified = True
 
     def mark_ssbonds(self, cys_list):
+        """ Mark Cys residue in cys_list as CYX for further usage """
         for res in cys_list:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
@@ -1299,6 +1302,7 @@ class StructureManager:
         self.modified = True
 
     def rename_terms(self, term_res):
+        """ Rename Terminal residues as NXXX or CXXX """
         for t in term_res:
             if t[1].resname not in ('ACE', 'NME'):
                 t[1].resname = t[0] + t[1].resname
@@ -1397,26 +1401,30 @@ class StructureManager:
             mu.build_atom(res, 'CD1', self.res_library, 'ILE')
 
     def prepare_mutations_from_na_seq(self, new_seq):
+        """ Prepare mutation list to get new_seq, including complementary chain
+            Only for canonical Duplexes
+
+        """
         if new_seq.find(':') != -1:
             mut_seq = new_seq.split(':')
         else:
-            mut_seq = [new_seq, mu.complement_na_seq(new_seq)]
+            mut_seq = [new_seq, mu.rev_complement_na_seq(new_seq)]
         #Prepared for std Duplexes
         mut_list = []
-        i=0
-        nch=0
+        i = 0
+        nch = 0
         for ch_id in self.sequence_data.data:
-           chn = self.sequence_data.data[ch_id]
-           start = chn['pdb'][0]['frgs'][0].features[0].location.start
-           seq = chn['pdb'][0]['frgs'][0].seq
-           if len(seq) != len(mut_seq[nch]):
-               sys.exit("Sequence lengths do not match")
-           prefix = ''
-           if chn['pdb'][0]['type'] == mu.DNA:
-               prefix = 'D'
-           for i,r in enumerate(seq):
-               mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix,r,start+i,prefix,mut_seq[nch][i]))
-           nch += 1
+            chn = self.sequence_data.data[ch_id]
+            start = chn['pdb'][0]['frgs'][0].features[0].location.start
+            seq = chn['pdb'][0]['frgs'][0].seq
+            if len(seq) != len(mut_seq[nch]):
+                sys.exit("Sequence lengths do not match")
+            prefix = ''
+            if chn['pdb'][0]['type'] == mu.DNA:
+                prefix = 'D'
+            for i, r in enumerate(seq):
+                mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix, r, start + i, prefix, mut_seq[nch][i]))
+            nch += 1
         return ','.join(mut_list)
 
 
@@ -1456,4 +1464,3 @@ class NotEnoughAtomsError(Error):
 class ParseError(Error):
     def __init__(self, err_id, err_txt):
         self.message = '{} ({}) found when parsing input structure'.format(err_id, err_txt)
-

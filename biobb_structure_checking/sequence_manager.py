@@ -2,15 +2,14 @@
 """ Module to manage sequence information for structures """
 
 import sys
-from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from typing import List, Dict
 
+from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from Bio.Seq import Seq, MutableSeq
 #Deprecated in Biopython 1.78
 #from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
-from Bio import pairwise2
-from Bio import SeqIO
+from Bio import pairwise2, SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 import biobb_structure_checking.model_utils as mu
@@ -29,7 +28,7 @@ class SequenceData():
         self.has_canonical = False
         self.fasta = []
 
-    def add_empty_chain(self, ch_id:str):
+    def add_empty_chain(self, ch_id: str):
         """ Add base structure for a new chain """
         self.data[ch_id] = {
             'can':None,
@@ -108,11 +107,11 @@ class SequenceData():
                 else:
                     new_seq = Seq(seqs[i].replace('\n', ''))
                 self.data[ch_id]['can'] = SeqRecord(
-                        new_seq,
-                        'can_sq_' + ch_id,
-                        'can_sq_' + ch_id,
-                        'canonical sequence chain ' + ch_id
-                    )
+                    new_seq,
+                    'can_sq_' + ch_id,
+                    'can_sq_' + ch_id,
+                    'canonical sequence chain ' + ch_id
+                )
                 self.data[ch_id]['can'].features.append(
                     SeqFeature(FeatureLocation(1, len(seqs[i])))
                 )
@@ -143,7 +142,7 @@ class SequenceData():
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                     if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
-                        print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id,mod.id))
+                        print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id, mod.id))
                         frags = [[res for res in chn.get_residues()]]
                 elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
@@ -262,7 +261,7 @@ class SequenceData():
                 'csq_' + ch_id,
                 'csq_' + ch_id,
                 'canonical sequence chain ' + ch_id,
-                annotations = {'molecule_type':'protein'}
+                annotations={'molecule_type':'protein'}
             )
             self.data[ch_id]['can'].features.append(
                 SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))

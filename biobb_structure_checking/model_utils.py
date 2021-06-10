@@ -5,10 +5,10 @@
 import re
 import sys
 import numpy as np
-from numpy import arccos, clip, cos, dot, pi, sin, sqrt
-from numpy.linalg import norm
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
+from numpy import arccos, clip, cos, dot, pi, sin, sqrt
+from numpy.linalg import norm
 
 from Bio.PDB.Atom import Atom
 from Bio.PDB.Residue import Residue
@@ -32,7 +32,7 @@ TYPE_LABEL = {
     'water': ALLWAT
 }
 SEQ_THRESHOLD = 0.8
-CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown',ALLWAT:'Water'}
+CHAIN_TYPE_LABELS = {PROTEIN:'Protein', DNA:'DNA', RNA:'RNA', UNKNOWN:'Unknown', ALLWAT:'Water'}
 
 #Model Types
 ENSM = 1
@@ -83,7 +83,7 @@ THREE_LETTER_RESIDUE_CODE = {
 DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
 RNA_RESIDUE_CODE = {'A', 'C', 'G', 'U'}
 NA_RESIDUE_CODE = DNA_RESIDUE_CODE.union(RNA_RESIDUE_CODE)
-COMPLEMENT_TAB = str.maketrans('ACGTU','TGCAA')
+COMPLEMENT_TAB = str.maketrans('ACGTU', 'TGCAA')
 
 # Residue & Atom friendly ids
 def residue_id(res, models='auto'):
@@ -118,7 +118,7 @@ def _protein_residue_check(res_id):
     res_id = res_id.upper()
     rid = ''
     if res_id in THREE_LETTER_RESIDUE_CODE.keys():
-        rid = THREE_LETTER_RESIDUE_CODE[res]
+        rid = THREE_LETTER_RESIDUE_CODE[res_id]
     elif res_id in ONE_LETTER_RESIDUE_CODE.keys():
         rid = res_id
     else:
@@ -130,12 +130,11 @@ def _na_residue_check(rid):
     rid = rid.upper()
     if rid in NA_RESIDUE_CODE:
         return rid
-    else:
-        return False
+    return False
 
-def complement_na_seq(s):
-    return s.translate(COMPLEMENT_TAB)[::-1]
-
+def rev_complement_na_seq(seq):
+    """ Reverse-complement NA sequence """
+    return seq.translate(COMPLEMENT_TAB)[::-1]
 
 def residue_check(res):
     """
@@ -147,12 +146,14 @@ def residue_check(res):
     return res_ok
 
 def is_protein(res):
+    """ Checks if a residue is a valid protein one """
     rid = res.get_resname()
-    return (rid in THREE_LETTER_RESIDUE_CODE or rid in ONE_LETTER_RESIDUE_CODE)
+    return rid in THREE_LETTER_RESIDUE_CODE or rid in ONE_LETTER_RESIDUE_CODE
 
 def is_na(res):
+    """ Checks if a residue is a valid NA one """
     rid = res.get_resname()
-    return (res in DNA_RESIDUE_CODE or res in RNA_RESIDUE_CODE)
+    return rid in DNA_RESIDUE_CODE or rid in RNA_RESIDUE_CODE
 
 def same_residue(at1, at2):
     """
@@ -244,7 +245,9 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     for res in chn.get_residues():
         if is_wat(res):
             continue
+
         total += 1
+
         rname = res.get_resname().replace(' ', '')
         if rname in THREE_LETTER_RESIDUE_CODE.values():
             prot += 1
@@ -252,11 +255,13 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             dna += 1
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
+
     if total > 0.:
         prot = prot / total
         dna = dna / total
         rna = rna / total
         other = 1. - prot - dna - rna
+
         if prot > thres or prot > dna + rna + other:
             return PROTEIN
         elif dna > thres or dna > prot + rna + other:
@@ -264,8 +269,8 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
         elif rna > thres or rna > prot + dna + other:
             return RNA
         return [prot, dna, rna, other]
-    else:
-        return ALLWAT
+
+    return ALLWAT
 
 #===============================================================================
 def check_chiral_residue(res, chiral_data):
@@ -474,6 +479,7 @@ def get_backbone_links(struc, backbone_atoms, covlnk, join_models=True):
     return cov_links
 
 def prep_rnums_list(res_list):
+    """ Prepares residue number list from residue list """
     return [residue_num(res) for res in res_list]
 
 # Residue manipulation =======================================================
@@ -536,6 +542,7 @@ def swap_atoms(at1, at2):
 
 # Atom management ==============================================================
 def rename_atom(res, old_at, new_at):
+    """ Rename atom within a residue """
     atm = res[old_at]
     res.detach_child(atm.id)
     atm.id = new_at
@@ -545,6 +552,7 @@ def rename_atom(res, old_at, new_at):
     res.add(atm)
 
 def delete_atom(res, at_id):
+    """ delete a atom within a residue """
     res.detach_child(at_id)
 
 def add_hydrogens_backbone(res, prev_res, next_res):
@@ -670,6 +678,7 @@ def add_hydrogens_side(res, res_library, opt, rules):
     return False
 
 def add_ACE_cap_at_res(res, next_res=None):
+    """ Adds ACE residue at N-term using available atoms """
     if 'N' in res:
         #ADD ACE residue
         print(residue_id(res), "Adding extra ACE residue")
@@ -740,6 +749,7 @@ def add_ACE_cap_at_res(res, next_res=None):
     return False
 
 def add_NME_cap_at_res(res, prev_res=None):
+    """ Adds NME residue at C-term using available atoms """
     # removing OXT if any
     if 'OXT' in res:
         delete_atom(res, 'OXT')
@@ -801,6 +811,7 @@ def add_NME_cap_at_res(res, prev_res=None):
     return False
 
 def build_atom(res, at_id, res_lib, new_res_id):
+    """ Builds atom from library """
     if at_id == 'CB':
         coords = build_coords_CB(res)
     else:
@@ -808,6 +819,7 @@ def build_atom(res, at_id, res_lib, new_res_id):
     add_new_atom_to_residue(res, at_id, coords)
 
 def add_new_atom_to_residue(res, at_id, coords):
+    """Adds a new atom a residue """
     res.add(Atom(at_id, coords, 99.0, 1.0, ' ', ' ' + at_id + ' ', 0, at_id[0:1]))
 
 def build_coords_from_lib(res, res_lib, new_res, at_id):
@@ -837,6 +849,7 @@ def build_coords_O(res): # Get O from Backbone
     return build_coords_from_ats_internal(res['C'], res['CA'], res['N'], OINTERNALS)
 
 def build_coords_trans_CA(at0, at1, at2):
+    """ Builds CA with trans peptide bond conf"""
     return build_coords_from_ats_internal(at0, at1, at2, [CCDIS, SP2ANGLE, PEPDIH])
 
 
@@ -908,6 +921,7 @@ def build_coords_SP2(dst, at0, at1, at2):
     return cr0 + avec
 
 def build_coords_from_ats_internal(at1, at2, at3, geom):
+    """ Gets coordinates from internal geometry using ats as parameters for easier usage"""
     return build_coords_from_internal(
         at1.get_coord(),
         at2.get_coord(),
@@ -1010,7 +1024,7 @@ def get_all_at2at_distances(
     return dist_mat
 
 def get_all_r2r_distances(struc, r_ids='all', d_cutoff=0., join_models=False):
-    # Uses distances between the first atom of each residue as r-r distance
+    """ Gets all distances from the first atoms of each residue """
     if not isinstance(r_ids, list):
         r_ids = r_ids.split(',')
     dist_mat = []
@@ -1036,6 +1050,7 @@ def _get_contacts(ats_list, d_cutoff):
     return contact_list
 
 def calc_RMSd_ats(ats1, ats2):
+    """ Calcs RMSd between two atom lists, no fit"""
     if len(ats1) != len(ats2):
         print(
             "Warning: atom lists of different length when calculating RMSd ({}, {})".format(
@@ -1052,12 +1067,14 @@ def calc_RMSd_ats(ats1, ats2):
     return sqrt(rmsd / i)
 
 def calc_RMSd_all_ats(st1, st2):
+    """ Calcs RMSd all atoms, no fit """
     return calc_RMSd_ats(
         [atm for atm in st1.get_atoms()],
         [atm for atm in st2.get_atoms()]
     )
 
 def get_all_rr_distances(res1, res2, with_h=False):
+    """ Gets all atom-atom distances between residues """
     dist_mat = []
     for at1 in res1.get_atoms():
         if at1.element == 'H' and not with_h:

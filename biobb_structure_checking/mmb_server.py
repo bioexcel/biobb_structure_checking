@@ -5,14 +5,13 @@
 import os
 import sys
 
-from Bio.PDB.PDBList import PDBList
-
-#from Bio._py3k import urlcleanup as _urlcleanup
-#from Bio._py3k import urlretrieve as _urlretrieve
 from urllib.request import urlretrieve
 from urllib.request import urlcleanup
 
-URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
+from Bio.PDB.PDBList import PDBList
+
+
+MMB_URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
 
 class MMBPDBList(PDBList):
     """ Replacement class to support access to biounits at MMB PDB Server.
@@ -45,10 +44,10 @@ class MMBPDBList(PDBList):
             if file_format == 'mmCif':
                 file_format = 'cif'
             if not biounit:
-                url = (URL_PREFIX + '/%s.%s' % (code, file_format))
+                url = (MMB_URL_PREFIX + '/%s.%s' % (code, file_format))
             else:
                 file_format = 'pdb'
-                url = (URL_PREFIX + '/%s_bn%s.pdb' % (code, biounit))
+                url = (MMB_URL_PREFIX + '/%s_bn%s.pdb' % (code, biounit))
         else:
             print('Error: MMB Server: File format', file_format, 'not supported')
             sys.exit(1)
