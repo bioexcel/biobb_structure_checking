@@ -7,7 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
-import argparse
+#import argparse
 #import psutil
 import numpy as np
 
@@ -804,7 +804,11 @@ class StructureChecking():
             getss_mark = opts
         else:
             getss_mark = opts['getss_mark']
-        pairs_list=[mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent()) for a in fix_data]
+
+        pairs_list = [
+            mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent())
+            for a in fix_data
+        ]
         input_line = ParamInput('Mark SS', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -821,7 +825,9 @@ class StructureChecking():
             if self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
+
         cys_to_mark = []
+
         for pair in fix_data:
             if (input_option == 'all') or (mu.residue_num(pair[0].get_parent()) + "-" + mu.residue_num(pair[1].get_parent()) in getss_mark.split(',')):
                 cys_to_mark.append(pair[0].get_parent())
@@ -829,6 +835,7 @@ class StructureChecking():
         self.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
         self.strucm.mark_ssbonds(cys_to_mark)
         self.strucm.update_internals()
+        return False
 
 # =============================================================================
     def amide(self, opts=None):
@@ -1574,7 +1581,7 @@ class StructureChecking():
                 if not self.args['fasta_seq_path']:
                     print(cts.MSGS['FASTA_MISSING'])
 
-                read_ok =self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+                read_ok = self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
                 if not read_ok:
                     self.args['fasta_seq_path'] = None
                 if self.args['non_interactive'] and not read_ok:

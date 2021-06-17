@@ -59,7 +59,7 @@ class MutationSet():
         self.old_id = mu.residue_check(mut_comps.group(1))
         self.new_id = mu.residue_check(mut_comps.group(3))
         self.res_num = mut_comps.group(2)
-        
+
         self.id = ''.join([self.chain, ":", self.old_id, self.res_num, self.new_id])
         self.mutations = []
 
@@ -138,7 +138,7 @@ class MutationSet():
                                 mu.residue_id(res)
                             )
                         )
-                        
+
             missing_ats = [
                 at_id
                 for at_id in mut_map[rname]['side_atoms']
