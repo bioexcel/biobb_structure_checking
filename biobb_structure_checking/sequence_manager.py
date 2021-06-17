@@ -61,7 +61,7 @@ class SequenceData():
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
 
-        self.read_structure_seqs(strucm.st)
+        self.read_structure_seqs(strucm)
         self.match_sequence_numbering()
 
     def read_canonical_seqs(self, strucm, cif_warn):
@@ -128,10 +128,10 @@ class SequenceData():
                 print("Warning, no canonical sequence available for chain {}".format(ch_id))
         return False
 
-    def read_structure_seqs(self, st):
+    def read_structure_seqs(self, strucm):
         """ Extracts sequences from structure fragments """
         # PDB extrated sequences
-        for mod in st:
+        for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
                 seqs = []

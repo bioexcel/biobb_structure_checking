@@ -4,7 +4,7 @@ import sys
 import os
 import uuid
 import shutil
-#from os.path import join as opj
+from os.path import join as opj
 
 from Bio import SeqIO, pairwise2
 from Bio.SeqRecord import SeqRecord
