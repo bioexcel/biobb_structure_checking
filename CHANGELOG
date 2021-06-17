@@ -2,7 +2,7 @@ v3.8.X (2021.3)
 
 Extended functions
     backbone
-        Do not use header from Fasta sequences, guess subunit from sequences ONGOING
+        automatic match between Fasta sequences and structure chains, Fasta header is no longer used
         Add additional templates to backbone reconstruction ONGOING
 
 V3.8.1 (2021.2)

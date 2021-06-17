@@ -40,7 +40,7 @@
 2.7. Complete backbone (backbone) DONE 
 2.7.1 Complete main chains DONE
 2.7.2 Add ACE, NME caps DONE
-2.7.3 Use standard FASTA for sequence input (check uniprot and pdb Fasta's)
+2.7.3 Use any FASTA for sequence input (do not use headers) DONE
 2.7.4 Accept/recognize GROMACS (and other non Amber) Atom names OT?
 2.7.5 Build structure from CA-only 
 3. Structure Warnings

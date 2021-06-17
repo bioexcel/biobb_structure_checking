@@ -74,7 +74,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--sequence',
     dest='fasta_seq_path',
-    help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'
+    help='Canonical sequence in FASTA format'
 )
 
 CMD_LINE.add_argument(
