@@ -57,10 +57,12 @@ class SequenceData():
         if clean:
             self.data = {}
             self.has_canonical = {}
-
+        
+        self.raw_pdb_seq =  self._get_pack_str_seqs(strucm)     
+        
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
-
+        
         self.read_structure_seqs(strucm)
         self.match_sequence_numbering()
 
@@ -71,11 +73,14 @@ class SequenceData():
             strucm.set_chain_ids()
 
         if self.fasta:
-            chids = []
-            seqs = []
-            for rec in self.fasta:
-                chids.append(rec.id.split('_')[1])
-                seqs.append(str(rec.seq))
+            hits = self.match_chain_seqs()
+            chids = [h['ch_id'] for h in hits]
+            seqs = [h['seq'] for h in hits]
+            print("Getting canonical sequences from matching FASTA input")
+            for h in sorted(hits, key=lambda h:h['ch_id']):
+                print(
+                    '{ch_id}: "{desc}", score: {score} {low}'.format(**h)
+                    )
         else:
             if strucm.input_format != 'cif':
                 if cif_warn:
@@ -121,8 +126,6 @@ class SequenceData():
                         self.data[ch_id]['chains'].append(chn)
         self.has_canonical = {}
         for ch_id in strucm.chain_ids:
-#            if strucm.chain_ids[ch_id] != PROTEIN:
-#                continue
             self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
             if not self.has_canonical[ch_id]:
                 print("Warning, no canonical sequence available for chain {}".format(ch_id))
@@ -130,7 +133,7 @@ class SequenceData():
 
     def read_structure_seqs(self, strucm):
         """ Extracts sequences from structure fragments """
-        # PDB extrated sequences
+        # PDB extracted sequences
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -309,3 +312,67 @@ class SequenceData():
                 )
                 outseq += SeqIO.FastaIO.as_fasta(seq)
         return outseq
+    
+    def match_chain_seqs(self):
+        """ Identifies chains in Fasta input """
+        all_hits = []
+        chids = set()
+        for rec in self.fasta:
+            for hit in self._assign_seq(rec):
+                ch_id, score = hit
+                chids.add(ch_id)
+                all_hits.append({
+                    'ch_id':ch_id,
+                    'seq': str(rec.seq),
+                    'desc': rec.description,
+                    'score': score
+                })
+        
+        hits = []
+
+        for ch_id in chids:
+            max_score = -100
+            best_hit=''
+            for h in all_hits:
+                if h['ch_id'] != ch_id:
+                    continue
+                if h['score'] > max_score:
+                    best_hit = h
+                    max_score = h['score']
+            best_hit['low'] = ''
+            if max_score < 0.5 * len(best_hit['seq']):
+                best_hit['low'] = "*low"
+            hits.append(best_hit)
+        return hits
+    
+    def _get_pack_str_seqs(self, strucm):
+        seqs = {}
+        for mod in strucm.st:
+            for chn in mod.get_chains():
+                if chn.id not in seqs:
+                    seqs[chn.id] = []
+                seq = ''
+                for r in [res for res in chn.get_residues() if not mu.is_hetatm(res)]:
+                    rn = r.get_resname()
+                    if strucm.chain_ids[chn.id] == mu.PROTEIN:
+                        if rn in mu.ONE_LETTER_RESIDUE_CODE:
+                            seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                        else:
+                            print("Warning: unknown protein residue code", mu.residue_id(r))
+                            seq += 'X'
+                    elif strucm.chain_ids[chn.id] == mu.DNA:
+                        seq += rn[1:]
+                    else:
+                        seq += rn
+                seqs[chn.id].append(seq)
+        return seqs
+        
+    def _assign_seq(self, rec):
+        matches = []
+        for ch in self.raw_pdb_seq:
+            for sq in self.raw_pdb_seq[ch]:
+                score = pairwise2.align.globalxs(rec.seq, sq, -5, -1, score_only=True)
+                if score > 0:
+                    matches.append((ch, score))
+        return matches
+        
