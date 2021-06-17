@@ -2,15 +2,14 @@
 """ Module to manage sequence information for structures """
 
 import sys
-from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from typing import List, Dict
 
+from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
 from Bio.Seq import Seq, MutableSeq
 #Deprecated in Biopython 1.78
 #from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
-from Bio import pairwise2
-from Bio import SeqIO
+from Bio import pairwise2, SeqIO
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 import biobb_structure_checking.model_utils as mu
@@ -29,7 +28,7 @@ class SequenceData():
         self.has_canonical = False
         self.fasta = []
 
-    def add_empty_chain(self, ch_id:str):
+    def add_empty_chain(self, ch_id: str):
         """ Add base structure for a new chain """
         self.data[ch_id] = {
             'can':None,
@@ -51,7 +50,7 @@ class SequenceData():
             print("WARNING: No valid FASTA formatted sequences found in {} ".format(fasta_sequence_path))
             read_ok = False
         return read_ok
-        
+
 
     def read_sequences(self, strucm, clean=True, cif_warn=False):
         """ Extracts sequences """
@@ -83,7 +82,6 @@ class SequenceData():
                     print("Warning: sequence features only available in mmCIF" +\
                     " format or with external fasta input")
                 return True
-            #TODO check for NA
             if '_entity_poly.pdbx_strand_id' in strucm.headers:
                 if not isinstance(strucm.headers['_entity_poly.pdbx_strand_id'], list):
                     chids = [strucm.headers['_entity_poly.pdbx_strand_id']]
@@ -100,6 +98,8 @@ class SequenceData():
             for ch_id in chids[i].split(','):
                 if ch_id not in strucm.chain_ids:
                     continue
+                if strucm.chain_ids[ch_id] == mu.UNKNOWN:
+                    continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
                 if has_IUPAC:
@@ -107,11 +107,11 @@ class SequenceData():
                 else:
                     new_seq = Seq(seqs[i].replace('\n', ''))
                 self.data[ch_id]['can'] = SeqRecord(
-                        new_seq,
-                        'can_sq_' + ch_id,
-                        'can_sq_' + ch_id,
-                        'canonical sequence chain ' + ch_id
-                    )
+                    new_seq,
+                    'can_sq_' + ch_id,
+                    'can_sq_' + ch_id,
+                    'canonical sequence chain ' + ch_id
+                )
                 self.data[ch_id]['can'].features.append(
                     SeqFeature(FeatureLocation(1, len(seqs[i])))
                 )
@@ -137,16 +137,18 @@ class SequenceData():
                 seqs = []
                 ch_id = chn.id
                 wrong_order = False
-                if strucm.chain_ids[ch_id] == 1:
+                if strucm.chain_ids[ch_id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
+                    if not frags:
+                        frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
+                    if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
+                        print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id, mod.id))
+                        frags = [[res for res in chn.get_residues()]]
+                elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
+                    frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
-                    #TODO use bnsTopLib
-                    frag = []
-                    for res in chn.get_residues():
-                        if mu.is_hetatm(res):
-                            continue
-                        frag.append(res)
-                    frags = [frag]
+                    self.add_empty_chain(ch_id)
+                    frags = []
 
                 for frag in frags:
                     start = frag[0].get_id()[1]
@@ -160,7 +162,17 @@ class SequenceData():
                         seq = ''
                         for r in frag:
                             rn = r.get_resname()
-                            seq += rn[1:]
+                            if strucm.chain_ids[ch_id] == mu.PROTEIN:
+                                if rn in mu.ONE_LETTER_RESIDUE_CODE:
+                                    seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
+                                else:
+                                    print("Warning: unknown protein residue code", mu.residue_id(r))
+                                    seq += 'X'
+                            elif strucm.chain_ids[ch_id] == mu.DNA:
+                                seq += rn[1:]
+                            else:
+                                seq += rn
+
                     sqr = SeqRecord(
                         seq,
                         'pdbsq_' + frid,
@@ -183,8 +195,8 @@ class SequenceData():
                         'wrong_order': wrong_order,
                         'type': strucm.chain_ids[ch_id]
                     }
-                    
-                    
+
+
 
     def match_sequence_numbering(self):
         """ Assign canonical sequence numbering to structural fragments """
@@ -249,7 +261,7 @@ class SequenceData():
                 'csq_' + ch_id,
                 'csq_' + ch_id,
                 'canonical sequence chain ' + ch_id,
-                annotations = {'molecule_type':'protein'}
+                annotations={'molecule_type':'protein'}
             )
             self.data[ch_id]['can'].features.append(
                 SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
@@ -264,7 +276,7 @@ class SequenceData():
             if self.has_canonical[ch_id]:
                 outseq += SeqIO.FastaIO.as_fasta(self.data[ch_id]['can'])
         return outseq
-    
+
     def get_pdbseq(self):
         """ Prepares a FASTA string with the structure sequence, and fragments """
         #TODO re-use this on modeller_manager

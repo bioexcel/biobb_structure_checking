@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -9,7 +9,7 @@ Structure pdb:1vtk.1 loaded
  Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
- Resolution: 0.0 A
+ Resolution (A): N.A.
  Biounit no. 1
 
  Num. models: 2 (type: BioUnit,   42.553 A)

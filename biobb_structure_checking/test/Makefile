@@ -1,4 +1,4 @@
-BASEDIR = ##BIOBB_STRUCTURE_CHECKING_BASEDIR##
+BASEDIR = ${CURDIR}/../..
 APPBIN = ${BASEDIR}/bin/check_structure
 TESTDIR = ${BASEDIR}/biobb_structure_checking/test
 SHELL = /bin/csh
@@ -11,17 +11,46 @@ clean:
 update:
 	cp *pdb *log *json ref
 
-all: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
-  backbone backbone_main backbone_caps cistransbck biounits all_checks ;
+
+all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
+  backbone backbone_caps cistransbck biounits sequences dnamut all_checks ;
+
+modeller: backbone_main biounits_bck 
+
+all_nodebug: all_nomodeller modeller
+
+all: debug all_nodebug
+
+
+debug:
+	echo "Running all checks on 1ubq with --debug"
+	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq_all_test_debug.pdb --json 1ubq_all_test_debug.json --debug --non_interactive command_list --list scripts/all_checks > 1ubq_all_test_debug.log
+
+load:
+	${COMMON};${APPBIN} -v -i pdb:1ark load > load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1svc load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:104l load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1bqo load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:4ku1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1ubq load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:4mdh load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1d23 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
 
 models: 
 	echo "Running models on 1ark"
-	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --debug --non_interactive models --select 5 > 1ark_models_test_5.log
+	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --non_interactive models --select 5 > 1ark_models_test_5.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_1_test.pdb --non_interactive models --select 1 > 1ark_models_test_1.log
 chains: 
 	@echo "Running chains on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select B > 2ki5_chains_test_B.log
+	@echo "Running chains on 1svc"
+	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_protein.pdb --non_interactive chains --select protein > 1svc_chains_test_protein.log
+	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_dna.pdb --non_interactive chains --select dna > 1svc_chains_test_dna.log
 
 inscodes:
 	echo "Running inscodes on 104l"
@@ -58,6 +87,7 @@ rem_hydrogen:
 getss:
 	echo "Running getss on 4ku1"
 	${COMMON};${APPBIN} -v -i pdb:4ku1 --check_only --non_interactive getss > 4ku1_getss_test.log
+	${COMMON};${APPBIN} -v -i pdb:4ku1 -o 4ku1_getss_mark_test.pdb --non_interactive getss --mark all > 4ku1_getss_mark_test.log
 
 clashes:
 	echo "Running clashes on 2ki5"
@@ -107,12 +137,13 @@ sequences:
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences > 2ki5_sequences_test.log
 dnamut:
 	echo "Running dnamut on 1D23"
-	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_mutateside_test.log
+	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_dnamut_test.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_poliA_test.pdb --non_interactive mutateside --na_seq AAAAAAAAAA  > 1d23_poliA_test.log
-    
+
 biounits:
 	echo "Running all checks on 1ldn.1"
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
+biounits_bck:
 	echo "Running all checks on 2ki5.1"
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall > 2ki5_checkall_test.log
 	echo "Running all checks on 1vtk.1"
@@ -133,7 +164,7 @@ all_checks:
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 	echo " 1vtk.1"
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive --sequence scripts/1vtk.fasta command_list --list scripts/all_checks > 1vtk_1_all_test.log
-    
+
 diffs:
 	cd ${TESTDIR};scripts/calcDiffs.csh
 

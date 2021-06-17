@@ -4,11 +4,10 @@ import sys
 import os
 import uuid
 import shutil
-from os.path import join as opj
+#from os.path import join as opj
 
-from Bio import SeqIO
+from Bio import SeqIO, pairwise2
 from Bio.SeqRecord import SeqRecord
-from Bio import pairwise2
 from Bio.Seq import Seq
 
 try:
@@ -39,7 +38,12 @@ class ModellerManager():
             os.mkdir(self.tmpdir)
         except IOError as err:
             sys.exit(err)
-        self.env = environ()
+        # Class changed in Modeller >= 10
+        try:
+            self.env = Environ()
+        except:
+            self.env = environ()
+
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
@@ -49,9 +53,9 @@ class ModellerManager():
         
         if not self.sequences.has_canonical[target_chain]:
             raise NoCanSeqError(target_chain)
-        
+
         tgt_seq = self.sequences.data[target_chain]['can'].seq
-        
+
         #triming N-term of canonical seq
         pdb_seq = self.sequences.data[target_chain]['pdb'][target_model]['frgs'][0].seq
         nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
@@ -88,7 +92,7 @@ class ModellerManager():
                         frgs[-1].features[0].location.end,
                         ch_id
                     ),
-                    annotations = {'molecule_type':'protein'} # required for writing PIR aligment
+                    annotations={'molecule_type':'protein'} # required for writing PIR aligment
                 )
             )
             knowns.append('templ' + ch_id)
@@ -134,7 +138,7 @@ def _write_alin(tgt_seq, templs, alin_file):
                 'target',
                 '',
                 'sequence:target:::::::0.00: 0.00',
-                annotations = {'molecule_type':'protein'}
+                annotations={'molecule_type':'protein'}
             )
         ] + templs,
         alin_file,

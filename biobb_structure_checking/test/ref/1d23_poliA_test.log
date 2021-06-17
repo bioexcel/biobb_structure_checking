@@ -1,0 +1,293 @@
+===============================================================================
+=                   BioBB structure checking utility v3.8.1                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+===============================================================================
+
+Structure exists: 'tmpPDB/d2/1d23.cif' 
+Warning: No backbone atoms defined
+Structure pdb:1d23 loaded
+ PDB id: 1D23
+ Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: DNA
+ Resolution (A): 1.500
+
+ Num. models: 1
+ Num. chains: 2 (A: DNA, B: DNA)
+ Num. residues:  176
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  156
+ Num. ligands or modified residues:  2
+ Num. water mol.:  154
+ Num. atoms:  560
+Metal/Ion residues found
+ MG A22
+ MG B21
+
+Running mutateside. Options: --na_seq AAAAAAAAAA
+A:DC1DA,A:DG2DA,A:DA3DA,A:DT4DA,A:DC5DA,A:DG6DA,A:DA7DA,A:DT8DA,A:DC9DA,A:DG10DA,B:DC11DT,B:DG12DT,B:DA13DT,B:DT14DT,B:DC15DT,B:DG16DT,B:DA17DT,B:DT18DT,B:DC19DT,B:DG20DT
+Mutations to perform
+A:DC1DA
+A:DG2DA
+A:DA3DA
+A:DT4DA
+A:DC5DA
+A:DG6DA
+A:DA7DA
+A:DT8DA
+A:DC9DA
+A:DG10DA
+B:DC11DT
+B:DG12DT
+B:DA13DT
+B:DT14DT
+B:DC15DT
+B:DG16DT
+B:DA17DT
+B:DT18DT
+B:DC19DT
+B:DG20DT
+Replacing  DC A1 into DA
+  Deleting C2
+  Deleting O2
+  Deleting N3
+  Deleting C4
+  Deleting N4
+  Deleting C5
+  Renaming N1 to N9
+  Renaming C6 to C8
+  Adding new atom N7
+  Adding new atom C5
+  Adding new atom C6
+  Adding new atom N6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N3
+  Adding new atom C4
+
+Replacing  DG A2 into DA
+  Deleting N2
+  Renaming O6 to N6
+
+Replacing  DA A3 into DA
+
+Replacing  DT A4 into DA
+  Deleting C2
+  Deleting O2
+  Deleting N3
+  Deleting C4
+  Deleting O4
+  Deleting C5
+  Deleting C7
+  Renaming N1 to N9
+  Renaming C6 to C8
+  Adding new atom N7
+  Adding new atom C5
+  Adding new atom C6
+  Adding new atom N6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N3
+  Adding new atom C4
+
+Replacing  DC A5 into DA
+  Deleting C2
+  Deleting O2
+  Deleting N3
+  Deleting C4
+  Deleting N4
+  Deleting C5
+  Renaming N1 to N9
+  Renaming C6 to C8
+  Adding new atom N7
+  Adding new atom C5
+  Adding new atom C6
+  Adding new atom N6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N3
+  Adding new atom C4
+
+Replacing  DG A6 into DA
+  Deleting N2
+  Renaming O6 to N6
+
+Replacing  DA A7 into DA
+
+Replacing  DT A8 into DA
+  Deleting C2
+  Deleting O2
+  Deleting N3
+  Deleting C4
+  Deleting O4
+  Deleting C5
+  Deleting C7
+  Renaming N1 to N9
+  Renaming C6 to C8
+  Adding new atom N7
+  Adding new atom C5
+  Adding new atom C6
+  Adding new atom N6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N3
+  Adding new atom C4
+
+Replacing  DC A9 into DA
+  Deleting C2
+  Deleting O2
+  Deleting N3
+  Deleting C4
+  Deleting N4
+  Deleting C5
+  Renaming N1 to N9
+  Renaming C6 to C8
+  Adding new atom N7
+  Adding new atom C5
+  Adding new atom C6
+  Adding new atom N6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N3
+  Adding new atom C4
+
+Replacing  DG A10 into DA
+  Deleting N2
+  Renaming O6 to N6
+
+Replacing  DC B11 into DT
+  Renaming N4 to O4
+  Adding new atom C7
+
+Replacing  DG B12 into DT
+  Deleting N1
+  Deleting C2
+  Deleting N3
+  Deleting C4
+  Deleting C5
+  Deleting C6
+  Deleting O6
+  Deleting N2
+  Deleting N7
+  Renaming N9 to N1
+  Renaming C8 to C6
+  Adding new atom C5
+  Adding new atom C7
+  Adding new atom C4
+  Adding new atom O4
+  Adding new atom N3
+  Adding new atom C2
+  Adding new atom O2
+
+Replacing  DA B13 into DT
+  Deleting N1
+  Deleting C2
+  Deleting N3
+  Deleting C4
+  Deleting C5
+  Deleting C6
+  Deleting N6
+  Deleting N7
+  Renaming N9 to N1
+  Renaming C8 to C6
+  Adding new atom C5
+  Adding new atom C7
+  Adding new atom C4
+  Adding new atom O4
+  Adding new atom N3
+  Adding new atom C2
+  Adding new atom O2
+
+Replacing  DT B14 into DT
+
+Replacing  DC B15 into DT
+  Renaming N4 to O4
+  Adding new atom C7
+
+Replacing  DG B16 into DT
+  Deleting N1
+  Deleting C2
+  Deleting N3
+  Deleting C4
+  Deleting C5
+  Deleting C6
+  Deleting O6
+  Deleting N2
+  Deleting N7
+  Renaming N9 to N1
+  Renaming C8 to C6
+  Adding new atom C5
+  Adding new atom C7
+  Adding new atom C4
+  Adding new atom O4
+  Adding new atom N3
+  Adding new atom C2
+  Adding new atom O2
+
+Replacing  DA B17 into DT
+  Deleting N1
+  Deleting C2
+  Deleting N3
+  Deleting C4
+  Deleting C5
+  Deleting C6
+  Deleting N6
+  Deleting N7
+  Renaming N9 to N1
+  Renaming C8 to C6
+  Adding new atom C5
+  Adding new atom C7
+  Adding new atom C4
+  Adding new atom O4
+  Adding new atom N3
+  Adding new atom C2
+  Adding new atom O2
+
+Replacing  DT B18 into DT
+
+Replacing  DC B19 into DT
+  Renaming N4 to O4
+  Adding new atom C7
+
+Replacing  DG B20 into DT
+  Deleting N1
+  Deleting C2
+  Deleting N3
+  Deleting C4
+  Deleting C5
+  Deleting C6
+  Deleting O6
+  Deleting N2
+  Deleting N7
+  Renaming N9 to N1
+  Renaming C8 to C6
+  Adding new atom C5
+  Adding new atom C7
+  Adding new atom C4
+  Adding new atom O4
+  Adding new atom N3
+  Adding new atom C2
+  Adding new atom O2
+
+Checking for steric clashes
+No severe clashes detected
+No apolar clashes detected
+2 Steric polar_acceptor clashes detected
+  DA A1.N1     DT B20.O4      2.894 A
+  DA A5.N1     DT B16.O4      2.968 A
+1 Steric polar_donor clashes detected
+  DA A9.N6     DT B11.N3      3.027 A
+No positive clashes detected
+No negative clashes detected
+Final Num. models: 1
+Final Num. chains: 2 (A: DNA, B: DNA)
+Final Num. residues:  176
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  156
+Final Num. ligands or modified residues:  2
+Final Num. water mol.:  154
+Final Num. atoms:  560
+Metal/Ion residues found
+ MG A22
+ MG B21
+Structure saved on 1d23_poliA_test.pdb

@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -8,7 +8,7 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Title:  structure of ubiquitin refined at 1.8 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: chromosomal protein
- Resolution: 1.8 A
+ Resolution (A): 1.8
 
  Num. models: 1
  Num. chains: 1 (A: Protein)

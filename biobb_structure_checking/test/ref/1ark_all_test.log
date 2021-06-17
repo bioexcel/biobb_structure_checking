@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -88,9 +88,9 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 No residues with missing backbone atoms found
 No backbone breaks
 No unexpected backbone links
@@ -105,9 +105,9 @@ Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss
+Step 15: getss --mark All
 
-Running getss.
+Running getss. Options: --mark All
 No SS bonds detected
 
 Step 16: clashes

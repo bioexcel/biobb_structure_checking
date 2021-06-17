@@ -25,7 +25,6 @@
    "ASP A136",
    "HIS A142",
    "GLU A146",
-   "HIS A151",
    "ASP A162",
    "ARG A163",
    "HIS A164",
@@ -54,7 +53,6 @@
    "ARG A256",
    "GLU A257",
    "ASP A258",
-   "GLU A273",
    "ARG A281",
    "HIS A283",
    "ASP A286",
@@ -103,129 +101,44 @@
   "breaks": {
    "detected": [
     [
-     "SER A263",
-     "GLY A264"
+     "SER A149",
+     "PRO A153"
+    ],
+    [
+     "GLY A264",
+     "PRO A280"
     ]
-   ]
+   ],
+   "option_selected": "none"
   },
   "clashes": {
-   "apolar": [
-    {
-     "at1": "SER A149.O",
-     "at2": "ALA A152.CB",
-     "dist": 2.7548
-    },
-    {
-     "at1": "SER A150.CB",
-     "at2": "SER A345.O",
-     "dist": 2.3787
-    },
-    {
-     "at1": "GLN A261.OE1",
-     "at2": "ALA A278.CA",
-     "dist": 2.0988
-    },
-    {
-     "at1": "ALA A278.O",
-     "at2": "HIS A283.CD2",
-     "dist": 1.6643
-    },
-    {
-     "at1": "GLY A279.C",
-     "at2": "PRO A282.O",
-     "dist": 2.8067
-    },
-    {
-     "at1": "GLY A279.O",
-     "at2": "HIS A283.CG",
-     "dist": 0.9079
-    },
-    {
-     "at1": "PRO A280.CA",
-     "at2": "HIS A283.CE1",
-     "dist": 2.6901
-    }
-   ],
+   "apolar": [],
    "negative": [],
    "polar_acceptor": [
     {
-     "at1": "PRO A153.O",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
-     "dist": 3.0228
-    },
-    {
-     "at1": "GLN A261.OE1",
-     "at2": "ALA A278.O",
-     "dist": 3.0084
-    },
-    {
-     "at1": "PRO A269.O",
-     "at2": "ALA A272.O",
-     "dist": 2.8938
-    },
-    {
-     "at1": "PRO A280.O",
-     "at2": "PRO A282.O",
-     "dist": 2.0644
+     "dist": 2.8269
     }
    ],
-   "polar_donor": [
-    {
-     "at1": "GLY A279.N",
-     "at2": "ILE A284.N",
-     "dist": 2.6113
-    }
-   ],
+   "polar_donor": [],
    "positive": [],
-   "severe": [
-    {
-     "at1": "GLY A279.O",
-     "at2": "HIS A283.CG",
-     "dist": 0.9079
-    }
-   ]
+   "severe": []
   },
-  "long_links": [
-   [
-    "SER A263",
-    "GLY A264",
-    5.15248
-   ]
-  ],
-  "main_chain_fix": [
-   "SER A149",
-   "SER A150",
-   "HIS A151",
-   "ALA A152",
-   "PRO A153",
-   "GLY A264",
-   "THR A265",
-   "ALA A266",
-   "VAL A267",
-   "PRO A268",
-   "PRO A269",
-   "GLN A270",
-   "GLY A271",
-   "ALA A272",
-   "GLU A273",
-   "PRO A274",
-   "GLN A275",
-   "SER A276",
-   "ASN A277",
-   "ALA A278",
-   "GLY A279",
-   "PRO A280"
-  ],
   "missing_atoms": {
-   "SER A263": [
+   "GLY A264": [
+    "OXT"
+   ],
+   "SER A149": [
     "OXT"
    ],
    "fixed": [
-    "SER A263"
+    "SER A149",
+    "GLY A264"
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -239,15 +152,7 @@
  "chiral_bck": {
   "n_chirals": 287
  },
- "cistransbck": {
-  "unusual_trans": [
-   [
-    "PRO A280",
-    "ARG A281",
-    108.619
-   ]
-  ]
- },
+ "cistransbck": {},
  "clashes": {
   "detected": {
    "apolar": [
@@ -260,41 +165,6 @@
      "at1": "ALA A118.CA",
      "at2": "SER A181.O",
      "dist": 2.8897
-    },
-    {
-     "at1": "SER A149.O",
-     "at2": "ALA A152.CB",
-     "dist": 2.7548
-    },
-    {
-     "at1": "SER A150.CB",
-     "at2": "SER A345.O",
-     "dist": 2.3787
-    },
-    {
-     "at1": "GLN A261.OE1",
-     "at2": "ALA A278.CA",
-     "dist": 2.0988
-    },
-    {
-     "at1": "ALA A278.O",
-     "at2": "HIS A283.CD2",
-     "dist": 1.6643
-    },
-    {
-     "at1": "GLY A279.C",
-     "at2": "PRO A282.O",
-     "dist": 2.8067
-    },
-    {
-     "at1": "GLY A279.O",
-     "at2": "HIS A283.CG",
-     "dist": 0.9079
-    },
-    {
-     "at1": "PRO A280.CA",
-     "at2": "HIS A283.CE1",
-     "dist": 2.6901
     }
    ],
    "negative": [],
@@ -310,9 +180,14 @@
      "dist": 3.0609
     },
     {
+     "at1": "SER A149.OXT",
+     "at2": "GLN A349.OE1",
+     "dist": 2.8269
+    },
+    {
      "at1": "PRO A153.O",
      "at2": "GLN A349.OE1",
-     "dist": 3.0228
+     "dist": 2.8022
     },
     {
      "at1": "LEU A217.O",
@@ -323,21 +198,6 @@
      "at1": "GLU A225.OE1",
      "at2": "TMP A500.O3'",
      "dist": 2.8949
-    },
-    {
-     "at1": "GLN A261.OE1",
-     "at2": "ALA A278.O",
-     "dist": 3.0084
-    },
-    {
-     "at1": "PRO A269.O",
-     "at2": "ALA A272.O",
-     "dist": 2.8938
-    },
-    {
-     "at1": "PRO A280.O",
-     "at2": "PRO A282.O",
-     "dist": 2.0644
     }
    ],
    "polar_donor": [
@@ -350,11 +210,6 @@
      "at1": "TRP A259.NE1",
      "at2": "ARG A293.NH1",
      "dist": 3.0938
-    },
-    {
-     "at1": "GLY A279.N",
-     "at2": "ILE A284.N",
-     "dist": 2.6113
     }
    ],
    "positive": [
@@ -374,26 +229,21 @@
      "dist": 2.9914
     }
    ],
-   "severe": [
-    {
-     "at1": "GLY A279.O",
-     "at2": "HIS A283.CG",
-     "dist": 0.9079
-    }
-   ]
+   "severe": []
   }
  },
  "final_stats": {
   "biounit": "1",
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 5082,
-  "num_res": 333,
+  "num_ats": 4855,
+  "num_res": 315,
   "num_wat": 0,
   "res_hetats": 2,
   "res_insc": 0,
@@ -402,12 +252,14 @@
  "fixside": {
   "opts": "--fix all"
  },
- "getss": {},
+ "getss": {
+  "opts": "--mark All"
+ },
  "headers": {
   "biounit": "1",
   "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
   "method": "x-ray diffraction",
-  "resolution": 0.0,
+  "resolution": "N.A.",
   "title": " thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
  },
  "inscodes": {},
@@ -435,6 +287,7 @@
  "stats": {
   "biounit": "1",
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1
   },

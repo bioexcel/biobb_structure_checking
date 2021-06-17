@@ -46,9 +46,9 @@ class DataLibManager:
 
         for rcode in self.residue_codes['cap_residues']:
             atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
-        
+
         return atom_lists
-        
+
 
     def get_atom_feature_list(self, feature):
         """ Gets a residue list with a specific section of data . """
@@ -57,6 +57,11 @@ class DataLibManager:
             for rcode in self.residue_data
             if feature in self.residue_data[rcode]
         }
+
+        for rcode in self.canonical_codes:
+            if feature in self.residue_data[self.canonical_codes[rcode]]:
+                f_list[rcode] = self.residue_data[self.canonical_codes[rcode]][feature]
+
         if '*' not in f_list:
             f_list['*'] = []
         return f_list
@@ -80,6 +85,7 @@ class DataLibManager:
             for cls_type in contact_types
             if cls_type != 'severe'
         }
+
         return atom_lists
 
     def get_amide_data(self):
@@ -100,10 +106,9 @@ class DataLibManager:
                 mut_rules[rcode] = self.residue_data[rcode]['mutation_rules']
                 mut_rules[rcode]['side_atoms'] = self.residue_data[rcode]['side_atoms']
         return mut_rules
-    
+
     def get_canonical_resname(self, rcode):
+        """ gets parent residue names for modified residues """
         if rcode in self.canonical_codes:
             return self.canonical_codes[rcode]
-        else:
-            return rcode
-            
+        return rcode

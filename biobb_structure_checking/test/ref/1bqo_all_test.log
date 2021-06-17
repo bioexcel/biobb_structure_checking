@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.0                   =
+=                   BioBB structure checking utility v3.8.1                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -9,7 +9,7 @@ Structure pdb:1bqo loaded
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
  Keywords: METALLOPROTEASE
- Resolution: 2.3 A
+ Resolution (A): 2.3
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -123,9 +123,9 @@ Step 12: fixside --fix All
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain All --add_caps none --no_recheck
+Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 1 Residues with missing backbone atoms found
  ASP A251   OXT
 No backbone breaks
@@ -156,9 +156,9 @@ THR A191   GLY A192   Dihedral:  156.442
 ILE B203   GLY B204   Dihedral:  159.080
 ILE A203   GLY A204   Dihedral: -159.337
 
-Step 15: getss
+Step 15: getss --mark All
 
-Running getss.
+Running getss. Options: --mark All
 No SS bonds detected
 
 Step 16: clashes

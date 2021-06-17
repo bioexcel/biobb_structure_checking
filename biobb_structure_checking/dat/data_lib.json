@@ -22,7 +22,7 @@
             "HID": "HIS",
             "HIP": "HIS",
             "CYX": "CYS",
-            "CYM": "CYM",
+            "CYM": "CYS",
             "ARN": "ARG",
             "LYN": "LYS",
             "TYM": "TYR"
@@ -2568,7 +2568,7 @@
                 "negative": 3.5
             },
             "MAX_DIST": 4.5,
-            "R_R_CUTOFF": 21,
+            "R_R_CUTOFF": {"PROT":15.0,"NA":21.0},
             "COVLNK": 2.0,
             "HBLNK": 3.5
         }

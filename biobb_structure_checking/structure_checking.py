@@ -7,7 +7,7 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
-import argparse
+#import argparse
 #import psutil
 import numpy as np
 
@@ -59,12 +59,11 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
             print(
-                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize), 
-                file=sys.stderr
+                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize)
             )
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
-            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.args['atom_limit']))
+            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
 
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
@@ -228,7 +227,7 @@ class StructureChecking():
                 opts = cts.DIALOGS.get_parameter(command, opts)
             else:
                 opts = {}
-            
+
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:
@@ -251,7 +250,7 @@ class StructureChecking():
     def sequences(self, opts=None):
         """ direct entry to run sequences """
         self._run_method('sequences', opts)
-        
+
     def _sequences_check(self):
         if self.strucm.sequence_data.has_canonical:
             print('Canonical sequence')
@@ -266,9 +265,9 @@ class StructureChecking():
             }
         else:
             print(cts.MSGS['NO_CANONICAL'])
-            
+
         return {}
-        
+
     def models(self, opts=None):
         """ direct entry to run models command """
         self._run_method('models', opts)
@@ -293,7 +292,7 @@ class StructureChecking():
             )
         )
         return True
-    
+
     def _models_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             select_model = opts
@@ -307,7 +306,7 @@ class StructureChecking():
         )
 
         input_option, select_model = input_line.run(select_model)
-        
+
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], select_model
 
@@ -446,7 +445,7 @@ class StructureChecking():
                 print(alt_str)
 
         return fix_data
-    
+
     def _altloc_fix(self, opts, fix_data=None):
 
         if isinstance(opts, str):
@@ -541,7 +540,7 @@ class StructureChecking():
             self.summary['metals']['detected'].append(mu.residue_num(res))
 
         return fix_data
-    
+
     def _metals_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             remove_metals = opts
@@ -679,7 +678,7 @@ class StructureChecking():
 
         return fix_data
 # =============================================================================
-    
+
     def _ligands_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             remove_ligands = opts
@@ -696,7 +695,7 @@ class StructureChecking():
         )
         input_line.default = 'all'
         input_option, remove_ligands = input_line.run(remove_ligands)
-        
+
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], remove_ligands
 
@@ -756,7 +755,7 @@ class StructureChecking():
         input_line.add_option_yes_no()
         input_line.default = 'yes'
         input_option, remove_h = input_line.run(remove_h)
-        
+
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], remove_h
 
@@ -782,24 +781,61 @@ class StructureChecking():
                 print(cts.MSGS['NO_SS'])
             return {}
         print(cts.MSGS['POSSIBLE_SS'].format(len(SS_bonds)))
-        self.summary['getss'] = []
+        self.summary['getss'] = {'found':[]}
         for ssb in SS_bonds:
             print(
                 ' {:12} {:12} {:8.3f}'.format(
                     mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
                 )
             )
-            self.summary['getss'].append(
+            self.summary['getss']['found'].append(
                 {
                     'at1':mu.atom_id(ssb[0]),
                     'at2':mu.atom_id(ssb[1]),
                     'dist': round(float(ssb[2]), 4)
                 }
             )
-        return {}
+        return SS_bonds
 
-#    def _getss_fix(self):
-#        pass
+    def _getss_fix(self, opts, fix_data=None):
+        if not fix_data:
+            return False
+        if isinstance(opts, str):
+            getss_mark = opts
+        else:
+            getss_mark = opts['getss_mark']
+
+        pairs_list = [
+            mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent())
+            for a in fix_data
+        ]
+        input_line = ParamInput('Mark SS', self.args['non_interactive'])
+        input_line.add_option_all()
+        input_line.add_option_none()
+        input_line.add_option_list(
+            'bypair', pairs_list, multiple=True
+        )
+        input_line.default = 'all'
+        input_option, getss_mark = input_line.run(getss_mark)
+
+        if input_option == 'error':
+            return cts.MSGS['UNKNOWN_SELECTION'], getss_mark
+
+        if input_option == 'none':
+            if self.args['verbose']:
+                print(cts.MSGS['DO_NOTHING'])
+            return False
+
+        cys_to_mark = []
+
+        for pair in fix_data:
+            if (input_option == 'all') or (mu.residue_num(pair[0].get_parent()) + "-" + mu.residue_num(pair[1].get_parent()) in getss_mark.split(',')):
+                cys_to_mark.append(pair[0].get_parent())
+                cys_to_mark.append(pair[1].get_parent())
+        self.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
+        self.strucm.mark_ssbonds(cys_to_mark)
+        self.strucm.update_internals()
+        return False
 
 # =============================================================================
     def amide(self, opts=None):
@@ -839,7 +875,7 @@ class StructureChecking():
             )
         return amide_check
 # =============================================================================
-    
+
     def _amide_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
@@ -860,7 +896,7 @@ class StructureChecking():
             )
             input_line.default = 'All'
             input_option, amide_fix = input_line.run(amide_fix)
-        
+
             if input_option == 'error':
                 return cts.MSGS['UNKNOWN_SELECTION'], amide_fix
 
@@ -942,7 +978,7 @@ class StructureChecking():
         )
         input_line.default = 'all'
         input_option, chiral_fix = input_line.run(chiral_fix)
-    
+
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], chiral_fix
 
@@ -1045,33 +1081,7 @@ class StructureChecking():
         self._run_method('clashes', opts)
 
     def _clashes_check(self):
-        clash_list = {}
-        for cls in stm.ALL_CONTACT_TYPES:
-            clash_list[cls] = {}
-
-        # Recalc when models are separated molecules
-        if not self.strucm.has_superimp_models():
-            rr_dist = self.strucm.get_all_r2r_distances('all', True)
-        else:
-            rr_dist = self.strucm.rr_dist
-
-        for r_pair in rr_dist:
-            res1, res2 = r_pair[0:2]
-
-            if mu.is_wat(res1) or mu.is_wat(res2):
-                continue
-
-            c_list = self.strucm.check_rr_clashes(res1, res2, stm.ALL_CONTACT_TYPES)
-
-            rkey = mu.residue_id(res1) + '-' + mu.residue_id(res2)
-            for cls in c_list:
-                if c_list[cls]:
-                    clash_list[cls][rkey] = c_list[cls]
-
-        self.summary['clashes']['detected'] = self._clash_report(
-            stm.ALL_CONTACT_TYPES, clash_list
-        )
-
+        self.summary['clashes']['detected'] = self._check_report_clashes()
         return False
 
 #    def _clashes_fix(self, res_to_fix, fix_data=None):
@@ -1229,7 +1239,7 @@ class StructureChecking():
         return fix_data
 
     def _add_hydrogen_fix(self, opts, fix_data=None):
-        
+
         if not fix_data:
             return False
         if not self.strucm.fixed_side and not opts['no_fix_side']:
@@ -1239,7 +1249,7 @@ class StructureChecking():
             add_h_mode = opts
         else:
             add_h_mode = opts['mode']
-        
+
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
         sel_options = ['auto']
@@ -1342,14 +1352,14 @@ class StructureChecking():
             mut_list = opts
         else:
             mut_list = opts['mut_list']
-            
+
         if opts['na_seq']:
             mut_list = self.strucm.prepare_mutations_from_na_seq(opts['na_seq'])
 
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
-        
-        
+
+
         mutations = self.strucm.prepare_mutations(mut_list)
 
         print(cts.MSGS['MUTATIONS_TO_DO'])
@@ -1570,8 +1580,8 @@ class StructureChecking():
                 self.args['fasta_seq_path'] = input_line.run(self.args['fasta_seq_path'])
                 if not self.args['fasta_seq_path']:
                     print(cts.MSGS['FASTA_MISSING'])
-                    
-                read_ok =self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
+
+                read_ok = self.strucm.sequence_data.load_sequence_from_fasta(self.args['fasta_seq_path'])
                 if not read_ok:
                     self.args['fasta_seq_path'] = None
                 if self.args['non_interactive'] and not read_ok:
@@ -1579,7 +1589,7 @@ class StructureChecking():
                     return []
             self.strucm.sequence_data.read_canonical_seqs(self.strucm, False)
             self.strucm.sequence_data.match_sequence_numbering()
-        
+
         to_fix = [
             rpair
             for rpair in breaks_list
@@ -1630,7 +1640,7 @@ class StructureChecking():
             return cts.MSGS['UNKNOWN_SELECTION'], add_caps
 
         self.summary['backbone']['add_caps'] = add_caps
-        
+
         if input_option == 'none':
             if self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
@@ -1645,7 +1655,7 @@ class StructureChecking():
                 for pair in term_res
                 if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
             ]
-            
+
         return self.strucm.add_main_chain_caps(to_fix)
 
     def _backbone_fix_missing(self, fix_back, fix_at_list):
@@ -1747,7 +1757,7 @@ class StructureChecking():
 
 #    def _cistransbck_fix(self, option):
 #        pass
-            
+
 #===============================================================================
     def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
 
@@ -1791,9 +1801,11 @@ class StructureChecking():
         self.strucm.save_structure(output_structure_path, rename_terms=rename_terms)
         return output_structure_path
 
-    def _check_report_clashes(self, residue_list, contact_types=None):
+    def _check_report_clashes(self, residue_list=None, contact_types=None):
         if contact_types is None:
             contact_types = stm.ALL_CONTACT_TYPES
+        if not residue_list:
+            residue_list = self.strucm.all_residues
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)

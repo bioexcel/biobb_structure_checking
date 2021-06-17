@@ -5,7 +5,7 @@ import argparse
 from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.8.0'
+VERSION = '3.8.1'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -303,6 +303,8 @@ DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
 DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
+DIALOGS.add_option('getss', '--mark', 'getss_mark', 'Mark Cys pairs as SS bond (All | None | List)')
+
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
@@ -326,7 +328,7 @@ MSGS = {
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
     'ALL_UNDO': 'All changes reverted to original structure',
-    'ATOM_LIMIT': 'Number of atoms limit exceeded ({}), use --limit to adjust',
+    'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), use --limit to adjust',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',

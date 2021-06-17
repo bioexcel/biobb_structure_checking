@@ -7,8 +7,6 @@
    "ASP A55",
    "HIS A58",
    "LYS A62",
-   "ARG A75",
-   "ASP A76",
    "ASP A77",
    "TYR A80",
    "GLU A83",
@@ -25,7 +23,6 @@
    "ASP A136",
    "HIS A142",
    "GLU A146",
-   "HIS A151",
    "ASP A162",
    "ARG A163",
    "HIS A164",
@@ -54,7 +51,6 @@
    "ARG A256",
    "GLU A257",
    "ASP A258",
-   "GLU A273",
    "ARG A281",
    "HIS A283",
    "ASP A286",
@@ -85,8 +81,6 @@
    "ASP B55",
    "HIS B58",
    "LYS B62",
-   "ARG B75",
-   "ASP B76",
    "ASP B77",
    "TYR B80",
    "GLU B83",
@@ -103,7 +97,6 @@
    "ASP B136",
    "HIS B142",
    "GLU B146",
-   "HIS B151",
    "ASP B162",
    "ARG B163",
    "HIS B164",
@@ -132,7 +125,6 @@
    "ARG B256",
    "GLU B257",
    "ASP B258",
-   "GLU B273",
    "ARG B281",
    "HIS B283",
    "ASP B286",
@@ -234,164 +226,40 @@
   "breaks": {
    "detected": [
     [
-     "SER A263",
-     "GLY A264"
+     "VAL A70",
+     "ASP A77"
     ],
     [
-     "PRO A280",
-     "ARG A281"
+     "GLY A148",
+     "PRO A154"
+    ],
+    [
+     "GLY A264",
+     "PRO A280"
+    ],
+    [
+     "GLY B73",
+     "ASP B77"
+    ],
+    [
+     "GLY B148",
+     "PRO B154"
+    ],
+    [
+     "SER B263",
+     "ALA B278"
     ]
-   ]
+   ],
+   "option_selected": "none"
   },
   "clashes": {
-   "apolar": [
-    {
-     "at1": "ARG A247.CD",
-     "at2": "SER A276.O",
-     "dist": 2.5716
-    },
-    {
-     "at1": "ARG A247.CD",
-     "at2": "ASN A277.O",
-     "dist": 2.0996
-    },
-    {
-     "at1": "ALA B243.CB",
-     "at2": "SER B276.OG",
-     "dist": 2.8338
-    },
-    {
-     "at1": "ARG B247.CD",
-     "at2": "SER B276.O",
-     "dist": 2.012
-    }
-   ],
+   "apolar": [],
    "negative": [],
-   "polar_acceptor": [
-    {
-     "at1": "LEU A69.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0606
-    },
-    {
-     "at1": "VAL A70.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0837
-    },
-    {
-     "at1": "ASP A76.OD2",
-     "at2": "PRO A155.O",
-     "dist": 2.4184
-    },
-    {
-     "at1": "PRO A153.O",
-     "at2": "GLN A349.OE1",
-     "dist": 2.5443
-    },
-    {
-     "at1": "ASN A244.OD1",
-     "at2": "PRO A274.O",
-     "dist": 2.9721
-    },
-    {
-     "at1": "SER A276.O",
-     "at2": "ALA A278.O",
-     "dist": 2.9478
-    },
-    {
-     "at1": "GLY B73.O",
-     "at2": "ASP B76.OD1",
-     "dist": 2.5389
-    },
-    {
-     "at1": "GLY B240.O",
-     "at2": "GLU B273.OE2",
-     "dist": 2.5361
-    },
-    {
-     "at1": "LEU B262.O",
-     "at2": "GLY B264.O",
-     "dist": 3.0976
-    }
-   ],
+   "polar_acceptor": [],
    "polar_donor": [],
    "positive": [],
    "severe": []
   },
-  "long_links": [
-   [
-    "SER A263",
-    "GLY A264",
-    5.67032
-   ],
-   [
-    "PRO A280",
-    "ARG A281",
-    5.59772
-   ]
-  ],
-  "main_chain_fix": [
-   "VAL A70",
-   "ALA A71",
-   "LEU A72",
-   "GLY A73",
-   "SER A74",
-   "ARG A75",
-   "ASP A76",
-   "ASP A77",
-   "GLY A148",
-   "SER A149",
-   "SER A150",
-   "HIS A151",
-   "ALA A152",
-   "PRO A153",
-   "PRO A154",
-   "GLY A264",
-   "THR A265",
-   "ALA A266",
-   "VAL A267",
-   "PRO A268",
-   "PRO A269",
-   "GLN A270",
-   "GLY A271",
-   "ALA A272",
-   "GLU A273",
-   "PRO A274",
-   "GLN A275",
-   "SER A276",
-   "ASN A277",
-   "ALA A278",
-   "GLY A279",
-   "PRO A280",
-   "GLY B73",
-   "SER B74",
-   "ARG B75",
-   "ASP B76",
-   "ASP B77",
-   "GLY B148",
-   "SER B149",
-   "SER B150",
-   "HIS B151",
-   "ALA B152",
-   "PRO B153",
-   "PRO B154",
-   "SER B263",
-   "GLY B264",
-   "THR B265",
-   "ALA B266",
-   "VAL B267",
-   "PRO B268",
-   "PRO B269",
-   "GLN B270",
-   "GLY B271",
-   "ALA B272",
-   "GLU B273",
-   "PRO B274",
-   "GLN B275",
-   "SER B276",
-   "ASN B277",
-   "ALA B278"
-  ],
   "missing_atoms": {
    "ALA A375": [
     "CA",
@@ -405,21 +273,55 @@
     "O",
     "OXT"
    ],
-   "PRO A280": [
+   "GLY A148": [
+    "CA",
+    "C",
+    "O",
     "OXT"
    ],
-   "SER A263": [
+   "GLY A264": [
+    "CA",
+    "C",
+    "O",
+    "OXT"
+   ],
+   "GLY B148": [
+    "CA",
+    "C",
+    "O",
+    "OXT"
+   ],
+   "GLY B73": [
+    "CA",
+    "C",
+    "O",
+    "OXT"
+   ],
+   "SER B263": [
+    "CA",
+    "C",
+    "O",
+    "OXT"
+   ],
+   "VAL A70": [
+    "CA",
+    "C",
+    "O",
     "OXT"
    ],
    "fixed": [
-    "SER A263",
-    "PRO A280",
+    "VAL A70",
+    "GLY A148",
+    "GLY A264",
     "ALA A375",
+    "GLY B73",
+    "GLY B148",
+    "SER B263",
     "ALA B375"
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -435,25 +337,7 @@
  "chiral_bck": {
   "n_chirals": 561
  },
- "cistransbck": {
-  "unusual_trans": [
-   [
-    "LEU B72",
-    "GLY B73",
-    155.995
-   ],
-   [
-    "ALA B147",
-    "GLY B148",
-    -145.731
-   ],
-   [
-    "ALA A147",
-    "GLY A148",
-    156.769
-   ]
-  ]
- },
+ "cistransbck": {},
  "clashes": {
   "detected": {
    "apolar": [
@@ -486,16 +370,6 @@
      "at1": "LEU A232.O",
      "at2": "ARG A236.CG",
      "dist": 2.7414
-    },
-    {
-     "at1": "ARG A247.CD",
-     "at2": "SER A276.O",
-     "dist": 2.5716
-    },
-    {
-     "at1": "ARG A247.CD",
-     "at2": "ASN A277.O",
-     "dist": 2.0996
     },
     {
      "at1": "MET A372.SD",
@@ -548,16 +422,6 @@
      "dist": 2.8754
     },
     {
-     "at1": "ALA B243.CB",
-     "at2": "SER B276.OG",
-     "dist": 2.8338
-    },
-    {
-     "at1": "ARG B247.CD",
-     "at2": "SER B276.O",
-     "dist": 2.012
-    },
-    {
      "at1": "SER B357.O",
      "at2": "ILE B361.CG1",
      "dist": 2.8614
@@ -581,44 +445,9 @@
      "dist": 3.0347
     },
     {
-     "at1": "LEU A69.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0606
-    },
-    {
-     "at1": "VAL A70.O",
-     "at2": "LEU A72.O",
-     "dist": 3.0837
-    },
-    {
-     "at1": "ASP A76.OD2",
-     "at2": "PRO A155.O",
-     "dist": 2.4184
-    },
-    {
-     "at1": "PRO A153.O",
-     "at2": "GLN A349.OE1",
-     "dist": 2.5443
-    },
-    {
-     "at1": "ASN A244.OD1",
-     "at2": "PRO A274.O",
-     "dist": 2.9721
-    },
-    {
-     "at1": "SER A276.O",
-     "at2": "ALA A278.O",
-     "dist": 2.9478
-    },
-    {
      "at1": "MET B46.SD",
      "at2": "VAL B352.O",
      "dist": 2.2915
-    },
-    {
-     "at1": "GLY B73.O",
-     "at2": "ASP B76.OD1",
-     "dist": 2.5389
     },
     {
      "at1": "ARG B89.O",
@@ -629,16 +458,6 @@
      "at1": "ASP B211.O",
      "at2": "ASP B215.OD2",
      "dist": 2.9139
-    },
-    {
-     "at1": "GLY B240.O",
-     "at2": "GLU B273.OE2",
-     "dist": 2.5361
-    },
-    {
-     "at1": "LEU B262.O",
-     "at2": "GLY B264.O",
-     "dist": 3.0976
     },
     {
      "at1": "ALA B334.O",
@@ -702,6 +521,7 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1,
    "B": 1
@@ -709,8 +529,8 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 10052,
-  "num_res": 662,
+  "num_ats": 9380,
+  "num_res": 614,
   "num_wat": 0,
   "res_hetats": 2,
   "res_insc": 0,
@@ -829,7 +649,9 @@
    }
   ]
  },
- "getss": {},
+ "getss": {
+  "opts": "--mark All"
+ },
  "headers": {
   "entry_id": "2KI5",
   "keywords": "TRANSFERASE",
@@ -866,6 +688,7 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "A": 1,
    "B": 1
