@@ -27,6 +27,8 @@ from biobb_structure_checking.sequence_manager import SequenceData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 
+MODELLER_ENV_VAR = 'KEY_MODELLER10v1'
+
 CISTHRES = 20  # TODO check vaules with pdb checking
 TRANSTHRES = 160
 
@@ -1028,9 +1030,8 @@ class StructureManager:
             templates = None
         ):
         """ Runs modeller """
-        # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
         if modeller_key:
-            os.environ['KEY_MODELLER9v25'] = modeller_key
+            os.environ[MODELLER_ENV_VAR] = modeller_key
         from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
 
         mod_mgr = ModellerManager()
