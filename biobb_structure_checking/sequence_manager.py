@@ -138,19 +138,18 @@ class SequenceData():
             ppb = PPBuilder()
             for chn in mod.get_chains():
                 seqs = []
-                ch_id = chn.id
                 wrong_order = False
-                if strucm.chain_ids[ch_id] == mu.PROTEIN:
+                if strucm.chain_ids[chn.id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                     if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
                         print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id, mod.id))
                         frags = [[res for res in chn.get_residues()]]
-                elif strucm.chain_ids[ch_id] in (mu.DNA, mu.RNA, mu.NA):
+                elif strucm.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
-                    self.add_empty_chain(ch_id)
+                    self.add_empty_chain(chn.id)
                     frags = []
 
                 for frag in frags:
@@ -158,23 +157,11 @@ class SequenceData():
                     start_index = frag[0].index
                     end = frag[-1].get_id()[1]
                     end_index = frag[-1].index
-                    frid = '{}:{}-{}:{}-{}'.format(ch_id, start, end, start_index, end_index)
+                    frid = '{}:{}-{}:{}-{}'.format(chn.id, start, end, start_index, end_index)
                     if hasattr(frag, 'get_sequence'):
                         seq = frag.get_sequence()
                     else:
-                        seq = ''
-                        for r in frag:
-                            rn = r.get_resname()
-                            if strucm.chain_ids[ch_id] == mu.PROTEIN:
-                                if rn in mu.ONE_LETTER_RESIDUE_CODE:
-                                    seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
-                                else:
-                                    print("Warning: unknown protein residue code", mu.residue_id(r))
-                                    seq += 'X'
-                            elif strucm.chain_ids[ch_id] == mu.DNA:
-                                seq += rn[1:]
-                            else:
-                                seq += rn
+                        seq = mu.get_sequence_from_list(frag, strucm.chain_ids[chn.id])
 
                     sqr = SeqRecord(
                         seq,
@@ -186,17 +173,17 @@ class SequenceData():
                         sqr.features.append(SeqFeature(FeatureLocation(start, end)))
                         sqr.features.append(SeqFeature(FeatureLocation(start_index, end_index)))
                     else:
-                        print("Warning: unusual residue numbering at chain ", ch_id)
+                        print("Warning: unusual residue numbering at chain ", chn.id)
                         print("Warning: chain reconstruction may not be available")
                         sqr.features.append(SeqFeature(FeatureLocation(end, start)))
                         wrong_order = True
                     seqs.append(sqr)
-                    if ch_id not in self.data:
-                        self.add_empty_chain(ch_id)
-                    self.data[ch_id]['pdb'][mod.id] = {
+                    if chn.id not in self.data:
+                        self.add_empty_chain(chn.id)
+                    self.data[chn.id]['pdb'][mod.id] = {
                         'frgs': seqs,
                         'wrong_order': wrong_order,
-                        'type': strucm.chain_ids[ch_id]
+                        'type': strucm.chain_ids[chn.id]
                     }
 
 
@@ -251,7 +238,7 @@ class SequenceData():
                     if mut['chain'] != ch_id:
                         continue
                     res_num = mut['residue'][1]
-                    seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
+                    seq[res_num - int(start_pos)] = mu.ONE_LETTER_RESIDUE_CODE[mut['new_id'].capitalize()]
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
             #Warning IUPAC deprecated in Biopython 1.78
@@ -275,7 +262,7 @@ class SequenceData():
     def get_canonical(self):
         """ Prepares a FASTA string with the canonical sequence"""
         outseq = ''
-        for ch_id in self.data:
+        for ch_id in sorted(self.data):
             if self.has_canonical[ch_id]:
                 outseq += SeqIO.FastaIO.as_fasta(self.data[ch_id]['can'])
         return outseq
@@ -284,7 +271,7 @@ class SequenceData():
         """ Prepares a FASTA string with the structure sequence, and fragments """
         #TODO re-use this on modeller_manager
         outseq = ''
-        for ch_id in self.data:
+        for ch_id in sorted(self.data):
             if self.has_canonical[ch_id]:
                 tgt_seq = self.data[ch_id]['can'].seq
                 frgs = self.data[ch_id]['pdb'][0]['frgs']
@@ -352,19 +339,11 @@ class SequenceData():
                 if chn.id not in seqs:
                     seqs[chn.id] = []
                 seq = ''
-                for r in [res for res in chn.get_residues() if not mu.is_hetatm(res)]:
-                    rn = r.get_resname()
-                    if strucm.chain_ids[chn.id] == mu.PROTEIN:
-                        if rn in mu.ONE_LETTER_RESIDUE_CODE:
-                            seq += mu.ONE_LETTER_RESIDUE_CODE[rn]
-                        else:
-                            print("Warning: unknown protein residue code", mu.residue_id(r))
-                            seq += 'X'
-                    elif strucm.chain_ids[chn.id] == mu.DNA:
-                        seq += rn[1:]
-                    else:
-                        seq += rn
-                seqs[chn.id].append(seq)
+                seqs[chn.id].append(mu.get_sequence_from_list(
+                    [res for res in chn.get_residues() if not mu.is_hetatm(res)], 
+                    strucm.chain_ids[chn.id]
+                    )
+                )
         return seqs
         
     def _assign_seq(self, rec):

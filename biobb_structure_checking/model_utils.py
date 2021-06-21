@@ -109,7 +109,27 @@ def atom_id(atm, models='auto'):
     """ Friendly replacement for atom ids like ASN A324/0.CA """
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
-# Id Checks
+def get_sequence_symbol(r, chain_type):
+    seq = ''
+    rn = r.get_resname()
+    if chain_type == PROTEIN:
+        if rn in ONE_LETTER_RESIDUE_CODE:
+            seq += ONE_LETTER_RESIDUE_CODE[rn]
+        else:
+            print("Warning: unknown protein residue code", residue_id(r))
+            seq += 'X'
+    elif chain_type == DNA:
+        seq += rn[1:]
+    else:
+        seq += rn
+    return seq
+
+def get_sequence_from_list(r_list, chain_type):
+    seq = ''
+    for res in r_list:
+        seq += get_sequence_symbol(res, chain_type)
+    return seq
+
 def _protein_residue_check(res_id):
     """
     Checks whether is a valid protein residue id, either one or three letter code
