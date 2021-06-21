@@ -1029,10 +1029,17 @@ class StructureManager:
             sequence_data = None,
             templates = None
         ):
+        
         """ Runs modeller """
+
+        MODELLER_ENV_VAR = _guess_modeller_env()
+
         if modeller_key:
             os.environ[MODELLER_ENV_VAR] = modeller_key
-        from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
+        try:
+            from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
+        except ImportError:
+            sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -1482,3 +1489,20 @@ class NotEnoughAtomsError(Error):
 class ParseError(Error):
     def __init__(self, err_id, err_txt):
         self.message = '{} ({}) found when parsing input structure'.format(err_id, err_txt)
+
+class ImportModellerError(Error):
+    def __init__(self):
+        self.message = 'Error Importing Modeller'
+
+
+def _guess_modeller_env():
+    """ Guessing Modeller version from conda installation if available """
+    import subprocess
+    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
+    for line in conda_info.stdout.decode('ASCII').split('\n'):
+        if 'modeller' in line:
+            info = line.split()
+    if info[1]:
+        v1,v2 = info[1].split('.')
+        return "KEY_MODELLER{}v{}".format(v1,v2)
+    return MODELLER_ENV_VAR

@@ -10,11 +10,8 @@ from Bio import SeqIO, pairwise2
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
 
-try:
-    from modeller import *
-    from modeller.automodel import *
-except:
-    sys.exit("Error importing modeller")
+from modeller import *
+from modeller.automodel import *
 
 # Check for back-compatiblity with biopython < 1.77
 try:
