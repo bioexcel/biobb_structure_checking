@@ -1,10 +1,17 @@
 v3.8.X (2021.3)
 
+New functions
+
 Extended functions
     backbone
         automatic match between Fasta sequences and structure chains, Fasta header is no longer used
         Add additional templates to backbone reconstruction ONGOING
 
+Bug fixes
+    Modeller based commands
+        External license key added from the command line may now be used with different Modeller versions.
+
+================================================================================
 V3.8.1 (2021.2)
 
 New functions
