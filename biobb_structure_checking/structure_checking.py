@@ -1476,6 +1476,22 @@ class StructureChecking():
 
         no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
 
+        self.strucm.templates = []
+        if opts['templates']:
+            print("Loading additional templates")
+            if not isinstance(opts['templates'], list):
+                opts['templates'] = [opts['templates']]
+            for templ in opts['templates']:
+                self.strucm.templates.append(stm.StructureManager(
+                    templ,
+                    self.args['data_library_path'],
+                    self.args['res_library_path'],
+                    pdb_server=self.args['pdb_server'],
+                    cache_dir=self.args['cache_dir_path'],
+                    file_format=self.args['file_format'],
+                    fasta_sequence_path=None
+                    )
+                )
         fix_done = not fix_data['bck_breaks_list']
         fixed_main_res = []
         while not fix_done:
@@ -1774,8 +1790,7 @@ class StructureChecking():
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
-            fasta_sequence_path=fasta_seq_path,
-            templates=self.args['templates']
+            fasta_sequence_path=fasta_seq_path
         )
 
         if verbose:

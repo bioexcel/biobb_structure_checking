@@ -134,36 +134,6 @@ class StructureManager:
         if fasta_sequence_path:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
-        if templates:
-            template_list = templates.split(',')
-            print("Loading requested templates")
-            self.templates = {}
-            for templ in template_list:
-                st, headers, input_format = self._load_structure_file(
-                    templ,
-                    cache_dir,
-                    pdb_server,
-                    file_format
-                )
-                i = 1
-                for res in st.get_residues():
-                    res.index = i
-                    if type(res).__name__ == 'DisorderedResidue':
-                        for ch_r in res.child_dict:
-                            res.child_dict[ch_r].index = i
-                    i += 1
-                sequence_data = SequenceData()
-                sequence_data.read_structure_seqs(st)
-                self.templates[templ] = {
-                    'st': st,
-                    'sequence_data':sequence_data,
-                    'headers': headers,
-                    'format': file_format
-                }
-                print(templ)
-                print(vars(sequence_data))
-
-
         # Checking models type according to RMS among models
         self.nmodels = len(self.st)
         self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
@@ -1001,15 +971,14 @@ class StructureManager:
             self,
             brk_list: Iterable[Atom],
             modeller_key: str = '',
-            extra_gap: int=0,
-            templates=None
+            extra_gap: int=0
         ) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0, templates=templates)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0, templates=self.templates)
 
         self.update_internals()
 
@@ -1057,6 +1026,11 @@ class StructureManager:
 
         modif_residues = []
 
+        for i,templ in enumerate(self.templates):
+            if templ.has_models():
+                templ.select_model(0)
+            templ.save_structure('{}/add_templ{}.pdb'.format(mod_mgr.tmpdir, i))
+
         for mod in self.st:
             if self.has_models():
                 print('Processing Model {}'.format(mod.id + 1))
@@ -1072,7 +1046,7 @@ class StructureManager:
                 print("Fixing chain/model {}/{}".format(ch_id, mod.id))
 
                 try:
-                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm, self.templates)
                 except NoCanSeqError as e:
                     print(e.message)
                     continue

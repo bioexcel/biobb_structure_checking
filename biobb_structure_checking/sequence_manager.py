@@ -143,7 +143,7 @@ class SequenceData():
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
-                    if not frags[0]: #TODO patched for a Weird case where a secon model lacks a chain
+                    if not frags[0]: #TODO patched for a Weird case where a second model lacks a chain
                         print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id, mod.id))
                         frags = [[res for res in chn.get_residues()]]
                 elif strucm.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
@@ -345,7 +345,7 @@ class SequenceData():
                     )
                 )
         return seqs
-        
+    
     def _assign_seq(self, rec):
         matches = []
         for ch in self.raw_pdb_seq:

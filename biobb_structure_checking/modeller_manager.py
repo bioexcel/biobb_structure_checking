@@ -44,7 +44,7 @@ class ModellerManager():
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
-    def build(self, target_model, target_chain, extra_NTerm_res):
+    def build(self, target_model, target_chain, extra_NTerm_res, templates):
         """ Prepares Modeller input and builds the model """
         alin_file = opj(self.tmpdir, "alin.pir")
         
