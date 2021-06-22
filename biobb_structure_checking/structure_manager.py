@@ -1029,24 +1029,31 @@ class StructureManager:
             sequence_data = None,
             templates = None
         ):
-        
-        """ Runs modeller """
-
-        MODELLER_ENV_VAR = _guess_modeller_env()
+        """ Runs modeller 
+            Args:
+                *ch_to_fix* (list(str)): List of chain ids to be fixed
+                *brk_list* (list(residue tuples)): Break to fix
+                *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used. 
+                *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
+                *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
+                *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
+                *templates* (list(structures)): Structures to be used as additional templates.
+        """
 
         if modeller_key:
+            MODELLER_ENV_VAR = _guess_modeller_env()
             os.environ[MODELLER_ENV_VAR] = modeller_key
+
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
         except ImportError:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
+        
         if not sequence_data:
             sequence_data = self.sequence_data
-
         mod_mgr.sequences = sequence_data
-        
 
         modif_residues = []
 
@@ -1451,8 +1458,20 @@ class StructureManager:
                 mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix, r, start + i, prefix, mut_seq[nch][i]))
             nch += 1
         return ','.join(mut_list)
-
-
+# ===============================================================================
+def _guess_modeller_env():
+    """ Guessing Modeller version from conda installation if available """
+    import subprocess
+    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
+    for line in conda_info.stdout.decode('ASCII').split('\n'):
+        if 'modeller' in line:
+            info = line.split()
+    if info[1]:
+        print("Modeller v{} detected".format(info[1]))
+        v1,v2 = info[1].split('.')
+        return "KEY_MODELLER{}v{}".format(v1,v2)
+    print("Modeller version not detected, using default")
+    return MODELLER_ENV_VAR
 # ===============================================================================
 
 
@@ -1494,15 +1513,3 @@ class ImportModellerError(Error):
     def __init__(self):
         self.message = 'Error Importing Modeller'
 
-
-def _guess_modeller_env():
-    """ Guessing Modeller version from conda installation if available """
-    import subprocess
-    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
-    for line in conda_info.stdout.decode('ASCII').split('\n'):
-        if 'modeller' in line:
-            info = line.split()
-    if info[1]:
-        v1,v2 = info[1].split('.')
-        return "KEY_MODELLER{}v{}".format(v1,v2)
-    return MODELLER_ENV_VAR
