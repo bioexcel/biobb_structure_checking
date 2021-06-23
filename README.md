@@ -136,5 +136,5 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 * python >=3.6
 * biopython
 * numpy
-* modeller 9.25 (optional)
+* modeller 10.1 (optional)
 * psutil (for performance debug, optional)

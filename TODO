@@ -1,6 +1,6 @@
 1. System Selection 
 1.1. Detect/Select Models (models) DONE
-1.1.1 Consider multiplei
+1.1.1 Consider multiple
 1.1.2 Save split collection
 1.1.3 Superimpose models
 1.2. Detect/Select Chains (chains) DONE
@@ -64,5 +64,4 @@
 4.2 Prepare autodock input
 4.3 Prepare CMIP input
 4.4 Convert from MD formats
-
 
