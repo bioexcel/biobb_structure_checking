@@ -3,6 +3,7 @@
 """
 import argparse
 from os.path import join as opj
+from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
 VERSION = '3.8.5'
@@ -424,13 +425,14 @@ MSGS = {
     'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
 }
 # Help handler
-def help(help_path, command=None):
+def help(command=None):
     '''
         Args:
             help_path: Path to commands help file
             command: command to print
     '''
     if not command:
+        help_path = opj(dirname(__file__), DATA_DIR_DEFAULT_PATH, COMMANDS_HELP_PATH)
         with open(help_path) as help_file:
             print(help_file.read())
     else:
