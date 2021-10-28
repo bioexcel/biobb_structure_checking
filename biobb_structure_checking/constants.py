@@ -423,3 +423,18 @@ MSGS = {
     'NO_NA': 'No NA chains found, skipping',
     'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
 }
+# Help handler
+def help(help_path, command=None):
+    '''
+        Args:
+            help_path: Path to commands help file
+            command: command to print
+    '''
+    if not command:
+        with open(help_path) as help_file:
+            print(help_file.read())
+    else:
+        DIALOGS.get_parameter(command, '', print_help=True)
+
+
+
