@@ -68,9 +68,9 @@ class StructureChecking():
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
 
-        if self.args['Notebook']:
-            self.args['non_interactive'] = True
-            self.args['check_only'] = False
+#        if self.args['Notebook']:
+#            self.args['non_interactive'] = True
+#            self.args['check_only'] = False
 
     def launch(self):
         """ Main method to run checking"""
@@ -202,6 +202,8 @@ class StructureChecking():
         if opts:
             if isinstance(opts, list):
                 opts_str = ' '.join(opts)
+            elif isinstance(opts, dict):
+                opts_str = str(opts)
             else:
                 opts_str = opts
             msg += ' Options: ' + opts_str
@@ -212,7 +214,7 @@ class StructureChecking():
 
     # Running checking method
         data_to_fix = f_check()
-
+ 
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if self.args['verbose']:
@@ -222,12 +224,13 @@ class StructureChecking():
                 f_fix = getattr(self, '_' + command + '_fix')
             except AttributeError:
                 sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
-
-            if cts.DIALOGS.exists(command):
-                opts = cts.DIALOGS.get_parameter(command, opts)
-            else:
-                opts = {}
-
+            
+            if isinstance(opts, str) or isinstance(opts, list):
+                if cts.DIALOGS.exists(command):
+                    opts = cts.DIALOGS.get_parameter(command, opts)
+                else:
+                    opts = {}
+ 
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:
@@ -1265,7 +1268,8 @@ class StructureChecking():
         return fix_data
 
     def _add_hydrogen_fix(self, opts, fix_data=None):
-
+        print("KK")
+        print(opts)
         if not fix_data:
             return False
         if not self.strucm.fixed_side and not opts['no_fix_side']:

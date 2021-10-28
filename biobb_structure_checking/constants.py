@@ -24,6 +24,7 @@ DEFAULTS = {
     'atom_limit': 1000000,
     'mem_check': False,
     'rename_terms': False,
+    'verbose': False,
     'options' : ''
 }
 
