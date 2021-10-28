@@ -230,6 +230,13 @@ class StructureChecking():
                     opts = cts.DIALOGS.get_parameter(command, opts)
                 else:
                     opts = {}
+            else:
+                #Adding default parameters
+                if cts.DIALOGS.exists(command):
+                    defs = cts.DIALOGS.get_parameter(command, '')
+                    for k in defs:
+                        if k not in opts:
+                            opts[k] = defs[k] 
  
             error_status = f_fix(opts, data_to_fix)
 

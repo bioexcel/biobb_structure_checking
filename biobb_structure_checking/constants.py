@@ -26,6 +26,7 @@ DEFAULTS = {
     'mem_check': False,
     'rename_terms': False,
     'verbose': False,
+    'debug': False,
     'options' : ''
 }
 
