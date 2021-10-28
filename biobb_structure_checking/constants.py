@@ -207,50 +207,50 @@ DIALOGS.add_entry('command_list', 'Runs a list of commands')
 DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
 
 DIALOGS.add_entry('models', 'Checks and selects models')
-DIALOGS.add_option('models', '--select', 'select_model', \
+DIALOGS.add_option('models', '--select', 'select', \
     'Select model to keep', int)
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
-DIALOGS.add_option('chains', '--select', 'select_chains',\
+DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
-DIALOGS.add_option('altloc', '--select', 'select_altloc', \
+DIALOGS.add_option('altloc', '--select', 'select', \
     'Select altloc occupancy|alt_id')
 
 DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
 DIALOGS.add_option('inscodes', '--renum', 'renum', 'Renumber residues', 'bool')
 
 DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated in v1.1')
-DIALOGS.add_option('metals', '--remove', 'remove_metals', 'Remove Metal ions')
+DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
-DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove All Water molecules')
+DIALOGS.add_option('water', '--remove', 'remove', 'Remove All Water molecules')
 
 DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'\
     ' (will be deprecated)')
-DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
+DIALOGS.add_option('ligands', '--remove', 'remove', 'Remove Ligand residues')
 
 DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms')
-DIALOGS.add_option('rem_hydrogen', '--remove', 'remove_h', 'Remove Hydrogen atoms')
+DIALOGS.add_option('rem_hydrogen', '--remove', 'remove', 'Remove Hydrogen atoms')
 
 DIALOGS.add_entry('amide', 'Checks and optionally fixes wrong amide contacts')
-DIALOGS.add_option('amide', '--fix', 'amide_fix', 'Fix Residues (All | None | List)')
+DIALOGS.add_option('amide', '--fix', 'fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('amide', '--no_recheck', 'no_recheck',\
     'Re-check after modification', 'bool')
 
 DIALOGS.add_entry('chiral', 'Checks and optionally fixes side chains with wrong chirality')
-DIALOGS.add_option('chiral', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
+DIALOGS.add_option('chiral', '--fix', 'fix', 'Fix Residues (All | None | List)')
 DIALOGS.add_option('chiral', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
 
 DIALOGS.add_entry('chiral_bck', 'Checks residues with wrong CA quiral')
-#DIALOGS.add_option('chiral_bck', '--fix', 'chiral_fix', 'Fix Residues (All | None | List)')
+#DIALOGS.add_option('chiral_bck', '--fix', 'fix', 'Fix Residues (All | None | List)')
 
 DIALOGS.add_entry('fixside', 'Checks and fixes missing side chain atoms')
-DIALOGS.add_option('fixside', '--fix', 'fix_side',\
+DIALOGS.add_option('fixside', '--fix', 'fix',\
     'Add missing atoms to side chains (All | None | List)')
-DIALOGS.add_option('fixside', '--no_rem', 'no_rem_extra',\
+DIALOGS.add_option('fixside', '--no_rem_extra', 'no_rem_extra',\
     'Do not remove unknown atoms', 'bool')
 DIALOGS.add_option('fixside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
@@ -258,9 +258,9 @@ DIALOGS.add_option('fixside', '--rebuild', 'rebuild',\
     'Rebuild complete side chain', 'bool')
 
 DIALOGS.add_entry('backbone', 'Checks and fixes several backbone issues')
-DIALOGS.add_option('backbone', '--fix_atoms', 'fix_back',\
+DIALOGS.add_option('backbone', '--fix_atoms', 'fix_atoms',\
     'Add missing Oxygen atoms to backbone (All | None | List)')
-DIALOGS.add_option('backbone', '--fix_chain', 'fix_main',\
+DIALOGS.add_option('backbone', '--fix_chain', 'fix_chain',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
     'Adds ACE and NME caps to missing main chain segments (All | None)')
@@ -272,7 +272,7 @@ DIALOGS.add_option('backbone', '--no_recheck', 'no_recheck',\
     'Do not re-check after modification', 'bool')
 
 DIALOGS.add_entry('mutateside', 'Performs side chain mutations')
-DIALOGS.add_option('mutateside', '--mut', 'mut_list',\
+DIALOGS.add_option('mutateside', '--mut', 'mut',\
     'Mutate side chains (Mutation List as [*:]arg234Thr)')
 DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
@@ -281,11 +281,11 @@ DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
 DIALOGS.add_option('mutateside', '--na_seq', 'na_seq',\
     'Mutate DNA duplex to generate sequence')
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
-DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
+DIALOGS.add_option('add_hydrogen', '--add_mode', 'add_mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
-DIALOGS.add_option('add_hydrogen', '--pH', 'pH_value',\
+DIALOGS.add_option('add_hydrogen', '--pH', 'pH',\
     'pH (0-14)')
-DIALOGS.add_option('add_hydrogen', '--list', 'ions_list',\
+DIALOGS.add_option('add_hydrogen', '--list', 'list',\
     'Ionic form selection (list as [*:]his234hip)')
 DIALOGS.add_option('add_hydrogen', '--no_fix_side', 'no_fix_side',\
     'Do not fix side chains', 'bool')
@@ -298,7 +298,7 @@ DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
 DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
-DIALOGS.add_option('getss', '--mark', 'getss_mark', 'Mark Cys pairs as SS bond (All | None | List)')
+DIALOGS.add_option('getss', '--mark', 'mark', 'Mark Cys pairs as SS bond (All | None | List)')
 
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')

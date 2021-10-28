@@ -300,7 +300,7 @@ class StructureChecking():
         if isinstance(opts, str):
             select_model = opts
         else:
-            select_model = opts['select_model']
+            select_model = opts['select']
 
         input_line = ParamInput('Select Model Num', self.args['non_interactive'])
         input_line.add_option_all()
@@ -349,7 +349,7 @@ class StructureChecking():
         if isinstance(opts, str):
             select_chains = opts
         else:
-            select_chains = opts['select_chains']
+            select_chains = opts['select']
 
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'])
@@ -454,7 +454,7 @@ class StructureChecking():
         if isinstance(opts, str):
             select_altloc = opts
         else:
-            select_altloc = opts['select_altloc']
+            select_altloc = opts['select']
 
         # Prepare the longest possible list of alternatives
         altlocs = []
@@ -548,7 +548,7 @@ class StructureChecking():
         if isinstance(opts, str):
             remove_metals = opts
         else:
-            remove_metals = opts['remove_metals']
+            remove_metals = opts['remove']
 
         input_line = ParamInput("Remove", self.args['non_interactive'])
         input_line.add_option_all()
@@ -622,7 +622,7 @@ class StructureChecking():
         if isinstance(opts, str):
             remove_wat = opts
         else:
-            remove_wat = opts['remove_wat']
+            remove_wat = opts['remove']
         input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_yes_no()
         input_line.default = 'yes'
@@ -686,7 +686,7 @@ class StructureChecking():
         if isinstance(opts, str):
             remove_ligands = opts
         else:
-            remove_ligands = opts['remove_ligands']
+            remove_ligands = opts['remove']
         input_line = ParamInput('Remove', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -753,7 +753,7 @@ class StructureChecking():
         if isinstance(opts, str):
             remove_h = opts
         else:
-            remove_h = opts['remove_h']
+            remove_h = opts['remove']
         input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
         input_line.add_option_yes_no()
         input_line.default = 'yes'
@@ -806,7 +806,7 @@ class StructureChecking():
         if isinstance(opts, str):
             getss_mark = opts
         else:
-            getss_mark = opts['getss_mark']
+            getss_mark = opts['mark']
 
         pairs_list = [
             mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent())
@@ -885,7 +885,7 @@ class StructureChecking():
         if isinstance(opts, str):
             amide_fix = opts
         else:
-            amide_fix = opts['amide_fix']
+            amide_fix = opts['fix']
         no_int_recheck = amide_fix is not None or self.args['non_interactive']
         while fix_data:
             input_line = ParamInput('Fix amide atoms', self.args['non_interactive'])
@@ -969,7 +969,7 @@ class StructureChecking():
         if isinstance(opts, str):
             chiral_fix = opts
         else:
-            chiral_fix = opts['chiral_fix']
+            chiral_fix = opts['fix']
         input_line = ParamInput('Fix chiralities', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -1157,7 +1157,7 @@ class StructureChecking():
         if isinstance(opts, str):
             fix_side = opts
         else:
-            fix_side = opts['fix_side']
+            fix_side = opts['fix']
 
         fixside_rnums = [mu.residue_num(r_at[0]) for r_at in fix_data['miss_at_list']]
 
@@ -1268,8 +1268,6 @@ class StructureChecking():
         return fix_data
 
     def _add_hydrogen_fix(self, opts, fix_data=None):
-        print("KK")
-        print(opts)
         if not fix_data:
             return False
         if not self.strucm.fixed_side and not opts['no_fix_side']:
@@ -1278,7 +1276,7 @@ class StructureChecking():
         if isinstance(opts, str):
             add_h_mode = opts
         else:
-            add_h_mode = opts['mode']
+            add_h_mode = opts['add_mode']
 
         input_line = ParamInput('Mode', self.args['non_interactive'])
         input_line.add_option_none()
@@ -1311,7 +1309,7 @@ class StructureChecking():
                 print('Selection: auto')
         else:
             if add_h_mode == 'ph':
-                ph_value = opts['pH_value']
+                ph_value = opts['pH']
                 input_line = ParamInput("pH Value", self.args['non_interactive'])
                 input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
                 input_option, ph_value = input_line.run(ph_value)
@@ -1326,7 +1324,7 @@ class StructureChecking():
                         ion_to_fix[res] = std_ion[rcode]['highpH']
             else:
                 if add_h_mode == 'list':
-                    ions_list = opts['ions_list']
+                    ions_list = opts['list']
                     if not self.args['quiet']:
                         print('Selection: list')
                     ions_list = ParamInput(
@@ -1381,7 +1379,7 @@ class StructureChecking():
         if isinstance(opts, str):
             mut_list = opts
         else:
-            mut_list = opts['mut_list']
+            mut_list = opts['mut']
 
         if opts['na_seq']:
             mut_list = self.strucm.prepare_mutations_from_na_seq(opts['na_seq'])
@@ -1504,7 +1502,7 @@ class StructureChecking():
 
     def _backbone_fix(self, opts, fix_data=None):
 
-        no_int_recheck = opts['fix_back'] is not None or self.args['non_interactive']
+        no_int_recheck = opts['fix_atoms'] is not None or self.args['non_interactive']
 
         fix_done = not fix_data['bck_breaks_list']
         fixed_main_res = []
@@ -1512,7 +1510,7 @@ class StructureChecking():
             if not opts['extra_gap']:
                 opts['extra_gap'] = 0
             fixed_main = self._backbone_fix_main_chain(
-                opts['fix_main'],
+                opts['fix_chain'],
                 fix_data['bck_breaks_list'],
                 self.args['modeller_key'],
                 opts['extra_gap']
@@ -1522,7 +1520,7 @@ class StructureChecking():
                 continue
             else:
                 fixed_main_res += fixed_main
-
+            
             self.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
             if fixed_main:
                 self.strucm.modified = True
@@ -1556,7 +1554,7 @@ class StructureChecking():
         fixed_res = []
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
-                opts['fix_back'],
+                opts['fix_atoms'],
                 fix_data['miss_bck_at_list']
             )
         if not isinstance(fixed_res, list):
@@ -1820,7 +1818,16 @@ class StructureChecking():
         self.summary['stats'] = strucm.get_stats()
 
         return strucm
-
+    
+    def save_structure(self, output_structure_path, rename_terms=False):
+        ''' Saving the current structure in a PDB file
+            Args:
+                output_structure_path (str): File name to save
+                rename_terms (bool): Rename terminal residues as NXXX, CXXX
+        '''
+        return self._save_structure(output_structure_path, rename_terms=rename_terms)
+    
+    #Kept for back compatibility
     def _save_structure(self, output_structure_path, rename_terms=False):
         input_line = ParamInput(
             "Enter output structure path",
