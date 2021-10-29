@@ -239,12 +239,12 @@ class StructureManager:
         print("Updating partial charges and atom types")
         tot_chrg = 0
         for res in self.st.get_residues():
-            rcode = self.data_library.get_canonical_resname(res.get_resname())
+            rcode = res.get_resname()
             if len(rcode) == 4:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
-            rcode3 = self.data_library.get_canonical_resname(rcode3)
+            can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
@@ -258,8 +258,8 @@ class StructureManager:
                 res_chr = 0.
                 for atm in res.get_atoms():
                     atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
-                    if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
-                        atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
+                    if atm.id in self.data_library.residue_data[can_rcode3]['ADT_type']:
+                        atm.ADT_type = self.data_library.residue_data[can_rcode3]['ADT_type'][atm.id]
                     elif atm.id in self.data_library.residue_data['*']['ADT_type']:
                         atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
                     else:
