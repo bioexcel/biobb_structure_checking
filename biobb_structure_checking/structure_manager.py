@@ -267,6 +267,7 @@ class StructureManager:
                         atm.atom_type = self.data_library.residue_data['*']['atom_type'][ff][atm.id]
                     else:
                         atm.atom_type = atm.element
+                    atm.radius = self.data_library.vdwprm[ff][atm.atom_type]
                     res_chr += atm.charge
                     tot_chrg += atm.charge
                     if atm.id == 'OXT':
