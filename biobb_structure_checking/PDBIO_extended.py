@@ -65,7 +65,7 @@ class PDBIO_extended(PDBIO):
         # Format PDBQT for Autodock
         if hasattr(atom, "charge"):
             charge = atom.charge
-            element = atom.ADT_type
+            element = atom.atom_type
             format = _ATOM_FORMAT_STRING_PDBQT
         else:
             format = _ATOM_FORMAT_STRING
