@@ -72,7 +72,6 @@
                 "highpH": "TYM"
             }
         },
-
         "atom_data": {
             "metal_atoms": [
                 "MG", "MN", "MO", "Mg2", "Mn2", "Ca2", "ZN", "NI", "FE",
@@ -80,6 +79,7 @@
                 "CD", "AG", "AU", "Cd2", "CA", "Ca"
             ]
         },
+        "atom_type_ff" : ["ADT", "CMIP"],
         "residue_data": {
             "*": {
                 "bck_atoms": ["N", "CA", "C", "O"],
@@ -87,13 +87,21 @@
                 "polar_acceptor_atoms": ["O", "O4'", "05'","OXT","O3'","O2'","OP1","OP2"],
                 "negative_atoms": ["OXT", "OP1", "OP2"],
                 "apolar_atoms":["CA", "C","C5'","C4'","C1'","C3'"],
-                "ADT_type" : {
-                    "O" : "OA",
-                    "OXT": "OA",
-                    "H" : "HD",
-                    "H1": "HD",
-                    "H2": "HD",
-                    "H3": "HD"
+                "atom_type" : {
+                    "ADT" :  {
+                        "O" : "OA",
+                        "OXT": "OA",
+                        "H" : "HD",
+                        "H1": "HD",
+                        "H2": "HD",
+                        "H3": "HD"
+                    },
+                    "CMIP" : {
+                        "H": "HN",
+                        "H1" : "HN",
+                        "H2" : "HN",
+                        "H3" : "HN"
+                    }
                 }
             },
             "ACE": {
@@ -103,8 +111,12 @@
                 "hydrogen_atoms": [],
                 "addH_rules": {},
                 "mutation_rules": {},
-                "ADT_type": {
-                    "O": "OA"
+                "atom_type": {
+                    "ADT" : {
+                        "O": "OA"
+                    },
+                    "CMIP" : {
+                    }
                 }
             },
             "NME": {
@@ -114,8 +126,13 @@
                 "hydrogen_atoms": [],
                 "addH_rules": {},
                 "mutation_rules": {},
-                "ADT_type" : {
-                    "H": "HD"
+                "atom_type" : {
+                    "ADT" : {
+                        "H": "HD"
+                    },
+                    "CMIP" : {
+                        "H": "NH1"
+                    }
                 }
             },
             "ALA": {
@@ -128,7 +145,9 @@
                         "ats": ["HB1", "HB2", "HB3"]
                     }
                 },
-                "ADT_type": {
+                "atom_type": {
+                    "ADT": {},
+                    "CMIP": {}
                 },
                 "mutation_rules": {
                     "ALA": {},
@@ -233,6 +252,16 @@
                     "HG": "HD",
                     "SG": "SA"
                 },
+                "atom_type": {
+                    "ADT": {
+                        "HG": "HD",
+                        "SG": "SA"
+                    },
+                    "CMIP": {
+                        "HG": "HN"
+                    }
+                },
+
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["SG"]
@@ -341,11 +370,16 @@
                     }
 
                 },
-                "ADT_type": {
-                    "OD1": "OA",
-                    "OD2": "OA",
-                    "HD2": "HD"
-                },
+                "atom_type": {
+                    "ADT": {
+                        "OD1": "OA",
+                        "OD2": "OA",
+                        "HD2": "HD"
+                    },
+                    "CMIP": {
+                        "HD2": "HO"
+                    }
+                },            
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "OD1", "OD2"]
@@ -470,10 +504,15 @@
                         }
                     }
                 },
-                "ADT_type": {
-                    "HE2": "HD",
-                    "OE1": "OA",
-                    "OE2": "OA"
+                "atom_type": {
+                    "ADT": {
+                        "HE2": "HD",
+                        "OE1": "OA",
+                        "OE2": "OA"
+                    }, 
+                    "CMIP": {
+                        "HE2": "HO"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -574,13 +613,16 @@
                         "ats": ["HD1", "HE1", "HZ", "HE2", "HD2"]
                     }
                 },
-                "ADT_type": {
-                    "CG" : "A",
-                    "CD1": "A",
-                    "CE1": "A",
-                    "CZ" : "A",
-                    "CE2": "A",
-                    "CD2": "A"                   
+                "atom_type": {
+                    "ADT": {
+                        "CG" : "A",
+                        "CD1": "A",
+                        "CE1": "A",
+                        "CZ" : "A",
+                        "CE2": "A",
+                        "CD2": "A"                   
+                    },
+                    "CMIP": {}
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -666,7 +708,7 @@
             "GLY": {
                 "side_atoms": [],
                 "apolar_atoms": [],
-                "ADT_type": {},
+                "atom_type": {"ADT": {}, "CMIP": {}},
                 "mutation_rules": {
                     "ALA": {
                         "Add": ["CB"]
@@ -776,12 +818,18 @@
                         }
                     }
                 },
-                "ADT_type": {
-                    "CG": "A",
-                    "CE1": "A",
-                    "CD2": "A",
-                    "HD1": "HD",
-                    "HE2": "HD"
+                "atom_type": {
+                    "ADT" : {
+                        "CG": "A",
+                        "CE1": "A",
+                        "CD2": "A",
+                        "HD1": "HD",
+                        "HE2": "HD"
+                    },
+                    "CMIP": {
+                        "HD1": "HN",
+                        "HE2": "HN"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -886,7 +934,7 @@
                         "ats": ["HG21", "HG22", "HG23", "HD11", "HD12", "HD13"]
                     }
                 },
-                "ADT_type": {},
+                "atom_type": {"ADT":{}, "CMIP": {}},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG2", "CG1", "CD1"]
@@ -1047,8 +1095,17 @@
                         }
                     }
                 },
-                "ADT_type": {"HZ1": "HD", "HZ2": "HD", "HZ3": "HD"},
-
+                "atom_type": {
+                    "ADT":{
+                        "HZ1": "HD", 
+                        "HZ2": "HD", 
+                        "HZ3": "HD"
+                    },
+                    "CMIP":{
+                        "HZ1": "HN", 
+                        "HZ2": "HN", 
+                        "HZ3": "HN"
+                    },
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "CE", "NZ"]
@@ -1157,7 +1214,7 @@
                         "ats": ["HD11", "HD12", "HD13", "HD21", "HD22", "HD23"]
                     }
                 },
-                "ADT_type" : {},
+                "atom_type" : {"ADT": {}, "CMIP":{}},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD1", "CD2"]
@@ -1267,8 +1324,11 @@
                         "ats": ["HE1", "HE2", "HE3"]
                     }
                 },
-                "ADT_type":{
-                    "SD": "SA"
+                "atom_type":{
+                    "ADT": {
+                        "SD": "SA"
+                    },
+                    "CMIP": {}
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -1369,10 +1429,16 @@
                         "ats": ["HD21", "HD22"]
                     }
                 },
-                "ADT_type": {
-                    "OD1": "OA",
-                    "HD21": "HD",
-                    "HD22": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "OD1": "OA",
+                        "HD21": "HD",
+                        "HD22": "HD"
+                    },
+                    "CMIP": {
+                        "HD21": "HN", 
+                        "HD22": "HN"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -1482,7 +1548,7 @@
                         "ats":["HD2","HD3"]
                     }
                 },
-                "ADT_type": {},
+                "atom_type": {"ADT":{}, "CMIP":{}},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CD", "CG"]
@@ -1584,10 +1650,16 @@
                         "ats": ["HE21", "HE22"]
                     }
                 },
-                "ADT_type": {
-                    "OE1": "OA",
-                    "HE21": "HD",
-                    "HE22": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "OE1": "OA",
+                        "HE21": "HD",
+                        "HE22": "HD"
+                    },
+                    "CMIP": {
+                        "HE21": "HN",
+                        "HE22": "HN"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -1737,12 +1809,21 @@
                         }
                     }
                 },
-                "ADT_type": {
-                    "HE": "HD",
-                    "HH11": "HD",
-                    "HH12": "HD",
-                    "HH21": "HD",
-                    "HH22": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "HE": "HD",
+                        "HH11": "HD",
+                        "HH12": "HD",
+                        "HH21": "HD",
+                        "HH22": "HD"
+                    },
+                    "CMIP": {
+                        "HE": "HN",
+                        "HH11": "HN",
+                        "HH12": "HN",
+                        "HH21": "HN",
+                        "HH22": "HN"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -1845,9 +1926,14 @@
                         "ats": ["HG"]
                     }
                 },
-                "ADT_type": {
-                    "OG": "OA",
-                    "HG": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "OG": "OA",
+                        "HG": "HD"
+                    },
+                    "CMIP": {
+                        "HG": "HO"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -1944,9 +2030,14 @@
                         "ats": ["HG21", "HG22", "HG23", "HG1"]
                     }
                 },
-                "ADT_type": {
-                    "OG1": "OA",
-                    "HG1": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "OG1": "OA",
+                        "HG1": "HD"
+                    },
+                    "CMIP" : {
+                        "HG1": "HO"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -2055,7 +2146,7 @@
                         "ats": ["HG11", "HG12", "HG13", "HG21", "HG22", "HG23"]
                     }
                 },
-                "ADT_type":{},
+                "atom_type":{"ADT": {}, "CMIP":{}},
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG1", "CG2"]
@@ -2161,16 +2252,21 @@
                         "ats": ["HD1", "HE1", "HZ2", "HH2", "HZ3", "HE3"]
                     }
                 },
-                "ADT_type" : {
-                   "CG": "A", 
-                   "CD1": "A", 
-                   "CE2": "A", 
-                   "CZ2": "A", 
-                   "CH2": "A", 
-                   "CZ3": "A",
-                   "CE3": "A",
-                   "CD2": "A",
-                   "HE1": "HD"
+                "atom_type" : {
+                    "ADT": {
+                        "CG": "A", 
+                        "CD1": "A", 
+                        "CE2": "A", 
+                        "CZ2": "A", 
+                        "CH2": "A", 
+                        "CZ3": "A",
+                        "CE3": "A",
+                        "CD2": "A",
+                        "HE1": "HD"
+                    }, 
+                    "CMIP":{
+                        "HE1": "HN"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {
@@ -2288,15 +2384,20 @@
                         }
                     }
                 },
-                "ADT_type": {
-                    "CG":  "A",
-                    "CD1": "A",
-                    "CE1": "A",
-                    "CZ":  "A",
-                    "CE2": "A",
-                    "CD2": "A",
-                    "OH": "OA",
-                    "HH": "HD"
+                "atom_type": {
+                    "ADT": {
+                        "CG":  "A",
+                        "CD1": "A",
+                        "CE1": "A",
+                        "CZ":  "A",
+                        "CE2": "A",
+                        "CD2": "A",
+                        "OH": "OA",
+                        "HH": "HD"
+                    }, 
+                    "CMIP": {
+                        "HH": "HO"
+                    }
                 },
                 "mutation_rules": {
                     "ALA": {

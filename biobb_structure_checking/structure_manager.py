@@ -237,36 +237,39 @@ class StructureManager:
                 atm.selected_child.serial_number = i
             i += 1
 
-    def update_atom_charges(self):
-        """ Updats atom charges from data library """
+    def update_atom_charges(self, ff):
+        """ Update atom charges and types from data library """
         print("Updating partial charges and atom types")
         tot_chrg = 0
+        if ff not in self.data_library['atom_type_ff']:
+            raise UnknownFFError(ff)
+
         for res in self.st.get_residues():
-            rcode = self.data_library.get_canonical_resname(res.get_resname())
+            rcode = res.get_resname()
             if len(rcode) == 4:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
-            rcode3 = self.data_library.get_canonical_resname(rcode3)
+            can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
                     atm.charge = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.ADT_type = atm.id.lower().capitalize()
+                        atm.atom_type= atm.id.lower().capitalize()
                     else:
-                        atm.ADT_type = atm.element
+                        atm.atom_type = atm.element
             else:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
                 for atm in res.get_atoms():
                     atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
-                    if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
-                        atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
-                    elif atm.id in self.data_library.residue_data['*']['ADT_type']:
-                        atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
+                    if atm.id in self.data_library.residue_data[can_rcode3]['atom_type'][ff]:
+                        atm.atom_type = self.data_library.residue_data[can_rcode3]['atom_type'][ff][atm.id]
+                    elif atm.id in self.data_library.residue_data['*']['atom_type'][ff]:
+                        atm.atom_type = self.data_library.residue_data['*']['atom_type'][ff][atm.id]
                     else:
-                        atm.ADT_type = atm.element
+                        atm.atom_type = atm.element
                     res_chr += atm.charge
                     tot_chrg += atm.charge
                     if atm.id == 'OXT':
@@ -1231,13 +1234,14 @@ class StructureManager:
         self.modified = True
         return True
 
-    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: bool = False):
+    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str):
         """
         Add hydrogens considering selections in ion_res_list
 
         Args:
            **r_at_list**: dict as Bio.PDB.Residue: Tauromeric Option
            **remove_h**: Remove Hydrogen atom before adding new ones
+           **add_charges**: Add charges and atom types acording to ff
         """
         add_h_rules = self.data_library.get_add_h_rules()
 
@@ -1306,7 +1310,7 @@ class StructureManager:
         self.atom_renumbering()
         if add_charges:
             self.rename_terms(self.get_term_res())
-            self.update_atom_charges()
+            self.update_atom_charges(add_charges)
         self.modified = True
 
     def mark_ssbonds(self, cys_list):
@@ -1487,3 +1491,6 @@ class ImportModellerError(Error):
     def __init__(self):
         self.message = 'Error Importing Modeller'
 
+class UnknownFFError(Error):
+    def __init__(self, ff):
+        self.message = '{} is not a valid ff for assigning atom types'.format(ff)

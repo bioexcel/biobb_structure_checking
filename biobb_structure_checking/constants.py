@@ -5,7 +5,7 @@ import argparse
 from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.8.1'
+VERSION = '3.8.5'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -299,7 +299,7 @@ DIALOGS.add_option('add_hydrogen', '--no_fix_side', 'no_fix_side',\
 DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
 DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
-    'Update atom partial charges', 'bool')
+    'Update atom partial charges', default="ADT")
 
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
