@@ -57,7 +57,7 @@ class ParamInput():
         })
 
     def add_option_free_text(self, label):
-        """ Add a numeric option to dialog """
+        """ Add a free text option to dialog """
         self.options.append({
             'label':label,
             'type':input,

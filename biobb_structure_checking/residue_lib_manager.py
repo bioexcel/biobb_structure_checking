@@ -46,7 +46,7 @@ class ResidueLib():
 
             elif re.match('^(....)  INT', line):
                 resid_str = re.match('(....)  INT', line)
-                res.id = resid_str.group(1).replace(" ","")
+                res.id = resid_str.group(1).replace(" ", "")
                 at_group = True
 
             elif at_group:

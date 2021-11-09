@@ -5,11 +5,11 @@ import argparse
 from os.path import join as opj
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.7.3'
+VERSION = '3.8.5'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
-RES_LIBRARY_DEFAULT_PATH = 'all_amino03.in'
+RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
@@ -129,11 +129,19 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
-    '--quiet',
+    '-nv', '--quiet',
     action="store_true",
     dest='quiet',
-    help='Reduces output, removing labels and progress info'
+    help='Minimal output, removing labels and progress info'
 )
+
+CMD_LINE.add_argument(
+    '-v', '--verbose',
+    action="store_true",
+    dest='verbose',
+    help='Add extra progress info'
+)
+
 
 CMD_LINE.add_argument(
     '--limit',
@@ -145,7 +153,7 @@ CMD_LINE.add_argument(
     '--debug',
     dest='debug',
     action='store_true',
-    help='Add debug information'
+    help='Add debug information (timings, resources)'
 )
 
 CMD_LINE.add_argument(
@@ -203,7 +211,7 @@ DIALOGS.add_option('models', '--select', 'select_model', \
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select_chains',\
-    'Chains (All | Chain list comma separated)')
+    'Chains (All | protein | na | dna | rna | Chain list comma separated)')
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option('altloc', '--select', 'select_altloc', \
@@ -219,7 +227,7 @@ DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove_wat', 'Remove All Water molecules')
 
 DIALOGS.add_entry('ligands', 'Checks and optionally removes ligand residues'\
-    ' (will be deprecated in v1.1)')
+    ' (will be deprecated)')
 DIALOGS.add_option('ligands', '--remove', 'remove_ligands', 'Remove Ligand residues')
 
 DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms')
@@ -269,7 +277,8 @@ DIALOGS.add_option('mutateside', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for generated clashes', 'bool')
 DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
     'Rebuild complete side chain', 'bool')
-
+DIALOGS.add_option('mutateside', '--na_seq', 'na_seq',\
+    'Mutate DNA duplex to generate sequence')
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
@@ -288,14 +297,20 @@ DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
 DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
+DIALOGS.add_option('getss', '--mark', 'getss_mark', 'Mark Cys pairs as SS bond (All | None | List)')
+
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
+DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
+
+
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
+
 
 MSGS = {
     #management
@@ -307,7 +322,7 @@ MSGS = {
     'UNKNOWN_SELECTION': 'Unknown selection',
     'DO_NOTHING': 'Nothing to do',
     'ALL_UNDO': 'All changes reverted to original structure',
-    'ATOM_LIMIT': 'Number of atoms limit exceeded ({}), use --limit to adjust',
+    'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), use --limit to adjust',
     #command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
@@ -315,6 +330,8 @@ MSGS = {
     'COMMAND_NOT_FOUND': 'Error: {} command unknown or not implemented',
     'FIX_COMMAND_NOT_FOUND': 'Error: {} command fix not implemented',
     'CHECK_ONLY_DONE': 'Running  check_only. Nothing else to do.',
+    #sequences
+    'NO_CANONICAL': 'Sequences command requires either mmCIF input or --sequence',
     #models
     'MODELS_FOUND': '{} Model(s) detected',
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',
@@ -400,5 +417,8 @@ MSGS = {
     'CLASHES_DETECTED': '{} Steric {} clashes detected',
     'NO_CLASHES_DETECTED': 'No {} clashes detected',
     #load
-    'STRUCTURE_LOADED': 'Structure {} loaded'
+    'STRUCTURE_LOADED': 'Structure {} loaded',
+    #NA related
+    'NO_NA': 'No NA chains found, skipping',
+    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
 }

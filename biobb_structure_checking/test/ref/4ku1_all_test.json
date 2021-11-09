@@ -7,7 +7,6 @@
    "ASP A249",
    "ARG A255",
    "GLU A258",
-   "CYS A261",
    "ASP A265",
    "HIS A268",
    "GLU A269",
@@ -32,7 +31,6 @@
    "GLU A318",
    "TYR A319",
    "LYS A320",
-   "CYS A321",
    "LYS A322",
    "LYS A326",
    "GLU A333",
@@ -46,7 +44,6 @@
    "ASP A356",
    "GLU A357",
    "LYS A360",
-   "CYS A367",
    "LYS A370",
    "TYR A373",
    "ASP A376",
@@ -62,7 +59,6 @@
    "ASP A413",
    "LYS A414",
    "ARG A416",
-   "CYS A425",
    "HIS A429",
    "GLU A430",
    "HIS A433",
@@ -74,7 +70,6 @@
    "ASP B249",
    "ARG B255",
    "GLU B258",
-   "CYS B261",
    "ASP B265",
    "HIS B268",
    "GLU B269",
@@ -99,7 +94,6 @@
    "GLU B318",
    "TYR B319",
    "LYS B320",
-   "CYS B321",
    "LYS B322",
    "LYS B326",
    "GLU B333",
@@ -113,7 +107,6 @@
    "ASP B356",
    "GLU B357",
    "LYS B360",
-   "CYS B367",
    "LYS B370",
    "TYR B373",
    "ASP B376",
@@ -129,7 +122,6 @@
    "ASP B413",
    "LYS B414",
    "ARG B416",
-   "CYS B425",
    "HIS B429",
    "GLU B430",
    "HIS B433",
@@ -542,12 +534,14 @@
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "selected": {}
  },
@@ -589,12 +583,12 @@
     },
     {
      "at1": "ASN A297.CG",
-     "at2": "NAG A501.C1",
+     "at2": "NAG C1.C1",
      "dist": 2.7592
     },
     {
-     "at1": "CYS A367.SG",
-     "at2": "CYS A425.CB",
+     "at1": "CYX A367.SG",
+     "at2": "CYX A425.CB",
      "dist": 2.8809
     },
     {
@@ -609,7 +603,7 @@
     },
     {
      "at1": "ASN B297.CG",
-     "at2": "NAG B501.C1",
+     "at2": "NAG D1.C1",
      "dist": 2.4334
     }
    ],
@@ -640,14 +634,30 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {
+   "C": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "D": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
   "chain_ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "models_type": 0,
-  "nchains": 2,
+  "nchains": 4,
   "nmodels": 1,
-  "num_ats": 6839,
+  "num_ats": 6831,
   "num_res": 435,
   "num_wat": 0,
   "res_hetats": 20,
@@ -657,28 +667,40 @@
  "fixside": {
   "opts": "--fix all"
  },
- "getss": [
-  {
-   "at1": "CYS A261.SG",
-   "at2": "CYS A321.SG",
-   "dist": 4.1413
-  },
-  {
-   "at1": "CYS A367.SG",
-   "at2": "CYS A425.SG",
-   "dist": 3.9808
-  },
-  {
-   "at1": "CYS B261.SG",
-   "at2": "CYS B321.SG",
-   "dist": 4.126
-  },
-  {
-   "at1": "CYS B367.SG",
-   "at2": "CYS B425.SG",
-   "dist": 4.1878
-  }
- ],
+ "getss": {
+  "found": [
+   {
+    "at1": "CYS A261.SG",
+    "at2": "CYS A321.SG",
+    "dist": 4.1413
+   },
+   {
+    "at1": "CYS A367.SG",
+    "at2": "CYS A425.SG",
+    "dist": 3.9808
+   },
+   {
+    "at1": "CYS B261.SG",
+    "at2": "CYS B321.SG",
+    "dist": 4.126
+   },
+   {
+    "at1": "CYS B367.SG",
+    "at2": "CYS B425.SG",
+    "dist": 4.1878
+   }
+  ],
+  "marked": [
+   "CYS A261",
+   "CYS A321",
+   "CYS A367",
+   "CYS A425",
+   "CYS B261",
+   "CYS B321",
+   "CYS B367",
+   "CYS B425"
+  ]
+ },
  "headers": {
   "entry_id": "4KU1",
   "keywords": "IMMUNE SYSTEM",
@@ -689,26 +711,26 @@
  "inscodes": {},
  "ligands": {
   "detected": [
-   "NAG A501",
-   "NAG A502",
-   "BMA A503",
-   "MAN A504",
-   "NAG A505",
-   "GAL A506",
-   "FUL A507",
-   "MAN A508",
-   "NAG A509",
-   "GAL A510",
    "PG4 A511",
-   "NAG B501",
-   "NAG B502",
-   "BMA B503",
-   "MAN B504",
-   "NAG B505",
-   "GAL B506",
-   "MAN B507",
-   "FUL B508",
-   "NAG B509"
+   "NAG C1",
+   "NAG C2",
+   "BMA C3",
+   "MAN C4",
+   "NAG C5",
+   "GAL C6",
+   "MAN C7",
+   "NAG C8",
+   "GAL C9",
+   "FUL C10",
+   "NAG D1",
+   "NAG D2",
+   "BMA D3",
+   "MAN D4",
+   "NAG D5",
+   "GAL D6",
+   "MAN D7",
+   "NAG D8",
+   "FUL D9"
   ],
   "error": "Unknown selection SO4"
  },
@@ -724,12 +746,28 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {
+   "C": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "D": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ]
+  },
   "chain_ids": {
    "A": 1,
-   "B": 1
+   "B": 1,
+   "C": 0,
+   "D": 0
   },
   "models_type": 0,
-  "nchains": 2,
+  "nchains": 4,
   "nmodels": 1,
   "num_ats": 3714,
   "num_res": 583,

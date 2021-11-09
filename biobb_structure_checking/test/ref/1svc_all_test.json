@@ -145,7 +145,7 @@
    ],
    "selected": "All"
   },
-  "opts": "--fix_atoms All --fix_chain All --add_caps none --no_recheck"
+  "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
   "ids": {
@@ -310,6 +310,7 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "D": 2,
    "P": 1
@@ -327,7 +328,9 @@
  "fixside": {
   "opts": "--fix all"
  },
- "getss": {},
+ "getss": {
+  "opts": "--mark All"
+ },
  "headers": {
   "entry_id": "1SVC",
   "keywords": "TRANSCRIPTION/DNA",
@@ -351,6 +354,7 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
+  "chain_details": {},
   "chain_ids": {
    "D": 2,
    "P": 1

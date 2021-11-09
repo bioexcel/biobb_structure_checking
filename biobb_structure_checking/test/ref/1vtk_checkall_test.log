@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.0.3                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-20                  =
+=                   BioBB structure checking utility v3.8.1                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
@@ -9,7 +9,7 @@ Structure pdb:1vtk.1 loaded
  Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
- Resolution: 0.0 A
+ Resolution (A): N.A.
  Biounit no. 1
 
  Num. models: 2 (type: BioUnit,   42.553 A)
@@ -45,13 +45,13 @@ No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
 Running add_hydrogen.
 152 Residues requiring selection on adding H atoms
-CYS A171/1,A251/1,A336/1,A362/1,A171/2,A251/2,A336/2,A362/2
-ASP A55/1,A76/1,A77/1,A108/1,A116/1,A136/1,A162/1,A211/1,A215/1,A228/1,A258/1,A286/1,A303/1,A313/1,A328/1,A330/1,A338/1,A363/1,A55/2,A76/2,A77/2,A108/2,A116/2,A136/2,A162/2,A211/2,A215/2,A228/2,A258/2,A286/2,A303/2,A313/2,A328/2,A330/2,A338/2,A363/2
-GLU A83/1,A95/1,A111/1,A146/1,A210/1,A225/1,A257/1,A296/1,A371/1,A374/1,A83/2,A95/2,A111/2,A146/2,A210/2,A225/2,A257/2,A296/2,A371/2,A374/2
-HIS A58/1,A105/1,A142/1,A164/1,A213/1,A283/1,A323/1,A351/1,A58/2,A105/2,A142/2,A164/2,A213/2,A283/2,A323/2,A351/2
-LYS A62/1,A219/1,A317/1,A62/2,A219/2,A317/2
-ARG A51/1,A75/1,A89/1,A106/1,A163/1,A176/1,A212/1,A216/1,A220/1,A222/1,A226/1,A236/1,A237/1,A247/1,A256/1,A281/1,A293/1,A318/1,A320/1,A337/1,A366/1,A370/1,A51/2,A75/2,A89/2,A106/2,A163/2,A176/2,A212/2,A216/2,A220/2,A222/2,A226/2,A236/2,A237/2,A247/2,A256/2,A281/2,A293/2,A318/2,A320/2,A337/2,A366/2,A370/2
-TYR A53/1,A80/1,A87/1,A101/1,A132/1,A172/1,A177/1,A239/1,A248/1,A305/1,A329/1,A53/2,A80/2,A87/2,A101/2,A132/2,A172/2,A177/2,A239/2,A248/2,A305/2,A329/2
+ CYS A171/1,A251/1,A336/1,A362/1,A171/2,A251/2,A336/2,A362/2
+ ASP A55/1,A76/1,A77/1,A108/1,A116/1,A136/1,A162/1,A211/1,A215/1,A228/1,A258/1,A286/1,A303/1,A313/1,A328/1,A330/1,A338/1,A363/1,A55/2,A76/2,A77/2,A108/2,A116/2,A136/2,A162/2,A211/2,A215/2,A228/2,A258/2,A286/2,A303/2,A313/2,A328/2,A330/2,A338/2,A363/2
+ GLU A83/1,A95/1,A111/1,A146/1,A210/1,A225/1,A257/1,A296/1,A371/1,A374/1,A83/2,A95/2,A111/2,A146/2,A210/2,A225/2,A257/2,A296/2,A371/2,A374/2
+ HIS A58/1,A105/1,A142/1,A164/1,A213/1,A283/1,A323/1,A351/1,A58/2,A105/2,A142/2,A164/2,A213/2,A283/2,A323/2,A351/2
+ LYS A62/1,A219/1,A317/1,A62/2,A219/2,A317/2
+ ARG A51/1,A75/1,A89/1,A106/1,A163/1,A176/1,A212/1,A216/1,A220/1,A222/1,A226/1,A236/1,A237/1,A247/1,A256/1,A281/1,A293/1,A318/1,A320/1,A337/1,A366/1,A370/1,A51/2,A75/2,A89/2,A106/2,A163/2,A176/2,A212/2,A216/2,A220/2,A222/2,A226/2,A236/2,A237/2,A247/2,A256/2,A281/2,A293/2,A318/2,A320/2,A337/2,A366/2,A370/2
+ TYR A53/1,A80/1,A87/1,A101/1,A132/1,A172/1,A177/1,A239/1,A248/1,A305/1,A329/1,A53/2,A80/2,A87/2,A101/2,A132/2,A172/2,A177/2,A239/2,A248/2,A305/2,A329/2
 Running  check_only. Nothing else to do.
 Running water.
 104 Water molecules detected
@@ -105,15 +105,17 @@ No severe clashes detected
  ALA A118/1.CA SER A181/1.O    2.890 A
  GLY A59/2.O  HIS A213/2.CD2    2.824 A
  ALA A118/2.CA SER A181/2.O    2.890 A
-8 Steric polar_acceptor clashes detected
+10 Steric polar_acceptor clashes detected
  SER A74/1.O  ASP A77/1.OD2    2.685 A
  GLN A104/1.O ASP A108/1.OD2    3.061 A
  PRO A153/1.O GLN A349/1.OE1    3.093 A
  LEU A217/1.O ARG A220/1.O    2.862 A
+ GLU A225/1.OE1 TMP A500/1.O3'    2.895 A
  SER A74/2.O  ASP A77/2.OD2    2.685 A
  GLN A104/2.O ASP A108/2.OD2    3.061 A
  PRO A153/2.O GLN A349/2.OE1    3.093 A
  LEU A217/2.O ARG A220/2.O    2.862 A
+ GLU A225/2.OE1 TMP A500/2.O3'    2.895 A
 4 Steric polar_donor clashes detected
  ARG A220/1.NH1 ARG A222/1.NH1    2.991 A
  TRP A259/1.NE1 ARG A293/1.NH1    3.094 A
@@ -127,4 +129,7 @@ No severe clashes detected
  ARG A212/2.NH2 ARG A216/2.NH2    3.171 A
  ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
 No negative clashes detected
+Running  check_only. Nothing else to do.
+Running sequences.
+Sequences command requires either mmCIF input or --sequence
 Running  check_only. Nothing else to do.
