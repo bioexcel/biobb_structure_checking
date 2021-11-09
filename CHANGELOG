@@ -1,16 +1,22 @@
 v3.8.X (2021.4)
 
 New functions
-    Jupyter Notebook support
+    
 
 Extended functions
+    Jupyter Notebook support extended
+        -Help function
+        -Settings accepted as Python dictionaries. 
+        
+    add_hydrogen
+        -Added support for multiple atom type sets
 
 Bug Fixes
     - Fix charge assignment for modified residues
     - Fixed tests
 
 
-===============================================================================================================================================
+=================================================================================
 V3.8.5 (2021.2)
 
 New functions
