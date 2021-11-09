@@ -398,17 +398,6 @@ class StructureManager:
             severe='severe' in contact_types
         )
 
-    def check_rr_clashes(self, res1: Residue, res2: Residue, contact_types: Iterable[str]) -> Dict[str, Tuple[Residue, Residue, float]]:
-        """ Checks all clashes between two residues"""
-        return mu.check_rr_clashes(
-            res1,
-            res2,
-            self.data_library.distances['CLASH_DIST'],
-            self.data_library.get_atom_lists(contact_types),
-            severe='severe' in contact_types
-
-        )
-
     def check_missing_atoms(self) -> List[Tuple[Residue, Dict[str, List[str]]]]:
         """ Makes a **list of missing atoms** in the structure
 

@@ -1,9 +1,12 @@
 1. System Selection 
 1.1. Detect/Select Models (models) DONE
-1.1.1 Consider multiple, save split
+1.1.1 Consider multiple
+1.1.2 Save split collection
+1.1.3 Superimpose models
 1.2. Detect/Select Chains (chains) DONE
 1.2.1 Detect mixed NA/protein chains
-1.2.1 Rebuild/fix chains
+1.2.2 Rebuild/fix chains
+1.2.3 Select chains according to molecule type DONE
 1.3. Detect/Select Alt Locations (altloc) DONE
 1.4. Detect Heavy Metals /Remove (metals) DONE
 1.5. Detect Ligands /Remove (ligands) DONE
@@ -16,7 +19,7 @@
 1.9.1 Get sequence from PDB without canonical 
 2. Fix Structure Errors
 2.1. Detect/Fix Amides Assignment (amide) DONE
-2.1.1 Automatic fix
+2.1.1 Amides Automatic fix
 2.2. Detect/Fix Improper quirality (chiral) DONE (!! check ILE with unusual atom labels)
 2.2.1 Detect Improper quirality on CAs (chiral_ca) DONE
 2.3. Detect insertion codes/Renum (inscode) DONE detection, no fix
@@ -26,21 +29,24 @@
 2.5. Mutate residues (mutate) DONE
 2.5.1 Add/remove modified residues 
 2.5.2 Mutate NA residues DONE
-2.5.2.1 Mutate NA from sequence DONE
+2.5.2.1 Mutate NA following sequence DONE
 2.4.3 Rebuild side chains (modeller) DONE for protein
 2.6. Add hydrogens (add_hydrogens) DONE
 2.6.1 Determine HIS from Hbond network
-2.6.2 Consider -SS-
-2.6.3 PDBQT/PQR formats
+2.6.2 Consider -SS- DONE
+2.6.3 PDBQT/PQR formats PDBQT DONE
+2.5.6 Consider Cap residues DONE
 2.6.4 Add hydrogens for NA chains
 2.6.5 Prepare input for AutoDock with flexible residues
 2.7. Complete backbone (backbone) DONE 
 2.7.1 Complete main chains DONE
 2.7.2 Add ACE, NME caps DONE
-2.7.3 Use standard FASTA for sequence input
+2.7.3 Use standard FASTA for sequence input (check uniprot and pdb Fasta's)
 2.7.4 Accept/recognize GROMACS (and other non Amber) Atom names OT?
+2.7.5 Build structure from CA-only 
 3. Structure Warnings
 3.1. Detect SS Bonds (getss) DONE
+3.1.1 Mark Cys in SS Bonds DONE
 3.2. Unusual cis/trans backbone (cisbck) DONE
 3.3. Non Consecutive residues (nonconres) DONE
 3.4. Possible Sequence Gaps (bckgaps) DONE
@@ -58,5 +64,4 @@
 4.2 Prepare autodock input
 4.3 Prepare CMIP input
 4.4 Convert from MD formats
-
 
