@@ -292,6 +292,7 @@ DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
 DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
     'Update atom partial charges', default="ADT")
+DIALOGS.add_option('add_hydrogen', '--format', 'format', 'Output format (pqr|pdbqt)')
 
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
