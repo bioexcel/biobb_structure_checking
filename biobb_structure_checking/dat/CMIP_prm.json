@@ -1,0 +1,58 @@
+{
+    "id" : "CMIP",
+    "description": "CMIP atom types and rvdw",
+    "rvdw" : {
+        "C" : 1.91,
+        "N" : 1.82,
+        "P" : 2.10,
+        "S" : 2.00,
+        "HW": 0.00,
+        "HO": 0.00,
+        "HN": 0.60,
+        "H" : 1.49,
+        "OW": 1.77,
+        "O" : 1.66
+    },
+    "residue_data": {
+        "*": {"H": "HN", "H1" : "HN", "H2" : "HN", "H3" : "HN"},
+        "ACE": {},
+        "NME": {"H": "HN"},
+        "ALA": {},
+        "CYS": {"HG": "HN" },
+        "ASP": {"HD2": "HO"},
+        "GLU": {"HE2": "HO"},
+        "PHE": {},
+        "GLY": {},
+        "HIS": {"HD1": "HN", "HE2": "HN"},
+        "ILE": {},
+        "LYS": {"HZ1": "HN", "HZ2": "HN", "HZ3": "HN"},
+        "LEU": {},
+        "MET": {},
+        "ASN": {"HD21": "HN", "HD22": "HN"},
+        "PRO": {},
+        "GLN": {"HE21": "HN", "HE22": "HN"},
+        "ARG": {"HE": "HN", "HH11": "HN", "HH12": "HN", "HH21": "HN", "HH22": "HN"},
+        "SER": {"HG": "HO"},
+        "THR": {"HG1": "HO"},
+        "VAL": {},
+        "TRP": {"HE1": "HN"},
+        "TYR": {"HH": "HO"},
+        "DG": {
+        },
+        "DC": {
+        },
+        "DA": {
+        },
+        "DT": {
+        },
+        "G": {
+        },
+        "C": {
+        },
+        "A": {
+        },
+        "U": {
+        }  
+    }
+}
+

@@ -121,6 +121,9 @@ class StructureManager:
         self.file_format = file_format
 
         self.data_library = DataLibManager(data_library_path)
+        for ff in self.data_library.ff_data:
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff  + '_prm.json')
+
         self.res_library = ResidueLib(res_library_path)
 
 
@@ -164,9 +167,12 @@ class StructureManager:
         else:
             real_pdb_path = input_pdb_path
 
-        if '.pdb' in real_pdb_path:
+        if '.pdb' in real_pdb_path: 
             parser = PDBParser(PERMISSIVE=1)
             input_format = 'pdb'
+        elif '.pqr' in real_pdb_path: 
+            parser = PDBParser(PERMISSIVE=1)
+            input_format = 'pqr'
         elif '.cif' in real_pdb_path:
             parser = MMCIFParser()
             input_format = 'cif'
@@ -181,10 +187,11 @@ class StructureManager:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
-        if input_format == 'pdb':
+        if input_format in ['pdb', 'pqr']:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
+            
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -238,8 +245,9 @@ class StructureManager:
         """ Update atom charges and types from data library """
         print("Updating partial charges and atom types")
         tot_chrg = 0
-        if ff not in self.data_library['atom_type_ff']:
+        if ff not in self.data_library.ff_data:
             raise UnknownFFError(ff)
+        ff_data = self.data_library.ff_data[ff]
 
         for res in self.st.get_residues():
             rcode = res.get_resname()
@@ -251,7 +259,7 @@ class StructureManager:
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
-                    atm.charge = 0.
+                    atm.pqr_charge = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
                         atm.atom_type= atm.id.lower().capitalize()
                     else:
@@ -259,17 +267,18 @@ class StructureManager:
             else:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
+                
                 for atm in res.get_atoms():
-                    atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
-                    if atm.id in self.data_library.residue_data[can_rcode3]['atom_type'][ff]:
-                        atm.atom_type = self.data_library.residue_data[can_rcode3]['atom_type'][ff][atm.id]
-                    elif atm.id in self.data_library.residue_data['*']['atom_type'][ff]:
-                        atm.atom_type = self.data_library.residue_data['*']['atom_type'][ff][atm.id]
+                    atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
+                    if atm.id in ff_data['residue_data'][can_rcode3]:
+                        atm.atom_type = ff_data['residue_data'][can_rcode3][atm.id]
+                    elif atm.id in ff_data['residue_data']['*']:
+                        atm.atom_type = ff_data['residue_data']['*'][atm.id]
                     else:
                         atm.atom_type = atm.element
-                    atm.radius = self.data_library.vdwprm[ff][atm.atom_type]
-                    res_chr += atm.charge
-                    tot_chrg += atm.charge
+                    atm.xtra['rvdw'] = ff_data['rvdw'][atm.atom_type]
+                    res_chr += atm.pqr_charge
+                    tot_chrg += atm.pqr_charge
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
@@ -1208,7 +1217,7 @@ class StructureManager:
         self.modified = True
         return True
 
-    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str):
+    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str = 'ADT'):
         """
         Add hydrogens considering selections in ion_res_list
 

@@ -21,6 +21,9 @@ class DataLibManager:
             self.distances = json_map['data_library']['distances']
             self.ion_res = json_map['data_library']['addH_check_residues']
             self.std_ion = json_map['data_library']['addH_std_ion']
+            self.ff_data = {}
+            for ff in json_map['data_library']['atom_type_ff']:
+                self.ff_data[ff] = {}
 
         except IOError:
             print("ERROR: unable to open data library " + file_path, file=sys.stderr)
@@ -112,3 +115,12 @@ class DataLibManager:
         if rcode in self.canonical_codes:
             return self.canonical_codes[rcode]
         return rcode
+
+    def get_ff_data(self, file_path):
+        try:
+            data_file_h = open(file_path)
+            json_map = json.load(data_file_h)
+            self.ff_data[json_map['id']] = json_map
+        except IOError:
+            print("ERROR: unable to open forcefield library " + file_path, file=sys.stderr)
+            sys.exit(2)
