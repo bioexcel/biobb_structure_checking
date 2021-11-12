@@ -91,9 +91,11 @@ class StructureChecking():
                     self.strucm.print_stats('Final')
                     self.summary['final_stats'] = self.strucm.get_stats()
                 try:
+                        
                     output_structure_path = self._save_structure(
                         self.args['output_structure_path'],
-                        self.args['rename_terms']
+                        self.args['rename_terms'],
+                        output_format=os.path.splitext(self.args['output_structure_path'])[1][1:]
                     )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
@@ -1791,13 +1793,13 @@ class StructureChecking():
 
         return strucm
 
-    def _save_structure(self, output_structure_path, rename_terms=False):
+    def _save_structure(self, output_structure_path, rename_terms=False, output_format='pdb'):
         input_line = ParamInput(
             "Enter output structure path",
             self.args['non_interactive']
         )
         output_structure_path = input_line.run(output_structure_path)
-        self.strucm.save_structure(output_structure_path, rename_terms=rename_terms)
+        self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
         return output_structure_path
 
     def _check_report_clashes(self, residue_list=None, contact_types=None):

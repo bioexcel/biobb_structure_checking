@@ -269,6 +269,7 @@ class StructureManager:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
                     atm.pqr_charge = 0.
+                    atm.radius = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
                         atm.xtra['atom_type']= atm.id.lower().capitalize()
                     else:
@@ -768,7 +769,7 @@ class StructureManager:
         if self.total_charge is not None:
             print("PQR input. Total charge loaded {:6.3f}".format(self.total_charge))
 
-    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False):
+    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False, output_format='pdb'):
         """
         Saves structure on disk in PDB format
 
@@ -781,7 +782,7 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO_extended(is_pqr=self.has_charges)
+        pdbio = PDBIO_extended(is_pqr=self.has_charges, output_format=output_format)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())

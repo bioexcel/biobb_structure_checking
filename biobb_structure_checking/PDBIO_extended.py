@@ -9,9 +9,12 @@ from Bio.Data.IUPACData import atom_weights
 
 _ATOM_FORMAT_STRING =       ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
 _ATOM_FORMAT_STRING_PDBQT = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f    %6.3f %s\n")
-_ATOM_FORMAT_STRING_PQR =   ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f %7s  %6s      %2s\n")
+_ATOM_FORMAT_STRING_PQR =   ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
 
 class PDBIO_extended(PDBIO):
+    def __init__(self, use_model_flag=0, is_pqr=False, output_format='pdb'):
+        super().__init__(use_model_flag, is_pqr)
+        self.output_format = output_format
 
     def _get_atom_line(
         self, 
@@ -28,7 +31,6 @@ class PDBIO_extended(PDBIO):
             Return an ATOM PDB string (PRIVATE).
             Extended to allow for variable formatting
         """
-
         if hetfield != " ":
             record_type = "HETATM"
         else:
@@ -73,10 +75,19 @@ class PDBIO_extended(PDBIO):
                 )
         # Added charges (from res_library and atom_types from data_library)
         # Format PDBQT for Autodock
-        if atom.pqr_charge is not None:
-            charge = atom.pqr_charge
-            element = atom.xtra['atom_type']
-            format = _ATOM_FORMAT_STRING_PDBQT
+        
+        if atom.pqr_charge is not None and self.output_format != 'pdb':
+            if self.output_format == 'pdbqt':
+                charge = atom.pqr_charge
+                element = atom.xtra['atom_type']                
+                format = _ATOM_FORMAT_STRING_PDBQT
+            elif self.output_format == 'pqr':
+                occupancy_str = "%6.2f" % atom.pqr_charge
+                bfactor = atom.radius
+                format = _ATOM_FORMAT_STRING_PQR
+            else:
+                print("Unknown output format, writing standard PDB")
+                format = _ATOM_FORMAT_STRING
         else:
             format = _ATOM_FORMAT_STRING
 
