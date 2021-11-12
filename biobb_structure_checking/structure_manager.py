@@ -191,6 +191,7 @@ class StructureManager:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
+            
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -233,19 +234,25 @@ class StructureManager:
         """ Sets  Bio.PDB.Atom.serial_number for all atoms in the structure,
             overriding original if any.
         """
+        if self.input_format == 'pqr':
+            self.total_charge = 0.
+        else:
+            self.total_charge = None
         i = 1
         for atm in self.st.get_atoms():
             atm.serial_number = i
             if hasattr(atm, 'selected_child'):
                 atm.selected_child.serial_number = i
+            if atm.pqr_charge is not None:
+                self.total_charge += atm.pqr_charge
             i += 1
-
+        
     def update_atom_charges(self, ff):
         """ Update atom charges and types from data library """
         
         print("Updating partial charges and atom types")
         
-        tot_chrg = 0.
+        self.total_charge = 0.
         
         if ff not in self.data_library.ff_data:
             raise UnknownFFError(ff)
@@ -280,12 +287,12 @@ class StructureManager:
                         atm.xtra['atom_type'] = atm.element
                     atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
                     res_chr += atm.pqr_charge
-                    tot_chrg += atm.pqr_charge
+                    self.total_charge += atm.pqr_charge
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
                     print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
-        print("Total assigned charge: {:10.2f}".format(tot_chrg))
+        print("Total assigned charge: {:10.2f}".format(self.total_charge))
 
         self.has_charges = True
 
@@ -758,6 +765,8 @@ class StructureManager:
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
+        if self.total_charge is not None:
+            print("PQR input. Total charge loaded {:6.3f}".format(self.total_charge))
 
     def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False):
         """
@@ -772,7 +781,7 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO_extended()
+        pdbio = PDBIO_extended(is_pqr=self.has_charges)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
