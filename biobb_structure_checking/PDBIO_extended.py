@@ -13,7 +13,17 @@ _ATOM_FORMAT_STRING_PQR =   ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f %7s  %6s
 
 class PDBIO_extended(PDBIO):
 
-    def _get_atom_line(self, atom, hetfield, segid, atom_number, resname, resseq, icode, chain_id, charge="   "):
+    def _get_atom_line(
+        self, 
+        atom, 
+        hetfield, 
+        segid, 
+        atom_number, 
+        resname, 
+        resseq, 
+        icode, 
+        chain_id, 
+        charge="   "):
         """
             Return an ATOM PDB string (PRIVATE).
             Extended to allow for variable formatting
@@ -63,9 +73,10 @@ class PDBIO_extended(PDBIO):
                 )
         # Added charges (from res_library and atom_types from data_library)
         # Format PDBQT for Autodock
-        if hasattr(atom, "pqr_charge"):
+        print(vars(atom))
+        if atom.pqr_charge is not None:
             charge = atom.pqr_charge
-            element = atom.atom_type
+            element = atom.xtra['atom_type']
             format = _ATOM_FORMAT_STRING_PDBQT
         else:
             format = _ATOM_FORMAT_STRING

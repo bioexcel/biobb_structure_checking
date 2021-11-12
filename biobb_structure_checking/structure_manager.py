@@ -168,10 +168,10 @@ class StructureManager:
             real_pdb_path = input_pdb_path
 
         if '.pdb' in real_pdb_path: 
-            parser = PDBParser(PERMISSIVE=1)
+            parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path: 
-            parser = PDBParser(PERMISSIVE=1)
+            parser = PDBParser(PERMISSIVE=1, is_pqr=True)
             input_format = 'pqr'
         elif '.cif' in real_pdb_path:
             parser = MMCIFParser()
@@ -191,7 +191,6 @@ class StructureManager:
             self.headers = parse_pdb_header(real_pdb_path)
         else:
             self.headers = MMCIF2Dict(real_pdb_path)
-            
         return input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -243,8 +242,11 @@ class StructureManager:
 
     def update_atom_charges(self, ff):
         """ Update atom charges and types from data library """
+        
         print("Updating partial charges and atom types")
-        tot_chrg = 0
+        
+        tot_chrg = 0.
+        
         if ff not in self.data_library.ff_data:
             raise UnknownFFError(ff)
         ff_data = self.data_library.ff_data[ff]
@@ -261,9 +263,9 @@ class StructureManager:
                 for atm in res.get_atoms():
                     atm.pqr_charge = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.atom_type= atm.id.lower().capitalize()
+                        atm.xtra['atom_type']= atm.id.lower().capitalize()
                     else:
-                        atm.atom_type = atm.element
+                        atm.xtra['atom_type'] = atm.element
             else:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
@@ -271,12 +273,12 @@ class StructureManager:
                 for atm in res.get_atoms():
                     atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
-                        atm.atom_type = ff_data['residue_data'][can_rcode3][atm.id]
+                        atm.xtra['atom_type'] = ff_data['residue_data'][can_rcode3][atm.id]
                     elif atm.id in ff_data['residue_data']['*']:
-                        atm.atom_type = ff_data['residue_data']['*'][atm.id]
+                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][atm.id]
                     else:
-                        atm.atom_type = atm.element
-                    atm.xtra['rvdw'] = ff_data['rvdw'][atm.atom_type]
+                        atm.xtra['atom_type'] = atm.element
+                    atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
                     res_chr += atm.pqr_charge
                     tot_chrg += atm.pqr_charge
                     if atm.id == 'OXT':
