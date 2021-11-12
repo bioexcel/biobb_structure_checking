@@ -73,7 +73,6 @@ class PDBIO_extended(PDBIO):
                 )
         # Added charges (from res_library and atom_types from data_library)
         # Format PDBQT for Autodock
-        print(vars(atom))
         if atom.pqr_charge is not None:
             charge = atom.pqr_charge
             element = atom.xtra['atom_type']
