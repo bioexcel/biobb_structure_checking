@@ -68,10 +68,6 @@ class StructureChecking():
         if 'Notebook' not in self.args:
             self.args['Notebook'] = False
 
-#        if self.args['Notebook']:
-#            self.args['non_interactive'] = True
-#            self.args['check_only'] = False
-
     def launch(self):
         """ Main method to run checking"""
         if self.args['command'] == 'command_list':
@@ -198,7 +194,6 @@ class StructureChecking():
             self.summary[command] = {}
 
         msg = 'Running {}.'.format(command)
-
         if opts:
             if isinstance(opts, list):
                 opts_str = ' '.join(opts)
@@ -214,7 +209,6 @@ class StructureChecking():
 
     # Running checking method
         data_to_fix = f_check()
- 
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if self.args['verbose']:
@@ -224,7 +218,6 @@ class StructureChecking():
                 f_fix = getattr(self, '_' + command + '_fix')
             except AttributeError:
                 sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
-            
             if isinstance(opts, str) or isinstance(opts, list):
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
@@ -236,8 +229,8 @@ class StructureChecking():
                     defs = cts.DIALOGS.get_parameter(command, '')
                     for k in defs:
                         if k not in opts:
-                            opts[k] = defs[k] 
- 
+                            opts[k] = defs[k]
+            print(opts)
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:

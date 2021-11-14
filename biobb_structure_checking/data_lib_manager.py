@@ -21,6 +21,7 @@ class DataLibManager:
             self.distances = json_map['data_library']['distances']
             self.ion_res = json_map['data_library']['addH_check_residues']
             self.std_ion = json_map['data_library']['addH_std_ion']
+            self.ff = json_map['data_library']['atom_type_ff']
 
         except IOError:
             print("ERROR: unable to open data library " + file_path, file=sys.stderr)

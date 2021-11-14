@@ -248,10 +248,6 @@
                         }
                     }
                 },
-                "ADT_type": {
-                    "HG": "HD",
-                    "SG": "SA"
-                },
                 "atom_type": {
                     "ADT": {
                         "HG": "HD",
@@ -261,7 +257,6 @@
                         "HG": "HN"
                     }
                 },
-
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["SG"]
@@ -1105,7 +1100,8 @@
                         "HZ1": "HN", 
                         "HZ2": "HN", 
                         "HZ3": "HN"
-                    },
+                    }
+                },
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "CE", "NZ"]

@@ -238,7 +238,7 @@ class StructureManager:
         """ Update atom charges and types from data library """
         print("Updating partial charges and atom types")
         tot_chrg = 0
-        if ff not in self.data_library['atom_type_ff']:
+        if ff not in self.data_library.ff:
             raise UnknownFFError(ff)
 
         for res in self.st.get_residues():
@@ -1207,7 +1207,7 @@ class StructureManager:
         self.modified = True
         return True
 
-    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str):
+    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str = 'ADT'):
         """
         Add hydrogens considering selections in ion_res_list
 
