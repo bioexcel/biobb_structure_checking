@@ -1006,7 +1006,6 @@
                         }
                     }
                 },
-
                 "mutation_rules": {
                     "ALA": {
                         "Del": ["CG", "CD", "CE", "NZ"]

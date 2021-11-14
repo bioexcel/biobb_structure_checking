@@ -155,7 +155,7 @@ class ParamInput():
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 
-class Dialog():
+class Dialog():  #To check subparsers from argparse
     """Dialog to complete command options"""
     def __init__(self):
         self.options = {}
@@ -179,7 +179,7 @@ class Dialog():
             'default': default
         })
 
-    def get_parameter(self, command, opts):
+    def get_parameter(self, command, opts, print_help=False):
         """Generate Dialog"""
         dialog = self.options[command]
         if not dialog:
@@ -209,7 +209,9 @@ class Dialog():
                 opts = [dialog['args'][0]['prompt'], opts]
             else:
                 opts = opts.split(' ')
-
+        if print_help:
+            opts_parser.print_usage()
+            return ''
         return vars(opts_parser.parse_args(opts))
 
     def get_dialog(self, command):
