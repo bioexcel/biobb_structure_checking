@@ -246,7 +246,8 @@ class StructureManager:
             if atm.pqr_charge is not None:
                 self.total_charge += atm.pqr_charge
             i += 1
-        
+        self.has_charges = (self.total_charge is not None)
+
     def update_atom_charges(self, ff):
         """ Update atom charges and types from data library """
         

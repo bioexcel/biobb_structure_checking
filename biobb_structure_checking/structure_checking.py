@@ -7,8 +7,6 @@ __date__ = "$26-jul-2018 14:34:51$"
 import sys
 import os
 import time
-#import argparse
-#import psutil
 import numpy as np
 
 import biobb_structure_checking.constants as cts
@@ -64,9 +62,6 @@ class StructureChecking():
 
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
-
-        if 'Notebook' not in self.args:
-            self.args['Notebook'] = False
 
     def launch(self):
         """ Main method to run checking"""
@@ -169,10 +164,14 @@ class StructureChecking():
 
     def checkall(self, opts=None):
         """ Predefined workflow for complete checking"""
+        #Required for interactive run in Notebooks
+        old_check_only = self.args['check_only']
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
+            
+        self.args['check_only'] = old_check_only
 
     def fixall(self, opts=None):
         """ Fix all using defaults """
@@ -1805,7 +1804,7 @@ class StructureChecking():
         return self._save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
     
     #Kept for back compatibility
-    def _save_structure(self, output_structure_path, rename_terms=False):
+    def _save_structure(self, output_structure_path, rename_terms=False, output_format='pdb'):
         input_line = ParamInput(
             "Enter output structure path",
             self.args['non_interactive']
