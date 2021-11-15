@@ -139,17 +139,26 @@ class StructureChecking():
             op_list = opts['op_list']
         except NoDialogAvailableError as err:
             print(err.message)
+        
+        if not op_list:
+            op_list = ParamInput('Command List File', False).run(op_list)
 
-        op_list = ParamInput('Command List File', False).run(op_list)
-
-        try:
-            list_file_h = open(op_list, "r")
-        except OSError:
-            sys.exit('{} {}'.format(cts.MSGS['ERROR_OPEN_FILE'], op_list))
+        if os.path.isfile(op_list):
+            command_list = []
+            try:
+                with open(op_list, "r") as list_file_h:
+                    for line in list_file_h:
+                        if line == "\n" or line[0:1] == '#':
+                            continue
+                        command_list.append(line)
+            except OSError:
+                sys.exit('{} {}'.format(cts.MSGS['ERROR_OPEN_FILE'], op_list))
+        else:
+            command_list = op_list.split(';')
+            
         i = 1
-        for line in list_file_h:
-            if line == "\n" or line[0:1] == '#':
-                continue
+        for line in command_list:
+            print(line)
             if not self.args['quiet']:
                 print("\nStep {}: {}".format(i, line))
             data = line.split()
