@@ -1,20 +1,25 @@
-v3.8.X (2021.4)
+v3.9.0 (2021.4)
 
 New functions
     
 
 Extended functions
     Jupyter Notebook support extended
-        -Help function
+        -Help() function
         -Settings accepted as Python dictionaries. 
         
     add_hydrogen
-        -Added support for multiple atom type sets
+        -Added support for multiple atom type sets (currently ADP, CMIP)
+        -Added support for pqr, pdbqt, cmip output formats
+        -Added support for pqr input format
+        -Terminal residue names available on 3 or 4 letter (N-, C-) codes
+
+    command_list
+        -Added support for inline command lists
 
 Bug Fixes
-    - Fix charge assignment for modified residues
+    - Fix charge assignment for modified residues and terminals
     - Fixed tests
-
 
 =================================================================================
 V3.8.5 (2021.2)
