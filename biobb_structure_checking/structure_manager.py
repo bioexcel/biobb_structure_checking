@@ -790,6 +790,8 @@ class StructureManager:
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
+        else:
+            self.revert_terms()
 
         if mod_id is None:
             pdbio.set_structure(self.st)
@@ -1269,18 +1271,23 @@ class StructureManager:
 
             rcode = res.get_resname()
 
+            if len(rcode) == 4:
+                rcode = rcode[1:]
+
             if rcode == 'GLY':
                 continue
             # Fixed for modified residues already in the original PDB
+        
             if rcode in self.data_library.canonical_codes:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-        
-            if rcode_can not in add_h_rules:
+
+            
+            if rcode_can not in add_h_rules:              
                 print(NotAValidResidueError(rcode).message)
                 continue
-
+            
             if rcode_can == rcode:
                 h_rules = add_h_rules[rcode]
             else:
