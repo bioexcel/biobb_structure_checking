@@ -243,7 +243,7 @@ class StructureManager:
             atm.serial_number = i
             if hasattr(atm, 'selected_child'):
                 atm.selected_child.serial_number = i
-            if atm.pqr_charge is not None:
+            if atm.pqr_charge is not None and self.total_charge is not None:
                 self.total_charge += atm.pqr_charge
             i += 1
         self.has_charges = (self.total_charge is not None)
@@ -495,12 +495,15 @@ class StructureManager:
         """
         ion_res = self.data_library.ion_res
         hydrogen_lists = self.data_library.get_hydrogen_atoms()
-
+       
         ion_res_list = []
         for res in self.all_residues:
             rcode = res.get_resname()
+            if len(rcode) == 4:
+                rcode = rcode[1:]
             if rcode in ion_res:
                 ion_res_list.append((res, hydrogen_lists[rcode]))
+
         return ion_res_list
 
     def get_backbone_breaks(self) -> Dict[str, List[List[Residue]]]:
@@ -1225,6 +1228,7 @@ class StructureManager:
                 'OXT',
                 mu.build_coords_SP2(mu.OINTERNALS[0], res['C'], res['CA'], res['O'])
             )
+            res.resname = 'C' + res.resname
 
         self.atom_renumbering()
         self.modified = True
@@ -1272,7 +1276,7 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-
+        
             if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
@@ -1303,10 +1307,10 @@ class StructureManager:
                 print(error_msg, mu.residue_id(res))
 
         self.residue_renumbering()
-        self.atom_renumbering()
         if add_charges:
             self.rename_terms(self.get_term_res())
             self.update_atom_charges(add_charges)
+        self.atom_renumbering()
         self.modified = True
 
     def mark_ssbonds(self, cys_list):
@@ -1322,6 +1326,12 @@ class StructureManager:
         for t in term_res:
             if t[1].resname not in ('ACE', 'NME'):
                 t[1].resname = t[0] + t[1].resname
+
+    def revert_terms(self):
+        """ Reverts 4 char len residue names to 3 letter codes"""
+        for res in self.st.get_residues():
+            if len(res.get_resname()) == 4:
+                res.resname = res.resname[1:]
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""

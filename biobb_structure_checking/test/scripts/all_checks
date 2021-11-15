@@ -14,4 +14,4 @@ backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 cistransbck
 getss --mark All
 clashes
-add_hydrogen --add_mode auto
+add_hydrogen --add_mode auto --add_charges ADT

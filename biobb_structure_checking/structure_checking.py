@@ -82,7 +82,6 @@ class StructureChecking():
                     self.strucm.print_stats('Final')
                     self.summary['final_stats'] = self.strucm.get_stats()
                 try:
-                        
                     output_structure_path = self._save_structure(
                         self.args['output_structure_path'],
                         self.args['rename_terms'],
@@ -100,7 +99,6 @@ class StructureChecking():
                     print(err.message, file=sys.stderr)
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
-
 
         if self.args['debug']:
             total = time.time() - self.start_time
@@ -125,6 +123,7 @@ class StructureChecking():
             print("#DEBUG ======================")
             for op, memsize in self.summary['memsize']:
                 print('#DEBUG {:15s}: {:.2f} MB'.format(op, memsize))
+
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             json_writer.data = self.summary
@@ -170,7 +169,7 @@ class StructureChecking():
 
         for meth in cts.AVAILABLE_METHODS:
             self._run_method(meth, opts)
-            
+
         self.args['check_only'] = old_check_only
 
     def fixall(self, opts=None):
@@ -231,7 +230,6 @@ class StructureChecking():
                     for k in defs:
                         if k not in opts:
                             opts[k] = defs[k]
-            print(opts)
             error_status = f_fix(opts, data_to_fix)
 
             if error_status:
@@ -1245,9 +1243,14 @@ class StructureChecking():
     def _add_hydrogen_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
+        
         if not self.strucm.fixed_side and not opts['no_fix_side']:
             print("WARNING: fixing side chains, override with --no_fix_side")
             self.fixside(['--fix', 'all'])
+        
+        # Fixing previously marked N and C terms
+        self.strucm.revert_terms()
+
         if isinstance(opts, str):
             add_h_mode = opts
         else:

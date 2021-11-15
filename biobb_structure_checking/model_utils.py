@@ -559,8 +559,9 @@ def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
 
     # only proteins
-
-    if not _protein_residue_check(res.get_resname()):
+    rcode = res.get_resname()
+    
+    if not _protein_residue_check(rcode):
         return "Warning: Residue not valid in this context "
 
     error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
@@ -576,12 +577,10 @@ def add_hydrogens_backbone(res, prev_res, next_res):
         if res.get_resname() == 'PRO':
             if 'CD' not in res:
                 return error_msg
+            crs = build_coords_2xSP3(HDIS, res['N'], res['CA'], res['CD'])
+            add_new_atom_to_residue(res, 'H2', crs[0])
+            add_new_atom_to_residue(res, 'H3', crs[1])
 
-            add_new_atom_to_residue(
-                res,
-                'H',
-                build_coords_SP2(HDIS, res['N'], res['CA'], res['CD'])
-            )
         elif res.get_resname() == 'ACE':
             crs = build_coords_3xSP3(HDIS, res['CA'], next_res['N'], res['C'])
             add_new_atom_to_residue(res, 'HA1', crs[0])
@@ -596,7 +595,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             add_new_atom_to_residue(res, 'H1', crs[0])
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
-
+            res.resname = 'N' + res.resname
 
     elif res.get_resname() != 'PRO':
         if 'C' not in prev_res:
@@ -636,12 +635,16 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
 def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
+
     if res.get_resname() in ('ACE', 'NME', 'GLY'):
         return False
+
     if 'N' not in res or 'CA' not in res or 'C' not in res:
         return "Warning: not enough atoms to build side chain hydrogen atoms on"
+
     for key_rule in rules.keys():
         rule = rules[key_rule]
+        
         if rule['mode'] == 'B2':
             crs = build_coords_2xSP3(
                 rule['dist'],
