@@ -272,7 +272,7 @@ class StructureManager:
                     atm.pqr_charge = 0.
                     atm.radius = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.xtra['atom_type']= atm.id.lower().capitalize()
+                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
                     else:
                         atm.xtra['atom_type'] = atm.element
             else:

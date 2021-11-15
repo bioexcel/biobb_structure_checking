@@ -1,7 +1,4 @@
-# To change this license header, choose License Headers in Project Properties.
-# To change this template file, choose Tools | Templates
-# and open the template in the editor.
-
+""" Extension for PDBIO to include additional output formats"""
 import sys
 
 from Bio.PDB.PDBIO import PDBIO
@@ -14,21 +11,22 @@ _ATOM_FORMAT_STRING_CMIP =  ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%8s  %-5s
 
 
 class PDBIO_extended(PDBIO):
+    """ Extended classe to support additional output formats"""
     def __init__(self, use_model_flag=0, is_pqr=False, output_format='pdb'):
         super().__init__(use_model_flag, is_pqr)
         self.output_format = output_format
 
     def _get_atom_line(
-        self, 
-        atom, 
-        hetfield, 
-        segid, 
-        atom_number, 
-        resname, 
-        resseq, 
-        icode, 
-        chain_id, 
-        charge="   "):
+            self,
+            atom, 
+            hetfield,
+            segid,
+            atom_number,
+            resname,
+            resseq,
+            icode,
+            chain_id,
+            charge="   "):
         """
             Return an ATOM PDB string (PRIVATE).
             Extended to allow for variable formatting

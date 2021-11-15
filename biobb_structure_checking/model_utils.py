@@ -560,7 +560,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     # only proteins
     rcode = res.get_resname()
-    
+
     if not _protein_residue_check(rcode):
         return "Warning: Residue not valid in this context "
 
@@ -569,7 +569,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
     if res.get_resname() not in ('ACE', 'NME'):
         if 'N' not in res:
             return error_msg
-    
+
     if 'CA' not in res:
         return error_msg
 
@@ -637,7 +637,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
 
-    if res.get_resname() in ('ACE', 'NME', 'GLY','NGLY','CGLY'):
+    if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
 
     if 'N' not in res or 'CA' not in res or 'C' not in res:
@@ -645,7 +645,7 @@ def add_hydrogens_side(res, res_library, opt, rules):
 
     for key_rule in rules.keys():
         rule = rules[key_rule]
-        
+
         if rule['mode'] == 'B2':
             crs = build_coords_2xSP3(
                 rule['dist'],

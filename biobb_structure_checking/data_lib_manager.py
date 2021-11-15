@@ -117,6 +117,10 @@ class DataLibManager:
         return rcode
 
     def get_ff_data(self, file_path):
+        """ Load Forcefield data from external file
+            Args:
+               file_path (str): Path to library file
+        """
         try:
             data_file_h = open(file_path)
             json_map = json.load(data_file_h)

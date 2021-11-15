@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.8.5'
+VERSION = '3.9.0'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -428,7 +428,6 @@ MSGS = {
 def help(command=None):
     '''
         Args:
-            help_path: Path to commands help file
             command: command to print
     '''
     if not command:
@@ -437,6 +436,3 @@ def help(command=None):
             print(help_file.read())
     else:
         DIALOGS.get_parameter(command, '', print_help=True)
-
-
-
