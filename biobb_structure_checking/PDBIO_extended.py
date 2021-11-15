@@ -10,6 +10,8 @@ from Bio.Data.IUPACData import atom_weights
 _ATOM_FORMAT_STRING =       ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
 _ATOM_FORMAT_STRING_PDBQT = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f    %6.3f %s\n")
 _ATOM_FORMAT_STRING_PQR =   ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
+_ATOM_FORMAT_STRING_CMIP =  ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%8s  %-5s%s%s\n")
+
 
 class PDBIO_extended(PDBIO):
     def __init__(self, use_model_flag=0, is_pqr=False, output_format='pdb'):
@@ -85,6 +87,11 @@ class PDBIO_extended(PDBIO):
                 occupancy_str = "%6.2f" % atom.pqr_charge
                 bfactor = atom.radius
                 format = _ATOM_FORMAT_STRING_PQR
+            elif self.output_format == 'cmip':
+                occupancy_str = "%8.4f" % atom.pqr_charge
+                bfactor = atom.xtra['atom_type']
+                element = "  "
+                format = _ATOM_FORMAT_STRING_CMIP
             else:
                 print("Unknown output format, writing standard PDB")
                 format = _ATOM_FORMAT_STRING
