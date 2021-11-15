@@ -569,6 +569,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
     if res.get_resname() not in ('ACE', 'NME'):
         if 'N' not in res:
             return error_msg
+    
     if 'CA' not in res:
         return error_msg
 
@@ -607,7 +608,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             build_coords_SP2(HDIS, res['N'], res['CA'], prev_res['C'])
         )
 
-    if res.get_resname() == 'GLY':
+    if res.get_resname() in ['GLY', 'NGLY']:
         if 'C' not in res:
             return error_msg
 
@@ -636,7 +637,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
 
-    if res.get_resname() in ('ACE', 'NME', 'GLY'):
+    if res.get_resname() in ('ACE', 'NME', 'GLY','NGLY','CGLY'):
         return False
 
     if 'N' not in res or 'CA' not in res or 'C' not in res:
