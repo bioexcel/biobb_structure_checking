@@ -28,7 +28,7 @@ optional arguments:
   -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}.
                         Biounits pdb:{pdbid}.{bn}. Biounits require MMB server
   -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
-                        Output structure. PDB Format
+                        Output structure. PDB|PDBQT|PQR|CMIP Formats
   --json JSON_OUTPUT_PATH
                         Summary activities on a json file
   --file_format FILE_FORMAT
@@ -92,12 +92,12 @@ mutateside [--mut mutation_list] [--no_check_clashes] [-rebuild]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     Check generated clashes except --no_check_clashes set
     --rebuild Optimize side chains using Modeller.
-add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges]
+add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
     Fixes missing side chain atoms unless --no_fix_side is set
     Existing hydrogen atoms are remove before adding new ones unless --keep_h set.
-    --add_charges adds partial charges (from RES_LIBRARY) and autodock atom types, forces PDBQT output
+    --add_charges FF adds partial charges (from RES_LIBRARY) and atom types from FF forcefield. Output format taken from file extension.
 
 2. Fix Structure Errors
 
@@ -134,7 +134,7 @@ clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
 ```
 ### Dependencies
 * python >=3.6
-* biopython
+* biopython >=1.78
 * numpy
 * modeller 10.1 (optional)
 * psutil (for performance debug, optional)

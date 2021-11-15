@@ -123,7 +123,7 @@ CMD_LINE.add_argument(
     '--rename_terms',
     action="store_true",
     dest='rename_terms',
-    help='Renames terminal residues to NXXX, CXXX'
+    help='Show terminal residues as NXXX, CXXX in output files'
 )
 CMD_LINE.add_argument(
     '--json',
@@ -294,7 +294,7 @@ DIALOGS.add_option('add_hydrogen', '--no_fix_side', 'no_fix_side',\
 DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
 DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
-    'Update atom partial charges', default="")
+    'Update atom partial charges and add atom types from given forcefield (ADT|CMIP)', default="")
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 

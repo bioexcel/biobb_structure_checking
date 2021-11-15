@@ -33,12 +33,12 @@ mutateside [--mut mutation_list] [--no_check_clashes]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     Check generated clashes except --no_check_clashes set
     --rebuild Optimize side chains using Modeller. 
-add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges]
+add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
     Fixes missing side chain atoms unless --no_fix_side is set
     Existing hydrogen atoms are removed before adding new ones unless --keep_h set.
-    --add_charges adds partial charges (from RES_LIBRARY) and autodock atom types, forces PDBQT output (experimental)
+    --add_charges FF adds partial charges (from RES_LIBRARY) and atom types from FF forcefield. Output format taken from file extension.
 
 2. Fix Structure Errors
 
