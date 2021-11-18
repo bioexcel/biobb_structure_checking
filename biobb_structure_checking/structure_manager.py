@@ -119,6 +119,7 @@ class StructureManager:
         self.biounit = False
         self.fixed_side = False
         self.file_format = file_format
+        self.has_charges = False
 
         self.data_library = DataLibManager(data_library_path)
         for ff in self.data_library.ff_data:
@@ -234,7 +235,7 @@ class StructureManager:
         """ Sets  Bio.PDB.Atom.serial_number for all atoms in the structure,
             overriding original if any.
         """
-        if self.input_format == 'pqr':
+        if self.input_format == 'pqr' or self.has_charges:
             self.total_charge = 0.
         else:
             self.total_charge = None
@@ -246,7 +247,7 @@ class StructureManager:
             if atm.pqr_charge is not None and self.total_charge is not None:
                 self.total_charge += atm.pqr_charge
             i += 1
-        self.has_charges = (self.total_charge is not None)
+        #self.has_charges = (self.total_charge is not None)
 
     def update_atom_charges(self, ff):
         """ Update atom charges and types from data library """
@@ -652,7 +653,8 @@ class StructureManager:
             'res_ligands': self.res_ligands,
             'num_wat': self.num_wat,
             'ca_only': self.ca_only,
-            'biounit': self.biounit
+            'biounit': self.biounit,
+            'total_charge': self.total_charge
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
@@ -770,8 +772,8 @@ class StructureManager:
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
-        if self.total_charge is not None:
-            print("PQR input. Total charge loaded {:6.3f}".format(self.total_charge))
+        if self.has_charges:
+            print("Total charge {:6.3f}".format(self.total_charge))
 
     def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False, output_format='pdb'):
         """
