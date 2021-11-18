@@ -107,9 +107,9 @@
    "LYS P346",
    "TYR P350",
    "TYR P351",
-   "GLU P353"
+   "CGLU P353"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -141,7 +141,7 @@
     "OXT"
    ],
    "fixed": [
-    "GLU P353"
+    "CGLU P353"
    ],
    "selected": "All"
   },
@@ -318,12 +318,13 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 5295,
+  "num_ats": 5296,
   "num_res": 330,
   "num_wat": 0,
   "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": -52.38227200000022
  },
  "fixside": {
   "opts": "--fix all"
@@ -340,7 +341,7 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": "--remove SO4"
+  "opts": "--remove all"
  },
  "metals": {
   "opts": "--remove ZN"
@@ -367,7 +368,8 @@
   "num_wat": 63,
   "res_hetats": 63,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": null
  },
  "water": {
   "n_detected": 63,

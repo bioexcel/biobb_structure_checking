@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -275,9 +275,17 @@ Running clashes.
  ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 
-Step 17: add_hydrogen --add_mode auto
+Step 17: ligands --remove all
 
-Running add_hydrogen. Options: --add_mode auto
+Running ligands. Options: --remove all
+2 Ligands detected
+ AC2 A1
+ AC2 B2
+Ligands removed all (2)
+
+Step 18: add_hydrogen --add_mode auto --add_charges ADT
+
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 148 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,B171,B251,B336,B362
  ASP A55,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363
@@ -315,17 +323,25 @@ Replacing HIS B323 by HIE
 Replacing HIS B351 by HIE
 Warning: not enough atoms to build backbone hydrogen atoms on ALA B375
 Warning: not enough atoms to build side chain hydrogen atoms on ALA B375
+Updating partial charges and atom types
+Warning: OXT atom missing in CVAL A70. Run backbone --add_atoms first
+Warning: OXT atom missing in CGLY A148. Run backbone --add_atoms first
+Warning: OXT atom missing in CGLY A264. Run backbone --add_atoms first
+Warning: OXT atom missing in CALA A375. Run backbone --add_atoms first
+Warning: OXT atom missing in CGLY B73. Run backbone --add_atoms first
+Warning: OXT atom missing in CGLY B148. Run backbone --add_atoms first
+Warning: OXT atom missing in CSER B263. Run backbone --add_atoms first
+Warning: OXT atom missing in CALA B375. Run backbone --add_atoms first
+Total assigned charge:      -2.53
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
-Final Num. residues:  614
+Final Num. residues:  612
 Final Num. residues with ins. codes:  0
-Final Num. HETATM residues:  2
-Final Num. ligands or modified residues:  2
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  9380
-Small mol ligands found
-AC2 A1
-AC2 B2
+Final Num. atoms:  9351
+Total charge -2.531
 Structure saved on 2ki5_all_test.pdb
 Summary data saved on 2ki5_all_test.json

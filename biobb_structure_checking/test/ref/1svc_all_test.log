@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -161,13 +161,18 @@ No severe clashes detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  GLU P287.OE1 GLU P289.OE2    3.216 A
 
-Step 17: add_hydrogen --add_mode auto
+Step 17: ligands --remove all
 
-Running add_hydrogen. Options: --add_mode auto
+Running ligands. Options: --remove all
+No ligands found
+
+Step 18: add_hydrogen --add_mode auto --add_charges ADT
+
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 106 Residues requiring selection on adding H atoms
  CYS P88,P119,P124,P162,P262,P273
  ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
- GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344,P353
+ GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344
  HIS P67,P108,P110,P112,P118,P144,P173,P307
  LYS P52,P77,P79,P80,P86,P95,P105,P117,P131,P147,P148,P149,P194,P206,P244,P252,P275,P278,P315,P318,P320,P326,P337,P346
  ARG P54,P57,P59,P157,P164,P187,P192,P198,P214,P230,P231,P255,P258,P284,P308,P335,P336
@@ -222,6 +227,8 @@ Replacing HIS P118 by HIE
 Replacing HIS P144 by HIE
 Replacing HIS P173 by HIE
 Replacing HIS P307 by HIE
+Updating partial charges and atom types
+Total assigned charge:     -52.38
 Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (D: DNA, P: Protein)
@@ -230,6 +237,7 @@ Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  5295
+Final Num. atoms:  5296
+Total charge -52.382
 Structure saved on 1svc_all_test.pdb
 Summary data saved on 1svc_all_test.json

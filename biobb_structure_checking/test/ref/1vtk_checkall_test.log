@@ -1,12 +1,12 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
- Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
  Resolution (A): N.A.
@@ -133,3 +133,4 @@ Running  check_only. Nothing else to do.
 Running sequences.
 Sequences command requires either mmCIF input or --sequence
 Running  check_only. Nothing else to do.
+Structure not modified, not saving. Override with --force_save

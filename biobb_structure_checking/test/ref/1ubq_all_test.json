@@ -27,7 +27,7 @@
    "ARG A72",
    "ARG A74"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -92,7 +92,8 @@
   "num_wat": 0,
   "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": -1.0000000011389787e-06
  },
  "fixside": {
   "opts": "--fix all"
@@ -109,7 +110,7 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": "--remove SO4"
+  "opts": "--remove all"
  },
  "metals": {
   "opts": "--remove ZN"
@@ -135,7 +136,8 @@
   "num_wat": 58,
   "res_hetats": 58,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": null
  },
  "water": {
   "n_detected": 58,

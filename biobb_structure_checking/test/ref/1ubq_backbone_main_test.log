@@ -1,10 +1,10 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure backbone_test/1ubq_caps.pdb loaded
- Title:  structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
+ Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
  Resolution (A): N.A.
 
@@ -34,12 +34,12 @@ Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_at
 No unexpected backbone links
 Main chain fixes
 
-                         MODELLER 9.23, 2019/10/22, r11522
+                         MODELLER 10.1, 2021/03/12, r12156
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2019 Andrej Sali
+                     Copyright(c) 1989-2021 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -55,10 +55,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 4.12.14-lp150.12.82-default x86_64
-Date and time of compilation         : 2019/10/22 22:09:02
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-59.27-default x86_64
+Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2021/06/10 19:09:08
+Job starting time (YY/MM/DD HH:MM:SS): 2021/11/18 12:14:42
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -67,12 +67,12 @@ and protein CA atoms within 10.00 angstroms
 0 atoms in residues without defined topology
 constrained to be rigid bodies
 >> Model assessment by DOPE potential
-DOPE score               : -6530.549805
+DOPE score               : -6567.333496
 
 >> Summary of successfully produced models:
 Filename                          molpdf     DOPE score    GA341 score
 ----------------------------------------------------------------------
-target.B99990001.pdb           841.10699    -6530.54980        1.00000
+target.B99990001.pdb           812.45667    -6567.33350        1.00000
 
 Fixing VAL A5 - LEU A8
   Adding VAL A5
@@ -98,58 +98,57 @@ Fixing ILE A44 - ALA A46
   Adding PHE A45
   Adding ALA A46
 
-1 Residues with missing backbone atoms found
- GLY A10    OXT
-1 Backbone breaks found
- GLY A10    - LYS A11    
-Unexpected backbone links found
- LEU A8     linked to GLY A10   , expected THR A9     
- THR A14    linked to GLU A16   , expected LEU A15    
- LEU A15    linked to VAL A17   , expected GLU A16    
+2 Residues with missing backbone atoms found
+ LEU A8     OXT
+ THR A14    OXT
+2 Backbone breaks found
+ LEU A8     - THR A9     
+ THR A14    - LEU A15    
+No unexpected backbone links
 Consecutive residues too far away to be covalently linked
- GLY A10    - LYS A11   , bond distance    7.132 
+ LEU A8     - THR A9    , bond distance    5.303 
+ THR A14    - LEU A15   , bond distance    9.068 
 Capping terminal ends
-True terminal residues:  A1,A9,A15,A76
-Terminal residues from backbone breaks:  A10-A11
+True terminal residues:  A1,A76
+Terminal residues from backbone breaks:  A8-A9,A14-A15
 Nothing to do
 No caps added
 Fixing missing backbone atoms
 Nothing to do
 Checking for steric clashes
-3 Steric severe clashes detected
- LEU A8.CG    GLY A10.O       0.477 A
- LEU A8.CD2   LYS A11.N       0.656 A
- LEU A15.C    VAL A17.C       0.289 A
-17 Steric apolar clashes detected
- MET A1.O     VAL A17.CG1     2.703 A
- GLN A2.CG    VAL A17.CG2     1.718 A
- ILE A3.N     VAL A17.CG2     2.890 A
- ILE A3.O     GLU A16.C       2.509 A
- PHE A4.CA    THR A14.OG1     1.055 A
- PHE A4.CD2   ILE A13.CG1     2.398 A
- VAL A5.CG2   LEU A67.CG      1.486 A
- VAL A5.O     THR A14.CB      2.210 A
- LYS A6.CB    THR A14.CB      2.021 A
- LEU A8.CD1   THR A12.N       2.617 A
- LEU A8.CD2   LYS A11.N       0.656 A
- LEU A15.CD2  GLU A18.OE2     1.198 A
- GLU A16.OE2  LYS A33.CE      1.445 A
- GLU A18.OE1  VAL A26.CA      2.608 A
- PRO A19.CD   LYS A29.NZ      2.200 A
- ILE A44.CD1  HIS A68.CB      2.690 A
- PHE A45.CD2  LYS A48.CE      2.610 A
-7 Steric polar_acceptor clashes detected
- MET A1.O     GLU A18.O       2.583 A
- ILE A3.O     THR A14.O       3.041 A
- ILE A3.O     GLU A16.O       1.448 A
- LYS A6.O     LEU A67.O       2.883 A
- THR A14.O    GLU A16.O       1.987 A
- LEU A15.O    VAL A17.O       2.537 A
- PRO A19.O    ASP A21.OD2     2.369 A
-3 Steric polar_donor clashes detected
- VAL A5.N     LEU A67.N       3.055 A
- THR A14.N    GLU A16.N       3.024 A
- LEU A15.N    VAL A17.N       0.830 A
+2 Steric severe clashes detected
+ LEU A15.C    VAL A17.C       0.491 A
+ LEU A15.CG   GLU A18.CD      0.428 A
+12 Steric apolar clashes detected
+ GLN A2.CG    VAL A17.CG2     2.070 A
+ ILE A3.O     GLU A16.C       2.749 A
+ VAL A5.CB    THR A14.O       2.113 A
+ VAL A5.O     ILE A13.C       2.240 A
+ LYS A6.CA    THR A14.N       1.717 A
+ LYS A6.CB    ILE A13.CA      1.689 A
+ LYS A6.CE    THR A12.O       2.649 A
+ LYS A6.NZ    GLY A10.CA      2.275 A
+ THR A7.N     ILE A13.CA      2.700 A
+ THR A7.OG1   THR A14.CG2     1.759 A
+ LEU A15.CG   GLU A18.CD      0.428 A
+ PRO A19.CD   LYS A29.NZ      2.357 A
+10 Steric polar_acceptor clashes detected
+ MET A1.O     GLU A18.O       2.577 A
+ ILE A3.O     GLU A16.O       1.747 A
+ VAL A5.O     ILE A13.O       2.633 A
+ VAL A5.O     THR A14.O       2.923 A
+ LEU A8.O     GLY A10.O       2.520 A
+ LEU A8.O     THR A12.O       3.023 A
+ GLY A10.O    THR A12.O       2.838 A
+ LEU A15.O    VAL A17.O       2.772 A
+ PRO A19.O    ASP A21.OD2     2.486 A
+ PHE A45.O    LYS A48.O       2.716 A
+5 Steric polar_donor clashes detected
+ LYS A6.N     THR A14.N       2.226 A
+ LYS A6.NZ    GLY A10.N       3.058 A
+ THR A7.N     ILE A13.N       3.092 A
+ THR A7.N     THR A14.N       2.527 A
+ LEU A15.N    VAL A17.N       0.922 A
 No positive clashes detected
 No negative clashes detected
 Final Num. models: 1

@@ -13,7 +13,7 @@ update:
 
 
 all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
-  backbone backbone_caps cistransbck biounits sequences dnamut all_checks ;
+  backbone backbone_caps cistransbck biounits sequences dnamut add_hydrogen all_checks
 
 modeller: backbone_main biounits_bck 
 
@@ -27,6 +27,7 @@ debug:
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq_all_test_debug.pdb --json 1ubq_all_test_debug.json --debug --non_interactive command_list --list scripts/all_checks > 1ubq_all_test_debug.log
 
 load:
+	echo "Loading structures"
 	${COMMON};${APPBIN} -v -i pdb:1ark load > load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1svc load >> load_cache.log
@@ -39,6 +40,7 @@ load:
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server mmb load >> load_cache.log
 
 models: 
 	echo "Running models on 1ark"
@@ -135,6 +137,7 @@ cistransbck:
 sequences:
 	echo "Running sequences on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences > 2ki5_sequences_test.log
+
 dnamut:
 	echo "Running dnamut on 1D23"
 	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG > 1d23_dnamut_test.log
@@ -143,12 +146,19 @@ dnamut:
 biounits:
 	echo "Running all checks on 1ldn.1"
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
+
 biounits_bck:
 	echo "Running all checks on 2ki5.1"
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall > 2ki5_checkall_test.log
 	echo "Running all checks on 1vtk.1"
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall > 1vtk_checkall_test.log
+	echo "Running all checks on 1svc.1"
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server mmb  --non_interactive checkall > 1svc_checkall_test.log
 
+add_hydrogen:
+	echo "Running add_hydrogens on 1ubq"
+	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pdbqt --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_test.log
+	
 all_checks:
 	echo -n "Running all checks on 1ark"
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_all_test.pdb --json 1ark_all_test.json --non_interactive command_list --list scripts/all_checks > 1ark_all_test.log
