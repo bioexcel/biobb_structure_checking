@@ -6,10 +6,10 @@ SHELL = /bin/csh
 COMMON = setenv PYTHONPATH ${BASEDIR}; cd ${TESTDIR}
 
 clean:
-	rm *pdb *log *json *diff 
+	rm *pdb *log *json *diff *cmip *pqr *pdbqt
 
 update:
-	cp *pdb *log *json ref
+	cp *pdb *log *json *cmip *pqr *pdbqt ref
 
 
 all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
@@ -155,7 +155,9 @@ biounits:
 
 add_hydrogen:
 	echo "Running add_hydrogens on 1ubq"
-	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pdbqt --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_test.log
+	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pdbqt --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_ADT_test.log
+	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pqr   --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_PQR_test.log
+	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.cmip  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges CMIP' > 1ubq_add_hydrogen_CMIP_test.log
 	
 all_checks:
 	echo -n "Running all checks on 1ark"
