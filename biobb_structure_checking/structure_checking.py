@@ -158,7 +158,6 @@ class StructureChecking():
             
         i = 1
         for line in command_list:
-            print(line)
             if not self.args['quiet']:
                 print("\nStep {}: {}".format(i, line))
             data = line.split()
