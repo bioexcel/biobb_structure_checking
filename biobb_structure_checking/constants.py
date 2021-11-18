@@ -422,7 +422,12 @@ MSGS = {
     'STRUCTURE_LOADED': 'Structure {} loaded',
     #NA related
     'NO_NA': 'No NA chains found, skipping',
-    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
+    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains',
+    # Model utils
+    'ATOM_NOT_FOUND': 'Warning: atom {:3} not found in {}',
+    'NO_BACKBONE_ATOMS': 'Warning: No backbone atoms defined',
+    'RESIDUE_NOT_VALID' : "Warning: Residue not valid in this context ",
+    'NOT_ENOUGH_ATOMS' : "Warning: not enough atoms to build {} hydrogen atoms on"
 }
 # Help handler
 def help(command=None):

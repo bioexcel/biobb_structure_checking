@@ -294,7 +294,7 @@ class StructureManager:
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
+                    print("Warning: OXT atom missing in {}. Run backbone --fix_atoms first".format(mu.residue_id(res)))
         print("Total assigned charge: {:10.2f}".format(self.total_charge))
 
         self.has_charges = True

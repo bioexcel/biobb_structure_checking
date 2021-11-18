@@ -15,6 +15,8 @@ from Bio.PDB.Residue import Residue
 from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
+from constants import MSGS
+
 #chain types
 PROTEIN = 1
 DNA = 2
@@ -303,7 +305,7 @@ def check_chiral(res, at1, at2, at3, at4, sign=1.):
     for atm in (at1, at2, at3, at4):
         at_ok = at_ok and atm in res
         if not at_ok:
-            print('Warning: atom {:3} not found in {}'.format(atm, residue_id(res)))
+            print(MSGS['ATOM_NOT_FOUND'].format(atm, residue_id(res)))
     if at_ok:
         vec1 = res[at1].coord - res[at2].coord
         vec2 = res[at3].coord - res[at2].coord
@@ -474,7 +476,7 @@ def get_backbone_links(struc, backbone_atoms, covlnk, join_models=True):
                         and (join_models or same_model(at1.get_parent(), at2.get_parent())):
                     cov_links.append(sorted([at1, at2], key=lambda x: x.serial_number))
         else:
-            print("Warning: No backbone atoms defined")
+            print(MSGS['NO_BACKBONE_ATOMS'])
 
     return cov_links
 
@@ -562,9 +564,9 @@ def add_hydrogens_backbone(res, prev_res, next_res):
     rcode = res.get_resname()
 
     if not _protein_residue_check(rcode):
-        return "Warning: Residue not valid in this context "
+        return MSGS['RESIDUE_NOT_VALID']
 
-    error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
+    error_msg = MSGS['NOT_ENOUGH_ATOMS'].format('backbone')
 
     if res.get_resname() not in ('ACE', 'NME'):
         if 'N' not in res:
@@ -641,7 +643,7 @@ def add_hydrogens_side(res, res_library, opt, rules):
         return False
 
     if 'N' not in res or 'CA' not in res or 'C' not in res:
-        return "Warning: not enough atoms to build side chain hydrogen atoms on"
+        return MSGS['NOT_ENOUGH_ATOMS'].format('side')
 
     for key_rule in rules.keys():
         rule = rules[key_rule]
