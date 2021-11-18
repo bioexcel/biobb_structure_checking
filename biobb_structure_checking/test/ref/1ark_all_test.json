@@ -134,7 +134,7 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": "--remove all"
+  "opts": "--remove All"
  },
  "metals": {
   "opts": "--remove ZN"

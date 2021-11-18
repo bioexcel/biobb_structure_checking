@@ -121,12 +121,18 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 17: ligands --remove all
+Step 17: ligands --remove All
 
-Running ligands. Options: --remove all
+Running ligands. Options: --remove All
 No ligands found
 
-Step 18: add_hydrogen --add_mode auto --add_charges ADT
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+1 Chain(s) detected
+ A: Protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 24 Residues requiring selection on adding H atoms

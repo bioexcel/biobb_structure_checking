@@ -192,9 +192,9 @@ No positive clashes detected
  ASP B107.OD2 ASP B182.OD1    3.482 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
 
-Step 17: ligands --remove all
+Step 17: ligands --remove All
 
-Running ligands. Options: --remove all
+Running ligands. Options: --remove All
 7 Ligands detected
   CA A303
   CA A304
@@ -203,9 +203,17 @@ Running ligands. Options: --remove all
   CA B304
   CA B305
  N25 B401
-Ligands removed all (7)
+Ligands removed All (7)
 
-Step 18: add_hydrogen --add_mode auto --add_charges ADT
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+2 Chain(s) detected
+ A: Protein
+ B: Protein
+Selecting chain(s) protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 107 Residues requiring selection on adding H atoms

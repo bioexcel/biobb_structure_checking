@@ -275,15 +275,23 @@ Running clashes.
  ARG B216.NH2 ARG B220.NH1    2.977 A
 No negative clashes detected
 
-Step 17: ligands --remove all
+Step 17: ligands --remove All
 
-Running ligands. Options: --remove all
+Running ligands. Options: --remove All
 2 Ligands detected
  AC2 A1
  AC2 B2
-Ligands removed all (2)
+Ligands removed All (2)
 
-Step 18: add_hydrogen --add_mode auto --add_charges ADT
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+2 Chain(s) detected
+ A: Protein
+ B: Protein
+Selecting chain(s) protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 148 Residues requiring selection on adding H atoms

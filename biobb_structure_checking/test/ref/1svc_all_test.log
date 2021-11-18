@@ -161,12 +161,20 @@ No severe clashes detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  GLU P287.OE1 GLU P289.OE2    3.216 A
 
-Step 17: ligands --remove all
+Step 17: ligands --remove All
 
-Running ligands. Options: --remove all
+Running ligands. Options: --remove All
 No ligands found
 
-Step 18: add_hydrogen --add_mode auto --add_charges ADT
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+2 Chain(s) detected
+ D: DNA
+ P: Protein
+Selecting chain(s) protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 106 Residues requiring selection on adding H atoms
@@ -181,44 +189,6 @@ WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
-Warning: Residue not valid in this context   DA D1
-Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DG D2
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D3
-Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DT D4
-Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DG D5
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D6
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D7
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DG D8
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D9
-Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DA D10
-Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DT D11
-Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DC D12
-Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D13
-Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D14
-Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DC D15
-Warning: DC is not a valid residue in this context
-Warning: Residue not valid in this context   DT D16
-Warning: DT is not a valid residue in this context
-Warning: Residue not valid in this context   DA D17
-Warning: DA is not a valid residue in this context
-Warning: Residue not valid in this context   DG D18
-Warning: DG is not a valid residue in this context
-Warning: Residue not valid in this context   DA D19
-Warning: DA is not a valid residue in this context
 Replacing HIS P67 by HIE
 Replacing HIS P108 by HIE
 Replacing HIS P110 by HIE
@@ -228,16 +198,16 @@ Replacing HIS P144 by HIE
 Replacing HIS P173 by HIE
 Replacing HIS P307 by HIE
 Updating partial charges and atom types
-Total assigned charge:     -52.38
+Total assigned charge:       1.90
 Command list completed
 Final Num. models: 1
-Final Num. chains: 2 (D: DNA, P: Protein)
-Final Num. residues:  330
+Final Num. chains: 1 (P: Protein)
+Final Num. residues:  311
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  5296
-Total charge -52.382
+Final Num. atoms:  4905
+Total charge  1.900
 Structure saved on 1svc_all_test.pdb
 Summary data saved on 1svc_all_test.json

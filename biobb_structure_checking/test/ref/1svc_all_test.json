@@ -152,7 +152,9 @@
    "D": 2,
    "P": 1
   },
-  "selected": {}
+  "selected": {
+   "P": 1
+  }
  },
  "chiral": {
   "n_chirals": 32,
@@ -312,19 +314,18 @@
   "ca_only": false,
   "chain_details": {},
   "chain_ids": {
-   "D": 2,
    "P": 1
   },
   "models_type": 0,
-  "nchains": 2,
+  "nchains": 1,
   "nmodels": 1,
-  "num_ats": 5296,
-  "num_res": 330,
+  "num_ats": 4905,
+  "num_res": 311,
   "num_wat": 0,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
-  "total_charge": -52.38227200000022
+  "total_charge": 1.9000280000000735
  },
  "fixside": {
   "opts": "--fix all"
@@ -341,7 +342,7 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": "--remove all"
+  "opts": "--remove All"
  },
  "metals": {
   "opts": "--remove ZN"
