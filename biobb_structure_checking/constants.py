@@ -30,9 +30,10 @@ DEFAULTS = {
     'options' : ''
 }
 
-def set_defaults(base_dir_path, args):
+def set_defaults(base_dir_path, args=None):
     """ Checks input args and complete with defaults if necessary """
-
+    if args is None:
+        args = {}
     data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
 
     if 'res_library_path' not in args or args['res_library_path'] is None:
