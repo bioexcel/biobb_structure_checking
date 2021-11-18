@@ -15,7 +15,7 @@ from Bio.PDB.Residue import Residue
 from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
-from constants import MSGS
+from biobb_structure_checking.constants import MSGS
 
 #chain types
 PROTEIN = 1
