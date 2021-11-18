@@ -15,7 +15,7 @@ update:
 all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
   backbone backbone_caps cistransbck biounits sequences dnamut add_hydrogen all_checks
 
-modeller: backbone_main biounits_bck 
+modeller: backbone_main 
 
 all_nodebug: all_nomodeller modeller
 
@@ -146,8 +146,6 @@ dnamut:
 biounits:
 	echo "Running all checks on 1ldn.1"
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
-
-biounits_bck:
 	echo "Running all checks on 2ki5.1"
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall > 2ki5_checkall_test.log
 	echo "Running all checks on 1vtk.1"
