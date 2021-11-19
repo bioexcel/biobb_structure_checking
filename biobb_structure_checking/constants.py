@@ -207,7 +207,7 @@ DIALOGS = Dialog()
 #Multiple parameters should come as separate lines with a unique "command"
 
 DIALOGS.add_entry('command_list', 'Runs a list of commands')
-DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
+DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File or string (; separated)')
 
 DIALOGS.add_entry('models', 'Checks and selects models')
 DIALOGS.add_option('models', '--select', 'select', \
