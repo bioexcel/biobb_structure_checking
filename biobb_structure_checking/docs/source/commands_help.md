@@ -1,0 +1,74 @@
+
+BioBB's check_structure.py performs MDWeb structure checking set as a command line
+utility.
+
+commands:     Help on available commands
+command_list: Run all tests from conf file
+checkall:     Perform all checks without fixes
+load:         Stores structure on local cache and provides basic statistics
+
+1. System Configuration
+=======================
+sequences 
+    Print canonical and structure sequences in FASTA format
+models [--select model_num]
+    Detect/Select Models
+chains [--select chain_ids | molecule_type]
+    Detect/Select Chains
+inscodes 
+    Detects residues with insertion codes. No fix provided (yet)
+altloc [--select occupancy| alt_id | list of res_id:alt_id]
+    Detect/Select Alternative Locations
+metals [--remove All | None | Met_ids_list | Residue_list]
+    Detect/Remove Metals
+ligands [--remove All | None | Res_type_list | Residue_list]
+    Detect/Remove Ligands
+getss      Detect SS Bonds
+    --mark Replace relevant CYS by CYX to mark SS Bond (HG atom removed if present)
+water [--remove Yes|No]
+    Remove Water molecules
+rem_hydrogen [--remove Yes|No]
+    Remove Hydrogen atoms from structure
+mutateside [--mut mutation_list] [--no_check_clashes]
+    Mutate side chain with minimal atom replacement. Allows multiple mutations.
+    Check generated clashes except --no_check_clashes set
+    --rebuild Optimize side chains using Modeller. 
+add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF]
+    Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
+    list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
+    Fixes missing side chain atoms unless --no_fix_side is set
+    Existing hydrogen atoms are removed before adding new ones unless --keep_h set.
+    --add_charges FF adds partial charges (from RES_LIBRARY) and atom types from FF forcefield. Output format taken from file extension.
+
+2. Fix Structure Errors
+
+amide  [--fix All|None|Residue List] [--no_recheck]
+    Detect/Fix Amide atoms Assignment
+    Amide contacts are recheck unless --no_recheck
+chiral [--fix All|None|Residue List] [--no_check_clashes]
+    Detect/Fix Improper quirality
+    Checks generated clashes unless --no_check_clashes set
+fixside [--fix All |None|Residue List] [--no_check_clashes]
+    Complete side chains (heavy atoms, protein only)
+    Checks generated clashes unless --no_check_clashes set
+    --rebuild  Rebuild complete side chain using Modeller
+backbone [--fix_atoms All|None|Residue List]
+         [--fix_main All|None|Break list] 
+         [--add_caps All|None|Break list] 
+         [--extra_gap]
+         [--no_recheck]
+         [--no_check_clashes]
+    Analyze main chain missing atoms and fragments (protein only).
+    --fix_atoms Missing O, OXT atoms can be fixed 
+    --fix_main Missing fragments filled using comparative modelling (Modeller License needed)
+    --add_caps Adds ACE and NME residues as necessary, preserving existing atoms
+    --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections (experimental)
+    Rechecks beckbone on each op unless --no_recheck is set.
+    Generated clashes are checked unless --no_check_clashes
+
+
+3. Structure Warnings (no fix)
+
+cistransbck Analyzes cis-trans dihedrals on backbone atoms
+clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
+           Ionic Positive, Ionic Negative)
