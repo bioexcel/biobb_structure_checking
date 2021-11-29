@@ -1,14 +1,12 @@
-# biobb_remote
-
+# biobb_structure_checking
 ### Introduction
-Biobb_remote is a package to allow biobb's to be executed on remote sites
-through ssh
+Biobb_structure_cheching perform 3D structure quality checking
 
 The latest documentation of this package can be found in our readthedocs site:
-[latest API documentation](http://biobb_remote.readthedocs.io/en/latest/).
+[latest API documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v1.2.3 November 2021
+v3.8.5 November 2021
 ### Installation
 Using PIP:
 
@@ -16,19 +14,19 @@ Using PIP:
 
 * Installation:
 
-        pip install "biobb_remote>=1.2.2"
+        pip install "biobb_structure_checking>=3.8.5"
 
-* Usage: [Python API documentation](https://biobb-remote.readthedocs.io/en/latest/modules.html)
+* Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html)
 
 Using ANACONDA:
 
 * Installation:
 
-        conda install -c bioconda "biobb_remote>=1.2.2"
+        conda install -c bioconda "biobb_structure_checking>=3.8.5"
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://
-biobb-remote.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://
-biobb-remote.readthedocs.io/en/latest/command_line.html)
+biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://
+biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
 
 ### Copyright & Licensing
 This software has been developed in the MMB group (http://mmb.irbbarcelona.org) at the

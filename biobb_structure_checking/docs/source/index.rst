@@ -17,7 +17,7 @@ Contents
 
    Introduction & installation <readme>
    API Documentation <modules>
-   Command-Line Scripts Documentation <command_line>
+   Command-Line Documentation <command_line>
 
 Indices and tables
 ==================
