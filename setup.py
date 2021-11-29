@@ -22,7 +22,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['psutil', 'biopython'],
+    install_requires=['psutil', 'biopython/1.76'],
     #python_requires='>=3.8',
     classifiers=(
         "Development Status :: 3 - Alpha",
