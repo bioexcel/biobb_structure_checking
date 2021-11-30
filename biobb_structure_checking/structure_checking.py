@@ -398,11 +398,17 @@ class StructureChecking():
         | StructureChecking.chains
         | Detect/Select Chains
         Args:
-            opts (str | list(str) | dict) (Optional): Command options
-                * None: Check only
-                * str: [--select] chain_ids|protein|na|rna|dna
-                * dict:
-                    * select (str) - chain_ids(Comma separated)|protein|na|rna|dna 
+            opts (str | list(str) | dict) (Optional): Command options. 
+        
+        Usage:
+            Opts: None: Check only
+            Opts: [--select] 
+                * chain_ids - List of chains to retain
+                * protein - Select all protein chains
+                * na - Select all NA chains
+                * rna - Select all RNA chains
+                * dna - Select all DNA chains
+            
         """
         self._run_method('chains', opts)
 
@@ -470,7 +476,7 @@ class StructureChecking():
         | StructureChecking.inscodes
         | Detects residues with insertion codes. No fix provided (yet)
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str) (Optional): Unused
         """
         self._run_method('inscodes', opts)
 
@@ -500,7 +506,12 @@ class StructureChecking():
         | StructureChecking.altloc
         | Detect/Select Alternative Locations
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict) (Optional): Command options
+                * None: Check only
+                * str: --select (occupancy | alt_id | list of res_id:alt_id)
+                * dict:
+                    * select (str): [–select occupancy| alt_id | list of res_id:alt_id]
+                
         """
         self._run_method('altloc', opts)
 
