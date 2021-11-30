@@ -403,13 +403,13 @@ class StructureChecking():
         Args:
             opts (str | list(str) | dict) (Optional): Command options.
         
-        Usage:
-            [--select] (str) one of:
-                * chain_ids - List of chains to retain
-                * protein - Select all protein chains
-                * na - Select all NA chains
-                * rna - Select all RNA chains
-                * dna - Select all DNA chains
+        Options:
+            [--select] one of (str):
+                * **chain_ids** - List of chains to retain (comma separated, case sensitive)
+                * **protein** - Select all protein chains
+                * **na** - Select all NA chains
+                * **rna** - Select all RNA chains
+                * **dna** - Select all DNA chains
             
         """
         self._run_method('chains', opts)
