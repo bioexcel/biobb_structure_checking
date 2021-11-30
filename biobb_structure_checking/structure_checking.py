@@ -337,9 +337,9 @@ class StructureChecking():
         | Detect/Select Models
         
         Args:
-            opts (str | list(str) | dict) (Optional): (None) Command options. 
+            opts (str | list(str) | dict) (Optional - Command options): 
                 * None - Check only
-                * str -  [--select] model_num
+                * str - [--select] model_num
                 * dict -  
                     * select (int) - Selected Model
         """
