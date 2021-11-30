@@ -338,9 +338,9 @@ class StructureChecking():
         
         Args:
             opts (str | list(str) | dict) (Optional): (None) Command options. None: Check only
-            opts(str) :  --select model_num. 
-            opts(dict):
-                * select (**int**) - Selected Model
+            opts_str -  [--select] model_num
+            opts_dict -  
+                * select (int) - Selected Model
         """
         self._run_method('models', opts)
 
