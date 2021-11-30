@@ -310,7 +310,7 @@ class StructureChecking():
         | StructureChecking.sequences
         | Print canonical and structure sequences in FASTA format
         Args:
-           opts (str): (None) Not used
+           opts (str): (None) Unused
         """
         self._run_method('sequences', opts)
 
@@ -339,8 +339,8 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (str | list(str) | dict) (Optional): Command options.
-                * [--select] model_num (int)
+            opts: Command options.
+                * select (int) - model number to select
         """
         self._run_method('models', opts)
 
@@ -401,14 +401,12 @@ class StructureChecking():
         
         Args:
             opts (str | list(str) | dict) (Optional): Command options.
-        
-        Usage:
-            [--select] option (str)
-                * **chain_ids** - List of chains to retain (comma separated, case sensitive)
-                * **protein** - Select all protein chains
-                * **na** - Select all NA chains
-                * **rna** - Select all RNA chains
-                * **dna** - Select all DNA chains
+                * select (str) - One of: 
+                **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
+                **protein** - Select all protein chains,
+                **na** - Select all NA chains,
+                **rna** - Select all RNA chains,
+                **dna** - Select all DNA chains.
             
         """
         self._run_method('chains', opts)
