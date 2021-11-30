@@ -398,11 +398,10 @@ class StructureChecking():
         | StructureChecking.chains
         | Detect/Select Chains
         Args:
-            opts (str | list(str) | dict) (Optional): Command options. 
+            opts (str | list(str) | dict) (Optional): Command options (None: Check only)
         
         Usage:
-            Opts: None: Check only
-            Opts: [--select] 
+            [--select] (str) Select one of:
                 * chain_ids - List of chains to retain
                 * protein - Select all protein chains
                 * na - Select all NA chains
