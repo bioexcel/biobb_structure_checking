@@ -338,7 +338,7 @@ class StructureChecking():
         Args:
             * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
-    self._run_method('models', opts)
+        self._run_method('models', opts)
 
     def _models_check(self):
         print(cts.MSGS['MODELS_FOUND'].format(self.strucm.nmodels))
