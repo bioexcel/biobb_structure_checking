@@ -117,7 +117,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
-    help='Output structure. Format PDB'
+    help='Output structure. Format PDB|PDBQT|PQR|CMIP'
 )
 
 CMD_LINE.add_argument(
