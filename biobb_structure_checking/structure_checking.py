@@ -398,7 +398,7 @@ class StructureChecking():
         | StructureChecking.chains
         | Detect/Select Chains
         Args:
-            opts (str | list(str) | dict) (Optional - Command options): 
+            opts (str | list(str) | dict) (Optional): Command options
                 * None: Check only
                 * str: [--select] chain_ids|protein|na|rna|dna
                 * dict:
