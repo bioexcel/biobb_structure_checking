@@ -400,7 +400,7 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (str | list(str) | dict) (Optional): Command options.
+            opts (dict- Command options dictionary): 
                 * select (str) - One of: 
                 **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
                 **protein** - Select all protein chains,
