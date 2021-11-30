@@ -27,8 +27,8 @@ class StructureChecking():
     | Load directly for Jupyter Notebook or python scripts. 
     
     Args:
-        * **base_dir_path** (str): Base directory path where application resides. 
-        * **args** (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html
+        base_dir_path (str): Base directory path where application resides. 
+        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html
     """
     def __init__(self, base_dir_path, args):
 
@@ -147,7 +147,7 @@ class StructureChecking():
         | StructureChecking.print_stats
         | Print statistics on the loaded structure
         Args:
-            * **prefix** (str) (Optional): (None) Prefix to add to the output lines for identfication.
+            prefix (str) (Optional): (None) Prefix to add to the output lines for identfication.
         """
         self.strucm.calc_stats()
         if prefix is None: 
@@ -160,7 +160,7 @@ class StructureChecking():
         | Manages command_list workflows
         
         Args:
-            * **opts** (str | list(str)): Command options as str or str list. 
+            opts (str | list(str)): Command options as str or str list. 
         """
         try:
             opts = cts.DIALOGS.get_parameter('command_list', opts)
@@ -202,7 +202,7 @@ class StructureChecking():
         | Predefined workflow for complete checking
         
         Args:
-            * **opts** (str | list(str) | dict)  (Optional): (None) Additional command options (Deprecated).
+            opts (str | list(str) | dict)  (Optional): (None) Not used.
         """
         #Required for interactive run in Notebooks
         old_check_only = self.args['check_only']
@@ -238,8 +238,8 @@ class StructureChecking():
         | Run check and fix methods for specific command
         
         Args:
-            * **command** (str): Command to run
-            * **opts** (str | list(str) | dict): Command options, passed from callers
+            command** (str): Command to run
+            opts (str | list(str) | dict): Command options, passed from callers
         """
         try:
             f_check = getattr(self, '_' + command + '_check')
@@ -310,7 +310,7 @@ class StructureChecking():
         | StructureChecking.sequences
         | Print canonical and structure sequences in FASTA format
         Args:
-            * **opts** (str): (None) Not used
+           opts (str): (None) Not used
         """
         self._run_method('sequences', opts)
 
@@ -336,10 +336,10 @@ class StructureChecking():
         | StructureChecking.models
         | Detect/Select Models
         Args:
-            * **opts** (None): None. Check Only
-            * **opts** (dict):
+            opts (None): None. Check Only
+            opts (dict):
                 * select: Model number to retains
-            * **opts** (str | list(str)) :  --select model_num. 
+            opts (str | list(str)) :  --select model_num. 
         """
         self._run_method('models', opts)
 
@@ -396,7 +396,7 @@ class StructureChecking():
         | StructureChecking.chains
         | Detect/Select Chains
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('chains', opts)
 
@@ -464,7 +464,7 @@ class StructureChecking():
         | StructureChecking.inscodes
         | Detects residues with insertion codes. No fix provided (yet)
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('inscodes', opts)
 
@@ -494,7 +494,7 @@ class StructureChecking():
         | StructureChecking.altloc
         | Detect/Select Alternative Locations
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('altloc', opts)
 
@@ -602,7 +602,7 @@ class StructureChecking():
         | StructureChecking.metals
         | Detect/Remove Metals
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('metals', opts)
 
@@ -690,7 +690,7 @@ class StructureChecking():
         | StructureChecking.water
         | Detect/Select Remove Water molecules
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('water', opts)
 
@@ -740,7 +740,7 @@ class StructureChecking():
         | StructureChecking.hetatm
         | Manages hetero atoms. Not implemented yet.
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         print("Warning: hatatm function not implemented yet, running ligands instead")
         self._run_method('ligands', opts)
@@ -750,7 +750,7 @@ class StructureChecking():
         | StructureChecking.ligands
         | Detect/Remove Ligands
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('ligands', opts)
 
@@ -842,7 +842,7 @@ class StructureChecking():
         | StructureChecking.add_hydrogen
         | Remove Hydrogen atoms from structure
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('rem_hydrogen', opts)
 
@@ -886,7 +886,7 @@ class StructureChecking():
         | StructureChecking.getss
         | Detect SS Bonds
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('getss', opts)
 
@@ -959,7 +959,7 @@ class StructureChecking():
         | StructureChecking.amide
         | Detect/Fix Amide atoms Assignment
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('amide', opts)
 
@@ -1059,7 +1059,7 @@ class StructureChecking():
         | StructureChecking.chiral
         | Detect/Fix Improper side chain chirality
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('chiral', opts)
 
@@ -1142,7 +1142,7 @@ class StructureChecking():
         | StructureChecking.chiral_bck
         | Detect/Fix Improper CA chirality. No fix
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('chiral_bck', opts)
 
@@ -1212,7 +1212,7 @@ class StructureChecking():
         | StructureChecking.clashes
         | Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('clashes', opts)
 
@@ -1228,7 +1228,7 @@ class StructureChecking():
         | StructureChecking.fixside
         | Complete side chains (heavy atoms, protein only)
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('fixside', opts)
 
@@ -1351,7 +1351,7 @@ class StructureChecking():
         | StructureChecking.add_hydrogen
         | Add Hydrogen Atoms to the structure
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('add_hydrogen', opts)
 
@@ -1494,7 +1494,7 @@ class StructureChecking():
         | StructureChecking.mutateside
         | Mutate side chain with minimal atom replacement
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('mutateside', mut_list)
 
@@ -1541,7 +1541,7 @@ class StructureChecking():
         | StructureChecking.models
         | Analyze/Fix main chain missing atoms and fragments (protein only)
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('backbone', opts)
 
@@ -1874,7 +1874,7 @@ class StructureChecking():
         | StructureChecking.cistransbck
         | Analyzes cis-trans dihedrals on backbone atoms
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
         """
         self._run_method('cistransbck', opts)
 
