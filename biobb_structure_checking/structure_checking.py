@@ -28,7 +28,7 @@ class StructureChecking():
     
     Args:
         base_dir_path (str): Base directory path where application resides. 
-        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html
+        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html. Recommended 'non-interactive':True for Notebook use.
     """
     def __init__(self, base_dir_path, args):
 
@@ -408,7 +408,6 @@ class StructureChecking():
         Usage:
             [--select] option (str)
             {'select' (str): option}
-            Options:
                 * **chain_ids** - List of chains to retain (comma separated, case sensitive)
                 * **protein** - Select all protein chains
                 * **na** - Select all NA chains
