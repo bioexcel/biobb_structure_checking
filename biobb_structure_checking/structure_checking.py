@@ -337,11 +337,10 @@ class StructureChecking():
         | Detect/Select Models
         
         Args:
-            opts (str | list(str) | dict) (Optional): (None). 
-            opts (None): Check only
-            opts (dict): 
-                * select: Selected Model
+            opts (str | list(str) | dict) (Optional): (None) Command options. None: Check only
             opts (str | list(str)) :  --select model_num. 
+            opts (dict):
+            * select (**int**) - Selected Model
         """
         self._run_method('models', opts)
 
