@@ -338,8 +338,8 @@ class StructureChecking():
         
         Args:
             opts (str | list(str) | dict) (Optional - Command options): 
-                * None - Check only
-                * str - [--select] model_num
+                * None: Check only
+                * str: [--select] model_num
                 * dict:
                     * select (int) - Selected Model
         """
@@ -398,7 +398,11 @@ class StructureChecking():
         | StructureChecking.chains
         | Detect/Select Chains
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (str | list(str) | dict) (Optional - Command options): 
+                * None: Check only
+                * str: [--select] chain_ids|protein|na|rna|dna
+                * dict:
+                    * select (str) - chain_ids(Comma separated)|protein|na|rna|dna 
         """
         self._run_method('chains', opts)
 
