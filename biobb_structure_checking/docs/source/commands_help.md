@@ -12,45 +12,34 @@
 ### System Configuration Commands
 Commands to manipulate structure composition. 
 
-**sequences**  
-_Print canonical and structure sequences in FASTA format_
+**sequences** - _Print canonical and structure sequences in FASTA format_
 
-**models** [--select model_num]  
-_Detect/Select Models_
+**models** [--select model_num] - _Detect/Select Models_
 
-**chains** [--select chain_ids | molecule_type]  
-_Detect/Select Chains_
+**chains** [--select chain_ids | molecule_type] - _Detect/Select Chains_
 
-**inscodes**  
-_Detects residues with insertion codes. No fix provided (yet)_
+**inscodes** - _Detects residues with insertion codes. No fix provided (yet)_
 
-**altloc** [--select occupancy| alt_id | list of res_id:alt_id]  
-_Detect/Select Alternative Locations_
+**altloc** [--select occupancy| alt_id | list of res_id:alt_id] - _Detect/Select Alternative Locations_
 
-**metals** [--remove All | None | Met_ids_list | Residue_list]  
-_Detect/Remove Metals_
+**metals** [--remove All | None | Met_ids_list | Residue_list] - _Detect/Remove Metals_
 
-**ligands** [--remove All | None | Res_type_list | Residue_list]  
-_Detect/Remove Ligands_
+**ligands** [--remove All | None | Res_type_list | Residue_list] - _Detect/Remove Ligands_
 
-**getss** [--mark All | None | Residue_list]  
- _Detect SS Bonds_  
+**getss** [--mark All | None | Residue_list] - _Detect SS Bonds_  
  * **--mark** - Replace relevant CYS by CYX to mark SS Bond (HG atom removed if present)
 
-**water** [--remove Yes|No]  
-_Remove Water molecules_
+**water** [--remove Yes|No] - _Remove Water molecules_
 
-**rem_hydrogen** [--remove Yes|No]  
-_Remove Hydrogen atoms from structure_
+**rem_hydrogen** [--remove Yes|No] - _Remove Hydrogen atoms from structure_
 
-**mutateside** [--mut mutation_list] [--no_check_clashes] [--rebuild]   
+**mutateside** [--mut mutation_list] [--no_check_clashes] [--rebuild] -
 _Mutate side chain with minimal atom replacement_  
 * Allows multiple mutations (comma separated). 
 * Check generated clashes except **--no_check_clashes** set.
 * **--rebuild** optimize side chains using Modeller. 
 
-**add_hydrogen** [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF]  
-_Add Hydrogen Atoms to the strucure_  
+**add_hydrogen** [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF] - _Add Hydrogen Atoms to the strucure_  
 * **--add_mode**
   * **Auto** - std changes at pH 7.0. His->Hie. pH: set pH value  
   * **list** - Explicit list as [*:]HisXXHid
@@ -63,21 +52,17 @@ _Add Hydrogen Atoms to the strucure_
 ### Fix Structure Errors
 Commands to detect and fix possible structure errors. 
 
-**Amide** [--fix All|None|Residue List] [--no_recheck]  
-_Detect/Fix Amide atoms Assignment_
+**Amide** [--fix All|None|Residue List] [--no_recheck] - _Detect/Fix Amide atoms Assignment_
 * Amide contacts are rechecked unless **--no_recheck** That can lead to infinite loops if done non-interactively.
   
-**chiral** [--fix All|None|Residue List] [--no_check_clashes]  
-_Detect/Fix Improper side chain chirality_
+**chiral** [--fix All|None|Residue List] [--no_check_clashes] - _Detect/Fix Improper side chain chirality_
 * Checks for generated clashes unless **--no_check_clashes** set
 
-**fixside** [--fix All |None|Residue List] [--no_check_clashes]  
-_Complete side chains (heavy atoms, protein only)_
+**fixside** [--fix All |None|Residue List] [--no_check_clashes] - _Complete side chains (heavy atoms, protein only)_
 * Checks generated clashes unless **--no_check_clashes** set
 * **--rebuild**  Rebuild complete side chain using Modeller
   
-**backbone** [--fix_atoms All|None|Residue List] [--fix_main All|None|Break list] [--add_caps All|None|Break list] [--extra_gap]        [--no_recheck] [--no_check_clashes]  
-_Analyze main chain missing atoms and fragments (protein only)_
+**backbone** [--fix_atoms All|None|Residue List] [--fix_main All|None|Break list] [--add_caps All|None|Break list] [--extra_gap]        [--no_recheck] [--no_check_clashes] - _Analyze main chain missing atoms and fragments (protein only)_
 * **--fix_atoms** Add missing O, OXT backbone atoms.
 * **--fix_main** Missing fragments filled using comparative modelling (Modeller License needed)
 * **--add_caps** Add ACE and NME residues as necessary, preserving existing atoms
@@ -88,10 +73,8 @@ _Analyze main chain missing atoms and fragments (protein only)_
 ### Structure Warnings
 Additional checks on structure quality. No fix available.
 
-**cistransbck**  
-_Analyzes cis-trans dihedrals on backbone atoms_
+**cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms_
 
-**clashes**  
-_Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative_
+**clashes** - _Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative_
 
 ***
