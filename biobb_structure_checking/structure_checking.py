@@ -335,13 +335,15 @@ class StructureChecking():
         """
         | StructureChecking.models
         | Detect/Select Models
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (str | list(str) | dict) (Optional - Command options): 
-                * None: Check only
-                * str: [--select] model_num
-                * dict:
-                    * select (int) - Selected Model
+            opts (str | list(str) | dict) (Optional): Command options.
+        
+        Options:
+            [--select] model_num (int)
+            {'select': model_num}
         """
         self._run_method('models', opts)
 
@@ -403,8 +405,10 @@ class StructureChecking():
         Args:
             opts (str | list(str) | dict) (Optional): Command options.
         
-        Options:
-            [--select] one of (str):
+        Usage:
+            [--select] option (str)
+            {'select' (str): option}
+            Options:
                 * **chain_ids** - List of chains to retain (comma separated, case sensitive)
                 * **protein** - Select all protein chains
                 * **na** - Select all NA chains
