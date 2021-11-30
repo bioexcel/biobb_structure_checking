@@ -1425,7 +1425,7 @@ class StructureChecking():
                 
         Args:
             opts (dict - Command options dictionary):
-                * add_mode (str) - One of
+                * add_mode : One of
                     **auto** - Add hydrogen atom considering pH 7.0
                     **pH** (float) - Set explicit pH
                     **list** (str) - Explicit residue list as [*:]HisXXHid
