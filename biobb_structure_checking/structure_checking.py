@@ -335,11 +335,11 @@ class StructureChecking():
         """
         | StructureChecking.models
         | Detect/Select Models
+        
         Args:
-            opts (None): None. Check Only
-            opts (dict):
+            opts (str | list(str) | dict) (None): 
                 * select: Model number to retains
-            opts (str | list(str)) :  --select model_num. 
+            opts_str :  --select model_num. 
         """
         self._run_method('models', opts)
 
