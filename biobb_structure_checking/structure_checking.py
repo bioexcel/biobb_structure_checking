@@ -23,12 +23,12 @@ class StructureChecking():
     """
     | biobb_structure_checking.StructureChecking
     | Main class to control structure checking functionality
-    | Provides functionality to check_structure command line 
-    | Loaded directly for Jupyter Notebook or python scripts. 
+    | Provides support for to check_structure command line 
+    | Load directly for Jupyter Notebook or python scripts. 
     
     Args:
         * **base_dir_path** (str): Base directory path where application resides. 
-        * **args** (dict): Arguments dictionary
+        * **args** (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html
     """
     def __init__(self, base_dir_path, args):
 
@@ -74,7 +74,7 @@ class StructureChecking():
     def launch(self):
         """
         | StructureChecking.launch
-        | Method to run from the command line
+        | Method run from the command line invocation
         """
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
@@ -147,7 +147,7 @@ class StructureChecking():
         | StructureChecking.print_stats
         | Print statistics on the loaded structure
         Args:
-            * **prefix** (str) (Optional): (None) Prefix to add to the output lines for indentfication.
+            * **prefix** (str) (Optional): (None) Prefix to add to the output lines for identfication.
         """
         self.strucm.calc_stats()
         if prefix is None: 
@@ -226,7 +226,7 @@ class StructureChecking():
         """
         | StructureChecking.revert_changes
         | Reload original structure.
-        | Used in Notebooks to revert changes
+        | Used in Pipelines or Notebooks to revert changes
         """
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
@@ -239,7 +239,7 @@ class StructureChecking():
         
         Args:
             * **command** (str): Command to run
-            * **opts** (str | list(str) | dict): Command options
+            * **opts** (str | list(str) | dict): Command options, passed from callers
         """
         try:
             f_check = getattr(self, '_' + command + '_check')
@@ -310,7 +310,7 @@ class StructureChecking():
         | StructureChecking.sequences
         | Print canonical and structure sequences in FASTA format
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            * **opts** (str): (None) Not used
         """
         self._run_method('sequences', opts)
 
@@ -336,7 +336,10 @@ class StructureChecking():
         | StructureChecking.models
         | Detect/Select Models
         Args:
-            * **opts** (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            * **opts** (None): None. Check Only
+            * **opts** (dict):
+                * select: Model number to retains
+            * **opts** (str | list(str)) :  --select model_num. 
         """
         self._run_method('models', opts)
 
