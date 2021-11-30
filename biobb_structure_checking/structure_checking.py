@@ -339,7 +339,7 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts: Command options.
+            opts (dict - Command options dictionary):
                 * select (int) - model number to select
         """
         self._run_method('models', opts)
@@ -400,7 +400,7 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict- Command options dictionary): 
+            opts (dict - Command options dictionary): 
                 * select (str) - One of: 
                 **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
                 **protein** - Select all protein chains,
@@ -474,6 +474,7 @@ class StructureChecking():
         """
         | StructureChecking.inscodes
         | Detects residues with insertion codes. No fix provided (yet)
+        
         Args:
             opts (str) (Optional): Unused
         """
@@ -508,11 +509,11 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (str | list(str) | dict) (Optional): Command options
-                [--select] one of
-                    * occupancy - select higher occupancy
-                    * alt_id - All atoms of the indicated alternative
-                    * list of res_id:alt_id - Indicate per atom
+            opts (dict - Command options dictionary):
+                * select : One of
+                    * **occupancy** - select higher occupancy,
+                    * **alt_id** - All atoms of the indicated alternative
+                    * **list** of res_id:alt_id - Indicate selection per atom
                 
         """
         self._run_method('altloc', opts)
@@ -624,8 +625,11 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options 
-                * [--remove] (all | none | atom_type_list | residue_list)
+            opts (dict - Command options dictionary):
+                * remove (str) - One of
+                    **all** - Remove all metal atoms,
+                    **atom_type_list**: Remove all Metals of listed types
+                    **residue_list**: Remove indicated residues
         """
         self._run_method('metals', opts)
 
@@ -716,8 +720,8 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. 
-                * [--remove] Yes | No 
+            opts (dict - Command options):. 
+                * remove: Yes - Remove All Water molecules
         """
         self._run_method('water', opts)
 
@@ -778,7 +782,11 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
           Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * remove (str) - One of:
+                    **all** - Remove all hetatm,
+                    **res_type_list** - Remove Hetatm of given types,
+                    **residue_list** - Remove indicated residues
         """
         self._run_method('ligands', opts)
 
@@ -873,7 +881,8 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * remove (str): Yes - remove all hydrogen atoms
         """
         self._run_method('rem_hydrogen', opts)
 
@@ -920,7 +929,10 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * mark (str) - One of 
+                    **all** - Rename all reported cys residues as CYX,
+                    **residue_list** - Rename indicated residues
         """
         self._run_method('getss', opts)
 
@@ -996,7 +1008,11 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * fix (str) - One of
+                    **All** - Fix all residues,
+                    **residue_list** - Fix indicated residues
+                * no_recheck (bool) - (False) Do not recheck amide residues after modification.
         """
         self._run_method('amide', opts)
 
@@ -1099,7 +1115,11 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * fix (str) - (All) One of
+                    **All** - Fix all residues
+                    **residue_list** - Fix indicates residues
+                * no_check_clashes (bool) (Optional) - (False) Do not check generated clashes
         """
         self._run_method('chiral', opts)
 
@@ -1181,11 +1201,9 @@ class StructureChecking():
         """
         | StructureChecking.chiral_bck
         | Detect/Fix Improper CA chirality. No fix
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict): Unused
         """
         self._run_method('chiral_bck', opts)
 
@@ -1254,9 +1272,9 @@ class StructureChecking():
         """
         | StructureChecking.clashes
         | Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative
-
+        
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts(dict): Unused
         """
         self._run_method('clashes', opts)
 
@@ -1275,7 +1293,12 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * fix (str) - one of 
+                    **all** - Fix all residues
+                    **residue_list** - Fix indicated residues
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
+                * rebuild (bool) (Optional) - (False) Rebuild side chains using Modeller
         """
         self._run_method('fixside', opts)
 
@@ -1401,7 +1424,14 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * add_mode (str) - One of
+                    **auto** - Add hydrogen atom considering pH 7.0
+                    **pH** (float) - Set explicit pH
+                    **list** (str) - Explicit residue list as [*:]HisXXHid
+                * no_fix_side (bool) (Optional) - (False) Do not fix side chains.
+                * keep_h (bool) (Optional) - (False) Keep original Hydrigen atoms
+                * add_charges FF (str) (Optional) - Add charges and atom types for the selected FF
         """
         self._run_method('add_hydrogen', opts)
 
@@ -1547,7 +1577,10 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * mut (str) - List of mutations
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
+                * rebuild (bool) (Optional) - (False) - Optimize new side chains using Modeller
         """
         self._run_method('mutateside', mut_list)
 
@@ -1597,7 +1630,19 @@ class StructureChecking():
         | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary):
+                * fix_atoms (str) - Fix missing O, OXT backbone atoms, of
+                    **all** - Fix all residues
+                    **residue List** - Fix indicated residues
+                * fix_main (str) - Fix backbone main chain of
+                    **all** - All detected breaks
+                    **break list** - Indicated breaks
+                * add_caps (str) - Add ACE and NME residues of
+                    **all** - All detected terminals
+                    **residue_list** - Indicated terminals
+                * extra_gap (int) (Optional) - (0) Recover addiciontal residues from the model to impve match (experimental)
+                * no_recheck (bool) (Optional) - (False) Do not recheck backbone after fixing 
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
         """
         self._run_method('backbone', opts)
 
@@ -1929,11 +1974,9 @@ class StructureChecking():
         """
         | StructureChecking.cistransbck
         | Analyzes cis-trans dihedrals on backbone atoms
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | list(str) | dict): Command options. see https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html.
+            opts (dict - Command options dictionary): Unused
         """
         self._run_method('cistransbck', opts)
 
