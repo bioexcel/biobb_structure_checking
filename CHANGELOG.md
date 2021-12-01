@@ -44,45 +44,44 @@
 - several commands
     - adapted to work with NA chains
 
-- Extended support for verbosity
-  - Default verbosity has been reduced to errors and warnigs
-  - --nv --quiet removes all progress reports
-  - -v  adds extra progress report (original default)
+Extended support for verbosity
+    Default verbosity has been reduced to errors and warnigs
+    --nv --quiet removes all progress reports
+    -v  adds extra progress report (original default)
  
-### Bugs fixed
-- clashes, add_hydrogen did not work for modified or cap residues 
-- mutateside crashed when trying to delete already modified atoms
-- added error message when chains will remove all chains in the structure
-- added error message when mutateside has no available mutations
+Bugs fixed
+    - clashes, add_hydrogen did not work for modified or cap residues 
+    - mutateside crashed when trying to delete already modified atoms
+    - added error message when chains will remove all chains in the structure
+    - added error message when mutateside has no available mutations
     
-***
-## v3.7.3 (2021.1)
+================================================================================
+v3.7.3 (2021.1)
 
-### Extended functionality
-- Added support for biopython 1.78
+Added support for biopython 1.78
 
-### Bugs fixed
-- backbone
+Bugs fixed
+    backbone
     - added error messages for incorrect or missing FASTA sequences
     - backbone reconstruction crashed when not all chains sequences were available even if missing chains where not needed
         
-***
-## v3.0.2
+================================================================================
+v3.0.2
 
-### New functions
-- --rename_terms
-    - Rename N and C terms as NXXX, CXXX
+New functions
+    --rename_terms
+        Rename N and C terms as NXXX, CXXX
 
-### Extended functions:
-- mutateside & fixside --rebuild
-  - Uses Modeller for building the side chains, includes conformational search
-- backbone --extra_gap
-    - Allow to use more residues from the built model to fill backbone breaks
-- add_hydrogen --add_charges
-   - Adds point charges to atoms and produces a PDBQT output suitable for autodock
+Extended functions:
+    mutateside & fixside --rebuild
+        Uses Modeller for building the side chains, includes conformational search
+    backbone --extra_gap
+        Allow to use more residues from the built model to fill backbone breaks
+    add_hydrogen --add_charges
+        Adds point charges to atoms and produces a PDBQT output suitable for autodock
 
-### Bug fixes
-- --debug
-    - Psutils import failed even when --debug was not requested
-- backbone
-    - Residue internal pointers corrupted when backbone was modified
+Bug fixes
+    --debug
+        Psutils import failed even when --debug was not requested
+    backbone
+        Residue internal pointers corrupted when backbone was modified
