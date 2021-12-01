@@ -386,7 +386,6 @@ class StructureChecking():
                     * **na** - Select all NA chains,
                     * **rna** - Select all RNA chains,
                     * **dna** - Select all DNA chains.
-            
         """
         self._run_method('chains', opts)
 
@@ -452,7 +451,6 @@ class StructureChecking():
     def inscodes(self):
         """ StructureChecking.inscodes
         Detects residues with insertion codes. No fix provided (yet)
-        
         """
         self._run_method('inscodes', None)
 
@@ -686,7 +684,7 @@ class StructureChecking():
         Detect/Select Remove Water molecules. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (str | dict - Options dictionary):. 
+            opts (str | dict - Options dictionary):
                 * remove: Yes - Remove All Water molecules
         """
         self._run_method('water', opts)
@@ -1150,7 +1148,6 @@ class StructureChecking():
     def chiral_bck(self):
         """  StructureChecking.chiral_bck
         Detect/Fix Improper CA chirality. No fix.
-                
         """
         self._run_method('chiral_bck', None)
 
@@ -1218,7 +1215,6 @@ class StructureChecking():
     def clashes(self):
         """ StructureChecking.clashes
         Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative
-        
         """
         self._run_method('clashes', None)
 
@@ -1903,7 +1899,6 @@ class StructureChecking():
     def cistransbck(self):
         """ StructureChecking.cistransbck
         Analyzes cis-trans dihedrals on backbone atoms
-                
         """
         self._run_method('cistransbck', None)
 
