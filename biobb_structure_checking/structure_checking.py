@@ -72,9 +72,8 @@ class StructureChecking():
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
 
     def launch(self):
-        """
-        | StructureChecking.launch
-        | Method run from the command line invocation
+        """ StructureChecking.launch
+        Method run from the command line invocation
         """
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
@@ -143,11 +142,11 @@ class StructureChecking():
                 print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
     
     def print_stats(self, prefix=None):
-        """
-        | StructureChecking.print_stats
-        | Print statistics on the loaded structure
+        """ StructureChecking.print_stats
+        Print statistics on the loaded structure
+        
         Args:
-            prefix (str) (Optional): (None) Prefix to add to the output lines for identfication.
+            prefix (str): (None) Prefix to add to the output lines for identfication.
         """
         self.strucm.calc_stats()
         if prefix is None: 
@@ -155,9 +154,8 @@ class StructureChecking():
         self.strucm.print_stats(prefix)
 
     def command_list(self, opts):
-        """
-        | StructureChecking.command_list
-        | Manages command_list workflows
+        """ StructureChecking.command_list
+        Manages command_list workflows
         
         Args:
             opts (str | list(str)): Command options as str or str list. 
@@ -197,12 +195,11 @@ class StructureChecking():
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
     def checkall(self, opts=None):
-        """
-        | StructureChecking.checkall
-        | Predefined workflow for complete checking
+        """ StructureChecking.checkall
+        Predefined workflow for complete checking
         
         Args:
-            opts (str | list(str) | dict)  (Optional): (None) Not used.
+            opts (str | list(str) | dict): (None) Unused.
         """
         #Required for interactive run in Notebooks
         old_check_only = self.args['check_only']
@@ -214,31 +211,26 @@ class StructureChecking():
         self.args['check_only'] = old_check_only
 
     def fixall(self, opts=None):
-        """
-        | StructureChecking.fixall
-        | Fix all using defaults
-        | Not implemented (yet)
+        """ StructureChecking.fixall
+        Fix all using defaults. Not implemented (yet)
         """
         # TODO Implement method fixall
         print("Fixall not implemented (yet)")
 
     def revert_changes(self):
-        """
-        | StructureChecking.revert_changes
-        | Reload original structure.
-        | Used in Pipelines or Notebooks to revert changes
+        """ StructureChecking.revert_changes
+        Reload original structure. Used in Pipelines or Notebooks to revert changes.
         """
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
         print(cts.MSGS['ALL_UNDO'])
 
     def _run_method(self, command, opts):
-        """
-        | Private. StructureChecking._run_method
-        | Run check and fix methods for specific command
+        """ Private. StructureChecking._run_method
+        Run check and fix methods for specific command
         
         Args:
-            command** (str): Command to run
+            command (str): Command to run
             opts (str | list(str) | dict): Command options, passed from callers
         """
         try:
@@ -304,11 +296,10 @@ class StructureChecking():
                 )
             )
 # ==============================================================================
-
     def sequences(self, opts=None):
-        """
-        | StructureChecking.sequences
-        | Print canonical and structure sequences in FASTA format
+        """ StructureChecking.sequences
+        Print canonical and structure sequences in FASTA format
+        
         Args:
            opts (str): (None) Unused
         """
@@ -332,11 +323,8 @@ class StructureChecking():
         return {}
 
     def models(self, opts=None):
-        """
-        | StructureChecking.models
-        | Detect/Select Models
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
+        """ StructureChecking.models
+        Detect/Select Models. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
             opts (dict - Command options dictionary):
@@ -393,20 +381,17 @@ class StructureChecking():
 # =============================================================================
 
     def chains(self, opts=None):
-        """
-        | StructureChecking.chains
-        | Detect/Select Chains
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
+        """ StructureChecking.chains
+        Detect/Select Chains. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict - Command options dictionary): 
-                * select (str) - One of: 
-                **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
-                **protein** - Select all protein chains,
-                **na** - Select all NA chains,
-                **rna** - Select all RNA chains,
-                **dna** - Select all DNA chains.
+            opts (dict - Options dictionary): 
+                select (str): 
+                    * **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
+                    * **protein** - Select all protein chains,
+                    * **na** - Select all NA chains,
+                    * **rna** - Select all RNA chains,
+                    * **dna** - Select all DNA chains.
             
         """
         self._run_method('chains', opts)
