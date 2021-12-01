@@ -7,7 +7,7 @@
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/04/Bioexcell_logo_1080px_transp.png
 
 BIOBB_STRUCTURE_CHECKING
-------------
+------------------------
 
 Contents
 ========
@@ -18,6 +18,7 @@ Contents
    Introduction & installation <readme>
    API Documentation <modules>
    Command-Line Documentation <command_line>
+   Changelog <changelog>
 
 Indices and tables
 ==================
