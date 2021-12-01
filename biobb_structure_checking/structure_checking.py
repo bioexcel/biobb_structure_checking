@@ -386,7 +386,7 @@ class StructureChecking():
         
         Args:
             opts (dict - Options dictionary): 
-                select (str): 
+                select: 
                     * **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
                     * **protein** - Select all protein chains,
                     * **na** - Select all NA chains,
@@ -456,12 +456,11 @@ class StructureChecking():
 
 # =============================================================================
     def inscodes(self, opts=None):
-        """
-        | StructureChecking.inscodes
-        | Detects residues with insertion codes. No fix provided (yet)
+        """ StructureChecking.inscodes
+        Detects residues with insertion codes. No fix provided (yet)
         
         Args:
-            opts (str) (Optional): Unused
+            opts (str): Unused
         """
         self._run_method('inscodes', opts)
 
@@ -487,19 +486,15 @@ class StructureChecking():
 # =============================================================================
 
     def altloc(self, opts=None):
-        """
-        | StructureChecking.altloc
-        | Detect/Select Alternative Locations
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
+        """ StructureChecking.altloc
+        Detect/Select Alternative Locations. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict - Command options dictionary):
-                * select : One of
+            opts (dict - Options dictionary):
+                * select : 
                     * **occupancy** - select higher occupancy,
                     * **alt_id** - All atoms of the indicated alternative
-                    * **list** of res_id:alt_id - Indicate selection per atom
-                
+                    * **list** of res_id:alt_id - Indicate selection per atom                
         """
         self._run_method('altloc', opts)
 
@@ -603,18 +598,15 @@ class StructureChecking():
 # =============================================================================
 
     def metals(self, opts=None):
-        """
-        | StructureChecking.metals
-        | Detect/Remove Metals
-        | Check only with no options
-        | Options accepted as command-line string, or python dictionary.
+        """ StructureChecking.metals
+        Detect/Remove Metals. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
             opts (dict - Command options dictionary):
-                * remove (str) - One of
-                    **all** - Remove all metal atoms,
-                    **atom_type_list**: Remove all Metals of listed types
-                    **residue_list**: Remove indicated residues
+                remove :
+                    * **all** - Remove all metal atoms,
+                    * **atom_type_list**: Remove all Metals of listed types
+                    * **residue_list**: Remove indicated residues
         """
         self._run_method('metals', opts)
 
