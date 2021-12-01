@@ -1,48 +1,48 @@
-v3.9.0 (2021.4)
+## v3.9.0 (2021.4)
 
-New functions
-    
+### New functions
 
-Extended functions
-    Jupyter Notebook support extended
-        -Help() function
-        -Settings accepted as single values, command line strings or Python dictionaries. 
+### Extended functions
+
+- Jupyter Notebook support extended
+  - Help() function
+  - Settings accepted as Python dictionaries. 
         
-    add_hydrogen
-        -Added support for multiple atom type sets (currently ADP, CMIP)
-        -Added support for pqr, pdbqt, cmip output formats
-        -Added support for pqr input format
-        -Terminal residue names available on 3 or 4 letter (Nxxx, Cxxx) codes
+- add_hydrogen
+    - Added support for multiple atom type sets (currently ADP, CMIP)
+    - Added support for pqr, pdbqt, cmip output formats
+    - Added support for pqr input format
+    - Terminal residue names available on 3 or 4 letter (N-, C-) codes
 
-    command_list
-        -Added support for inline command lists
+- command_list
+    - Added support for inline command lists
 
-Bug Fixes
-    - Fix charge assignment for modified residues and terminals
-    - Fixed tests
+### Bug Fixes
+- Fix charge assignment for modified residues and terminals
+- Fixed tests
 
-=================================================================================
-V3.8.5 (2021.2)
+***
+## V3.8.5 (2021.2)
 
-New functions
-    sequences 
-        prints both canonical and structural sequences (protein or NA).
+### New functions
+- sequences
+  - prints both canonical and structural sequences (protein or NA).
 
-Extended functions
-    mutateside
-        added support for mutation of DNA/RNA residues
-        --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes) 
-    chains 
-        allows to select chains according to molecular type (protein | dna | rna | na). 
-        Improved guess of chain type.
-    getss 
-        can now mark CYS residues as part of SSBonds. Further commands like add_hydrogen reacts accordingly
-    load
-        can now be used to convert downloaded cif to pdb format using --force_save
-    Modeller based commands
-        adapted to support Modeller >= 10.1
-    several commands
-        adapted to work with NA chains
+### Extended functions
+- mutateside
+    - added support for mutation of DNA/RNA residues
+    - --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes) 
+- chains 
+    - allows to select chains according to molecular type (protein | dna | rna | na).
+    - Improved guess of chain type.
+- getss 
+    - can now mark CYS residues as part of SSBonds. Further commands like add_hydrogen reacts accordingly
+- load
+    - can now be used to convert downloaded cif to pdb format using --force_save
+- Modeller based commands 
+    - adapted to support Modeller >= 10.1
+- several commands
+    - adapted to work with NA chains
 
 Extended support for verbosity
     Default verbosity has been reduced to errors and warnigs
