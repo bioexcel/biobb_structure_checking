@@ -1,114 +1,53 @@
-# Structure Checking from MDWeb
-
+# biobb_structure_checking
+### Introduction
 Biobb_structure_checking performs 3D structure quality checking intended to facilitate the setup of molecular dynamics simulation of protein or nucleic acids systems.
 
 Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), detects and fixes structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality).
 
+Biobb_structure_checking provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html). 
+
 The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
+### Version
+v3.9.0 December 2021
 
-```
-usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
-                       [--file_format FILE_FORMAT] [--sequence FASTA_SEQ_PATH]
-                       [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
-                       [--modeller_key MODELLER_KEY]
-                       [--res_lib RES_LIBRARY_PATH]
-                       [--data_lib DATA_LIBRARY_PATH]
-                       [-o OUTPUT_STRUCTURE_PATH] [--rename_terms]
-                       [--json JSON_OUTPUT_PATH] [-nv] [-v]
-                       [--limit ATOM_LIMIT] [--debug] [--force_save]
-                       [--check_only] [--non_interactive] [--version]
-                       command ...
+### Requirements
 
+* Biopython
+### Optional requirements
+* psutil (required for --debug, included in conda pkg.) 
+* Modeller (required for some functionalities, not included in conda pkg.)
+* jupyter & nglview (required for demonstration notebooks, not included in conda pkg.)
 
-positional arguments:
-  command               Command to execute (help: check_structure commands)
-  options               Specific command options
+### Installation
+Using PIP:
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}.
-                        Biounits pdb:{pdbid}.{bn}. Biounits require MMB server
-  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
-                        Output structure. PDB|PDBQT|PQR|CMIP Formats
-  --json JSON_OUTPUT_PATH
-                        Summary activities on a json file
-  --file_format FILE_FORMAT
-                        Format for retrieving structures (default=mmCif|pdb|xml)
-  --sequence FASTA_SEQ_PATH
-                        Canonical sequence in FASTA format, pdb_chain[,chain] in header,
-                        may be required for backbone rebuilding
-  --pdb_server PDB_SERVER
-                        Remote server for retrieving structures (default|MMB)
-  --cache_dir CACHE_DIR_PATH
-                        Path for structure's cache directory (default: ./tmpPDB)
-  --modeller_key MODELLER_KEY
-                        User key for modeller, required for backbone rebuilding,
-                        register at https://salilab.org/modeller/registration.html
+> **Important:** PIP only installs the package. All the dependencies must be installed separately. To perform a complete installation, please use ANACONDA.
 
-  --res_lib RES_LIBRARY_PATH
-                        Override settings default residue library (AMBER prep format)
-  --data_lib DATA_LIBRARY_PATH
-                        Override settings default data library
-  --quiet               Reduces output, removing labels and progress info
-  --limit ATOM_LIMIT    Limit on number of atoms, 0: nolimit
-  --debug               Add debug information
-  --force_save          Force saving an output file even if no modification
-  --rename_terms        Label N-term and C-term as NXXX and CXXX residues (for Amber compatibility)
-  --check_only          Perform checks only, structure is not modified
-  --non_interactive     Do not prompt for missing parameters
-  --version             show program's version number and exit
-```
+* Installation:
 
-## Available commands:
+        pip install "biobb_structure_checking>=3.9.0"
 
-```
-  command               Command to execute (help: check_structure commands)
-  options               Specific command options
+* Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -i INPUT_STRUCTURE_PATH, --input INPUT_STRUCTURE_PATH
-                        Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}
-  --file_format FILE_FORMAT
-                        Format for retrieving structures
-                        (default=mmCif|pdb|xml)
-  --sequence FASTA_SEQ_PATH
-                        Canonical sequence in FASTA format, pdb_chain[,chain]
-                        in header
-  --pdb_server PDB_SERVER
-                        Server for retrieving structures (default|MMB)
-  --cache_dir CACHE_DIR_PATH
-                        Path for structure's cache directory (default:
-                        ./tmpPDB)
-  --modeller_key MODELLER_KEY
-                        User key for modeller, required for backbone fix,
-                        register at
-                        https://salilab.org/modeller/registration.html
-  --res_lib RES_LIBRARY_PATH
-                        Override settings default residue library (AMBER prep
-                        format)
-  --data_lib DATA_LIBRARY_PATH
-                        Override settings default data library
-  -o OUTPUT_STRUCTURE_PATH, --output OUTPUT_STRUCTURE_PATH
-                        Output structure. Format PDB|PDBQT|PQR|CMIP
-  --rename_terms        Show terminal residues as NXXX, CXXX in output files
-  --json JSON_OUTPUT_PATH
-                        Summary checking results on a json file
-  -nv, --quiet          Minimal output, removing labels and progress info
-  -v, --verbose         Add extra progress info
-  --limit ATOM_LIMIT    Limit on number of atoms,0:nolimit
-  --debug               Add debug information (timings, resources)
-  --force_save          Force saving an output file even if no modification
-  --check_only          Perform checks only, structure is not modified
-  --non_interactive     Do not prompt for missing parameters
-  --version             show program's version number and exit
+Using ANACONDA:
 
-```
-### Dependencies
-* python >=3.7
-* biopython >=1.78
-* numpy
-* modeller 10.1 (optional)
-* psutil (for performance debug, optional)
+* Installation:
+
+        conda install -c bioconda "biobb_structure_checking>=3.9.0"
+
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
+
+### Copyright & Licensing
+This software has been developed in the MMB group (http://mmb.irbbarcelona.org) at the
+BSC (https://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European BioExcel (https://bioexcel.eu/), funded by the European Commission
+(EU H2020 [675728](https://cordis.europa.eu/projects/675728)).
+
+* (c) 2015-2021 [Barcelona Supercomputing Center](https://www.bsc.es/)
+* (c) 2015-2021 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
+
+Licensed under the
+[GNU Lesser General Public License v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
+
+![](https://bioexcel.eu/wp-content/uploads/2015/12/Bioexcell_logo_1080px_transp.png "Bioexcel")
