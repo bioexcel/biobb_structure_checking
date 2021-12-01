@@ -1,12 +1,25 @@
 # biobb_structure_checking
 ### Introduction
-Biobb_structure_cheching perform 3D structure quality checking
+Biobb_structure_cheching performs 3D structure quality checking intended to facilitate the setup of molecular dynamics simulation of protein or nucleic acids systems.
+
+Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), detects and fixes structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality).
+
+Biobb_structure_checking provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html). 
 
 The latest documentation of this package can be found in our readthedocs site:
-[latest API documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
+[latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v3.8.5 November 2021
+v3.9.0 December 2021
+
+### Requirements
+
+* Biopython
+### Optional requirements
+* psutil (required for --debug, included in conda pkg.) 
+* Modeller (required for some functionalities, not included in conda pkg.)
+* jupyter & nglview (required for demonstration notebooks, not included in conda pkg.)
+
 ### Installation
 Using PIP:
 
@@ -14,24 +27,22 @@ Using PIP:
 
 * Installation:
 
-        pip install "biobb_structure_checking>=3.8.5"
+        pip install "biobb_structure_checking>=3.9.0"
 
-* Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html)
+* Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
 
 Using ANACONDA:
 
 * Installation:
 
-        conda install -c bioconda "biobb_structure_checking>=3.8.5"
+        conda install -c bioconda "biobb_structure_checking>=3.9.0"
 
-* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://
-biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the [Command Line documentation](https://
-biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
 
 ### Copyright & Licensing
 This software has been developed in the MMB group (http://mmb.irbbarcelona.org) at the
-BSC (http://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European BioExcel (http://bioexcel.eu/), funded by the European Commission
-(EU H2020 [675728](http://cordis.europa.eu/projects/675728)).
+BSC (https://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European BioExcel (https://bioexcel.eu/), funded by the European Commission
+(EU H2020 [675728](https://cordis.europa.eu/projects/675728)).
 
 * (c) 2015-2021 [Barcelona Supercomputing Center](https://www.bsc.es/)
 * (c) 2015-2021 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
