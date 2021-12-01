@@ -18,7 +18,7 @@ Contents
    Introduction & installation <readme>
    API Documentation <modules>
    Command-Line Documentation <command_line>
-   CHANGELOG <changelog>
+   CHANGELOG <changelog_menu>
 
 Indices and tables
 ==================
