@@ -1,5 +1,5 @@
 
-## Commands Help
+## commands Help
 
 ### Preset commands
 
