@@ -151,7 +151,7 @@
    "GLU B371",
    "GLU B374"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "AC2 A1": {
@@ -328,7 +328,10 @@
    "A": 1,
    "B": 1
   },
-  "selected": {}
+  "selected": {
+   "A": 1,
+   "B": 1
+  }
  },
  "chiral": {
   "n_chirals": 84,
@@ -529,12 +532,13 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 9380,
-  "num_res": 614,
+  "num_ats": 9351,
+  "num_res": 612,
   "num_wat": 0,
-  "res_hetats": 2,
+  "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 2
+  "res_ligands": 0,
+  "total_charge": -2.531111999999998
  },
  "fixside": {
   "detected_missing": {
@@ -662,18 +666,16 @@
  "inscodes": {},
  "ligands": {
   "detected": [
-   "SO4 A4",
    "AC2 A1",
-   "SO4 B3",
    "AC2 B2"
   ],
   "n_removed": 2,
   "removed": {
    "lst": [
-    "SO4 A4",
-    "SO4 B3"
+    "AC2 A1",
+    "AC2 B2"
    ],
-   "opt": "SO4"
+   "opt": "All"
   }
  },
  "metals": {
@@ -701,7 +703,8 @@
   "num_wat": 292,
   "res_hetats": 296,
   "res_insc": 0,
-  "res_ligands": 4
+  "res_ligands": 4,
+  "total_charge": null
  },
  "water": {
   "n_detected": 292,

@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -121,9 +121,20 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 17: add_hydrogen --add_mode auto
+Step 17: ligands --remove All
 
-Running add_hydrogen. Options: --add_mode auto
+Running ligands. Options: --remove All
+No ligands found
+
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+1 Chain(s) detected
+ A: Protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
+
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 24 Residues requiring selection on adding H atoms
  ASP A21,A32,A39,A52,A58
  GLU A16,A18,A24,A34,A51,A64
@@ -136,6 +147,8 @@ Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A68 by HIE
+Updating partial charges and atom types
+Total assigned charge:      -0.00
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
@@ -145,5 +158,6 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  1231
+Total charge -0.000
 Structure saved on 1ubq_all_test.pdb
 Summary data saved on 1ubq_all_test.json

@@ -78,8 +78,7 @@ class StructureChecking():
                 if not self.strucm.modified:
                     print(cts.MSGS['FORCE_SAVE_STRUCTURE'])
                 if not self.args['check_only']:
-                    self.strucm.calc_stats()
-                    self.strucm.print_stats('Final')
+                    self.print_stats('Final')
                     self.summary['final_stats'] = self.strucm.get_stats()
                 try:
                     output_structure_path = self._save_structure(
@@ -131,6 +130,10 @@ class StructureChecking():
                 print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
             except IOError:
                 print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
+    
+    def print_stats(self, prefix=''):
+        self.strucm.calc_stats()
+        self.strucm.print_stats(prefix)
 
     def command_list(self, opts):
         """ Manages command_list workflows"""
@@ -158,7 +161,6 @@ class StructureChecking():
             
         i = 1
         for line in command_list:
-            print(line)
             if not self.args['quiet']:
                 print("\nStep {}: {}".format(i, line))
             data = line.split()

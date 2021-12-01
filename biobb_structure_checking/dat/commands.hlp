@@ -3,7 +3,7 @@ BioBB's check_structure.py performs MDWeb structure checking set as a command li
 utility.
 
 commands:     Help on available commands
-command_list: Run all tests from conf file
+command_list: Run all tests from conf file or command line list
 checkall:     Perform all checks without fixes
 load:         Stores structure on local cache and provides basic statistics
 

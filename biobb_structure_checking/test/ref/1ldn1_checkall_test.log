@@ -1,12 +1,12 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1ldn.1 loaded
- Title:  structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+ Title: structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: oxidoreductase(choh(d)-nad(a))
  Resolution (A): N.A.
@@ -411,3 +411,4 @@ Running  check_only. Nothing else to do.
 Running sequences.
 Sequences command requires either mmCIF input or --sequence
 Running  check_only. Nothing else to do.
+Structure not modified, not saving. Override with --force_save

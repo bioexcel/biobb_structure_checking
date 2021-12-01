@@ -1,11 +1,11 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.0                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Structure pdb:1vtk.1 loaded
- Title:  thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
  Resolution (A): N.A.
@@ -126,7 +126,7 @@ Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 1 Steric polar_acceptor clashes detected
- SER A149.OXT GLN A349.OE1    2.827 A
+ CSER A149.OXT GLN A349.OE1    2.827 A
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
@@ -152,7 +152,7 @@ No severe clashes detected
 6 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
- SER A149.OXT GLN A349.OE1    2.827 A
+ CSER A149.OXT GLN A349.OE1    2.827 A
  PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
  GLU A225.OE1 TMP A500.O3'    2.895 A
@@ -165,9 +165,23 @@ No severe clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
 No negative clashes detected
 
-Step 17: add_hydrogen --add_mode auto
+Step 17: ligands --remove All
 
-Running add_hydrogen. Options: --add_mode auto
+Running ligands. Options: --remove All
+2 Ligands detected
+ ADP A400
+ TMP A500
+Ligands removed All (2)
+
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+1 Chain(s) detected
+ A: Protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
+
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 76 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362
  ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363
@@ -188,17 +202,17 @@ Replacing HIS A213 by HIE
 Replacing HIS A283 by HIE
 Replacing HIS A323 by HIE
 Replacing HIS A351 by HIE
+Updating partial charges and atom types
+Total assigned charge:      -3.20
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
-Final Num. residues:  315
+Final Num. residues:  313
 Final Num. residues with ins. codes:  0
-Final Num. HETATM residues:  2
-Final Num. ligands or modified residues:  2
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  4855
-Small mol ligands found
-ADP A400
-TMP A500
+Final Num. atoms:  4809
+Total charge -3.200
 Structure saved on 1vtk_1_all_test.pdb
 Summary data saved on 1vtk_1_all_test.json

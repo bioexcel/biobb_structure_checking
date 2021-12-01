@@ -79,7 +79,7 @@
    "GLU A371",
    "GLU A374"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -116,7 +116,7 @@
    "negative": [],
    "polar_acceptor": [
     {
-     "at1": "SER A149.OXT",
+     "at1": "CSER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     }
@@ -133,8 +133,8 @@
     "OXT"
    ],
    "fixed": [
-    "SER A149",
-    "GLY A264"
+    "CSER A149",
+    "CGLY A264"
    ],
    "selected": "All"
   },
@@ -180,7 +180,7 @@
      "dist": 3.0609
     },
     {
-     "at1": "SER A149.OXT",
+     "at1": "CSER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     },
@@ -242,12 +242,13 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 4855,
-  "num_res": 315,
+  "num_ats": 4809,
+  "num_res": 313,
   "num_wat": 0,
-  "res_hetats": 2,
+  "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 2
+  "res_ligands": 0,
+  "total_charge": -3.1999499999999887
  },
  "fixside": {
   "opts": "--fix all"
@@ -260,7 +261,7 @@
   "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
   "method": "x-ray diffraction",
   "resolution": "N.A.",
-  "title": " thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
+  "title": "thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
  },
  "inscodes": {},
  "ligands": {
@@ -268,7 +269,14 @@
    "ADP A400",
    "TMP A500"
   ],
-  "error": "Unknown selection SO4"
+  "n_removed": 2,
+  "removed": {
+   "lst": [
+    "ADP A400",
+    "TMP A500"
+   ],
+   "opt": "All"
+  }
  },
  "metals": {
   "opts": "--remove ZN"
@@ -302,7 +310,8 @@
   "num_wat": 104,
   "res_hetats": 108,
   "res_insc": 0,
-  "res_ligands": 4
+  "res_ligands": 4,
+  "total_charge": null
  },
  "water": {
   "n_detected": 52,

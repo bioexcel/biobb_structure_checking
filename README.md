@@ -62,7 +62,7 @@ optional arguments:
 
 ```
 commands:     Help on available commands
-command_list: Run all tests from conf file
+command_list: Run all tests from conf file or command line list
 checkall:     Perform all checks without fixes
 load:         Stores structure on local cache and provide basic statistics
 

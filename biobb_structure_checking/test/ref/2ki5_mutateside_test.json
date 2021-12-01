@@ -15,7 +15,8 @@
   "num_wat": 292,
   "res_hetats": 296,
   "res_insc": 0,
-  "res_ligands": 4
+  "res_ligands": 4,
+  "total_charge": null
  },
  "headers": {
   "entry_id": "2KI5",
@@ -72,6 +73,7 @@
   "num_wat": 292,
   "res_hetats": 296,
   "res_insc": 0,
-  "res_ligands": 4
+  "res_ligands": 4,
+  "total_charge": null
  }
 }

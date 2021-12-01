@@ -30,9 +30,10 @@ DEFAULTS = {
     'options' : ''
 }
 
-def set_defaults(base_dir_path, args):
+def set_defaults(base_dir_path, args=None):
     """ Checks input args and complete with defaults if necessary """
-
+    if args is None:
+        args = {}
     data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
 
     if 'res_library_path' not in args or args['res_library_path'] is None:
@@ -206,7 +207,7 @@ DIALOGS = Dialog()
 #Multiple parameters should come as separate lines with a unique "command"
 
 DIALOGS.add_entry('command_list', 'Runs a list of commands')
-DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File')
+DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File or string (; separated)')
 
 DIALOGS.add_entry('models', 'Checks and selects models')
 DIALOGS.add_option('models', '--select', 'select', \
@@ -422,7 +423,12 @@ MSGS = {
     'STRUCTURE_LOADED': 'Structure {} loaded',
     #NA related
     'NO_NA': 'No NA chains found, skipping',
-    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains'
+    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains',
+    # Model utils
+    'ATOM_NOT_FOUND': 'Warning: atom {:3} not found in {}',
+    'NO_BACKBONE_ATOMS': 'Warning: No backbone atoms defined',
+    'RESIDUE_NOT_VALID' : "Warning: Residue not valid in this context ",
+    'NOT_ENOUGH_ATOMS' : "Warning: not enough atoms to build {} hydrogen atoms on"
 }
 # Help handler
 def help(command=None):

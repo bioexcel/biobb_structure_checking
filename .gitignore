@@ -6,4 +6,4 @@ __pycache__/
 *.pyc
 
 .ipynb_checkpoints
-biobb_structure_checking/test/jnote/tmpPDB
+tmpPDB
