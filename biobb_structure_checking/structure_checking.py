@@ -146,7 +146,7 @@ class StructureChecking():
         Print statistics on the loaded structure
         
         Args:
-            prefix (str): (None) Prefix to add to the output lines for identfication.
+            prefix (str): (None) Prefix to add to the output lines for identification.
         """
         self.strucm.calc_stats()
         if prefix is None: 
@@ -166,7 +166,7 @@ class StructureChecking():
         except NoDialogAvailableError as err:
             print(err.message)
         
-        if not op_list:
+        if not op_list and not self.args['non_interactive']:
             op_list = ParamInput('Command List File', False).run(op_list)
 
         if os.path.isfile(op_list):
@@ -194,28 +194,25 @@ class StructureChecking():
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
-    def checkall(self, opts=None):
+    def checkall(self):
         """ StructureChecking.checkall
         Predefined workflow for complete checking
-        
-        Args:
-            opts (str | list(str) | dict): (None) Unused.
         """
         #Required for interactive run in Notebooks
         old_check_only = self.args['check_only']
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
-            self._run_method(meth, opts)
+            self._run_method(meth, None)
 
         self.args['check_only'] = old_check_only
 
-    def fixall(self, opts=None):
-        """ StructureChecking.fixall
-        Fix all using defaults. Not implemented (yet)
-        """
-        # TODO Implement method fixall
-        print("Fixall not implemented (yet)")
+    # def fixall(self):
+    #     """ StructureChecking.fixall
+    #     Fix all using defaults. Not implemented (yet)
+    #     """
+    #     # TODO Implement method fixall
+    #     print("Fixall not implemented (yet)")
 
     def revert_changes(self):
         """ StructureChecking.revert_changes
@@ -296,14 +293,11 @@ class StructureChecking():
                 )
             )
 # ==============================================================================
-    def sequences(self, opts=None):
+    def sequences(self):
         """ StructureChecking.sequences
         Print canonical and structure sequences in FASTA format
-        
-        Args:
-           opts (str): (None) Unused
         """
-        self._run_method('sequences', opts)
+        self._run_method('sequences', None)
 
     def _sequences_check(self):
         if self.strucm.sequence_data.has_canonical:
@@ -327,7 +321,7 @@ class StructureChecking():
         Detect/Select Models. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict - Command options dictionary):
+            opts (str | dict - Options dictionary):
                 * select (int) - model number to select
         """
         self._run_method('models', opts)
@@ -385,7 +379,7 @@ class StructureChecking():
         Detect/Select Chains. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict - Options dictionary): 
+            opts (str | dict - Options dictionary): 
                 * select: 
                     * **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
                     * **protein** - Select all protein chains,
@@ -455,14 +449,12 @@ class StructureChecking():
         return False
 
 # =============================================================================
-    def inscodes(self, opts=None):
+    def inscodes(self):
         """ StructureChecking.inscodes
         Detects residues with insertion codes. No fix provided (yet)
         
-        Args:
-            opts (str): Unused
         """
-        self._run_method('inscodes', opts)
+        self._run_method('inscodes', None)
 
     def _inscodes_check(self):
         ins_codes_list = self.strucm.get_ins_codes()
@@ -490,7 +482,7 @@ class StructureChecking():
         Detect/Select Alternative Locations. Check only with no options. Options accepted as command-line string, or python dictionary.
         
         Args:
-            opts (dict - Options dictionary):
+            opts (str | dict - Options dictionary):
                 * select: 
                     * **occupancy** - select higher occupancy,
                     * **alt_id** - All atoms of the indicated alternative
@@ -602,7 +594,7 @@ class StructureChecking():
         Detect/Remove Metals. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
+            opts (str | dict - Options dictionary):
                 * remove:
                     * **all** - Remove all metal atoms,
                     * **atom_type_list**: Remove all Metals of listed types
@@ -694,7 +686,7 @@ class StructureChecking():
         Detect/Select Remove Water molecules. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options):. 
+            opts (str | dict - Options dictionary):. 
                 * remove: Yes - Remove All Water molecules
         """
         self._run_method('water', opts)
@@ -752,7 +744,7 @@ class StructureChecking():
         Detect/Remove Ligands. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
+            opts (str | dict - Options dictionary):
                 * remove:
                     * **all** - Remove all hetatm,
                     * **res_type_list** - Remove Hetatm of given types,
@@ -848,7 +840,7 @@ class StructureChecking():
         Remove Hydrogen atoms from structure. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
+            opts (str | dict - Options dictionary):
                 * remove (str): Yes - remove all hydrogen atoms
         """
         self._run_method('rem_hydrogen', opts)
@@ -893,8 +885,8 @@ class StructureChecking():
         Detect SS Bonds. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Options dictionary):
-                * mark (str) - One of 
+            opts (str | dict - Options dictionary):
+                * mark: 
                     * **all** - Rename all reported cys residues as CYX,
                     * **residue_list** - Rename indicated residues
         """
@@ -969,8 +961,8 @@ class StructureChecking():
         Detect/Fix Amide atoms Assignment. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
-                * fix - One of
+            opts (str | dict - Options dictionary):
+                * fix:
                     * **all** - Fix all residues,
                     * **residue_list** - Fix indicated residues
                 * no_recheck (bool) - (False) Do not recheck amide residues after modification.
@@ -1073,7 +1065,7 @@ class StructureChecking():
         Detect/Fix Improper side chain chirality. Check only with no options.  Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Options dictionary):
+            opts (str | dict - Options dictionary):
                 * fix:
                     * **All** - Fix all residues
                     * **residue_list** - Fix indicates residues
@@ -1155,14 +1147,12 @@ class StructureChecking():
         return False
 # =============================================================================
 
-    def chiral_bck(self, opts=None):
+    def chiral_bck(self):
         """  StructureChecking.chiral_bck
         Detect/Fix Improper CA chirality. No fix.
                 
-        Args:
-            opts (dict): Unused
         """
-        self._run_method('chiral_bck', opts)
+        self._run_method('chiral_bck', None)
 
     def _chiral_bck_check(self):
         check = self.strucm.get_chiral_bck_list()
@@ -1225,28 +1215,24 @@ class StructureChecking():
 #            self.strucm.modified = True
 
 # =============================================================================
-    def clashes(self, opts=None):
+    def clashes(self):
         """ StructureChecking.clashes
         Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative
         
-        Args:
-            opts(dict): Unused
         """
-        self._run_method('clashes', opts)
+        self._run_method('clashes', None)
 
     def _clashes_check(self):
         self.summary['clashes']['detected'] = self._check_report_clashes()
         return False
 
-#    def _clashes_fix(self, res_to_fix, fix_data=None):
-#        pass
 # =============================================================================
     def fixside(self, opts=None):
         """  StructureChecking.fixside
         Complete side chains (heavy atoms, protein only). Check only with no options.  Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
+            opts (str | dict - Options dictionary):
                 * fix: 
                     * **all** - Fix all residues
                     * **residue_list** - Fix indicated residues
@@ -1370,18 +1356,18 @@ class StructureChecking():
 # =============================================================================
 
     def add_hydrogen(self, opts=None):
-        """ | StructureChecking.add_hydrogen
+        """ StructureChecking.add_hydrogen
         Add Hydrogen Atoms to the structure. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Command options dictionary):
-                * add_mode : 
-                    * **auto** - Add hydrogen atom considering pH 7.0
-                    * **pH** (float) - Set explicit pH
-                    * **list** (str) - Explicit residue list as [*:]HisXXHid
+            opts (str | dict - Options dictionary):
+                * add_mode: 
+                    * **auto** - Add hydrogen atom considering pH 7.0.
+                    * **pH** (float) - Set explicit pH value.
+                    * **list** (str) - Explicit residue list as [*:]HisXXHid.
                 * no_fix_side (bool) - (False) Do not fix side chains.
-                * keep_h (bool) - (False) Keep original Hydrigen atoms
-                * add_charges FF (str) - Add charges and atom types for the selected FF
+                * keep_h (bool) - (False) Keep original Hydrigen atoms.
+                * add_charges FF (str) - Add charges and atom types for the selected FF.
         """
         self._run_method('add_hydrogen', opts)
 
@@ -1524,7 +1510,7 @@ class StructureChecking():
         Mutate side chain with minimal atom replacement. Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Options dictionary):
+            opts (str | dict - Options dictionary):
                 * mut (str) - List of mutations
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
                 * rebuild (bool) - (False) - Optimize new side chains using Modeller
@@ -1574,7 +1560,7 @@ class StructureChecking():
         Analyze/Fix main chain missing atoms and fragments (protein only). Check only with no options. Options accepted as command-line string, or python dictionary.
                 
         Args:
-            opts (dict - Options dictionary):
+            opts (str | dict - Options dictionary):
                 * fix_atoms (str - Fix missing O, OXT backbone atoms):
                     * **all** - Fix all residues
                     * **residue List** - Fix indicated residues
@@ -1914,14 +1900,12 @@ class StructureChecking():
         return fixed_res
 #===============================================================================
 
-    def cistransbck(self, opts=None):
+    def cistransbck(self):
         """ StructureChecking.cistransbck
         Analyzes cis-trans dihedrals on backbone atoms
                 
-        Args:
-            opts (dict): Unused
         """
-        self._run_method('cistransbck', opts)
+        self._run_method('cistransbck', None)
 
     def _cistransbck_check(self):
         (cis_backbone_list, lowtrans_backbone_list) = self.strucm.check_cis_backbone()
