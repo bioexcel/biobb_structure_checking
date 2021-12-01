@@ -1,5 +1,5 @@
 """
-    Main Class for Structure Checking functionality
+    Class for Structure Checking functionality
 """
 __author__ = "gelpi"
 __date__ = "$26-jul-2018 14:34:51$"
@@ -20,8 +20,16 @@ import biobb_structure_checking.model_utils as mu
 
 # Main class
 class StructureChecking():
-    """Main class to control structure checking front end"""
-
+    """
+    | biobb_structure_checking.StructureChecking
+    | Main class to control structure checking functionality
+    | Provides support for to check_structure command line 
+    | Load directly for Jupyter Notebook or python scripts. 
+    
+    Args:
+        base_dir_path (str): Base directory path where application resides. 
+        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html. Recommended 'non-interactive':True for Notebook use.
+    """
     def __init__(self, base_dir_path, args):
 
         if args is None:
@@ -64,7 +72,10 @@ class StructureChecking():
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
 
     def launch(self):
-        """ Main method to run checking"""
+        """
+        | StructureChecking.launch
+        | Method run from the command line invocation
+        """
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
@@ -131,12 +142,26 @@ class StructureChecking():
             except IOError:
                 print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
     
-    def print_stats(self, prefix=''):
+    def print_stats(self, prefix=None):
+        """
+        | StructureChecking.print_stats
+        | Print statistics on the loaded structure
+        Args:
+            prefix (str) (Optional): (None) Prefix to add to the output lines for identfication.
+        """
         self.strucm.calc_stats()
+        if prefix is None: 
+            prefix = ''
         self.strucm.print_stats(prefix)
 
     def command_list(self, opts):
-        """ Manages command_list workflows"""
+        """
+        | StructureChecking.command_list
+        | Manages command_list workflows
+        
+        Args:
+            opts (str | list(str)): Command options as str or str list. 
+        """
         try:
             opts = cts.DIALOGS.get_parameter('command_list', opts)
             op_list = opts['op_list']
@@ -172,7 +197,13 @@ class StructureChecking():
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
     def checkall(self, opts=None):
-        """ Predefined workflow for complete checking"""
+        """
+        | StructureChecking.checkall
+        | Predefined workflow for complete checking
+        
+        Args:
+            opts (str | list(str) | dict)  (Optional): (None) Not used.
+        """
         #Required for interactive run in Notebooks
         old_check_only = self.args['check_only']
         self.args['check_only'] = True
@@ -183,18 +214,33 @@ class StructureChecking():
         self.args['check_only'] = old_check_only
 
     def fixall(self, opts=None):
-        """ Fix all using defaults """
+        """
+        | StructureChecking.fixall
+        | Fix all using defaults
+        | Not implemented (yet)
+        """
         # TODO Implement method fixall
         print("Fixall not implemented (yet)")
 
     def revert_changes(self):
-        """ revert to original structure, used in Notebooks """
+        """
+        | StructureChecking.revert_changes
+        | Reload original structure.
+        | Used in Pipelines or Notebooks to revert changes
+        """
         self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
         self.summary = {}
         print(cts.MSGS['ALL_UNDO'])
 
     def _run_method(self, command, opts):
-        """ Run check and fix methods for specific command"""
+        """
+        | Private. StructureChecking._run_method
+        | Run check and fix methods for specific command
+        
+        Args:
+            command** (str): Command to run
+            opts (str | list(str) | dict): Command options, passed from callers
+        """
         try:
             f_check = getattr(self, '_' + command + '_check')
         except AttributeError:
@@ -260,7 +306,12 @@ class StructureChecking():
 # ==============================================================================
 
     def sequences(self, opts=None):
-        """ direct entry to run sequences """
+        """
+        | StructureChecking.sequences
+        | Print canonical and structure sequences in FASTA format
+        Args:
+           opts (str): (None) Unused
+        """
         self._run_method('sequences', opts)
 
     def _sequences_check(self):
@@ -281,7 +332,16 @@ class StructureChecking():
         return {}
 
     def models(self, opts=None):
-        """ direct entry to run models command """
+        """
+        | StructureChecking.models
+        | Detect/Select Models
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+        
+        Args:
+            opts (dict - Command options dictionary):
+                * select (int) - model number to select
+        """
         self._run_method('models', opts)
 
     def _models_check(self):
@@ -333,7 +393,22 @@ class StructureChecking():
 # =============================================================================
 
     def chains(self, opts=None):
-        """ Run chains command """
+        """
+        | StructureChecking.chains
+        | Detect/Select Chains
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+        
+        Args:
+            opts (dict - Command options dictionary): 
+                * select (str) - One of: 
+                **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
+                **protein** - Select all protein chains,
+                **na** - Select all NA chains,
+                **rna** - Select all RNA chains,
+                **dna** - Select all DNA chains.
+            
+        """
         self._run_method('chains', opts)
 
     def _chains_check(self):
@@ -396,7 +471,13 @@ class StructureChecking():
 
 # =============================================================================
     def inscodes(self, opts=None):
-        """ Run inscodes command """
+        """
+        | StructureChecking.inscodes
+        | Detects residues with insertion codes. No fix provided (yet)
+        
+        Args:
+            opts (str) (Optional): Unused
+        """
         self._run_method('inscodes', opts)
 
     def _inscodes_check(self):
@@ -421,7 +502,20 @@ class StructureChecking():
 # =============================================================================
 
     def altloc(self, opts=None):
-        """ run altloc command """
+        """
+        | StructureChecking.altloc
+        | Detect/Select Alternative Locations
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+        
+        Args:
+            opts (dict - Command options dictionary):
+                * select : One of
+                    * **occupancy** - select higher occupancy,
+                    * **alt_id** - All atoms of the indicated alternative
+                    * **list** of res_id:alt_id - Indicate selection per atom
+                
+        """
         self._run_method('altloc', opts)
 
     def _altloc_check(self): #TODO improve output
@@ -524,7 +618,19 @@ class StructureChecking():
 # =============================================================================
 
     def metals(self, opts=None):
-        """ Run metals command """
+        """
+        | StructureChecking.metals
+        | Detect/Remove Metals
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * remove (str) - One of
+                    **all** - Remove all metal atoms,
+                    **atom_type_list**: Remove all Metals of listed types
+                    **residue_list**: Remove indicated residues
+        """
         self._run_method('metals', opts)
 
     def _metals_check(self):
@@ -607,7 +713,16 @@ class StructureChecking():
 # =============================================================================
 
     def water(self, opts=None):
-        """ Run water command """
+        """
+        | StructureChecking.water
+        | Detect/Select Remove Water molecules
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options):. 
+                * remove: Yes - Remove All Water molecules
+        """
         self._run_method('water', opts)
 
     def _water_check(self):
@@ -652,12 +767,27 @@ class StructureChecking():
 # =============================================================================
 
     def hetatm(self, opts=None):
-        """ Run hetatm command """
+        """
+        | StructureChecking.hetatm
+        | Manages hetero atoms. Not implemented yet. See Ligands
+        """
         print("Warning: hatatm function not implemented yet, running ligands instead")
         self._run_method('ligands', opts)
 
     def ligands(self, opts=None):
-        """ Run ligands command """
+        """
+        | StructureChecking.ligands
+        | Detect/Remove Ligands
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+          Args:
+            opts (dict - Command options dictionary):
+                * remove (str) - One of:
+                    **all** - Remove all hetatm,
+                    **res_type_list** - Remove Hetatm of given types,
+                    **residue_list** - Remove indicated residues
+        """
         self._run_method('ligands', opts)
 
     def _ligands_check(self):
@@ -744,7 +874,16 @@ class StructureChecking():
 # =============================================================================
 
     def rem_hydrogen(self, opts=None):
-        """ Run rem_hydrogen command """
+        """
+        | StructureChecking.add_hydrogen
+        | Remove Hydrogen atoms from structure
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * remove (str): Yes - remove all hydrogen atoms
+        """
         self._run_method('rem_hydrogen', opts)
 
     def _rem_hydrogen_check(self):
@@ -783,7 +922,18 @@ class StructureChecking():
 # =============================================================================
 
     def getss(self, opts=None):
-        """ run getss command """
+        """
+        | StructureChecking.getss
+        | Detect SS Bonds
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * mark (str) - One of 
+                    **all** - Rename all reported cys residues as CYX,
+                    **residue_list** - Rename indicated residues
+        """
         self._run_method('getss', opts)
 
     def _getss_check(self):
@@ -851,7 +1001,19 @@ class StructureChecking():
 
 # =============================================================================
     def amide(self, opts=None):
-        """ run amide command """
+        """
+        | StructureChecking.amide
+        | Detect/Fix Amide atoms Assignment
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * fix (str) - One of
+                    **All** - Fix all residues,
+                    **residue_list** - Fix indicated residues
+                * no_recheck (bool) - (False) Do not recheck amide residues after modification.
+        """
         self._run_method('amide', opts)
 
     def _amide_check(self):
@@ -946,7 +1108,19 @@ class StructureChecking():
 # =============================================================================
 
     def chiral(self, opts=None):
-        """ run chiral command """
+        """
+        | StructureChecking.chiral
+        | Detect/Fix Improper side chain chirality
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * fix (str) - (All) One of
+                    **All** - Fix all residues
+                    **residue_list** - Fix indicates residues
+                * no_check_clashes (bool) (Optional) - (False) Do not check generated clashes
+        """
         self._run_method('chiral', opts)
 
     def _chiral_check(self):
@@ -1024,7 +1198,13 @@ class StructureChecking():
 # =============================================================================
 
     def chiral_bck(self, opts=None):
-        """ run chiral_bck command """
+        """
+        | StructureChecking.chiral_bck
+        | Detect/Fix Improper CA chirality. No fix
+                
+        Args:
+            opts (dict): Unused
+        """
         self._run_method('chiral_bck', opts)
 
     def _chiral_bck_check(self):
@@ -1089,7 +1269,13 @@ class StructureChecking():
 
 # =============================================================================
     def clashes(self, opts=None):
-        """ run clashes command """
+        """
+        | StructureChecking.clashes
+        | Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative
+        
+        Args:
+            opts(dict): Unused
+        """
         self._run_method('clashes', opts)
 
     def _clashes_check(self):
@@ -1100,7 +1286,20 @@ class StructureChecking():
 #        pass
 # =============================================================================
     def fixside(self, opts=None):
-        """ run fixside command """
+        """
+        | StructureChecking.fixside
+        | Complete side chains (heavy atoms, protein only)
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * fix (str) - one of 
+                    **all** - Fix all residues
+                    **residue_list** - Fix indicated residues
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
+                * rebuild (bool) (Optional) - (False) Rebuild side chains using Modeller
+        """
         self._run_method('fixside', opts)
 
     def _fixside_check(self):
@@ -1218,7 +1417,22 @@ class StructureChecking():
 # =============================================================================
 
     def add_hydrogen(self, opts=None):
-        """ Run add_hydrogen command """
+        """
+        | StructureChecking.add_hydrogen
+        | Add Hydrogen Atoms to the structure
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * add_mode : One of
+                    **auto** - Add hydrogen atom considering pH 7.0
+                    **pH** (float) - Set explicit pH
+                    **list** (str) - Explicit residue list as [*:]HisXXHid
+                * no_fix_side (bool) (Optional) - (False) Do not fix side chains.
+                * keep_h (bool) (Optional) - (False) Keep original Hydrigen atoms
+                * add_charges FF (str) (Optional) - Add charges and atom types for the selected FF
+        """
         self._run_method('add_hydrogen', opts)
 
     def _add_hydrogen_check(self):
@@ -1356,7 +1570,18 @@ class StructureChecking():
 # =============================================================================
 
     def mutateside(self, mut_list):
-        """ Run mutateside command """
+        """
+        | StructureChecking.mutateside
+        | Mutate side chain with minimal atom replacement
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * mut (str) - List of mutations
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
+                * rebuild (bool) (Optional) - (False) - Optimize new side chains using Modeller
+        """
         self._run_method('mutateside', mut_list)
 
     def _mutateside_check(self):
@@ -1398,7 +1623,27 @@ class StructureChecking():
 #===============================================================================
 
     def backbone(self, opts=None):
-        """ Run backbone command """
+        """
+        | StructureChecking.models
+        | Analyze/Fix main chain missing atoms and fragments (protein only)
+        | Check only with no options
+        | Options accepted as command-line string, or python dictionary.
+                
+        Args:
+            opts (dict - Command options dictionary):
+                * fix_atoms (str) - Fix missing O, OXT backbone atoms, of
+                    **all** - Fix all residues
+                    **residue List** - Fix indicated residues
+                * fix_main (str) - Fix backbone main chain of
+                    **all** - All detected breaks
+                    **break list** - Indicated breaks
+                * add_caps (str) - Add ACE and NME residues of
+                    **all** - All detected terminals
+                    **residue_list** - Indicated terminals
+                * extra_gap (int) (Optional) - (0) Recover addiciontal residues from the model to impve match (experimental)
+                * no_recheck (bool) (Optional) - (False) Do not recheck backbone after fixing 
+                * no_check_clashes (bool) (Optional) - (False) Do not check for generated clashes
+        """
         self._run_method('backbone', opts)
 
     def _backbone_check(self):
@@ -1726,7 +1971,13 @@ class StructureChecking():
 #===============================================================================
 
     def cistransbck(self, opts=None):
-        """ Run cistransbck command """
+        """
+        | StructureChecking.cistransbck
+        | Analyzes cis-trans dihedrals on backbone atoms
+                
+        Args:
+            opts (dict - Command options dictionary): Unused
+        """
         self._run_method('cistransbck', opts)
 
     def _cistransbck_check(self):
@@ -1776,6 +2027,16 @@ class StructureChecking():
 
 #===============================================================================
     def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
+        """
+        | Private. StructureChecking.load_structure
+        | Prepares Structure Manager and load structure
+
+        Args:
+            input_structure_path (str): Path to structure file or pdb:{pdbid]
+            fasta_seq_path (str) (Optional): (None) Path to sequence FASTA file
+            verbose (bool) (Optional): (True) Output progress information.
+            print_stats (bool) (Optional): (True) Print structure statistics
+        """
 
         input_line = ParamInput(
             "Enter input structure path (PDB, mmcif | pdb:pdbid)",
@@ -1808,16 +2069,26 @@ class StructureChecking():
         return strucm
     
     def save_structure(self, output_structure_path, rename_terms=False):
-        ''' Saving the current structure in a PDB file
-            Args:
-                output_structure_path (str): File name to save
-                rename_terms (bool): Rename terminal residues as NXXX, CXXX
-                output_format (str): Output format (pdb|pqr|pdbqt)
-        '''
+        """
+        | StuctureChecking.save_structure
+        | Saving the current structure in a the output file
+        
+        Args:
+            output_structure_path (str): Path to saved File
+            rename_terms (bool) (Optional): (False) Rename terminal residues as NXXX, CXXX
+        """
         return self._save_structure(output_structure_path, rename_terms=rename_terms)
     
     #Kept for back compatibility
     def _save_structure(self, output_structure_path, rename_terms=False):
+        """
+        | Private. StuctureChecking._save_structure
+        | Saving the current structure in a the output file
+        
+        Args:
+            output_structure_path (str): Path to saved File
+            rename_terms (bool) (Optional): (False) Rename terminal residues as NXXX, CXXX
+        """
         input_line = ParamInput(
             "Enter output structure path",
             self.args['non_interactive']

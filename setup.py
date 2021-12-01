@@ -22,9 +22,8 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['psutil', 'biopython'],
-    python_requires='>=3.6',
-    classifiers=(
+    install_requires=['psutil', 'biopython','numpy==1.17'],
+     classifiers=(
         "Development Status :: 3 - Alpha",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
