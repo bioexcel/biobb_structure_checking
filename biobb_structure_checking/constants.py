@@ -31,9 +31,16 @@ DEFAULTS = {
 }
 
 def set_defaults(base_dir_path, args=None):
-    """ Checks input args and complete with defaults if necessary """
+    """ Constants set_defaults
+    Checks input args and complete with defaults if necessary
+    
+    Args:
+        base_dir_path (str) - Directory where application resides
+        args (dict) - Arguments as passed from the command line
+    """
     if args is None:
         args = {}
+    
     data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
 
     if 'res_library_path' not in args or args['res_library_path'] is None:
@@ -57,7 +64,7 @@ def set_defaults(base_dir_path, args=None):
 
     return args
 
-# Main Command Line
+# Main Command Line Management
 CMD_LINE = argparse.ArgumentParser(
     description='Basic Structure checking based on MDWeb'
 )
@@ -308,12 +315,11 @@ DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
 
-
+# All methods to perform checkall
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
     'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
-
 
 MSGS = {
     #management
@@ -430,12 +436,14 @@ MSGS = {
     'RESIDUE_NOT_VALID' : "Warning: Residue not valid in this context ",
     'NOT_ENOUGH_ATOMS' : "Warning: not enough atoms to build {} hydrogen atoms on"
 }
+
 # Help handler
 def help(command=None):
-    '''
-        Args:
-            command: command to print
-    '''
+    """ constants help
+    Commands help handler
+    Args:
+        command (str) - (None) Command requested, if empty help on all commands is provided.
+    """
     if not command:
         help_path = opj(dirname(__file__), DATA_DIR_DEFAULT_PATH, COMMANDS_HELP_PATH)
         with open(help_path) as help_file:
