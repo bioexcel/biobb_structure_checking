@@ -31,8 +31,9 @@ DEFAULTS = {
 }
 
 def set_defaults(base_dir_path, args=None):
-    """ Constants set_defaults
-    Checks input args and complete with defaults if necessary
+    """
+    | Constants set_defaults
+    | Checks input args and complete with defaults if necessary
     
     Args:
         base_dir_path (str) - Directory where application resides
@@ -439,8 +440,10 @@ MSGS = {
 
 # Help handler
 def help(command=None):
-    """ constants help
-    Commands help handler
+    """ 
+    | constants help
+    | Handler for getting help on commands
+    
     Args:
         command (str) - (None) Command requested, if empty help on all commands is provided.
     """
