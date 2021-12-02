@@ -11,7 +11,7 @@ class DataLibManager:
     | Manages projects' global data file
 
     Args:
-        file_path (str) - Path to library json file
+        file_path (str) : Path to library json file
     """
 
     def __init__(self, file_path):
@@ -38,7 +38,11 @@ class DataLibManager:
         Obtain valid residue codes 
         
         Args:
-            mol_type (str) - One of valid moleculer types (na=dna+rna, dna, rna, protein)
+            mol_type (str) : One of valid moleculer types
+                * **na** - dna + rna, 
+                * **dna** -
+                * **rna** - 
+                * **protein** -
         """
         if mol_type == 'na':
             codes = self.residue_codes['dna'] + self.residue_codes['rna']
@@ -68,7 +72,7 @@ class DataLibManager:
         Gets a residue list with a specific section of data.
         
         Args:
-            feature (str) - One of 'bck_atoms', 'side_atoms', 'apolar_atoms', 'hydrogen_atoms', 'addH_rules', 'mutation_rules'
+            feature (str) : One of 'bck_atoms', 'side_atoms', 'apolar_atoms', 'hydrogen_atoms', 'addH_rules', 'mutation_rules'
         """
         f_list = {
             rcode: self.residue_data[rcode][feature]
@@ -146,7 +150,7 @@ class DataLibManager:
         Gets parent residue names for modified residues 
         
         Args:
-            rcode (str) - Original residue code (3 letter for aminoacids)
+            rcode (str) : Original residue code (3 letter for aminoacids)
         """
         if rcode in self.canonical_codes:
             return self.canonical_codes[rcode]
@@ -157,7 +161,7 @@ class DataLibManager:
         Load Forcefield data from external file
        
         Args:
-            file_path (str) - Path to library file
+            file_path (str) : Path to library file
         """
         try:
             data_file_h = open(file_path)
