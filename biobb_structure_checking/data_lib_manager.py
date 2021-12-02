@@ -52,7 +52,7 @@ class DataLibManager:
 
     def get_all_atom_lists(self):
         """ DataLibManager.get_all_atom_lists
-        Obtains lists of atoms per protein residue.
+        Obtain lists of atoms per protein residue.
         """
         atom_lists = {
             rcode: {
@@ -69,10 +69,10 @@ class DataLibManager:
 
     def get_atom_feature_list(self, feature):
         """ DataLibManager.get_atom_feature_list
-        Gets a residue list with a specific section of data.
+        Get a residue list with a specific section of data.
         
         Args:
-            feature (str) :
+            feature (str - Options) :
                 * **bck_atoms** - Backbone atoms
                 * **side_atoms** - Side chain atoms
                 * **apolar_atoms** - Apolar atoms
@@ -101,28 +101,28 @@ class DataLibManager:
 
     def get_chiral_data(self):
         """ DataLibManager.get_chiral_data
-        Gets data related to chiral atoms.
+        Get data related to chiral atoms.
         """
         return self.get_atom_feature_list('chiral_atoms')
 
     def get_hydrogen_atoms(self):
         """ DataLibManager.get_hydrogen_atoms
-        Gets list of hydrogen atoms per residue. 
+        Get list of hydrogen atoms per residue. 
         """
         return self.get_atom_feature_list('hydrogen_atoms')
 
     def get_add_h_rules(self):
         """ DataLibManager.get_add_h_rules
-        Gets rules for adding Hydrogen atoms to residues. 
+        Get rules for adding Hydrogen atoms to residues. 
         """
         return self.get_atom_feature_list('addH_rules')
 
     def get_atom_lists(self, contact_types):
         """ DataLibManager.get_atom_lists
-        Gets a list of atoms organized per contact types. 
+        Get a list of atoms organized per contact types. 
         
         Args:
-            contact_types (list(str) - List of types of contacts. From) :
+            contact_types (list(str) - List of types of contacts. Options) :
                 * **apolar** - Involving any apolar atom
                 * **polar_donor** - Involving two Hbond donors
                 * **polar_acceptor** - Involving two HBond acceptors
@@ -140,7 +140,7 @@ class DataLibManager:
 
     def get_amide_data(self):
         """ DataLibManager.get_amide_data
-        Gets atoms related to amide issues
+        Get atoms related to amide issues
         """
         alist = []
         rlist = {}
@@ -152,7 +152,7 @@ class DataLibManager:
 
     def get_mutation_map(self):
         """ DataLibManager.get_mutation_map
-        Gets the complete map of mutation rules per residue.
+        Get the complete map of mutation rules per residue.
         """
         mut_rules = {}
         for rcode in self.residue_data:
@@ -163,7 +163,7 @@ class DataLibManager:
 
     def get_canonical_resname(self, rcode):
         """ DataLibManager.get_canonical_resname
-        Gets parent residue names for modified residues 
+        Get parent residue names for modified residues 
         
         Args:
             rcode (str) : Original residue code (3 letter for aminoacids)
