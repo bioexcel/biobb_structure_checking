@@ -1,16 +1,14 @@
 ## v3.9.0 (2021.4)
 
-### New functions
-
 ### Extended functions
 
 - Jupyter Notebook support extended
-  - Help() function
-  - Settings accepted as Python dictionaries. 
+  - Help(command) function
+  - Settings accepted also as Python dictionaries- 
         
 - add_hydrogen
     - Added support for multiple atom type sets (currently ADP, CMIP)
-    - Added support for pqr, pdbqt, cmip output formats
+    - Added support for pqr, pdbqt, cmip output formats following file extension
     - Added support for pqr input format
     - Terminal residue names available on 3 or 4 letter (N-, C-) codes
 
@@ -75,9 +73,9 @@
 
 ### Extended functions:
 - mutateside & fixside --rebuild
-  - Uses Modeller for building the side chains, includes conformational search
+  - Use Modeller for building the side chains, include conformational search
 - backbone --extra_gap
-    - Allow to use more residues from the built model to fill backbone breaks
+    - Allows to use more residues from the built model to fill backbone breaks (experimental)
 - add_hydrogen --add_charges
    - Adds point charges to atoms and produces a PDBQT output suitable for autodock
 

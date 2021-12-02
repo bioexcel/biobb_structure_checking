@@ -1,10 +1,10 @@
 # biobb_structure_checking
 ### Introduction
-Biobb_structure_checking performs 3D structure quality checking intended to facilitate the setup of molecular dynamics simulation of protein or nucleic acids systems.
+Biobb_structure_checking performs a checking of the quality of a 3D structure intended to facilitate the setup of molecular dynamics simulation of protein or nucleic acids systems.
 
-Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), detects and fixes structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality).
+Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), to detect and fix structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality). It works with structures obtained from the Protein Data Bank or user provided. 
 
-Biobb_structure_checking provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html). 
+The Biobb_structure_checking package provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and a python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html). 
 
 The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).

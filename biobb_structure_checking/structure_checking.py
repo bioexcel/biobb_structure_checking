@@ -71,6 +71,15 @@ class StructureChecking():
         if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
 
+    def help(self, command=None):
+        """ StructureChecking.help
+        Provides help on StructureChecking commands
+        
+        Args:
+            command (str) : (None) Requested command. If empty returns all commands help
+        """
+        return cts.help(command)
+
     def launch(self):
         """ StructureChecking.launch
         Method run from the command line invocation

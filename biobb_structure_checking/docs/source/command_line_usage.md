@@ -84,7 +84,6 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ### Miscelanea
 **--modeller_key** MODELLER_KEY - _User key for Modeller, required for backbone rebuild unless included in Modeller installation. Register at https://salilab.org/modeller/registration.html_
   
-
 **-h, --help** - _show this help message and exit_
 
 **--version** - _show program's version number and exit_

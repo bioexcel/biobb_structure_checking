@@ -3,8 +3,8 @@
 ### Extended functions
 
 - Jupyter Notebook support extended
-  - Help() function
-  - Settings accepted as Python dictionaries. 
+  - Help(command) function
+  - Settings accepted also as Python dictionaries- 
         
 - add_hydrogen
     - Added support for multiple atom type sets (currently ADP, CMIP)
