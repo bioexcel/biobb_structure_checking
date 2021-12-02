@@ -38,7 +38,7 @@ class DataLibManager:
         Obtain valid residue codes 
         
         Args:
-            mol_type (str) : One of valid moleculer types
+            mol_type (str - One of valid molecular types) :
                 * **na** - dna + rna, 
                 * **dna** -
                 * **rna** - 
@@ -72,7 +72,18 @@ class DataLibManager:
         Gets a residue list with a specific section of data.
         
         Args:
-            feature (str) : One of 'bck_atoms', 'side_atoms', 'apolar_atoms', 'hydrogen_atoms', 'addH_rules', 'mutation_rules'
+            feature (str) :
+                * **bck_atoms** - Backbone atoms
+                * **side_atoms** - Side chain atoms
+                * **apolar_atoms** - Apolar atoms
+                * **polar_acceptor_atoms** - H-bond acceptor polar atoms
+                * **polar_donor_atoms** - H-bond donor polar atoms
+                * **positive_atoms** - Atoms bearing formal positive charge
+                * **negative_atoms** - Atoms bearing formal negative charge
+                * **hydrogen_atoms** - Hydrogen atoms
+                * **addH_rules** - Rules for adding Hydrogen atoms
+                * **mutation_rules** - Rules to mutate to other residue types
+
         """
         f_list = {
             rcode: self.residue_data[rcode][feature]
@@ -111,7 +122,12 @@ class DataLibManager:
         Gets a list of atoms organized per contact types. 
         
         Args:
-            contact_types (list(str)) - List of types of contacts. from 'apolar', 'polar*', 'ionic*'
+            contact_types (list(str) - List of types of contacts. From) :
+                * **apolar** - Involving any apolar atom
+                * **polar_donor** - Involving two Hbond donors
+                * **polar_acceptor** - Involving two HBond acceptors
+                * **positive** - Involving two positive atoms
+                * **negative** - Involving two negative atoms
         """
 
         atom_lists = {
