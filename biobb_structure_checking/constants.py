@@ -36,8 +36,8 @@ def set_defaults(base_dir_path, args=None):
     | Checks input args and complete with defaults if necessary
     
     Args:
-        base_dir_path (str) - Directory where application resides
-        args (dict) - Arguments as passed from the command line
+        base_dir_path (str) : Directory where application resides
+        args (dict) : Arguments as passed from the command line
     """
     if args is None:
         args = {}
@@ -445,7 +445,7 @@ def help(command=None):
     | Handler for getting help on commands
     
     Args:
-        command (str) - (None) Command requested, if empty help on all commands is provided.
+        command (str) : (None) Command requested, if empty help on all commands is provided.
     """
     if not command:
         help_path = opj(dirname(__file__), DATA_DIR_DEFAULT_PATH, COMMANDS_HELP_PATH)
