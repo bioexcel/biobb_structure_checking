@@ -5,9 +5,13 @@
 import json
 import sys
 
-
 class DataLibManager:
-    """ Manages projects' global data file
+    """ 
+    | data_lib_manager DataLibManager
+    | Manages projects' global data file
+
+    Args:
+        file_path (str) - Path to library json file
     """
 
     def __init__(self, file_path):
@@ -30,7 +34,12 @@ class DataLibManager:
             sys.exit(2)
 
     def get_valid_codes(self, mol_type):
-        """ Obtain valid residue codes """
+        """ DataLibManager.get_valid_codes
+        Obtain valid residue codes 
+        
+        Args:
+            mol_type (str) - One of valid moleculer types (na=dna+rna, dna, rna, protein)
+        """
         if mol_type == 'na':
             codes = self.residue_codes['dna'] + self.residue_codes['rna']
         else:
@@ -38,7 +47,9 @@ class DataLibManager:
         return codes
 
     def get_all_atom_lists(self):
-        """ Obtains lists of atoms per protein residue. """
+        """ DataLibManager.get_all_atom_lists
+        Obtains lists of atoms per protein residue.
+        """
         atom_lists = {
             rcode: {
                 'backbone': self.residue_data['*']['bck_atoms'],
@@ -52,9 +63,13 @@ class DataLibManager:
 
         return atom_lists
 
-
     def get_atom_feature_list(self, feature):
-        """ Gets a residue list with a specific section of data . """
+        """ DataLibManager.get_atom_feature_list
+        Gets a residue list with a specific section of data.
+        
+        Args:
+            feature (str) - One of 'bck_atoms', 'side_atoms', 'apolar_atoms', 'hydrogen_atoms', 'addH_rules', 'mutation_rules'
+        """
         f_list = {
             rcode: self.residue_data[rcode][feature]
             for rcode in self.residue_data
@@ -70,19 +85,31 @@ class DataLibManager:
         return f_list
 
     def get_chiral_data(self):
-        """ Gets data related to chiral residues. """
+        """ DataLibManager.get_chiral_data
+        Gets data related to chiral atoms.
+        """
         return self.get_atom_feature_list('chiral_atoms')
 
     def get_hydrogen_atoms(self):
-        """ Gets list of hydrogen atoms per residue. """
+        """ DataLibManager.get_hydrogen_atoms
+        Gets list of hydrogen atoms per residue. 
+        """
         return self.get_atom_feature_list('hydrogen_atoms')
 
     def get_add_h_rules(self):
-        """ Gets rules for adding Hydrogen atoms to residues. """
+        """ DataLibManager.get_add_h_rules
+        Gets rules for adding Hydrogen atoms to residues. 
+        """
         return self.get_atom_feature_list('addH_rules')
 
     def get_atom_lists(self, contact_types):
-        """ Gets a list of atoms organized per contact types. """
+        """ DataLibManager.get_atom_lists
+        Gets a list of atoms organized per contact types. 
+        
+        Args:
+            contact_types (list(str)) - List of types of contacts. from 'apolar', 'polar*', 'ionic*'
+        """
+
         atom_lists = {
             cls_type: self.get_atom_feature_list(cls_type + '_atoms')
             for cls_type in contact_types
@@ -92,7 +119,9 @@ class DataLibManager:
         return atom_lists
 
     def get_amide_data(self):
-        """ Gets data related to amide residues """
+        """ DataLibManager.get_amide_data
+        Gets atoms related to amide issues
+        """
         alist = []
         rlist = {}
         for rcode in self.residue_data:
@@ -102,7 +131,9 @@ class DataLibManager:
         return rlist, alist
 
     def get_mutation_map(self):
-        """ Gets the complete map of mutation rules per residue."""
+        """ DataLibManager.get_mutation_map
+        Gets the complete map of mutation rules per residue.
+        """
         mut_rules = {}
         for rcode in self.residue_data:
             if 'mutation_rules' in self.residue_data[rcode]:
@@ -111,15 +142,22 @@ class DataLibManager:
         return mut_rules
 
     def get_canonical_resname(self, rcode):
-        """ gets parent residue names for modified residues """
+        """ DataLibManager.get_canonical_resname
+        Gets parent residue names for modified residues 
+        
+        Args:
+            rcode (str) - Original residue code (3 letter for aminoacids)
+        """
         if rcode in self.canonical_codes:
             return self.canonical_codes[rcode]
         return rcode
 
     def get_ff_data(self, file_path):
-        """ Load Forcefield data from external file
-            Args:
-               file_path (str): Path to library file
+        """ DataLibManager.get_ff_data
+        Load Forcefield data from external file
+       
+        Args:
+            file_path (str) - Path to library file
         """
         try:
             data_file_h = open(file_path)
