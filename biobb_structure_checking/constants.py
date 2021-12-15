@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.0'
+VERSION = '3.9.1'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -34,14 +34,14 @@ def set_defaults(base_dir_path, args=None):
     """
     | Constants set_defaults
     | Checks input args and complete with defaults if necessary
-    
+
     Args:
         base_dir_path (str) : Directory where application resides
         args (dict) : Arguments as passed from the command line
     """
     if args is None:
         args = {}
-    
+
     data_dir_path = opj(base_dir_path, DATA_DIR_DEFAULT_PATH)
 
     if 'res_library_path' not in args or args['res_library_path'] is None:
@@ -440,10 +440,10 @@ MSGS = {
 
 # Help handler
 def help(command=None):
-    """ 
+    """
     | constants help
     | Handler for getting help on commands
-    
+
     Args:
         command (str) : (None) Command requested, if empty help on all commands is provided.
     """

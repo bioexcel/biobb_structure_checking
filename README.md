@@ -2,21 +2,21 @@
 ### Introduction
 Biobb_structure_checking performs a checking of the quality of a 3D structure intended to facilitate the setup of molecular dynamics simulation of protein or nucleic acids systems.
 
-Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), to detect and fix structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality). It works with structures obtained from the Protein Data Bank or user provided. 
+Biobb_structure_checking package allows to configure the system (selection of model/chains,alternative location, addition of disulfide bonds and hydrogen atoms, side chain mutations), to detect and fix structure errors (missing side chain atoms, backbone breaks, amide assignments, incorrect chirality). It works with structures obtained from the Protein Data Bank or user provided.
 
-The Biobb_structure_checking package provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and a python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html). 
+The Biobb_structure_checking package provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and a python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html).
 
 The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v3.9.0 December 2021
+v3.9.1 December 2021
 
 ### Requirements
 
 * Biopython
 ### Optional requirements
-* psutil (required for --debug, included in conda pkg.) 
+* psutil (required for --debug, included in conda pkg.)
 * Modeller (required for some functionalities, not included in conda pkg.)
 * jupyter & nglview (required for demonstration notebooks, not included in conda pkg.)
 
@@ -27,7 +27,7 @@ Using PIP:
 
 * Installation:
 
-        pip install "biobb_structure_checking>=3.9.0"
+        pip install "biobb_structure_checking>=3.9.1"
 
 * Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
 
@@ -35,7 +35,7 @@ Using ANACONDA:
 
 * Installation:
 
-        conda install -c bioconda "biobb_structure_checking>=3.9.0"
+        conda install -c bioconda "biobb_structure_checking>=3.9.1"
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
 
