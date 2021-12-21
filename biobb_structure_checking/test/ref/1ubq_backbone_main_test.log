@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.0                   =
+=                   BioBB structure checking utility v3.9.2                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -55,10 +55,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-59.27-default x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-59.37-default x86_64
 Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2021/11/18 12:23:48
+Job starting time (YY/MM/DD HH:MM:SS): 2021/12/21 16:47:07
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
