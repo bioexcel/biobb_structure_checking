@@ -10,13 +10,21 @@ from urllib.request import urlcleanup
 
 from Bio.PDB.PDBList import PDBList
 
-
 MMB_URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
 
 class MMBPDBList(PDBList):
-    """ Replacement class to support access to biounits at MMB PDB Server.
+    """ 
+    | mmb_server MMBPDBList
+    | Replacement class to support access to biounits at MMB PDB Server.
+    | Modified from original BioPython code.
 
-        Modified from original BioPython code.
+    Args:
+        pdb_code (str) : PDB code to retrieve
+        obsolete (bool) : (False) Retrieve also obsolete entries
+        pdir (str) : (None) Path to local cache
+        file_format (str) : (None) Format to download (default: mmCIF)
+        overwrite (bool): (False) Do not download existing files
+        biounit (bool) : (False) Download a Biological assembly
     """
 
     def retrieve_pdb_file(
