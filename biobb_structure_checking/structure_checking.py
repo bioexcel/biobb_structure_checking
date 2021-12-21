@@ -87,7 +87,7 @@ class StructureChecking():
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
-            self.checkall(self.args['options'])
+            self.checkall()
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
         elif self.args['command'] != 'load':
@@ -203,7 +203,7 @@ class StructureChecking():
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
-    def checkall(self):
+    def checkall(self, opts=None):
         """ StructureChecking.checkall
         Predefined workflow for complete checking
         """
