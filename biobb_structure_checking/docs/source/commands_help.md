@@ -33,9 +33,10 @@ Commands to manipulate structure composition.
 
 **rem_hydrogen** [--remove Yes|No] - _Remove Hydrogen atoms from structure_
 
-**mutateside** [--mut mutation_list] [--no_check_clashes] [--rebuild] -
+**mutateside** [--mut mutation_list|file:mutations_file] [--no_check_clashes] [--rebuild] -
 _Mutate side chain with minimal atom replacement_  
 * Allows multiple mutations (comma separated). 
+* mutation_list as file: accepts list of mutations in a external file
 * Check generated clashes except **--no_check_clashes** set.
 * **--rebuild** optimize side chains using Modeller. 
 
