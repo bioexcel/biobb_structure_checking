@@ -1,4 +1,4 @@
-## v3.9.0 (2021.4)
+## v3.9.3 (2021.4)
 
 ### Extended functions
 
@@ -15,10 +15,13 @@
 - command_list
     - Added support for inline command lists
 
+- mutationside
+    - Added support for RNA mutations
 ### Bug Fixes
 - Fix charge assignment for modified residues and terminals
+- Fixed wrong assigment of RNA residues as protein
 - Fixed tests
-
+- 
 ***
 ## V3.8.5 (2021.2)
 
