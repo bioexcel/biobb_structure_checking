@@ -2864,7 +2864,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-ADENOSINE - with 5' - OH end group and 3' - O(minus)
 
- A5  INT     1
+ A5   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3028,7 +3028,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-ADENOSINE - with 5' - OH group and 3' - OH group
 
- AN  INT     1
+ AN   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3296,7 +3296,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-URACIL - with 5' - OH end group and 3' - O(minus)
 
- U5  INT     1
+ U5   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3346,7 +3346,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-URACIL - with 5' - phosphate group and 3' - O(minus) group 
 
- U   INT     1
+ U    INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3398,7 +3398,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-URACIL - with 5' - phosphate group and 3' - OH group
 
- U3  INT     1
+ U3   INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3451,7 +3451,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-URACIL - with 5' - OH group and 3' - OH group
 
- UN  INT     1
+ UN   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3724,7 +3724,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-GUANOSINE - with 5' - OH end group and 3' - O(minus) group
 
- G5  INT     1
+ G5   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3779,7 +3779,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-GUANOSINE - with 5' - phosphate group and 3' - O(minus) group 
 
- G   INT     1
+ G    INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3836,7 +3836,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-GUANOSINE - with 5' - phosphate group and 3' - OH group
 
- G3  INT     1
+ G3   INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -3894,7 +3894,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-GUANOSINE - with 5' - OH group and 3' - OH group
 
- GN  INT     1
+ GN   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -4156,7 +4156,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-CYTOSINE - with 5' - OH end group and 3' - O(minus) group
 
- C5  INT     1
+ C5   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -4207,7 +4207,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-CYTOSINE - with 5' - phosphate group and 3' - O(minus) group 
 
- C   INT     1
+ C    INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -4260,7 +4260,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-CYTOSINE - with 5' - phosphate group and 3' - OH group
 
- C3  INT     1
+ C3   INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000
@@ -4314,7 +4314,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-CYTOSINE - with 5' - OH group and 3' - OH group
 
- CN  INT     1
+ CN   INT     1
  CORRECT NOMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000

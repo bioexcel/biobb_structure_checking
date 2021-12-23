@@ -128,9 +128,17 @@ def _protein_residue_check(res_id):
 
     return rid
 
-def _na_residue_check(rid):
+def _na_residue_check(rid, type):
     rid = rid.upper()
-    if rid in NA_RESIDUE_CODE:
+    if type == NA:
+        codes = NA_RESIDUE_CODE
+    elif type == DNA:
+        codes = DNA_RESIDUE_CODE
+    elif type == RNA:
+        codes = RNA_RESIDUE_CODE
+    else:
+        codes = set()
+    if rid in codes:
         return rid
     return False
 
@@ -138,15 +146,12 @@ def rev_complement_na_seq(seq):
     """ Reverse-complement NA sequence """
     return seq.translate(COMPLEMENT_TAB)[::-1]
 
-def residue_check(res):
-    """
-    Checks whether is a valid residue id,
-    """
-    res_ok = _protein_residue_check(res)
-    if not res_ok:
-        res_ok = _na_residue_check(res)
-    return res_ok
-
+def valid_residue_check(res, chain_type):
+    if chain_type == PROTEIN:
+        return _protein_residue_check(res)
+    else:
+        return _na_residue_check(res, chain_type)
+    
 def is_protein(res):
     """ Checks if a residue is a valid protein one """
     rid = res.get_resname()
