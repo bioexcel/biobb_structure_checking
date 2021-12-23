@@ -1538,7 +1538,6 @@ class StructureChecking():
         input_line = ParamInput('Mutation list', self.args['non_interactive'])
         mut_list = input_line.run(mut_list)
 
-
         mutations = self.strucm.prepare_mutations(mut_list)
 
         print(cts.MSGS['MUTATIONS_TO_DO'])

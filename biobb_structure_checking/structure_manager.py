@@ -1351,11 +1351,11 @@ class StructureManager:
         return res not in self.next_residue
 
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
-        """ Fins residues to mutate from mut_list"""
-        mutations = MutationManager(mut_list)
+        """ Find residues to mutate from mut_list"""
+        mutations = MutationManager(mut_list, self.chain_ids)
         mutations.prepare_mutations(self.st)
         return mutations
-
+    
     def apply_mutations(self, mutations: MutationManager) -> Residue:
         """ Perform mutations """
         mutated_res = mutations.apply_mutations(
