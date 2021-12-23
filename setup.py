@@ -22,7 +22,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['psutil', 'biopython','numpy==1.17'],
+    install_requires=['psutil', 'biopython', 'numpy==1.19.5'],
     entry_points={
         "console_scripts": [
             "check_structure = biobb_structure_checking.check_structure:main"
