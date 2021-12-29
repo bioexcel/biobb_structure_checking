@@ -9,7 +9,7 @@
   - Output models as multiple PDB files
   
 - backbone
-  - Use standard FASTA files as sequence input
+  - Accept standard FASTA files as sequence input
   - Accept multiple templates
 ### Bug Fixes
 
