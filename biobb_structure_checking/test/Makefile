@@ -46,6 +46,8 @@ models:
 	echo "Running models on 1ark"
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --non_interactive models --select 5 > 1ark_models_test_5.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_1_test.pdb --non_interactive models --select 1 > 1ark_models_test_1.log
+	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_sup_test.pdb --non_interactive models --select 3-6 --superimpose --save_split > 1ark_models_3-6_sup_test.log
+
 chains: 
 	@echo "Running chains on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log

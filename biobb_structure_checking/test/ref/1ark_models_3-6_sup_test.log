@@ -19,16 +19,18 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 
-Running models. Options: --select 1
+Running models. Options: --select 3-6 --superimpose --save_split
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
-Selecting model num. 1
-Final Num. models: 1
+Selecting model num. 3-6
+Models superimposed: final RMSd 2.6151 A
+Final Num. models: 4 (type: Ensembl/NMR,    2.615 A)
 Final Num. chains: 1 (A: Protein)
-Final Num. residues:  60
+Final Num. residues:  240
 Final Num. residues with ins. codes:  0
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  905
-Structure saved on 1ark_models_1_test.pdb
+Final Num. atoms:  3620
+Splitting models
+Structure saved on 1ark_models_sup_test.pdb
