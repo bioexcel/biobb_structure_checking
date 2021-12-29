@@ -102,7 +102,8 @@ class StructureChecking():
                 try:
                     output_structure_path = self._save_structure(
                         self.args['output_structure_path'],
-                        self.args['rename_terms']
+                        self.args['rename_terms'],
+                        split_models = '--save_split' in self.args['options']
                     )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
@@ -377,6 +378,14 @@ class StructureChecking():
 
         if input_option != 'all':
             self.strucm.select_model(select_model)
+
+        if (opts['superimpose']):
+            self.strucm.superimpose_models()
+            print(f'Models superimposed: final RMSd {self.strucm.models_type["rmsd"]} A')
+            self.summary['models']['superimp_rmsd'] = self.strucm.models_type["rmsd"]
+
+        if (opts['save_split']): # tag as modified to force save
+            self.strucm.modified = True
 
         self.summary['models']['selected'] = select_model
 
@@ -1997,7 +2006,7 @@ class StructureChecking():
 
         return strucm
     
-    def save_structure(self, output_structure_path, rename_terms=False):
+    def save_structure(self, output_structure_path, rename_terms=False, split_models=False):
         """ StuctureChecking.save_structure
         Saving the current structure in a the output file
         
@@ -2005,10 +2014,10 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
         """
-        return self._save_structure(output_structure_path, rename_terms=rename_terms)
+        return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
     
     #Kept for back compatibility
-    def _save_structure(self, output_structure_path, rename_terms=False):
+    def _save_structure(self, output_structure_path, rename_terms=False, split_models=False):
         """ Private. StuctureChecking._save_structure
         Saving the current structure in a the output file
         
@@ -2023,8 +2032,17 @@ class StructureChecking():
         output_structure_path = input_line.run(output_structure_path)
         
         output_format = os.path.splitext(output_structure_path)[1][1:]
+        base_name = os.path.splitext(output_structure_path)[0]
+        if not output_format:
+            output_format = 'pdb'
         
-        self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
+        if not split_models:
+            self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
+        else:
+            for mod in self.strucm.st.get_models():
+                output_path = f'{output_structure_path}_{mod.serial_num}.{output_format}'
+                self.strucm.save_structure(output_path, mod_id = mod.id, rename_terms=rename_terms, output_format=output_format)
+            print("Splitting models")
         
         return output_structure_path
 

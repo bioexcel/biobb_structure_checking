@@ -4,10 +4,10 @@
 
 ### Extended functions
 - models
-  - Output set of models in multiple PDB files
-  - Select multiple
-  - Superimpose models
-
+  - Select multiple models
+  - Superimpose current models
+  - Output models as multiple PDB files
+  
 - backbone
   - Use standard FASTA files as sequence input
   - Accept multiple templates

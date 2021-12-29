@@ -775,7 +775,12 @@ class StructureManager:
         if self.has_charges:
             print("Total charge {:6.3f}".format(self.total_charge))
 
-    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False, output_format='pdb'):
+    def save_structure(
+            self, 
+            output_pdb_path: str, 
+            mod_id: str = None, 
+            rename_terms: bool = False, 
+            output_format='pdb'):
         """
         Saves structure on disk in PDB format
 
@@ -861,12 +866,25 @@ class StructureManager:
         self.update_internals()
         self.modified = True
 
+    def superimpose_models(self):
+        spimp = Superimposer()
+        if self.nmodels > 1:
+            fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
+            for mod in self.st.get_models():
+                if mod.id == 0:
+                    continue
+                mov_atoms = [at for at in self.st[mod.id].get_atoms() if at.id == 'CA']
+                spimp.set_atoms(fix_atoms, mov_atoms)
+                spimp.apply(self.st[mod.id].get_atoms())
+            self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
+            self.modified = True
     def has_models(self) -> bool:
         """ Shotcut method to check whether the structure has more than one model
 
             Returns: Boolean
         """
         return self.nmodels > 1
+
 
     def has_superimp_models(self) -> bool:
         """ Shotcut method to check whether the structure has superimposed

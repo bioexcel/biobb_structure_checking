@@ -1,8 +1,8 @@
 1. System Selection 
     1.1. Detect/Select Models (models) DONE
-        1.1.1 Consider multiple
-        1.1.2 Save split collection
-        1.1.3 Superimpose models
+        1.1.1 Consider multiple DONE
+        1.1.2 Save split collection DONE
+        1.1.3 Superimpose models DONE
     1.2. Detect/Select Chains (chains) DONE
         1.2.1 Detect mixed NA/protein chains
         1.2.2 Rebuild/fix chains
