@@ -1040,17 +1040,17 @@ def get_all_r2r_distances(struc, r_ids='all', d_cutoff=0., join_models=False):
         r_ids = r_ids.split(',')
     dist_mat = []
     check_ats = {}
-    for md_id in range(len(struc)):
-        check_ats[md_id] = []
-        for res in struc[md_id].get_residues():
+    for mod in struc.get_models():
+        check_ats[mod.id] = []
+        for res in struc[mod.id].get_residues():
             if res.resname in r_ids or r_ids == ['all']:
                 if join_models:
                     check_ats[0].append(res.child_list[0])
                 else:
-                    check_ats[md_id].append(res.child_list[0])
-    for md_id in range(len(struc)):
-        if check_ats[md_id]:
-            dist_mat += _get_contacts(check_ats[md_id], d_cutoff)
+                    check_ats[mod.id].append(res.child_list[0])
+    for mod in struc.get_models():
+        if check_ats[mod.id]:
+            dist_mat += _get_contacts(check_ats[mod.id], d_cutoff)
     return dist_mat
 
 def _get_contacts(ats_list, d_cutoff):

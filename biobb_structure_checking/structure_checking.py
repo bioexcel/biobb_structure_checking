@@ -365,7 +365,7 @@ class StructureChecking():
         input_line = ParamInput('Select Model Num', self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_numeric(
-            'modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels
+            'modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels, multiple=True
         )
 
         input_option, select_model = input_line.run(select_model)

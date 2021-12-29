@@ -46,7 +46,8 @@ class ParamInput():
             'list2':list2
         })
 
-    def add_option_numeric(self, label, opt_list, opt_type, min_val, max_val):
+    
+    def add_option_numeric(self, label, opt_list, opt_type, min_val, max_val, multiple=False):
         """ Add a numeric option to dialog """
         self.options.append({
             'label':label,
@@ -54,6 +55,7 @@ class ParamInput():
             'type':opt_type,
             'min':min_val,
             'max':max_val,
+            'multiple':multiple
         })
 
     def add_option_free_text(self, label):
@@ -116,13 +118,25 @@ class ParamInput():
                         input_ok = input_ok and val_sp[1] in opt['list2']
 
             elif opt['type'] in ('int', 'float'):
-                opt_value = float(opt_value)
-                if opt['type'] == "int":
-                    opt_value = int(opt_value)
-                input_ok = (opt_value >= opt['min']) and (opt_value <= opt['max'])
+                ok = True
+                if opt['multiple']:
+                    values = []
+                    if (opt['type'] == 'int') and ('-' in opt_value):
+                        m1, m2 = opt_value.split('-')
+                        for v in range(int(m1), int(m2) + 1):
+                            values.append(v)
+                    elif ',' in opt_value:
+                        values = opt_value.split(',')
+                else:
+                    values = [opt_value]
+                for val in values:
+                    opt_val = float(val)
+                    if opt['type'] == "int":
+                        opt_val = int(val)
+                    ok = ok and (opt_val >= opt['min']) and (opt_val <= opt['max'])
+                input_ok = ok
             if not input_ok:
                 iopt += 1
-
         return input_ok, iopt, opt_value
 
     def run(self, opt_value):
@@ -151,7 +165,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print('Input not valid ({})'.format(opt_value))
+                print(f'Input not valid or out of range ({opt_value})')
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 

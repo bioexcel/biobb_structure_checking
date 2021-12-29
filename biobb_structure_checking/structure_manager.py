@@ -827,21 +827,36 @@ class StructureManager:
         return mu.get_altloc_residues(self.st)
 
 # Methods to modify structure
-    def select_model(self, keep_model: int) -> None:
-        """ Selects one model and delete the others from the structure. Model is
-            renumbered to model 1
+    def select_model(self, keep_model: str) -> None:
+        """ Selects model(s) and delete the others from the structure. Model are
+            renumbered
 
             Args:
-                keep_model: Model number to keep
+                keep_model: Model number(s) to keep
         """
-        ids = [nmodel.id for nmodel in self.st.get_models()]
-        for ind, model_id in enumerate(ids):
-            if ind != keep_model - 1:
-                self.st.detach_child(model_id)
-        if keep_model != 1:
-            self.st[keep_model-1].id = 0
-        self.nmodels = 1
-        self.models_type = 0
+        models = []
+        if '-' in keep_model:
+            m1, m2 = keep_model.split('-')
+            for v in range(int(m1), int(m2) + 1):
+                models.append(v)
+        elif ',' in keep_model:
+            models = [int(m) for m in keep_model.split(',')]
+        else:
+            models = [int(keep_model)]
+        
+        ids = [mod.id for mod in self.st.get_models()]
+        for md_id in ids:
+            if self.st[md_id].serial_num not in models:
+                self.st.detach_child(md_id)
+
+        # renumbering models
+        for i, mod in enumerate(self.st):
+            mod.id = i
+            mod.serial_num = i + 1
+        
+        self.nmodels = len(self.st)
+        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
+        
         # Update internal data
         self.update_internals()
         self.modified = True

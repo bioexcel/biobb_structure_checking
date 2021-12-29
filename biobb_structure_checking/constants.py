@@ -219,7 +219,7 @@ DIALOGS.add_option('command_list', '--list', 'op_list', 'Command List File or st
 
 DIALOGS.add_entry('models', 'Checks and selects models')
 DIALOGS.add_option('models', '--select', 'select', \
-    'Select model to keep', int)
+    'Select model(s) to keep')
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
