@@ -3,7 +3,14 @@
 ### New Functions
 
 ### Extended functions
+- models
+  - Output set of models in multiple PDB files
+  - Select multiple
+  - Superimpose models
 
+- backbone
+  - Use standard FASTA files as sequence input
+  - Accept multiple templates
 ### Bug Fixes
 
 ***
