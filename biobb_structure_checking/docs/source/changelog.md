@@ -1,3 +1,19 @@
+## v3.10.0 (2022.X)
+
+### New Functions
+
+### Extended functions
+- models
+  - Select multiple models
+  - Superimpose current models
+  - Output models as multiple PDB files
+  
+- backbone
+  - Accept standard FASTA files as sequence input
+  - Accept multiple templates
+### Bug Fixes
+
+***
 ## v3.9.6 (2021.4)
 
 ### Extended functions
@@ -21,7 +37,7 @@
 - Fix charge assignment for modified residues and terminals
 - Fixed wrong assigment of RNA residues as protein
 - Fixed tests
--
+
 ***
 ## V3.8.5 (2021.2)
 

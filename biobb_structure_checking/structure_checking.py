@@ -332,7 +332,8 @@ class StructureChecking():
         
         Args:
             opts (str | dict - Options dictionary):
-                * select (int) - model number to select
+                * select (int) - model(s) to select
+                * superimpose (bool) - superimpose models
         """
         self._run_method('models', opts)
 
@@ -381,7 +382,7 @@ class StructureChecking():
 
         if (opts['superimpose']):
             self.strucm.superimpose_models()
-            print(f'Models superimposed: final RMSd {self.strucm.models_type["rmsd"]} A')
+            print(cts.MSGS['SUPIMP_MODELS'].format(self.strucm.models_type["rmsd"]))
             self.summary['models']['superimp_rmsd'] = self.strucm.models_type["rmsd"]
 
         if (opts['save_split']): # tag as modified to force save
@@ -2013,6 +2014,7 @@ class StructureChecking():
         Args:
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
+            split_models (bool): (False) Save models in separated output files
         """
         return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
     
@@ -2024,6 +2026,7 @@ class StructureChecking():
         Args:
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
+            split_models (bool): (False) Save models in separated output files
         """
         input_line = ParamInput(
             "Enter output structure path",
@@ -2042,7 +2045,7 @@ class StructureChecking():
             for mod in self.strucm.st.get_models():
                 output_path = f'{output_structure_path}_{mod.serial_num}.{output_format}'
                 self.strucm.save_structure(output_path, mod_id = mod.id, rename_terms=rename_terms, output_format=output_format)
-            print("Splitting models")
+            print(cts.MSGS["SPLIT_MODELS"])
         
         return output_structure_path
 

@@ -11,8 +11,10 @@ load:         Stores structure on local cache and provides basic statistics
 =======================
 sequences 
     Print canonical and structure sequences in FASTA format
-models [--select model_num]
+models [--select model_num] [--superimpose] [--save_split]
     Detect/Select Models
+    --superimpose Superimposes currently selected models
+    --save_split Split models as separated output files. 
 chains [--select chain_ids | molecule_type]
     Detect/Select Chains
 inscodes 

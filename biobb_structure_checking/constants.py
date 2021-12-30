@@ -351,6 +351,8 @@ MSGS = {
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',
     'SINGLE_MODEL': 'Single model found',
     'SELECT_MODEL': 'Selecting model num.',
+    'SPLIT_MODELS': 'Splitting models for output',
+    'SUPIMP_MODELS': 'Models superimposed: final RMSd {:8.3f} A',
     #chains
     'CHAINS_DETECTED': '{} Chain(s) detected',
     'UNKNOWN_CHAINS':   ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} ' +\

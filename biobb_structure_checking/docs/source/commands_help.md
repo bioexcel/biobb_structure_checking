@@ -14,7 +14,10 @@ Commands to manipulate structure composition.
 
 **sequences** - _Print canonical and structure sequences in FASTA format_
 
-**models** [--select model_num] - _Detect/Select Models_
+**models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
+ * Accept List of Models (comma separated) or Model number range 
+ * **--superimpose** - Superimposes currently selected models
+ * **--save_split** Split models as separated output files. 
 
 **chains** [--select chain_ids | molecule_type] - _Detect/Select Chains_
 
