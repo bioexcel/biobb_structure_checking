@@ -56,6 +56,7 @@ class ModellerManager():
             target_model (int) : Model to repair
             target_chain (str) : Chain to repair
             extra_NTerm_res (int) : Number of additional residues at NTerm (to fix NTerm, experimental)
+            templates ([StructureManager]): Additional templates
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
@@ -105,10 +106,14 @@ class ModellerManager():
             )
             knowns.append('templ' + ch_id)
 
+            for tmp in templates:
+                print(tmp.sequence_data._assign_seq(tgt_seq))
+
             if ch_id == target_chain:
                 tgt_seq = tgt_seq[0:len(pdb_seq)]
 
         _write_alin(tgt_seq, templs, alin_file)
+        sys.exit()
 
         return self._automodel_run(alin_file, knowns)
 
@@ -137,6 +142,8 @@ class ModellerManager():
     def __del__(self):
         if not DEBUG:
             shutil.rmtree(self.tmpdir)
+            print(self.tmpdir)
+            
 
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(
@@ -159,4 +166,4 @@ class NoCanSeqError(Exception):
     | Error raised when no canonical sequence exists
     """
     def __init__(self, ch_id):
-        self.message = 'No canonical sequence found for chain {}. Check it is defined in FASTA header (>anyId_A,B,...) or use mmCif input'.format(ch_id)
+        self.message = 'No canonical sequence found for chain {}.'.format(ch_id)

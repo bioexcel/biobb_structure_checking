@@ -58,8 +58,7 @@ class StructureManager:
             pdb_server: str = 'ftp://ftp.wwpdb.org',
             cache_dir: str = 'tmpPDB',
             file_format: str = 'mmCif',
-            fasta_sequence_path: str = '',
-            templates = None
+            fasta_sequence_path: str = ''
         ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -138,6 +137,8 @@ class StructureManager:
         if fasta_sequence_path:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
+        self.templates = []
+        
         # Checking models type according to RMS among models
         self.nmodels = len(self.st)
         self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
@@ -1044,7 +1045,7 @@ class StructureManager:
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0, templates=self.templates)
+        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
 
         self.update_internals()
 
@@ -1061,8 +1062,7 @@ class StructureManager:
             modeller_key='',
             extra_gap: int = 0,
             extra_NTerm: int = 0,
-            sequence_data = None,
-            templates = None
+            sequence_data = None
         ):
         """ Runs modeller 
             Args:
@@ -1085,13 +1085,13 @@ class StructureManager:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
-        
+        print(mod_mgr.tmpdir)
         if not sequence_data:
             sequence_data = self.sequence_data
         mod_mgr.sequences = sequence_data
 
         modif_residues = []
-
+        print(self.templates)
         for i,templ in enumerate(self.templates):
             if templ.has_models():
                 templ.select_model(0)

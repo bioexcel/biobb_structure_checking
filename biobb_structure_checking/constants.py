@@ -89,11 +89,11 @@ CMD_LINE.add_argument(
     help='Canonical sequence in FASTA format'
 )
 
-CMD_LINE.add_argument(
-    '--use_templates',
-    dest='templates',
-    help='Additional template(s) for backbone reconstruction (comma separated, format as -i)'
-)
+# CMD_LINE.add_argument(
+#     '--use_templates',
+#     dest='templates',
+#     help='Additional template(s) for backbone reconstruction (comma separated, format as -i)'
+# )
 
 CMD_LINE.add_argument(
     '--pdb_server',
@@ -285,7 +285,7 @@ DIALOGS.add_option('backbone', '--fix_chain', 'fix_chain',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
     'Adds ACE and NME caps to missing main chain segments (All | None)')
-DIALOGS.add_option('backbone', '--add_templates', 'templates',\
+DIALOGS.add_option('backbone', '--templates', 'templates',\
     'Additional structure templates (List)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')

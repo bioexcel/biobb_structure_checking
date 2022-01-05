@@ -57,9 +57,9 @@ class SequenceData():
                 for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
                     self.fasta.append(record)
             except IOError:
-                sys.exit("Error loading FASTA")
+                sys.exit('Error loading FASTA')
         if not self.fasta:
-            print("WARNING: No valid FASTA formatted sequences found in {} ".format(fasta_sequence_path))
+            print(f'WARNING: No valid FASTA formatted sequences found in {fasta_sequence_path}')
             read_ok = False
         return read_ok
 
@@ -100,11 +100,9 @@ class SequenceData():
             hits = self.match_chain_seqs()
             chids = [h['ch_id'] for h in hits]
             seqs = [h['seq'] for h in hits]
-            print("Getting canonical sequences from matching FASTA input")
+            print('Getting canonical sequences from matching FASTA input')
             for h in sorted(hits, key=lambda h:h['ch_id']):
-                print(
-                    '{ch_id}: "{desc}", score: {score} {low}'.format(**h)
-                    )
+                print('{ch_id}: "{desc}", score: {score} {low}'.format(**h))
         else:
             if strucm.input_format != 'cif':
                 if cif_warn:
@@ -152,7 +150,7 @@ class SequenceData():
         for ch_id in strucm.chain_ids:
             self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
             if not self.has_canonical[ch_id]:
-                print("Warning, no canonical sequence available for chain {}".format(ch_id))
+                print(f'Warning, no canonical sequence available for chain {ch_id}')
         return False
 
     def read_structure_seqs(self, strucm):
@@ -162,7 +160,7 @@ class SequenceData():
         Args:
             strucm (StructureManager) : Object containing the loaded structure
         """
-        # PDB extrated sequences
+        # PDB extracted sequences
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -385,10 +383,14 @@ class SequenceData():
         return seqs
     
     def _assign_seq(self, rec):
+        if hasattr(rec,'seq'):
+            tgt = rec.seq
+        else:
+            tgt = rec
         matches = []
         for ch in self.raw_pdb_seq:
             for sq in self.raw_pdb_seq[ch]:
-                score = pairwise2.align.globalxs(rec.seq, sq, -5, -1, score_only=True)
+                score = pairwise2.align.globalxs(tgt, sq, -5, -1, score_only=True)
                 if score > 0:
                     matches.append((ch, score))
         return matches
