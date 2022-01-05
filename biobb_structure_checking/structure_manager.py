@@ -18,7 +18,7 @@ from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
-from biobb_structure_checking.mmb_server import MMBPDBList
+from biobb_structure_checking.mmb_server import MMBPDBList, ALT_SERVERS
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
@@ -150,7 +150,7 @@ class StructureManager:
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')
                 input_pdb_path = pdbid[4:].upper()
-                if pdb_server != 'mmb':
+                if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format='pdb', biounit=biounit
