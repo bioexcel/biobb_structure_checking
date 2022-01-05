@@ -90,6 +90,16 @@ $CLI -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall &> $DIR/1ldn1_ch
 $CLI -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall &> $DIR/2ki5_checkall_test.log
 #echo "Running all checks on 1vtk.1"
 $CLI -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall &> $DIR/1vtk_checkall_test.log
+#sequences:
+#"Running sequences on 2ki5"
+$CLI -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences &> $DIR/2ki5_sequences_test.log
+#dnamut
+#echo "Running dnamut on 1D23"
+$CLI -i pdb:1d23 -o 1d23_dnamut_test.pdb --non_interactive mutateside --mut DA3DG &> $DIR/1d23_dnamut_test.log
+$CLI -i pdb:1d23 -o 1d23_poliA_test.pdb --non_interactive mutateside --na_seq AAAAAAAAAA  &> $DIR/1d23_poliA_test.log
+#add_hydrogen:
+#~echo "Running add_hydrogens on 1ubq"
+$CLI -i pdb:1ubq -o 1ubq.pdbqt --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' &> $DIR/1ubq_add_hydrogen_test.log
 #All_test
 #echo -n "Running all checks on 1ark"
 $CLI -i pdb:1ark -o $DIR/1ark_all_test.pdb --json $DIR/1ark_all_test.json --non_interactive command_list --list $DIR/all_checks &> $DIR/1ark_all_test.log

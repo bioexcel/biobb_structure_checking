@@ -21,7 +21,7 @@
    "TYR A56",
    "GLU A58"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -117,7 +117,8 @@
   "num_wat": 0,
   "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": -4.0000000000000036
  },
  "fixside": {
   "opts": "--fix all"
@@ -133,7 +134,7 @@
  },
  "inscodes": {},
  "ligands": {
-  "opts": "--remove SO4"
+  "opts": "--remove All"
  },
  "metals": {
   "opts": "--remove ZN"
@@ -169,7 +170,8 @@
   "num_wat": 0,
   "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 0
+  "res_ligands": 0,
+  "total_charge": null
  },
  "water": {
   "opts": "--remove Yes"

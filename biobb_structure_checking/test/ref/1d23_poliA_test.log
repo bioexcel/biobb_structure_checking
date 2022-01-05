@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.2                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -25,7 +25,6 @@ Metal/Ion residues found
  MG B21
 
 Running mutateside. Options: --na_seq AAAAAAAAAA
-A:DC1DA,A:DG2DA,A:DA3DA,A:DT4DA,A:DC5DA,A:DG6DA,A:DA7DA,A:DT8DA,A:DC9DA,A:DG10DA,B:DC11DT,B:DG12DT,B:DA13DT,B:DT14DT,B:DC15DT,B:DG16DT,B:DA17DT,B:DT18DT,B:DC19DT,B:DG20DT
 Mutations to perform
 A:DC1DA
 A:DG2DA

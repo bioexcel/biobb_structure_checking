@@ -15,6 +15,8 @@ from Bio.PDB.Residue import Residue
 from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
+from biobb_structure_checking.constants import MSGS
+
 #chain types
 PROTEIN = 1
 DNA = 2
@@ -146,9 +148,17 @@ def _protein_residue_check(res_id):
 
     return rid
 
-def _na_residue_check(rid):
+def _na_residue_check(rid, type):
     rid = rid.upper()
-    if rid in NA_RESIDUE_CODE:
+    if type == NA:
+        codes = NA_RESIDUE_CODE
+    elif type == DNA:
+        codes = DNA_RESIDUE_CODE
+    elif type == RNA:
+        codes = RNA_RESIDUE_CODE
+    else:
+        codes = set()
+    if rid in codes:
         return rid
     return False
 
@@ -156,15 +166,12 @@ def rev_complement_na_seq(seq):
     """ Reverse-complement NA sequence """
     return seq.translate(COMPLEMENT_TAB)[::-1]
 
-def residue_check(res):
-    """
-    Checks whether is a valid residue id,
-    """
-    res_ok = _protein_residue_check(res)
-    if not res_ok:
-        res_ok = _na_residue_check(res)
-    return res_ok
-
+def valid_residue_check(res, chain_type):
+    if chain_type == PROTEIN:
+        return _protein_residue_check(res)
+    else:
+        return _na_residue_check(res, chain_type)
+    
 def is_protein(res):
     """ Checks if a residue is a valid protein one """
     rid = res.get_resname()
@@ -323,7 +330,7 @@ def check_chiral(res, at1, at2, at3, at4, sign=1.):
     for atm in (at1, at2, at3, at4):
         at_ok = at_ok and atm in res
         if not at_ok:
-            print('Warning: atom {:3} not found in {}'.format(atm, residue_id(res)))
+            print(MSGS['ATOM_NOT_FOUND'].format(atm, residue_id(res)))
     if at_ok:
         vec1 = res[at1].coord - res[at2].coord
         vec2 = res[at3].coord - res[at2].coord
@@ -494,7 +501,7 @@ def get_backbone_links(struc, backbone_atoms, covlnk, join_models=True):
                         and (join_models or same_model(at1.get_parent(), at2.get_parent())):
                     cov_links.append(sorted([at1, at2], key=lambda x: x.serial_number))
         else:
-            print("Warning: No backbone atoms defined")
+            print(MSGS['NO_BACKBONE_ATOMS'])
 
     return cov_links
 
@@ -579,15 +586,17 @@ def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
 
     # only proteins
+    rcode = res.get_resname()
 
-    if not _protein_residue_check(res.get_resname()):
-        return "Warning: Residue not valid in this context "
+    if not _protein_residue_check(rcode):
+        return MSGS['RESIDUE_NOT_VALID']
 
-    error_msg = "Warning: not enough atoms to build backbone hydrogen atoms on"
+    error_msg = MSGS['NOT_ENOUGH_ATOMS'].format('backbone')
 
     if res.get_resname() not in ('ACE', 'NME'):
         if 'N' not in res:
             return error_msg
+
     if 'CA' not in res:
         return error_msg
 
@@ -596,12 +605,10 @@ def add_hydrogens_backbone(res, prev_res, next_res):
         if res.get_resname() == 'PRO':
             if 'CD' not in res:
                 return error_msg
+            crs = build_coords_2xSP3(HDIS, res['N'], res['CA'], res['CD'])
+            add_new_atom_to_residue(res, 'H2', crs[0])
+            add_new_atom_to_residue(res, 'H3', crs[1])
 
-            add_new_atom_to_residue(
-                res,
-                'H',
-                build_coords_SP2(HDIS, res['N'], res['CA'], res['CD'])
-            )
         elif res.get_resname() == 'ACE':
             crs = build_coords_3xSP3(HDIS, res['CA'], next_res['N'], res['C'])
             add_new_atom_to_residue(res, 'HA1', crs[0])
@@ -616,7 +623,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             add_new_atom_to_residue(res, 'H1', crs[0])
             add_new_atom_to_residue(res, 'H2', crs[1])
             add_new_atom_to_residue(res, 'H3', crs[2])
-
+            res.resname = 'N' + res.resname
 
     elif res.get_resname() != 'PRO':
         if 'C' not in prev_res:
@@ -628,7 +635,7 @@ def add_hydrogens_backbone(res, prev_res, next_res):
             build_coords_SP2(HDIS, res['N'], res['CA'], prev_res['C'])
         )
 
-    if res.get_resname() == 'GLY':
+    if res.get_resname() in ['GLY', 'NGLY']:
         if 'C' not in res:
             return error_msg
 
@@ -656,12 +663,16 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
 def add_hydrogens_side(res, res_library, opt, rules):
     """ Add hydrogens to side chains"""
-    if res.get_resname() in ('ACE', 'NME', 'GLY'):
+
+    if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
+
     if 'N' not in res or 'CA' not in res or 'C' not in res:
-        return "Warning: not enough atoms to build side chain hydrogen atoms on"
+        return MSGS['NOT_ENOUGH_ATOMS'].format('side')
+
     for key_rule in rules.keys():
         rule = rules[key_rule]
+
         if rule['mode'] == 'B2':
             crs = build_coords_2xSP3(
                 rule['dist'],
@@ -1049,17 +1060,17 @@ def get_all_r2r_distances(struc, r_ids='all', d_cutoff=0., join_models=False):
         r_ids = r_ids.split(',')
     dist_mat = []
     check_ats = {}
-    for md_id in range(len(struc)):
-        check_ats[md_id] = []
-        for res in struc[md_id].get_residues():
+    for mod in struc.get_models():
+        check_ats[mod.id] = []
+        for res in struc[mod.id].get_residues():
             if res.resname in r_ids or r_ids == ['all']:
                 if join_models:
                     check_ats[0].append(res.child_list[0])
                 else:
-                    check_ats[md_id].append(res.child_list[0])
-    for md_id in range(len(struc)):
-        if check_ats[md_id]:
-            dist_mat += _get_contacts(check_ats[md_id], d_cutoff)
+                    check_ats[mod.id].append(res.child_list[0])
+    for mod in struc.get_models():
+        if check_ats[mod.id]:
+            dist_mat += _get_contacts(check_ats[mod.id], d_cutoff)
     return dist_mat
 
 def _get_contacts(ats_list, d_cutoff):

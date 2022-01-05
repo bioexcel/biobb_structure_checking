@@ -1,4 +1,3 @@
-
 """ Module to manage sequence information for structures """
 
 import sys
@@ -22,14 +21,22 @@ except ImportError:
     has_IUPAC = False
 
 class SequenceData():
-    """ Class to manage sequence data """
+    """ 
+    | sequence_manager SequenceData
+    | Class to manage sequence data 
+    """
     def __init__(self):
         self.data = {}
         self.has_canonical = False
         self.fasta = []
 
     def add_empty_chain(self, ch_id: str):
-        """ Add base structure for a new chain """
+        """ SequenceData.add_empty_chain
+        Add base structure for a new chain 
+        
+        Args:
+            ch_id (str) : Id of the new chain
+        """
         self.data[ch_id] = {
             'can':None,
             'chains': [],
@@ -37,7 +44,12 @@ class SequenceData():
         }
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
-        """ Loads canonical sequence from external FASTA file"""
+        """ SequenceData.load_sequence_from_fasta
+        Load canonical sequence from external FASTA file
+        
+        Args:
+            fasta_sequence_path (str) : Path to FASTA file
+        """
         read_ok = True
         self.fasta = []
         if fasta_sequence_path:
@@ -51,9 +63,15 @@ class SequenceData():
             read_ok = False
         return read_ok
 
-
     def read_sequences(self, strucm, clean=True, cif_warn=False):
-        """ Extracts sequences """
+        """ SequenceData.read_sequences
+        Extracts sequences from input data
+        
+        Args:
+            strucm (StructureManager) : Object containing loaded structure
+            clean (bool) : (True) Clean existing sequence data
+            cif_warn (bool) : (False) Issue a warning when structure is not CIF
+        """
         if clean:
             self.data = {}
             self.has_canonical = {}
@@ -67,7 +85,13 @@ class SequenceData():
         self.match_sequence_numbering()
 
     def read_canonical_seqs(self, strucm, cif_warn):
-        """ Prepare canonical sequences """
+        """ SequenceData.read_canonical_seqs
+        Prepare canonical sequences from the available input
+        
+        Args:
+            strucm (StructureManager) : Object containing the loaded structure
+            cif_warn (bool) : Issue a warning when structure is not CIF
+        """
 
         if not strucm.chain_ids:
             strucm.set_chain_ids()
@@ -132,8 +156,13 @@ class SequenceData():
         return False
 
     def read_structure_seqs(self, strucm):
-        """ Extracts sequences from structure fragments """
-        # PDB extracted sequences
+        """ SequenceData.read_structure_seqs
+        Extract sequence from structure fragments
+        
+        Args:
+            strucm (StructureManager) : Object containing the loaded structure
+        """
+        # PDB extrated sequences
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -186,10 +215,10 @@ class SequenceData():
                         'type': strucm.chain_ids[chn.id]
                     }
 
-
-
     def match_sequence_numbering(self):
-        """ Assign canonical sequence numbering to structural fragments """
+        """ SequenceData.match_sequence_numbering
+        Assign canonical sequence numbering to structural fragments
+        """
         if not hasattr(self, 'has_canonical'):
             return False
         for ch_id in self.data:
@@ -210,8 +239,13 @@ class SequenceData():
         return True
 
     def fake_canonical_sequence(self, strucm, mutations):
-        """ Fakes a canonical sequence to support modeller use
-            in fixside and mutateside --rebuild """
+        """ SequenceData.fake_canonical_sequence
+        Fakes a canonical sequence to support modeller use in fixside and mutateside --rebuild
+        
+        Args:
+            strucm (StructureManager) : Object containing the loaded structure
+            mutations (MutationsManager) : Object containing the list of mutations to perform
+        """
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
         for ch_id in strucm.chain_ids:
@@ -260,7 +294,9 @@ class SequenceData():
             self.has_canonical[ch_id] = True
 
     def get_canonical(self):
-        """ Prepares a FASTA string with the canonical sequence"""
+        """ SequenceData.get_canonical
+        Prepares a FASTA string with the canonical sequence
+        """
         outseq = ''
         for ch_id in sorted(self.data):
             if self.has_canonical[ch_id]:
@@ -268,7 +304,9 @@ class SequenceData():
         return outseq
 
     def get_pdbseq(self):
-        """ Prepares a FASTA string with the structure sequence, and fragments """
+        """ SequenceData.get_pdbseq
+        Prepares a FASTA string with the structure sequence, and fragments
+        """
         #TODO re-use this on modeller_manager
         outseq = ''
         for ch_id in sorted(self.data):

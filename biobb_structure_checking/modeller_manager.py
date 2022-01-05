@@ -1,4 +1,6 @@
-""" Module to handle an interface to modeller """
+""" 
+    Module to handle an interface to modeller, used to rebuild main and side chains and to optimize side chain orientation
+"""
 
 import sys
 import os
@@ -24,7 +26,9 @@ TMP_BASE_DIR = '/tmp'
 DEBUG = False
 
 class ModellerManager():
-    """ Class to handle Modeller calculations """
+    """ 
+    | modeller_manager ModellerManager
+    | Class to handle Modeller calculations """
     def __init__(self):
         self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
         #print("Using temporary working dir " + self.tmpdir)
@@ -45,9 +49,16 @@ class ModellerManager():
         log.none()
 
     def build(self, target_model, target_chain, extra_NTerm_res, templates):
-        """ Prepares Modeller input and builds the model """
-        alin_file = opj(self.tmpdir, "alin.pir")
+        """ ModellerManager.build
+        Prepare Modeller input and builds the model
         
+        Args:
+            target_model (int) : Model to repair
+            target_chain (str) : Chain to repair
+            extra_NTerm_res (int) : Number of additional residues at NTerm (to fix NTerm, experimental)
+        """
+        alin_file = opj(self.tmpdir, "alin.pir")
+
         if not self.sequences.has_canonical[target_chain]:
             raise NoCanSeqError(target_chain)
 
@@ -69,7 +80,7 @@ class ModellerManager():
             for i in range(1, len(frgs)):
                 frag_seq = frgs[i].seq
                 pdb_seq += frag_seq
-            # tuned to open gaps on missing loops
+            # tuned to open gaps on missing loops only
             alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
             if has_IUPAC:
@@ -143,5 +154,9 @@ def _write_alin(tgt_seq, templs, alin_file):
     )
 
 class NoCanSeqError(Exception):
+    """ 
+    | modeller_manager NoCanSeqError
+    | Error raised when no canonical sequence exists
+    """
     def __init__(self, ch_id):
         self.message = 'No canonical sequence found for chain {}. Check it is defined in FASTA header (>anyId_A,B,...) or use mmCif input'.format(ch_id)

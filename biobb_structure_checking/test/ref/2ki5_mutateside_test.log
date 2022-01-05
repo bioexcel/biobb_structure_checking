@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.2                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -26,7 +26,6 @@ SO4 B3
 AC2 B2
 
 Running mutateside. Options: --mut Leu49Ile,B:arg51Lys
-Leu49Ile,B:arg51Lys
 Mutations to perform
 *:LEU49ILE
 B:ARG51LYS

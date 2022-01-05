@@ -1,0 +1,55 @@
+===============================================================================
+=                   BioBB structure checking utility v3.9.2                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+===============================================================================
+
+Structure exists: 'tmpPDB/ub/1ubq.cif' 
+Structure pdb:1ubq loaded
+ PDB id: 1UBQ
+ Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: CHROMOSOMAL PROTEIN
+ Resolution (A): 1.8
+
+ Num. models: 1
+ Num. chains: 1 (A: Protein)
+ Num. residues:  134
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  58
+ Num. ligands or modified residues:  0
+ Num. water mol.:  58
+ Num. atoms:  660
+
+
+Step 1: water --remove yes
+Running water. Options: --remove yes
+58 Water molecules detected
+58 Water molecules removed
+
+Step 2:  add_hydrogen --add_mode auto --add_charges ADT
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
+24 Residues requiring selection on adding H atoms
+ ASP A21,A32,A39,A52,A58
+ GLU A16,A18,A24,A34,A51,A64
+ HIS A68
+ LYS A6,A11,A27,A29,A33,A48,A63
+ ARG A42,A54,A72,A74
+ TYR A59
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all
+No residues with missing or unknown side chain atoms found
+Selection: auto
+Replacing HIS A68 by HIE
+Updating partial charges and atom types
+Total assigned charge:      -0.00
+Command list completed
+Final Num. models: 1
+Final Num. chains: 1 (A: Protein)
+Final Num. residues:  76
+Final Num. residues with ins. codes:  0
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
+Final Num. water mol.:  0
+Final Num. atoms:  1231
+Total charge -0.000
+Structure saved on 1ubq.pdbqt

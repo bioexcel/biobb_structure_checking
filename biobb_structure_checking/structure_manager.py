@@ -19,7 +19,7 @@ from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
-from biobb_structure_checking.mmb_server import MMBPDBList
+from biobb_structure_checking.mmb_server import MMBPDBList, ALT_SERVERS
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
@@ -123,8 +123,12 @@ class StructureManager:
         self.biounit = False
         self.fixed_side = False
         self.file_format = file_format
+        self.has_charges = False
 
         self.data_library = DataLibManager(data_library_path)
+        for ff in self.data_library.ff_data:
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff  + '_prm.json')
+
         self.res_library = ResidueLib(res_library_path)
 
         self.st, self.headers, self.input_format = self._load_structure_file(
@@ -149,7 +153,7 @@ class StructureManager:
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')
                 input_pdb_path = pdbid[4:].upper()
-                if pdb_server != 'mmb':
+                if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format='pdb', biounit=biounit
@@ -167,9 +171,12 @@ class StructureManager:
         else:
             real_pdb_path = input_pdb_path
 
-        if '.pdb' in real_pdb_path:
-            parser = PDBParser(PERMISSIVE=1)
+        if '.pdb' in real_pdb_path: 
+            parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
+        elif '.pqr' in real_pdb_path: 
+            parser = PDBParser(PERMISSIVE=1, is_pqr=True)
+            input_format = 'pqr'
         elif '.cif' in real_pdb_path:
             parser = MMCIFParser()
             input_format = 'cif'
@@ -184,10 +191,11 @@ class StructureManager:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
-        if input_format == 'pdb':
+        if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(real_pdb_path)
         else:
             headers = MMCIF2Dict(real_pdb_path)
+            
         return st, headers, input_format
 
     def update_internals(self, cif_warn: bool = False):
@@ -230,50 +238,67 @@ class StructureManager:
         """ Sets  Bio.PDB.Atom.serial_number for all atoms in the structure,
             overriding original if any.
         """
+        if self.input_format == 'pqr' or self.has_charges:
+            self.total_charge = 0.
+        else:
+            self.total_charge = None
         i = 1
         for atm in self.st.get_atoms():
             atm.serial_number = i
             if hasattr(atm, 'selected_child'):
                 atm.selected_child.serial_number = i
+            if atm.pqr_charge is not None and self.total_charge is not None:
+                self.total_charge += atm.pqr_charge
             i += 1
+        #self.has_charges = (self.total_charge is not None)
 
-    def update_atom_charges(self):
-        """ Updats atom charges from data library """
+    def update_atom_charges(self, ff):
+        """ Update atom charges and types from data library """
+        
         print("Updating partial charges and atom types")
-        tot_chrg = 0
+        
+        self.total_charge = 0.
+        
+        if ff not in self.data_library.ff_data:
+            raise UnknownFFError(ff)
+        ff_data = self.data_library.ff_data[ff]
+
         for res in self.st.get_residues():
-            rcode = self.data_library.get_canonical_resname(res.get_resname())
+            rcode = res.get_resname()
             if len(rcode) == 4:
                 rcode3 = rcode[1:]
             else:
                 rcode3 = rcode
-            rcode3 = self.data_library.get_canonical_resname(rcode3)
+            can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
                 for atm in res.get_atoms():
-                    atm.charge = 0.
+                    atm.pqr_charge = 0.
+                    atm.radius = 0.
                     if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.ADT_type = atm.id.lower().capitalize()
+                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
                     else:
-                        atm.ADT_type = atm.element
+                        atm.xtra['atom_type'] = atm.element
             else:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
+                
                 for atm in res.get_atoms():
-                    atm.charge = self.res_library.get_atom_def(rcode, atm.id).chrg
-                    if atm.id in self.data_library.residue_data[rcode3]['ADT_type']:
-                        atm.ADT_type = self.data_library.residue_data[rcode3]['ADT_type'][atm.id]
-                    elif atm.id in self.data_library.residue_data['*']['ADT_type']:
-                        atm.ADT_type = self.data_library.residue_data['*']['ADT_type'][atm.id]
+                    atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
+                    if atm.id in ff_data['residue_data'][can_rcode3]:
+                        atm.xtra['atom_type'] = ff_data['residue_data'][can_rcode3][atm.id]
+                    elif atm.id in ff_data['residue_data']['*']:
+                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][atm.id]
                     else:
-                        atm.ADT_type = atm.element
-                    res_chr += atm.charge
-                    tot_chrg += atm.charge
+                        atm.xtra['atom_type'] = atm.element
+                    atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
+                    res_chr += atm.pqr_charge
+                    self.total_charge += atm.pqr_charge
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print("Warning: OXT atom missing in {}. Run backbone --add_atoms first".format(mu.residue_id(res)))
-        print("Total assigned charge: {:10.2f}".format(tot_chrg))
+                    print("Warning: OXT atom missing in {}. Run backbone --fix_atoms first".format(mu.residue_id(res)))
+        print("Total assigned charge: {:10.2f}".format(self.total_charge))
 
         self.has_charges = True
 
@@ -474,12 +499,15 @@ class StructureManager:
         """
         ion_res = self.data_library.ion_res
         hydrogen_lists = self.data_library.get_hydrogen_atoms()
-
+       
         ion_res_list = []
         for res in self.all_residues:
             rcode = res.get_resname()
+            if len(rcode) == 4:
+                rcode = rcode[1:]
             if rcode in ion_res:
                 ion_res_list.append((res, hydrogen_lists[rcode]))
+
         return ion_res_list
 
     def get_backbone_breaks(self) -> Dict[str, List[List[Residue]]]:
@@ -628,7 +656,8 @@ class StructureManager:
             'res_ligands': self.res_ligands,
             'num_wat': self.num_wat,
             'ca_only': self.ca_only,
-            'biounit': self.biounit
+            'biounit': self.biounit,
+            'total_charge': self.total_charge
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
@@ -746,8 +775,15 @@ class StructureManager:
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
+        if self.has_charges:
+            print("Total charge {:6.3f}".format(self.total_charge))
 
-    def save_structure(self, output_pdb_path: str, mod_id: str = None, rename_terms: bool = False):
+    def save_structure(
+            self, 
+            output_pdb_path: str, 
+            mod_id: str = None, 
+            rename_terms: bool = False, 
+            output_format='pdb'):
         """
         Saves structure on disk in PDB format
 
@@ -760,10 +796,12 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO_extended()
+        pdbio = PDBIO_extended(is_pqr=self.has_charges, output_format=output_format)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
+        else:
+            self.revert_terms()
 
         if mod_id is None:
             pdbio.set_structure(self.st)
@@ -797,31 +835,59 @@ class StructureManager:
         return mu.get_altloc_residues(self.st)
 
 # Methods to modify structure
-    def select_model(self, keep_model: int) -> None:
-        """ Selects one model and delete the others from the structure. Model is
-            renumbered to model 1
+    def select_model(self, keep_model: str) -> None:
+        """ Selects model(s) and delete the others from the structure. Model are
+            renumbered
 
             Args:
-                keep_model: Model number to keep
+                keep_model: Model number(s) to keep
         """
-        ids = [nmodel.id for nmodel in self.st.get_models()]
-        for ind, model_id in enumerate(ids):
-            if ind != keep_model - 1:
-                self.st.detach_child(model_id)
-        if keep_model != 1:
-            self.st[keep_model-1].id = 0
-        self.nmodels = 1
-        self.models_type = 0
+        models = []
+        if '-' in keep_model:
+            m1, m2 = keep_model.split('-')
+            for v in range(int(m1), int(m2) + 1):
+                models.append(v)
+        elif ',' in keep_model:
+            models = [int(m) for m in keep_model.split(',')]
+        else:
+            models = [int(keep_model)]
+        
+        ids = [mod.id for mod in self.st.get_models()]
+        for md_id in ids:
+            if self.st[md_id].serial_num not in models:
+                self.st.detach_child(md_id)
+
+        # renumbering models
+        for i, mod in enumerate(self.st):
+            mod.id = i
+            mod.serial_num = i + 1
+        
+        self.nmodels = len(self.st)
+        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
+        
         # Update internal data
         self.update_internals()
         self.modified = True
 
+    def superimpose_models(self):
+        spimp = Superimposer()
+        if self.nmodels > 1:
+            fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
+            for mod in self.st.get_models():
+                if mod.id == 0:
+                    continue
+                mov_atoms = [at for at in self.st[mod.id].get_atoms() if at.id == 'CA']
+                spimp.set_atoms(fix_atoms, mov_atoms)
+                spimp.apply(self.st[mod.id].get_atoms())
+            self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
+            self.modified = True
     def has_models(self) -> bool:
         """ Shotcut method to check whether the structure has more than one model
 
             Returns: Boolean
         """
         return self.nmodels > 1
+
 
     def has_superimp_models(self) -> bool:
         """ Shotcut method to check whether the structure has superimposed
@@ -1226,18 +1292,20 @@ class StructureManager:
                 'OXT',
                 mu.build_coords_SP2(mu.OINTERNALS[0], res['C'], res['CA'], res['O'])
             )
+            res.resname = 'C' + res.resname
 
         self.atom_renumbering()
         self.modified = True
         return True
 
-    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: bool = False):
+    def add_hydrogens(self, ion_res_list, remove_h: bool = True, add_charges: str = 'ADT'):
         """
         Add hydrogens considering selections in ion_res_list
 
         Args:
            **r_at_list**: dict as Bio.PDB.Residue: Tauromeric Option
            **remove_h**: Remove Hydrogen atom before adding new ones
+           **add_charges**: Add charges and atom types acording to ff
         """
         add_h_rules = self.data_library.get_add_h_rules()
 
@@ -1265,18 +1333,23 @@ class StructureManager:
 
             rcode = res.get_resname()
 
+            if len(rcode) == 4:
+                rcode = rcode[1:]
+
             if rcode == 'GLY':
                 continue
             # Fixed for modified residues already in the original PDB
+        
             if rcode in self.data_library.canonical_codes:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
 
-            if rcode_can not in add_h_rules:
+            
+            if rcode_can not in add_h_rules:              
                 print(NotAValidResidueError(rcode).message)
                 continue
-
+            
             if rcode_can == rcode:
                 h_rules = add_h_rules[rcode]
             else:
@@ -1303,10 +1376,10 @@ class StructureManager:
                 print(error_msg, mu.residue_id(res))
 
         self.residue_renumbering()
-        self.atom_renumbering()
         if add_charges:
             self.rename_terms(self.get_term_res())
-            self.update_atom_charges()
+            self.update_atom_charges(add_charges)
+        self.atom_renumbering()
         self.modified = True
 
     def mark_ssbonds(self, cys_list):
@@ -1323,6 +1396,12 @@ class StructureManager:
             if t[1].resname not in ('ACE', 'NME'):
                 t[1].resname = t[0] + t[1].resname
 
+    def revert_terms(self):
+        """ Reverts 4 char len residue names to 3 letter codes"""
+        for res in self.st.get_residues():
+            if len(res.get_resname()) == 4:
+                res.resname = res.resname[1:]
+
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
         return res not in self.prev_residue
@@ -1332,11 +1411,11 @@ class StructureManager:
         return res not in self.next_residue
 
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
-        """ Fins residues to mutate from mut_list"""
-        mutations = MutationManager(mut_list)
+        """ Find residues to mutate from mut_list"""
+        mutations = MutationManager(mut_list, self.chain_ids)
         mutations.prepare_mutations(self.st)
         return mutations
-
+    
     def apply_mutations(self, mutations: MutationManager) -> Residue:
         """ Perform mutations """
         mutated_res = mutations.apply_mutations(
@@ -1487,3 +1566,6 @@ class ImportModellerError(Error):
     def __init__(self):
         self.message = 'Error Importing Modeller'
 
+class UnknownFFError(Error):
+    def __init__(self, ff):
+        self.message = '{} is not a valid ff for assigning atom types'.format(ff)

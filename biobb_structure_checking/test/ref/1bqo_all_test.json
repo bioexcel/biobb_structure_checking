@@ -54,7 +54,7 @@
    "ASP A237",
    "ASP A238",
    "TYR A246",
-   "ASP A251",
+   "CASP A251",
    "ARG B84",
    "LYS B91",
    "ARG B93",
@@ -110,7 +110,7 @@
    "ASP B251",
    "GLU B254"
   ],
-  "opts": "--add_mode auto"
+  "opts": "--add_mode auto --add_charges ADT"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -142,7 +142,7 @@
     "OXT"
    ],
    "fixed": [
-    "ASP A251"
+    "CASP A251"
    ],
    "selected": "All"
   },
@@ -153,7 +153,10 @@
    "A": 1,
    "B": 1
   },
-  "selected": {}
+  "selected": {
+   "A": 1,
+   "B": 1
+  }
  },
  "chiral": {
   "n_chirals": 43,
@@ -311,12 +314,13 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 5334,
-  "num_res": 349,
+  "num_ats": 5294,
+  "num_res": 342,
   "num_wat": 0,
-  "res_hetats": 7,
+  "res_hetats": 0,
   "res_insc": 0,
-  "res_ligands": 7
+  "res_ligands": 0,
+  "total_charge": -23.00000099999987
  },
  "fixside": {
   "opts": "--fix all"
@@ -342,7 +346,19 @@
    " CA B305",
    "N25 B401"
   ],
-  "error": "Unknown selection SO4"
+  "n_removed": 7,
+  "removed": {
+   "lst": [
+    " CA A303",
+    " CA A304",
+    " CA A305",
+    " CA B303",
+    " CA B304",
+    " CA B305",
+    "N25 B401"
+   ],
+   "opt": "All"
+  }
  },
  "metals": {
   "detected": [
@@ -387,7 +403,8 @@
   "num_wat": 75,
   "res_hetats": 86,
   "res_insc": 0,
-  "res_ligands": 11
+  "res_ligands": 11,
+  "total_charge": null
  },
  "water": {
   "n_detected": 75,

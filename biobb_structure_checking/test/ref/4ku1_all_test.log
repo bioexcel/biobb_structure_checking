@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.8.1                   =
+=                   BioBB structure checking utility v3.9.2                   =
 =                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
 ===============================================================================
 
@@ -243,9 +243,47 @@ No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
 
-Step 17: add_hydrogen --add_mode auto
+Step 17: ligands --remove All
 
-Running add_hydrogen. Options: --add_mode auto
+Running ligands. Options: --remove All
+20 Ligands detected
+ PG4 A511
+ NAG C1
+ NAG C2
+ BMA C3
+ MAN C4
+ NAG C5
+ GAL C6
+ MAN C7
+ NAG C8
+ GAL C9
+ FUL C10
+ NAG D1
+ NAG D2
+ BMA D3
+ MAN D4
+ NAG D5
+ GAL D6
+ MAN D7
+ NAG D8
+ FUL D9
+Warning, no canonical sequence available for chain C
+Warning, no canonical sequence available for chain D
+Ligands removed All (20)
+
+Step 18: chains --select protein
+
+Running chains. Options: --select protein
+4 Chain(s) detected
+ A: Protein
+ B: Protein
+ C: Water
+ D: Water
+Selecting chain(s) protein
+
+Step 19: add_hydrogen --add_mode auto --add_charges ADT
+
+Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 126 Residues requiring selection on adding H atoms
  ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
  GLU A258,A269,A272,A283,A293,A294,A318,A333,A345,A357,A380,A382,A388,A430,B258,B269,B272,B283,B293,B294,B318,B333,B345,B357,B380,B382,B388,B430
@@ -269,35 +307,17 @@ Replacing HIS B310 by HIE
 Replacing HIS B429 by HIE
 Replacing HIS B433 by HIE
 Replacing HIS B435 by HIE
+Updating partial charges and atom types
+Total assigned charge:       0.00
 Command list completed
 Final Num. models: 1
-Final Num. chains: 4 (A: Protein, B: Protein, C: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%), D: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%))
-Final Num. residues:  435
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  415
 Final Num. residues with ins. codes:  0
-Final Num. HETATM residues:  20
-Final Num. ligands or modified residues:  20
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  6831
-Small mol ligands found
-PG4 A511
-NAG C1
-NAG C2
-BMA C3
-MAN C4
-NAG C5
-GAL C6
-MAN C7
-NAG C8
-GAL C9
-FUL C10
-NAG D1
-NAG D2
-BMA D3
-MAN D4
-NAG D5
-GAL D6
-MAN D7
-NAG D8
-FUL D9
+Final Num. atoms:  6587
+Total charge  0.000
 Structure saved on 4ku1_all_test.pdb
 Summary data saved on 4ku1_all_test.json

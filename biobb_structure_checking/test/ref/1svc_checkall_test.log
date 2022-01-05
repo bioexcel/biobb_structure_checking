@@ -1,0 +1,154 @@
+===============================================================================
+=                   BioBB structure checking utility v3.9.2                   =
+=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+===============================================================================
+
+Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
+Warning: sequence features only available in mmCIF format or with external fasta input
+Structure pdb:1svc.1 loaded
+ Title: nfkb p50 homodimer bound to dna
+ Experimental method: x-ray diffraction
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
+ Resolution (A): N.A.
+ Biounit no. 1
+
+ Num. models: 2 (type: BioUnit,   50.749 A)
+ Num. chains: 2 (D: DNA, P: Protein)
+ Num. residues:  786
+ Num. residues with ins. codes:  0
+ Num. HETATM residues:  126
+ Num. ligands or modified residues:  0
+ Num. water mol.:  126
+ Num. atoms:  5806
+
+Running models.
+2 Model(s) detected
+Models do not superimpose, RMSd:   50.749 A, guessed as BioUnit 
+Running  check_only. Nothing else to do.
+Running chains.
+2 Chain(s) detected
+ D: DNA
+ P: Protein
+Running  check_only. Nothing else to do.
+Running inscodes.
+No residues with insertion codes found
+Running  check_only. Nothing else to do.
+Running altloc.
+No residues with alternative location labels detected
+Running  check_only. Nothing else to do.
+Running rem_hydrogen.
+No residues with Hydrogen atoms found
+Running  check_only. Nothing else to do.
+Running add_hydrogen.
+212 Residues requiring selection on adding H atoms
+ CYS P88/1,P119/1,P124/1,P162/1,P262/1,P273/1,P88/2,P119/2,P124/2,P162/2,P262/2,P273/2
+ ASP P121/1,P132/1,P175/1,P186/1,P191/1,P209/1,P223/1,P238/1,P242/1,P257/1,P274/1,P279/1,P280/1,P300/1,P305/1,P321/1,P339/1,P121/2,P132/2,P175/2,P186/2,P191/2,P209/2,P223/2,P238/2,P242/2,P257/2,P274/2,P279/2,P280/2,P300/2,P305/2,P321/2,P339/2
+ GLU P49/1,P63/1,P76/1,P120/1,P152/1,P155/1,P160/1,P182/1,P193/1,P195/1,P207/1,P233/1,P267/1,P268/1,P287/1,P288/1,P289/1,P290/1,P296/1,P341/1,P344/1,P353/1,P49/2,P63/2,P76/2,P120/2,P152/2,P155/2,P160/2,P182/2,P193/2,P195/2,P207/2,P233/2,P267/2,P268/2,P287/2,P288/2,P289/2,P290/2,P296/2,P341/2,P344/2,P353/2
+ HIS P67/1,P108/1,P110/1,P112/1,P118/1,P144/1,P173/1,P307/1,P67/2,P108/2,P110/2,P112/2,P118/2,P144/2,P173/2,P307/2
+ LYS P52/1,P77/1,P79/1,P80/1,P86/1,P95/1,P105/1,P117/1,P131/1,P147/1,P148/1,P149/1,P194/1,P206/1,P244/1,P252/1,P275/1,P278/1,P315/1,P318/1,P320/1,P326/1,P337/1,P346/1,P52/2,P77/2,P79/2,P80/2,P86/2,P95/2,P105/2,P117/2,P131/2,P147/2,P148/2,P149/2,P194/2,P206/2,P244/2,P252/2,P275/2,P278/2,P315/2,P318/2,P320/2,P326/2,P337/2,P346/2
+ ARG P54/1,P57/1,P59/1,P157/1,P164/1,P187/1,P192/1,P198/1,P214/1,P230/1,P231/1,P255/1,P258/1,P284/1,P308/1,P335/1,P336/1,P54/2,P57/2,P59/2,P157/2,P164/2,P187/2,P192/2,P198/2,P214/2,P230/2,P231/2,P255/2,P258/2,P284/2,P308/2,P335/2,P336/2
+ TYR P44/1,P60/1,P82/1,P90/1,P166/1,P178/1,P241/1,P270/1,P286/1,P319/1,P350/1,P351/1,P44/2,P60/2,P82/2,P90/2,P166/2,P178/2,P241/2,P270/2,P286/2,P319/2,P350/2,P351/2
+Running  check_only. Nothing else to do.
+Running water.
+126 Water molecules detected
+Running  check_only. Nothing else to do.
+Running metals.
+No metal ions found
+Running  check_only. Nothing else to do.
+Running ligands.
+No ligands found
+Running  check_only. Nothing else to do.
+Running getss.
+No SS bonds detected
+Running  check_only. Nothing else to do.
+Running amide.
+2 unusual contact(s) involving amide atoms found
+ GLN P180/1.NE2 ARG P231/1.NH1    2.845 A
+ GLN P180/2.NE2 ARG P231/2.NH1    2.845 A
+Running  check_only. Nothing else to do.
+Running chiral.
+No residues with incorrect side-chain chirality found
+Running  check_only. Nothing else to do.
+Running chiral_bck.
+No residues with incorrect backbone chirality found
+Running  check_only. Nothing else to do.
+Running fixside.
+No residues with missing or unknown side chain atoms found
+Running  check_only. Nothing else to do.
+Running backbone.
+2 Residues with missing backbone atoms found
+ GLU P353/1 OXT
+ GLU P353/2 OXT
+No backbone breaks
+No unexpected backbone links
+Running  check_only. Nothing else to do.
+Running cistransbck.
+No cis peptide bonds found
+No trans peptide bonds with unusual omega dihedrals found
+Running  check_only. Nothing else to do.
+Running clashes.
+No severe clashes detected
+26 Steric apolar clashes detected
+ PRO P43/1.O  LEU P232/1.CD2    2.898 A
+ GLU P63/1.O  HIS P67/1.CD2    2.853 A
+ SER P74/1.OG SER P81/1.CB    2.821 A
+ PRO P93/1.O  PHE P228/1.CE1    2.770 A
+ HIS P108/1.CD2 GLN P204/1.OE1    2.681 A
+ GLY P129/1.O ASP P132/1.C    2.813 A
+ GLY P183/1.O GLN P188/1.CB    2.855 A
+ ALA P201/1.O THR P205/1.CG2    2.847 A
+ ALA P219/1.O ARG P231/1.CA    2.862 A
+ ASP P223/1.OD2 ARG P230/1.CG    2.866 A
+ LEU P251/1.O SER P343/1.CB    2.870 A
+ TYR P286/1.CA TRP P295/1.O    2.821 A
+ ARG P336/1.O LEU P340/1.CA    2.840 A
+ PRO P43/2.O  LEU P232/2.CD2    2.898 A
+ GLU P63/2.O  HIS P67/2.CD2    2.853 A
+ SER P74/2.OG SER P81/2.CB    2.821 A
+ PRO P93/2.O  PHE P228/2.CE1    2.770 A
+ HIS P108/2.CD2 GLN P204/2.OE1    2.681 A
+ GLY P129/2.O ASP P132/2.C    2.813 A
+ GLY P183/2.O GLN P188/2.CB    2.855 A
+ ALA P201/2.O THR P205/2.CG2    2.847 A
+ ALA P219/2.O ARG P231/2.CA    2.862 A
+ ASP P223/2.OD2 ARG P230/2.CG    2.866 A
+ LEU P251/2.O SER P343/2.CB    2.870 A
+ TYR P286/2.CA TRP P295/2.O    2.821 A
+ ARG P336/2.O LEU P340/2.CA    2.840 A
+14 Steric polar_acceptor clashes detected
+ TYR P44/1.O  CYS P88/1.O     2.939 A
+ GLU P49/1.OE1 TYR P82/1.O     2.951 A
+ VAL P96/1.O  VAL P126/1.O    3.060 A
+ GLY P129/1.O ASP P132/1.O    2.790 A
+ CYS P162/1.O GLU P182/1.O    3.056 A
+ TYR P178/1.O GLU P182/1.OE1    3.086 A
+ LEU P179/1.O GLU P182/1.O    2.852 A
+ TYR P44/2.O  CYS P88/2.O     2.939 A
+ GLU P49/2.OE1 TYR P82/2.O     2.951 A
+ VAL P96/2.O  VAL P126/2.O    3.060 A
+ GLY P129/2.O ASP P132/2.O    2.790 A
+ CYS P162/2.O GLU P182/2.O    3.056 A
+ TYR P178/2.O GLU P182/2.OE1    3.086 A
+ LEU P179/2.O GLU P182/2.O    2.852 A
+4 Steric polar_donor clashes detected
+ ARG P54/1.NH1 ARG P336/1.NH1    3.056 A
+ GLN P180/1.NE2 ARG P231/1.NH1    2.845 A
+ ARG P54/2.NH1 ARG P336/2.NH1    3.056 A
+ GLN P180/2.NE2 ARG P231/2.NH1    2.845 A
+6 Steric positive clashes detected
+ ARG P54/1.NH1 ARG P336/1.NH1    3.056 A
+ ARG P57/1.NH2 ARG P59/1.NH1    3.356 A
+ ARG P284/1.NE ARG P335/1.NH1    3.476 A
+ ARG P54/2.NH1 ARG P336/2.NH1    3.056 A
+ ARG P57/2.NH2 ARG P59/2.NH1    3.356 A
+ ARG P284/2.NE ARG P335/2.NH1    3.476 A
+4 Steric negative clashes detected
+ ASP P121/1.OD2 GLU P160/1.OE2    3.177 A
+ GLU P287/1.OE1 GLU P289/1.OE2    3.216 A
+ ASP P121/2.OD2 GLU P160/2.OE2    3.177 A
+ GLU P287/2.OE1 GLU P289/2.OE2    3.216 A
+Running  check_only. Nothing else to do.
+Running sequences.
+Sequences command requires either mmCIF input or --sequence
+Running  check_only. Nothing else to do.
+Structure not modified, not saving. Override with --force_save
