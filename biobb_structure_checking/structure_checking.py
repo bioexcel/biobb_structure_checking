@@ -1684,8 +1684,10 @@ class StructureChecking():
         fix_done = not fix_data['bck_breaks_list']
         fixed_main_res = []
         while not fix_done:
-            if not opts['extra_gap']:
+            if opts['extra_gap'] is None:
                 opts['extra_gap'] = 0
+            if opts['fix_chain'] is None and self.args['non_interactive']:
+                opts['fix_chain'] = 'none'
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_chain'],
                 fix_data['bck_breaks_list'],
@@ -1713,6 +1715,8 @@ class StructureChecking():
                 fix_done = not fix_data['bck_breaks_list']
 
         # Add CAPS
+        if opts['add_caps'] is None and self.args['non_interactive']:
+            opts['add_caps'] = 'none'
         fixed_caps = self._backbone_add_caps(
             opts['add_caps'],
             fix_data['bck_breaks_list']
@@ -1729,6 +1733,8 @@ class StructureChecking():
 
         # Add missing atoms
         fixed_res = []
+        if opts['fix_atoms'] is None and self.args['non_interactive']:
+            opts['fix_atoms'] = 'none'
         if fix_data['miss_bck_at_list']:
             fixed_res = self._backbone_fix_missing(
                 opts['fix_atoms'],
