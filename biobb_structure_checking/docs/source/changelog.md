@@ -11,8 +11,8 @@
 - backbone
   - Accept standard FASTA files as sequence input
   - Accept multiple templates
+  - Main options default to "none"
 ### Bug Fixes
-
 ***
 ## v3.9.6 (2021.4)
 
