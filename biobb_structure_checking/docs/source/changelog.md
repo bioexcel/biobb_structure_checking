@@ -21,7 +21,8 @@
 - Fix charge assignment for modified residues and terminals
 - Fixed wrong assigment of RNA residues as protein
 - Fixed tests
--
+- Fixed behaviour with --non_interactive and missing command options
+
 ***
 ## V3.8.5 (2021.2)
 
