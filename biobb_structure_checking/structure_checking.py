@@ -2018,11 +2018,16 @@ class StructureChecking():
         """
         input_line = ParamInput(
             "Enter output structure path",
-            self.args['non_interactive']
+            self.args['non_interactive'],
+            set_none='fixed_structure.pdb'
         )
+        
         output_structure_path = input_line.run(output_structure_path)
         
-        output_format = os.path.splitext(output_structure_path)[1][1:]
+        if self.args['output_format']:
+            output_format = self.args['output_format']
+        else:
+            output_format = os.path.splitext(output_structure_path)[1][1:]
         
         self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
         

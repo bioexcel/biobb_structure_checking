@@ -125,7 +125,14 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
-    help='Output structure. Format PDB|PDBQT|PQR|CMIP'
+    help='Output structure. Formats available pdb|pdbqt|pqr|cmip (use file extension or --output_format to set format)'
+)
+
+CMD_LINE.add_argument(
+    '--output_format',
+    dest='output_format',
+    help='Format for the Output. When empty output file extension is used.',
+    choices=['pdb', 'pdbqt', 'pqr', 'cmip']
 )
 
 CMD_LINE.add_argument(
