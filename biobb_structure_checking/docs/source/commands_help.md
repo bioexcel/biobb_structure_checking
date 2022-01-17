@@ -51,7 +51,7 @@ _Mutate side chain with minimal atom replacement_
 * Fixes missing side chain atoms unless **--no_fix_side** is set.  
 * Existing hydrogen atoms are removed before adding new ones unless **--keep_h** is set.  
 * **--add_charges FF** adds partial charges (from RES_LIBRARY) and atom types from FF forcefield (Accepted: ATD, CMIP).  
-* Output format taken from file extension (Accepted: pdb, pdbqt, pqr).
+* Output format taken from file extension (Accepted: pdb, pdbqt, pqr) or --output_format.
 
 ### Fix Structure Errors
 Commands to detect and fix possible structure errors. 
