@@ -144,7 +144,6 @@ class ParamInput():
 
     def run(self, opt_value):
         """ Build and execute dialog"""
-
         # Non interactive enviroment, check available input only
         if self.non_interactive:
             if opt_value is None:
