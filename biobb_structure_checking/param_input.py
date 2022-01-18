@@ -15,11 +15,12 @@ def _get_input(value, prompt_text, default=None):
 
 class ParamInput():
     """ Class to generate and manage interactive parameter dialogs"""
-    def __init__(self, prefix, non_interactive=True):
+    def __init__(self, prefix, non_interactive=True, set_none = 'none'):
         self.options = []
         self.non_interactive = non_interactive
         self.prefix = prefix
         self.default = None
+        self.default_none = set_none
 
     def add_option_all(self):
         """ Add 'All' option to dialog"""
@@ -64,7 +65,9 @@ class ParamInput():
             'label':label,
             'type':input,
         })
-
+    def set_default(self, value):
+        self.default = value
+        
     def _build_dialog(self):
         if not self.options:
             return self.prefix + ': '
@@ -141,16 +144,18 @@ class ParamInput():
 
     def run(self, opt_value):
         """ Build and execute dialog"""
-
         # Non interactive enviroment, check available input only
         if self.non_interactive:
-            # No options, nothing to do, return original value
+            if opt_value is None:
+                print(f" WARNING: No selection provided and non_interactive, using '{self.default_none}'")
+                opt_value = self.default_none
+                        # No options, nothing to do, return original value
             if not self.options:
                 return opt_value
             # Check input
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print('Input not valid ({})'.format(opt_value))
+                print(f'Input not valid ({opt_value})')
                 self.options.append({'label':'error'})
             return [self.options[iopt]['label'], opt_value]
 
@@ -165,7 +170,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print(f'Input not valid or out of range ({opt_value})')
+                print(f'Input not valid ({opt_value})')
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 
