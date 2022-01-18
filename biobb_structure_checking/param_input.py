@@ -15,7 +15,7 @@ def _get_input(value, prompt_text, default=None):
 
 class ParamInput():
     """ Class to generate and manage interactive parameter dialogs"""
-    def __init__(self, prefix, non_interactive=True, set_none = 'none'):
+    def __init__(self, prefix, non_interactive=True, set_none='none'):
         self.options = []
         self.non_interactive = non_interactive
         self.prefix = prefix
@@ -149,7 +149,7 @@ class ParamInput():
             if opt_value is None:
                 print(f" WARNING: No selection provided and non_interactive, using '{self.default_none}'")
                 opt_value = self.default_none
-                        # No options, nothing to do, return original value
+            # No options, nothing to do, return original value
             if not self.options:
                 return opt_value
             # Check input
