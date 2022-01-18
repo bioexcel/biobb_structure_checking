@@ -22,7 +22,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['psutil', 'numpy==1.19.5', 'biopython==1.79'],
+    install_requires=['psutil', 'numpy==1.21.0', 'biopython==1.79'],
     python_requires='==3.7.*',
     extras_require={},
     entry_points={
