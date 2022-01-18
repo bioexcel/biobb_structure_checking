@@ -7,11 +7,19 @@
   - Select multiple models
   - Superimpose current models
   - Output models as multiple PDB files
-  
+
 - backbone
   - Accept standard FASTA files as sequence input
   - Accept multiple templates
 ### Bug Fixes
+
+***
+## v3.9.7 (2021.4)
+
+### Bug Fixes
+- Fixed tests
+- Fixed behaviour with --non_interactive and missing command options
+
 
 ***
 ## v3.9.6 (2021.4)
