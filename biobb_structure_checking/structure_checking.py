@@ -1604,6 +1604,8 @@ class StructureChecking():
                 * add_caps (str - Add ACE and NME residues):
                     * **all** - All detected terminals
                     * **residue_list** - Indicated terminals
+                    * **breaks** - Add caps to backbone breaks
+                    * **terms** - Add caps to true terminals
                 * extra_gap (int) - ('0') Recover addiciontal residues from the model to improve match (experimental)
                 * no_recheck (bool) - (False) Do not recheck backbone after fixing 
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
