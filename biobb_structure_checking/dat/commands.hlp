@@ -56,14 +56,14 @@ fixside [--fix All |None|Residue List] [--no_check_clashes]
     Checks generated clashes unless --no_check_clashes set
     --rebuild  Rebuild complete side chain using Modeller
 backbone [--fix_atoms All|None|Residue List]
-         [--fix_main All|None|Break list] 
+         [--fix_chain All|None|Break list] 
          [--add_caps All|None|Break list] 
          [--extra_gap]
          [--no_recheck]
          [--no_check_clashes]
     Analyze main chain missing atoms and fragments (protein only).
     --fix_atoms Missing O, OXT atoms can be fixed 
-    --fix_main Missing fragments filled using comparative modelling (Modeller License needed)
+    --fix_chain Missing fragments filled using comparative modelling (Modeller License needed)
     --add_caps Adds ACE and NME residues as necessary, preserving existing atoms
     --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections (experimental)
     Rechecks beckbone on each op unless --no_recheck is set.
