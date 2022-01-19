@@ -1598,7 +1598,7 @@ class StructureChecking():
                 * fix_atoms (str - Fix missing O, OXT backbone atoms):
                     * **all** - Fix all residues
                     * **residue List** - Fix indicated residues
-                * fix_main (str - Fix backbone main chain):
+                * fix_chain (str - Fix backbone main chain):
                     * **all** - All detected breaks
                     * **break list** - Indicated breaks
                 * add_caps (str - Add ACE and NME residues):
