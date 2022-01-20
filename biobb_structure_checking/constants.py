@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.6'
+VERSION = '3.9.7'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -131,7 +131,14 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
-    help='Output structure. Format PDB|PDBQT|PQR|CMIP'
+    help='Output structure. Formats available pdb|pdbqt|pqr|cmip (use file extension or --output_format to set format)'
+)
+
+CMD_LINE.add_argument(
+    '--output_format',
+    dest='output_format',
+    help='Format for the Output. When empty output file extension is used.',
+    choices=['pdb', 'pdbqt', 'pqr', 'cmip']
 )
 
 CMD_LINE.add_argument(
@@ -284,7 +291,7 @@ DIALOGS.add_option('backbone', '--fix_atoms', 'fix_atoms',\
 DIALOGS.add_option('backbone', '--fix_chain', 'fix_chain',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
-    'Adds ACE and NME caps to missing main chain segments (All | None)')
+    'Adds ACE and NME caps to missing main chain segments (All | None | Breaks | Terms)')
 DIALOGS.add_option('backbone', '--templates', 'templates',\
     'Additional structure templates (List)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\

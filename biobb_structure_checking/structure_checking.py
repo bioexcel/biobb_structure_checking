@@ -176,8 +176,12 @@ class StructureChecking():
         except NoDialogAvailableError as err:
             print(err.message)
         
-        if not op_list and not self.args['non_interactive']:
-            op_list = ParamInput('Command List File', False).run(op_list)
+        if not op_list:
+            if not self.args['non_interactive']:
+                op_list = ParamInput('Command List File', False).run(op_list)
+            else:
+                sys.exit(f'ERROR: command list not provided and non_interactive')
+            
 
         if os.path.isfile(op_list):
             command_list = []
@@ -286,8 +290,12 @@ class StructureChecking():
                         if k not in opts:
                             opts[k] = defs[k]
             error_status = f_fix(opts, data_to_fix)
-
+            
             if error_status:
+                if isinstance(error_status, tuple):
+                    if error_status[1] is None:
+                        error_status = [error_status[0]]
+                    
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
 
@@ -363,13 +371,12 @@ class StructureChecking():
             select_model = opts
         else:
             select_model = opts['select']
-
-        input_line = ParamInput('Select Model Num', self.args['non_interactive'])
+        
+        input_line = ParamInput('Select Model Num', self.args['non_interactive'], set_none='All')
         input_line.add_option_all()
         input_line.add_option_numeric(
             'modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels, multiple=True
         )
-
         input_option, select_model = input_line.run(select_model)
 
         if input_option == 'error':
@@ -431,9 +438,9 @@ class StructureChecking():
             select_chains = opts
         else:
             select_chains = opts['select']
-
+        
         self.summary['chains']['selected'] = {}
-        input_line = ParamInput('Select chain', self.args['non_interactive'])
+        input_line = ParamInput('Select chain', self.args['non_interactive'], set_none='All')
         input_line.add_option_all()
         input_line.add_option_list(
             'type', ['protein'], multiple=False
@@ -450,7 +457,8 @@ class StructureChecking():
         input_line.add_option_list(
             'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
         )
-        input_line.default = 'All'
+        input_line.set_default('All')
+
         input_option, select_chains = input_line.run(select_chains)
 
         if input_option == 'error':
@@ -547,7 +555,7 @@ class StructureChecking():
             select_altloc = opts
         else:
             select_altloc = opts['select']
-
+            
         # Prepare the longest possible list of alternatives
         altlocs = []
         max_al_len = 0
@@ -556,7 +564,8 @@ class StructureChecking():
                 altlocs = fix_data['altlocs'][res]
                 max_al_len = len(fix_data['altlocs'][res])
 
-        input_line = ParamInput('Select alternative', self.args['non_interactive'])
+        input_line = ParamInput('Select alternative', self.args['non_interactive'], set_none='All')
+        input_line.add_option_all()
         input_line.add_option_list('occup', ['occupancy'])
         input_line.add_option_list('altids', altlocs, case='upper')
         input_line.add_option_list(
@@ -567,41 +576,42 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
-        input_line.default = 'occupancy'
+        input_line.set_default('occupancy')
+
         input_option, select_altloc = input_line.run(select_altloc)
 
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], select_altloc
-
-        print('Selecting location {}'.format(select_altloc))
-        if input_option in ('occup', 'altids'):
-            select_altloc = select_altloc.upper()
-            to_fix = {
-                res: {
-                    'ats': value,
-                    'select' : select_altloc
-                } for res, value in fix_data['alt_loc_res'].items()
-            }
-
-        elif input_option == 'resnum':
-            to_fix = {}
-            selected_rnums = {}
-            for rsel in select_altloc.split(','):
-                rnum, alt = rsel.split(':')
-                selected_rnums[rnum] = alt
-            to_fix = {
-                res : {
-                    'ats' : value,
-                    'select' : selected_rnums[mu.residue_num(res)]
+        
+        if input_option != 'all':
+            print('Selecting location {}'.format(select_altloc))
+            if input_option in ('occup', 'altids'):
+                select_altloc = select_altloc.upper()
+                to_fix = {
+                    res: {
+                        'ats': value,
+                        'select' : select_altloc
+                    } for res, value in fix_data['alt_loc_res'].items()
                 }
-                for res, value in fix_data['alt_loc_res'].items()
-                if mu.residue_num(res) in selected_rnums
-            }
+
+            elif input_option == 'resnum':
+                to_fix = {}
+                selected_rnums = {}
+                for rsel in select_altloc.split(','):
+                    rnum, alt = rsel.split(':')
+                    selected_rnums[rnum] = alt
+                to_fix = {
+                    res : {
+                        'ats' : value,
+                        'select' : selected_rnums[mu.residue_num(res)]
+                    }
+                    for res, value in fix_data['alt_loc_res'].items()
+                    if mu.residue_num(res) in selected_rnums
+                }
+            for res in to_fix:
+                self.strucm.select_altloc_residue(res, to_fix[res])
 
         self.summary['altloc']['selected'] = select_altloc
-
-        for res in to_fix:
-            self.strucm.select_altloc_residue(res, to_fix[res])
 
         return False
 # =============================================================================
@@ -650,7 +660,7 @@ class StructureChecking():
             remove_metals = opts
         else:
             remove_metals = opts['remove']
-
+        
         input_line = ParamInput("Remove", self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -661,7 +671,7 @@ class StructureChecking():
             multiple=True
         )
         input_line.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
-        input_line.default = 'All'
+        input_line.set_default('All')
         input_option, remove_metals = input_line.run(remove_metals)
 
         if input_option == "error":
@@ -730,9 +740,10 @@ class StructureChecking():
             remove_wat = opts
         else:
             remove_wat = opts['remove']
-        input_line = ParamInput('Remove', self.args['non_interactive'])
+        
+        input_line = ParamInput('Remove', self.args['non_interactive'], set_none='no')
         input_line.add_option_yes_no()
-        input_line.default = 'yes'
+        input_line.set_default('yes')
         input_option, remove_wat = input_line.run(remove_wat)
 
         if input_option == 'error':
@@ -814,7 +825,7 @@ class StructureChecking():
         input_line.add_option_list(
             'byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True
         )
-        input_line.default = 'all'
+        input_line.set_default('All')
         input_option, remove_ligands = input_line.run(remove_ligands)
 
         if input_option == 'error':
@@ -878,9 +889,11 @@ class StructureChecking():
             remove_h = opts
         else:
             remove_h = opts['remove']
-        input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'])
+
+        input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'], set_none='no')
         input_line.add_option_yes_no()
-        input_line.default = 'yes'
+        input_line.set_default('yes')
+
         input_option, remove_h = input_line.run(remove_h)
 
         if input_option == 'error':
@@ -950,7 +963,7 @@ class StructureChecking():
         input_line.add_option_list(
             'bypair', pairs_list, multiple=True
         )
-        input_line.default = 'all'
+        input_line.set_default('All')
         input_option, getss_mark = input_line.run(getss_mark)
 
         if input_option == 'error':
@@ -1038,7 +1051,7 @@ class StructureChecking():
                 case='sensitive',
                 multiple=True
             )
-            input_line.default = 'All'
+            input_line.set_default('All')
             input_option, amide_fix = input_line.run(amide_fix)
 
             if input_option == 'error':
@@ -1129,7 +1142,7 @@ class StructureChecking():
             case='sensitive',
             multiple=True
         )
-        input_line.default = 'all'
+        input_line.set_default('All')
         input_option, chiral_fix = input_line.run(chiral_fix)
 
         if input_option == 'error':
@@ -1303,7 +1316,7 @@ class StructureChecking():
         input_line.add_option_list(
             'resnum', fixside_rnums, case='sensitive', multiple=True
         )
-        input_line.default = 'all'
+        input_line.set_default('All')
         input_option_fix, fix_side = input_line.run(fix_side)
 
         if input_option_fix == 'error':
@@ -1437,7 +1450,7 @@ class StructureChecking():
         if fix_data['ion_res_list']:
             sel_options += ['pH', 'list', 'int', 'int_his']
         input_line.add_option_list('selection', sel_options)
-        input_line.default = 'auto'
+        input_line.set_default('auto')
         input_option, add_h_mode = input_line.run(add_h_mode)
 
         if input_option == 'error':
@@ -1463,8 +1476,9 @@ class StructureChecking():
         else:
             if add_h_mode == 'ph':
                 ph_value = opts['pH']
-                input_line = ParamInput("pH Value", self.args['non_interactive'])
+                input_line = ParamInput("pH Value", self.args['non_interactive'], set_none=7.0)
                 input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
+                input_line.set_default(7.0)
                 input_option, ph_value = input_line.run(ph_value)
                 if not self.args['quiet']:
                     print('Selection: pH', ph_value)
@@ -1545,9 +1559,15 @@ class StructureChecking():
         if opts['na_seq']:
             mut_list = self.strucm.prepare_mutations_from_na_seq(opts['na_seq'])
 
-        input_line = ParamInput('Mutation list', self.args['non_interactive'])
-        mut_list = input_line.run(mut_list)
+        input_line = ParamInput('Mutation list', self.args['non_interactive'], set_none='')
 
+        mut_list = input_line.run(mut_list)
+        
+        if mut_list == '':
+            if self.args['verbose']:
+                print(cts.MSGS['DO_NOTHING'])
+            return False   
+        
         mutations = self.strucm.prepare_mutations(mut_list)
 
         print(cts.MSGS['MUTATIONS_TO_DO'])
@@ -1578,12 +1598,14 @@ class StructureChecking():
                 * fix_atoms (str - Fix missing O, OXT backbone atoms):
                     * **all** - Fix all residues
                     * **residue List** - Fix indicated residues
-                * fix_main (str - Fix backbone main chain):
+                * fix_chain (str - Fix backbone main chain):
                     * **all** - All detected breaks
                     * **break list** - Indicated breaks
                 * add_caps (str - Add ACE and NME residues):
                     * **all** - All detected terminals
                     * **residue_list** - Indicated terminals
+                    * **breaks** - Add caps to backbone breaks
+                    * **terms** - Add caps to true terminals
                 * extra_gap (int) - ('0') Recover addiciontal residues from the model to improve match (experimental)
                 * no_recheck (bool) - (False) Do not recheck backbone after fixing 
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
@@ -1700,7 +1722,7 @@ class StructureChecking():
         fix_done = not fix_data['bck_breaks_list']
         fixed_main_res = []
         while not fix_done:
-            if not opts['extra_gap']:
+            if opts['extra_gap'] is None:
                 opts['extra_gap'] = 0
             fixed_main = self._backbone_fix_main_chain(
                 opts['fix_chain'],
@@ -1777,7 +1799,7 @@ class StructureChecking():
         input_line.add_option_list(
             'brk', brk_rnums, case='sensitive', multiple=True
         )
-        input_line.default = 'all'
+        input_line.set_default('All')
         input_option, fix_main_bck = input_line.run(fix_main_bck)
 
         if input_option == 'error':
@@ -1854,7 +1876,7 @@ class StructureChecking():
         input_line.add_option_list(
             'resnum', term_rnums, case='sensitive', multiple=True
         )
-        input_line.default = 'none'
+        input_line.set_default('none')
         input_option, add_caps = input_line.run(add_caps)
 
         if input_option == 'error':
@@ -1888,7 +1910,7 @@ class StructureChecking():
         input_line.add_option_list(
             'resnum', fixbck_rnums, case='sensitive', multiple=True
         )
-        input_line.default = 'none'
+        input_line.set_default('none')
         input_option, fix_back = input_line.run(fix_back)
 
         if input_option == 'error':
@@ -2046,14 +2068,15 @@ class StructureChecking():
         """
         input_line = ParamInput(
             "Enter output structure path",
-            self.args['non_interactive']
+            self.args['non_interactive'],
+            set_none='fixed_structure.pdb'
         )
-        output_structure_path = input_line.run(output_structure_path)
         
-        output_format = os.path.splitext(output_structure_path)[1][1:]
-        base_name = os.path.splitext(output_structure_path)[0]
-        if not output_format:
-            output_format = 'pdb'
+        output_structure_path = input_line.run(output_structure_path)
+        if self.args['output_format']:
+            output_format = self.args['output_format']
+        else:
+            output_format = os.path.splitext(output_structure_path)[1][1:]
         
         if not split_models:
             self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)

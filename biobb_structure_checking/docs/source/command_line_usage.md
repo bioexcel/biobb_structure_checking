@@ -59,7 +59,10 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ### Arguments for output
 
 **-o --output** OUTPUT_STRUCTURE_PATH - _Output structure._
-* PDB|PDBQT|PQR|CMIP Formats Available (selected from file extension)
+* pdb|pdbqt|pqr|cmip formats available (use file extension or --output_format to set format)
+
+**--output_format** OUTPUT_FORMAT - _Format for the Output._
+* pdb|pdbqt|pqr|cmip formats available (if empty file extension is used)
   
 **--json** JSON_OUTPUT_PATH - _Store a summary of all activities on a json file_
 
