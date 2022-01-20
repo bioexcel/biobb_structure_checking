@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.6'
+VERSION = '3.9.7'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -285,7 +285,7 @@ DIALOGS.add_option('backbone', '--fix_atoms', 'fix_atoms',\
 DIALOGS.add_option('backbone', '--fix_chain', 'fix_chain',\
     'Fixes missing main chain segments (All | None | List)')
 DIALOGS.add_option('backbone', '--add_caps', 'add_caps',\
-    'Adds ACE and NME caps to missing main chain segments (All | None)')
+    'Adds ACE and NME caps to missing main chain segments (All | None | Breaks | Terms)')
 DIALOGS.add_option('backbone', '--no_check_clashes', 'no_check_clashes',\
     'Do not check for new clashes', 'bool')
 DIALOGS.add_option('backbone', '--extra_gap', 'extra_gap',\
