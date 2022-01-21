@@ -80,7 +80,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving structures (default=mmCif|pdb|xml)'
+    help='Format for retrieving structures (default=mmCif|pdb|xml)',
+    choices=['pdb','cif','xml','pqr']
 )
 
 CMD_LINE.add_argument(
