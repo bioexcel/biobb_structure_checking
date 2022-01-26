@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.8'
+VERSION = '3.9.9'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'

@@ -13,7 +13,7 @@
   - Accept multiple templates
 ### Bug Fixes
 
-## v3.9.8 (2021.4)
+## v3.9.9 (2021.4)
 
 ### Bug Fixes
 - Remove pinned numpy dependency
