@@ -1598,12 +1598,14 @@ class StructureChecking():
                 * fix_atoms (str - Fix missing O, OXT backbone atoms):
                     * **all** - Fix all residues
                     * **residue List** - Fix indicated residues
-                * fix_main (str - Fix backbone main chain):
+                * fix_chain (str - Fix backbone main chain):
                     * **all** - All detected breaks
                     * **break list** - Indicated breaks
                 * add_caps (str - Add ACE and NME residues):
                     * **all** - All detected terminals
                     * **residue_list** - Indicated terminals
+                    * **breaks** - Add caps to backbone breaks
+                    * **terms** - Add caps to true terminals
                 * extra_gap (int) - ('0') Recover addiciontal residues from the model to improve match (experimental)
                 * no_recheck (bool) - (False) Do not recheck backbone after fixing 
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
