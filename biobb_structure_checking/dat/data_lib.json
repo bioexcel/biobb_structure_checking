@@ -2298,7 +2298,14 @@
             "DG": {
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
                 "polar_donor_atoms": ["N2"],
-                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],                
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
+                "hydrogen_atoms": ["H8", "H1", "H21", "H22"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H8", "H1", "H21", "H22"]
+                    }
+                },     
                 "mutation_rules": {
                     "DA":{
                         "Del": ["N2"],
@@ -2321,6 +2328,13 @@
                 "polar_acceptor_atoms": ["N3"],
                 "polar_donor_atoms": ["N4"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","N4","C5","C6"],
+                "hydrogen_atoms": ["H6", "H5", "H41", "H42"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H6", "H5", "H41", "H42"]
+                    }
+                },    
                 "mutation_rules": {
                     "DA":{
                         "Del": ["C2","O2","N3","C4","N4","C5"],
@@ -2343,6 +2357,13 @@
                 "polar_acceptor_atoms": ["N7", "N3", "N1"],
                 "polar_donor_atoms": ["N6"],
                 "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N7","C8","N9"],
+                "hydrogen_atoms": ["H8", "H61", "H62", "H2"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H8", "H61", "H62", "H2"]
+                    }
+                },    
                 "mutation_rules": {
                     "DA":{},
                     "DC":{
@@ -2365,6 +2386,13 @@
                 "polar_acceptor_atoms": ["O4"],
                 "polar_donor_atoms": ["N3"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6","C7"],
+                "hydrogen_atoms": ["H6", "H71", "H72", "H73", "H3"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H6", "H71", "H72", "H73", "H3"]
+                    }
+                },     
                 "mutation_rules": {
                     "DA":{
                         "Del": ["C2","O2","N3","C4","O4","C5","C7"],
@@ -2387,6 +2415,13 @@
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
                 "polar_donor_atoms": ["N2"],
                 "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
+                "hydrogen_atoms": ["H8", "H1", "H21", "H22"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H8", "H1", "H21", "H22"]
+                    }
+                },       
                 "mutation_rules": {
                     "A":{
                         "Del": ["N2"],
@@ -2410,6 +2445,8 @@
                 "polar_acceptor_atoms": ["N3"],
                 "polar_donor_atoms": ["N4"],
                 "side_atoms":  ["C1","C2","O2","N3","C4","O4","C5","C6"],
+                "hydrogen_atoms": ["H6", "H5", "H41", "H42"],
+                "addH_rules": {},     
                 "mutation_rules": {
                     "A":{
                         "Del": ["C2","O2","N3","C4","N4","C5"],
@@ -2431,6 +2468,13 @@
                 "polar_acceptor_atome": ["N7", "N3", "N1"],
                 "polar_donor_atoms": ["N6"],
                 "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N2","N7","C8","N9"],
+                "hydrogen_atoms": ["H8", "H61", "H62", "H2"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H8", "H61", "H62", "H2"]
+                    }
+                },       
                 "mutation_rules": {
                     "A":{},
                     "C":{
@@ -2453,6 +2497,13 @@
                 "polar_acceptor_atoms": ["O4"],
                 "polar_donor_atoms": ["N3"],
                 "side_atoms":  ["C1","C2","O2","N3","C4","N4","C5","C6"],
+                "hydrogen_atoms": ["H6", "H5", "H3"],
+                "addH_rules": {
+                    "*" :{
+                        "mode":"L",
+                        "ats":["H6", "H5", "H3"]
+                    }
+                },    
                 "mutation_rules": {
                     "A":{
                         "Del": ["C2","O2","N3","C4","O4","C5"],
