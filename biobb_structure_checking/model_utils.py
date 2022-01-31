@@ -565,12 +565,30 @@ def delete_atom(res, at_id):
 def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
 
-    # only proteins
     rcode = res.get_resname()
 
-    if not _protein_residue_check(rcode):
+    if _na_residue_check(rcode, type=NA):
+        return _add_hydrogens_na_backbone(res, prev_res, next_res)
+    elif not _protein_residue_check(rcode):
         return MSGS['RESIDUE_NOT_VALID']
+    else:
+        return _add_hydrogens_protein_backbone(res, prev_res, next_res)
 
+def _add_hydrogens_na_backbone(res, prev_res, next_res):
+    #Add C5'
+    crs= build_coords_2xSP3(HDIS, res["C5'"],res["OP2"],res["O5'"]])
+    add_new_atom_to_residue(res, "H5'", crs[0])
+    add_new_atom_to_residue(res, "H5''", crs[1])
+    #Add C4'
+    #Add C3'
+    #Add C2'
+    #Add C1'
+    return 0
+
+def _add_hydrogens_protein_backbone(res, prev_res, next_res):
+    
+    rcode = res.get_resname()
+    
     error_msg = MSGS['NOT_ENOUGH_ATOMS'].format('backbone')
 
     if res.get_resname() not in ('ACE', 'NME'):
@@ -647,8 +665,9 @@ def add_hydrogens_side(res, res_library, opt, rules):
     if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
 
-    if 'N' not in res or 'CA' not in res or 'C' not in res:
-        return MSGS['NOT_ENOUGH_ATOMS'].format('side')
+    if  _protein_residue_check(res.get_resname()):
+        if 'N' not in res or 'CA' not in res or 'C' not in res:
+            return MSGS['NOT_ENOUGH_ATOMS'].format('side')
 
     for key_rule in rules.keys():
         rule = rules[key_rule]

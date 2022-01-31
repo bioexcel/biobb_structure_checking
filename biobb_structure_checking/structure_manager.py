@@ -1319,7 +1319,7 @@ class StructureManager:
                 rcode_can = rcode
 
             
-            if rcode_can not in add_h_rules:              
+            if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
             
