@@ -207,9 +207,9 @@ class StructureManager:
 
         self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
 
-        # Precalc backbone . TODO Nucleic Acids
+        # Precalc backbone 
         self.check_backbone_connect(
-            ('N', 'C'),
+            ("N", "C", "P", "O3'"),
             self.data_library.distances['COVLNK']
         )
         # get canonical and structure sequences
