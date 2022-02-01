@@ -690,13 +690,13 @@ def _add_hydrogens_protein_backbone(res, prev_res, next_res):
 
     return False
 
-def add_hydrogens_side(res, res_library, opt, rules):
+def add_hydrogens_side(res, res_library, opt, rules, is_protein=True):
     """ Add hydrogens to side chains"""
 
     if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
-
-    if  _protein_residue_check(res.get_resname()):
+    print(is_protein, res)
+    if  is_protein and _protein_residue_check(res.get_resname()) :
         if 'N' not in res or 'CA' not in res or 'C' not in res:
             return MSGS['NOT_ENOUGH_ATOMS'].format('side')
 

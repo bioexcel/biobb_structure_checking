@@ -1286,6 +1286,8 @@ class StructureManager:
             if mu.is_hetatm(res):
                 continue
 
+            protein_res = self.chain_ids[res.get_parent().id] == mu.PROTEIN
+
             if remove_h:
                 mu.remove_H_from_r(res, verbose=False)
 
@@ -1317,7 +1319,6 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-
             
             if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
@@ -1327,7 +1328,7 @@ class StructureManager:
                 h_rules = add_h_rules[rcode]
             else:
                 h_rules = add_h_rules[rcode_can][rcode]
-
+            
             if res in ion_res_list:
                 if rcode != ion_res_list[res]:
                     print(
@@ -1339,11 +1340,12 @@ class StructureManager:
                     res,
                     self.res_library,
                     ion_res_list[res],
-                    h_rules[ion_res_list[res]]
+                    h_rules[ion_res_list[res]],
+                    protein_res
                 )
                 res.resname = ion_res_list[res]
             else:
-                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules)
+                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules, protein_res)
 
             if error_msg:
                 print(error_msg, mu.residue_id(res))
