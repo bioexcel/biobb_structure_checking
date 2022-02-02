@@ -2029,7 +2029,7 @@ class StructureChecking():
 
         return strucm
     
-    def save_structure(self, output_structure_path, rename_terms=False, split_models=False):
+    def save_structure(self, output_structure_path, rename_terms=False, split_models=False, keep_resnames=False):
         """ StuctureChecking.save_structure
         Saving the current structure in a the output file
         
@@ -2037,6 +2037,7 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
+            keep_resnames (bool): (False) Keep canonical residue names
         """
         return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
     
@@ -2049,6 +2050,7 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
+            keep_resnames (bool): (False) Keep canonical residue names        
         """
         input_line = ParamInput(
             "Enter output structure path",
@@ -2061,13 +2063,24 @@ class StructureChecking():
             output_format = self.args['output_format']
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
-        
+
         if not split_models:
-            self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
+            self.strucm.save_structure(
+                output_structure_path, 
+                rename_terms=rename_terms, 
+                output_format=output_format, 
+                keep_resnames=self.args['keep_canonical']
+            )
         else:
             for mod in self.strucm.st.get_models():
                 output_path = f'{output_structure_path}_{mod.serial_num}.{output_format}'
-                self.strucm.save_structure(output_path, mod_id = mod.id, rename_terms=rename_terms, output_format=output_format)
+                self.strucm.save_structure(
+                    output_path, 
+                    mod_id = mod.id, 
+                    rename_terms=rename_terms, 
+                    output_format=output_format, 
+                    keep_resnames=self.args['keep_canonical']
+                )
             print(cts.MSGS["SPLIT_MODELS"])
         
         return output_structure_path

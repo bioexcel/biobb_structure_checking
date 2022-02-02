@@ -95,6 +95,7 @@ class StructureManager:
 
         self.backbone_links = []
         self.modified_residue_list = []
+        self.non_canonical_residue_list = []
 
         self.hetatm = {}
         self.num_res = 0
@@ -298,7 +299,6 @@ class StructureManager:
         print("Total assigned charge: {:10.2f}".format(self.total_charge))
 
         self.has_charges = True
-
 
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
@@ -780,14 +780,17 @@ class StructureManager:
             output_pdb_path: str, 
             mod_id: str = None, 
             rename_terms: bool = False, 
-            output_format='pdb'):
+            output_format: str = 'pdb',
+            keep_resnames: bool = False):
         """
         Saves structure on disk in PDB format
 
         Args:
             output_pdb_path: OS path to the output file
             mod_id (optional): model to write
-
+            rename_terms: rename terminal residues
+            output_format: select output format
+            keep_resnames: keep canonical residue names
         Errors:
             OSError: Error saving the file
         """
@@ -800,12 +803,19 @@ class StructureManager:
         else:
             self.revert_terms()
 
+        if keep_resnames:
+            self.revert_can_resnames(canonical=True)
+            print("Warning: reverting residue names to canonical on output")
+
         if mod_id is None:
             pdbio.set_structure(self.st)
             pdbio.save(output_pdb_path)
         else:
             pdbio.set_structure(self.st[mod_id])
             pdbio.save(output_pdb_path)
+        
+        if keep_resnames:
+            self.revert_can_resnames(canonical=False)
 
     def get_all_r2r_distances(self, res_group: Union[str, Iterable[str]], join_models: bool) -> List[Tuple[Residue, Residue, float]]:
         """ Determine residue pairs within a given Cutoff distance
@@ -1317,7 +1327,6 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-
             
             if rcode_can not in add_h_rules:              
                 print(NotAValidResidueError(rcode).message)
@@ -1342,6 +1351,7 @@ class StructureManager:
                     h_rules[ion_res_list[res]]
                 )
                 res.resname = ion_res_list[res]
+                self.non_canonical_residue_list.append({'res':res, 'can_res':rcode_can, 'new_res':res.resname})
             else:
                 error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules)
 
@@ -1361,6 +1371,7 @@ class StructureManager:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
             res.resname = 'CYX'
+            self.non_canonical_residue_list.append({'res':res, 'can_res':'CYS', 'new_res':res.resname})
         self.modified = True
 
     def rename_terms(self, term_res):
@@ -1374,6 +1385,14 @@ class StructureManager:
         for res in self.st.get_residues():
             if len(res.get_resname()) == 4:
                 res.resname = res.resname[1:]
+
+    def revert_can_resnames(self, canonical=True):
+        """ Revert residue names to canonical ones """
+        for mod_res in self.non_canonical_residue_list:
+            if canonical:
+                mod_res['res'].resname = mod_res['can_res']
+            else:
+                mod_res['res'].resname = mod_res['new_res']
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
