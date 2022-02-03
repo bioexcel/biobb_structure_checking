@@ -565,12 +565,61 @@ def delete_atom(res, at_id):
 def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
 
-    # only proteins
     rcode = res.get_resname()
 
-    if not _protein_residue_check(rcode):
+    if _na_residue_check(rcode, type=NA):
+        return _add_hydrogens_to_ribose(res, prev_res, next_res)
+    elif not _protein_residue_check(rcode):
         return MSGS['RESIDUE_NOT_VALID']
+    else:
+        return _add_hydrogens_protein_backbone(res, prev_res, next_res)
 
+def _add_hydrogens_to_ribose(res, prev_res, next_res):
+    #C5'
+    if prev_res is None:
+        crs = build_coords_3xSP3(HDIS, res["O5'"], res["C5'"], res["C4'"])
+        add_new_atom_to_residue(res, "HO5'", crs[0])    
+
+    crs = build_coords_2xSP3(HDIS, res["C5'"], res["O5'"], res["C4'"])
+    add_new_atom_to_residue(res, "H5'", crs[0])    
+    add_new_atom_to_residue(res, "H5''", crs[1])    
+    
+    #C4
+    crs = build_coords_1xSP3(HDIS, res["C4'"], res["C5'"], res["O4'"], res["C3'"])
+    add_new_atom_to_residue(res, "H4'", crs)    
+    
+    #C3
+    crs = build_coords_1xSP3(HDIS, res["C3'"], res["C4'"], res["O3'"], res["C2'"])
+    add_new_atom_to_residue(res, "H3'", crs)    
+
+    if next_res is None:
+        crs = build_coords_3xSP3(HDIS, res["O3'"], res["C3'"], res["C4'"])
+        add_new_atom_to_residue(res, "HO3'", crs[0])
+    
+    #C2
+    if "O2'" in res:
+        crs = build_coords_1xSP3(HDIS, res["C2'"], res["C3'"], res["O2'"], res["C1'"])
+        add_new_atom_to_residue(res, "H2'", crs)    
+        crs = build_coords_3xSP3(HDIS, res["O2'"], res["C2'"], res["C3'"])
+        add_new_atom_to_residue(res, "HO2'", crs[0])
+    else:
+        crs = build_coords_2xSP3(HDIS, res["C2'"], res["C3'"], res["C1'"])
+        add_new_atom_to_residue(res, "H2'", crs[0])    
+        add_new_atom_to_residue(res, "H2''", crs[1])    
+    
+    #C1
+    if "N9" in res: #Purine
+        crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N9"])
+    else: #Pyrimidone
+        crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N1"])
+    add_new_atom_to_residue(res, "H1'", crs)
+     
+    return False
+
+def _add_hydrogens_protein_backbone(res, prev_res, next_res):
+    
+    rcode = res.get_resname()
+    
     error_msg = MSGS['NOT_ENOUGH_ATOMS'].format('backbone')
 
     if res.get_resname() not in ('ACE', 'NME'):
@@ -641,14 +690,14 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     return False
 
-def add_hydrogens_side(res, res_library, opt, rules):
+def add_hydrogens_side(res, res_library, opt, rules, is_protein=True):
     """ Add hydrogens to side chains"""
 
     if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
-
-    if 'N' not in res or 'CA' not in res or 'C' not in res:
-        return MSGS['NOT_ENOUGH_ATOMS'].format('side')
+    if  is_protein and _protein_residue_check(res.get_resname()) :
+        if 'N' not in res or 'CA' not in res or 'C' not in res:
+            return MSGS['NOT_ENOUGH_ATOMS'].format('side')
 
     for key_rule in rules.keys():
         rule = rules[key_rule]
