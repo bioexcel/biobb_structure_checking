@@ -695,7 +695,6 @@ def add_hydrogens_side(res, res_library, opt, rules, is_protein=True):
 
     if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
-    print(is_protein, res)
     if  is_protein and _protein_residue_check(res.get_resname()) :
         if 'N' not in res or 'CA' not in res or 'C' not in res:
             return MSGS['NOT_ENOUGH_ATOMS'].format('side')
