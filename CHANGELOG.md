@@ -15,6 +15,7 @@
 
 - add_hydrogen
   - Extended to Nucleic Acids
+  - added option to keep canonical residue names
 ### Bug Fixes
 - add_hydrogen
   - Forced upper case for FF names
