@@ -12,7 +12,17 @@
   - Accept standard FASTA files as sequence input
   - Accept multiple templates
   - Main options default to "none"
+
+- add_hydrogen
+  - Extended to Nucleic Acids
 ### Bug Fixes
+- add_hydrogen
+  - Forced upper case for FF names
+## v3.9.9 (2021.4)
+
+### Bug Fixes
+- Remove pinned numpy dependency
+
 ***
 ## v3.9.7 (2021.4)
 
