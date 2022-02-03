@@ -123,7 +123,7 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff  + '_prm.json')
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
 
         self.res_library = ResidueLib(res_library_path)
 

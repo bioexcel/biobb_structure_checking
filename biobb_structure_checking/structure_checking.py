@@ -1529,7 +1529,7 @@ class StructureChecking():
                         form = None
                         input_option, form = input_line.run(form)
                         ion_to_fix[r_at[0]] = form.upper()
-        self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'])
+        self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'].upper())
         self.strucm.modified = True
         return False
 # =============================================================================
