@@ -82,7 +82,11 @@
         "atom_type_ff" : ["ADT", "CMIP"],
         "residue_data": {
             "*": {
-                "bck_atoms": ["N", "CA", "C", "O"],
+                "bck_atoms": {
+                    "protein": ["N", "CA", "C", "O"],
+                    "rna": ["C5'", "O5'", "C4'", "O4'", "C3'", "O3'", "C2'", "O2'", "C1'"],
+                    "dna": ["C5'", "O5'", "C4'", "O4'", "C3'", "O3'", "C2'", "C1'"]
+                },
                 "polar_donor_atoms": ["N","O4'","O3'","O2'"],
                 "polar_acceptor_atoms": ["O", "O4'", "05'","OXT","O3'","O2'","OP1","OP2"],
                 "negative_atoms": ["OXT", "OP1", "OP2"],

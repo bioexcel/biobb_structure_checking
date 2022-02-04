@@ -50,20 +50,23 @@ class DataLibManager:
             codes = self.residue_codes[mol_type]
         return codes
 
-    def get_all_atom_lists(self):
+    def get_all_atom_lists(self, type=None):
         """ DataLibManager.get_all_atom_lists
-        Obtain lists of atoms per protein residue.
         """
+        if type is None:
+            type = 'protein' #back compatibility
+
         atom_lists = {
             rcode: {
-                'backbone': self.residue_data['*']['bck_atoms'],
+                'backbone': self.residue_data['*']['bck_atoms'][type],
                 'side': self.residue_data[rcode]['side_atoms']
             }
-            for rcode in self.residue_codes['protein']
+            for rcode in self.residue_codes[type]
         }
-
-        for rcode in self.residue_codes['cap_residues']:
-            atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
+        if type == 'protein':
+            for rcode in self.residue_codes['cap_residues']:
+                atom_lists[rcode] = {}
+                atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
 
         return atom_lists
 

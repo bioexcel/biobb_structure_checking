@@ -433,19 +433,31 @@ class StructureManager:
                 List of residues with missing atoms, as a tuples
                 ["r",{"backbone":[atoms_list],"side":[atoms_list]}]
         """
-        # TODO Nucleic acids
-        valid_codes = self.data_library.get_valid_codes('protein')
-        residue_data = self.data_library.get_all_atom_lists()
+        valid_codes = {}
+        residue_data = {}
+        for type in ('protein', 'dna', 'rna'):
+            valid_codes[mu.TYPE_LABEL[type]] = self.data_library.get_valid_codes(type)
+            residue_data[mu.TYPE_LABEL[type]] = self.data_library.get_all_atom_lists(type)        
         miss_at_list = []
         for res in self.st.get_residues():
-            if res.get_resname() in valid_codes and not mu.is_hetatm(res):
+            ch_type = self._get_chain_type(res)
+            if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
                 miss_at = mu.check_all_at_in_r(
-                    res, residue_data[res.get_resname().replace(' ', '')]
+                    res, residue_data[ch_type][res.get_resname().replace(' ', '')]
                 )
-                if self.is_C_term(res) and res.get_resname() != 'NME' and 'OXT' not in res:
+                bck_miss = []
+                if ch_type == mu.PROTEIN:
+                    if self.is_C_term(res) and res.get_resname() != 'NME' and 'OXT' not in res:
+                        bck_miss.append('OXT')
+                else:
+                    if not self.is_5_term(res):
+                        for at_id in ["P","OP1","OP2"]:
+                            if at_id not in res:
+                                bck_miss.append(at_id)
+                if bck_miss:
                     if 'backbone' not in miss_at:
-                        miss_at['backbone'] = []
-                    miss_at['backbone'].append('OXT')
+                            miss_at['backbone'] = []
+                    miss_at['backbone'] += bck_miss
                 if miss_at:
                     miss_at_list.append((res, miss_at))
         return miss_at_list
@@ -457,18 +469,29 @@ class StructureManager:
                 List of residues with extra atoms, as a tuples
                 ["r",atoms_list]
         """
-        # TODO Nucleic acids
-        valid_codes = self.data_library.get_valid_codes('protein')
-        residue_data = self.data_library.get_all_atom_lists()
-
+        valid_codes = {}
+        residue_data = {}
+        for type in ('protein', 'dna', 'rna'):
+            valid_codes[mu.TYPE_LABEL[type]] = self.data_library.get_valid_codes(type)
+            residue_data[mu.TYPE_LABEL[type]] = self.data_library.get_all_atom_lists(type) 
         extra_at_list = []
         for res in self.st.get_residues():
-            if res.get_resname() in valid_codes and not mu.is_hetatm(res):
-                extra_ats = mu.check_unk_at_in_r(
-                    res, residue_data[res.get_resname().replace(' ', '')]
-                )
+            if mu.is_hetatm(res):
+                continue
+            ch_type = self._get_chain_type(res)
+            rcode = res.get_resname().replace(' ','')
+            if rcode not in valid_codes[ch_type]:
+                print(f"Warning: unknown residue {rcode}")
+                continue
+            if ch_type == mu.PROTEIN:
+                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][rcode])
                 if extra_ats:
                     extra_at_list.append((res, extra_ats))
+            else:
+                res_at_list = residue_data[ch_type][rcode]
+                if not self.is_5_term(res):
+                    res_at_list['backbone'] += ["P","OP1","OP2"]
+                extra_ats = mu.check_unk_at_in_r(res, res_at_list)
         return extra_at_list
 
     def get_missing_atoms(self, fragment: str) -> List[Tuple[Residue, List[str]]]:
@@ -482,7 +505,7 @@ class StructureManager:
         for res_at in self.check_missing_atoms():
             res, at_list = res_at
             if fragment == 'side':
-                if 'side' in at_list and 'N' in res and 'CA' in res and 'C' in res:
+                if at_list['side']:
                     miss_ats.append((res, at_list['side']))
             else:
                 if at_list['backbone']:
