@@ -52,6 +52,7 @@ _Mutate side chain with minimal atom replacement_
 * Existing hydrogen atoms are removed before adding new ones unless **--keep_h** is set.  
 * **--add_charges FF** adds partial charges (from RES_LIBRARY) and atom types from FF forcefield (Accepted: ATD, CMIP).  
 * Output format taken from file extension (Accepted: pdb, pdbqt, pqr) or --output_format.
+* Residue names are modified according to ionization state (e.g. HIS-> HIE, HID, HIP). Use --keep_canonical_resnames to avoid this behaviour
 
 ### Fix Structure Errors
 Commands to detect and fix possible structure errors. 

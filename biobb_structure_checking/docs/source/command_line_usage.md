@@ -63,6 +63,8 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 
 **--output_format** OUTPUT_FORMAT - _Format for the Output._
 * pdb|pdbqt|pqr|cmip formats available (if empty file extension is used)
+
+**--keep_canonical_resnames** - _Revert output to canonical residue names when modified by any operation_
   
 **--json** JSON_OUTPUT_PATH - _Store a summary of all activities on a json file_
 

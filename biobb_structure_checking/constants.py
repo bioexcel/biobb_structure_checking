@@ -136,6 +136,13 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--keep_canonical_resnames',
+    action="store_true",
+    dest='keep_canonical',
+    help='Keep canonical names for ionized residues in output files'
+)
+
+CMD_LINE.add_argument(
     '--rename_terms',
     action="store_true",
     dest='rename_terms',
