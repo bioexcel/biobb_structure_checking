@@ -2448,7 +2448,7 @@
             "C": {
                 "polar_acceptor_atoms": ["N3"],
                 "polar_donor_atoms": ["N4"],
-                "side_atoms":  ["C1","C2","O2","N3","C4","O4","C5","C6"],
+                "side_atoms":  ["N1","C2","O2","N3","C4","N4","C5","C6"],
                 "hydrogen_atoms": ["H6", "H5", "H41", "H42"],
                 "addH_rules": {},     
                 "mutation_rules": {
@@ -2471,7 +2471,7 @@
             "A": {
                 "polar_acceptor_atome": ["N7", "N3", "N1"],
                 "polar_donor_atoms": ["N6"],
-                "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N2","N7","C8","N9"],
+                "side_atoms" :["N1","C2","N3","C4","C5","C6","N6","N7","C8","N9"],
                 "hydrogen_atoms": ["H8", "H61", "H62", "H2"],
                 "addH_rules": {
                     "*" :{
@@ -2500,7 +2500,7 @@
             "U": {
                 "polar_acceptor_atoms": ["O4"],
                 "polar_donor_atoms": ["N3"],
-                "side_atoms":  ["C1","C2","O2","N3","C4","N4","C5","C6"],
+                "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6"],
                 "hydrogen_atoms": ["H6", "H5", "H3"],
                 "addH_rules": {
                     "*" :{
