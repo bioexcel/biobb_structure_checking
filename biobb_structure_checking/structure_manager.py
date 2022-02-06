@@ -261,6 +261,8 @@ class StructureManager:
         ff_data = self.data_library.ff_data[ff]
 
         for res in self.st.get_residues():
+            ch_type = self._get_chain_type(res)
+            ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
             if len(rcode) == 4: # Protein terms
                 rcode3 = rcode[1:]
@@ -287,8 +289,8 @@ class StructureManager:
                     atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
                         atm.xtra['atom_type'] = ff_data['residue_data'][can_rcode3][atm.id]
-                    elif atm.id in ff_data['residue_data']['*']:
-                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][atm.id]
+                    elif atm.id in ff_data['residue_data']['*'][ch_type_label]:
+                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][ch_type_label][atm.id]
                     else:
                         atm.xtra['atom_type'] = atm.element
                     atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
