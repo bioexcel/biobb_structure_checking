@@ -13,6 +13,6 @@ sphinx:
 python:
    version: "3.7"
    install:
-      - requirements: biobb_structure_checking/docs/source/requirements.txt
+      - requirements: biobb_structure_checking/docs/requirements.txt
       - method: pip
         path: .
