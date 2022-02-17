@@ -33,7 +33,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ### Arguments for input:
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
-* Formats PDB|mmCIF|PQR. Taken from file extension.
+* Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted as pdb.
 * Remote **pdb:{pdbid}**. See **--file_format** for selecting download format (default: cif)
 * Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB server (**--pdb_server MMB**). Format PDB.
 

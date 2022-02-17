@@ -72,7 +72,7 @@ class StructureManager:
 
         Object structure:
             {
-                "input_format" (str): Format of input file pdb|cif
+                "input_format" (str): Format of input file pdb(qt)|pqr|cif
                 "models_type" (int): Guessed model type when num. models > 1 NMR|Bunit
                 "num_ats" (int): Total Number of atoms
                 "nmodels" (int): Number of Models
@@ -169,7 +169,7 @@ class StructureManager:
         else:
             real_pdb_path = input_pdb_path
 
-        if '.pdb' in real_pdb_path: 
+        if '.pdb' in real_pdb_path: # accepts .pdbqt
             parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path: 
