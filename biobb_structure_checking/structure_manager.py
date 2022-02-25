@@ -170,6 +170,8 @@ class StructureManager:
             real_pdb_path = input_pdb_path
 
         if '.pdb' in real_pdb_path: # accepts .pdbqt
+            if '.pdbqt' in real_pdb_path:
+                print("Warning: PDBQT file will be loaded as PDB")
             parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path: 
