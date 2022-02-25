@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.9'
+VERSION = '3.9.10'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -74,14 +74,14 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}'
+    help='Input structure. Formats pdb(qt)|pqr|cif. Remote pdb:{pdbid}'
 )
 
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
     help='Format for retrieving structures (default=mmCif|pdb|xml)',
-    choices=['pdb','cif','xml','pqr']
+    choices=['pdb','cif','xml']
 )
 
 CMD_LINE.add_argument(

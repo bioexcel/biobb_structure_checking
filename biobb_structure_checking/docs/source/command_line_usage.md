@@ -17,7 +17,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
                        [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
-                       [-o OUTPUT_STRUCTURE_PATH] [--rename_terms]
+                       [-o OUTPUT_STRUCTURE_PATH] [--rename_terms] [--keep_canonical_resnames]
                        [--json JSON_OUTPUT_PATH] [-nv] [-v]
                        [--limit ATOM_LIMIT] [--debug] [--force_save]
                        [--check_only] [--non_interactive] [--version]
@@ -33,7 +33,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ### Arguments for input:
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
-* Formats PDB|mmCIF|PQR. Taken from file extension.
+* Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted as pdb.
 * Remote **pdb:{pdbid}**. See **--file_format** for selecting download format (default: cif)
 * Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB server (**--pdb_server MMB**). Format PDB.
 
@@ -65,7 +65,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 * pdb|pdbqt|pqr|cmip formats available (if empty file extension is used)
 
 **--keep_canonical_resnames** - _Revert output to canonical residue names when modified by any operation_
-  
+
 **--json** JSON_OUTPUT_PATH - _Store a summary of all activities on a json file_
 
 **--force_save** - _Force saving an output file even if no modification_
