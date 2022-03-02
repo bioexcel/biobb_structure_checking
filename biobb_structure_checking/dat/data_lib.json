@@ -84,13 +84,13 @@
             "*": {
                 "bck_atoms": {
                     "protein": ["N", "CA", "C", "O"],
-                    "rna": ["C5'", "O5'", "C4'", "O4'", "C3'", "O3'", "C2'", "O2'", "C1'"],
-                    "dna": ["C5'", "O5'", "C4'", "O4'", "C3'", "O3'", "C2'", "C1'"]
+                    "rna": ["C1'", "C2'", "O2'","C3'", "O3'", "C4'", "O4'", "C5'", "O5'"],
+                    "dna": ["C1'", "C2'", "C3'", "O3'", "C4'", "O4'", "C5'", "O5'"]
                 },
-                "polar_donor_atoms": ["N","O4'","O3'","O2'"],
-                "polar_acceptor_atoms": ["O", "O4'", "05'","OXT","O3'","O2'","OP1","OP2"],
+                "polar_donor_atoms": ["N", "O4'","O3'","O2'"],
+                "polar_acceptor_atoms": ["O", "OXT", "OP1","OP2", "O2'", "O3'", "O4'", "05'"],
                 "negative_atoms": ["OXT", "OP1", "OP2"],
-                "apolar_atoms":["CA", "C","C5'","C4'","C1'","C3'"]
+                "apolar_atoms":["CA", "C", "C1'", "C2'", "C3'", "C4'", "C5'"]
             },
             "ACE": {
                 "bck_atoms" : ["CA", "C", "O"],
@@ -2301,9 +2301,9 @@
             },
             "DG": {
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
-                "polar_donor_atoms": ["N2"],
-                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
-                "hydrogen_atoms": ["H8", "H1", "H21", "H22"],
+                "polar_donor_atoms": ["N1", "N2"],
+                "side_atoms" :["N1","C2","N2", "N3","C4","C5","C6","O6","N7","C8","N9"],
+                "hydrogen_atoms": ["H1", "H21", "H22","H8"],
                 "addH_rules": {
                     "*" :{
                         "mode":"L",
@@ -2329,7 +2329,7 @@
                 }
             },
             "DC": {
-                "polar_acceptor_atoms": ["N3"],
+                "polar_acceptor_atoms": ["O2", "N3"],
                 "polar_donor_atoms": ["N4"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","N4","C5","C6"],
                 "hydrogen_atoms": ["H6", "H5", "H41", "H42"],
@@ -2387,7 +2387,7 @@
                 }
             },
             "DT": {
-                "polar_acceptor_atoms": ["O4"],
+                "polar_acceptor_atoms": ["O2", "O4"],
                 "polar_donor_atoms": ["N3"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6","C7"],
                 "hydrogen_atoms": ["H6", "H71", "H72", "H73", "H3"],
@@ -2417,8 +2417,8 @@
             },
             "G": {
                 "polar_acceptor_atoms": ["N7", "O6", "N3"],
-                "polar_donor_atoms": ["N2"],
-                "side_atoms" :["N1","C2","N3","C4","C5","C6","O6","N2","N7","C8","N9"],
+                "polar_donor_atoms": ["N1", "N2"],
+                "side_atoms" :["N1","C2","N2", "N3","C4","C5","C6","O6","N7","C8","N9"],
                 "hydrogen_atoms": ["H8", "H1", "H21", "H22"],
                 "addH_rules": {
                     "*" :{
@@ -2446,7 +2446,7 @@
                 }
             },
             "C": {
-                "polar_acceptor_atoms": ["N3"],
+                "polar_acceptor_atoms": ["O2", "N3"],
                 "polar_donor_atoms": ["N4"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","N4","C5","C6"],
                 "hydrogen_atoms": ["H6", "H5", "H41", "H42"],
@@ -2498,7 +2498,7 @@
                 }
             },
             "U": {
-                "polar_acceptor_atoms": ["O4"],
+                "polar_acceptor_atoms": ["O2", "O4"],
                 "polar_donor_atoms": ["N3"],
                 "side_atoms":  ["N1","C2","O2","N3","C4","O4","C5","C6"],
                 "hydrogen_atoms": ["H6", "H5", "H3"],
@@ -2510,8 +2510,8 @@
                 },    
                 "mutation_rules": {
                     "A":{
-                        "Del": ["C2","O2","N3","C4","O4","C5"],
-                        "Add": ["N7","C5","C6","N6","N1","C2","N3","C4"],
+                        "Del": ["C2","O2", "N3", "C4","O4","C5"],
+                        "Add": ["N7", "C5", "C6","N6","N1","C2","N3","C4"],
                         "Mov": ["N1-N9", "C6-C8"]
                     },
                     "C":{ 
