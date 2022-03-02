@@ -65,8 +65,10 @@ class DataLibManager:
         }
         if type == 'protein':
             for rcode in self.residue_codes['cap_residues']:
-                atom_lists[rcode] = {}
-                atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
+                atom_lists[rcode] = {
+                    'backbone': self.residue_data[rcode]['bck_atoms'],
+                    'side' : []
+                }
 
         return atom_lists
 

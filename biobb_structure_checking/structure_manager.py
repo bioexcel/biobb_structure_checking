@@ -1,5 +1,7 @@
 """Module to manage structure, based on BioPython Bio.PDB
 """
+from cgitb import reset
+from re import I
 import warnings
 import os
 import sys
@@ -445,7 +447,10 @@ class StructureManager:
         miss_at_list = []
         for res in self.st.get_residues():
             ch_type = self._get_chain_type(res)
+            if ch_type not in (mu.PROTEIN, mu.NA):
+                continue
             if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
+
                 miss_at = mu.check_all_at_in_r(
                     res, residue_data[ch_type][res.get_resname().replace(' ', '')]
                 )
@@ -509,12 +514,26 @@ class StructureManager:
         for res_at in self.check_missing_atoms():
             res, at_list = res_at
             if fragment == 'side':
-                if at_list['side']:
+                if 'side' in at_list and not self._missing_bck_atoms(res):
                     miss_ats.append((res, at_list['side']))
             else:
                 if at_list['backbone']:
                     miss_ats.append((res, at_list['backbone']))
         return miss_ats
+
+    def _missing_bck_atoms(self, res):
+        """ Check whether backbone atoms required to build side chains are present"""
+        if self._get_chain_type(res)  == mu.PROTEIN:
+            bck_ats =  ("N", "CA", "C")
+        else: 
+            bck_ats = ("C1'", "O4'", "C4'")
+
+        missing = False
+
+        for at in bck_ats:
+            missing = missing or at not in res
+
+        return missing
 
     def get_ion_res_list(self) -> List[Tuple[Residue, List[str]]]:
         """
@@ -1409,19 +1428,25 @@ class StructureManager:
         self.modified = True
 
     def rename_terms(self, term_res):
-        """ Rename Terminal residues as NXXX or CXXX """
+        """ Rename Terminal residues as NXXX or CXXX in proteins or XX5 XX3 in NA """
         for t in term_res:
             if t[0] in ('N', 'C'):
-                if t[1].resname not in ('ACE', 'NME'):
+                if t[1].resname not in ('ACE', 'NME') and len(t[1].resname) == 3 :
                     t[1].resname = t[0] + t[1].resname
             elif t[0] in ('5','3'):
                 t[1].resname = t[1].resname + t[0]
 
     def revert_terms(self):
-        """ Reverts 4 char len residue names to 3 letter codes"""
+        """ Reverts special term residue names to canonical ones"""
         for res in self.st.get_residues():
-            if len(res.get_resname()) == 4:
-                res.resname = res.resname[1:]
+            if mu.is_hetatm(res):
+                continue
+            if self._get_chain_type(res) == mu.PROTEIN:
+                if len(res.get_resname()) == 4:
+                    res.resname = res.resname[1:]
+            elif self._get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
+                if res.get_resname()[-1] in ('5','3'):
+                    res.resname = res.resname[:-1]
 
     def revert_can_resnames(self, canonical=True):
         """ Revert residue names to canonical ones """
@@ -1449,7 +1474,10 @@ class StructureManager:
 
     def _get_chain_type(self, res):
         """ Return type of chain for residue"""
-        return self.chain_ids[res.get_parent().id]
+        if mu.is_hetatm(res):
+            return mu.UNKNOWN
+        else:
+            return self.chain_ids[res.get_parent().id]
     
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
         """ Find residues to mutate from mut_list"""
