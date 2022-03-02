@@ -1377,12 +1377,14 @@ class StructureManager:
     def rename_terms(self, term_res):
         """ Rename Terminal residues as NXXX or CXXX """
         for t in term_res:
-            if t[1].resname not in ('ACE', 'NME'):
+            if t[1].resname not in ('ACE', 'NME') and len(t[1].resname) == 3 :
                 t[1].resname = t[0] + t[1].resname
 
     def revert_terms(self):
         """ Reverts 4 char len residue names to 3 letter codes"""
         for res in self.st.get_residues():
+            if mu.is_hetatm(res):
+                continue
             if len(res.get_resname()) == 4:
                 res.resname = res.resname[1:]
 
@@ -1396,11 +1398,11 @@ class StructureManager:
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
-        return res not in self.prev_residue
+        return not mu.is_hetatm(res) and res not in self.prev_residue
 
     def is_C_term(self, res: Residue) -> bool:
         """ Detects whether it is C terminal residue."""
-        return res not in self.next_residue
+        return not mu.is_hetatm(res ) and res not in self.next_residue
 
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
         """ Find residues to mutate from mut_list"""
