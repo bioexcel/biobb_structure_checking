@@ -1,8 +1,10 @@
-# v3.10.0 (2022.X)
+## v3.9.10 (2021.4)
 
 ### New Functions
 
 ### Extended functions
+- Adding new option --keep_canonical_resnames to revert output to canonical residue names when modified by any operation.
+
 - models
   - Select multiple models
   - Superimpose current models

@@ -42,7 +42,7 @@ add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no
     Fixes missing side chain atoms unless --no_fix_side is set
     Existing hydrogen atoms are removed before adding new ones unless --keep_h set.
     --add_charges FF adds partial charges (from RES_LIBRARY) and atom types from FF forcefield. Output format taken from file extension or --output_format
-
+    Residue names are modified according to ionization state (e.g. HIS-> HIE, HID, HIP). Use --keep_canonical_resnames to avoid this behaviour
 2. Fix Structure Errors
 
 amide  [--fix All|None|Residue List] [--no_recheck]
