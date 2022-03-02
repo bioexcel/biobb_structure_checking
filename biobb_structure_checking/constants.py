@@ -74,14 +74,14 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. Formats pdb(qt)|pqr|cif. Remote pdb:{pdbid}'
+    help='Input structure. 1) Fetch from remote pdb:{pdbid} 2) Local file: Formats pdb(qt)|pqr|cif. Format assumed from extension.'
 )
 
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving structures (default=cif(mmCif)|pdb|xml)',
-    choices=['pdb','cif','xml']
+    help='Format for retrieving remote structures (cif(default)|pdb|xml)',
+    choices=['cif', 'pdb', 'xml']
 )
 
 CMD_LINE.add_argument(
