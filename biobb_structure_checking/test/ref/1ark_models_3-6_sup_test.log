@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.6                   =
+=                   BioBB structure checking utility v3.9.10                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
@@ -23,7 +23,7 @@ Running models. Options: --select 3-6 --superimpose --save_split
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 3-6
-Models superimposed: final RMSd 2.6151 A
+Models superimposed: final RMSd    2.615 A
 Final Num. models: 4 (type: Ensembl/NMR,    2.615 A)
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  240
@@ -32,5 +32,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  3620
-Splitting models
+Splitting models for output
 Structure saved on 1ark_models_sup_test.pdb

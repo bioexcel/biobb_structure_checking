@@ -447,10 +447,9 @@ class StructureManager:
         miss_at_list = []
         for res in self.st.get_residues():
             ch_type = self._get_chain_type(res)
-            if ch_type not in (mu.PROTEIN, mu.NA):
+            if ch_type not in (mu.PROTEIN, mu.NA, mu.DNA, mu.RNA):
                 continue
             if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
-
                 miss_at = mu.check_all_at_in_r(
                     res, residue_data[ch_type][res.get_resname().replace(' ', '')]
                 )
@@ -498,9 +497,14 @@ class StructureManager:
                     extra_at_list.append((res, extra_ats))
             else:
                 res_at_list = residue_data[ch_type][rcode]
+                add_ats = []
                 if not self.is_5_term(res):
-                    res_at_list['backbone'] += ["P","OP1","OP2"]
-                extra_ats = mu.check_unk_at_in_r(res, res_at_list)
+                    if 'P' not in res_at_list['backbone']: # fix to avoid chain many
+                        add_ats = ["P","OP1","OP2"]
+                extra_ats = mu.check_unk_at_in_r(res, {
+                                'backbone':res_at_list['backbone'] + add_ats,
+                                'side': res_at_list['side']
+                            })
         return extra_at_list
 
     def get_missing_atoms(self, fragment: str) -> List[Tuple[Residue, List[str]]]:
@@ -1058,7 +1062,13 @@ class StructureManager:
         Args:
             **r_at**: tuple as [Bio.PDB.Residue, [list of atom ids]]
         """
-        print(mu.residue_id(r_at[0]))
+        print(mu.residue_id(r_at[0]))        
+        if self._get_chain_type(r_at[0]) == mu.PROTEIN:
+            self._fix_side_chain_protein(r_at)
+        else:
+            self._fix_side_chain_na(r_at)
+            
+    def _fix_side_chain_protein(self, r_at):
         for at_id in r_at[1]:
             print("  Adding new atom " + at_id)
             if at_id == 'CB':
@@ -1073,6 +1083,25 @@ class StructureManager:
             mu.add_new_atom_to_residue(r_at[0], at_id, coords)
         self.atom_renumbering()
         self.modified = True
+
+    def _fix_side_chain_na(self, r_at):
+        if r_at[0].get_resname() in ['A','DA','G','DG'] and\
+                ('N9' in r_at[1] or 'C8' in r_at[1]) or\
+            r_at[0].get_resname() in ('C','DC','DT','U') and\
+                ('N1' in r_at[1] or 'C6' in r_at[1]):
+            print (f"Not enough atoms left on {mu.residue_id(r_at[0])} to recover base orientation, skipping")
+        else:
+            for at_id in r_at[1]:
+                print("  Adding new atom " + at_id)
+                coords = mu.build_coords_from_lib(
+                    r_at[0],
+                    self.res_library,
+                    r_at[0].get_resname(),
+                    at_id
+                )
+                mu.add_new_atom_to_residue(r_at[0], at_id, coords)
+            self.atom_renumbering()
+            self.modified = True
 
     def rebuild_side_chains(self, r_list: Iterable[str]) -> None:
         """ Rebuild side chain as mutation to same residue using Modeller """

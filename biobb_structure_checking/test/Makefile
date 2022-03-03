@@ -114,6 +114,8 @@ fixside:
 	@echo "Running fixside on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 fixside --fix None > 2ki5_fixside_None_test.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_fixside_All_test.pdb fixside --fix All > 2ki5_fixside_All_test.log
+	@echo "Running fixside on 1d23_fixtest"
+	${COMMON};${APPBIN} -v -i dna_test/1d23_fixtest.pdb -o 1d23_fixtest_All_test.pdb fixside --fix All > 1d23_fixtest_All_test.log
 
 chiral_bck:
 	@echo "Running chiral_bck on modified 1ark"

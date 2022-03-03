@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.9                   =
+=                   BioBB structure checking utility v3.9.10                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
@@ -41,8 +41,7 @@ No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A68 by HIE
 Updating partial charges and atom types
-Warning: NNMET not found in residue library atom charges set to 0.
-Total assigned charge:      -1.00
+Total assigned charge:      -0.00
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
@@ -52,5 +51,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  1231
-Total charge -1.000
+Total charge -0.000
 Structure saved on 1ubq.pqr

@@ -55,7 +55,6 @@ class DataLibManager:
         """
         if type is None:
             type = 'protein' #back compatibility
-
         atom_lists = {
             rcode: {
                 'backbone': self.residue_data['*']['bck_atoms'][type],
@@ -69,7 +68,6 @@ class DataLibManager:
                     'backbone': self.residue_data[rcode]['bck_atoms'],
                     'side' : []
                 }
-
         return atom_lists
 
     def get_atom_feature_list(self, feature):

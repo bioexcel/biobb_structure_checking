@@ -890,7 +890,9 @@ def build_coords_from_lib(res, res_lib, new_res, at_id):
 
     if atom_def is None:
         sys.exit("#ERROR: Unknown target atom")
-
+    for at_def in atom_def.link_ats:
+        if at_def not in res:
+            sys.exit(f"Error, required atom {at_def} not available in {residue_id(res)}")
     return build_coords_from_ats_internal(
         res[atom_def.link_ats[0]],
         res[atom_def.link_ats[1]],
