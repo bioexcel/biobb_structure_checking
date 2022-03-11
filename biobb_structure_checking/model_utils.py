@@ -321,7 +321,7 @@ def check_chiral(res, at1, at2, at3, at4, sign=1.):
 
 def check_all_at_in_r(res, at_list):
     """ Check whether all residue atoms are present. """
-    miss_at = {}
+    miss_at = {'backbone':[], 'side':[]}
     for group in ['backbone', 'side']:
         miss_at[group] = [at_id for at_id in at_list[group] if not at_id in res]
     if miss_at['backbone'] + miss_at['side']:
@@ -337,7 +337,7 @@ def check_unk_at_in_r(res, at_list, skip_H=True):
         ]
     return  [
         at.id for at in res.get_atoms()
-        if at.id not in at_list['backbone'] + at_list['side'] + ['OXT']
+        if at.id not in at_list['backbone'] + at_list['side'] 
     ]
 
 def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=True, severe=True):
@@ -890,7 +890,9 @@ def build_coords_from_lib(res, res_lib, new_res, at_id):
 
     if atom_def is None:
         sys.exit("#ERROR: Unknown target atom")
-
+    for at_def in atom_def.link_ats:
+        if at_def not in res:
+            sys.exit(f"Error, required atom {at_def} not available in {residue_id(res)}")
     return build_coords_from_ats_internal(
         res[atom_def.link_ats[0]],
         res[atom_def.link_ats[1]],

@@ -22,15 +22,9 @@
     },
     "residue_data": {
         "*": {
-                "O" : "OA",
-                "OXT": "OA",
-                "H" : "HD",
-                "H1": "HD",
-                "H2": "HD",
-                "H3": "HD",
-                "HO5'": "HD",
-                "HO3'": "HD",
-                "HO2'": "HD"
+                "protein": {"O" : "OA", "OXT": "OA", "H" : "HD", "H1": "HD", "H2": "HD", "H3": "HD"},
+                "dna": {"HO5'": "HD", "HO3'": "HD"},
+                "rna": {"HO5'": "HD", "HO3'": "HD", "HO2'": "HD"}
         },
         "NME": {
                 "H": "HD"

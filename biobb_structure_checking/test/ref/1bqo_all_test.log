@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+=                   BioBB structure checking utility v3.9.10                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
@@ -225,6 +225,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A99,A104,A136,A155,A168,A220,A223,A246,B99,B104,B136,B155,B168,B220,B223,B246
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
+Warning: unknown residue CASP
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A96 by HIE

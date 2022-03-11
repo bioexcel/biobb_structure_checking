@@ -141,7 +141,7 @@
  },
  "models": {
   "nmodels": 15,
-  "selected": 1,
+  "selected": "1",
   "type": {
    "rmsd": 35.0317,
    "type": 2
