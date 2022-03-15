@@ -248,7 +248,7 @@ class SequenceData():
                         self.data[ch_id]['pdb'][mod_id]['match_numbering'] = False
         return True
 
-    def fake_canonical_sequence(self, strucm, mutations):
+    def fake_canonical_sequence(self, strucm, mutations, ins_res_type='G'):
         """ SequenceData.fake_canonical_sequence
         Fakes a canonical sequence to support modeller use in fixside and mutateside --rebuild
         
@@ -273,7 +273,7 @@ class SequenceData():
                 if not start_pos:
                     start_pos = frag.features[0].location.start
                 if last_pos:
-                    seq += 'G'*(frag.features[0].location.start - last_pos-1)
+                    seq += ins_res_type*(frag.features[0].location.start - last_pos-1)
 
                 seq += frag.seq
                 last_pos = frag.features[0].location.end
@@ -320,7 +320,7 @@ class SequenceData():
         #TODO re-use this on modeller_manager
         outseq = ''
         for ch_id in self.data:
-            if self.has_canonical[ch_id]:
+            if ch_id in self.has_canonical and self.has_canonical[ch_id]:
                 tgt_seq = self.data[ch_id]['can'].seq
                 frgs = self.data[ch_id]['pdb'][0]['frgs']
                 frags_num = []
@@ -338,6 +338,34 @@ class SequenceData():
                     pdb_seq = Seq(alin[0][1], IUPAC.protein)
                 else:
                     pdb_seq = Seq(alin[0][1])
+
+                seq = SeqRecord(
+                    pdb_seq,
+                    'pdb_sq_' + ch_id,
+                    '',
+                    'Frags: ' + ','.join(frags_num)
+                )
+                outseq += SeqIO.FastaIO.as_fasta(seq)
+            else:
+                last_pos = 0
+                start_pos = 0
+                sequence = ''
+                frags_num = []
+                for frag in self.data[ch_id]['pdb'][0]['frgs']:
+                    if not start_pos:
+                        start_pos = frag.features[0].location.start
+                    if last_pos:
+                        sequence += '-'*(frag.features[0].location.start - last_pos-1)
+                    sequence += frag.seq
+                    last_pos = frag.features[0].location.end
+                    frags_num.append(
+                        '{}-{}'.format(frag.features[0].location.start, frag.features[0].location.end)
+                    )
+
+                if has_IUPAC:
+                    pdb_seq = Seq(sequence, IUPAC.protein)
+                else:
+                    pdb_seq = Seq(sequence)
 
                 seq = SeqRecord(
                     pdb_seq,
