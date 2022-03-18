@@ -334,11 +334,15 @@ DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
 
+DIALOGS.add_entry('ca_only', 'Check and Fix all-CA protein Structures')
+DIALOGS.add_option('ca_only', '--fix', 'fix', 'Build a complete Protein model using CA-only coordinates (Yes | No)')
+
+
 # All methods to perform checkall
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences', 'ca_only']
 
 MSGS = {
     #management

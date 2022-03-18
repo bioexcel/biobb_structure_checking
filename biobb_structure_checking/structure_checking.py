@@ -1986,7 +1986,35 @@ class StructureChecking():
 
 #    def _cistransbck_fix(self, option):
 #        pass
+    def ca_only(self, opts=None):
+        """ Fix CA-Only protein building a possible model (Uses Modeller) """
+       self._run_method('ca_only', opts)
 
+    def _ca_only_check(self):
+        if self.strucm.ca_only:
+            print("Number of atoms compatible with CA-Only model")
+            fix_data = True
+        else:
+            print("The number and atom distribution is not compatible with a CA-only model")
+            fix_data = False
+        return fix_data
+
+    def _ca_only_fix(self, opts, fix_data=False):
+        if isinstance(opts, str):
+            fix_ca = opts
+        else:
+            fix_ca = opts['fix']
+        
+        input_line = ParamInput('Fix', self.args['non_interactive'], set_none='no')
+        input_line.add_option_yes_no()
+        input_line.set_default('yes')
+        input_option, fix_ca = input_line.run(fix_ca)
+
+        if input_option == 'error':
+            return cts.MSGS['UNKNOWN_SELECTION'], fix_ca
+
+        if input_option == 'yes':
+            self.strucm.fix_ca_only()
 #===============================================================================
     def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
         """ Private. StructureChecking._load_structure
