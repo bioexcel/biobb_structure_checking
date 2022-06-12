@@ -149,11 +149,11 @@ biounits:
 	@echo " 1ldn.1 "
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
 	@echo " 2ki5.1 "
-	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb  --non_interactive checkall > 2ki5_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server bsc  --non_interactive checkall > 2ki5_checkall_test.log
 	@echo " 1vtk.1 "
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall > 1vtk_checkall_test.log
 	@echo " 1svc.1 "
-	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server mmb  --non_interactive checkall > 1svc_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server bsc  --non_interactive checkall > 1svc_checkall_test.log
 
 add_hydrogen:
 	@echo "Running add_hydrogen on 1ubq"

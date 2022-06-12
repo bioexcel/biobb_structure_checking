@@ -13,15 +13,18 @@
 - backbone
   - Accept standard FASTA files as sequence input
   - Accept multiple templates
-### Bug Fixes
+  - Main options default to "none"
 
+- add_hydrogen
+  - Extended to support Nucleic Acids
+  - added option to keep canonical residue names
+### Bug Fixes
+- add_hydrogen
+  - Forced upper case for FF names
 ## v3.9.9 (2021.4)
 
 ### Bug Fixes
 - Remove pinned numpy dependency
-
-
-***
 
 ***
 ## v3.9.7 (2021.4)

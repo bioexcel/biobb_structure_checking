@@ -170,7 +170,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print(f'Input not valid ({opt_value})')
+                print(f'Input not valid or out of range ({opt_value})')
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 

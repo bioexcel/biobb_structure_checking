@@ -2917,7 +2917,7 @@ LOOP CLOSING EXPLICIT
 DONE
 R-ADENOSINE - with 5' - phosphate group and 3' - O(minus) group 
 
- A   INT     1
+ A    INT     1
  CORRECT OMIT DU   BEG
    0.0
    1   DUMM  DU    M    0  -1  -2    0.00      0.00      0.00       0.0000

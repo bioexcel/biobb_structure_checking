@@ -10,7 +10,10 @@ from urllib.request import urlcleanup
 
 from Bio.PDB.PDBList import PDBList
 
-MMB_URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
+ALT_SERVERS = {
+    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
+    'bsc': 'http://mdb-login.bsc.es/api/pdb'
+}
 
 class MMBPDBList(PDBList):
     """ 
@@ -39,25 +42,25 @@ class MMBPDBList(PDBList):
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
             MMB PDB API. Defaults to Biopython super() if standard server is used.
         """
-        if self.pdb_server != 'mmb':
+        if self.pdb_server not in ALT_SERVERS:
             return super().retrieve_pdb_file(
                 pdb_code, obsolete, pdir, file_format, overwrite
             )
 
         self._verbose = True
-
+        
         code = pdb_code.lower()
 
         if file_format in ('pdb', 'mmCif', 'xml'):
             if file_format == 'mmCif':
                 file_format = 'cif'
             if not biounit:
-                url = (MMB_URL_PREFIX + '/%s.%s' % (code, file_format))
+                url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
             else:
                 file_format = 'pdb'
-                url = (MMB_URL_PREFIX + '/%s_bn%s.pdb' % (code, biounit))
+                url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
         else:
-            print('Error: MMB Server: File format', file_format, 'not supported')
+            print(f'Error: MMB/BSC Server: File format {file_format} not supported')
             sys.exit(1)
         #Where does the final PDB file get saved?
         if pdir is None:
@@ -88,18 +91,18 @@ class MMBPDBList(PDBList):
         if not overwrite:
             if os.path.exists(final_file):
                 if self._verbose:
-                    print("Structure exists: '%s' " % final_file)
+                    print(f"Structure exists: '{final_file}' ")
                 return final_file
 
         # Retrieve the file
         if self._verbose:
             if biounit:
-                print("Downloading PDB structure '%s.%s'..." % (pdb_code, biounit))
+                print(f"Downloading PDB structure '{pdb_code}.{biounit}' from {self.pdb_server} ...")
             else:
-                print("Downloading PDB structure '%s'..." % pdb_code)
+                print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)
         except IOError:
-            print("Desired structure doesn't exists")
+            print(f"Desired structure doesn't exist at {self.pdb_server} server")
         return final_file

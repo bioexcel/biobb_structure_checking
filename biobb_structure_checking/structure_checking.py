@@ -2080,18 +2080,19 @@ class StructureChecking():
             split_models (bool): (False) Save models in separated output files
             keep_resnames (bool): (False) Keep canonical residue names        
         """
-        input_line = ParamInput(
+        output_structure_path = ParamInput(
             "Enter output structure path",
             self.args['non_interactive'],
             set_none='fixed_structure.pdb'
-        )
+        ).run(output_structure_path)
         
-        output_structure_path = input_line.run(output_structure_path)
         if self.args['output_format']:
             output_format = self.args['output_format']
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
-
+        
+        base_name = os.path.splitext(output_structure_path)[0]
+        
         if not split_models:
             self.strucm.save_structure(
                 output_structure_path, 
