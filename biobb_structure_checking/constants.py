@@ -343,7 +343,7 @@ DIALOGS.add_option('ca_only', '--fix', 'fix', 'Build a complete Protein model us
 AVAILABLE_METHODS = [
     'models', 'chains', 'inscodes', 'altloc', 'rem_hydrogen', 'add_hydrogen',
     'water', 'metals', 'ligands', 'getss', 'amide', 'chiral', 'chiral_bck',
-    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences', 'ca_only']
+    'fixside', 'backbone', 'cistransbck', 'clashes', 'sequences']
 
 MSGS = {
     #management
