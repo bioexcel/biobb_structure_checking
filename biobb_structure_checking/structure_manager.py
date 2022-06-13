@@ -1183,15 +1183,59 @@ class StructureManager:
                     'model_st',
                     mod_mgr.tmpdir + "/" + model_pdb['name']
                 )
-                modif_set_residues = self.merge_structure(
-                    sequence_data,
-                    model_st,
-                    mod.id,
-                    ch_id,
-                    None,
-                    sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
-                    extra_gap
-                )
+                offset =  sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start
+
+                spimp = Superimposer()
+
+                list_res = self.st[mod.id][ch_id].get_list()
+
+                modif_residues = []
+                # Superimposes structures using fragments at both sides of the gap
+                fixed_ats = []
+                moving_ats = []
+
+                #checking whether there is a chain id in the model (Support for Modeller >= 10)
+                new_ch_id = model_st[0].child_list[0].id
+                
+                start_0 = list_res[0].id[1]
+                end_0 = list_res[len(list_res) - 1].id[1]
+                print(start_0, offset)
+                start_1 = start_0 - offset + 1
+                end_1 = end_0 - offset + 1
+
+                for nres in range(start_0, end_0):
+                    mod_nres = nres - offset + 1
+                    if nres in self.st[mod.id][ch_id] and mod_nres in model_st[0][new_ch_id]:
+                        fixed_ats.append(self.st[mod.id][ch_id][nres]['CA'])
+                        moving_ats.append(model_st[0][new_ch_id][mod_nres]['CA'])
+
+                for nres in range(start_1, end_1):
+                    mod_nres = nres - offset + 1
+                    if nres in self.st[mod.id][ch_id] and\
+                        'CA' in self.st[mod.id][ch_id][nres] and\
+                        mod_nres in model_st[0][new_ch_id]:
+                        fixed_ats.append(self.st[mod.id][ch_id][nres]['CA'])
+                        moving_ats.append(model_st[0][new_ch_id][mod_nres]['CA'])
+
+                moving_ats = moving_ats[:len(fixed_ats)]
+                spimp.set_atoms(fixed_ats, moving_ats)
+                spimp.apply(model_st.get_atoms())
+
+                res_pairs = []
+                for nres in range(start_0, end_0):
+                    res_pairs.append([nres, nres - offset + 1])
+                pos = 0
+                for res_pair in res_pairs:
+                    nres, mod_nres = res_pair
+                    if nres in self.st[mod.id][ch_id]:
+                        self.remove_residue(self.st[mod.id][ch_id][nres], update_int=False)
+
+                    res = model_st[0][new_ch_id][mod_nres].copy()
+                    res.id = (' ', nres, ' ')
+                    self.st[mod.id][ch_id].insert(pos, res)
+                    pos += 1
+           
+           
         return None
 
     def run_modeller(
@@ -1274,44 +1318,48 @@ class StructureManager:
 
         modif_residues = []
 
-        for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id]['frgs']) - 1):
-            loc_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[0].location
-            loc_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[0].location
-            seq_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
-            seq_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
+        if brk_list is not None:
+            for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id]['frgs']) - 1):
+                loc_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[0].location
+                loc_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[0].location
+                seq_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
+                seq_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
 
-            gap_start = loc_i.end
-            gap_end = loc_ii.start
-            # Gap length taken from sequence gap to avoid PDB numbering issues
-            gap_length = seq_ii.start - seq_i.end - 1
-            # Offset to account for breaks in PDB residue numbering
-            seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
+                gap_start = loc_i.end
+                gap_end = loc_ii.start
+                # Gap length taken from sequence gap to avoid PDB numbering issues
+                gap_length = seq_ii.start - seq_i.end - 1
+                # Offset to account for breaks in PDB residue numbering
+                seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
 
-            if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
-                #Checking for incomplete gap build needed for fixing side chains with rebuild
-                n_br = 0
-                while n_br < len(brk_list) - 1 and \
-                        (self.st[mod_id][ch_id][gap_start] != brk_list[n_br][0]) and\
-                        (self.st[mod_id][ch_id][gap_end] != brk_list[n_br][1]):
-                    n_br += 1
-                if self.st[mod_id][ch_id][gap_start] == brk_list[n_br][0] or\
-                        self.st[mod_id][ch_id][gap_end] == brk_list[n_br][1]:
-                    # adjusting gap ends to existint residues
-                    gap_start = brk_list[n_br][0].id[1]
-                    while gap_start not in self.st[mod_id][ch_id]:
-                        gap_start += 1
+                if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
+                    #Checking for incomplete gap build needed for fixing side chains with rebuild
+                    n_br = 0
+                    while n_br < len(brk_list) - 1 and \
+                            (self.st[mod_id][ch_id][gap_start] != brk_list[n_br][0]) and\
+                            (self.st[mod_id][ch_id][gap_end] != brk_list[n_br][1]):
+                        n_br += 1
+                    if self.st[mod_id][ch_id][gap_start] == brk_list[n_br][0] or\
+                            self.st[mod_id][ch_id][gap_end] == brk_list[n_br][1]:
+                        # adjusting gap ends to existint residues
+                        gap_start = brk_list[n_br][0].id[1]
+                        while gap_start not in self.st[mod_id][ch_id]:
+                            gap_start += 1
 
-                    gap_end = brk_list[n_br][1].id[1]
-                    while gap_end not in self.st[mod_id][ch_id]:
-                        gap_end -= 1
+                        gap_end = brk_list[n_br][1].id[1]
+                        while gap_end not in self.st[mod_id][ch_id]:
+                            gap_end -= 1
 
-                    extra_gap = 0
-                else:
-                    continue
-
-            print('Fixing {} - {}'.format(
-                mu.residue_id(self.st[mod_id][ch_id][gap_start]),
-                mu.residue_id(self.st[mod_id][ch_id][gap_end])))
+                        extra_gap = 0
+                    else:
+                        continue
+            
+                print('Fixing {} - {}'.format(
+                    mu.residue_id(self.st[mod_id][ch_id][gap_start]),
+                    mu.residue_id(self.st[mod_id][ch_id][gap_end])))
+            else:
+                loc_i.start = list_res[0] 
+                loc_i.end = list_res[len(list_res)]
 
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []

@@ -277,7 +277,7 @@ class SequenceData():
 
                 seq += frag.seq
                 last_pos = frag.features[0].location.end
-            # Consider case muntations is none
+            # Consider case mutations is none on ca_only
             if mutations is not None:
                 for mut_set in mutations.mutation_list:
                     for mut in mut_set.mutations:
