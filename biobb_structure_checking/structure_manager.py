@@ -1230,10 +1230,11 @@ class StructureManager:
                     if nres in self.st[mod.id][ch_id]:
                         self.remove_residue(self.st[mod.id][ch_id][nres], update_int=False)
 
-                    res = model_st[0][new_ch_id][mod_nres].copy()
-                    res.id = (' ', nres, ' ')
-                    self.st[mod.id][ch_id].insert(pos, res)
-                    pos += 1
+                    if mod_nres in model_st[0][new_ch_id]:
+                        res = model_st[0][new_ch_id][mod_nres].copy()
+                        res.id = (' ', nres, ' ')
+                        self.st[mod.id][ch_id].insert(pos, res)
+                        pos += 1
            
            
         return None
