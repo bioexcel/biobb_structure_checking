@@ -14,7 +14,11 @@
         "O" : 1.66
     },
     "residue_data": {
-        "*": {"H": "HN", "H1" : "HN", "H2" : "HN", "H3" : "HN", "HO2'": "HO", "HO3'": "HO", "HO5'":"HO"},
+        "*": {
+		"protein": {"H": "HN", "H1" : "HN", "H2" : "HN", "H3" : "HN"},
+		"dna": {"HO3'": "HO", "HO5'":"HO"},
+		"rna": {"HO2'": "HO", "HO3'": "HO", "HO5'":"HO"}
+             },
         "ACE": {},
         "NME": {"H": "HN"},
         "ALA": {},

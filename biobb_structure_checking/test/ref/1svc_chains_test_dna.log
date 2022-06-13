@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+=                   BioBB structure checking utility v3.9.10                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
@@ -24,7 +24,6 @@ Running chains. Options: --select dna
 2 Chain(s) detected
  D: DNA
  P: Protein
-Warning: No backbone atoms defined
 Selecting chain(s) dna
 Final Num. models: 1
 Final Num. chains: 1 (D: DNA)
