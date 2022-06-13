@@ -1994,10 +1994,12 @@ class StructureChecking():
     def _ca_only_check(self):
         if self.strucm.ca_only:
             print("Number of atoms compatible with CA-Only model")
-            fix_data = True
+            fix_data = self.strucm.check_ca_only()
         else:
             print("The number and atom distribution is not compatible with a CA-only model")
             fix_data = False
+        if fix_data:
+            print("CA-Only model confirmed")
         return fix_data
 
     def _ca_only_fix(self, opts, fix_data=False):

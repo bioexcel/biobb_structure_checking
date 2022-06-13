@@ -539,6 +539,13 @@ class StructureManager:
 
         return missing
 
+    def check_ca_only(self):
+        for ch_id in self.chain_ids:
+            ca_only = True
+            for at in self.st[0].get_atoms():
+                ca_only = ca_only and (at.id == 'CA')
+        return ca_only
+
     def get_ion_res_list(self) -> List[Tuple[Residue, List[str]]]:
         """
             returns list of residues with potencial selection on adding H
