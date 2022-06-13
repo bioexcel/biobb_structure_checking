@@ -1045,7 +1045,6 @@ class StructureManager:
         self.atom_renumbering()
         self.modified = True
 
-
     def fix_backbone_chain(
             self,
             brk_list: Iterable[Atom],
@@ -1062,6 +1061,65 @@ class StructureManager:
         self.update_internals()
 
         return modeller_result
+
+    def fix_ca_only(self, modeller_key=''):
+        self.run_modeller_full(modeller_key=modeller_key)
+        self.update_internals()
+        self.modified = True
+
+    def run_modeller_full(
+            self,
+            modeller_key='',
+            extra_gap: int = 0,
+            extra_NTerm: int = 0
+        ):
+        """ Runs modeller """
+        # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
+        if modeller_key:
+            os.environ['KEY_MODELLER9v25'] = modeller_key
+        from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
+
+        mod_mgr = ModellerManager()
+
+        sequence_data = self.sequence_data
+        
+        if not sequence_data.has_canonical:
+            sequence_data.fake_canonical_sequence(self)
+
+        mod_mgr.sequences = sequence_data
+
+        for mod in self.st:
+            if self.has_models():
+                print('Processing Model {}'.format(mod.id + 1))
+                self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
+            else:
+                self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
+
+            for ch_id in self.chain_ids:
+                if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
+                    print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
+                print("Fixing chain/model {}/{}".format(ch_id, mod.id))
+                try:
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                except NoCanSeqError as e:
+                    print(e.message)
+                    continue
+
+                parser = PDBParser(PERMISSIVE=1)
+                model_st = parser.get_structure(
+                    'model_st',
+                    mod_mgr.tmpdir + "/" + model_pdb['name']
+                )
+                modif_set_residues = self.merge_structure(
+                    sequence_data,
+                    model_st,
+                    mod.id,
+                    ch_id,
+                    None,
+                    sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
+                    extra_gap
+                )
+        return None
 
     def run_modeller(
             self,

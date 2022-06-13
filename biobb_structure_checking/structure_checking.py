@@ -1988,7 +1988,7 @@ class StructureChecking():
 #        pass
     def ca_only(self, opts=None):
         """ Fix CA-Only protein building a possible model (Uses Modeller) """
-       self._run_method('ca_only', opts)
+        self._run_method('ca_only', opts)
 
     def _ca_only_check(self):
         if self.strucm.ca_only:
