@@ -159,7 +159,7 @@ class SequenceData():
         Args:
             strucm (StructureManager) : Object containing the loaded structure
         """
-        # PDB extrated sequences
+        # PDB extracted sequences
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -201,6 +201,7 @@ class SequenceData():
                                 seq += rn[1:]
                             else:
                                 seq += rn
+                        seq = Seq(seq)
 
                     sqr = SeqRecord(
                         seq,
@@ -340,7 +341,6 @@ class SequenceData():
                     pdb_seq = Seq(alin[0][1], IUPAC.protein)
                 else:
                     pdb_seq = Seq(alin[0][1])
-
                 seq = SeqRecord(
                     pdb_seq,
                     'pdb_sq_' + ch_id,
@@ -363,7 +363,6 @@ class SequenceData():
                     frags_num.append(
                         '{}-{}'.format(frag.features[0].location.start, frag.features[0].location.end)
                     )
-
                 seq = SeqRecord(
                     pdb_seq,
                     'pdb_sq_' + ch_id,
