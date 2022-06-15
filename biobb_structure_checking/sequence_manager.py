@@ -351,23 +351,18 @@ class SequenceData():
             else:
                 last_pos = 0
                 start_pos = 0
-                sequence = ''
+                pdb_seq = ''
                 frags_num = []
                 for frag in self.data[ch_id]['pdb'][0]['frgs']:
                     if not start_pos:
                         start_pos = frag.features[0].location.start
                     if last_pos:
-                        sequence += '-'*(frag.features[0].location.start - last_pos-1)
-                    sequence += frag.seq
+                        pdb_seq += '-'*(frag.features[0].location.start - last_pos-1)
+                    pdb_seq += frag.seq
                     last_pos = frag.features[0].location.end
                     frags_num.append(
                         '{}-{}'.format(frag.features[0].location.start, frag.features[0].location.end)
                     )
-
-                if has_IUPAC:
-                    pdb_seq = Seq(sequence, IUPAC.protein)
-                else:
-                    pdb_seq = Seq(sequence)
 
                 seq = SeqRecord(
                     pdb_seq,
