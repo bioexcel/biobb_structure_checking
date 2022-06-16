@@ -26,7 +26,7 @@ except ImportError:
     has_IUPAC = False
 
 TMP_BASE_DIR = '/tmp'
-DEBUG = False
+DEBUG = True
 
 class ModellerManager():
     """ 
@@ -141,6 +141,8 @@ class ModellerManager():
     def __del__(self):
         if not DEBUG:
             shutil.rmtree(self.tmpdir)
+        else:
+            print(self.tmpdir)
 
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(

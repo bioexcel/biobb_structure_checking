@@ -167,7 +167,7 @@ class SequenceData():
                 ch_id = chn.id
                 wrong_order = False
                 if strucm.chain_ids[ch_id] == mu.PROTEIN:
-                    frags = ppb.build_peptides(chn)
+                    frags = ppb.build_peptides(chn) # Does not work for CA_Only models
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                     if not frags[0]: #TODO patched for a Weird case where a second model lacks a chain
