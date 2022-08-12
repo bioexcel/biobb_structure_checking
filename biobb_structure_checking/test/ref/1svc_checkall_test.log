@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
 Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
@@ -8,7 +8,7 @@ Warning: sequence features only available in mmCIF format or with external fasta
 Structure pdb:1svc.1 loaded
  Title: nfkb p50 homodimer bound to dna
  Experimental method: x-ray diffraction
- Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, dna, transcription-dna complex
  Resolution (A): N.A.
  Biounit no. 1
 
@@ -16,6 +16,7 @@ Structure pdb:1svc.1 loaded
  Num. chains: 2 (D: DNA, P: Protein)
  Num. residues:  786
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  126
  Num. ligands or modified residues:  0
  Num. water mol.:  126

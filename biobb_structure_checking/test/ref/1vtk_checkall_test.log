@@ -1,6 +1,6 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
@@ -16,6 +16,7 @@ Structure pdb:1vtk.1 loaded
  Num. chains: 1 (A: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  108
  Num. ligands or modified residues:  4
  Num. water mol.:  104
