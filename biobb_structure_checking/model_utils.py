@@ -248,6 +248,7 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     prot = 0.
     dna = 0.
     rna = 0.
+    other = 0.
     total = 0.
     for res in chn.get_residues():
         if is_wat(res):
@@ -268,17 +269,18 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
         dna = dna / total
         rna = rna / total
         other = 1. - prot - dna - rna
-
         if prot > thres or prot > dna + rna + other:
-            return PROTEIN
+            type = PROTEIN 
         elif dna > thres or dna > prot + rna + other:
-            return DNA
+            type = DNA
         elif rna > thres or rna > prot + dna + other:
-            return RNA
-        return [prot, dna, rna, other]
+            type = RNA
+        else:
+            type = UNKNOWN
 
-    return ALLWAT
+    return {'type': type, 'details': {'Prt': prot, 'DNA': dna, 'RNA': rna, 'Oth': other}}
 
+    
 #===============================================================================
 def check_chiral_residue(res, chiral_data):
     """

@@ -348,7 +348,7 @@ class StructureManager:
         # num_ats should be much larger than num_res
         # waters removed
         # Taking polyGly as a lower limit
-        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat)*4
+        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat) * 4
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -649,8 +649,8 @@ class StructureManager:
             'nmodels': self.nmodels,
             'models_type': self.models_type,
             'nchains': len(self.chain_ids),
-            'chain_ids': self.chain_ids,
-            'chain_details' : self.chain_details,
+            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.chain_ids.items()},
+            'chain_guess_details' : self.chain_details,
             'num_res': self.num_res,
             'num_ats': self.num_ats,
             'res_insc': self.res_insc,
@@ -737,8 +737,9 @@ class StructureManager:
         """ Print chains info """
         chids = []
         for ch_id in sorted(self.chain_ids):
-            if ch_id in self.chain_details:
-                chids.append('{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
+            if self.chain_ids == mu.UNKNOWN:
+                chids.append(
+                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
                     ch_id, g=self.chain_details[ch_id]))
             else:
                 chids.append(
@@ -746,7 +747,9 @@ class StructureManager:
                         ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
                     )
                 )
+  
         print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
+
 
     def print_stats(self, prefix='') -> None:
         """
@@ -924,13 +927,9 @@ class StructureManager:
             if not self.biounit and chn.get_parent().id > 0:
                 continue
             guess = mu.guess_chain_type(chn)
-            if isinstance(guess, list):
-                self.chain_ids[chn.id] = mu.UNKNOWN
-                if chn.id not in self.chain_details:
-                    self.chain_details[chn.id] = guess
-            else:
-                self.chain_ids[chn.id] = guess
-
+            self.chain_ids[chn.id] = guess['type']
+            self.chain_details[chn.id] = guess['details']
+            
     def has_NA(self):
         """ Checks if any of the chains is NA"""
         has_NA = False
