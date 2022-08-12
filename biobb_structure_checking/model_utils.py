@@ -263,7 +263,7 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             dna += 1
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
-
+    type = ALLWAT
     if total > 0.:
         prot = prot / total
         dna = dna / total
@@ -278,7 +278,7 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
         else:
             type = UNKNOWN
 
-    return {'type': type, 'details': {'Prt': prot, 'DNA': dna, 'RNA': rna, 'Oth': other}}
+    return {'type': type, 'details': {'Protein': prot, 'DNA': dna, 'RNA': rna, 'Other': other}}
 
     
 #===============================================================================
@@ -460,7 +460,7 @@ def get_residues_with_H(struc):
             if atm.element == 'H':
                 has_h += 1
         if has_h:
-            resh_list.append({'r':res, 'n_h':has_h})
+            resh_list.append({'r':res, 'num_h':has_h})
     return resh_list
 
 

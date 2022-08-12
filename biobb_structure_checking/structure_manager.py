@@ -342,7 +342,7 @@ class StructureManager:
             self.num_ats += len(res.get_list())
         self.res_ligands = self.res_hetats - self.num_wat
         for pair in mu.get_residues_with_H(self.st):
-            self.res_h =+ 1
+            self.res_h += 1
             self.num_h += pair['num_h']
         # Detecting whether it is a CA-only structure
         # num_ats should be much larger than num_res
