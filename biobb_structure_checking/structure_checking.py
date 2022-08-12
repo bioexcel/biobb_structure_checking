@@ -651,7 +651,7 @@ class StructureChecking():
             if atm.id not in fix_data['at_groups']:
                 fix_data['at_groups'][atm.id] = []
             fix_data['at_groups'][atm.id].append(atm)
-            self.summary['metals']['detected'].append(mu.residue_num(res))
+            self.summary['metals']['detected'].append(mu.residue_id(res))
 
         return fix_data
 
