@@ -329,6 +329,8 @@ class StructureManager:
         self.res_hetats = 0
         self.num_wat = 0
         self.res_insc = 0
+        self.num_h = 0
+        self.res_h = 0 
         for res in self.st.get_residues():
             self.num_res += 1
             if mu.is_wat(res):
@@ -339,6 +341,9 @@ class StructureManager:
                 self.res_insc += 1
             self.num_ats += len(res.get_list())
         self.res_ligands = self.res_hetats - self.num_wat
+        for pair in mu.get_residues_with_H(self.st):
+            self.res_h =+ 1
+            self.num_h += pair['num_h']
         # Detecting whether it is a CA-only structure
         # num_ats should be much larger than num_res
         # waters removed
@@ -654,7 +659,9 @@ class StructureManager:
             'num_wat': self.num_wat,
             'ca_only': self.ca_only,
             'biounit': self.biounit,
-            'total_charge': self.total_charge
+            'total_charge': self.total_charge,
+            'res_h': self.res_h,
+            'num_h': self.num_h
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
@@ -754,6 +761,10 @@ class StructureManager:
 
         print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
         print('{} Num. residues with ins. codes:  {}'.format(prefix, stats['res_insc']))
+        if stats['num_h']:
+            print('{} Num. residues with H atoms: {} (total {} H atoms)'.format(prefix, stats['res_h'], stats['num_h']))
+        else:
+            print('{} Num. residues with H atoms: {}'.format(prefix, stats['res_h']))
         print('{} Num. HETATM residues:  {}'.format(prefix, stats['res_hetats']))
         print('{} Num. ligands or modified residues:  {}'.format(prefix, stats['res_ligands']))
         print('{} Num. water mol.:  {}'.format(prefix, stats['num_wat']))
