@@ -25,7 +25,7 @@ def header():
     return BANNER.format(cts.VERSION)
 
 def main():
-    """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""
+    """ Command-line version of BioBB's structure checking facility"""
 
     base_dir_path = biobb_structure_checking.__path__[0]
     data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT_PATH)
