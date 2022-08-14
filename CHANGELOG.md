@@ -1,3 +1,8 @@
+## v3.9.11 (2021.4)
+
+### New Functions
+- Support for PDBQT files
+
 ## v3.9.10 (2021.4)
 
 ### New Functions

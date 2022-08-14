@@ -1,5 +1,5 @@
 ===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
+=                   BioBB structure checking utility v3.9.11                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
 ===============================================================================
 
@@ -15,6 +15,7 @@ Structure pdb:1svc loaded
  Num. chains: 2 (D: DNA, P: Protein)
  Num. residues:  393
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  63
  Num. ligands or modified residues:  0
  Num. water mol.:  63
@@ -205,6 +206,7 @@ Final Num. models: 1
 Final Num. chains: 1 (P: Protein)
 Final Num. residues:  311
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 311 (total 2455 H atoms)
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0

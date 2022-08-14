@@ -431,7 +431,8 @@ class StructureChecking():
                         ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]
                     )
                 )
-        self.summary['chains'] = {'ids':self.strucm.chain_ids}
+        self.summary['chains'] = {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.strucm.chain_ids.items()}
+        
         return len(self.strucm.chain_ids) > 1
 
     def _chains_fix(self, opts, fix_data=None):
@@ -652,7 +653,7 @@ class StructureChecking():
             if atm.id not in fix_data['at_groups']:
                 fix_data['at_groups'][atm.id] = []
             fix_data['at_groups'][atm.id].append(atm)
-            self.summary['metals']['detected'].append(mu.residue_num(res))
+            self.summary['metals']['detected'].append(mu.residue_id(res))
 
         return fix_data
 
