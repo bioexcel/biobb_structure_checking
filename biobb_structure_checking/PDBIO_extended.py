@@ -1,13 +1,13 @@
 """ Extension for PDBIO to include additional output formats"""
-import sys
+#import sys
 
 from Bio.PDB.PDBIO import PDBIO
 from Bio.Data.IUPACData import atom_weights
 
-_ATOM_FORMAT_STRING =       ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
+_ATOM_FORMAT_STRING = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
 _ATOM_FORMAT_STRING_PDBQT = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f    %6.3f %s\n")
-_ATOM_FORMAT_STRING_PQR =   ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
-_ATOM_FORMAT_STRING_CMIP =  ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%8s  %-5s%s%s\n")
+_ATOM_FORMAT_STRING_PQR = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%s%6.2f      %4s%2s\n")
+_ATOM_FORMAT_STRING_CMIP = ("%s%5i %-4s%c%3s %c%4i%c   %8.3f%8.3f%8.3f%8s  %-5s%s%s\n")
 
 
 class PDBIO_extended(PDBIO):
@@ -18,7 +18,7 @@ class PDBIO_extended(PDBIO):
 
     def _get_atom_line(
             self,
-            atom, 
+            atom,
             hetfield,
             segid,
             atom_number,
@@ -75,26 +75,26 @@ class PDBIO_extended(PDBIO):
                 )
         # Added charges (from res_library and atom_types from data_library)
         # Format PDBQT for Autodock
-        
+
         if atom.pqr_charge is not None and self.output_format != 'pdb':
             if self.output_format == 'pdbqt':
                 charge = atom.pqr_charge
-                element = atom.xtra['atom_type']                
-                format = _ATOM_FORMAT_STRING_PDBQT
+                element = atom.xtra['atom_type']
+                line_format = _ATOM_FORMAT_STRING_PDBQT
             elif self.output_format == 'pqr':
                 occupancy_str = "%6.2f" % atom.pqr_charge
                 bfactor = atom.radius
-                format = _ATOM_FORMAT_STRING_PQR
+                line_format = _ATOM_FORMAT_STRING_PQR
             elif self.output_format == 'cmip':
                 occupancy_str = "%8.4f" % atom.pqr_charge
                 bfactor = atom.xtra['atom_type']
                 element = "  "
-                format = _ATOM_FORMAT_STRING_CMIP
+                line_format = _ATOM_FORMAT_STRING_CMIP
             else:
                 print("Unknown output format, writing standard PDB")
-                format = _ATOM_FORMAT_STRING
+                line_format = _ATOM_FORMAT_STRING
         else:
-            format = _ATOM_FORMAT_STRING
+            line_format = _ATOM_FORMAT_STRING
 
         args = (
             record_type,
@@ -113,7 +113,7 @@ class PDBIO_extended(PDBIO):
             charge,
             element
         )
-        line = format % args
+        line = line_format % args
 
         # Support for 4 letter residue names (terminals)
         if len(resname) == 4:

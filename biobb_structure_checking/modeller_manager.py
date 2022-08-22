@@ -1,22 +1,22 @@
-""" 
+"""
     Module to handle an interface to modeller, used to rebuild main and side chains and to optimize side chain orientation
 """
 
 import sys
 import os
+from os.path import join as opj
 import uuid
 import shutil
-from os.path import join as opj
 
 from Bio import SeqIO, pairwise2
-from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
 
 try:
-    from modeller import *
-    from modeller.automodel import *
-except:
-    sys.exit("Error importing modeller")
+    from modeller import Environ, log
+    from modeller.automodel import automodel, assess
+except ImportError:
+    sys.exit("Error importing Modeller package")
 
 # Check for back-compatiblity with biopython < 1.77
 try:
@@ -29,7 +29,7 @@ TMP_BASE_DIR = '/tmp'
 DEBUG = False
 
 class ModellerManager():
-    """ 
+    """
     | modeller_manager ModellerManager
     | Class to handle Modeller calculations """
     def __init__(self):
@@ -55,7 +55,7 @@ class ModellerManager():
     def build(self, target_model, target_chain, extra_NTerm_res):
         """ ModellerManager.build
         Prepare Modeller input and builds the model
-        
+
         Args:
             target_model (int) : Model to repair
             target_chain (str) : Chain to repair
@@ -158,7 +158,7 @@ def _write_alin(tgt_seq, templs, alin_file):
     )
 
 class NoCanSeqError(Exception):
-    """ 
+    """
     | modeller_manager NoCanSeqError
     | Error raised when no canonical sequence exists
     """

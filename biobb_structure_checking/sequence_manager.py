@@ -3,27 +3,27 @@
 import sys
 from typing import List, Dict
 
-from Bio.PDB.Polypeptide import PPBuilder, Polypeptide
+from Bio import pairwise2, SeqIO
+from Bio.PDB.Polypeptide import PPBuilder
 from Bio.Seq import Seq, MutableSeq
 #Deprecated in Biopython 1.78
 #from Bio.Seq import IUPAC
-from Bio.SeqUtils import IUPACData
-from Bio import pairwise2, SeqIO
-from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature, FeatureLocation
-import biobb_structure_checking.model_utils as mu
-
-# Check for back-compatiblity with biopython < 1.77
 try:
     from Bio.Seq import IUPAC
     has_IUPAC = True
 except ImportError:
     has_IUPAC = False
+from Bio.SeqUtils import IUPACData
+from Bio.SeqRecord import SeqRecord
+from Bio.SeqFeature import SeqFeature, FeatureLocation
+import biobb_structure_checking.model_utils as mu
+
+# Check for back-compatibility with biopython < 1.77
 
 class SequenceData():
-    """ 
+    """
     | sequence_manager SequenceData
-    | Class to manage sequence data 
+    | Class to manage sequence data
     """
     def __init__(self):
         self.data = {}
@@ -32,8 +32,8 @@ class SequenceData():
 
     def add_empty_chain(self, ch_id: str):
         """ SequenceData.add_empty_chain
-        Add base structure for a new chain 
-        
+        Add base structure for a new chain
+
         Args:
             ch_id (str) : Id of the new chain
         """
@@ -46,7 +46,7 @@ class SequenceData():
     def load_sequence_from_fasta(self, fasta_sequence_path):
         """ SequenceData.load_sequence_from_fasta
         Load canonical sequence from external FASTA file
-        
+
         Args:
             fasta_sequence_path (str) : Path to FASTA file
         """
@@ -66,7 +66,7 @@ class SequenceData():
     def read_sequences(self, strucm, clean=True, cif_warn=False):
         """ SequenceData.read_sequences
         Extracts sequences from input data
-        
+
         Args:
             strucm (StructureManager) : Object containing loaded structure
             clean (bool) : (True) Clean existing sequence data
@@ -85,7 +85,7 @@ class SequenceData():
     def read_canonical_seqs(self, strucm, cif_warn):
         """ SequenceData.read_canonical_seqs
         Prepare canonical sequences from the available input
-        
+
         Args:
             strucm (StructureManager) : Object containing the loaded structure
             cif_warn (bool) : Issue a warning when structure is not CIF
@@ -155,7 +155,7 @@ class SequenceData():
     def read_structure_seqs(self, strucm):
         """ SequenceData.read_structure_seqs
         Extract sequence from structure fragments
-        
+
         Args:
             strucm (StructureManager) : Object containing the loaded structure
         """
@@ -251,7 +251,7 @@ class SequenceData():
     def fake_canonical_sequence(self, strucm, mutations):
         """ SequenceData.fake_canonical_sequence
         Fakes a canonical sequence to support modeller use in fixside and mutateside --rebuild
-        
+
         Args:
             strucm (StructureManager) : Object containing the loaded structure
             mutations (MutationsManager) : Object containing the list of mutations to perform

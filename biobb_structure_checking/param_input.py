@@ -47,7 +47,7 @@ class ParamInput():
             'list2':list2
         })
 
-    
+
     def add_option_numeric(self, label, opt_list, opt_type, min_val, max_val, multiple=False):
         """ Add a numeric option to dialog """
         self.options.append({
@@ -66,8 +66,9 @@ class ParamInput():
             'type':input,
         })
     def set_default(self, value):
+        """ Set default value for parameter"""
         self.default = value
-        
+
     def _build_dialog(self):
         if not self.options:
             return self.prefix + ': '
@@ -136,7 +137,7 @@ class ParamInput():
                     opt_val = float(val)
                     if opt['type'] == "int":
                         opt_val = int(val)
-                    ok = ok and (opt_val >= opt['min']) and (opt_val <= opt['max'])
+                    ok = ok and (opt['min'] <= opt_val <= opt['max'])
                 input_ok = ok
             if not input_ok:
                 iopt += 1
@@ -242,11 +243,7 @@ class Dialog():  #To check subparsers from argparse
         return command in self.options
 
 #===============================================================================
-class Error(Exception):
-    """ Base class """
-    pass
-
-class NoDialogAvailableError(Error):
+class NoDialogAvailableError(Exception):
     """ Error on no Dialog available for **command**"""
     def __init__(self, command):
         self.message = 'ERROR: no dialog available for {}'.format(command)

@@ -23,7 +23,7 @@ class JSONWriter:
     def append_data(self, array_element, val):
         """ JSONWriter.append_data
         Append item to array
-        
+
         Args:
             array_element(str) : Array to modify
             val (mixed) : Added value
@@ -41,7 +41,7 @@ class JSONWriter:
     def save(self, file):
         """ JSONWrite.save
         Save json data
-        
+
         Args:
             file (str) : Path to output file
         """
