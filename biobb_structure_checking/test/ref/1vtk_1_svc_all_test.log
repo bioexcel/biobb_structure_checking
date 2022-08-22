@@ -1,7 +1,7 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input

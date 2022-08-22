@@ -1,7 +1,7 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
@@ -21,58 +21,58 @@ Structure pdb:1ubq loaded
  Num. water mol.:  58
  Num. atoms:  660
 
-#DEBUG Memory used after structure load: 47.480469 MB 
+#DEBUG Memory used after structure load: 47.222656 MB 
 
 Step 1: models --select 1
 
 Running models. Options: --select 1
 1 Model(s) detected
 Single model found
-#DEBUG Memory used after models: 47.480469 MB 
+#DEBUG Memory used after models: 47.222656 MB 
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
 1 Chain(s) detected
  A: Protein
-#DEBUG Memory used after chains: 47.480469 MB 
+#DEBUG Memory used after chains: 47.222656 MB 
 
 Step 3: inscodes
 
 Running inscodes.
 No residues with insertion codes found
-#DEBUG Memory used after inscodes: 47.480469 MB 
+#DEBUG Memory used after inscodes: 47.222656 MB 
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
-#DEBUG Memory used after altloc: 47.480469 MB 
+#DEBUG Memory used after altloc: 47.222656 MB 
 
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN
 No metal ions found
-#DEBUG Memory used after metals: 47.480469 MB 
+#DEBUG Memory used after metals: 47.222656 MB 
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
 No ligands found
-#DEBUG Memory used after ligands: 47.480469 MB 
+#DEBUG Memory used after ligands: 47.222656 MB 
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
 58 Water molecules detected
 58 Water molecules removed
-#DEBUG Memory used after water: 47.480469 MB 
+#DEBUG Memory used after water: 47.363281 MB 
 
 Step 8: rem_hydrogen --remove Yes
 
 Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
-#DEBUG Memory used after rem_hydrogen: 47.480469 MB 
+#DEBUG Memory used after rem_hydrogen: 47.363281 MB 
 
 Step 9: amide --fix All
 
@@ -82,25 +82,25 @@ Running amide. Options: --fix All
 Amide residues fixed All (1)
 Rechecking
 No unusual contact(s) involving amide atoms found
-#DEBUG Memory used after amide: 47.480469 MB 
+#DEBUG Memory used after amide: 47.363281 MB 
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
-#DEBUG Memory used after chiral: 47.480469 MB 
+#DEBUG Memory used after chiral: 47.363281 MB 
 
 Step 11: chiral_bck
 
 Running chiral_bck.
 No residues with incorrect backbone chirality found
-#DEBUG Memory used after chiral_bck: 47.480469 MB 
+#DEBUG Memory used after chiral_bck: 47.363281 MB 
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
-#DEBUG Memory used after fixside: 47.480469 MB 
+#DEBUG Memory used after fixside: 47.363281 MB 
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
@@ -112,20 +112,20 @@ Capping terminal ends
 True terminal residues:  A1,A76
 Nothing to do
 No caps added
-#DEBUG Memory used after backbone: 47.480469 MB 
+#DEBUG Memory used after backbone: 47.363281 MB 
 
 Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
-#DEBUG Memory used after cistransbck: 47.480469 MB 
+#DEBUG Memory used after cistransbck: 47.363281 MB 
 
 Step 15: getss --mark All
 
 Running getss. Options: --mark All
 No SS bonds detected
-#DEBUG Memory used after getss: 47.480469 MB 
+#DEBUG Memory used after getss: 47.363281 MB 
 
 Step 16: clashes
 
@@ -137,20 +137,20 @@ No apolar clashes detected
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
-#DEBUG Memory used after clashes: 47.480469 MB 
+#DEBUG Memory used after clashes: 47.363281 MB 
 
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
 No ligands found
-#DEBUG Memory used after ligands: 47.480469 MB 
+#DEBUG Memory used after ligands: 47.363281 MB 
 
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
 1 Chain(s) detected
  A: Protein
-#DEBUG Memory used after chains: 47.480469 MB 
+#DEBUG Memory used after chains: 47.363281 MB 
 
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
@@ -165,12 +165,12 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-#DEBUG Memory used after fixside: 47.480469 MB 
+#DEBUG Memory used after fixside: 47.363281 MB 
 Selection: auto
 Replacing HIS A68 by HIE
 Updating partial charges and atom types
 Total assigned charge:      -0.00
-#DEBUG Memory used after add_hydrogen: 48.238281 MB 
+#DEBUG Memory used after add_hydrogen: 47.902344 MB 
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
@@ -185,50 +185,50 @@ Total charge -0.000
 Structure saved on 1ubq_all_test_debug.pdb
 #DEBUG TIMINGS
 #DEBUG =======
-#DEBUG load           :     0.1599 s ( 16.35%)
-#DEBUG models         :     0.0009 s (  0.09%)
+#DEBUG load           :     0.1782 s ( 11.31%)
+#DEBUG models         :     0.0196 s (  1.24%)
 #DEBUG chains         :     0.0001 s (  0.01%)
-#DEBUG inscodes       :     0.0002 s (  0.02%)
-#DEBUG altloc         :     0.0004 s (  0.04%)
-#DEBUG metals         :     0.0010 s (  0.11%)
-#DEBUG ligands        :     0.0002 s (  0.02%)
-#DEBUG water          :     0.0142 s (  1.45%)
-#DEBUG rem_hydrogen   :     0.0004 s (  0.04%)
-#DEBUG amide          :     0.1184 s ( 12.11%)
-#DEBUG chiral         :     0.0013 s (  0.14%)
-#DEBUG chiral_bck     :     0.0042 s (  0.43%)
-#DEBUG fixside        :     0.0007 s (  0.07%)
-#DEBUG backbone       :     0.0010 s (  0.11%)
-#DEBUG cistransbck    :     0.0112 s (  1.14%)
-#DEBUG getss          :     0.0005 s (  0.06%)
-#DEBUG clashes        :     0.6103 s ( 62.42%)
-#DEBUG ligands        :     0.0002 s (  0.02%)
+#DEBUG inscodes       :     0.0001 s (  0.01%)
+#DEBUG altloc         :     0.0003 s (  0.02%)
+#DEBUG metals         :     0.0011 s (  0.07%)
+#DEBUG ligands        :     0.0002 s (  0.01%)
+#DEBUG water          :     0.0157 s (  1.00%)
+#DEBUG rem_hydrogen   :     0.0002 s (  0.01%)
+#DEBUG amide          :     0.2016 s ( 12.80%)
+#DEBUG chiral         :     0.0018 s (  0.11%)
+#DEBUG chiral_bck     :     0.0076 s (  0.48%)
+#DEBUG fixside        :     0.0009 s (  0.06%)
+#DEBUG backbone       :     0.0016 s (  0.10%)
+#DEBUG cistransbck    :     0.0190 s (  1.21%)
+#DEBUG getss          :     0.0002 s (  0.02%)
+#DEBUG clashes        :     1.0434 s ( 66.25%)
+#DEBUG ligands        :     0.0002 s (  0.01%)
 #DEBUG chains         :     0.0001 s (  0.01%)
-#DEBUG fixside        :     0.0015 s (  0.15%)
-#DEBUG add_hydrogen   :     0.0430 s (  4.40%)
-#DEBUG TOTAL          :     0.9779 s
+#DEBUG fixside        :     0.0018 s (  0.12%)
+#DEBUG add_hydrogen   :     0.0698 s (  4.43%)
+#DEBUG TOTAL          :     1.5751 s
 
 #DEBUG MEMORY USAGE EVOLUTION
 #DEBUG ======================
-#DEBUG load           : 47.48 MB
-#DEBUG models         : 47.48 MB
-#DEBUG chains         : 47.48 MB
-#DEBUG inscodes       : 47.48 MB
-#DEBUG altloc         : 47.48 MB
-#DEBUG metals         : 47.48 MB
-#DEBUG ligands        : 47.48 MB
-#DEBUG water          : 47.48 MB
-#DEBUG rem_hydrogen   : 47.48 MB
-#DEBUG amide          : 47.48 MB
-#DEBUG chiral         : 47.48 MB
-#DEBUG chiral_bck     : 47.48 MB
-#DEBUG fixside        : 47.48 MB
-#DEBUG backbone       : 47.48 MB
-#DEBUG cistransbck    : 47.48 MB
-#DEBUG getss          : 47.48 MB
-#DEBUG clashes        : 47.48 MB
-#DEBUG ligands        : 47.48 MB
-#DEBUG chains         : 47.48 MB
-#DEBUG fixside        : 47.48 MB
-#DEBUG add_hydrogen   : 48.24 MB
+#DEBUG load           : 47.22 MB
+#DEBUG models         : 47.22 MB
+#DEBUG chains         : 47.22 MB
+#DEBUG inscodes       : 47.22 MB
+#DEBUG altloc         : 47.22 MB
+#DEBUG metals         : 47.22 MB
+#DEBUG ligands        : 47.22 MB
+#DEBUG water          : 47.36 MB
+#DEBUG rem_hydrogen   : 47.36 MB
+#DEBUG amide          : 47.36 MB
+#DEBUG chiral         : 47.36 MB
+#DEBUG chiral_bck     : 47.36 MB
+#DEBUG fixside        : 47.36 MB
+#DEBUG backbone       : 47.36 MB
+#DEBUG cistransbck    : 47.36 MB
+#DEBUG getss          : 47.36 MB
+#DEBUG clashes        : 47.36 MB
+#DEBUG ligands        : 47.36 MB
+#DEBUG chains         : 47.36 MB
+#DEBUG fixside        : 47.36 MB
+#DEBUG add_hydrogen   : 47.90 MB
 Summary data saved on 1ubq_all_test_debug.json

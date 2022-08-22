@@ -1,7 +1,7 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
