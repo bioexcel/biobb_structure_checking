@@ -1,14 +1,14 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1svc.1 loaded
  Title: nfkb p50 homodimer bound to dna
  Experimental method: x-ray diffraction
- Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, dna, transcription-dna complex
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
  Resolution (A): N.A.
  Biounit no. 1
 
@@ -151,5 +151,16 @@ No severe clashes detected
 Running  check_only. Nothing else to do.
 Running sequences.
 Sequences command requires either mmCIF input or --sequence
+Structure sequence
+>pdb_sq_D Frags: 1-19
+AGATGGGGAATCCCCTAGA
+>pdb_sq_P Frags: 43-353
+PYLQILEQPKQRGFRFRYVAEGPSHGGLPGASSEKNKKSYPQVKICNYVGPAKVIVQLVT
+NGKNIHLHAHSLVGKHCEDGICTVTAGPKDMVVGFANLGILHVTKKKVFETLEARMTEAC
+IRGYNPGLLVHPDLAYLQAEGGGDRQLGDREKELIRQAALQQTKEMDLSVVRLMFTAFLP
+DSTGSFTRRLEPVVSDAIYDSKAPNASNLKIVRMDRTAGCVTGGEEIYLLCDKVQKDDIQ
+IRFYEEEENGGVWEGFGDFSPTDVHRQFAIVFKTPKYKDINITKPASVFVQLRRKSDLET
+SEPKPFLYYPE
+
 Running  check_only. Nothing else to do.
 Structure not modified, not saving. Override with --force_save

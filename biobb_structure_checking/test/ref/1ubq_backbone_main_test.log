@@ -1,7 +1,7 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure backbone_test/1ubq_caps.pdb loaded
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
@@ -56,14 +56,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg6 4.19.104-microsoft-standard x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-150300.59.76-default x86_64
 Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-<<<<<<< HEAD
-Job starting time (YY/MM/DD HH:MM:SS): 2022/03/03 16:35:31
-=======
-Job starting time (YY/MM/DD HH:MM:SS): 2022/08/12 20:41:32
->>>>>>> master
+Job starting time (YY/MM/DD HH:MM:SS): 2022/08/22 12:59:36
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

@@ -1,7 +1,7 @@
-===============================================================================
+================================================================================
 =                   BioBB structure checking utility v3.9.11                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
@@ -16,10 +16,7 @@ Structure pdb:1vtk.1 loaded
  Num. chains: 1 (A: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
-<<<<<<< HEAD
-=======
  Num. residues with H atoms: 0
->>>>>>> master
  Num. HETATM residues:  108
  Num. ligands or modified residues:  4
  Num. water mol.:  104
@@ -197,11 +194,8 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-<<<<<<< HEAD
 Warning: unknown residue CSER
 Warning: unknown residue CGLY
-=======
->>>>>>> master
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A58 by HIE
@@ -219,10 +213,7 @@ Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  313
 Final Num. residues with ins. codes:  0
-<<<<<<< HEAD
-=======
 Final Num. residues with H atoms: 313 (total 2416 H atoms)
->>>>>>> master
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
