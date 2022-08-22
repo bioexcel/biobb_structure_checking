@@ -2,6 +2,8 @@
 
 ### New Functions
 - Support for PDBQT files
+- add_hydrogen
+  - Multiple charge sets accepted (currently ADP, CMIP)
 
 ## v3.9.10 (2021.4)
 
@@ -15,9 +17,6 @@
   - Superimpose current models
   - Output models as multiple PDB files
 
-- backbone
-  - Accept standard FASTA files as sequence input
-  - Accept multiple templates
 ### Bug Fixes
 
 ## v3.9.9 (2021.4)
