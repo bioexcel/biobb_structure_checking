@@ -116,7 +116,7 @@
    "negative": [],
    "polar_acceptor": [
     {
-     "at1": "CSER A149.OXT",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     }
@@ -133,8 +133,8 @@
     "OXT"
    ],
    "fixed": [
-    "CSER A149",
-    "CGLY A264"
+    "SER A149",
+    "GLY A264"
    ],
    "selected": "All"
   },
@@ -178,7 +178,7 @@
      "dist": 3.0609
     },
     {
-     "at1": "CSER A149.OXT",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     },
@@ -236,8 +236,8 @@
   "chain_guess_details": {
    "A": {
     "DNA": 0.0,
-    "Other": 0.006389776357827448,
-    "Protein": 0.9936102236421726,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    }
   },
@@ -305,8 +305,8 @@
   "chain_guess_details": {
    "A": {
     "DNA": 0.0,
-    "Other": 0.006389776357827448,
-    "Protein": 0.9936102236421726,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    }
   },

@@ -3,6 +3,7 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
+1 http://mmb.irbbarcelona.org/api/pdb/2ki5_bn1.pdb
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:2ki5.1 loaded
