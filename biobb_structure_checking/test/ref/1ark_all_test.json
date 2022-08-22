@@ -43,9 +43,7 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "ids": {
-   "A": 1
-  }
+  "A": "Protein"
  },
  "chiral": {
   "n_chirals": 9,
@@ -105,16 +103,25 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 905,
+  "num_h": 442,
   "num_res": 60,
   "num_wat": 0,
+  "res_h": 60,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
@@ -155,9 +162,16 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": {
    "rmsd": 35.0317,
@@ -166,8 +180,10 @@
   "nchains": 1,
   "nmodels": 15,
   "num_ats": 13575,
+  "num_h": 6630,
   "num_res": 900,
   "num_wat": 0,
+  "res_h": 900,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,

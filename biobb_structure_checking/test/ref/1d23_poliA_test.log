@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
 Structure pdb:1d23 loaded
@@ -15,6 +15,7 @@ Structure pdb:1d23 loaded
  Num. chains: 2 (A: DNA, B: DNA)
  Num. residues:  176
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  156
  Num. ligands or modified residues:  2
  Num. water mol.:  154
@@ -281,6 +282,7 @@ Final Num. models: 1
 Final Num. chains: 2 (A: DNA, B: DNA)
 Final Num. residues:  176
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
 Final Num. HETATM residues:  156
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  154

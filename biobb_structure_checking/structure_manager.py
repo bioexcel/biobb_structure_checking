@@ -338,6 +338,8 @@ class StructureManager:
         self.res_hetats = 0
         self.num_wat = 0
         self.res_insc = 0
+        self.num_h = 0
+        self.res_h = 0 
         for res in self.st.get_residues():
             self.num_res += 1
             if mu.is_wat(res):
@@ -348,11 +350,14 @@ class StructureManager:
                 self.res_insc += 1
             self.num_ats += len(res.get_list())
         self.res_ligands = self.res_hetats - self.num_wat
+        for pair in mu.get_residues_with_H(self.st):
+            self.res_h += 1
+            self.num_h += pair['num_h']
         # Detecting whether it is a CA-only structure
         # num_ats should be much larger than num_res
         # waters removed
         # Taking polyGly as a lower limit
-        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat)*4
+        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat) * 4
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -697,8 +702,8 @@ class StructureManager:
             'nmodels': self.nmodels,
             'models_type': self.models_type,
             'nchains': len(self.chain_ids),
-            'chain_ids': self.chain_ids,
-            'chain_details' : self.chain_details,
+            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.chain_ids.items()},
+            'chain_guess_details' : self.chain_details,
             'num_res': self.num_res,
             'num_ats': self.num_ats,
             'res_insc': self.res_insc,
@@ -707,7 +712,9 @@ class StructureManager:
             'num_wat': self.num_wat,
             'ca_only': self.ca_only,
             'biounit': self.biounit,
-            'total_charge': self.total_charge
+            'total_charge': self.total_charge,
+            'res_h': self.res_h,
+            'num_h': self.num_h
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
@@ -784,8 +791,9 @@ class StructureManager:
         """ Print chains info """
         chids = []
         for ch_id in sorted(self.chain_ids):
-            if ch_id in self.chain_details:
-                chids.append('{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
+            if self.chain_ids == mu.UNKNOWN:
+                chids.append(
+                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
                     ch_id, g=self.chain_details[ch_id]))
             else:
                 chids.append(
@@ -793,7 +801,9 @@ class StructureManager:
                         ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
                     )
                 )
+  
         print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
+
 
     def print_stats(self, prefix='') -> None:
         """
@@ -808,6 +818,10 @@ class StructureManager:
 
         print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
         print('{} Num. residues with ins. codes:  {}'.format(prefix, stats['res_insc']))
+        if stats['num_h']:
+            print('{} Num. residues with H atoms: {} (total {} H atoms)'.format(prefix, stats['res_h'], stats['num_h']))
+        else:
+            print('{} Num. residues with H atoms: {}'.format(prefix, stats['res_h']))
         print('{} Num. HETATM residues:  {}'.format(prefix, stats['res_hetats']))
         print('{} Num. ligands or modified residues:  {}'.format(prefix, stats['res_ligands']))
         print('{} Num. water mol.:  {}'.format(prefix, stats['num_wat']))
@@ -967,13 +981,9 @@ class StructureManager:
             if not self.biounit and chn.get_parent().id > 0:
                 continue
             guess = mu.guess_chain_type(chn)
-            if isinstance(guess, list):
-                self.chain_ids[chn.id] = mu.UNKNOWN
-                if chn.id not in self.chain_details:
-                    self.chain_details[chn.id] = guess
-            else:
-                self.chain_ids[chn.id] = guess
-
+            self.chain_ids[chn.id] = guess['type']
+            self.chain_details[chn.id] = guess['details']
+            
     def has_NA(self):
         """ Checks if any of the chains is NA"""
         has_NA = False
