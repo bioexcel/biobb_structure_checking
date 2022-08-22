@@ -1,12 +1,11 @@
 ## v3.9.12 (2022.3)
-### New Functions
 ### Extended functions
-- Added stats on hydrogen atoms
-- Add_hydrogen
-  - Added support for Nucleic Acids
+- Added hydrogen atoms count to stats
+- add_hydrogen
+  - Extended to support Nucleic Acids
 ### Bug Fixes
-- Minor fixes on output layout
-- Added full ids for metal residues
+- Fixed banner format
+- Fixed residue id on metals output
 ## v3.9.11 (2021.4)
 
 ### New Functions
