@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
@@ -16,6 +16,7 @@ Structure pdb:1ldn.1 loaded
  Num. chains: 4 (A: Protein, B: Protein, C: Protein, D: Protein)
  Num. residues:  1561
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  297
  Num. ligands or modified residues:  10
  Num. water mol.:  287

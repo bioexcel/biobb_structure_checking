@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.7'
+VERSION = '3.9.11'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -74,13 +74,13 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. Formats PDB|mmCIF. Remote pdb:{pdbid}'
+    help='Input structure. Formats pdb(qt)|pqr|cif. Remote pdb:{pdbid}'
 )
 
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving structures (default=mmCif|pdb|xml)'
+    help='Format for retrieving structures (default=cif|pdb|xml)'
 )
 
 CMD_LINE.add_argument(
@@ -139,6 +139,13 @@ CMD_LINE.add_argument(
     dest='output_format',
     help='Format for the Output. When empty output file extension is used.',
     choices=['pdb', 'pdbqt', 'pqr', 'cmip']
+)
+
+CMD_LINE.add_argument(
+    '--keep_canonical_resnames',
+    action="store_true",
+    dest='keep_canonical',
+    help='Keep canonical names for ionized residues in output files'
 )
 
 CMD_LINE.add_argument(

@@ -430,7 +430,8 @@ class StructureChecking():
                         ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]
                     )
                 )
-        self.summary['chains'] = {'ids':self.strucm.chain_ids}
+        self.summary['chains'] = {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.strucm.chain_ids.items()}
+        
         return len(self.strucm.chain_ids) > 1
 
     def _chains_fix(self, opts, fix_data=None):
@@ -651,7 +652,7 @@ class StructureChecking():
             if atm.id not in fix_data['at_groups']:
                 fix_data['at_groups'][atm.id] = []
             fix_data['at_groups'][atm.id].append(atm)
-            self.summary['metals']['detected'].append(mu.residue_num(res))
+            self.summary['metals']['detected'].append(mu.residue_id(res))
 
         return fix_data
 
@@ -1529,7 +1530,7 @@ class StructureChecking():
                         form = None
                         input_option, form = input_line.run(form)
                         ion_to_fix[r_at[0]] = form.upper()
-        self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'])
+        self.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'].upper())
         self.strucm.modified = True
         return False
 # =============================================================================
@@ -2045,7 +2046,7 @@ class StructureChecking():
 
         return strucm
     
-    def save_structure(self, output_structure_path, rename_terms=False, split_models=False):
+    def save_structure(self, output_structure_path, rename_terms=False, split_models=False, keep_resnames=False):
         """ StuctureChecking.save_structure
         Saving the current structure in a the output file
         
@@ -2053,6 +2054,7 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
+            keep_resnames (bool): (False) Keep canonical residue names
         """
         return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
     
@@ -2065,6 +2067,7 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
+            keep_resnames (bool): (False) Keep canonical residue names        
         """
         input_line = ParamInput(
             "Enter output structure path",
@@ -2077,13 +2080,24 @@ class StructureChecking():
             output_format = self.args['output_format']
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
-        
+
         if not split_models:
-            self.strucm.save_structure(output_structure_path, rename_terms=rename_terms, output_format=output_format)
+            self.strucm.save_structure(
+                output_structure_path, 
+                rename_terms=rename_terms, 
+                output_format=output_format, 
+                keep_resnames=self.args['keep_canonical']
+            )
         else:
             for mod in self.strucm.st.get_models():
                 output_path = f'{output_structure_path}_{mod.serial_num}.{output_format}'
-                self.strucm.save_structure(output_path, mod_id = mod.id, rename_terms=rename_terms, output_format=output_format)
+                self.strucm.save_structure(
+                    output_path, 
+                    mod_id = mod.id, 
+                    rename_terms=rename_terms, 
+                    output_format=output_format, 
+                    keep_resnames=self.args['keep_canonical']
+                )
             print(cts.MSGS["SPLIT_MODELS"])
         
         return output_structure_path

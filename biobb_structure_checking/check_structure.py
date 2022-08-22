@@ -16,16 +16,16 @@ import biobb_structure_checking
 import biobb_structure_checking.constants as cts
 from biobb_structure_checking.structure_checking import StructureChecking
 
-BANNER = "===============================================================================\n"\
-    "=                   BioBB structure checking utility v{}                   =\n"\
-    "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =\n"\
-    "===============================================================================\n"
+BANNER = "================================================================================\n"\
+         "=                   BioBB structure checking utility v{:10}               =\n"\
+         "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =\n"\
+         "================================================================================\n"
 def header():
     """ Prints general application headers"""
     return BANNER.format(cts.VERSION)
 
 def main():
-    """ Command-line version of MDWeb's structure checking facility (BioBB suite)"""
+    """ Command-line version of BioBB's structure checking facility"""
 
     base_dir_path = biobb_structure_checking.__path__[0]
     data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT_PATH)

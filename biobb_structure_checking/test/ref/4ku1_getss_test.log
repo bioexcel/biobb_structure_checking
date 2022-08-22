@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Warning, no canonical sequence available for chain C
@@ -14,9 +14,10 @@ Structure pdb:4ku1 loaded
  Resolution (A): 1.90
 
  Num. models: 1
- Num. chains: 4 (A: Protein, B: Protein, C: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%), D: Unknown (P:0.0% DNA:0.0% RNA:0.0% UNK:100.0%))
+ Num. chains: 4 (A: Protein, B: Protein, C: Unknown, D: Unknown)
  Num. residues:  583
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  168
  Num. ligands or modified residues:  20
  Num. water mol.:  148

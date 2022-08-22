@@ -1,17 +1,31 @@
-## v3.10.0 (2022.X)
+## v3.9.11 (2021.4)
+
+### New Functions
+- Support for PDBQT files
+- add_hydrogen
+  - Multiple charge sets accepted (currently ADP, CMIP)
+
+## v3.9.10 (2021.4)
 
 ### New Functions
 
 ### Extended functions
+- Adding new option --keep_canonical_resnames to revert output to canonical residue names when modified by any operation.
+
 - models
   - Select multiple models
   - Superimpose current models
   - Output models as multiple PDB files
 
-- backbone
-  - Accept standard FASTA files as sequence input
-  - Accept multiple templates
 ### Bug Fixes
+
+## v3.9.9 (2021.4)
+
+### Bug Fixes
+- Remove pinned numpy dependency
+
+
+***
 
 ***
 ## v3.9.7 (2021.4)

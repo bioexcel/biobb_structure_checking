@@ -75,7 +75,7 @@ class StructureManager:
 
         Object structure:
             {
-                "input_format" (str): Format of input file pdb|cif
+                "input_format" (str): Format of input file pdb(qt)|pqr|cif
                 "models_type" (int): Guessed model type when num. models > 1 NMR|Bunit
                 "num_ats" (int): Total Number of atoms
                 "nmodels" (int): Number of Models
@@ -98,6 +98,7 @@ class StructureManager:
 
         self.backbone_links = []
         self.modified_residue_list = []
+        self.non_canonical_residue_list = []
 
         self.hetatm = {}
         self.num_res = 0
@@ -126,7 +127,7 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff  + '_prm.json')
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper()  + '_prm.json')
 
         self.res_library = ResidueLib(res_library_path)
 
@@ -172,7 +173,7 @@ class StructureManager:
         else:
             real_pdb_path = input_pdb_path
 
-        if '.pdb' in real_pdb_path: 
+        if '.pdb' in real_pdb_path: # accepts .pdbqt
             parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path: 
@@ -303,7 +304,6 @@ class StructureManager:
 
         self.has_charges = True
 
-
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
         """
@@ -333,6 +333,8 @@ class StructureManager:
         self.res_hetats = 0
         self.num_wat = 0
         self.res_insc = 0
+        self.num_h = 0
+        self.res_h = 0 
         for res in self.st.get_residues():
             self.num_res += 1
             if mu.is_wat(res):
@@ -343,11 +345,14 @@ class StructureManager:
                 self.res_insc += 1
             self.num_ats += len(res.get_list())
         self.res_ligands = self.res_hetats - self.num_wat
+        for pair in mu.get_residues_with_H(self.st):
+            self.res_h += 1
+            self.num_h += pair['num_h']
         # Detecting whether it is a CA-only structure
         # num_ats should be much larger than num_res
         # waters removed
         # Taking polyGly as a lower limit
-        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat)*4
+        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat) * 4
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -648,8 +653,8 @@ class StructureManager:
             'nmodels': self.nmodels,
             'models_type': self.models_type,
             'nchains': len(self.chain_ids),
-            'chain_ids': self.chain_ids,
-            'chain_details' : self.chain_details,
+            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.chain_ids.items()},
+            'chain_guess_details' : self.chain_details,
             'num_res': self.num_res,
             'num_ats': self.num_ats,
             'res_insc': self.res_insc,
@@ -658,7 +663,9 @@ class StructureManager:
             'num_wat': self.num_wat,
             'ca_only': self.ca_only,
             'biounit': self.biounit,
-            'total_charge': self.total_charge
+            'total_charge': self.total_charge,
+            'res_h': self.res_h,
+            'num_h': self.num_h
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
@@ -734,8 +741,9 @@ class StructureManager:
         """ Print chains info """
         chids = []
         for ch_id in sorted(self.chain_ids):
-            if ch_id in self.chain_details:
-                chids.append('{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
+            if self.chain_ids == mu.UNKNOWN:
+                chids.append(
+                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
                     ch_id, g=self.chain_details[ch_id]))
             else:
                 chids.append(
@@ -743,7 +751,9 @@ class StructureManager:
                         ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
                     )
                 )
+  
         print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
+
 
     def print_stats(self, prefix='') -> None:
         """
@@ -758,6 +768,10 @@ class StructureManager:
 
         print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
         print('{} Num. residues with ins. codes:  {}'.format(prefix, stats['res_insc']))
+        if stats['num_h']:
+            print('{} Num. residues with H atoms: {} (total {} H atoms)'.format(prefix, stats['res_h'], stats['num_h']))
+        else:
+            print('{} Num. residues with H atoms: {}'.format(prefix, stats['res_h']))
         print('{} Num. HETATM residues:  {}'.format(prefix, stats['res_hetats']))
         print('{} Num. ligands or modified residues:  {}'.format(prefix, stats['res_ligands']))
         print('{} Num. water mol.:  {}'.format(prefix, stats['num_wat']))
@@ -784,14 +798,17 @@ class StructureManager:
             output_pdb_path: str, 
             mod_id: str = None, 
             rename_terms: bool = False, 
-            output_format='pdb'):
+            output_format: str = 'pdb',
+            keep_resnames: bool = False):
         """
         Saves structure on disk in PDB format
 
         Args:
             output_pdb_path: OS path to the output file
             mod_id (optional): model to write
-
+            rename_terms: rename terminal residues
+            output_format: select output format
+            keep_resnames: keep canonical residue names
         Errors:
             OSError: Error saving the file
         """
@@ -804,12 +821,19 @@ class StructureManager:
         else:
             self.revert_terms()
 
+        if keep_resnames:
+            self.revert_can_resnames(canonical=True)
+            print("Warning: reverting residue names to canonical on output")
+
         if mod_id is None:
             pdbio.set_structure(self.st)
             pdbio.save(output_pdb_path)
         else:
             pdbio.set_structure(self.st[mod_id])
             pdbio.save(output_pdb_path)
+        
+        if keep_resnames:
+            self.revert_can_resnames(canonical=False)
 
     def get_all_r2r_distances(self, res_group: Union[str, Iterable[str]], join_models: bool) -> List[Tuple[Residue, Residue, float]]:
         """ Determine residue pairs within a given Cutoff distance
@@ -907,13 +931,9 @@ class StructureManager:
             if not self.biounit and chn.get_parent().id > 0:
                 continue
             guess = mu.guess_chain_type(chn)
-            if isinstance(guess, list):
-                self.chain_ids[chn.id] = mu.UNKNOWN
-                if chn.id not in self.chain_details:
-                    self.chain_details[chn.id] = guess
-            else:
-                self.chain_ids[chn.id] = guess
-
+            self.chain_ids[chn.id] = guess['type']
+            self.chain_details[chn.id] = guess['details']
+            
     def has_NA(self):
         """ Checks if any of the chains is NA"""
         has_NA = False
@@ -1344,7 +1364,6 @@ class StructureManager:
                 rcode_can = self.data_library.canonical_codes[rcode]
             else:
                 rcode_can = rcode
-
             
             if rcode_can not in add_h_rules:              
                 print(NotAValidResidueError(rcode).message)
@@ -1369,6 +1388,7 @@ class StructureManager:
                     h_rules[ion_res_list[res]]
                 )
                 res.resname = ion_res_list[res]
+                self.non_canonical_residue_list.append({'res':res, 'can_res':rcode_can, 'new_res':res.resname})
             else:
                 error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules)
 
@@ -1388,6 +1408,7 @@ class StructureManager:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
             res.resname = 'CYX'
+            self.non_canonical_residue_list.append({'res':res, 'can_res':'CYS', 'new_res':res.resname})
         self.modified = True
 
     def rename_terms(self, term_res):
@@ -1401,6 +1422,14 @@ class StructureManager:
         for res in self.st.get_residues():
             if len(res.get_resname()) == 4:
                 res.resname = res.resname[1:]
+
+    def revert_can_resnames(self, canonical=True):
+        """ Revert residue names to canonical ones """
+        for mod_res in self.non_canonical_residue_list:
+            if canonical:
+                mod_res['res'].resname = mod_res['can_res']
+            else:
+                mod_res['res'].resname = mod_res['new_res']
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
