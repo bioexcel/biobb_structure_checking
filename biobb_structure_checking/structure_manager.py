@@ -4,6 +4,7 @@
 #from re import I
 import warnings
 import os
+from os.path import join as opj
 import sys
 #import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
@@ -20,13 +21,15 @@ from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
-from biobb_structure_checking.mmb_server import MMBPDBList
+from biobb_structure_checking.mmb_server import MMBPDBList, ALT_SERVERS
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
+
+MODELLER_ENV_VAR = 'KEY_MODELLER10v1'
 
 CISTHRES = 20  # TODO check values with pdb checking
 TRANSTHRES = 160
@@ -134,7 +137,7 @@ class StructureManager:
         self.res_library = ResidueLib(res_library_path)
 
 
-        self.input_format = self._load_structure_file(
+        self.st, self.headers, self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
 
@@ -156,7 +159,7 @@ class StructureManager:
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')
                 input_pdb_path = pdbid[4:].upper()
-                if pdb_server != 'mmb':
+                if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format='pdb', biounit=biounit
@@ -191,17 +194,17 @@ class StructureManager:
         warnings.simplefilter('ignore', BiopythonWarning)
 
         try:
-            self.st = parser.get_structure('st', real_pdb_path)
+            st = parser.get_structure('st', real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
         if input_format in ['pdb', 'pqr']:
-            self.headers = parse_pdb_header(real_pdb_path)
+            headers = parse_pdb_header(real_pdb_path)
         else:
-            self.headers = MMCIF2Dict(real_pdb_path)
+            headers = MMCIF2Dict(real_pdb_path)
 
-        return input_format
+        return st, headers, input_format
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """
@@ -268,6 +271,7 @@ class StructureManager:
             raise UnknownFFError(ff)
         ff_data = self.data_library.ff_data[ff]
 
+        self.rename_terms(self.get_term_res())
         for res in self.st.get_residues():
             ch_type = self._get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
@@ -309,6 +313,8 @@ class StructureManager:
                 if not oxt_ok:
                     print("Warning: OXT atom missing in {}. Run backbone --fix_atoms first".format(mu.residue_id(res)))
         print("Total assigned charge: {:10.2f}".format(self.total_charge))
+
+        self.revert_terms()
 
         self.has_charges = True
 
@@ -585,7 +591,7 @@ class StructureManager:
         self.modified_residue_list = []
         for i in range(0, len(self.all_residues)-1):
             res1 = self.all_residues[i]
-            res2 = self.all_residues[i+1]
+            res2 = self.all_residues[i + 1]
             if not mu.same_chain(res1, res2):
                 continue
             if mu.is_hetatm(res1) or mu.is_hetatm(res2):
@@ -1164,11 +1170,25 @@ class StructureManager:
             extra_NTerm: int = 0,
             sequence_data=None
         ):
-        """ Runs modeller """
-        # environ var depends on MODELLER version!!! TODO Check usage of this feature by later Modeller versions
+        """ Runs modeller
+            Args:
+                *ch_to_fix* (list(str)): List of chain ids to be fixed
+                *brk_list* (list(residue tuples)): Break to fix
+                *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used.
+                *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
+                *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
+                *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
+                *templates* (list(structures)): Structures to be used as additional templates.
+        """
         if modeller_key:
-            os.environ['KEY_MODELLER9v25'] = modeller_key
-        from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
+            MODELLER_ENV_VAR = _guess_modeller_env()
+            os.environ[MODELLER_ENV_VAR] = modeller_key
+
+        try:
+            from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
+        except ImportError:
+            sys.exit("Error importing modeller")
+
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -1201,7 +1221,7 @@ class StructureManager:
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
                     'model_st',
-                    mod_mgr.tmpdir + "/" + model_pdb['name']
+                    opj(mod_mgr.tmpdir, model_pdb['name'])
                 )
 
                 modif_set_residues = self.merge_structure(
@@ -1373,7 +1393,6 @@ class StructureManager:
                 'OXT',
                 mu.build_coords_SP2(mu.OINTERNALS[0], res['C'], res['CA'], res['O'])
             )
-            res.resname = 'C' + res.resname
 
         self.atom_renumbering()
         self.modified = True
@@ -1461,7 +1480,6 @@ class StructureManager:
 
         self.residue_renumbering()
         if add_charges:
-            self.rename_terms(self.get_term_res())
             self.update_atom_charges(add_charges)
         self.atom_renumbering()
         self.modified = True
@@ -1576,16 +1594,6 @@ class StructureManager:
         mutated_res = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, extra_NTerm, mutated_sequence_data)
 
         self.update_internals()
-#        mutated_res = []
-#        for frag in (modeller_result):
-#            m = re.search('(.*)-(.*)/(.*)', frag)
-#            mod, ch, start_res, end_res  = \
-#                int(m.group(3)) - 1, \
-#                m.group(1)[:1], \
-#                int(m.group(1)[1:]), \
-#                int(m.group(2)[1:])
-#            for i in range(start_res, end_res + 1):
-#                mutated_res.append(self.st[mod][ch][i])
         return mutated_res
 
     def invert_amide_atoms(self, res: Residue):
@@ -1637,10 +1645,21 @@ class StructureManager:
                 mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix, r, start + i, prefix, mut_seq[nch][i]))
             nch += 1
         return ','.join(mut_list)
-
-
 # ===============================================================================
-
+def _guess_modeller_env():
+    """ Guessing Modeller version from conda installation if available """
+    import subprocess
+    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
+    for line in conda_info.stdout.decode('ASCII').split('\n'):
+        if 'modeller' in line:
+            info = line.split()
+    if info[1]:
+        print("Modeller v{} detected".format(info[1]))
+        v1,v2 = info[1].split('.')
+        return "KEY_MODELLER{}v{}".format(v1,v2)
+    print("Modeller version not detected, using default")
+    return MODELLER_ENV_VAR
+# ===============================================================================
 
 class WrongServerError(Exception):
     def __init__(self):
