@@ -59,7 +59,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-150300.59.76-default x86_64
 Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2022/08/22 12:46:49
+Job starting time (YY/MM/DD HH:MM:SS): 2022/08/22 13:31:31
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

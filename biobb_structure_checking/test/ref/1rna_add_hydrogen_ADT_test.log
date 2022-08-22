@@ -1,0 +1,50 @@
+================================================================================
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Structure exists: 'tmpPDB/rn/1rna.cif' 
+Structure pdb:1rna loaded
+ PDB id: 1RNA
+ Title: CRYSTALLOGRAPHIC STRUCTURE OF AN RNA HELIX: [U(U-A)6A]2
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: RNA
+ Resolution (A): 2.250
+
+ Num. models: 1
+ Num. chains: 2 (A: RNA, B: RNA)
+ Num. residues:  119
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  91
+ Num. ligands or modified residues:  0
+ Num. water mol.:  91
+ Num. atoms:  673
+
+
+Step 1: water --remove yes
+Running water. Options: --remove yes
+91 Water molecules detected
+91 Water molecules removed
+
+Step 2:  add_hydrogen --add_mode auto --add_charges adt
+Running add_hydrogen. Options: --add_mode auto --add_charges adt
+No residues requiring selection on adding H atoms
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all
+No residues with missing or unknown side chain atoms found
+Selection: auto
+Updating partial charges and atom types
+Total assigned charge:     -26.00
+Command list completed
+Final Num. models: 1
+Final Num. chains: 2 (A: RNA, B: RNA)
+Final Num. residues:  28
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 28 (total 298 H atoms)
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
+Final Num. water mol.:  0
+Final Num. atoms:  880
+Total charge -26.000
+Structure saved on 1rna.pdbqt

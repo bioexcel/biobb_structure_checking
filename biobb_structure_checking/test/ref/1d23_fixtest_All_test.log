@@ -1,0 +1,53 @@
+================================================================================
+=                   BioBB structure checking utility v3.9.11                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Warning: sequence features only available in mmCIF format or with external fasta input
+Structure dna_test/1d23_fixtest.pdb loaded
+ Title: 
+ Experimental method: unknown
+ Resolution (A): N.A.
+
+ Num. models: 1
+ Num. chains: 2 (A: DNA, B: DNA)
+ Num. residues:  20
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  0
+ Num. ligands or modified residues:  0
+ Num. water mol.:  0
+ Num. atoms:  391
+
+Running fixside. Options: --fix All
+2 Residues with missing side chain atoms found
+  DG A2     C6,O6,N1,C2,N2,N3
+  DC A5     C6,C5,C4,N4,N3,C2,O2
+Fixing side chains
+ DG A2
+  Adding new atom C6
+  Adding new atom O6
+  Adding new atom N1
+  Adding new atom C2
+  Adding new atom N2
+  Adding new atom N3
+ DC A5
+Not enough atoms left on  DC A5 to recover base orientation, skipping
+Fixed 2 side chain(s)
+Checking for steric clashes
+No severe clashes detected
+No apolar clashes detected
+No polar_acceptor clashes detected
+No polar_donor clashes detected
+No positive clashes detected
+No negative clashes detected
+Final Num. models: 1
+Final Num. chains: 2 (A: DNA, B: DNA)
+Final Num. residues:  20
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  0
+Final Num. ligands or modified residues:  0
+Final Num. water mol.:  0
+Final Num. atoms:  397
+Structure saved on 1d23_fixtest_All_test.pdb

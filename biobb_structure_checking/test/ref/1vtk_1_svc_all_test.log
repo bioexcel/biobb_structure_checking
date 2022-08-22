@@ -194,6 +194,8 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
+Warning: unknown residue CSER
+Warning: unknown residue CGLY
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A58 by HIE

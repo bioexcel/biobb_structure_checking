@@ -1,5 +1,7 @@
 """Module to manage structure, based on BioPython Bio.PDB
 """
+from cgitb import reset
+from re import I
 import warnings
 import os
 import sys
@@ -124,7 +126,7 @@ class StructureManager:
 
         self.data_library = DataLibManager(data_library_path)
         for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper()  + '_prm.json')
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
 
         self.res_library = ResidueLib(res_library_path)
 
@@ -170,6 +172,8 @@ class StructureManager:
             real_pdb_path = input_pdb_path
 
         if '.pdb' in real_pdb_path: # accepts .pdbqt
+            if '.pdbqt' in real_pdb_path:
+                print("Warning: PDBQT file will be loaded as PDB")
             parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path: 
@@ -208,9 +212,9 @@ class StructureManager:
 
         self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
 
-        # Precalc backbone . TODO Nucleic Acids
+        # Precalc backbone 
         self.check_backbone_connect(
-            ('N', 'C'),
+            ("N", "C", "P", "O3'"),
             self.data_library.distances['COVLNK']
         )
         # get canonical and structure sequences
@@ -262,11 +266,16 @@ class StructureManager:
         ff_data = self.data_library.ff_data[ff]
 
         for res in self.st.get_residues():
+            ch_type = self._get_chain_type(res)
+            ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
-            if len(rcode) == 4:
+            if len(rcode) == 4: # Protein terms
                 rcode3 = rcode[1:]
+            elif rcode[-1] in ('3', '5'): # NA Terms
+                rcode3 = rcode[:-1]
             else:
                 rcode3 = rcode
+                
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
                 print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
@@ -285,8 +294,8 @@ class StructureManager:
                     atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
                         atm.xtra['atom_type'] = ff_data['residue_data'][can_rcode3][atm.id]
-                    elif atm.id in ff_data['residue_data']['*']:
-                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][atm.id]
+                    elif atm.id in ff_data['residue_data']['*'][ch_type_label]:
+                        atm.xtra['atom_type'] = ff_data['residue_data']['*'][ch_type_label][atm.id]
                     else:
                         atm.xtra['atom_type'] = atm.element
                     atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
@@ -435,19 +444,33 @@ class StructureManager:
                 List of residues with missing atoms, as a tuples
                 ["r",{"backbone":[atoms_list],"side":[atoms_list]}]
         """
-        # TODO Nucleic acids
-        valid_codes = self.data_library.get_valid_codes('protein')
-        residue_data = self.data_library.get_all_atom_lists()
+        valid_codes = {}
+        residue_data = {}
+        for type in ('protein', 'dna', 'rna'):
+            valid_codes[mu.TYPE_LABEL[type]] = self.data_library.get_valid_codes(type)
+            residue_data[mu.TYPE_LABEL[type]] = self.data_library.get_all_atom_lists(type)        
         miss_at_list = []
         for res in self.st.get_residues():
-            if res.get_resname() in valid_codes and not mu.is_hetatm(res):
+            ch_type = self._get_chain_type(res)
+            if ch_type not in (mu.PROTEIN, mu.NA, mu.DNA, mu.RNA):
+                continue
+            if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
                 miss_at = mu.check_all_at_in_r(
-                    res, residue_data[res.get_resname().replace(' ', '')]
+                    res, residue_data[ch_type][res.get_resname().replace(' ', '')]
                 )
-                if self.is_C_term(res) and res.get_resname() != 'NME' and 'OXT' not in res:
+                bck_miss = []
+                if ch_type == mu.PROTEIN:
+                    if self.is_C_term(res) and res.get_resname() != 'NME' and 'OXT' not in res:
+                        bck_miss.append('OXT')
+                else:
+                    if not self.is_5_term(res):
+                        for at_id in ["P","OP1","OP2"]:
+                            if at_id not in res:
+                                bck_miss.append(at_id)
+                if bck_miss:
                     if 'backbone' not in miss_at:
-                        miss_at['backbone'] = []
-                    miss_at['backbone'].append('OXT')
+                            miss_at['backbone'] = []
+                    miss_at['backbone'] += bck_miss
                 if miss_at:
                     miss_at_list.append((res, miss_at))
         return miss_at_list
@@ -459,18 +482,34 @@ class StructureManager:
                 List of residues with extra atoms, as a tuples
                 ["r",atoms_list]
         """
-        # TODO Nucleic acids
-        valid_codes = self.data_library.get_valid_codes('protein')
-        residue_data = self.data_library.get_all_atom_lists()
-
+        valid_codes = {}
+        residue_data = {}
+        for type in ('protein', 'dna', 'rna'):
+            valid_codes[mu.TYPE_LABEL[type]] = self.data_library.get_valid_codes(type)
+            residue_data[mu.TYPE_LABEL[type]] = self.data_library.get_all_atom_lists(type) 
         extra_at_list = []
         for res in self.st.get_residues():
-            if res.get_resname() in valid_codes and not mu.is_hetatm(res):
-                extra_ats = mu.check_unk_at_in_r(
-                    res, residue_data[res.get_resname().replace(' ', '')]
-                )
+            if mu.is_hetatm(res):
+                continue
+            ch_type = self._get_chain_type(res)
+            rcode = res.get_resname().replace(' ','')
+            if rcode not in valid_codes[ch_type]:
+                print(f"Warning: unknown residue {rcode}")
+                continue
+            if ch_type == mu.PROTEIN:
+                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][rcode])
                 if extra_ats:
                     extra_at_list.append((res, extra_ats))
+            else:
+                res_at_list = residue_data[ch_type][rcode]
+                add_ats = []
+                if not self.is_5_term(res):
+                    if 'P' not in res_at_list['backbone']: # fix to avoid chain many
+                        add_ats = ["P","OP1","OP2"]
+                extra_ats = mu.check_unk_at_in_r(res, {
+                                'backbone':res_at_list['backbone'] + add_ats,
+                                'side': res_at_list['side']
+                            })
         return extra_at_list
 
     def get_missing_atoms(self, fragment: str) -> List[Tuple[Residue, List[str]]]:
@@ -484,12 +523,26 @@ class StructureManager:
         for res_at in self.check_missing_atoms():
             res, at_list = res_at
             if fragment == 'side':
-                if 'side' in at_list and 'N' in res and 'CA' in res and 'C' in res:
+                if 'side' in at_list and not self._missing_bck_atoms(res):
                     miss_ats.append((res, at_list['side']))
             else:
                 if at_list['backbone']:
                     miss_ats.append((res, at_list['backbone']))
         return miss_ats
+
+    def _missing_bck_atoms(self, res):
+        """ Check whether backbone atoms required to build side chains are present"""
+        if self._get_chain_type(res)  == mu.PROTEIN:
+            bck_ats =  ("N", "CA", "C")
+        else: 
+            bck_ats = ("C1'", "O4'", "C4'")
+
+        missing = False
+
+        for at in bck_ats:
+            missing = missing or at not in res
+
+        return missing
 
     def get_ion_res_list(self) -> List[Tuple[Residue, List[str]]]:
         """
@@ -670,13 +723,14 @@ class StructureManager:
         for res in self.all_residues:
             if mu.is_hetatm(res):
                 continue
-            #TODO NA
-            if res.get_resname() not in self.data_library.get_valid_codes('protein'):
-                continue
             if self.is_N_term(res):
                 term_res.append(('N', res))
-            if self.is_C_term(res):
+            elif self.is_C_term(res):
                 term_res.append(('C', res))
+            elif self.is_5_term(res):
+                term_res.append(('5', res))
+            elif self.is_3_term(res):
+                term_res.append(('3', res))
         return term_res
 
     def print_headers(self) -> None:
@@ -1018,7 +1072,13 @@ class StructureManager:
         Args:
             **r_at**: tuple as [Bio.PDB.Residue, [list of atom ids]]
         """
-        print(mu.residue_id(r_at[0]))
+        print(mu.residue_id(r_at[0]))        
+        if self._get_chain_type(r_at[0]) == mu.PROTEIN:
+            self._fix_side_chain_protein(r_at)
+        else:
+            self._fix_side_chain_na(r_at)
+            
+    def _fix_side_chain_protein(self, r_at):
         for at_id in r_at[1]:
             print("  Adding new atom " + at_id)
             if at_id == 'CB':
@@ -1033,6 +1093,25 @@ class StructureManager:
             mu.add_new_atom_to_residue(r_at[0], at_id, coords)
         self.atom_renumbering()
         self.modified = True
+
+    def _fix_side_chain_na(self, r_at):
+        if r_at[0].get_resname() in ['A','DA','G','DG'] and\
+                ('N9' in r_at[1] or 'C8' in r_at[1]) or\
+            r_at[0].get_resname() in ('C','DC','DT','U') and\
+                ('N1' in r_at[1] or 'C6' in r_at[1]):
+            print (f"Not enough atoms left on {mu.residue_id(r_at[0])} to recover base orientation, skipping")
+        else:
+            for at_id in r_at[1]:
+                print("  Adding new atom " + at_id)
+                coords = mu.build_coords_from_lib(
+                    r_at[0],
+                    self.res_library,
+                    r_at[0].get_resname(),
+                    at_id
+                )
+                mu.add_new_atom_to_residue(r_at[0], at_id, coords)
+            self.atom_renumbering()
+            self.modified = True
 
     def rebuild_side_chains(self, r_list: Iterable[str]) -> None:
         """ Rebuild side chain as mutation to same residue using Modeller """
@@ -1306,6 +1385,8 @@ class StructureManager:
             if mu.is_hetatm(res):
                 continue
 
+            protein_res = self.chain_ids[res.get_parent().id] == mu.PROTEIN
+
             if remove_h:
                 mu.remove_H_from_r(res, verbose=False)
 
@@ -1338,7 +1419,7 @@ class StructureManager:
             else:
                 rcode_can = rcode
             
-            if rcode_can not in add_h_rules:              
+            if rcode_can not in add_h_rules:
                 print(NotAValidResidueError(rcode).message)
                 continue
             
@@ -1346,7 +1427,7 @@ class StructureManager:
                 h_rules = add_h_rules[rcode]
             else:
                 h_rules = add_h_rules[rcode_can][rcode]
-
+            
             if res in ion_res_list:
                 if rcode != ion_res_list[res]:
                     print(
@@ -1358,12 +1439,13 @@ class StructureManager:
                     res,
                     self.res_library,
                     ion_res_list[res],
-                    h_rules[ion_res_list[res]]
+                    h_rules[ion_res_list[res]],
+                    protein_res
                 )
                 res.resname = ion_res_list[res]
                 self.non_canonical_residue_list.append({'res':res, 'can_res':rcode_can, 'new_res':res.resname})
             else:
-                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules)
+                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules, protein_res)
 
             if error_msg:
                 print(error_msg, mu.residue_id(res))
@@ -1385,16 +1467,25 @@ class StructureManager:
         self.modified = True
 
     def rename_terms(self, term_res):
-        """ Rename Terminal residues as NXXX or CXXX """
+        """ Rename Terminal residues as NXXX or CXXX in proteins or XX5 XX3 in NA """
         for t in term_res:
-            if t[1].resname not in ('ACE', 'NME'):
-                t[1].resname = t[0] + t[1].resname
+            if t[0] in ('N', 'C'):
+                if t[1].resname not in ('ACE', 'NME') and len(t[1].resname) == 3 :
+                    t[1].resname = t[0] + t[1].resname
+            elif t[0] in ('5','3'):
+                t[1].resname = t[1].resname + t[0]
 
     def revert_terms(self):
-        """ Reverts 4 char len residue names to 3 letter codes"""
+        """ Reverts special term residue names to canonical ones"""
         for res in self.st.get_residues():
-            if len(res.get_resname()) == 4:
-                res.resname = res.resname[1:]
+            if mu.is_hetatm(res):
+                continue
+            if self._get_chain_type(res) == mu.PROTEIN:
+                if len(res.get_resname()) == 4:
+                    res.resname = res.resname[1:]
+            elif self._get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
+                if res.get_resname()[-1] in ('5','3'):
+                    res.resname = res.resname[:-1]
 
     def revert_can_resnames(self, canonical=True):
         """ Revert residue names to canonical ones """
@@ -1406,12 +1497,27 @@ class StructureManager:
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
-        return res not in self.prev_residue
+        return self._get_chain_type(res) == mu.PROTEIN and res not in self.prev_residue
 
     def is_C_term(self, res: Residue) -> bool:
         """ Detects whether it is C terminal residue."""
-        return res not in self.next_residue
+        return self._get_chain_type(res) == mu.PROTEIN and res not in self.next_residue
 
+    def is_5_term(self, res: Residue) -> bool:
+        """ Detects whether it is 5' terminal residue."""
+        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.prev_residue
+
+    def is_3_term(self, res: Residue) -> bool:
+        """ Detects whether it is 3' terminal residue."""
+        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.next_residue
+
+    def _get_chain_type(self, res):
+        """ Return type of chain for residue"""
+        if mu.is_hetatm(res):
+            return mu.UNKNOWN
+        else:
+            return self.chain_ids[res.get_parent().id]
+    
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
         """ Find residues to mutate from mut_list"""
         mutations = MutationManager(mut_list, self.chain_ids)

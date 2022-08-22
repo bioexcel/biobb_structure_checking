@@ -99,7 +99,7 @@ Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no
 No backbone breaks
 No unexpected backbone links
 Capping terminal ends
-True terminal residues:  P43,P353
+True terminal residues:  D1,D19,P43,P353
 Nothing to do
 No caps added
 Fixing missing backbone atoms
@@ -188,6 +188,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
+Warning: unknown residue CGLU
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS P67 by HIE
