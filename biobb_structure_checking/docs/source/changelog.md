@@ -1,11 +1,14 @@
 ## v3.9.12 (2022.3)
 ### Extended functions
 - Added hydrogen atoms count to stats
+- Support for PQR input files
+- Removed Requirements to FASTA format for sequence input
 - add_hydrogen
   - Extended to support Nucleic Acids
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
+- Removed required usage N and C terms residue names except on output
 ## v3.9.11 (2021.4)
 
 ### New Functions
