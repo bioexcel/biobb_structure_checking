@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
@@ -15,6 +15,7 @@ Structure pdb:1svc loaded
  Num. chains: 2 (D: DNA, P: Protein)
  Num. residues:  393
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  63
  Num. ligands or modified residues:  0
  Num. water mol.:  63
@@ -180,14 +181,13 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 106 Residues requiring selection on adding H atoms
  CYS P88,P119,P124,P162,P262,P273
  ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
- GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344
+ GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344,P353
  HIS P67,P108,P110,P112,P118,P144,P173,P307
  LYS P52,P77,P79,P80,P86,P95,P105,P117,P131,P147,P148,P149,P194,P206,P244,P252,P275,P278,P315,P318,P320,P326,P337,P346
  ARG P54,P57,P59,P157,P164,P187,P192,P198,P214,P230,P231,P255,P258,P284,P308,P335,P336
  TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-Warning: unknown residue CGLU
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS P67 by HIE
@@ -205,6 +205,7 @@ Final Num. models: 1
 Final Num. chains: 1 (P: Protein)
 Final Num. residues:  311
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 311 (total 2455 H atoms)
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0

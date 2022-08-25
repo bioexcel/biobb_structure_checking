@@ -529,20 +529,18 @@
     "OXT"
    ],
    "fixed": [
-    "CLEU A443",
-    "CSER B444"
+    "LEU A443",
+    "SER B444"
    ],
    "selected": "All"
   },
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "ids": {
-   "A": 1,
-   "B": 1,
-   "C": 10,
-   "D": 10
-  },
+  "A": "Protein",
+  "B": "Protein",
+  "C": "Water",
+  "D": "Water",
   "selected": {
    "A": 1,
    "B": 1
@@ -637,30 +635,44 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {
-   "C": [
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ],
-   "D": [
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ]
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.019323671497584516,
+    "Protein": 0.9806763285024155,
+    "RNA": 0.0
+   },
+   "B": {
+    "DNA": 0.0,
+    "Other": 0.019230769230769273,
+    "Protein": 0.9807692307692307,
+    "RNA": 0.0
+   },
+   "C": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   },
+   "D": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   }
   },
   "chain_ids": {
-   "A": 1,
-   "B": 1
+   "A": "Protein",
+   "B": "Protein"
   },
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 6587,
+  "num_h": 3263,
   "num_res": 415,
   "num_wat": 0,
+  "res_h": 415,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
@@ -773,32 +785,46 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {
-   "C": [
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ],
-   "D": [
-    0.0,
-    0.0,
-    0.0,
-    1.0
-   ]
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.019323671497584516,
+    "Protein": 0.9806763285024155,
+    "RNA": 0.0
+   },
+   "B": {
+    "DNA": 0.0,
+    "Other": 0.019230769230769273,
+    "Protein": 0.9807692307692307,
+    "RNA": 0.0
+   },
+   "C": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   },
+   "D": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   }
   },
   "chain_ids": {
-   "A": 1,
-   "B": 1,
-   "C": 0,
-   "D": 0
+   "A": "Protein",
+   "B": "Protein",
+   "C": "Unknown",
+   "D": "Unknown"
   },
   "models_type": 0,
   "nchains": 4,
   "nmodels": 1,
   "num_ats": 3714,
+  "num_h": 0,
   "num_res": 583,
   "num_wat": 148,
+  "res_h": 0,
   "res_hetats": 168,
   "res_insc": 0,
   "res_ligands": 20,

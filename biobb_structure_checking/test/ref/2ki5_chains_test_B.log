@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
@@ -15,6 +15,7 @@ Structure pdb:2ki5 loaded
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  296
  Num. ligands or modified residues:  4
  Num. water mol.:  292
@@ -34,6 +35,7 @@ Final Num. models: 1
 Final Num. chains: 1 (B: Protein)
 Final Num. residues:  458
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
 Final Num. HETATM residues:  150
 Final Num. ligands or modified residues:  2
 Final Num. water mol.:  148

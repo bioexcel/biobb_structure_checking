@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/rn/1rna.cif' 
 Structure pdb:1rna loaded
@@ -15,6 +15,7 @@ Structure pdb:1rna loaded
  Num. chains: 2 (A: RNA, B: RNA)
  Num. residues:  119
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  91
  Num. ligands or modified residues:  0
  Num. water mol.:  91
@@ -40,6 +41,7 @@ Final Num. models: 1
 Final Num. chains: 2 (A: RNA, B: RNA)
 Final Num. residues:  28
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 28 (total 298 H atoms)
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0

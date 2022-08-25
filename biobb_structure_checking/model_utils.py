@@ -4,9 +4,9 @@
 
 import re
 import sys
-import numpy as np
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
+import numpy as np
 from numpy import arccos, clip, cos, dot, pi, sin, sqrt
 from numpy.linalg import norm
 
@@ -111,6 +111,27 @@ def atom_id(atm, models='auto'):
     """ Friendly replacement for atom ids like ASN A324/0.CA """
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
+def get_sequence_symbol(r, chain_type):
+    seq = ''
+    rn = r.get_resname()
+    if chain_type == PROTEIN:
+        if rn in ONE_LETTER_RESIDUE_CODE:
+            seq += ONE_LETTER_RESIDUE_CODE[rn]
+        else:
+            print("Warning: unknown protein residue code", residue_id(r))
+            seq += 'X'
+    elif chain_type == DNA:
+        seq += rn[1:]
+    else:
+        seq += rn
+    return seq
+
+def get_sequence_from_list(r_list, chain_type):
+    seq = ''
+    for res in r_list:
+        seq += get_sequence_symbol(res, chain_type)
+    return seq
+
 # Id Checks
 def _protein_residue_check(res_id):
     """
@@ -128,13 +149,13 @@ def _protein_residue_check(res_id):
 
     return rid
 
-def _na_residue_check(rid, type):
+def _na_residue_check(rid, chain_type):
     rid = rid.upper()
-    if type == NA:
+    if chain_type == NA:
         codes = NA_RESIDUE_CODE
-    elif type == DNA:
+    elif chain_type == DNA:
         codes = DNA_RESIDUE_CODE
-    elif type == RNA:
+    elif chain_type == RNA:
         codes = RNA_RESIDUE_CODE
     else:
         codes = set()
@@ -147,11 +168,17 @@ def rev_complement_na_seq(seq):
     return seq.translate(COMPLEMENT_TAB)[::-1]
 
 def valid_residue_check(res, chain_type):
+    """ Check whether is a valid residue name for the given chain type
+        Args:
+        res : residue
+        chain_type (int): Type of chain
+    """
+    #return _protein_residue_check(res) if chain_type == PROTEIN else return _na_residue_check(res, chain_type)
     if chain_type == PROTEIN:
         return _protein_residue_check(res)
     else:
         return _na_residue_check(res, chain_type)
-    
+
 def is_protein(res):
     """ Checks if a residue is a valid protein one """
     rid = res.get_resname()
@@ -248,6 +275,7 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     prot = 0.
     dna = 0.
     rna = 0.
+    other = 0.
     total = 0.
     for res in chn.get_residues():
         if is_wat(res):
@@ -263,21 +291,24 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
 
+    chain_type = ALLWAT
+
     if total > 0.:
         prot = prot / total
         dna = dna / total
         rna = rna / total
         other = 1. - prot - dna - rna
-
         if prot > thres or prot > dna + rna + other:
-            return PROTEIN
+            chain_type = PROTEIN
         elif dna > thres or dna > prot + rna + other:
-            return DNA
+            chain_type = DNA
         elif rna > thres or rna > prot + dna + other:
-            return RNA
-        return [prot, dna, rna, other]
+            chain_type = RNA
+        else:
+            chain_type = UNKNOWN
 
-    return ALLWAT
+    return {'type': chain_type, 'details': {'Protein': prot, 'DNA': dna, 'RNA': rna, 'Other': other}}
+
 
 #===============================================================================
 def check_chiral_residue(res, chiral_data):
@@ -337,7 +368,7 @@ def check_unk_at_in_r(res, at_list, skip_H=True):
         ]
     return  [
         at.id for at in res.get_atoms()
-        if at.id not in at_list['backbone'] + at_list['side'] 
+        if at.id not in at_list['backbone'] + at_list['side'] + ['OXT']
     ]
 
 def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=True, severe=True):
@@ -458,13 +489,12 @@ def get_residues_with_H(struc):
             if atm.element == 'H':
                 has_h += 1
         if has_h:
-            resh_list.append({'r':res, 'n_h':has_h})
+            resh_list.append({'r':res, 'num_h':has_h})
     return resh_list
 
 
 def get_backbone_links(struc, backbone_atoms, covlnk, join_models=True):
     """ Get links making the main chain """
-    # TODO differenciate Protein and NA
     cov_links = []
     for mod in struc:
         bckats = []
@@ -567,59 +597,57 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     rcode = res.get_resname()
 
-    if _na_residue_check(rcode, type=NA):
+    if _na_residue_check(rcode, chain_type=NA):
         return _add_hydrogens_to_ribose(res, prev_res, next_res)
     elif not _protein_residue_check(rcode):
         return MSGS['RESIDUE_NOT_VALID']
-    else:
-        return _add_hydrogens_protein_backbone(res, prev_res, next_res)
+
+    return _add_hydrogens_protein_backbone(res, prev_res, next_res)
 
 def _add_hydrogens_to_ribose(res, prev_res, next_res):
     #C5'
     if prev_res is None:
         crs = build_coords_3xSP3(HDIS, res["O5'"], res["C5'"], res["C4'"])
-        add_new_atom_to_residue(res, "HO5'", crs[0])    
+        add_new_atom_to_residue(res, "HO5'", crs[0])
 
     crs = build_coords_2xSP3(HDIS, res["C5'"], res["O5'"], res["C4'"])
-    add_new_atom_to_residue(res, "H5'", crs[0])    
-    add_new_atom_to_residue(res, "H5''", crs[1])    
-    
+    add_new_atom_to_residue(res, "H5'", crs[0])
+    add_new_atom_to_residue(res, "H5''", crs[1])
+
     #C4
     crs = build_coords_1xSP3(HDIS, res["C4'"], res["C5'"], res["O4'"], res["C3'"])
-    add_new_atom_to_residue(res, "H4'", crs)    
-    
+    add_new_atom_to_residue(res, "H4'", crs)
+
     #C3
     crs = build_coords_1xSP3(HDIS, res["C3'"], res["C4'"], res["O3'"], res["C2'"])
-    add_new_atom_to_residue(res, "H3'", crs)    
+    add_new_atom_to_residue(res, "H3'", crs)
 
     if next_res is None:
         crs = build_coords_3xSP3(HDIS, res["O3'"], res["C3'"], res["C4'"])
         add_new_atom_to_residue(res, "HO3'", crs[0])
-    
+
     #C2
     if "O2'" in res:
         crs = build_coords_1xSP3(HDIS, res["C2'"], res["C3'"], res["O2'"], res["C1'"])
-        add_new_atom_to_residue(res, "H2'", crs)    
+        add_new_atom_to_residue(res, "H2'", crs)
         crs = build_coords_3xSP3(HDIS, res["O2'"], res["C2'"], res["C3'"])
         add_new_atom_to_residue(res, "HO2'", crs[0])
     else:
         crs = build_coords_2xSP3(HDIS, res["C2'"], res["C3'"], res["C1'"])
-        add_new_atom_to_residue(res, "H2'", crs[0])    
-        add_new_atom_to_residue(res, "H2''", crs[1])    
-    
+        add_new_atom_to_residue(res, "H2'", crs[0])
+        add_new_atom_to_residue(res, "H2''", crs[1])
+
     #C1
     if "N9" in res: #Purine
         crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N9"])
     else: #Pyrimidone
         crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N1"])
     add_new_atom_to_residue(res, "H1'", crs)
-     
+
     return False
 
 def _add_hydrogens_protein_backbone(res, prev_res, next_res):
-    
-    rcode = res.get_resname()
-    
+
     error_msg = MSGS['NOT_ENOUGH_ATOMS'].format('backbone')
 
     if res.get_resname() not in ('ACE', 'NME'):
@@ -690,12 +718,13 @@ def _add_hydrogens_protein_backbone(res, prev_res, next_res):
 
     return False
 
-def add_hydrogens_side(res, res_library, opt, rules, is_protein=True):
+def add_hydrogens_side(res, res_library, opt, rules, is_a_protein=True):
     """ Add hydrogens to side chains"""
 
     if res.get_resname() in ('ACE', 'NME', 'GLY', 'NGLY', 'CGLY'):
         return False
-    if  is_protein and _protein_residue_check(res.get_resname()) :
+
+    if  is_a_protein and _protein_residue_check(res.get_resname()):
         if 'N' not in res or 'CA' not in res or 'C' not in res:
             return MSGS['NOT_ENOUGH_ATOMS'].format('side')
 

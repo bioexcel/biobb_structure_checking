@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.10                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22           =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
@@ -14,6 +14,7 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. chains: 1 (A: Protein)
  Num. residues:  134
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  58
  Num. ligands or modified residues:  0
  Num. water mol.:  58

@@ -2,17 +2,32 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.006535947712418277,
+    "Protein": 0.9934640522875817,
+    "RNA": 0.0
+   },
+   "B": {
+    "DNA": 0.0,
+    "Other": 0.006451612903225823,
+    "Protein": 0.9935483870967742,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1,
-   "B": 1
+   "A": "Protein",
+   "B": "Protein"
   },
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 4959,
+  "num_h": 0,
   "num_res": 908,
   "num_wat": 292,
+  "res_h": 0,
   "res_hetats": 296,
   "res_insc": 0,
   "res_ligands": 4,
@@ -60,17 +75,32 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.006535947712418277,
+    "Protein": 0.9934640522875817,
+    "RNA": 0.0
+   },
+   "B": {
+    "DNA": 0.0,
+    "Other": 0.006451612903225823,
+    "Protein": 0.9935483870967742,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1,
-   "B": 1
+   "A": "Protein",
+   "B": "Protein"
   },
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 4961,
+  "num_h": 0,
   "num_res": 908,
   "num_wat": 292,
+  "res_h": 0,
   "res_hetats": 296,
   "res_insc": 0,
   "res_ligands": 4,

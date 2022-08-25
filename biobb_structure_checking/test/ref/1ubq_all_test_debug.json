@@ -49,9 +49,7 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "ids": {
-   "A": 1
-  }
+  "A": "Protein"
  },
  "chiral": {
   "n_chirals": 14,
@@ -78,39 +76,48 @@
   }
  },
  "elapsed_times": {
-  "add_hydrogen": 0.06955671310424805,
-  "altloc": 0.00028967857360839844,
-  "amide": 0.193925142288208,
-  "backbone": 0.0021593570709228516,
-  "chains": 9.5367431640625e-05,
-  "chiral": 0.0018677711486816406,
-  "chiral_bck": 0.007482290267944336,
-  "cistransbck": 0.018648147583007812,
-  "clashes": 1.012556552886963,
-  "fixside": 0.002176523208618164,
-  "getss": 0.000385284423828125,
-  "inscodes": 0.00012683868408203125,
-  "ligands": 0.00019979476928710938,
-  "load": 0.13619399070739746,
-  "metals": 0.0012345314025878906,
-  "models": 0.0008144378662109375,
-  "rem_hydrogen": 0.0002124309539794922,
-  "total": 1.4764680862426758,
-  "water": 0.015763521194458008
+  "add_hydrogen": 0.07301688194274902,
+  "altloc": 0.0002982616424560547,
+  "amide": 0.20725727081298828,
+  "backbone": 0.0023293495178222656,
+  "chains": 9.226799011230469e-05,
+  "chiral": 0.0019216537475585938,
+  "chiral_bck": 0.012472867965698242,
+  "cistransbck": 0.0196075439453125,
+  "clashes": 1.0968639850616455,
+  "fixside": 0.002279520034790039,
+  "getss": 0.0003693103790283203,
+  "inscodes": 0.00013208389282226562,
+  "ligands": 0.0001895427703857422,
+  "load": 0.14112234115600586,
+  "metals": 0.001153707504272461,
+  "models": 0.0006875991821289062,
+  "rem_hydrogen": 0.00025463104248046875,
+  "total": 1.59063720703125,
+  "water": 0.017071962356567383
  },
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 1231,
+  "num_h": 629,
   "num_res": 76,
   "num_wat": 0,
+  "res_h": 76,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
@@ -136,87 +143,87 @@
  "memsize": [
   [
    "load",
-   46.734375
+   46.94140625
   ],
   [
    "models",
-   46.734375
+   47.171875
   ],
   [
    "chains",
-   46.734375
+   47.171875
   ],
   [
    "inscodes",
-   46.734375
+   47.171875
   ],
   [
    "altloc",
-   46.734375
+   47.171875
   ],
   [
    "metals",
-   46.734375
+   47.171875
   ],
   [
    "ligands",
-   46.734375
+   47.171875
   ],
   [
    "water",
-   46.94140625
+   47.171875
   ],
   [
    "rem_hydrogen",
-   46.94140625
+   47.171875
   ],
   [
    "amide",
-   46.94140625
+   47.171875
   ],
   [
    "chiral",
-   46.94140625
+   47.171875
   ],
   [
    "chiral_bck",
-   46.94140625
+   47.171875
   ],
   [
    "fixside",
-   46.94140625
+   47.171875
   ],
   [
    "backbone",
-   46.94140625
+   47.171875
   ],
   [
    "cistransbck",
-   46.94140625
+   47.171875
   ],
   [
    "getss",
-   46.94140625
+   47.171875
   ],
   [
    "clashes",
-   46.94140625
+   47.171875
   ],
   [
    "ligands",
-   46.94140625
+   47.171875
   ],
   [
    "chains",
-   46.94140625
+   47.171875
   ],
   [
    "fixside",
-   46.94140625
+   47.171875
   ],
   [
    "add_hydrogen",
-   47.5078125
+   47.625
   ]
  ],
  "metals": {
@@ -231,16 +238,25 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 660,
+  "num_h": 0,
   "num_res": 134,
   "num_wat": 58,
+  "res_h": 0,
   "res_hetats": 58,
   "res_insc": 0,
   "res_ligands": 0,

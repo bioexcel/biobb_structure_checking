@@ -107,7 +107,7 @@
    "LYS P346",
    "TYR P350",
    "TYR P351",
-   "CGLU P353"
+   "GLU P353"
   ],
   "opts": "--add_mode auto --add_charges ADT"
  },
@@ -141,17 +141,15 @@
     "OXT"
    ],
    "fixed": [
-    "CGLU P353"
+    "GLU P353"
    ],
    "selected": "All"
   },
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "ids": {
-   "D": 2,
-   "P": 1
-  },
+  "D": "DNA",
+  "P": "Protein",
   "selected": {
    "P": 1
   }
@@ -312,16 +310,31 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "D": {
+    "DNA": 1.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   },
+   "P": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "P": 1
+   "P": "Protein"
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 4905,
+  "num_h": 2455,
   "num_res": 311,
   "num_wat": 0,
+  "res_h": 311,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
@@ -356,17 +369,32 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "D": {
+    "DNA": 1.0,
+    "Other": 0.0,
+    "Protein": 0.0,
+    "RNA": 0.0
+   },
+   "P": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "D": 2,
-   "P": 1
+   "D": "DNA",
+   "P": "Protein"
   },
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
   "num_ats": 2903,
+  "num_h": 0,
   "num_res": 393,
   "num_wat": 63,
+  "res_h": 0,
   "res_hetats": 63,
   "res_insc": 0,
   "res_ligands": 0,

@@ -1,3 +1,26 @@
+## v3.9.12 (2022.3)
+### Extended functions
+- Structure details
+  - Added hydrogen atoms count
+- Input files
+  - Support for PQR format
+- backbone, sequences
+  - Input Sequences are automatically assigned to the appropriate chain. No special requirements for FASTA headers
+- add_hydrogen
+  - Extended to support Nucleic Acids
+- sequences
+  - Structure sequence is always reported even in the absence of canonical one
+### Bug Fixes
+- Fixed banner format
+- Fixed residue id on metals output
+- Removed required usage N and C terms 4-letter residue names except of requested output
+## v3.9.11 (2021.4)
+
+### New Functions
+- Support for PDBQT files
+- add_hydrogen
+  - Multiple charge sets accepted (currently ADP, CMIP)
+
 ## v3.9.10 (2021.4)
 
 ### New Functions
@@ -10,10 +33,7 @@
   - Superimpose current models
   - Output models as multiple PDB files
 
-- backbone
-  - Accept standard FASTA files as sequence input
-  - Accept multiple templates
-  - Main options default to "none"
+### Bug Fixes
 
 - add_hydrogen
   - Extended to Nucleic Acids
