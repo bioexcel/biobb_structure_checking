@@ -361,8 +361,9 @@ class SequenceData():
                     pdb_seq = Seq(sequence, IUPAC.protein)
                 else:
                     pdb_seq = Seq(sequence)
+
                 seq = SeqRecord(
-                        pdb_seq,
+                    pdb_seq,
                     'pdb_sq_' + ch_id,
                     '',
                     'Frags: ' + ','.join(frags_num)

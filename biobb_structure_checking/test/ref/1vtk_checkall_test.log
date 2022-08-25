@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
+Structure exists: 'tmpPDB/vt/1vtk_1.pdb'
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
  Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
@@ -29,7 +29,7 @@ TMP A500/2
 
 Running models.
 2 Model(s) detected
-Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
+Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit
 Running  check_only. Nothing else to do.
 Running chains.
 1 Chain(s) detected
@@ -89,10 +89,10 @@ Running backbone.
  SER A149/2 OXT
  GLY A264/2 OXT
 4 Backbone breaks found
- SER A149/1 - PRO A153/1 
- GLY A264/1 - PRO A280/1 
- SER A149/2 - PRO A153/2 
- GLY A264/2 - PRO A280/2 
+ SER A149/1 - PRO A153/1
+ GLY A264/1 - PRO A280/1
+ SER A149/2 - PRO A153/2
+ GLY A264/2 - PRO A280/2
 No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
@@ -132,8 +132,7 @@ No severe clashes detected
 No negative clashes detected
 Running  check_only. Nothing else to do.
 Running sequences.
-Sequences command requires either mmCIF input or --sequence
-MPTLLRVYIDGPHGMGKTTTTQLLVALGSRDDIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAGS---PPPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG---------------PRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEAN <class 'Bio.Seq.Seq'>
+Canonical Sequences requires either mmCIF input or --sequence
 Structure sequence
 >pdb_sq_A Frags: 46-149,153-264,280-376
 MPTLLRVYIDGPHGMGKTTTTQLLVALGSRDDIVYVPEPMTYWRVLGASETIANIYTTQH

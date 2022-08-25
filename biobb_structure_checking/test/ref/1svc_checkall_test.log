@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
+Structure exists: 'tmpPDB/sv/1svc_1.pdb'
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1svc.1 loaded
  Title: nfkb p50 homodimer bound to dna
@@ -24,7 +24,7 @@ Structure pdb:1svc.1 loaded
 
 Running models.
 2 Model(s) detected
-Models do not superimpose, RMSd:   50.749 A, guessed as BioUnit 
+Models do not superimpose, RMSd:   50.749 A, guessed as BioUnit
 Running  check_only. Nothing else to do.
 Running chains.
 2 Chain(s) detected
@@ -150,9 +150,7 @@ No severe clashes detected
  GLU P287/2.OE1 GLU P289/2.OE2    3.216 A
 Running  check_only. Nothing else to do.
 Running sequences.
-Sequences command requires either mmCIF input or --sequence
-AGATGGGGAATCCCCTAGA <class 'str'>
-PYLQILEQPKQRGFRFRYVAEGPSHGGLPGASSEKNKKSYPQVKICNYVGPAKVIVQLVTNGKNIHLHAHSLVGKHCEDGICTVTAGPKDMVVGFANLGILHVTKKKVFETLEARMTEACIRGYNPGLLVHPDLAYLQAEGGGDRQLGDREKELIRQAALQQTKEMDLSVVRLMFTAFLPDSTGSFTRRLEPVVSDAIYDSKAPNASNLKIVRMDRTAGCVTGGEEIYLLCDKVQKDDIQIRFYEEEENGGVWEGFGDFSPTDVHRQFAIVFKTPKYKDINITKPASVFVQLRRKSDLETSEPKPFLYYPE <class 'Bio.Seq.Seq'>
+Canonical Sequences requires either mmCIF input or --sequence
 Structure sequence
 >pdb_sq_D Frags: 1-19
 AGATGGGGAATCCCCTAGA
