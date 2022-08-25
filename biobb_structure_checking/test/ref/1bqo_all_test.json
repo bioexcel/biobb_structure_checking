@@ -54,7 +54,7 @@
    "ASP A237",
    "ASP A238",
    "TYR A246",
-   "CASP A251",
+   "ASP A251",
    "ARG B84",
    "LYS B91",
    "ARG B93",
@@ -142,7 +142,7 @@
     "OXT"
    ],
    "fixed": [
-    "CASP A251"
+    "ASP A251"
    ],
    "selected": "All"
   },
@@ -307,8 +307,8 @@
   "chain_guess_details": {
    "A": {
     "DNA": 0.0,
-    "Other": 0.00591715976331364,
-    "Protein": 0.9940828402366864,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    },
    "B": {
@@ -406,8 +406,8 @@
   "chain_guess_details": {
    "A": {
     "DNA": 0.0,
-    "Other": 0.00591715976331364,
-    "Protein": 0.9940828402366864,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    },
    "B": {

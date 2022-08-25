@@ -31,8 +31,8 @@ class MutationManager():
     def prepare_mutations(self, struc, stop_on_error=True):
         """  Check mutation_list and unroll chains/models."""
         for mut in self.mutation_list:
-            mut.prepare(struc, stop_on_error) 
-            
+            mut.prepare(struc, stop_on_error)
+
     def apply_mutations(self, mutation_map, residue_lib, remove_h='mut'):
         """ Perform the requested mutations."""
         mutated_res = []
@@ -80,7 +80,7 @@ class MutationSet():
                         self.mutations.append({
                             'model':model.get_id(),
                             'chain':chn,
-                            'type': self.chain_ids[chn],                    
+                            'type': self.chain_ids[chn],
                             'residue':old_id,
                             'new_id':new_id,
                             'resobj': res

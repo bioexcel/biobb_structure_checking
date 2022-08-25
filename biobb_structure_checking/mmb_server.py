@@ -16,7 +16,7 @@ ALT_SERVERS = {
 }
 
 class MMBPDBList(PDBList):
-    """ 
+    """
     | mmb_server MMBPDBList
     | Replacement class to support access to biounits at MMB PDB Server.
     | Modified from original BioPython code.
@@ -42,26 +42,27 @@ class MMBPDBList(PDBList):
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
             MMB PDB API. Defaults to Biopython super() if standard server is used.
         """
-        if self.pdb_server not in ALT_SERVERS:
+        if self.pdb_server.lower() not in ALT_SERVERS:
             return super().retrieve_pdb_file(
                 pdb_code, obsolete, pdir, file_format, overwrite
             )
 
         self._verbose = True
-        
+
         code = pdb_code.lower()
 
-        if file_format in ('pdb', 'mmCif', 'xml'):
-            if file_format == 'mmCif':
-                file_format = 'cif'
-            if not biounit:
-                url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
-            else:
-                file_format = 'pdb'
-                url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
-        else:
+        if file_format not in ('pdb', 'cif', 'mmCif', 'xml'):
             print(f'Error: MMB/BSC Server: File format {file_format} not supported')
             sys.exit(1)
+
+        if file_format == 'mmCif':
+            file_format = 'cif'
+
+        if not biounit:
+            url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
+        else:
+            file_format = 'pdb'
+            url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
         #Where does the final PDB file get saved?
         if pdir is None:
             path = self.local_pdb if not obsolete else self.obsolete_pdb
@@ -87,6 +88,7 @@ class MMBPDBList(PDBList):
                 'xml': '%s.xml'
             }
             final_file = os.path.join(path, final[file_format] % code)
+
         # Skip download if the file already exists
         if not overwrite:
             if os.path.exists(final_file):

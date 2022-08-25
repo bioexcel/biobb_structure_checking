@@ -4,33 +4,3 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
-Structure pdb:1ark loaded
- PDB id: 1ARK
- Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
- Experimental method: SOLUTION NMR
- Keywords: TRANSFERASE
-
- Num. models: 15 (type: BioUnit,   35.032 A)
- Num. chains: 1 (A: Protein)
- Num. residues:  900
- Num. residues with ins. codes:  0
- Num. residues with H atoms: 900 (total 6630 H atoms)
- Num. HETATM residues:  0
- Num. ligands or modified residues:  0
- Num. water mol.:  0
- Num. atoms:  13575
-
-Running models. Options: --select 5
-15 Model(s) detected
-Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
-Selecting model num. 5
-Final Num. models: 1
-Final Num. chains: 1 (A: Protein)
-Final Num. residues:  60
-Final Num. residues with ins. codes:  0
-Final Num. residues with H atoms: 60 (total 442 H atoms)
-Final Num. HETATM residues:  0
-Final Num. ligands or modified residues:  0
-Final Num. water mol.:  0
-Final Num. atoms:  905
-Structure saved on 1ark_models_5_test.pdb
