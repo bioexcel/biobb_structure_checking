@@ -23,11 +23,11 @@ class StructureChecking():
     """
     | biobb_structure_checking.StructureChecking
     | Main class to control structure checking functionality
-    | Provides support for to check_structure command line 
-    | Load directly for Jupyter Notebook or python scripts. 
-    
+    | Provides support for to check_structure command line
+    | Load directly for Jupyter Notebook or python scripts.
+
     Args:
-        base_dir_path (str): Base directory path where application resides. 
+        base_dir_path (str): Base directory path where application resides.
         args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html. Recommended 'non-interactive':True for Notebook use.
     """
     def __init__(self, base_dir_path, args):
@@ -74,7 +74,7 @@ class StructureChecking():
     def help(self, command=None):
         """ StructureChecking.help
         Provides help on StructureChecking commands
-        
+
         Args:
             command (str) : (None) Requested command. If empty returns all commands help
         """
@@ -87,7 +87,7 @@ class StructureChecking():
         if self.args['command'] == 'command_list':
             self.command_list(self.args['options'])
         elif self.args['command'] == 'checkall':
-            self.checkall()
+            self.checkall(self.args['options'])
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
         elif self.args['command'] != 'load':
@@ -103,7 +103,7 @@ class StructureChecking():
                     output_structure_path = self._save_structure(
                         self.args['output_structure_path'],
                         self.args['rename_terms'],
-                        split_models = '--save_split' in self.args['options']
+                        split_models='--save_split' in self.args['options']
                     )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
 
@@ -150,38 +150,38 @@ class StructureChecking():
                 print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
             except IOError:
                 print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
-    
+
     def print_stats(self, prefix=None):
         """ StructureChecking.print_stats
         Print statistics on the loaded structure
-        
+
         Args:
             prefix (str): (None) Prefix to add to the output lines for identification.
         """
         self.strucm.calc_stats()
-        if prefix is None: 
+        if prefix is None:
             prefix = ''
         self.strucm.print_stats(prefix)
 
     def command_list(self, opts):
         """ StructureChecking.command_list
         Manages command_list workflows
-        
+
         Args:
-            opts (str | list(str)): Command options as str or str list. 
+            opts (str | list(str)): Command options as str or str list.
         """
         try:
             opts = cts.DIALOGS.get_parameter('command_list', opts)
             op_list = opts['op_list']
         except NoDialogAvailableError as err:
             print(err.message)
-        
+
         if not op_list:
             if not self.args['non_interactive']:
                 op_list = ParamInput('Command List File', False).run(op_list)
             else:
                 sys.exit(f'ERROR: command list not provided and non_interactive')
-            
+
 
         if os.path.isfile(op_list):
             command_list = []
@@ -195,7 +195,7 @@ class StructureChecking():
                 sys.exit('{} {}'.format(cts.MSGS['ERROR_OPEN_FILE'], op_list))
         else:
             command_list = op_list.split(';')
-            
+
         i = 1
         for line in command_list:
             if not self.args['quiet']:
@@ -221,12 +221,12 @@ class StructureChecking():
 
         self.args['check_only'] = old_check_only
 
-    # def fixall(self):
-    #     """ StructureChecking.fixall
-    #     Fix all using defaults. Not implemented (yet)
-    #     """
-    #     # TODO Implement method fixall
-    #     print("Fixall not implemented (yet)")
+    def fixall(self, opts=None):
+        """ StructureChecking.fixall
+         Fix all using defaults. Not implemented (yet)
+        """
+        # TODO Implement method fixall
+        print("Fixall not implemented (yet)")
 
     def revert_changes(self):
         """ StructureChecking.revert_changes
@@ -239,7 +239,7 @@ class StructureChecking():
     def _run_method(self, command, opts):
         """ Private. StructureChecking._run_method
         Run check and fix methods for specific command
-        
+
         Args:
             command (str): Command to run
             opts (str | list(str) | dict): Command options, passed from callers
@@ -277,7 +277,7 @@ class StructureChecking():
                 f_fix = getattr(self, '_' + command + '_fix')
             except AttributeError:
                 sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
-            if isinstance(opts, str) or isinstance(opts, list):
+            if isinstance(opts, (str, list)):
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
                 else:
@@ -290,12 +290,12 @@ class StructureChecking():
                         if k not in opts:
                             opts[k] = defs[k]
             error_status = f_fix(opts, data_to_fix)
-            
+
             if error_status:
                 if isinstance(error_status, tuple):
                     if error_status[1] is None:
                         error_status = [error_status[0]]
-                    
+
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
 
@@ -322,22 +322,24 @@ class StructureChecking():
             print('Canonical sequence')
             can_seq = self.strucm.sequence_data.get_canonical()
             print(can_seq)
-            pdb_seq = self.strucm.sequence_data.get_pdbseq()
-            print('Structure sequence')
-            print(pdb_seq)
-            self.summary['FASTA'] = {
-                'canonical': can_seq,
-                'structure': pdb_seq
-            }
         else:
             print(cts.MSGS['NO_CANONICAL'])
+            can_seq=''
+
+        pdb_seq = self.strucm.sequence_data.get_pdbseq()
+        print('Structure sequence')
+        print(pdb_seq)
+        self.summary['FASTA'] = {
+            'canonical': can_seq,
+            'structure': pdb_seq
+        }
 
         return {}
 
     def models(self, opts=None):
         """ StructureChecking.models
         Detect/Select Models. Check only with no options. Options accepted as command-line string, or python dictionary.
-        
+
         Args:
             opts (str | dict - Options dictionary):
                 * select (int) - model(s) to select
@@ -371,7 +373,7 @@ class StructureChecking():
             select_model = opts
         else:
             select_model = opts['select']
-        
+
         input_line = ParamInput('Select Model Num', self.args['non_interactive'], set_none='All')
         input_line.add_option_all()
         input_line.add_option_numeric(
@@ -387,12 +389,12 @@ class StructureChecking():
         if input_option != 'all':
             self.strucm.select_model(select_model)
 
-        if (opts['superimpose']):
+        if opts['superimpose']:
             self.strucm.superimpose_models()
             print(cts.MSGS['SUPIMP_MODELS'].format(self.strucm.models_type["rmsd"]))
             self.summary['models']['superimp_rmsd'] = self.strucm.models_type["rmsd"]
 
-        if (opts['save_split']): # tag as modified to force save
+        if opts['save_split']: # tag as modified to force save
             self.strucm.modified = True
 
         self.summary['models']['selected'] = select_model
@@ -403,11 +405,11 @@ class StructureChecking():
     def chains(self, opts=None):
         """ StructureChecking.chains
         Detect/Select Chains. Check only with no options. Options accepted as command-line string, or python dictionary.
-        
+
         Args:
-            opts (str | dict - Options dictionary): 
-                * select: 
-                    * **chain_id_list** - List of chains to retain (comma separated, case sensitive), 
+            opts (str | dict - Options dictionary):
+                * select:
+                    * **chain_id_list** - List of chains to retain (comma separated, case sensitive),
                     * **protein** - Select all protein chains,
                     * **na** - Select all NA chains,
                     * **rna** - Select all RNA chains,
@@ -430,8 +432,8 @@ class StructureChecking():
                         ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]
                     )
                 )
-        self.summary['chains'] = {k:mu.CHAIN_TYPE_LABELS[v] for k,v in self.strucm.chain_ids.items()}
-        
+        self.summary['chains'] = {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.strucm.chain_ids.items()}
+
         return len(self.strucm.chain_ids) > 1
 
     def _chains_fix(self, opts, fix_data=None):
@@ -439,7 +441,7 @@ class StructureChecking():
             select_chains = opts
         else:
             select_chains = opts['select']
-        
+
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'], set_none='All')
         input_line.add_option_all()
@@ -506,13 +508,13 @@ class StructureChecking():
     def altloc(self, opts=None):
         """ StructureChecking.altloc
         Detect/Select Alternative Locations. Check only with no options. Options accepted as command-line string, or python dictionary.
-        
+
         Args:
             opts (str | dict - Options dictionary):
-                * select: 
+                * select:
                     * **occupancy** - select higher occupancy,
                     * **alt_id** - All atoms of the indicated alternative
-                    * **list** of res_id:alt_id - Indicate selection per atom                
+                    * **list** of res_id:alt_id - Indicate selection per atom
         """
         self._run_method('altloc', opts)
 
@@ -556,7 +558,7 @@ class StructureChecking():
             select_altloc = opts
         else:
             select_altloc = opts['select']
-            
+
         # Prepare the longest possible list of alternatives
         altlocs = []
         max_al_len = 0
@@ -583,7 +585,7 @@ class StructureChecking():
 
         if input_option == 'error':
             return cts.MSGS['UNKNOWN_SELECTION'], select_altloc
-        
+
         if input_option != 'all':
             print('Selecting location {}'.format(select_altloc))
             if input_option in ('occup', 'altids'):
@@ -620,7 +622,7 @@ class StructureChecking():
     def metals(self, opts=None):
         """ StructureChecking.metals
         Detect/Remove Metals. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * remove:
@@ -661,7 +663,7 @@ class StructureChecking():
             remove_metals = opts
         else:
             remove_metals = opts['remove']
-        
+
         input_line = ParamInput("Remove", self.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
@@ -712,7 +714,7 @@ class StructureChecking():
     def water(self, opts=None):
         """ StructureChecking.water
         Detect/Select Remove Water molecules. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * remove: Yes - Remove All Water molecules
@@ -741,7 +743,7 @@ class StructureChecking():
             remove_wat = opts
         else:
             remove_wat = opts['remove']
-        
+
         input_line = ParamInput('Remove', self.args['non_interactive'], set_none='no')
         input_line.add_option_yes_no()
         input_line.set_default('yes')
@@ -771,7 +773,7 @@ class StructureChecking():
     def ligands(self, opts=None):
         """ StructureChecking.ligands
         Detect/Remove Ligands. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * remove:
@@ -867,7 +869,7 @@ class StructureChecking():
     def rem_hydrogen(self, opts=None):
         """ StructureChecking.add_hydrogen
         Remove Hydrogen atoms from structure. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * remove (str): Yes - remove all hydrogen atoms
@@ -914,10 +916,10 @@ class StructureChecking():
     def getss(self, opts=None):
         """ StructureChecking.getss
         Detect SS Bonds. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
-                * mark: 
+                * mark:
                     * **all** - Rename all reported cys residues as CYX,
                     * **residue_list** - Rename indicated residues
         """
@@ -990,7 +992,7 @@ class StructureChecking():
     def amide(self, opts=None):
         """  StructureChecking.amide
         Detect/Fix Amide atoms Assignment. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * fix:
@@ -1094,7 +1096,7 @@ class StructureChecking():
     def chiral(self, opts=None):
         """ StructureChecking.chiral
         Detect/Fix Improper side chain chirality. Check only with no options.  Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * fix:
@@ -1259,10 +1261,10 @@ class StructureChecking():
     def fixside(self, opts=None):
         """  StructureChecking.fixside
         Complete side chains (heavy atoms, protein only). Check only with no options.  Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
-                * fix: 
+                * fix:
                     * **all** - Fix all residues
                     * **residue_list** - Fix indicated residues
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
@@ -1387,10 +1389,10 @@ class StructureChecking():
     def add_hydrogen(self, opts=None):
         """ StructureChecking.add_hydrogen
         Add Hydrogen Atoms to the structure. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
-                * add_mode: 
+                * add_mode:
                     * **auto** - Add hydrogen atom considering pH 7.0.
                     * **pH** (float) - Set explicit pH value.
                     * **list** (str) - Explicit residue list as [*:]HisXXHid.
@@ -1432,11 +1434,11 @@ class StructureChecking():
     def _add_hydrogen_fix(self, opts, fix_data=None):
         if not fix_data:
             return False
-        
+
         if not self.strucm.fixed_side and not opts['no_fix_side']:
             print("WARNING: fixing side chains, override with --no_fix_side")
             self.fixside(['--fix', 'all'])
-        
+
         # Fixing previously marked N and C terms
         self.strucm.revert_terms()
 
@@ -1538,7 +1540,7 @@ class StructureChecking():
     def mutateside(self, mut_list):
         """ StructureChecking.mutateside
         Mutate side chain with minimal atom replacement. Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * mut (str) - List of mutations
@@ -1563,12 +1565,12 @@ class StructureChecking():
         input_line = ParamInput('Mutation list', self.args['non_interactive'], set_none='')
 
         mut_list = input_line.run(mut_list)
-        
+
         if mut_list == '':
             if self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
-            return False   
-        
+            return False
+
         mutations = self.strucm.prepare_mutations(mut_list)
 
         print(cts.MSGS['MUTATIONS_TO_DO'])
@@ -1593,7 +1595,7 @@ class StructureChecking():
     def backbone(self, opts=None):
         """ StructureChecking.backbone
         Analyze/Fix main chain missing atoms and fragments (protein only). Check only with no options. Options accepted as command-line string, or python dictionary.
-                
+
         Args:
             opts (str | dict - Options dictionary):
                 * fix_atoms (str - Fix missing O, OXT backbone atoms):
@@ -1608,7 +1610,7 @@ class StructureChecking():
                     * **breaks** - Add caps to backbone breaks
                     * **terms** - Add caps to true terminals
                 * extra_gap (int) - ('0') Recover addiciontal residues from the model to improve match (experimental)
-                * no_recheck (bool) - (False) Do not recheck backbone after fixing 
+                * no_recheck (bool) - (False) Do not recheck backbone after fixing
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
         """
         self._run_method('backbone', opts)
@@ -1736,7 +1738,7 @@ class StructureChecking():
                 continue
             else:
                 fixed_main_res += fixed_main
-            
+
             self.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
             if fixed_main:
                 self.strucm.modified = True
@@ -1889,7 +1891,8 @@ class StructureChecking():
             if self.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return []
-        elif input_option == 'terms':
+
+        if input_option == 'terms':
             to_fix = true_term
         elif input_option == 'brks':
             to_fix = [pair for pair in term_res if pair[1] in brk_res]
@@ -2045,11 +2048,11 @@ class StructureChecking():
         self.summary['stats'] = strucm.get_stats()
 
         return strucm
-    
-    def save_structure(self, output_structure_path, rename_terms=False, split_models=False, keep_resnames=False):
+
+    def save_structure(self, output_structure_path, rename_terms=False, split_models=False):
         """ StuctureChecking.save_structure
         Saving the current structure in a the output file
-        
+
         Args:
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
@@ -2057,24 +2060,23 @@ class StructureChecking():
             keep_resnames (bool): (False) Keep canonical residue names
         """
         return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
-    
+
     #Kept for back compatibility
     def _save_structure(self, output_structure_path, rename_terms=False, split_models=False):
         """ Private. StuctureChecking._save_structure
         Saving the current structure in a the output file
-        
+
         Args:
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
-            keep_resnames (bool): (False) Keep canonical residue names        
-        """
+            """
         input_line = ParamInput(
             "Enter output structure path",
             self.args['non_interactive'],
             set_none='fixed_structure.pdb'
         )
-        
+
         output_structure_path = input_line.run(output_structure_path)
         if self.args['output_format']:
             output_format = self.args['output_format']
@@ -2083,23 +2085,23 @@ class StructureChecking():
 
         if not split_models:
             self.strucm.save_structure(
-                output_structure_path, 
-                rename_terms=rename_terms, 
-                output_format=output_format, 
+                output_structure_path,
+                rename_terms=rename_terms,
+                output_format=output_format,
                 keep_resnames=self.args['keep_canonical']
             )
         else:
             for mod in self.strucm.st.get_models():
                 output_path = f'{output_structure_path}_{mod.serial_num}.{output_format}'
                 self.strucm.save_structure(
-                    output_path, 
-                    mod_id = mod.id, 
-                    rename_terms=rename_terms, 
-                    output_format=output_format, 
+                    output_path,
+                    mod_id=mod.id,
+                    rename_terms=rename_terms,
+                    output_format=output_format,
                     keep_resnames=self.args['keep_canonical']
                 )
             print(cts.MSGS["SPLIT_MODELS"])
-        
+
         return output_structure_path
 
     def _check_report_clashes(self, residue_list=None, contact_types=None):

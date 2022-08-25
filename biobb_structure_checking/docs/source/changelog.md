@@ -1,3 +1,20 @@
+## v3.9.12 (2022.3)
+### Extended functions
+- Structure details
+  - Added hydrogen atoms count
+- Input files
+  - Support for PQR format
+- backbone, sequences
+  - Input Sequences are automatically assigned to the appropriate chain. No special requirements for FASTA headers
+- add_hydrogen
+  - Extended to support Nucleic Acids
+- sequences
+  - Structure sequence is always reported even in the absence of canonical one
+
+### Bug Fixes
+- Fixed banner format
+- Fixed residue id on metals output
+- Removed required usage N and C terms 4-letter residue names except of requested output
 ## v3.9.11 (2021.4)
 
 ### New Functions
@@ -71,7 +88,7 @@
 
 ### Extended functions
 - mutateside
-    - added support for mutation of DNA/RNA residues
+    - added support for mutation of DNA residues
     - --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes)
 - chains
     - allows to select chains according to molecular type (protein | dna | rna | na).

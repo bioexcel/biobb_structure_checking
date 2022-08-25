@@ -36,7 +36,7 @@
         2.6.2 Consider -SS- DONE
         2.6.3 PDBQT|PQR|CMIP formats DONE
         2.5.6 Consider Cap residues DONE
-        2.6.4 Add hydrogens for NA chains
+        2.6.4 Add hydrogens for NA chains DONE
         2.6.5 Prepare input for AutoDock with flexible residues
     2.7. Complete backbone (backbone) DONE 
         2.7.1 Complete main chains DONE

@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -128,7 +128,7 @@ Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 1 Steric polar_acceptor clashes detected
- CSER A149.OXT GLN A349.OE1    2.827 A
+ SER A149.OXT GLN A349.OE1    2.827 A
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
@@ -154,7 +154,7 @@ No severe clashes detected
 6 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
- CSER A149.OXT GLN A349.OE1    2.827 A
+ SER A149.OXT GLN A349.OE1    2.827 A
  PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
  GLU A225.OE1 TMP A500.O3'    2.895 A
