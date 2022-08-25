@@ -322,15 +322,17 @@ class StructureChecking():
             print('Canonical sequence')
             can_seq = self.strucm.sequence_data.get_canonical()
             print(can_seq)
-            pdb_seq = self.strucm.sequence_data.get_pdbseq()
-            print('Structure sequence')
-            print(pdb_seq)
-            self.summary['FASTA'] = {
-                'canonical': can_seq,
-                'structure': pdb_seq
-            }
         else:
             print(cts.MSGS['NO_CANONICAL'])
+            can_seq=''
+
+        pdb_seq = self.strucm.sequence_data.get_pdbseq()
+        print('Structure sequence')
+        print(pdb_seq)
+        self.summary['FASTA'] = {
+            'canonical': can_seq,
+            'structure': pdb_seq
+        }
 
         return {}
 

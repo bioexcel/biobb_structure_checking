@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.11'
+VERSION = '3.9.12'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -360,7 +360,7 @@ MSGS = {
     'FIX_COMMAND_NOT_FOUND': 'Error: {} command fix not implemented',
     'CHECK_ONLY_DONE': 'Running  check_only. Nothing else to do.',
     #sequences
-    'NO_CANONICAL': 'Sequences command requires either mmCIF input or --sequence',
+    'NO_CANONICAL': 'Canonical Sequences requires either mmCIF input or --sequence',
     #models
     'MODELS_FOUND': '{} Model(s) detected',
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',
