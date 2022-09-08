@@ -10,6 +10,8 @@
   - Extended to support Nucleic Acids
 - sequences
   - Structure sequence is always reported even in the absence of canonical one
+- chains
+  - Unlabelled chains can be fixed. 
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
