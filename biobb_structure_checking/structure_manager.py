@@ -97,6 +97,7 @@ class StructureManager:
 
         self.chain_ids = {}
         self.chain_details = {}
+        self.has_chains_to_rename = False
 
         self.backbone_links = []
         self.modified_residue_list = []
@@ -992,12 +993,30 @@ class StructureManager:
         Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
         """
         self.chain_ids = {}
+        self.has_chains_to_rename = False
         for chn in self.st.get_chains():
             if not self.biounit and chn.get_parent().id > 0:
                 continue
             guess = mu.guess_chain_type(chn)
             self.chain_ids[chn.id] = guess['type']
             self.chain_details[chn.id] = guess['details']
+            if chn.id == ' ':
+                self.has_chains_to_rename = self.has_chains_to_rename  or True
+    def rename_empty_chain_label(self, new_label) -> None:
+        if not self.has_chains_to_rename:
+            return ''
+        if new_label == 'auto':
+            new_label_char = 65
+            while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
+                new_label_char =+1
+        new_label = chr(new_label_char)
+        for mod in self.st:
+            for chn in mod:
+                if chn.id == ' ':
+                    chn.id = new_label
+        self.set_chain_ids()
+        self.modified = True
+
 
     def has_NA(self):
         """ Checks if any of the chains is NA"""
