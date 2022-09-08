@@ -63,8 +63,9 @@ class ParamInput():
         """ Add a free text option to dialog """
         self.options.append({
             'label':label,
-            'type':input,
+            'type': 'text',
         })
+
     def set_default(self, value):
         """ Set default value for parameter"""
         self.default = value
@@ -139,6 +140,8 @@ class ParamInput():
                         opt_val = int(val)
                     ok = ok and (opt['min'] <= opt_val <= opt['max'])
                 input_ok = ok
+            elif opt['type'] == 'text':
+                input_ok = opt_value
             if not input_ok:
                 iopt += 1
         return input_ok, iopt, opt_value
