@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.10.0'
+VERSION = '3.10.1'
 
 
 # Default locations and settings

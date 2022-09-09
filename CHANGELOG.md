@@ -1,4 +1,4 @@
-## v3.10.0 (2022.3)
+## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details
   - Added hydrogen atoms count
@@ -11,7 +11,7 @@
 - sequences
   - Structure sequence is always reported even in the absence of canonical one
 - chains
-  - Unlabelled chains can be fixed. 
+  - Unlabelled chains can be fixed.
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
