@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
@@ -15,6 +15,7 @@ Structure pdb:1bqo loaded
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  428
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  86
  Num. ligands or modified residues:  11
  Num. water mol.:  75
@@ -50,6 +51,7 @@ Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  418
 Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
 Final Num. HETATM residues:  76
 Final Num. ligands or modified residues:  1
 Final Num. water mol.:  75

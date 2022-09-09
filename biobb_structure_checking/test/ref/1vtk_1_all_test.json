@@ -116,7 +116,7 @@
    "negative": [],
    "polar_acceptor": [
     {
-     "at1": "CSER A149.OXT",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     }
@@ -133,17 +133,15 @@
     "OXT"
    ],
    "fixed": [
-    "CSER A149",
-    "CGLY A264"
+    "SER A149",
+    "GLY A264"
    ],
    "selected": "All"
   },
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "ids": {
-   "A": 1
-  }
+  "A": "Protein"
  },
  "chiral": {
   "n_chirals": 42,
@@ -180,7 +178,7 @@
      "dist": 3.0609
     },
     {
-     "at1": "CSER A149.OXT",
+     "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
     },
@@ -235,16 +233,25 @@
  "final_stats": {
   "biounit": "1",
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
   "num_ats": 4809,
+  "num_h": 2416,
   "num_res": 313,
   "num_wat": 0,
+  "res_h": 313,
   "res_hetats": 0,
   "res_insc": 0,
   "res_ligands": 0,
@@ -283,7 +290,7 @@
  },
  "models": {
   "nmodels": 2,
-  "selected": 1,
+  "selected": "1",
   "type": {
    "rmsd": 42.5525,
    "type": 2
@@ -295,9 +302,16 @@
  "stats": {
   "biounit": "1",
   "ca_only": false,
-  "chain_details": {},
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
   "chain_ids": {
-   "A": 1
+   "A": "Protein"
   },
   "models_type": {
    "rmsd": 42.5525,
@@ -306,8 +320,10 @@
   "nchains": 1,
   "nmodels": 2,
   "num_ats": 4982,
+  "num_h": 0,
   "num_res": 734,
   "num_wat": 104,
+  "res_h": 0,
   "res_hetats": 108,
   "res_insc": 0,
   "res_ligands": 4,

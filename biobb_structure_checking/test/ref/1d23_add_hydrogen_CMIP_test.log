@@ -24,33 +24,35 @@ Metal/Ion residues found
  MG A22
  MG B21
 
-Running mutateside. Options: --mut DA3DG
-#WARNING: Unknown residue B:DA3
-Mutations to perform
-*:DA3DG
-Replacing  DA A3 into DG
-  Renaming N6 to O6
-  Adding new atom N2
 
-Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-1 Steric polar_acceptor clashes detected
-  DG A3.O6     DT B18.O4      2.996 A
-1 Steric polar_donor clashes detected
-  DG A3.N1     DT B18.N3      2.859 A
-No positive clashes detected
-No negative clashes detected
+Step 1: water --remove yes
+Running water. Options: --remove yes
+154 Water molecules detected
+154 Water molecules removed
+
+Step 2:  add_hydrogen --add_mode auto --add_charges CMIP
+Running add_hydrogen. Options: --add_mode auto --add_charges CMIP
+No residues requiring selection on adding H atoms
+WARNING: fixing side chains, override with --no_fix_side
+Running fixside. Options: --fix all
+No residues with missing or unknown side chain atoms found
+Selection: auto
+Updating partial charges and atom types
+Warning: MG not found in residue library atom charges set to 0.
+Warning: MG not found in residue library atom charges set to 0.
+Total assigned charge:     -18.00
+Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: DNA, B: DNA)
-Final Num. residues:  176
+Final Num. residues:  22
 Final Num. residues with ins. codes:  0
-Final Num. residues with H atoms: 0
-Final Num. HETATM residues:  156
+Final Num. residues with H atoms: 20 (total 228 H atoms)
+Final Num. HETATM residues:  2
 Final Num. ligands or modified residues:  2
-Final Num. water mol.:  154
-Final Num. atoms:  561
+Final Num. water mol.:  0
+Final Num. atoms:  634
 Metal/Ion residues found
  MG A22
  MG B21
-Structure saved on 1d23_dnamut_test.pdb
+Total charge -18.000
+Structure saved on 1d23.pdb

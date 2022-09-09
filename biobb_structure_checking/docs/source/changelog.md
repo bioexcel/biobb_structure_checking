@@ -1,48 +1,29 @@
 ## v3.10.0 (2022.3)
+### Extended functions
+- Structure details
+  - Added hydrogen atoms count
+- Input files
+  - Support for PQR format
+- backbone, sequences
+  - Input Sequences are automatically assigned to the appropriate chain. No special requirements for FASTA headers
+- add_hydrogen
+  - Extended to support Nucleic Acids
+- sequences
+  - Structure sequence is always reported even in the absence of canonical one
+- chains
+  - Unlabelled chains can be fixed.   
 
-### New Functions & bug fixes
-
-- Added atom type to NA Hydrogens
-- Added simple addH Rules to NA
-- Add_hydrogens to NA, nuclebases completed from library
-- Fixed format for A
-- Completed add_hydrogen for NA, tested DNA and RNA
-- Completed NA charges
-- Fixed forced uppercase for FF ids
-- Added Fixside check for NA
-- Added test for add_hydrogen to DNA
-- Fixed atom data for RNA
-- Fixed backbone potentials for NA
-- Reorganized help for input formats
-- Merge branch 'fixInputFormatsDocs' into na_Charges
-- Fixed HB acceptors for pirimidines
-- Fixed unexpected behaviour or --rename_terms on NA and hetatms
-- Fixed rename_terms for possible accumulative behaviour
-- Fixed check_extra_atoms corruption of library data; fixed NA atoms in…
-- Added test case
-- Merge branch 'fix_rename_terms' into na_Charges
-- Merge branch 'master' into na_Charges
-- RC Sept 2022 Initial setup
-- Merge branch 'na_Charges' into Sept2022_RC
-- Updated changelog
-- Removed unused file
-- Added support for BSC PDB server
-- Style fixes
-- Fixed access to MMB servers
-- Removed required formats in FASTA headers
-- Updated tests
-- Fixed management terms
-- Sequences returns structure seq in all cases
-- Updated version tag
-- Fixed sequences behaviour on unknown chains
-- Added support for free text dialogs
-- Added fix for unlabelled chains
-- Added fix for unlabelled chains
+### Bug Fixes
+- Fixed banner format
+- Fixed residue id on metals output
+- Removed required usage N and C terms 4-letter residue names except of requested output
 
 ## v3.9.11 (2021.4)
 
 ### New Functions
 - Support for PDBQT files
+- add_hydrogen
+  - Multiple charge sets accepted (currently ADP, CMIP)
 
 ## v3.9.10 (2021.4)
 
@@ -56,9 +37,6 @@
   - Superimpose current models
   - Output models as multiple PDB files
 
-- backbone
-  - Accept standard FASTA files as sequence input
-  - Accept multiple templates
 ### Bug Fixes
 
 ## v3.9.9 (2021.4)
@@ -112,7 +90,7 @@
 
 ### Extended functions
 - mutateside
-    - added support for mutation of DNA/RNA residues
+    - added support for mutation of DNA residues
     - --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes)
 - chains
     - allows to select chains according to molecular type (protein | dna | rna | na).

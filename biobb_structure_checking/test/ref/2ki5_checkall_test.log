@@ -1,7 +1,7 @@
-===============================================================================
-=                   BioBB structure checking utility v3.9.2                   =
-=                 A. Hospital, P. Andrio, J.L. Gelpi 2018-21                  =
-===============================================================================
+================================================================================
+=                   BioBB structure checking utility v3.9.12                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
@@ -16,6 +16,7 @@ Structure pdb:2ki5.1 loaded
  Num. chains: 2 (A: Protein, B: Protein)
  Num. residues:  908
  Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
  Num. HETATM residues:  296
  Num. ligands or modified residues:  4
  Num. water mol.:  292
@@ -162,6 +163,22 @@ No severe clashes detected
 No negative clashes detected
 Running  check_only. Nothing else to do.
 Running sequences.
-Sequences command requires either mmCIF input or --sequence
+Canonical Sequences requires either mmCIF input or --sequence
+Structure sequence
+>pdb_sq_A Frags: 46-70,77-148,154-264,280-375
+MPTLLRVYIDGPHGMGKTTTTQLLV------DIVYVPEPMTYWRVLGASETIANIYTTQH
+RLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG-----PPALTLIFDRHP
+IAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGE
+RLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG---------------PRPHIG
+DTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTS
+GMVQTHVTTPGSIPTICDLARTFAREMGEA
+>pdb_sq_B Frags: 46-73,77-148,154-263,278-375
+MPTLLRVYIDGPHGMGKTTTTQLLVALG---DIVYVPEPMTYWRVLGASETIANIYTTQH
+RLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG-----PPALTLIFDRHP
+IAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGE
+RLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLS--------------AGPRPHIG
+DTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTS
+GMVQTHVTTPGSIPTICDLARTFAREMGEA
+
 Running  check_only. Nothing else to do.
 Structure not modified, not saving. Override with --force_save
