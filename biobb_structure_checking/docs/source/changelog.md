@@ -1,3 +1,44 @@
+## v3.10.0 (2022.3)
+
+### New Functions & bug fixes
+
+- Added atom type to NA Hydrogens
+- Added simple addH Rules to NA
+- Add_hydrogens to NA, nuclebases completed from library
+- Fixed format for A
+- Completed add_hydrogen for NA, tested DNA and RNA
+- Completed NA charges
+- Fixed forced uppercase for FF ids
+- Added Fixside check for NA
+- Added test for add_hydrogen to DNA
+- Fixed atom data for RNA
+- Fixed backbone potentials for NA
+- Reorganized help for input formats
+- Merge branch 'fixInputFormatsDocs' into na_Charges
+- Fixed HB acceptors for pirimidines
+- Fixed unexpected behaviour or --rename_terms on NA and hetatms
+- Fixed rename_terms for possible accumulative behaviour
+- Fixed check_extra_atoms corruption of library data; fixed NA atoms in…
+- Added test case
+- Merge branch 'fix_rename_terms' into na_Charges
+- Merge branch 'master' into na_Charges
+- RC Sept 2022 Initial setup
+- Merge branch 'na_Charges' into Sept2022_RC
+- Updated changelog
+- Removed unused file
+- Added support for BSC PDB server
+- Style fixes
+- Fixed access to MMB servers
+- Removed required formats in FASTA headers
+- Updated tests
+- Fixed management terms
+- Sequences returns structure seq in all cases
+- Updated version tag
+- Fixed sequences behaviour on unknown chains
+- Added support for free text dialogs
+- Added fix for unlabelled chains
+- Added fix for unlabelled chains
+
 ## v3.9.11 (2021.4)
 
 ### New Functions
@@ -38,7 +79,6 @@
 
 ***
 ## v3.9.6 (2021.4)
-
 
 ### Extended functions
 
