@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -25,7 +25,6 @@ Running chains. Options: --select dna
 2 Chain(s) detected
  D: DNA
  P: Protein
-Warning: No backbone atoms defined
 Selecting chain(s) dna
 Final Num. models: 1
 Final Num. chains: 1 (D: DNA)

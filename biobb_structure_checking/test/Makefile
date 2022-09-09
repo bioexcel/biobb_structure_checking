@@ -114,6 +114,8 @@ fixside:
 	@echo "Running fixside on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 fixside --fix None > 2ki5_fixside_None_test.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_fixside_All_test.pdb fixside --fix All > 2ki5_fixside_All_test.log
+	@echo "Running fixside on 1d23_fixtest"
+	${COMMON};${APPBIN} -v -i dna_test/1d23_fixtest.pdb -o 1d23_fixtest_All_test.pdb fixside --fix All > 1d23_fixtest_All_test.log
 
 chiral_bck:
 	@echo "Running chiral_bck on modified 1ark"
@@ -160,7 +162,10 @@ add_hydrogen:
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pdbqt --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_ADT_test.log
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.pqr   --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges ADT' > 1ubq_add_hydrogen_PQR_test.log
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq.cmip  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges CMIP' > 1ubq_add_hydrogen_CMIP_test.log
-	
+	@echo "Running add_hydrogen on 1d23"
+	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23.pdb --output_format cmip  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges CMIP' > 1d23_add_hydrogen_CMIP_test.log
+	@echo "Running add_hydrogen on 1rna"
+	${COMMON};${APPBIN} -v -i pdb:1rna -o 1rna.pdbqt --output_format pdbqt  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges adt' > 1rna_add_hydrogen_ADT_test.log
 all_checks:
 	@echo "Running all checks"
 	@echo " 1ark "

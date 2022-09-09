@@ -10,10 +10,13 @@ from urllib.request import urlcleanup
 
 from Bio.PDB.PDBList import PDBList
 
-MMB_URL_PREFIX = 'http://mmb.irbbarcelona.org/api/pdb'
+ALT_SERVERS = {
+    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
+    'bsc': 'http://mdb-login.bsc.es/api/pdb'
+}
 
 class MMBPDBList(PDBList):
-    """ 
+    """
     | mmb_server MMBPDBList
     | Replacement class to support access to biounits at MMB PDB Server.
     | Modified from original BioPython code.
@@ -39,7 +42,7 @@ class MMBPDBList(PDBList):
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
             MMB PDB API. Defaults to Biopython super() if standard server is used.
         """
-        if self.pdb_server != 'mmb':
+        if self.pdb_server.lower() not in ALT_SERVERS:
             return super().retrieve_pdb_file(
                 pdb_code, obsolete, pdir, file_format, overwrite
             )
@@ -48,17 +51,18 @@ class MMBPDBList(PDBList):
 
         code = pdb_code.lower()
 
-        if file_format in ('pdb', 'mmCif', 'xml'):
-            if file_format == 'mmCif':
-                file_format = 'cif'
-            if not biounit:
-                url = (MMB_URL_PREFIX + '/%s.%s' % (code, file_format))
-            else:
-                file_format = 'pdb'
-                url = (MMB_URL_PREFIX + '/%s_bn%s.pdb' % (code, biounit))
-        else:
-            print('Error: MMB Server: File format', file_format, 'not supported')
+        if file_format not in ('pdb', 'cif', 'mmCif', 'xml'):
+            print(f'Error: MMB/BSC Server: File format {file_format} not supported')
             sys.exit(1)
+
+        if file_format == 'mmCif':
+            file_format = 'cif'
+
+        if not biounit:
+            url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
+        else:
+            file_format = 'pdb'
+            url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
         #Where does the final PDB file get saved?
         if pdir is None:
             path = self.local_pdb if not obsolete else self.obsolete_pdb
@@ -84,22 +88,23 @@ class MMBPDBList(PDBList):
                 'xml': '%s.xml'
             }
             final_file = os.path.join(path, final[file_format] % code)
+
         # Skip download if the file already exists
         if not overwrite:
             if os.path.exists(final_file):
                 if self._verbose:
-                    print("Structure exists: '%s' " % final_file)
+                    print(f"Structure exists: '{final_file}' ")
                 return final_file
 
         # Retrieve the file
         if self._verbose:
             if biounit:
-                print("Downloading PDB structure '%s.%s'..." % (pdb_code, biounit))
+                print(f"Downloading PDB structure '{pdb_code}.{biounit}' from {self.pdb_server} ...")
             else:
-                print("Downloading PDB structure '%s'..." % pdb_code)
+                print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)
         except IOError:
-            print("Desired structure doesn't exists")
+            print(f"Desired structure doesn't exist at {self.pdb_server} server")
         return final_file

@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -294,6 +294,14 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
+Warning: unknown residue CYX
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A268 by HIE

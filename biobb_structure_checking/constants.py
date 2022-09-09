@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.9.11'
+VERSION = '3.9.12'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -74,13 +74,14 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. Formats pdb(qt)|pqr|cif. Remote pdb:{pdbid}'
+    help='Input structure. 1) Fetch from remote pdb:{pdbid} 2) Local file: Formats pdb(qt)|pqr|cif. Format assumed from extension.'
 )
 
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving structures (default=cif|pdb|xml)'
+    help='Format for retrieving remote structures (cif(default)|pdb|xml)',
+    choices=['cif', 'pdb', 'xml']
 )
 
 CMD_LINE.add_argument(
@@ -359,7 +360,7 @@ MSGS = {
     'FIX_COMMAND_NOT_FOUND': 'Error: {} command fix not implemented',
     'CHECK_ONLY_DONE': 'Running  check_only. Nothing else to do.',
     #sequences
-    'NO_CANONICAL': 'Sequences command requires either mmCIF input or --sequence',
+    'NO_CANONICAL': 'Canonical Sequences requires either mmCIF input or --sequence',
     #models
     'MODELS_FOUND': '{} Model(s) detected',
     'MODELS_GUESS': 'Models {} superimpose, RMSd: {:8.3f} A, guessed as {} ',

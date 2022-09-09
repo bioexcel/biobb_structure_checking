@@ -107,7 +107,7 @@
    "LYS P346",
    "TYR P350",
    "TYR P351",
-   "CGLU P353"
+   "GLU P353"
   ],
   "opts": "--add_mode auto --add_charges ADT"
  },
@@ -141,7 +141,7 @@
     "OXT"
    ],
    "fixed": [
-    "CGLU P353"
+    "GLU P353"
    ],
    "selected": "All"
   },
@@ -319,8 +319,8 @@
    },
    "P": {
     "DNA": 0.0,
-    "Other": 0.003215434083601254,
-    "Protein": 0.9967845659163987,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    }
   },
@@ -378,8 +378,8 @@
    },
    "P": {
     "DNA": 0.0,
-    "Other": 0.003215434083601254,
-    "Protein": 0.9967845659163987,
+    "Other": 0.0,
+    "Protein": 1.0,
     "RNA": 0.0
    }
   },

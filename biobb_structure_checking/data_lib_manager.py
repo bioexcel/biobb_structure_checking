@@ -6,7 +6,7 @@ import json
 import sys
 
 class DataLibManager:
-    """ 
+    """
     | data_lib_manager DataLibManager
     | Manages projects' global data file
 
@@ -26,8 +26,8 @@ class DataLibManager:
             self.ion_res = json_map['data_library']['addH_check_residues']
             self.std_ion = json_map['data_library']['addH_std_ion']
             self.ff_data = {}
-            for ff in json_map['data_library']['atom_type_ff']:
-                self.ff_data[ff] = {}
+            for charge_set in json_map['data_library']['atom_type_ff']:
+                self.ff_data[charge_set] = {}
 
         except IOError:
             print("ERROR: unable to open data library " + file_path, file=sys.stderr)
@@ -35,13 +35,13 @@ class DataLibManager:
 
     def get_valid_codes(self, mol_type):
         """ DataLibManager.get_valid_codes
-        Obtain valid residue codes 
-        
+        Obtain valid residue codes
+
         Args:
             mol_type (str - One of valid molecular types) :
-                * **na** - dna + rna, 
+                * **na** - dna + rna,
                 * **dna** -
-                * **rna** - 
+                * **rna** -
                 * **protein** -
         """
         if mol_type == 'na':
@@ -50,27 +50,30 @@ class DataLibManager:
             codes = self.residue_codes[mol_type]
         return codes
 
-    def get_all_atom_lists(self):
+    def get_all_atom_lists(self, chain_type=None):
         """ DataLibManager.get_all_atom_lists
-        Obtain lists of atoms per protein residue.
         """
+        if chain_type is None:
+            chain_type = 'protein' #back compatibility
         atom_lists = {
             rcode: {
-                'backbone': self.residue_data['*']['bck_atoms'],
+                'backbone': self.residue_data['*']['bck_atoms'][chain_type],
                 'side': self.residue_data[rcode]['side_atoms']
             }
-            for rcode in self.residue_codes['protein']
+            for rcode in self.residue_codes[chain_type]
         }
-
-        for rcode in self.residue_codes['cap_residues']:
-            atom_lists[rcode]['backbone'] = self.residue_data[rcode]['bck_atoms']
-
+        if chain_type == 'protein':
+            for rcode in self.residue_codes['cap_residues']:
+                atom_lists[rcode] = {
+                    'backbone': self.residue_data[rcode]['bck_atoms'],
+                    'side' : []
+                }
         return atom_lists
 
     def get_atom_feature_list(self, feature):
         """ DataLibManager.get_atom_feature_list
         Get a residue list with a specific section of data.
-        
+
         Args:
             feature (str - Options) :
                 * **bck_atoms** - Backbone atoms
@@ -107,20 +110,20 @@ class DataLibManager:
 
     def get_hydrogen_atoms(self):
         """ DataLibManager.get_hydrogen_atoms
-        Get list of hydrogen atoms per residue. 
+        Get list of hydrogen atoms per residue.
         """
         return self.get_atom_feature_list('hydrogen_atoms')
 
     def get_add_h_rules(self):
         """ DataLibManager.get_add_h_rules
-        Get rules for adding Hydrogen atoms to residues. 
+        Get rules for adding Hydrogen atoms to residues.
         """
         return self.get_atom_feature_list('addH_rules')
 
     def get_atom_lists(self, contact_types):
         """ DataLibManager.get_atom_lists
-        Get a list of atoms organized per contact types. 
-        
+        Get a list of atoms organized per contact types.
+
         Args:
             contact_types (list(str) - List of types of contacts. Options) :
                 * **apolar** - Involving any apolar atom
@@ -163,8 +166,8 @@ class DataLibManager:
 
     def get_canonical_resname(self, rcode):
         """ DataLibManager.get_canonical_resname
-        Get parent residue names for modified residues 
-        
+        Get parent residue names for modified residues
+
         Args:
             rcode (str) : Original residue code (3 letter for aminoacids)
         """
@@ -175,7 +178,7 @@ class DataLibManager:
     def get_ff_data(self, file_path):
         """ DataLibManager.get_ff_data
         Load Forcefield data from external file
-       
+
         Args:
             file_path (str) : Path to library file
         """

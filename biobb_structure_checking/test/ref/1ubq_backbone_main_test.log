@@ -1,8 +1,10 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
+Getting canonical sequences from matching FASTA input
+A: "1ubq_A  protein 76  UBIQUITIN", score: 46.0 
 Structure backbone_test/1ubq_caps.pdb loaded
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
@@ -59,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.3.18-150300.59.76-default x86_64
 Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2022/08/22 12:46:49
+Job starting time (YY/MM/DD HH:MM:SS): 2022/08/25 18:59:15
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -99,6 +101,8 @@ Fixing ILE A44 - ALA A46
   Adding PHE A45
   Adding ALA A46
 
+Getting canonical sequences from matching FASTA input
+A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0 
 2 Residues with missing backbone atoms found
  LEU A8     OXT
  THR A14    OXT

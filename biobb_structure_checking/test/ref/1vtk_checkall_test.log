@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.11                   =
+=                   BioBB structure checking utility v3.9.12                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -132,6 +132,15 @@ No severe clashes detected
 No negative clashes detected
 Running  check_only. Nothing else to do.
 Running sequences.
-Sequences command requires either mmCIF input or --sequence
+Canonical Sequences requires either mmCIF input or --sequence
+Structure sequence
+>pdb_sq_A Frags: 46-149,153-264,280-376
+MPTLLRVYIDGPHGMGKTTTTQLLVALGSRDDIVYVPEPMTYWRVLGASETIANIYTTQH
+RLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAGS---PPPALTLIFDRHP
+IAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGE
+RLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG---------------PRPHIG
+DTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTS
+GMVQTHVTTPGSIPTICDLARTFAREMGEAN
+
 Running  check_only. Nothing else to do.
 Structure not modified, not saving. Override with --force_save

@@ -12,12 +12,13 @@ check_structure can be run interactively. It will prompt for any missing paramet
 
 ~~~
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
-                       [--file_format FILE_FORMAT] [--sequence FASTA_SEQ_PATH]
+                       [--file_format {cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
                        [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
-                       [-o OUTPUT_STRUCTURE_PATH] [--rename_terms] [--keep_canonical_resnames]
+                       [-o OUTPUT_STRUCTURE_PATH {pdb,pdbqt,pqr,cmip}] 
+                       [--rename_terms] [--keep_canonical_resnames]
                        [--json JSON_OUTPUT_PATH] [-nv] [-v]
                        [--limit ATOM_LIMIT] [--debug] [--force_save]
                        [--check_only] [--non_interactive] [--version]
@@ -33,16 +34,16 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ### Arguments for input:
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
-* Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted as pdb.
+* Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted, but read as pdb.
 * Remote **pdb:{pdbid}**. See **--file_format** for selecting download format (default: cif)
 * Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB server (**--pdb_server MMB**). Format PDB.
 
 **--sequence** FASTA_SEQ_PATH - _Canonical sequence in FASTA format_
 * Header should start >pdb_chain[,chain] for backbone rebuild. Required only for PDB/PQR structures.
 
-**--file_format** FILE_FORMAT - _Format for retrieving structures (default=cif|pdb|xml)_
+**--file_format** {cif,pdb,xml} - _Format for retrieving structures (cif(default)|pdb|xml)_
 
-**--pdb_server** PDB_SERVER - _Remote server for retrieving structures (default=rcsb|MMB)_
+**--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB)_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
 
