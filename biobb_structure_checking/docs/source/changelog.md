@@ -1,4 +1,4 @@
-## v3.9.12 (2022.3)
+## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details
   - Added hydrogen atoms count
@@ -10,11 +10,14 @@
   - Extended to support Nucleic Acids
 - sequences
   - Structure sequence is always reported even in the absence of canonical one
+- chains
+  - Unlabelled chains can be fixed.   
 
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
 - Removed required usage N and C terms 4-letter residue names except of requested output
+
 ## v3.9.11 (2021.4)
 
 ### New Functions
@@ -54,7 +57,6 @@
 
 ***
 ## v3.9.6 (2021.4)
-
 
 ### Extended functions
 

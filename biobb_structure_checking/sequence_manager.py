@@ -339,7 +339,7 @@ class SequenceData():
                     'Frags: ' + ','.join(frags_num)
                 )
                 outseq += SeqIO.FastaIO.as_fasta(seq)
-            else:
+            elif self.data[ch_id]['pdb']:
                 last_pos = 0
                 start_pos = 0
                 sequence = ''
@@ -356,9 +356,9 @@ class SequenceData():
                     )
 
                 if has_IUPAC:
-                    pdb_seq = Seq(sequence, IUPAC.protein)
+                    pdb_seq = Seq(str(sequence), IUPAC.protein)
                 else:
-                    pdb_seq = Seq(sequence)
+                    pdb_seq = Seq(str(sequence))
 
                 seq = SeqRecord(
                     pdb_seq,
@@ -367,6 +367,8 @@ class SequenceData():
                     'Frags: ' + ','.join(frags_num)
                 )
                 outseq += SeqIO.FastaIO.as_fasta(seq)
+            else:
+                print(f"Warning: chain {ch_id} sequence cannot be recongized")
         return outseq
     def match_chain_seqs(self):
         """ Identifies chains in Fasta input """

@@ -439,8 +439,34 @@ class StructureChecking():
     def _chains_fix(self, opts, fix_data=None):
         if isinstance(opts, str):
             select_chains = opts
+            rename_chains = ''
         else:
             select_chains = opts['select']
+            if 'rename' in opts:
+                rename_chains = opts['rename']
+            else:
+                rename_chains = ''
+
+        if self.strucm.has_chains_to_rename:
+            self.summary['chains']['selected'] = {}
+            input_line = ParamInput('Add missing chain label', self.args['non_interactive'], set_none='None')
+            input_line.add_option_none()
+            input_line.add_option_list('auto_chain',['auto'])
+            input_line.add_option_free_text('new_chain')
+            input_line.set_default("auto")
+            input_ok = False
+            while not input_ok:
+                input_option, rename_chains = input_line.run(rename_chains)
+                if input_option == 'error':
+                    return cts.MSGS['UNKNOWN_SELECTION'], rename_chains
+                if input_option in ('none', 'auto_chain') or (rename_chains not in self.strucm.chain_ids):
+                    input_ok = True
+                else:
+                    print(f"Chain {rename_chains} is already present")
+                    rename_chains = ''
+            if input_option != 'none':
+                self.strucm.rename_empty_chain_label(rename_chains)
+                self._chains_check()
 
         self.summary['chains']['selected'] = {}
         input_line = ParamInput('Select chain', self.args['non_interactive'], set_none='All')
