@@ -464,7 +464,7 @@ class StructureChecking():
                 else:
                     print(f"Chain {rename_chains} is already present")
                     rename_chains = ''
-            if input_option is not 'none':
+            if input_option != 'none':
                 self.strucm.rename_empty_chain_label(rename_chains)
                 self._chains_check()
 
