@@ -29,7 +29,7 @@ from biobb_structure_checking.sequence_manager import SequenceData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 
-MODELLER_ENV_VAR = 'KEY_MODELLER10v1'
+MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
 CISTHRES = 20  # TODO check values with pdb checking
 TRANSTHRES = 160
@@ -972,13 +972,13 @@ class StructureManager:
                 spimp.apply(self.st[mod.id].get_atoms())
             self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
             self.modified = True
+
     def has_models(self) -> bool:
         """ Shotcut method to check whether the structure has more than one model
 
             Returns: Boolean
         """
         return self.nmodels > 1
-
 
     def has_superimp_models(self) -> bool:
         """ Shotcut method to check whether the structure has superimposed
@@ -1002,6 +1002,7 @@ class StructureManager:
             self.chain_details[chn.id] = guess['details']
             if chn.id == ' ':
                 self.has_chains_to_rename = self.has_chains_to_rename  or True
+    
     def rename_empty_chain_label(self, new_label) -> None:
         if not self.has_chains_to_rename:
             return False
@@ -1017,8 +1018,6 @@ class StructureManager:
         self.set_chain_ids()
         self.modified = True
         return True
-
-
 
     def has_NA(self):
         """ Checks if any of the chains is NA"""
@@ -1185,7 +1184,6 @@ class StructureManager:
     def _load_bck_template(templ_path):
         pass
 
-
     def run_modeller(
             self,
             ch_to_fix,
@@ -1202,7 +1200,7 @@ class StructureManager:
                 *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used.
                 *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
                 *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
-                *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
+                *sequence_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
         if modeller_key:
@@ -1215,7 +1213,9 @@ class StructureManager:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
+        
         print(mod_mgr.tmpdir)
+        
         if not sequence_data:
             sequence_data = self.sequence_data
         mod_mgr.sequences = sequence_data
@@ -1225,21 +1225,21 @@ class StructureManager:
         for i,templ in enumerate(self.templates):
             if templ.has_models():
                 templ.select_model(0)
-            templ.save_structure('{}/add_templ{}.pdb'.format(mod_mgr.tmpdir, i))
+            templ.save_structure(opj(mod_mgr.tmpdir, f"add_templ{i}.pdb"))
 
         for mod in self.st:
             if self.has_models():
-                print('Processing Model {}'.format(mod.id + 1))
-                self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
+                print(f"Processing Model {mod.id + 1}")
+                self.save_structure(opj(mod_mgr.tmpdir, mod_mgr.templ_file), mod.id)
             else:
-                self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
+                self.save_structure(opj(mod_mgr.tmpdir, mod_mgr.templ_file))
 
             for ch_id in self.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
-                    print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
-                print("Fixing chain/model {}/{}".format(ch_id, mod.id))
+                    print(f"Warning: chain {ch_id} has a unexpected residue numbering, skipping")
+                print(f"Fixing chain/model {ch_id}/{mod.id}")
 
                 try:
                     model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm, self.templates)

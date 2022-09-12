@@ -35,13 +35,14 @@ class ModellerManager():
     def __init__(self):
         self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
         #self.tmpdir = "/tmp/modtest"
-        #print("Using temporary working dir " + self.tmpdir)
+        print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
         self.templ_file = 'templ.pdb'
         try:
             os.mkdir(self.tmpdir)
         except IOError as err:
+            print(err)
             sys.exit(err)
         # Class changed in Modeller >= 10
         try:
@@ -144,7 +145,7 @@ class ModellerManager():
 
     def __del__(self):
         if not DEBUG:
-            shutil.rmtree(self.tmpdir)
+            #shutil.rmtree(self.tmpdir)
             print(self.tmpdir)
 
 
