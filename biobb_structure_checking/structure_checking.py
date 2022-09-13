@@ -17,6 +17,8 @@ from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableEr
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.model_utils as mu
 
+from biobb_structure_checking.commands import sequences, models, chains, inscodes, altloc
+from biobb_structure_checking.commands import metals, water, ligands, rem_hydrogens
 
 # Main class
 class StructureChecking():
@@ -244,10 +246,15 @@ class StructureChecking():
             command (str): Command to run
             opts (str | list(str) | dict): Command options, passed from callers
         """
-        try:
-            f_check = getattr(self, '_' + command + '_check')
-        except AttributeError:
+        # try:
+        #     f_check = getattr(self, '_' + command + '_check') or 
+        # except AttributeError:
+        
+        if 'biobb_structure_checking.commands.' + command not in sys.modules:
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
+        else:
+            f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
+            f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
 
         if command not in self.summary:
             self.summary[command] = {}
@@ -267,16 +274,16 @@ class StructureChecking():
             print(msg.strip())
 
     # Running checking method
-        data_to_fix = f_check()
+        data_to_fix = f_check(self)
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if self.args['verbose']:
                 print(cts.MSGS['CHECK_ONLY_DONE'])
         elif data_to_fix:
-            try:
-                f_fix = getattr(self, '_' + command + '_fix')
-            except AttributeError:
-                sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
+            # try:
+            #     f_fix = getattr(self, '_' + command + '_fix')
+            # except AttributeError:
+            #     sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
             if isinstance(opts, (str, list)):
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
@@ -289,7 +296,7 @@ class StructureChecking():
                     for k in defs:
                         if k not in opts:
                             opts[k] = defs[k]
-            error_status = f_fix(opts, data_to_fix)
+            error_status = f_fix(self, opts, data_to_fix)
 
             if error_status:
                 if isinstance(error_status, tuple):
@@ -311,30 +318,12 @@ class StructureChecking():
                 )
             )
 # ==============================================================================
+# Entry points for direct notebook calls
     def sequences(self):
         """ StructureChecking.sequences
         Print canonical and structure sequences in FASTA format
         """
         self._run_method('sequences', None)
-
-    def _sequences_check(self):
-        if self.strucm.sequence_data.has_canonical:
-            print('Canonical sequence')
-            can_seq = self.strucm.sequence_data.get_canonical()
-            print(can_seq)
-        else:
-            print(cts.MSGS['NO_CANONICAL'])
-            can_seq=''
-
-        pdb_seq = self.strucm.sequence_data.get_pdbseq()
-        print('Structure sequence')
-        print(pdb_seq)
-        self.summary['FASTA'] = {
-            'canonical': can_seq,
-            'structure': pdb_seq
-        }
-
-        return {}
 
     def models(self, opts=None):
         """ StructureChecking.models
@@ -346,62 +335,7 @@ class StructureChecking():
                 * superimpose (bool) - superimpose models
         """
         self._run_method('models', opts)
-
-    def _models_check(self):
-        print(cts.MSGS['MODELS_FOUND'].format(self.strucm.nmodels))
-        self.summary['models'] = {'nmodels': self.strucm.nmodels}
-        if self.strucm.nmodels == 1:
-            if not self.args['quiet']:
-                print(cts.MSGS['SINGLE_MODEL'])
-            return {}
-
-        self.summary['models']['type'] = self.strucm.models_type
-        supimp = ''
-        if not self.strucm.has_superimp_models():
-            supimp = 'do not'
-        print(
-            cts.MSGS['MODELS_GUESS'].format(
-                supimp,
-                self.strucm.models_type['rmsd'],
-                mu.MODEL_TYPE_LABELS[self.strucm.models_type['type']]
-            )
-        )
-        return True
-
-    def _models_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            select_model = opts
-        else:
-            select_model = opts['select']
-
-        input_line = ParamInput('Select Model Num', self.args['non_interactive'], set_none='All')
-        input_line.add_option_all()
-        input_line.add_option_numeric(
-            'modelno', [], opt_type='int', min_val=1, max_val=self.strucm.nmodels, multiple=True
-        )
-        input_option, select_model = input_line.run(select_model)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], select_model
-
-        print(cts.MSGS['SELECT_MODEL'], select_model)
-
-        if input_option != 'all':
-            self.strucm.select_model(select_model)
-
-        if opts['superimpose']:
-            self.strucm.superimpose_models()
-            print(cts.MSGS['SUPIMP_MODELS'].format(self.strucm.models_type["rmsd"]))
-            self.summary['models']['superimp_rmsd'] = self.strucm.models_type["rmsd"]
-
-        if opts['save_split']: # tag as modified to force save
-            self.strucm.modified = True
-
-        self.summary['models']['selected'] = select_model
-
-        return False
-# =============================================================================
-
+    
     def chains(self, opts=None):
         """ StructureChecking.chains
         Detect/Select Chains. Check only with no options. Options accepted as command-line string, or python dictionary.
@@ -417,119 +351,11 @@ class StructureChecking():
         """
         self._run_method('chains', opts)
 
-    def _chains_check(self):
-        print(cts.MSGS['CHAINS_DETECTED'].format(len(self.strucm.chain_ids)))
-        for ch_id in sorted(self.strucm.chain_ids):
-            if isinstance(self.strucm.chain_ids[ch_id], list):
-                print(
-                    cts.MSGS['UNKNOWN_CHAINS'].format(
-                        ch_id, s=self.strucm.chain_ids[ch_id]
-                    )
-                )
-            else:
-                print(
-                    ' {}: {}'.format(
-                        ch_id, mu.CHAIN_TYPE_LABELS[self.strucm.chain_ids[ch_id]]
-                    )
-                )
-        self.summary['chains'] = {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.strucm.chain_ids.items()}
-
-        return len(self.strucm.chain_ids) > 1
-
-    def _chains_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            select_chains = opts
-            rename_chains = ''
-        else:
-            select_chains = opts['select']
-            if 'rename' in opts:
-                rename_chains = opts['rename']
-            else:
-                rename_chains = ''
-
-        if self.strucm.has_chains_to_rename:
-            self.summary['chains']['selected'] = {}
-            input_line = ParamInput('Add missing chain label', self.args['non_interactive'], set_none='None')
-            input_line.add_option_none()
-            input_line.add_option_list('auto_chain',['auto'])
-            input_line.add_option_free_text('new_chain')
-            input_line.set_default("auto")
-            input_ok = False
-            while not input_ok:
-                input_option, rename_chains = input_line.run(rename_chains)
-                if input_option == 'error':
-                    return cts.MSGS['UNKNOWN_SELECTION'], rename_chains
-                if input_option in ('none', 'auto_chain') or (rename_chains not in self.strucm.chain_ids):
-                    input_ok = True
-                else:
-                    print(f"Chain {rename_chains} is already present")
-                    rename_chains = ''
-            if input_option != 'none':
-                self.strucm.rename_empty_chain_label(rename_chains)
-                self._chains_check()
-
-        self.summary['chains']['selected'] = {}
-        input_line = ParamInput('Select chain', self.args['non_interactive'], set_none='All')
-        input_line.add_option_all()
-        input_line.add_option_list(
-            'type', ['protein'], multiple=False
-        )
-        input_line.add_option_list(
-            'type', ['na'], multiple=False
-        )
-        input_line.add_option_list(
-            'type', ['dna'], multiple=False
-        )
-        input_line.add_option_list(
-            'type', ['rna'], multiple=False
-        )
-        input_line.add_option_list(
-            'chid', sorted(self.strucm.chain_ids), multiple=True, case="sensitive"
-        )
-        input_line.set_default('All')
-
-        input_option, select_chains = input_line.run(select_chains)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], select_chains
-
-        if input_option == 'all':
-            print(cts.MSGS['SELECT_ALL_CHAINS'])
-            return False
-
-        self.strucm.select_chains(select_chains)
-        print(cts.MSGS['SELECT_CHAINS'], select_chains)
-        self.summary['chains']['selected'] = self.strucm.chain_ids
-
-        return False
-
-# =============================================================================
     def inscodes(self):
         """ StructureChecking.inscodes
         Detects residues with insertion codes. No fix provided (yet)
         """
         self._run_method('inscodes', None)
-
-    def _inscodes_check(self):
-        ins_codes_list = self.strucm.get_ins_codes()
-        if not ins_codes_list:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_INSCODES_FOUND'])
-            return {}
-
-        print(cts.MSGS['INSCODES_FOUND'].format(len(ins_codes_list)))
-        self.summary['inscodes'] = []
-        for res in ins_codes_list:
-            print(mu.residue_id(res))
-            self.summary['inscodes'].append(mu.residue_id(res))
-        return {'ins_codes_list': ins_codes_list}
-
-    def _inscodes_fix(self, opts, fix_data=None):
-        # TODO implement method _inscodes_fix
-        if opts['renum']:
-            print("--renum option not implemented (yet)")
-        return False
-# =============================================================================
 
     def altloc(self, opts=None):
         """ StructureChecking.altloc
@@ -544,107 +370,6 @@ class StructureChecking():
         """
         self._run_method('altloc', opts)
 
-    def _altloc_check(self): #TODO improve output
-        alt_loc_res = self.strucm.get_altloc_residues()
-        if not alt_loc_res:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_ALTLOC_FOUND'])
-            return {}
-
-        print(cts.MSGS['ALTLOC_FOUND'].format(len(alt_loc_res)))
-
-        self.summary['altloc'] = {}
-
-        fix_data = {
-            'alt_loc_res' : alt_loc_res,
-            'altlocs' : {}
-        }
-
-        for res in sorted(alt_loc_res, key=lambda x: x.index):
-            rid = mu.residue_id(res)
-            print(rid)
-            self.summary['altloc'][rid] = {}
-            fix_data['altlocs'][res] = sorted(alt_loc_res[res][0].child_dict)
-            for atm in alt_loc_res[res]:
-                self.summary['altloc'][rid][atm.id] = []
-                alt_str = '  {:4}'.format(atm.id)
-                for alt in sorted(atm.child_dict):
-                    alt_str += ' {} ({:4.2f})'.format(alt, atm.child_dict[alt].occupancy)
-                    self.summary['altloc'][rid][atm.id].append({
-                        'loc_label': alt,
-                        'occupancy': atm.child_dict[alt].occupancy
-                    })
-                print(alt_str)
-
-        return fix_data
-
-    def _altloc_fix(self, opts, fix_data=None):
-
-        if isinstance(opts, str):
-            select_altloc = opts
-        else:
-            select_altloc = opts['select']
-
-        # Prepare the longest possible list of alternatives
-        altlocs = []
-        max_al_len = 0
-        for res in fix_data['altlocs']:
-            if len(fix_data['altlocs'][res]) > max_al_len:
-                altlocs = fix_data['altlocs'][res]
-                max_al_len = len(fix_data['altlocs'][res])
-
-        input_line = ParamInput('Select alternative', self.args['non_interactive'], set_none='All')
-        input_line.add_option_all()
-        input_line.add_option_list('occup', ['occupancy'])
-        input_line.add_option_list('altids', altlocs, case='upper')
-        input_line.add_option_list(
-            'resnum',
-            mu.prep_rnums_list(fix_data['altlocs']),
-            opt_type='pair_list',
-            list2=altlocs,
-            case='sensitive',
-            multiple=True
-        )
-        input_line.set_default('occupancy')
-
-        input_option, select_altloc = input_line.run(select_altloc)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], select_altloc
-
-        if input_option != 'all':
-            print('Selecting location {}'.format(select_altloc))
-            if input_option in ('occup', 'altids'):
-                select_altloc = select_altloc.upper()
-                to_fix = {
-                    res: {
-                        'ats': value,
-                        'select' : select_altloc
-                    } for res, value in fix_data['alt_loc_res'].items()
-                }
-
-            elif input_option == 'resnum':
-                to_fix = {}
-                selected_rnums = {}
-                for rsel in select_altloc.split(','):
-                    rnum, alt = rsel.split(':')
-                    selected_rnums[rnum] = alt
-                to_fix = {
-                    res : {
-                        'ats' : value,
-                        'select' : selected_rnums[mu.residue_num(res)]
-                    }
-                    for res, value in fix_data['alt_loc_res'].items()
-                    if mu.residue_num(res) in selected_rnums
-                }
-            for res in to_fix:
-                self.strucm.select_altloc_residue(res, to_fix[res])
-
-        self.summary['altloc']['selected'] = select_altloc
-
-        return False
-# =============================================================================
-
     def metals(self, opts=None):
         """ StructureChecking.metals
         Detect/Remove Metals. Check only with no options. Options accepted as command-line string, or python dictionary.
@@ -658,85 +383,6 @@ class StructureChecking():
         """
         self._run_method('metals', opts)
 
-    def _metals_check(self):
-        met_list = self.strucm.get_metal_atoms()
-
-        if not met_list:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_METALS_FOUND'])
-            return {}
-
-        print(cts.MSGS['METALS_FOUND'].format(len(met_list)))
-        self.summary['metals'] = {'detected':[]}
-        fix_data = {
-            'met_list': met_list,
-            'met_rids': [],
-            'at_groups': {}
-        }
-        for atm in sorted(met_list, key=lambda x: x.serial_number):
-            print(" {:12}".format(mu.atom_id(atm)))
-            res = atm.get_parent()
-            fix_data['met_rids'].append(mu.residue_num(res))
-            if atm.id not in fix_data['at_groups']:
-                fix_data['at_groups'][atm.id] = []
-            fix_data['at_groups'][atm.id].append(atm)
-            self.summary['metals']['detected'].append(mu.residue_id(res))
-
-        return fix_data
-
-    def _metals_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            remove_metals = opts
-        else:
-            remove_metals = opts['remove']
-
-        input_line = ParamInput("Remove", self.args['non_interactive'])
-        input_line.add_option_all()
-        input_line.add_option_none()
-        input_line.add_option_list(
-            'atids',
-            sorted(fix_data['at_groups']),
-            case='sensitive',
-            multiple=True
-        )
-        input_line.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
-        input_line.set_default('All')
-        input_option, remove_metals = input_line.run(remove_metals)
-
-        if input_option == "error":
-            return cts.MSGS['UNKNOWN_SELECTION'], remove_metals
-
-        if input_option == 'none':
-            if self.args['verbose']:
-                print(cts.MSGS['DO_NOTHING'])
-            return False
-
-        if input_option == 'all':
-            to_remove = fix_data['met_list']
-        elif input_option == 'resids':
-            rid_list = remove_metals.split(',')
-            to_remove = [
-                atm for atm in fix_data['met_list']
-                if mu.residue_num(atm.get_parent()) in rid_list
-            ]
-        elif input_option == 'atids':
-            to_remove = []
-            for atid in remove_metals.split(','):
-                to_remove.extend(fix_data['at_groups'][atid])
-
-        self.summary['metals']['removed'] = []
-
-        rmm_num = 0
-        for atm in to_remove:
-            self.summary['metals']['removed'].append(mu.residue_id(atm.get_parent()))
-            self.strucm.remove_residue(atm.get_parent(), False)
-            rmm_num += 1
-        self.strucm.update_internals()
-        print(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
-        self.summary['metals']['n_removed'] = rmm_num
-        return False
-# =============================================================================
-
     def water(self, opts=None):
         """ StructureChecking.water
         Detect/Select Remove Water molecules. Check only with no options. Options accepted as command-line string, or python dictionary.
@@ -746,49 +392,7 @@ class StructureChecking():
                 * remove: Yes - Remove All Water molecules
         """
         self._run_method('water', opts)
-
-    def _water_check(self):
-        wat_list = [
-            res
-            for res in mu.get_ligands(self.strucm.st, incl_water=True)
-            if mu.is_wat(res)
-        ]
-
-        if not wat_list:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_WATERS'])
-            return {}
-
-        print(cts.MSGS['WATERS_FOUND'].format(len(wat_list)))
-        self.summary['water']['n_detected'] = len(wat_list)
-
-        return {'wat_list': wat_list}
-
-    def _water_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            remove_wat = opts
-        else:
-            remove_wat = opts['remove']
-
-        input_line = ParamInput('Remove', self.args['non_interactive'], set_none='no')
-        input_line.add_option_yes_no()
-        input_line.set_default('yes')
-        input_option, remove_wat = input_line.run(remove_wat)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], remove_wat
-
-        if input_option == 'yes':
-            rmw_num = 0
-            for res in fix_data['wat_list']:
-                self.strucm.remove_residue(res, False)
-                rmw_num += 1
-            self.strucm.update_internals()
-            print(cts.MSGS['WATER_REMOVED'].format(rmw_num))
-            self.summary['water']['n_removed'] = rmw_num
-        return False
-# =============================================================================
-
+   
     def hetatm(self, opts=None):
         """  StructureChecking.hetatm
         Manages hetero atoms. Not implemented yet. See Ligands
@@ -809,89 +413,6 @@ class StructureChecking():
         """
         self._run_method('ligands', opts)
 
-    def _ligands_check(self):
-        lig_list = mu.get_ligands(self.strucm.st, incl_water=False)
-
-        if not lig_list:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_LIGANDS_FOUND'])
-            return {}
-
-        print(cts.MSGS['LIGANDS_DETECTED'].format(len(lig_list)))
-        fix_data = {
-            'lig_list': lig_list,
-            'ligand_rids': set(),
-            'ligand_rnums': []
-        }
-        self.summary['ligands'] = {'detected': []}
-
-        for res in sorted(lig_list, key=lambda x: x.index):
-            if self.strucm.has_models():
-                if res.get_parent().get_parent().id > 0:
-                    continue
-                print(' {}/*'.format(mu.residue_id(res, False)))
-            else:
-                print(' {}'.format(mu.residue_id(res, False)))
-
-            self.summary['ligands']['detected'].append(mu.residue_id(res))
-            fix_data['ligand_rids'].add(res.get_resname())
-            fix_data['ligand_rnums'].append(mu.residue_num(res))
-
-        return fix_data
-# =============================================================================
-
-    def _ligands_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            remove_ligands = opts
-        else:
-            remove_ligands = opts['remove']
-        input_line = ParamInput('Remove', self.args['non_interactive'])
-        input_line.add_option_all()
-        input_line.add_option_none()
-        input_line.add_option_list(
-            'byrids', sorted(fix_data['ligand_rids']), multiple=True
-        )
-        input_line.add_option_list(
-            'byresnum', fix_data['ligand_rnums'], case='sensitive', multiple=True
-        )
-        input_line.set_default('All')
-        input_option, remove_ligands = input_line.run(remove_ligands)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], remove_ligands
-
-        self.summary['ligands']['removed'] = {'opt':remove_ligands, 'lst':[]}
-
-        if input_option == 'none':
-            if self.args['verbose']:
-                print(cts.MSGS['DO_NOTHING'])
-            return False
-
-        if input_option == 'all':
-            to_remove = fix_data['lig_list']
-        elif input_option == 'byrids':
-            to_remove = [
-                res
-                for res in fix_data['lig_list']
-                if res.get_resname() in remove_ligands.split(',')
-            ]
-        elif input_option == 'byresnum':
-            to_remove = [
-                res
-                for res in fix_data['lig_list']
-                if mu.residue_num(res) in remove_ligands.split(',')
-            ]
-        rl_num = 0
-        for res in to_remove:
-            self.summary['ligands']['removed']['lst'].append(mu.residue_id(res))
-            self.strucm.remove_residue(res, False)
-            rl_num += 1
-        self.strucm.update_internals()
-        print(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
-        self.summary['ligands']['n_removed'] = rl_num
-        return False
-# =============================================================================
-
     def rem_hydrogen(self, opts=None):
         """ StructureChecking.add_hydrogen
         Remove Hydrogen atoms from structure. Check only with no options. Options accepted as command-line string, or python dictionary.
@@ -901,43 +422,6 @@ class StructureChecking():
                 * remove (str): Yes - remove all hydrogen atoms
         """
         self._run_method('rem_hydrogen', opts)
-
-    def _rem_hydrogen_check(self):
-        remh_list = mu.get_residues_with_H(self.strucm.st)
-        if not remh_list:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_RESIDUES_H_FOUND'])
-            return {}
-
-        print(cts.MSGS['RESIDUES_H_FOUND'].format(len(remh_list)))
-        self.summary['rem_hydrogen']['n_detected'] = len(remh_list)
-        return {'remh_list': remh_list}
-
-    def _rem_hydrogen_fix(self, opts, fix_data=None):
-        if isinstance(opts, str):
-            remove_h = opts
-        else:
-            remove_h = opts['remove']
-
-        input_line = ParamInput('Remove hydrogen atoms', self.args['non_interactive'], set_none='no')
-        input_line.add_option_yes_no()
-        input_line.set_default('yes')
-
-        input_option, remove_h = input_line.run(remove_h)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], remove_h
-
-        if input_option == 'yes':
-            rmh_num = 0
-            for resh in fix_data['remh_list']:
-                mu.remove_H_from_r(resh['r'])
-                rmh_num += 1
-            print(cts.MSGS['REMOVED_H'].format(rmh_num))
-            self.strucm.modified = True
-            self.summary['rem_hydrogen']['n_removed'] = rmh_num
-        return False
-# =============================================================================
 
     def getss(self, opts=None):
         """ StructureChecking.getss
@@ -951,71 +435,7 @@ class StructureChecking():
         """
         self._run_method('getss', opts)
 
-    def _getss_check(self):
-        SS_bonds = self.strucm.get_SS_bonds()
-        if not SS_bonds:
-            if not self.args['quiet']:
-                print(cts.MSGS['NO_SS'])
-            return {}
-        print(cts.MSGS['POSSIBLE_SS'].format(len(SS_bonds)))
-        self.summary['getss'] = {'found':[]}
-        for ssb in SS_bonds:
-            print(
-                ' {:12} {:12} {:8.3f}'.format(
-                    mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
-                )
-            )
-            self.summary['getss']['found'].append(
-                {
-                    'at1':mu.atom_id(ssb[0]),
-                    'at2':mu.atom_id(ssb[1]),
-                    'dist': round(float(ssb[2]), 4)
-                }
-            )
-        return SS_bonds
-
-    def _getss_fix(self, opts, fix_data=None):
-        if not fix_data:
-            return False
-        if isinstance(opts, str):
-            getss_mark = opts
-        else:
-            getss_mark = opts['mark']
-
-        pairs_list = [
-            mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent())
-            for a in fix_data
-        ]
-        input_line = ParamInput('Mark SS', self.args['non_interactive'])
-        input_line.add_option_all()
-        input_line.add_option_none()
-        input_line.add_option_list(
-            'bypair', pairs_list, multiple=True
-        )
-        input_line.set_default('All')
-        input_option, getss_mark = input_line.run(getss_mark)
-
-        if input_option == 'error':
-            return cts.MSGS['UNKNOWN_SELECTION'], getss_mark
-
-        if input_option == 'none':
-            if self.args['verbose']:
-                print(cts.MSGS['DO_NOTHING'])
-            return False
-
-        cys_to_mark = []
-
-        for pair in fix_data:
-            if (input_option == 'all') or (mu.residue_num(pair[0].get_parent()) + "-" + mu.residue_num(pair[1].get_parent()) in getss_mark.split(',')):
-                cys_to_mark.append(pair[0].get_parent())
-                cys_to_mark.append(pair[1].get_parent())
-        self.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
-        self.strucm.mark_ssbonds(cys_to_mark)
-        self.strucm.update_internals()
-        return False
-
-# =============================================================================
-    def amide(self, opts=None):
+        def amide(self, opts=None):
         """  StructureChecking.amide
         Detect/Fix Amide atoms Assignment. Check only with no options. Options accepted as command-line string, or python dictionary.
 
