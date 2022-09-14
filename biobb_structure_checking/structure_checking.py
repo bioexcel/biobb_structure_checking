@@ -414,6 +414,10 @@ class StructureChecking():
                     * **na** - Select all NA chains,
                     * **rna** - Select all RNA chains,
                     * **dna** - Select all DNA chains.
+                * rename:
+                    * **auto** - Add first possible label staring on A to unlabeled chains
+                    * **label** - Use indicated label
+
         """
         self._run_method('chains', opts)
 
