@@ -49,7 +49,10 @@ class StructureChecking():
             self.summary['memsize'] = []
 
         try:
-            self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
+            self.strucm = self._load_structure(
+                self.args['input_structure_path'],
+                self.args['fasta_seq_path']
+            )
         except IOError:
             sys.exit(
                 'ERROR: fetching/parsing structure from {}'.format(
@@ -115,23 +118,17 @@ class StructureChecking():
             print("#DEBUG TIMINGS")
             print("#DEBUG =======")
             ant = 0.
-            for op, timing in self.timings:
+            for operation, timing in self.timings:
                 elapsed = timing - ant
-                self.summary['elapsed_times'][op] = elapsed
-                print(
-                    '#DEBUG {:15s}: {:10.4f} s ({:6.2f}%)'.format(
-                        op,
-                        elapsed,
-                        elapsed / total * 100.
-                    )
-                )
+                self.summary['elapsed_times'][operation] = elapsed
+                print(f"#DEBUG {operation:15s}: {elapsed:10.4f} s ({elapsed / total * 100:6.2f}%)")
                 ant = timing
             print('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
             print()
             print("#DEBUG MEMORY USAGE EVOLUTION")
             print("#DEBUG ======================")
-            for op, memsize in self.summary['memsize']:
-                print('#DEBUG {:15s}: {:.2f} MB'.format(op, memsize))
+            for operation, memsize in self.summary['memsize']:
+                print(f"#DEBUG {operation:15s}: {memsize:.2f} MB")
 
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
@@ -223,7 +220,10 @@ class StructureChecking():
         """ StructureChecking.revert_changes
         Reload original structure. Used in Pipelines or Notebooks to revert changes.
         """
-        self.strucm = self._load_structure(self.args['input_structure_path'], self.args['fasta_seq_path'])
+        self.strucm = self._load_structure(
+            self.args['input_structure_path'],
+            self.args['fasta_seq_path']
+        )
         self.summary = {}
         print(cts.MSGS['ALL_UNDO'])
 
@@ -239,37 +239,31 @@ class StructureChecking():
             importlib.import_module('biobb_structure_checking.commands.' + command)
             f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
             f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
-        except ImportError as e:
+        except ImportError:
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
 
-        if command not in self.summary:
-            self.summary[command] = {}
-
-        msg = 'Running {}.'.format(command)
-        if opts:
-            if isinstance(opts, list):
-                opts_str = ' '.join(opts)
-            elif isinstance(opts, dict):
-                opts_str = str(opts)
-            else:
-                opts_str = opts
-            msg += ' Options: ' + opts_str
-            self.summary[command]['opts'] = opts_str
+        if command not in self.summary: self.summary[command] = {}
 
         if not self.args['quiet'] or self.args['verbose']:
-            print(msg.strip())
+            msg = f"Running {command}."
+            if opts:
+                if isinstance(opts, list):
+                    opts_str = ' '.join(opts)
+                elif isinstance(opts, dict):
+                    opts_str = str(opts)
+                else:
+                    opts_str = opts
+                msg += ' Options: ' + opts_str
+                self.summary[command]['opts'] = opts_str
+                print(msg.strip())
 
     # Running checking method
         data_to_fix = f_check(self)
+
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
-            if self.args['verbose']:
-                print(cts.MSGS['CHECK_ONLY_DONE'])
+            if self.args['verbose']: print(cts.MSGS['CHECK_ONLY_DONE'])
         elif data_to_fix:
-            # try:
-            #     f_fix = getattr(self, '_' + command + '_fix')
-            # except AttributeError:
-            #     sys.exit(cts.MSGS['FIX_COMMAND_NOT_FOUND'].format(command))
             if isinstance(opts, (str, list)):
                 if cts.DIALOGS.exists(command):
                     opts = cts.DIALOGS.get_parameter(command, opts)
@@ -278,16 +272,15 @@ class StructureChecking():
             else:
                 #Adding default parameters
                 if cts.DIALOGS.exists(command):
-                    defs = cts.DIALOGS.get_parameter(command, '')
-                    for k in defs:
+                    defaults = cts.DIALOGS.get_parameter(command, '')
+                    for k in defaults:
                         if k not in opts:
-                            opts[k] = defs[k]
+                            opts[k] = defaults[k]
             error_status = f_fix(self, opts, data_to_fix)
 
             if error_status:
                 if isinstance(error_status, tuple):
-                    if error_status[1] is None:
-                        error_status = [error_status[0]]
+                    if error_status[1] is None: error_status = [error_status[0]]
 
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
@@ -304,7 +297,13 @@ class StructureChecking():
                 )
             )
 # ==============================================================================
-    def _load_structure(self, input_structure_path, fasta_seq_path=None, verbose=True, print_stats=True):
+    def _load_structure(
+            self,
+            input_structure_path,
+            fasta_seq_path=None,
+            verbose=True,
+            print_stats=True
+        ):
         """ Private. StructureChecking._load_structure
         Prepares Structure Manager and load structure
 
@@ -355,7 +354,11 @@ class StructureChecking():
             split_models (bool): (False) Save models in separated output files
             keep_resnames (bool): (False) Keep canonical residue names
         """
-        return self._save_structure(output_structure_path, rename_terms=rename_terms, split_models=split_models)
+        return self._save_structure(
+            output_structure_path,
+            rename_terms=rename_terms,
+            split_models=split_models
+        )
 
     #Kept for back compatibility
     def _save_structure(self, output_structure_path, rename_terms=False, split_models=False):
@@ -400,13 +403,9 @@ class StructureChecking():
 
         return output_structure_path
 
-
-
     def _check_report_clashes(self, residue_list=None, contact_types=None):
-        if contact_types is None:
-            contact_types = stm.ALL_CONTACT_TYPES
-        if not residue_list:
-            residue_list = self.strucm.all_residues
+        if contact_types is None: contact_types = stm.ALL_CONTACT_TYPES
+        if not residue_list: residue_list = self.strucm.all_residues
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)
@@ -420,7 +419,8 @@ class StructureChecking():
                 print(cts.MSGS['CLASHES_DETECTED'].format(len(clash_list[cls]), cls))
                 for rkey in sorted(
                         clash_list[cls],
-                        key=lambda x: mu.key_sort_atom_pairs(clash_list[cls][x])):
+                        key=lambda x: mu.key_sort_atom_pairs(clash_list[cls][x])
+                    ):
                     print(
                         ' {:12} {:12} {:8.3f} A'.format(
                             mu.atom_id(clash_list[cls][rkey][0]),
@@ -434,8 +434,7 @@ class StructureChecking():
                         'dist': round(float(sqrt(clash_list[cls][rkey][2])), 4)
                     })
             else:
-                if not self.args['quiet']:
-                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
+                if not self.args['quiet']: print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 
 # ==============================================================================
@@ -454,7 +453,7 @@ class StructureChecking():
         """ StructureChecking.sequences
         Print canonical and structure sequences in FASTA format
         """
-        self._run_method('sequences', None)
+        self._run_method('sequences', opts)
 
     def models(self, opts=None):
         """ StructureChecking.models
@@ -479,6 +478,9 @@ class StructureChecking():
                     * **na** - Select all NA chains,
                     * **rna** - Select all RNA chains,
                     * **dna** - Select all DNA chains.
+                * rename:
+                    * **auto** - Add first possible label staring on A to unlabeled chains
+                    * **label** - Use indicated label
         """
         self._run_method('chains', opts)
 
@@ -528,7 +530,7 @@ class StructureChecking():
         """  StructureChecking.hetatm
         Manages hetero atoms. Not implemented yet. See Ligands
         """
-        print("Warning: hatatm function not implemented yet, running ligands instead")
+        print("Warning: hetatm function not implemented yet, running ligands instead")
         self._run_method('ligands', opts)
 
     def ligands(self, opts=None):
