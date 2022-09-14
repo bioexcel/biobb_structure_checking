@@ -1,4 +1,5 @@
-""" Module supporting models chains"""
+""" Module supporting chains command"""
+
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -15,7 +16,7 @@ def _check(strcheck):
         else:
             print(f" {ch_id}: {mu.CHAIN_TYPE_LABELS[strcheck.strucm.chain_ids[ch_id]]}")
     strcheck.summary['chains'] = {
-        k:mu.CHAIN_TYPE_LABELS[v] 
+        k:mu.CHAIN_TYPE_LABELS[v]
         for k, v in strcheck.strucm.chain_ids.items()
     }
     return len(strcheck.strucm.chain_ids) > 1

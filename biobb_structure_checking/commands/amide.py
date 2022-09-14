@@ -1,25 +1,28 @@
 """ Module supporting amide command"""
+
+import numpy as np
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
+from biobb_structure_checking.structure_manager import NotAValidResidueError
 
-def _check(self):
-    amide_check = self.strucm.check_amide_contacts()
+def _check(strcheck):
+    amide_check = strcheck.strucm.check_amide_contacts()
     if 'list' not in amide_check:
-        if not self.args['quiet']:
+        if not strcheck.args['quiet']:
             print(cts.MSGS['NO_AMIDES'])
         return {}
-    self.summary['amide']['n_amides'] = len(amide_check['list'])
+    strcheck.summary['amide']['n_amides'] = len(amide_check['list'])
 
     if not amide_check['cont_list']:
-        if not self.args['quiet']:
+        if not strcheck.args['quiet']:
             print(cts.MSGS['NO_UNUSUAL_AMIDES'])
         return {}
 
     print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_check['cont_list'])))
 
-    self.summary['amide']['detected'] = []
-    for at_pair in sorted(amide_check['cont_list'], key=_key_sort_atom_pairs):
+    strcheck.summary['amide']['detected'] = []
+    for at_pair in sorted(amide_check['cont_list'], key=mu.key_sort_atom_pairs):
         print(
             ' {:12} {:12} {:8.3f} A'.format(
                 mu.atom_id(at_pair[0]),
@@ -27,7 +30,7 @@ def _check(self):
                 np.sqrt(at_pair[2])
             )
         )
-        self.summary['amide']['detected'].append(
+        strcheck.summary['amide']['detected'].append(
             {
                 'at1': mu.atom_id(at_pair[0]),
                 'at2': mu.atom_id(at_pair[1]),
@@ -36,16 +39,16 @@ def _check(self):
         )
     return amide_check
 
-def _fix(self, opts, fix_data=None):
+def _fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):
         amide_fix = opts
     else:
         amide_fix = opts['fix']
-    no_int_recheck = amide_fix is not None or self.args['non_interactive']
+    no_int_recheck = amide_fix is not None or strcheck.args['non_interactive']
     while fix_data:
-        input_line = ParamInput('Fix amide atoms', self.args['non_interactive'])
+        input_line = ParamInput('Fix amide atoms', strcheck.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_list(
@@ -61,7 +64,7 @@ def _fix(self, opts, fix_data=None):
             return cts.MSGS['UNKNOWN_SELECTION'], amide_fix
 
         if input_option == 'none':
-            if self.args['verbose']:
+            if strcheck.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
         to_fix = [
@@ -74,20 +77,21 @@ def _fix(self, opts, fix_data=None):
         for res in to_fix:
             if res not in done:
                 try:
-                    self.strucm.invert_amide_atoms(res)
-                except stm.NotAValidResidueError as err:
+                    strcheck.strucm.invert_amide_atoms(res)
+                except NotAValidResidueError as err:
                     return [err.message]
                 done.add(res) # To avoid double change
                 fix_num += 1
 
         print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
-        self.strucm.modified = True
+        strcheck.strucm.modified = True
         fix_data = {}
         if not opts['no_recheck']:
-            if not self.args['quiet']:
+            if not strcheck.args['quiet']:
                 print(cts.MSGS['AMIDES_RECHECK'])
-            fix_data = self._amide_check()
+            fix_data = _check(strcheck)
             amide_fix = ''
             if no_int_recheck:
                 fix_data = {}
     return False
+

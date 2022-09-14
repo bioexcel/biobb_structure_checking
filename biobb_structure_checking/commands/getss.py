@@ -1,9 +1,10 @@
 """ Module supporting getss command"""
+
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
 
-def _getss_check(strcheck):
+def _check(strcheck):
     SS_bonds = strcheck.strucm.get_SS_bonds()
     if not SS_bonds:
         if not strcheck.args['quiet']:
@@ -26,7 +27,7 @@ def _getss_check(strcheck):
         )
     return SS_bonds
 
-def _getss_fix(strcheck, opts, fix_data=None):
+def _fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):

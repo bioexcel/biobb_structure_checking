@@ -1,4 +1,5 @@
-""" Module supporting models command"""
+""" Module supporting altloc command"""
+
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
