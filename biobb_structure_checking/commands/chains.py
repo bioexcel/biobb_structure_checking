@@ -19,7 +19,7 @@ def _check(strcheck):
         k:mu.CHAIN_TYPE_LABELS[v]
         for k, v in strcheck.strucm.chain_ids.items()
     }
-    return len(strcheck.strucm.chain_ids) > 1
+    return len(strcheck.strucm.chain_ids) > 1 or strcheck.strucm.has_chains_to_rename
 
 def _fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -40,7 +40,7 @@ def _fix(strcheck, opts, fix_data=None):
             set_none='None'
         )
         input_line.add_option_none()
-        input_line.add_option_list('auto_chain',['auto'])
+        input_line.add_option_list('auto_chain', ['auto'])
         input_line.add_option_free_text('new_chain')
         input_line.set_default("auto")
         input_ok = False

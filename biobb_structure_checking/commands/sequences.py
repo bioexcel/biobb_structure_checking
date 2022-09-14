@@ -8,7 +8,7 @@ def _check(strcheck):
         print(can_seq)
     else:
         print(cts.MSGS['NO_CANONICAL'])
-        can_seq=''
+        can_seq = ''
 
     pdb_seq = strcheck.strucm.sequence_data.get_pdbseq()
     print('Structure sequence')

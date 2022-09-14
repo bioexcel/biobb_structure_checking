@@ -59,11 +59,11 @@ def _fix(strcheck, opts, fix_data=None):
     cys_to_mark = []
 
     for pair in fix_data:
-        if (input_option == 'all') or (mu.residue_num(pair[0].get_parent()) + "-" + mu.residue_num(pair[1].get_parent()) in getss_mark.split(',')):
+        pair_id = f"{mu.residue_num(pair[0].get_parent())}-{mu.residue_num(pair[1].get_parent())}"
+        if input_option == 'all' or pair_id in getss_mark.split(','):
             cys_to_mark.append(pair[0].get_parent())
             cys_to_mark.append(pair[1].get_parent())
     strcheck.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
     strcheck.strucm.mark_ssbonds(cys_to_mark)
     strcheck.strucm.update_internals()
     return False
-

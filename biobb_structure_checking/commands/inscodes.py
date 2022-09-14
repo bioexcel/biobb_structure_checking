@@ -21,4 +21,3 @@ def _fix(strcheck, opts, fix_data=None):
     if opts['renum']:
         print("--renum option not implemented (yet)")
     return False
-

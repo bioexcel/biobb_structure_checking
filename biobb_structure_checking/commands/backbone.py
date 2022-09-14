@@ -204,7 +204,9 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             if not strcheck.args['fasta_seq_path']:
                 print(cts.MSGS['FASTA_MISSING'])
 
-            read_ok = strcheck.strucm.sequence_data.load_sequence_from_fasta(strcheck.args['fasta_seq_path'])
+            read_ok = strcheck.strucm.sequence_data.load_sequence_from_fasta(
+                strcheck.args['fasta_seq_path']
+            )
             if not read_ok:
                 strcheck.args['fasta_seq_path'] = None
             if strcheck.args['non_interactive'] and not read_ok:

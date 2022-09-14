@@ -94,4 +94,3 @@ def _fix(strcheck, opts, fix_data=None):
             if no_int_recheck:
                 fix_data = {}
     return False
-
