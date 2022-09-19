@@ -61,6 +61,7 @@ class DataLibManager:
                 'side': self.residue_data[rcode]['side_atoms']
             }
             for rcode in self.residue_codes[chain_type]
+            if rcode not in self.canonical_codes
         }
         if chain_type == 'protein':
             for rcode in self.residue_codes['cap_residues']:

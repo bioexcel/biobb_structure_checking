@@ -234,6 +234,7 @@ class StructureManager:
         """
         i = 1
         self.all_residues = []
+        self.non_canonical_residue_list = []
         for res in self.st.get_residues():
             res.index = i
             res.resname = res.resname.strip()
@@ -241,6 +242,15 @@ class StructureManager:
                 for ch_r in res.child_dict:
                     res.child_dict[ch_r].index = i
             self.all_residues.append(res)
+            if res.get_resname() in self.data_library.canonical_codes:
+                self.non_canonical_residue_list.append(
+                    {
+                        'res':res, 
+                        'can_res':self.data_library.canonical_codes[res.get_resname()], 
+                        'new_res':res.resname
+                    }
+                )
+            
             i += 1
 
     def atom_renumbering(self):
@@ -458,15 +468,22 @@ class StructureManager:
         residue_data = {}
         for chain_type in ('protein', 'dna', 'rna'):
             valid_codes[mu.TYPE_LABEL[chain_type]] = self.data_library.get_valid_codes(chain_type)
+            if chain_type == 'protein':
+                valid_codes[mu.TYPE_LABEL[chain_type]] += list(self.data_library.canonical_codes)
             residue_data[mu.TYPE_LABEL[chain_type]] = self.data_library.get_all_atom_lists(chain_type)
         miss_at_list = []
         for res in self.st.get_residues():
             ch_type = self._get_chain_type(res)
             if ch_type not in (mu.PROTEIN, mu.NA, mu.DNA, mu.RNA):
                 continue
-            if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
+
+            if res.get_resname() in valid_codes[ch_type]  and not mu.is_hetatm(res):
+                if res.get_resname() in self.data_library.canonical_codes:
+                    can_rcode = self.data_library.canonical_codes[res.get_resname()]
+                else:
+                    can_rcode = res.get_resname()
                 miss_at = mu.check_all_at_in_r(
-                    res, residue_data[ch_type][res.get_resname().replace(' ', '')]
+                    res, residue_data[ch_type][can_rcode]
                 )
                 bck_miss = []
                 if ch_type == mu.PROTEIN:
@@ -496,22 +513,28 @@ class StructureManager:
         residue_data = {}
         for chain_type in ('protein', 'dna', 'rna'):
             valid_codes[mu.TYPE_LABEL[chain_type]] = self.data_library.get_valid_codes(chain_type)
+            if chain_type == 'protein':
+                valid_codes[mu.TYPE_LABEL[chain_type]] += list(self.data_library.canonical_codes)
             residue_data[mu.TYPE_LABEL[chain_type]] = self.data_library.get_all_atom_lists(chain_type)
         extra_at_list = []
         for res in self.st.get_residues():
             if mu.is_hetatm(res):
                 continue
+            if res.get_resname() in self.data_library.canonical_codes:
+                can_rcode = self.data_library.canonical_codes[res.get_resname()]
+            else:
+                can_rcode = res.get_resname()
             ch_type = self._get_chain_type(res)
             rcode = res.get_resname().replace(' ', '')
             if rcode not in valid_codes[ch_type]:
                 print(f"Warning: unknown residue {rcode}")
                 continue
             if ch_type == mu.PROTEIN:
-                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][rcode])
+                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][can_rcode])
                 if extra_ats:
                     extra_at_list.append((res, extra_ats))
             else:
-                res_at_list = residue_data[ch_type][rcode]
+                res_at_list = residue_data[ch_type][can_rcode]
                 add_ats = []
                 if not self.is_5_term(res):
                     if 'P' not in res_at_list['backbone']: # fix to avoid chain many
@@ -1541,6 +1564,12 @@ class StructureManager:
                 mod_res['res'].resname = mod_res['can_res']
             else:
                 mod_res['res'].resname = mod_res['new_res']
+
+    def revert_one_can_resname(self, res, canonical=True):
+        if canonical:
+            res.resname = res['can_res']
+        else:
+            res.resname = res['new_res']
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
