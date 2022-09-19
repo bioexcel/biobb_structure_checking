@@ -38,6 +38,7 @@ def _fix(strcheck, opts, fix_data=None):
         for resh in fix_data['remh_list']:
             mu.remove_H_from_r(resh['r'])
             rmh_num += 1
+        strcheck.strucm.revert_can_resnames(canonical=True)
         print(cts.MSGS['REMOVED_H'].format(rmh_num))
         strcheck.strucm.modified = True
         strcheck.summary['rem_hydrogen']['n_removed'] = rmh_num
