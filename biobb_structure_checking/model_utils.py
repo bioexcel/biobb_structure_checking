@@ -111,6 +111,9 @@ def atom_id(atm, models='auto'):
     """ Friendly replacement for atom ids like ASN A324/0.CA """
     return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
 
+def key_sort_atom_pairs(at_pair):
+    return at_pair[0].serial_number * 10000 + at_pair[1].serial_number
+
 def get_sequence_symbol(r, chain_type):
     seq = ''
     rn = r.get_resname()

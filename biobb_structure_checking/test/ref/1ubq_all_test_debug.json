@@ -263,4 +263,202 @@
         "n_removed": 58,
         "opts": "--remove Yes"
     }
+   ],
+   "polar_donor": [],
+   "positive": [],
+   "severe": []
+  }
+ },
+ "elapsed_times": {
+  "add_hydrogen": 0.06955480575561523,
+  "altloc": 0.00043272972106933594,
+  "amide": 0.20390677452087402,
+  "backbone": 0.0023925304412841797,
+  "chains": 0.00010943412780761719,
+  "chiral": 0.001986265182495117,
+  "chiral_bck": 0.007889032363891602,
+  "cistransbck": 0.019911766052246094,
+  "clashes": 1.0611538887023926,
+  "fixside": 0.0023376941680908203,
+  "getss": 0.0005731582641601562,
+  "inscodes": 0.00025534629821777344,
+  "ligands": 0.00021791458129882812,
+  "load": 0.1344609260559082,
+  "metals": 0.0012927055358886719,
+  "models": 0.0010342597961425781,
+  "rem_hydrogen": 0.00035190582275390625,
+  "total": 1.5372288227081299,
+  "water": 0.016508102416992188
+ },
+ "final_stats": {
+  "biounit": false,
+  "ca_only": false,
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
+  "chain_ids": {
+   "A": "Protein"
+  },
+  "models_type": 0,
+  "nchains": 1,
+  "nmodels": 1,
+  "num_ats": 1231,
+  "num_h": 629,
+  "num_res": 76,
+  "num_wat": 0,
+  "res_h": 76,
+  "res_hetats": 0,
+  "res_insc": 0,
+  "res_ligands": 0,
+  "total_charge": -1.0000000011389787e-06
+ },
+ "fixside": {
+  "opts": "--fix all"
+ },
+ "getss": {
+  "opts": "--mark All"
+ },
+ "headers": {
+  "entry_id": "1UBQ",
+  "keywords": "CHROMOSOMAL PROTEIN",
+  "method": "X-RAY DIFFRACTION",
+  "resolution": "1.8",
+  "title": "STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION"
+ },
+ "inscodes": {},
+ "ligands": {
+  "opts": "--remove All"
+ },
+ "memsize": [
+  [
+   "load",
+   47.09375
+  ],
+  [
+   "models",
+   47.09375
+  ],
+  [
+   "chains",
+   47.09375
+  ],
+  [
+   "inscodes",
+   47.09375
+  ],
+  [
+   "altloc",
+   47.09375
+  ],
+  [
+   "metals",
+   47.09375
+  ],
+  [
+   "ligands",
+   47.09375
+  ],
+  [
+   "water",
+   47.3125
+  ],
+  [
+   "rem_hydrogen",
+   47.3125
+  ],
+  [
+   "amide",
+   47.3125
+  ],
+  [
+   "chiral",
+   47.3125
+  ],
+  [
+   "chiral_bck",
+   47.3125
+  ],
+  [
+   "fixside",
+   47.3125
+  ],
+  [
+   "backbone",
+   47.3125
+  ],
+  [
+   "cistransbck",
+   47.3125
+  ],
+  [
+   "getss",
+   47.3125
+  ],
+  [
+   "clashes",
+   47.3125
+  ],
+  [
+   "ligands",
+   47.3125
+  ],
+  [
+   "chains",
+   47.3125
+  ],
+  [
+   "fixside",
+   47.3125
+  ],
+  [
+   "add_hydrogen",
+   47.90625
+  ]
+ ],
+ "metals": {
+  "opts": "--remove ZN"
+ },
+ "models": {
+  "nmodels": 1
+ },
+ "rem_hydrogen": {
+  "opts": "--remove Yes"
+ },
+ "stats": {
+  "biounit": false,
+  "ca_only": false,
+  "chain_guess_details": {
+   "A": {
+    "DNA": 0.0,
+    "Other": 0.0,
+    "Protein": 1.0,
+    "RNA": 0.0
+   }
+  },
+  "chain_ids": {
+   "A": "Protein"
+  },
+  "models_type": 0,
+  "nchains": 1,
+  "nmodels": 1,
+  "num_ats": 660,
+  "num_h": 0,
+  "num_res": 134,
+  "num_wat": 58,
+  "res_h": 0,
+  "res_hetats": 58,
+  "res_insc": 0,
+  "res_ligands": 0,
+  "total_charge": null
+ },
+ "water": {
+  "n_detected": 58,
+  "n_removed": 58,
+  "opts": "--remove Yes"
+ }
 }

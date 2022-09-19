@@ -1002,7 +1002,8 @@ class StructureManager:
             self.chain_details[chn.id] = guess['details']
             if chn.id == ' ':
                 self.has_chains_to_rename = self.has_chains_to_rename  or True
-    def rename_empty_chain_label(self, new_label) -> None:
+    
+    def rename_empty_chain_label(self, new_label: str) -> str:
         if not self.has_chains_to_rename:
             return False
         if new_label == 'auto':
@@ -1016,9 +1017,7 @@ class StructureManager:
                     chn.id = new_label
         self.set_chain_ids()
         self.modified = True
-        return True
-
-
+        return new_label
 
     def has_NA(self):
         """ Checks if any of the chains is NA"""
