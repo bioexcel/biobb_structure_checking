@@ -19,6 +19,7 @@ def _check(strcheck):
         k:mu.CHAIN_TYPE_LABELS[v]
         for k, v in strcheck.strucm.chain_ids.items()
     }
+    strcheck.summary['chains']['unlabelled'] = strcheck.strucm.has_chains_to_rename
     return len(strcheck.strucm.chain_ids) > 1 or strcheck.strucm.has_chains_to_rename
 
 def _fix(strcheck, opts, fix_data=None):
@@ -55,9 +56,9 @@ def _fix(strcheck, opts, fix_data=None):
                 print(f"Chain {rename_chains} is already present")
                 rename_chains = ''
         if input_option != 'none':
-            strcheck.strucm.rename_empty_chain_label(rename_chains)
+            new_label = strcheck.strucm.rename_empty_chain_label(rename_chains)
             _check(strcheck)
-
+            strcheck.summary['chains']['renamed'] = new_label
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
     input_line.add_option_all()

@@ -84,6 +84,8 @@ def _fix(strcheck, opts, fix_data=None):
                 fix_num += 1
 
         print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
+        strcheck.summary['amide']['fixed'] = amide_fix
+
         strcheck.strucm.modified = True
         fix_data = {}
         if not opts['no_recheck']:

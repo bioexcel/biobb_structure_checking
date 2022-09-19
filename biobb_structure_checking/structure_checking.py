@@ -100,7 +100,7 @@ class StructureChecking():
                         split_models='--save_split' in self.args['options']
                     )
                     print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
-
+                    self.summary['saved_structure'] = output_structure_path
                 except OSError:
                     print(
                         'ERROR: unable to save PDB data on ',
@@ -111,6 +111,7 @@ class StructureChecking():
                     print(err.message, file=sys.stderr)
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
+            self.summary['modified_structure'] = self.strucm.modified 
 
         if self.args['debug']:
             total = time.time() - self.start_time
@@ -244,18 +245,19 @@ class StructureChecking():
 
         if command not in self.summary: self.summary[command] = {}
 
+        msg = f"Running {command}."
+        if opts:
+            if isinstance(opts, list):
+                opts_str = ' '.join(opts)
+            elif isinstance(opts, dict):
+                opts_str = str(opts)
+            else:
+                opts_str = opts
+            msg += ' Options: ' + opts_str
+            self.summary[command]['opts'] = opts_str
+    
         if not self.args['quiet'] or self.args['verbose']:
-            msg = f"Running {command}."
-            if opts:
-                if isinstance(opts, list):
-                    opts_str = ' '.join(opts)
-                elif isinstance(opts, dict):
-                    opts_str = str(opts)
-                else:
-                    opts_str = opts
-                msg += ' Options: ' + opts_str
-                self.summary[command]['opts'] = opts_str
-                print(msg.strip())
+            print(msg.strip())
 
     # Running checking method
         data_to_fix = f_check(self)
@@ -330,11 +332,14 @@ class StructureChecking():
             fasta_sequence_path=fasta_seq_path
         )
 
+        self.summary['loaded_structure'] = input_structure_path
+
         if verbose:
             print(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
             strucm.print_headers()
             print()
-            self.summary['headers'] = strucm.meta
+        
+        self.summary['headers'] = strucm.meta
 
         if print_stats:
             strucm.print_stats()

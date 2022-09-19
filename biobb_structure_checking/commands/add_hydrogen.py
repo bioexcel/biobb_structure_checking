@@ -16,7 +16,6 @@ def _check(strcheck):
     fix_data = {
         'ion_res_list': ion_res_list,
     }
-    strcheck.summary['add_hydrogen']['detected'] = {}
     print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
     for res_type in strcheck.strucm.data_library.residue_codes['protein']:
         residue_list = [
@@ -78,6 +77,7 @@ def _fix(strcheck, opts, fix_data=None):
     if add_h_mode == 'auto':
         if not strcheck.args['quiet']:
             print('Selection: auto')
+        strcheck.summary['add_hydrogen']['selection'] = 'auto'
     else:
         if add_h_mode == 'ph':
             ph_value = opts['pH']
@@ -85,8 +85,11 @@ def _fix(strcheck, opts, fix_data=None):
             input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
             input_line.set_default(7.0)
             input_option, ph_value = input_line.run(ph_value)
+
             if not strcheck.args['quiet']:
                 print('Selection: pH', ph_value)
+            strcheck.summary['add_hydrogen']['selection'] = f"pH {ph_value}"
+
             for r_at in fix_data['ion_res_list']:
                 res = r_at[0]
                 rcode = res.get_resname()
@@ -99,10 +102,13 @@ def _fix(strcheck, opts, fix_data=None):
                 ions_list = opts['list']
                 if not strcheck.args['quiet']:
                     print('Selection: list')
+                
                 ions_list = ParamInput(
                     "Enter Forms list as [*:]his22hip",
                     strcheck.args['non_interactive']
                 ).run(ions_list)
+
+                strcheck.summary['add_hydrogen']['selection'] = ions_list
 
                 # Changes in tautomeric forms made as mutationts eg.HisXXHip
                 mutations = strcheck.strucm.prepare_mutations(ions_list)
@@ -121,7 +127,7 @@ def _fix(strcheck, opts, fix_data=None):
                         r_at for r_at in fix_data['ion_res_list']
                         if r_at[0].get_resname() == 'HIS'
                     ]
-
+                    strcheck.summary['add_hydrogen']['selection'] = []
                 for r_at in res_list:
                     rcode = r_at[0].get_resname()
                     input_line = ParamInput(
@@ -134,6 +140,8 @@ def _fix(strcheck, opts, fix_data=None):
                     form = None
                     input_option, form = input_line.run(form)
                     ion_to_fix[r_at[0]] = form.upper()
+                    strcheck.summary['add_hydrogen']['selection'].append(f"{rcode} {form.upper()}")
+    
     strcheck.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'].upper())
     strcheck.strucm.modified = True
     return False
