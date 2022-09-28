@@ -1,5 +1,5 @@
 """
-  Utility functions to manipulate structures. based on Bio.PDB data model
+  Utility functions to manipulate biopython structures. based on Bio.PDB data model
 """
 
 import re
