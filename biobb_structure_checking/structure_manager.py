@@ -9,7 +9,6 @@ import sys
 #import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
-
 from Bio.PDB.Residue import Residue
 from Bio.PDB.Atom import Atom
 from Bio.PDB.Structure import Structure
@@ -26,13 +25,14 @@ from biobb_structure_checking.mutation_manager import MutationManager, MutationS
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
+from biobb_structure_checking.internals import InternalData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 
-MODELLER_ENV_VAR = 'KEY_MODELLER10v1'
+MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
 CISTHRES = 20  # TODO check values with pdb checking
-TRANSTHRES = 160
+TRANSTHRES = 150
 
 ALL_CONTACT_TYPES = [
     'severe',
@@ -94,6 +94,8 @@ class StructureManager:
                 "backbone_links" []: List of found canonical backbone links as [at1, at2] tuples, according to a distance criterium
             TODO Update and complete
         """
+
+        self.internals = InternalData()
 
         self.chain_ids = {}
         self.chain_details = {}
