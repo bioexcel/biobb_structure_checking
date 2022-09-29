@@ -414,6 +414,10 @@ class StructureChecking():
                     * **na** - Select all NA chains,
                     * **rna** - Select all RNA chains,
                     * **dna** - Select all DNA chains.
+                * rename:
+                    * **auto** - Add first possible label staring on A to unlabeled chains
+                    * **label** - Use indicated label
+
         """
         self._run_method('chains', opts)
 
@@ -464,7 +468,7 @@ class StructureChecking():
                 else:
                     print(f"Chain {rename_chains} is already present")
                     rename_chains = ''
-            if input_option is not 'none':
+            if input_option != 'none':
                 self.strucm.rename_empty_chain_label(rename_chains)
                 self._chains_check()
 

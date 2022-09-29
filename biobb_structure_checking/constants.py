@@ -244,6 +244,7 @@ DIALOGS.add_option('models', '--superimpose', 'superimpose', \
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
+DIALOGS.add_option('chains', '--rename', 'rename','Rename unlabelled chains (auto | label)')
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option('altloc', '--select', 'select', \

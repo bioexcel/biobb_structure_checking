@@ -358,9 +358,9 @@ class SequenceData():
                     )
 
                 if has_IUPAC:
-                    pdb_seq = Seq(sequence, IUPAC.protein)
+                    pdb_seq = Seq(str(sequence), IUPAC.protein)
                 else:
-                    pdb_seq = Seq(sequence)
+                    pdb_seq = Seq(str(sequence))
 
                 seq = SeqRecord(
                     pdb_seq,
