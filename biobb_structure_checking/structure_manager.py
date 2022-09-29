@@ -1201,9 +1201,14 @@ class StructureManager:
                 *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
+
         if modeller_key:
-            MODELLER_ENV_VAR = _guess_modeller_env()
-            os.environ[MODELLER_ENV_VAR] = modeller_key
+            MODELLER_ENV_VAR, MODELLER_INSTALL_ENV_VAR, modeller_install_dir = _guess_modeller_env()
+            if not os.environ.get(MODELLER_ENV_VAR):
+                os.environ[MODELLER_ENV_VAR] = modeller_key
+            if not os.environ.get(MODELLER_INSTALL_ENV_VAR):
+                os.environ[MODELLER_INSTALL_ENV_VAR] = modeller_install_dir
+
 
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
@@ -1676,10 +1681,11 @@ def _guess_modeller_env():
             info = line.split()
     if info[1]:
         print("Modeller v{} detected".format(info[1]))
-        v1,v2 = info[1].split('.')
-        return "KEY_MODELLER{}v{}".format(v1,v2)
+        v1, v2 = info[1].split('.')
+        return "KEY_MODELLER{}v{}".format(v1, v2), "MODINSTALL{}v{}".format(v1, v2), f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{v1}.{v2}"
+
     print("Modeller version not detected, using default")
-    return MODELLER_ENV_VAR
+    return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 
 class WrongServerError(Exception):
