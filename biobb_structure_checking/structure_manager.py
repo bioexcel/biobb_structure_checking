@@ -4,6 +4,7 @@
 #from re import I
 import warnings
 import os
+import copy
 from os.path import join as opj
 import sys
 #import re
@@ -997,10 +998,35 @@ class StructureManager:
                 spimp.apply(self.st[mod.id].get_atoms())
             self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
             self.modified = True
+
+    def build_complex(self):
+        if self.models_type['type'] != mu.BUNIT:
+            print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_type['rmsd']}")
+            return 0
+        # Use first available model as base
+        added_chains = 0
+        last_chain_id = ''
+        for mod in self.st:
+            print(mod)
+            if mod.id == 0:
+                for ch in mod:
+                    last_chain_id = ord(ch.id)
+                continue
+            new_chain_ids = [ch.id for ch in mod]
+            for ch_id in new_chain_ids:
+                new_ch = mod[ch_id].copy()
+                last_chain_id += 1
+                new_ch.id = chr(last_chain_id)
+                new_ch.set_parent(self.st[0])
+                self.st[0].add(new_ch)
+                added_chains += 1  
+        self.select_model('1')
+        return added_chains
+
     def has_models(self) -> bool:
         """ Shotcut method to check whether the structure has more than one model
 
-            Returns: Boolean
+            Returns: Boolea
         """
         return self.nmodels > 1
 

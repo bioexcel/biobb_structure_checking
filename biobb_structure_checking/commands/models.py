@@ -1,4 +1,5 @@
 """ Module supporting models command"""
+from unittest.util import strclass
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -50,9 +51,15 @@ def _fix(strcheck, opts, fix_data=None):
         print(cts.MSGS['SUPIMP_MODELS'].format(strcheck.strucm.models_type["rmsd"]))
         strcheck.summary['models']['superimp_rmsd'] = strcheck.strucm.models_type["rmsd"]
 
+    if opts['build_complex']:
+        added_chains = strcheck.strucm.build_complex()
+        print(cts.MSGS['ADDED_CHAINS_TO_COMPLEX'].format(added_chains))
+        strcheck.summary['models']['added_chains'] = added_chains
+
     if opts['save_split']: # tag as modified to force save
         strcheck.strucm.modified = True
 
     strcheck.summary['models']['selected'] = select_model
+    
 
     return False

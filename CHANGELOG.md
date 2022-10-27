@@ -1,3 +1,10 @@
+## v3.XXXXX (2023.4)
+### Extended functions
+- models
+  - Convert biounit's selected models into actual complexes.
+### Bug Fixes
+- Added missing defaults for Notebook execution
+
 ## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details
