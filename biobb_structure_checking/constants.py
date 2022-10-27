@@ -26,9 +26,15 @@ DEFAULTS = {
     'atom_limit': 1000000,
     'mem_check': False,
     'rename_terms': False,
+    'keep_canonical': False,
     'verbose': False,
     'debug': False,
-    'options' : ''
+    'options' : '',
+    'modeller_key': None,
+    'file_format': 'cif',
+    'output_format': 'pdb',
+
+
 }
 
 def set_defaults(base_dir_path, args=None):
@@ -134,6 +140,7 @@ CMD_LINE.add_argument(
     '--output_format',
     dest='output_format',
     help='Format for the Output. When empty output file extension is used.',
+    default='pdb',
     choices=['pdb', 'pdbqt', 'pqr', 'cmip']
 )
 
@@ -240,6 +247,8 @@ DIALOGS.add_option('models', '--save_split', 'save_split', \
     'Save each model in a separated PDB file', 'bool')
 DIALOGS.add_option('models', '--superimpose', 'superimpose', \
     'Superimpose models', 'bool')
+DIALOGS.add_option('models', '--build_complex', 'build_complex', 
+    'Build a complex from selected models (biounit type)', 'bool')
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
@@ -370,6 +379,7 @@ MSGS = {
     'SELECT_MODEL': 'Selecting model num.',
     'SPLIT_MODELS': 'Splitting models for output',
     'SUPIMP_MODELS': 'Models superimposed: final RMSd {:8.3f} A',
+    'ADDED_CHAINS_TO_COMPLEX': '{} chains added to new complex',
     #chains
     'CHAINS_DETECTED': '{} Chain(s) detected',
     'UNKNOWN_CHAINS':   ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} ' +\
