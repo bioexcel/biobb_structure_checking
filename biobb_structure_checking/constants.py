@@ -8,7 +8,6 @@ from biobb_structure_checking.param_input import Dialog
 
 VERSION = '3.10.1'
 
-
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
 RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
@@ -32,9 +31,7 @@ DEFAULTS = {
     'options' : '',
     'modeller_key': None,
     'file_format': 'cif',
-    'output_format': 'pdb',
-
-
+    'output_format': 'pdb'
 }
 
 def set_defaults(base_dir_path, args=None):
@@ -157,6 +154,7 @@ CMD_LINE.add_argument(
     dest='rename_terms',
     help='Show terminal residues as NXXX, CXXX in output files'
 )
+
 CMD_LINE.add_argument(
     '--json',
     dest='json_output_path',
@@ -177,13 +175,13 @@ CMD_LINE.add_argument(
     help='Add extra progress info'
 )
 
-
 CMD_LINE.add_argument(
     '--limit',
     dest='atom_limit',
     type=int,
     help='Limit on number of atoms,0:nolimit'
 )
+
 CMD_LINE.add_argument(
     '--debug',
     dest='debug',
@@ -230,8 +228,8 @@ CMD_LINE.add_argument(
     version="%(prog)s " + VERSION
 )
 
-
 # Interactive DIALOGS to complete command_line missing parameters
+# ===============================================================
 DIALOGS = Dialog()
 
 #DIALOGS.add_option(command, prompt, destination, help_text, type(str))
@@ -321,6 +319,7 @@ DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
     'Rebuild complete side chain', 'bool')
 DIALOGS.add_option('mutateside', '--na_seq', 'na_seq',\
     'Mutate DNA duplex to generate sequence')
+
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'add_mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
@@ -334,6 +333,7 @@ DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
 DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
     'Update atom partial charges and add atom types from given forcefield (ADT|CMIP)', default="")
+
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
@@ -341,7 +341,9 @@ DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
 DIALOGS.add_option('getss', '--mark', 'mark', 'Mark Cys pairs as SS bond (All | None | List)')
 
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
+
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
+
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
