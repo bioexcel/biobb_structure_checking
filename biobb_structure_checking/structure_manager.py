@@ -1251,6 +1251,7 @@ class StructureManager:
                 *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
+
         if modeller_key:
             MODELLER_ENV_VAR, MODELLER_INSTALL_ENV_VAR, modeller_install_dir = _guess_modeller_env()
             if not os.environ.get(MODELLER_ENV_VAR):
