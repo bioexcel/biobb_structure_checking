@@ -103,7 +103,7 @@ class SequenceData():
             for h in sorted(hits, key=lambda h:h['ch_id']):
                 print('{ch_id}: "{desc}", score: {score} {low}'.format(**h))
         else:
-            if strucm.input_format != 'cif':
+            if strucm.st_data.input_format != 'cif':
                 if cif_warn:
                     print("Warning: sequence features only available in mmCIF" +\
                     " format or with external fasta input")

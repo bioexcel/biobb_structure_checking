@@ -82,7 +82,7 @@ class ModelsData():
                 new_ch.set_parent(self.st[0])
                 self.st[0].add(new_ch)
                 added_chains += 1  
-        self.select_model('1')
+        self.select('1')
         return added_chains
 
     def has_models(self) -> bool:

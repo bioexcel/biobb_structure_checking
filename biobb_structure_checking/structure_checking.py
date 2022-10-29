@@ -71,8 +71,8 @@ class StructureChecking():
                 "#DEBUG Memory used after structure load: {:f} MB ".format(memsize)
             )
 
-        if self.args['atom_limit'] and self.strucm.num_ats > self.args['atom_limit']:
-            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.num_ats, self.args['atom_limit']))
+        if self.args['atom_limit'] and self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
+            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.st_data.stats['num_ats'], self.args['atom_limit']))
 
     def launch(self):
         """ StructureChecking.launch
@@ -147,7 +147,7 @@ class StructureChecking():
         Args:
             prefix (str): (None) Prefix to add to the output lines for identification.
         """
-        self.strucm.calc_stats()
+        self.strucm.st_data.calc_stats()
         if prefix is None:
             prefix = ''
         self.strucm.print_stats(prefix)
@@ -411,7 +411,7 @@ class StructureChecking():
 
     def _check_report_clashes(self, residue_list=None, contact_types=None):
         if contact_types is None: contact_types = stm.ALL_CONTACT_TYPES
-        if not residue_list: residue_list = self.strucm.all_residues
+        if not residue_list: residue_list = self.strucm.st_data.all_residues
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)
