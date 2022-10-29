@@ -30,7 +30,6 @@ DEFAULTS = {
     'debug': False,
     'options' : '',
     'modeller_key': None,
-    'file_format': 'cif',
     'output_format': 'pdb'
 }
 

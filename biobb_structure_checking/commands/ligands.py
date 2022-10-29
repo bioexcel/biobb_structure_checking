@@ -20,7 +20,7 @@ def _check(strcheck):
     strcheck.summary['ligands'] = {'detected': []}
 
     for res in sorted(lig_list, key=lambda x: x.index):
-        if strcheck.strucm.has_models():
+        if strcheck.strucm.models_data.has_models():
             if res.get_parent().get_parent().id > 0:
                 continue
             print(' {}/*'.format(mu.residue_id(res, False)))

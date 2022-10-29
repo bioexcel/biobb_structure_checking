@@ -26,9 +26,9 @@ from biobb_structure_checking.mutation_manager import MutationManager, MutationS
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
-from biobb_structure_checking.internals import InternalData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
+from biobb_structure_checking.modelling.model import ModelsData
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
@@ -78,25 +78,23 @@ class StructureManager:
 
         Object structure:
             {
-                "input_format" (str): Format of input file pdb(qt)|pqr|cif
-                "models_type" (int): Guessed model type when num. models > 1 NMR|Bunit
-                "num_ats" (int): Total Number of atoms
-                "nmodels" (int): Number of Models
-                "chain_ids" (List): Chain composition as [chain_id:{}]
-                "modified" (Boolean): Flag to indicated that structure has been modified
-                "all_residues" (list): List of pointer to Bio.PDB.Residue objects, ordered acording to input file
-                "num_res" (int): Number of residues
-                "res_insc" (int): Number of residues with insertion codes
-                "res_hetats" (int): Number of residues flagged as HETATM
-                "res_ligands" (int): Number of non water residues flagged as HETATM
-                "num_wat" (int): Number of water residues
-                "ca_only" (boolead): Flag to indicate a possible CA-only structure
-                "modified_residue_list" []: List of residues being connected HETATM as PDB.Bio.Residue
-                "backbone_links" []: List of found canonical backbone links as [at1, at2] tuples, according to a distance criterium
             TODO Update and complete
         """
+        self.data_library = DataLibManager(data_library_path)
+        for ff in self.data_library.ff_data:
+            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
 
-        self.internals = InternalData()
+        self.res_library = ResidueLib(res_library_path)
+
+        self.sequence_data = SequenceData()
+        if fasta_sequence_path:
+            self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
+
+        self.st, self.headers, self.input_format = self._load_structure_file(
+            input_pdb_path, cache_dir, pdb_server, file_format
+        )
+
+        self.models_data = ModelsData(self.st)
 
         self.chain_ids = {}
         self.chain_details = {}
@@ -125,7 +123,6 @@ class StructureManager:
         self.next_residue = {}
         self.prev_residue = {}
 
-        self.sequence_data = SequenceData()
 
         self.modified = False
         self.biounit = False
@@ -133,24 +130,6 @@ class StructureManager:
         self.file_format = file_format
         self.has_charges = False
         self.total_charge = None
-
-        self.data_library = DataLibManager(data_library_path)
-        for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
-
-        self.res_library = ResidueLib(res_library_path)
-
-
-        self.st, self.headers, self.input_format = self._load_structure_file(
-            input_pdb_path, cache_dir, pdb_server, file_format
-        )
-
-        if fasta_sequence_path:
-            self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
-
-        # Checking models type according to RMS among models
-        self.nmodels = len(self.st)
-        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
 
         # Calc internal data
         self.update_internals(cif_warn=True)
@@ -172,7 +151,7 @@ class StructureManager:
             else:
                 input_pdb_path = input_pdb_path[4:].upper()
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format=self.file_format
+                    input_pdb_path, file_format=file_format
                 )
                 if file_format == 'pdb':
                     # change file name to id.pdb
@@ -400,7 +379,7 @@ class StructureManager:
             self.st,
             'SG',
             self.data_library.distances['SS_DIST'],
-            not self.has_superimp_models()
+            not self.models_data.has_superimp_models()
         )
         return self.ss_bonds
 
@@ -456,7 +435,7 @@ class StructureManager:
             self.rr_dist,
             self.data_library.distances['CLASH_DIST'],
             self.data_library.get_atom_lists(contact_types),
-            not self.has_superimp_models(),
+            not self.models_data.has_superimp_models(),
             severe='severe' in contact_types
         )
 
@@ -738,8 +717,8 @@ class StructureManager:
             Dict as {}
         """
         return {
-            'nmodels': self.nmodels,
-            'models_type': self.models_type,
+            'nmodels': self.models_data.nmodels,
+            'models_type': self.models_data.models_type,
             'nchains': len(self.chain_ids),
             'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chain_ids.items()},
             'chain_guess_details' : self.chain_details,
@@ -812,20 +791,6 @@ class StructureManager:
         if self.biounit:
             self.meta['biounit'] = self.biounit
 
-    def print_model_stats(self, prefix='') -> None:
-        """ Print stats """
-        if self.nmodels > 1:
-            print(
-                '{} Num. models: {} (type: {}, {:8.3f} A)'.format(
-                    prefix,
-                    self.nmodels,
-                    mu.MODEL_TYPE_LABELS[self.models_type['type']],
-                    self.models_type['rmsd']
-                )
-            )
-        else:
-            print('{} Num. models: {}'.format(prefix, self.nmodels))
-
     def print_chain_stats(self, prefix='') -> None:
         """ Print chains info """
         chids = []
@@ -854,7 +819,7 @@ class StructureManager:
             prefix: Text prefix to prepend to printed data
         """
         stats = self.get_stats()
-        self.print_model_stats(prefix)
+        print(self.models_data.stats(prefix))
         self.print_chain_stats(prefix)
 
         print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
@@ -959,85 +924,18 @@ class StructureManager:
             Args:
                 keep_model: Model number(s) to keep
         """
-        models = []
-        if '-' in keep_model:
-            m1, m2 = keep_model.split('-')
-            for v in range(int(m1), int(m2) + 1):
-                models.append(v)
-        elif ',' in keep_model:
-            models = [int(m) for m in keep_model.split(',')]
-        else:
-            models = [int(keep_model)]
-
-        ids = [mod.id for mod in self.st.get_models()]
-        for md_id in ids:
-            if self.st[md_id].serial_num not in models:
-                self.st.detach_child(md_id)
-
-        # renumbering models
-        for i, mod in enumerate(self.st):
-            mod.id = i
-            mod.serial_num = i + 1
-
-        self.nmodels = len(self.st)
-        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
-
-        # Update internal data
+        self.models_data.select(keep_model)
         self.update_internals()
         self.modified = True
 
     def superimpose_models(self):
-        spimp = Superimposer()
-        if self.nmodels > 1:
-            fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
-            for mod in self.st.get_models():
-                if mod.id == 0:
-                    continue
-                mov_atoms = [at for at in self.st[mod.id].get_atoms() if at.id == 'CA']
-                spimp.set_atoms(fix_atoms, mov_atoms)
-                spimp.apply(self.st[mod.id].get_atoms())
-            self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
-            self.modified = True
-
+        self.modified = self.models_data.superimpose_models()
+    
     def build_complex(self):
-        if self.models_type['type'] != mu.BUNIT:
-            print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_type['rmsd']}")
+        if self.models_data.models_type['type'] != mu.BUNIT:
+            print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
             return 0
-        # Use first available model as base
-        added_chains = 0
-        last_chain_id = ''
-        for mod in self.st:
-            print(mod)
-            if mod.id == 0:
-                for ch in mod:
-                    last_chain_id = ord(ch.id)
-                continue
-            new_chain_ids = [ch.id for ch in mod]
-            for ch_id in new_chain_ids:
-                new_ch = mod[ch_id].copy()
-                last_chain_id += 1
-                new_ch.id = chr(last_chain_id)
-                new_ch.set_parent(self.st[0])
-                self.st[0].add(new_ch)
-                added_chains += 1  
-        self.select_model('1')
-        return added_chains
-
-    def has_models(self) -> bool:
-        """ Shotcut method to check whether the structure has more than one model
-
-            Returns: Boolean
-        """
-        return self.nmodels > 1
-
-
-    def has_superimp_models(self) -> bool:
-        """ Shotcut method to check whether the structure has superimposed
-            models (i.e. NMR or ensemble)
-
-            Returns: Boolean
-        """
-        return self.models_type and self.models_type['type'] == mu.ENSM
+        return self.models_data.build_complex()
 
     def set_chain_ids(self) -> None:
         """
@@ -1275,7 +1173,7 @@ class StructureManager:
         modif_residues = []
 
         for mod in self.st:
-            if self.has_models():
+            if self.models_data.has_models():
                 print('Processing Model {}'.format(mod.id + 1))
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
             else:
