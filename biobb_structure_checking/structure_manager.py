@@ -26,7 +26,6 @@ from biobb_structure_checking.mutation_manager import MutationManager, MutationS
 from biobb_structure_checking.data_lib_manager import DataLibManager
 from biobb_structure_checking.residue_lib_manager import ResidueLib
 from biobb_structure_checking.sequence_manager import SequenceData
-from biobb_structure_checking.internals import InternalData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 
@@ -96,8 +95,6 @@ class StructureManager:
             TODO Update and complete
         """
 
-        self.internals = InternalData()
-
         self.chain_ids = {}
         self.chain_details = {}
         self.has_chains_to_rename = False
@@ -140,7 +137,6 @@ class StructureManager:
 
         self.res_library = ResidueLib(res_library_path)
 
-
         self.st, self.headers, self.input_format = self._load_structure_file(
             input_pdb_path, cache_dir, pdb_server, file_format
         )
@@ -158,7 +154,7 @@ class StructureManager:
     def _load_structure_file(self, input_pdb_path, cache_dir, pdb_server, file_format):
         """ Load structure file """
         if "pdb:" in input_pdb_path:
-            # MMBPDBList child defaults to Bio.PDB.PDBList if MMB server is not selected
+            # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')
@@ -171,6 +167,9 @@ class StructureManager:
                 self.biounit = biounit
             else:
                 input_pdb_path = input_pdb_path[4:].upper()
+                #Force mmCif as cif is not accepted by biopython
+                if self.file_format == 'cif':
+                    self.file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format=self.file_format
                 )

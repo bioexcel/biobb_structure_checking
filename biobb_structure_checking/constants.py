@@ -6,7 +6,7 @@ from os.path import join as opj
 from os.path import dirname
 from biobb_structure_checking.param_input import Dialog
 
-VERSION = '3.10.1'
+VERSION = '3.10.2'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -30,7 +30,6 @@ DEFAULTS = {
     'debug': False,
     'options' : '',
     'modeller_key': None,
-    'file_format': 'cif',
     'output_format': 'pdb'
 }
 
@@ -84,8 +83,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving remote structures (cif(default)|pdb|xml)',
-    choices=['cif', 'pdb', 'xml']
+    help='Format for retrieving remote structures (mmCif(default)|pdb|xml)',
+    choices=['mmCif', 'pdb', 'xml', 'cif']
 )
 
 CMD_LINE.add_argument(
