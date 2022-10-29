@@ -29,6 +29,8 @@ from biobb_structure_checking.sequence_manager import SequenceData
 from biobb_structure_checking.PDBIO_extended import PDBIO_extended
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.modelling.model import ModelsData
+from biobb_structure_checking.modelling.chains import ChainsData
+from biobb_structure_checking.modelling.structure import StructureData
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
@@ -47,7 +49,6 @@ AMIDE_CONTACT_TYPES = [
     'polar_acceptor',
     'polar_donor',
 ]
-
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
@@ -95,42 +96,14 @@ class StructureManager:
         )
 
         self.models_data = ModelsData(self.st)
-
-        self.chain_ids = {}
-        self.chain_details = {}
-        self.has_chains_to_rename = False
-
-        self.backbone_links = []
-        self.modified_residue_list = []
-        self.non_canonical_residue_list = []
-
-        self.hetatm = {}
-        self.num_res = 0
-        self.num_ats = 0
-        self.res_hetats = 0
-        self.num_wat = 0
-        self.num_h = 0
-        self.res_h = 0
-        self.res_insc = 0
-        self.res_ligands = 0
-        self.ca_only = False
-
-        self.ss_bonds = []
+        self.chains_data = ChainsData(self.st)
+        self.st_data = StructureData(self.st)
 
         self.meta = {}
-
-        self.all_residues = []
-        self.next_residue = {}
-        self.prev_residue = {}
-
 
         self.modified = False
         self.biounit = False
         self.fixed_side = False
-        self.file_format = file_format
-        self.has_charges = False
-        self.total_charge = None
-
         # Calc internal data
         self.update_internals(cif_warn=True)
 
@@ -195,7 +168,7 @@ class StructureManager:
         self.residue_renumbering()
         # Atom renumbering for mmCIF, PDB uses atom number in file
         self.atom_renumbering()
-        self.set_chain_ids()
+        self.chains_data.set_chain_ids(self.biounit)
         self.calc_stats()
         self.guess_hetatm()
 
@@ -266,7 +239,7 @@ class StructureManager:
 
         self.rename_terms(self.get_term_res())
         for res in self.st.get_residues():
-            ch_type = self._get_chain_type(res)
+            ch_type = self.chains_data.get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
             if len(rcode) == 4: # Protein terms
@@ -409,7 +382,7 @@ class StructureManager:
         prot_chains = 0
         chiral_bck_list = []
         for chn in self.st.get_chains():
-            if self.chain_ids[chn.id] == mu.PROTEIN:
+            if self.chains_data.chain_ids[chn.id] == mu.PROTEIN:
                 prot_chains += 1
                 for res in chn.get_residues():
                     if res.get_resname() != 'GLY' and not mu.is_hetatm(res):
@@ -455,7 +428,7 @@ class StructureManager:
             residue_data[mu.TYPE_LABEL[chain_type]] = self.data_library.get_all_atom_lists(chain_type)
         miss_at_list = []
         for res in self.st.get_residues():
-            ch_type = self._get_chain_type(res)
+            ch_type = self.chains_data.get_chain_type(res)
             if ch_type not in (mu.PROTEIN, mu.NA, mu.DNA, mu.RNA):
                 continue
 
@@ -506,7 +479,7 @@ class StructureManager:
                 can_rcode = self.data_library.canonical_codes[res.get_resname()]
             else:
                 can_rcode = res.get_resname()
-            ch_type = self._get_chain_type(res)
+            ch_type = self.chains_data.get_chain_type(res)
             rcode = res.get_resname().replace(' ', '')
             if rcode not in valid_codes[ch_type]:
                 print(f"Warning: unknown residue {rcode}")
@@ -550,7 +523,7 @@ class StructureManager:
 
     def _missing_bck_atoms(self, res):
         """ Check whether backbone atoms required to build side chains are present"""
-        if self._get_chain_type(res) == mu.PROTEIN:
+        if self.chains_data.get_chain_type(res) == mu.PROTEIN:
             bck_ats = ("N", "CA", "C")
         else:
             bck_ats = ("C1'", "O4'", "C4'")
@@ -609,7 +582,7 @@ class StructureManager:
                     continue
             # Skip NA
             # TODO include NA Backbone
-            if self.chain_ids[res1.get_parent().id] != mu.PROTEIN:
+            if self.chains_data.chain_ids[res1.get_parent().id] != mu.PROTEIN:
                 continue
 
             if res1 not in self.next_residue:
@@ -719,9 +692,9 @@ class StructureManager:
         return {
             'nmodels': self.models_data.nmodels,
             'models_type': self.models_data.models_type,
-            'nchains': len(self.chain_ids),
-            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chain_ids.items()},
-            'chain_guess_details' : self.chain_details,
+            'nchains': len(self.chains_data.chain_ids),
+            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chains_data.chain_ids.items()},
+            'chain_guess_details' : self.chains_data.chain_details,
             'num_res': self.num_res,
             'num_ats': self.num_ats,
             'res_insc': self.res_insc,
@@ -791,26 +764,6 @@ class StructureManager:
         if self.biounit:
             self.meta['biounit'] = self.biounit
 
-    def print_chain_stats(self, prefix='') -> None:
-        """ Print chains info """
-        chids = []
-        for ch_id in sorted(self.chain_ids):
-            if self.chain_ids == mu.UNKNOWN:
-                chids.append(
-                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
-                        ch_id, g=self.chain_details[ch_id]
-                    )
-                )
-            else:
-                chids.append(
-                    '{}: {}'.format(
-                        ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
-                    )
-                )
-
-        print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
-
-
     def print_stats(self, prefix='') -> None:
         """
         Prints statistics to stdout
@@ -820,7 +773,7 @@ class StructureManager:
         """
         stats = self.get_stats()
         print(self.models_data.stats(prefix))
-        self.print_chain_stats(prefix)
+        print(self.chains_data.stats(prefix))
 
         print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
         print('{} Num. residues with ins. codes:  {}'.format(prefix, stats['res_insc']))
@@ -937,41 +890,10 @@ class StructureManager:
             return 0
         return self.models_data.build_complex()
 
-    def set_chain_ids(self) -> None:
-        """
-        Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
-        """
-        self.chain_ids = {}
-        self.has_chains_to_rename = False
-        for chn in self.st.get_chains():
-            if not self.biounit and chn.get_parent().id > 0:
-                continue
-            guess = mu.guess_chain_type(chn)
-            self.chain_ids[chn.id] = guess['type']
-            self.chain_details[chn.id] = guess['details']
-            if chn.id == ' ':
-                self.has_chains_to_rename = self.has_chains_to_rename  or True
-    
-    def rename_empty_chain_label(self, new_label: str) -> str:
-        if not self.has_chains_to_rename:
-            return False
-        if new_label == 'auto':
-            new_label_char = 65
-            while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
-                new_label_char =+1
-            new_label = chr(new_label_char)
-        for mod in self.st:
-            for chn in mod:
-                if chn.id == ' ':
-                    chn.id = new_label
-        self.set_chain_ids()
-        self.modified = True
-        return new_label
-
     def has_NA(self):
         """ Checks if any of the chains is NA"""
         has_NA = False
-        for v in self.chain_ids.values():
+        for v in self.chains_data.chain_ids.values():
             has_NA = (has_NA or (v > 1))
         return has_NA
 
@@ -981,27 +903,7 @@ class StructureManager:
         Args:
             select_chains: Comma separated chain ids, | protein | dna | rna | na
         """
-        if not self.chain_ids:
-            self.set_chain_ids()
-
-        if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
-            if select_chains.lower() == 'na':
-                ch_ok = [mu.DNA, mu.RNA]
-            else:
-                ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
-        else:
-            ch_ok = select_chains.split(',')
-            for chn in ch_ok:
-                if chn not in self.chain_ids:
-                    print('Warning: skipping unknown chain', chn)
-        for mod in self.st:
-            for chn in self.chain_ids:
-                if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
-                    self.st[mod.id].detach_child(chn)
-            if not self.st[mod.id]:
-                print("ERROR: would remove all chains, exiting")
-                sys.exit()
-        # Update internal data
+        self.chains_data.select(select_chains)
         self.update_internals()
         self.modified = True
 
@@ -1057,7 +959,7 @@ class StructureManager:
             **r_at**: tuple as [Bio.PDB.Residue, [list of atom ids]]
         """
         print(mu.residue_id(r_at[0]))
-        if self._get_chain_type(r_at[0]) == mu.PROTEIN:
+        if self.chains_data.get_chain_type(r_at[0]) == mu.PROTEIN:
             self._fix_side_chain_protein(r_at)
         else:
             self._fix_side_chain_na(r_at)
@@ -1179,7 +1081,7 @@ class StructureManager:
             else:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
 
-            for ch_id in self.chain_ids:
+            for ch_id in self.chains_data.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
@@ -1387,7 +1289,7 @@ class StructureManager:
             if mu.is_hetatm(res):
                 continue
 
-            protein_res = self.chain_ids[res.get_parent().id] == mu.PROTEIN
+            protein_res = self.chains_data.chain_ids[res.get_parent().id] == mu.PROTEIN
 
             if remove_h:
                 mu.remove_H_from_r(res, verbose=False)
@@ -1481,10 +1383,10 @@ class StructureManager:
         for res in self.st.get_residues():
             if mu.is_hetatm(res):
                 continue
-            if self._get_chain_type(res) == mu.PROTEIN:
+            if self.chains_data.get_chain_type(res) == mu.PROTEIN:
                 if len(res.get_resname()) == 4:
                     res.resname = res.resname[1:]
-            elif self._get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
+            elif self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
                 if res.get_resname()[-1] in ('5', '3'):
                     res.resname = res.resname[:-1]
 
@@ -1504,29 +1406,23 @@ class StructureManager:
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
-        return self._get_chain_type(res) == mu.PROTEIN and res not in self.prev_residue
+        return self.chains_data.get_chain_type(res) == mu.PROTEIN and res not in self.prev_residue
 
     def is_C_term(self, res: Residue) -> bool:
         """ Detects whether it is C terminal residue."""
-        return self._get_chain_type(res) == mu.PROTEIN and res not in self.next_residue
+        return self.chains_data.get_chain_type(res) == mu.PROTEIN and res not in self.next_residue
 
     def is_5_term(self, res: Residue) -> bool:
         """ Detects whether it is 5' terminal residue."""
-        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.prev_residue
+        return self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.prev_residue
 
     def is_3_term(self, res: Residue) -> bool:
         """ Detects whether it is 3' terminal residue."""
-        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.next_residue
-
-    def _get_chain_type(self, res):
-        """ Return type of chain for residue"""
-        if mu.is_hetatm(res):
-            return mu.UNKNOWN
-        return self.chain_ids[res.get_parent().id]
+        return self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.next_residue
 
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
         """ Find residues to mutate from mut_list"""
-        mutations = MutationManager(mut_list, self.chain_ids)
+        mutations = MutationManager(mut_list, self.chains_data.chain_ids)
         mutations.prepare_mutations(self.st)
         return mutations
 
@@ -1547,7 +1443,7 @@ class StructureManager:
         brk_list = []
         for mut_set in mutations.mutation_list:
             for mut in mut_set.mutations:
-                if self.chain_ids[mut['chain']] > 1:
+                if self.chains_data.chain_ids[mut['chain']] > 1:
                     continue
                 ch_to_fix.add(mut['chain'])
                 start_res = mut['resobj']

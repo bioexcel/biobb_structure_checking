@@ -84,7 +84,7 @@ class SequenceData():
         self.match_sequence_numbering()
 
     def read_canonical_seqs(self, strucm, cif_warn):
-        """ SequenceData.read_canonical_seqs
+        """ SequenceData.reachains_data.d_canonical_seqs
         Prepare canonical sequences from the available input
 
         Args:
@@ -92,8 +92,8 @@ class SequenceData():
             cif_warn (bool) : Issue a warning when structure is not CIF
         """
 
-        if not strucm.chain_ids:
-            strucm.set_chain_ids()
+        if not strucm.chains_data.chain_ids:
+            strucm.chains_data.set_chain_ids()
 
         if self.fasta:
             hits = self.match_chain_seqs()
@@ -122,9 +122,9 @@ class SequenceData():
 
         for i in range(0, len(chids)):
             for ch_id in chids[i].split(','):
-                if ch_id not in strucm.chain_ids:
+                if ch_id not in strucm.chains_data.chain_ids:
                     continue
-                if strucm.chain_ids[ch_id] == mu.UNKNOWN:
+                if strucm.chains_data.chain_ids[ch_id] == mu.UNKNOWN:
                     continue
                 if ch_id not in self.data:
                     self.add_empty_chain(ch_id)
@@ -152,7 +152,7 @@ class SequenceData():
                         self.data[ch_id]['chains'].append(match[0])
 
         self.has_canonical = {}
-        for ch_id in strucm.chain_ids:
+        for ch_id in strucm.chains_data.chain_ids:
 #            if strucm.chain_ids[ch_id] != PROTEIN:
 #                continue
             self.has_canonical[ch_id] = (ch_id in self.data) and hasattr(self.data[ch_id]['can'], 'seq')
@@ -173,14 +173,14 @@ class SequenceData():
             for chn in mod.get_chains():
                 seqs = []
                 wrong_order = False
-                if strucm.chain_ids[chn.id] == mu.PROTEIN:
+                if strucm.chains_data.chain_ids[chn.id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                     if not frags[0]: #TODO patched for a Weird case where a second model lacks a chain
                         print("Warning: no protein residues found for chain {} at model {}, adding hetatm to avoid empty chain ".format(chn.id, mod.id))
                         frags = [[res for res in chn.get_residues()]]
-                elif strucm.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
+                elif strucm.chains_data.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
                     self.add_empty_chain(chn.id)
@@ -195,7 +195,7 @@ class SequenceData():
                     if hasattr(frag, 'get_sequence'):
                         seq = frag.get_sequence()
                     else:
-                        seq = mu.get_sequence_from_list(frag, strucm.chain_ids[chn.id])
+                        seq = mu.get_sequence_from_list(frag, strucm.chains_data.chain_ids[chn.id])
 
                     sqr = SeqRecord(
                         seq,
@@ -217,7 +217,7 @@ class SequenceData():
                     self.data[chn.id]['pdb'][mod.id] = {
                         'frgs': seqs,
                         'wrong_order': wrong_order,
-                        'type': strucm.chain_ids[chn.id]
+                        'type': strucm.chains_data.chain_ids[chn.id]
                     }
 
     def match_sequence_numbering(self):
@@ -253,7 +253,7 @@ class SequenceData():
         """
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
-        for ch_id in strucm.chain_ids:
+        for ch_id in strucm.chains_data.chain_ids:
             if strucm.chain_ids[ch_id] != mu.PROTEIN:
                 continue
             #build sequence from frags filling gaps with G
@@ -415,7 +415,7 @@ class SequenceData():
                 seq = ''
                 seqs[chn.id].append(mu.get_sequence_from_list(
                     [res for res in chn.get_residues() if not mu.is_hetatm(res)],
-                    strucm.chain_ids[chn.id]
+                    strucm.chains_data.chain_ids[chn.id]
                     )
                 )
         strucm.revert_can_resnames(canonical=False)

@@ -5,22 +5,22 @@ import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
 
 def _check(strcheck):
-    print(cts.MSGS['CHAINS_DETECTED'].format(len(strcheck.strucm.chain_ids)))
-    for ch_id in sorted(strcheck.strucm.chain_ids):
-        if isinstance(strcheck.strucm.chain_ids[ch_id], list):
+    print(cts.MSGS['CHAINS_DETECTED'].format(len(strcheck.strucm.chains_data.chain_ids)))
+    for ch_id in sorted(strcheck.strucm.chains_data.chain_ids):
+        if isinstance(strcheck.strucm.chains_data.chain_ids[ch_id], list):
             print(
                 cts.MSGS['UNKNOWN_CHAINS'].format(
-                    ch_id, s=strcheck.strucm.chain_ids[ch_id]
+                    ch_id, s=strcheck.strucm.chains_data.chain_ids[ch_id]
                 )
             )
         else:
-            print(f" {ch_id}: {mu.CHAIN_TYPE_LABELS[strcheck.strucm.chain_ids[ch_id]]}")
+            print(f" {ch_id}: {mu.CHAIN_TYPE_LABELS[strcheck.strucm.chains_data.chain_ids[ch_id]]}")
     strcheck.summary['chains'] = {
         k:mu.CHAIN_TYPE_LABELS[v]
-        for k, v in strcheck.strucm.chain_ids.items()
+        for k, v in strcheck.strucm.chains_data.chain_ids.items()
     }
-    strcheck.summary['chains']['unlabelled'] = strcheck.strucm.has_chains_to_rename
-    return len(strcheck.strucm.chain_ids) > 1 or strcheck.strucm.has_chains_to_rename
+    strcheck.summary['chains']['unlabelled'] = strcheck.strucm.chains_data.has_chains_to_rename
+    return len(strcheck.strucm.chains_data.chain_ids) > 1 or strcheck.strucm.chains_data.has_chains_to_rename
 
 def _fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -33,7 +33,7 @@ def _fix(strcheck, opts, fix_data=None):
         else:
             rename_chains = ''
 
-    if strcheck.strucm.has_chains_to_rename:
+    if strcheck.strucm.chains_data.has_chains_to_rename:
         strcheck.summary['chains']['selected'] = {}
         input_line = ParamInput(
             'Add missing chain label',
@@ -50,13 +50,13 @@ def _fix(strcheck, opts, fix_data=None):
             if input_option == 'error':
                 return cts.MSGS['UNKNOWN_SELECTION'], rename_chains
             if input_option in ('none', 'auto_chain') or\
-                    (rename_chains not in strcheck.strucm.chain_ids):
+                    (rename_chains not in strcheck.strucm.chains_data.chain_ids):
                 input_ok = True
             else:
                 print(f"Chain {rename_chains} is already present")
                 rename_chains = ''
         if input_option != 'none':
-            new_label = strcheck.strucm.rename_empty_chain_label(rename_chains)
+            new_label = strcheck.strucm.chains_data.rename_empty_chain_label(rename_chains)
             _check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
     strcheck.summary['chains']['selected'] = {}
@@ -75,7 +75,7 @@ def _fix(strcheck, opts, fix_data=None):
         'type', ['rna'], multiple=False
     )
     input_line.add_option_list(
-        'chid', sorted(strcheck.strucm.chain_ids), multiple=True, case="sensitive"
+        'chid', sorted(strcheck.strucm.chains_data.chain_ids), multiple=True, case="sensitive"
     )
     input_line.set_default('All')
 
@@ -90,6 +90,6 @@ def _fix(strcheck, opts, fix_data=None):
 
     strcheck.strucm.select_chains(select_chains)
     print(cts.MSGS['SELECT_CHAINS'], select_chains)
-    strcheck.summary['chains']['selected'] = strcheck.strucm.chain_ids
+    strcheck.summary['chains']['selected'] = strcheck.strucm.chains_data.chain_ids
 
     return False
