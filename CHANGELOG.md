@@ -1,9 +1,14 @@
 ## v3.XXXXX (2023.4)
 ### Extended functions
+- json
+  - Extended information on json summary output
 - models
   - Convert biounit's selected models into actual complexes.
+- chains
+  - --rename fixes empty chain labels
 ### Bug Fixes
 - Added missing defaults for Notebook execution
+- Ionized/tautomeric residue names recognized
 
 ## v3.10.1 (2022.3)
 ### Extended functions
