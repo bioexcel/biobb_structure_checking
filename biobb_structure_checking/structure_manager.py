@@ -42,11 +42,11 @@ ALL_CONTACT_TYPES = [
     'positive',
     'negative'
 ]
+
 AMIDE_CONTACT_TYPES = [
     'polar_acceptor',
     'polar_donor',
 ]
-
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
@@ -672,7 +672,6 @@ class StructureManager:
 
 #    def check_cis_backbone(self) -> Tuple[List[Tuple[Residue, Residue, float]], List[Residue, Residue, float]]:
     def check_cis_backbone(self):
-
         """
         Determines omega dihedrals for two bound residues and classifies them
         as normal trans, low angle trans, and cis
@@ -843,7 +842,6 @@ class StructureManager:
                 )
 
         print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
-
 
     def print_stats(self, prefix='') -> None:
         """
@@ -1213,7 +1211,6 @@ class StructureManager:
         self.atom_renumbering()
         self.modified = True
 
-
     def fix_backbone_chain(
             self,
             brk_list: Iterable[Atom],
@@ -1250,7 +1247,6 @@ class StructureManager:
                 *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
-
         if modeller_key:
             MODELLER_ENV_VAR, MODELLER_INSTALL_ENV_VAR, modeller_install_dir = _guess_modeller_env()
             if not os.environ.get(MODELLER_ENV_VAR):
@@ -1258,12 +1254,10 @@ class StructureManager:
             if not os.environ.get(MODELLER_INSTALL_ENV_VAR):
                 os.environ[MODELLER_INSTALL_ENV_VAR] = modeller_install_dir
 
-
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
         except ImportError:
             sys.exit("Error importing modeller")
-
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -1742,7 +1736,6 @@ def _guess_modeller_env():
     print("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
-
 class WrongServerError(Exception):
     def __init__(self):
         self.message = 'ERROR: Biounits supported only on MMB server'
