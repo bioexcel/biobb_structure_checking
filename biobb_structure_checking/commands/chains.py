@@ -62,18 +62,8 @@ def _fix(strcheck, opts, fix_data=None):
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
     input_line.add_option_all()
-    input_line.add_option_list(
-        'type', ['protein'], multiple=False
-    )
-    input_line.add_option_list(
-        'type', ['na'], multiple=False
-    )
-    input_line.add_option_list(
-        'type', ['dna'], multiple=False
-    )
-    input_line.add_option_list(
-        'type', ['rna'], multiple=False
-    )
+    for typ in 'protein', 'na', 'dna', 'rna':
+        input_line.add_option_list('type', [typ], multiple=False)
     input_line.add_option_list(
         'chid', sorted(strcheck.strucm.chains_data.chain_ids), multiple=True, case="sensitive"
     )

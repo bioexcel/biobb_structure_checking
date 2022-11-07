@@ -21,7 +21,7 @@ def _check(strcheck):
     print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_check['res_to_fix'])))
     strcheck.summary['chiral']['detected'] = []
     for res in chiral_check['res_to_fix']:
-        print(' {:10}'.format(mu.residue_id(res)))
+        print(f" {mu.residue_id(res):10}")
         strcheck.summary['chiral']['detected'].append(mu.residue_id(res))
 
     return chiral_check

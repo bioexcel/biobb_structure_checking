@@ -22,14 +22,14 @@ def _check(strcheck):
         print(cts.MSGS['MISSING_SIDE_ATOMS'].format(len(miss_at_list)))
         for r_at in miss_at_list:
             res, at_list = r_at
-            print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+            print(f" {mu.residue_id(res):10} {','.join(at_list)}")
             strcheck.summary['fixside']['detected_missing'][mu.residue_id(res)] = at_list
     if extra_at_list:
         strcheck.summary['fixside']['detected_unknown'] = {}
         print(cts.MSGS['UNKNOWN_SIDE_ATOMS'].format(len(extra_at_list)))
         for r_at in extra_at_list:
             res, at_list = r_at
-            print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+            print(f" {mu.residue_id(res):10} {','.join(at_list)}")
             strcheck.summary['fixside']['detected_unknown'][mu.residue_id(res)] = at_list
 
     return fix_data

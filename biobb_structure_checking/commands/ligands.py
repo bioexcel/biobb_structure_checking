@@ -23,9 +23,9 @@ def _check(strcheck):
         if strcheck.strucm.models_data.has_models():
             if res.get_parent().get_parent().id > 0:
                 continue
-            print(' {}/*'.format(mu.residue_id(res, False)))
+            print(f" {mu.residue_id(res, False)}/*")
         else:
-            print(' {}'.format(mu.residue_id(res, False)))
+            print(f" {mu.residue_id(res, False)}")
 
         strcheck.summary['ligands']['detected'].append(mu.residue_id(res))
         fix_data['ligand_rids'].add(res.get_resname())

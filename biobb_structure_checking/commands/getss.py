@@ -14,10 +14,11 @@ def _check(strcheck):
     strcheck.summary['getss'] = {'found':[]}
     for ssb in SS_bonds:
         print(
-            ' {:12} {:12} {:8.3f}'.format(
-                mu.atom_id(ssb[0]), mu.atom_id(ssb[1]), ssb[2]
-            )
+            f" {mu.atom_id(ssb[0]):12}"
+            f" {mu.atom_id(ssb[1]):12}"
+            f" {ssb[2]:8.3f}"
         )
+        
         strcheck.summary['getss']['found'].append(
             {
                 'at1':mu.atom_id(ssb[0]),
@@ -36,7 +37,7 @@ def _fix(strcheck, opts, fix_data=None):
         getss_mark = opts['mark']
 
     pairs_list = [
-        mu.residue_num(a[0].get_parent()) + "-" + mu.residue_num(a[1].get_parent())
+        f"{mu.residue_num(a[0].get_parent())}-{mu.residue_num(a[1].get_parent())}"
         for a in fix_data
     ]
     input_line = ParamInput('Mark SS', strcheck.args['non_interactive'])

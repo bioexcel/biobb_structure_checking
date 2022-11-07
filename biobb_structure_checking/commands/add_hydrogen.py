@@ -24,7 +24,7 @@ def _check(strcheck):
             if r_at[0].get_resname() == res_type
         ]
         if residue_list:
-            print(' {} {}'.format(res_type, ','.join(residue_list)))
+            print(f" {res_type} {','.join(residue_list)}")
 
     strcheck.summary['add_hydrogen']['ionic_detected'] = [
         mu.residue_id(r_at[0]) for r_at in ion_res_list

@@ -24,11 +24,9 @@ def _check(strcheck):
     strcheck.summary['amide']['detected'] = []
     for at_pair in sorted(amide_check['cont_list'], key=mu.key_sort_atom_pairs):
         print(
-            ' {:12} {:12} {:8.3f} A'.format(
-                mu.atom_id(at_pair[0]),
-                mu.atom_id(at_pair[1]),
-                np.sqrt(at_pair[2])
-            )
+            f" {mu.atom_id(at_pair[0]):12}"
+            f" {mu.atom_id(at_pair[1]):12}"
+            f" {np.sqrt(at_pair[2]):8.3f} A"
         )
         strcheck.summary['amide']['detected'].append(
             {
