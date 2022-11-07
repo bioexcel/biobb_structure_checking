@@ -91,4 +91,10 @@ class ChainsData():
                 print("ERROR: would remove all chains, exiting")
                 sys.exit()
 
+    def has_NA(self):
+        """ Checks if any of the chains is NA"""
+        has_NA = False
+        for v in self.chain_ids.values():
+            has_NA = (has_NA or (v > 1))
+        return has_NA
 

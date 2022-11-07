@@ -108,13 +108,13 @@ class SequenceData():
                     print("Warning: sequence features only available in mmCIF" +\
                     " format or with external fasta input")
                 return True
-            if '_entity_poly.pdbx_strand_id' in strucm.headers:
-                if not isinstance(strucm.headers['_entity_poly.pdbx_strand_id'], list):
-                    chids = [strucm.headers['_entity_poly.pdbx_strand_id']]
-                    seqs = [strucm.headers['_entity_poly.pdbx_seq_one_letter_code_can']]
+            if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
+                if not isinstance(strucm.st_data.headers['_entity_poly.pdbx_strand_id'], list):
+                    chids = [strucm.st_data.headers['_entity_poly.pdbx_strand_id']]
+                    seqs = [strucm.st_data.headers['_entity_poly.pdbx_seq_one_letter_code_can']]
                 else:
-                    chids = strucm.headers['_entity_poly.pdbx_strand_id']
-                    seqs = strucm.headers['_entity_poly.pdbx_seq_one_letter_code_can']
+                    chids = strucm.st_data.headers['_entity_poly.pdbx_strand_id']
+                    seqs = strucm.st_data.headers['_entity_poly.pdbx_seq_one_letter_code_can']
             else:
                 if cif_warn:
                     print("Warning: sequence data unavailable on cif data")

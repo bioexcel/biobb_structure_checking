@@ -109,7 +109,7 @@ def _fix(strcheck, opts, fix_data=None):
         fixed_res = [r_at[0] for r_at in to_add]
 
     print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
-    strcheck.strucm.fixed_side = True
+    strcheck.strucm.st_data.fixed_side = True
     strcheck.strucm.modified = True
     # Checking new clashes
     if not opts['no_check_clashes']:

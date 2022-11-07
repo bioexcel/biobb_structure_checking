@@ -2,12 +2,16 @@
 import biobb_structure_checking.model_utils as mu
 
 class StructureData():
-    def __init__(self, st, input_format):
+    def __init__(self, st, input_format, headers, biounit=False):
         self.st = st
         self.input_format = input_format
         self.backbone_links = []
         self.modified_residue_list = []
         self.non_canonical_residue_list = []
+        self.meta = {}
+        self.headers = headers
+        self.biounit = biounit
+        self.fixed_side = False
         
         self.hetatm = {}
         self.stats = {
@@ -120,3 +124,78 @@ class StructureData():
         # waters removed
         # Taking polyGly as a lower limit
         self.ca_only = self.stats['num_ats'] - self.stats['num_wat'] < (self.stats['num_res'] - self.stats['num_wat']) * 4
+
+    def get_headers(self) -> None:
+        """
+        Extract selected components from structure headers
+        """
+        self.meta = {}
+        if self.input_format == 'cif':
+            self.meta['entry_id'] = ', '.join(self.headers['_entry.id'])
+            self.meta['title'] = ', '.join(self.headers['_struct.title'])
+            self.meta['method'] = ', '.join(self.headers['_exptl.method'])
+            self.meta['keywords'] = ', '.join(self.headers['_struct_keywords.pdbx_keywords'])
+            if '_refine_hist.d_res_high' in self.headers:
+                self.meta['resolution'] = ', '.join(self.headers['_refine_hist.d_res_high'])
+        else:
+            self.meta['title'] = self.headers['name']
+            self.meta['method'] = self.headers['structure_method']
+            if 'keywords' in self.headers:
+                self.meta['keywords'] = self.headers['keywords']
+            if 'resolution' not in self.headers or not self.headers['resolution']:
+                self.meta['resolution'] = 'N.A.'
+            else:
+                self.meta['resolution'] = self.headers['resolution']
+        if self.biounit:
+            self.meta['biounit'] = self.biounit
+    
+    def print_headers(self) -> None:
+        """
+        Prints selected components from structure headers
+        """
+        self.get_headers()
+        if 'entry_id' in self.meta:
+            print(f" PDB id: {self.meta['entry_id']}\n"
+                  f" Title: {self.meta['title']}\n"
+                  f" Experimental method: {self.meta['method']}"
+            )
+        if 'keywords' in self.meta:
+            print(f" Keywords: {self.meta['keywords']}")
+        if 'resolution' in self.meta:
+            print(f" Resolution (A): {self.meta['resolution']}")
+        if self.biounit:
+            print(f" Biounit no. {self.meta['biounit']}")
+
+    def guess_hetatm(self):
+        """ Guesses HETATM type as modified res, metal, wat, organic
+        """
+        self.hetatm = {}
+        for typ in [mu.UNKNOWN, mu.MODRES, mu.METAL, mu.ORGANIC, mu.COVORGANIC, mu.WAT]:
+            self.hetatm[typ] = []
+        for res in self.st.get_residues():
+            if not mu.is_hetatm(res):
+                continue
+            if mu.is_wat(res):
+                self.hetatm[mu.WAT].append(res)
+            elif len(res) == 1:
+                self.hetatm[mu.METAL].append(res)
+            elif 'N' in res or 'C' in res:
+                # modified aminoacid candidate, TODO check connectivity with n-1 or n+1
+                self.hetatm[mu.MODRES].append(res)
+                # TODO check modified nucleotides
+            else:
+                self.hetatm[mu.ORGANIC].append(res)
+
+    def print_hetatm_stats(self):
+        if self.hetatm[mu.MODRES]:
+            print('Modified residues found')
+            for res in self.hetatm[mu.MODRES]:
+                print(mu.residue_id(res))
+        if self.hetatm[mu.METAL]:
+            print('Metal/Ion residues found')
+            for res in self.hetatm[mu.METAL]:
+                print(mu.residue_id(res))
+        if self.hetatm[mu.ORGANIC]:
+            print('Small mol ligands found')
+            for res in self.hetatm[mu.ORGANIC]:
+                print(mu.residue_id(res))

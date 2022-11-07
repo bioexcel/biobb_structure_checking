@@ -36,7 +36,7 @@ def _fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
 
-    if not strcheck.strucm.fixed_side and not opts['no_fix_side']:
+    if not strcheck.strucm.st_data.fixed_side and not opts['no_fix_side']:
         print("WARNING: fixing side chains, override with --no_fix_side")
         strcheck.fixside(['--fix', 'all'])
 

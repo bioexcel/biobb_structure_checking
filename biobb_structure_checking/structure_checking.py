@@ -54,11 +54,7 @@ class StructureChecking():
                 self.args['fasta_seq_path']
             )
         except IOError:
-            sys.exit(
-                'ERROR: fetching/parsing structure from {}'.format(
-                    self.args['input_structure_path']
-                )
-            )
+            sys.exit(f"ERROR: fetching/parsing structure from {self.args['input_structure_path']}")
         except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
             sys.exit(err.message)
 
@@ -67,9 +63,7 @@ class StructureChecking():
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
-            print(
-                "#DEBUG Memory used after structure load: {:f} MB ".format(memsize)
-            )
+            print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
 
         if self.args['atom_limit'] and self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
             sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.st_data.stats['num_ats'], self.args['atom_limit']))
@@ -124,7 +118,7 @@ class StructureChecking():
                 self.summary['elapsed_times'][operation] = elapsed
                 print(f"#DEBUG {operation:15s}: {elapsed:10.4f} s ({elapsed / total * 100:6.2f}%)")
                 ant = timing
-            print('#DEBUG {:15s}: {:10.4F} s'.format('TOTAL', total))
+            print(f"#DEBUG TOTAL          : {total:10.4F} s")
             print()
             print("#DEBUG MEMORY USAGE EVOLUTION")
             print("#DEBUG ======================")
@@ -169,8 +163,7 @@ class StructureChecking():
             if not self.args['non_interactive']:
                 op_list = ParamInput('Command List File', False).run(op_list)
             else:
-                sys.exit(f'ERROR: command list not provided and non_interactive')
-
+                sys.exit('ERROR: command list not provided and non_interactive')
 
         if os.path.isfile(op_list):
             command_list = []
@@ -181,14 +174,14 @@ class StructureChecking():
                             continue
                         command_list.append(line)
             except OSError:
-                sys.exit('{} {}'.format(cts.MSGS['ERROR_OPEN_FILE'], op_list))
+                sys.exit(f"{cts.MSGS['ERROR_OPEN_FILE']} {op_list}")
         else:
             command_list = op_list.split(';')
 
         i = 1
         for line in command_list:
             if not self.args['quiet']:
-                print("\nStep {}: {}".format(i, line))
+                print(f"\nStep {i}: {line}")
             data = line.split()
             command = data[0]
             opts = data[1:]
@@ -293,11 +286,8 @@ class StructureChecking():
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append([command, memsize])
-            print(
-                "#DEBUG Memory used after {}: {:f} MB ".format(
-                    command, memsize
-                )
-            )
+            print(f"#DEBUG Memory used after {command}: {memsize:f} MB ")
+            
 # ==============================================================================
     def _load_structure(
             self,
@@ -336,10 +326,10 @@ class StructureChecking():
 
         if verbose:
             print(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
-            strucm.print_headers()
+            strucm.st_data.print_headers()
             print()
         
-        self.summary['headers'] = strucm.meta
+        self.summary['headers'] = strucm.st_data.meta
 
         if print_stats:
             strucm.print_stats()
@@ -428,11 +418,9 @@ class StructureChecking():
                         key=lambda x: mu.key_sort_atom_pairs(clash_list[cls][x])
                     ):
                     print(
-                        ' {:12} {:12} {:8.3f} A'.format(
-                            mu.atom_id(clash_list[cls][rkey][0]),
-                            mu.atom_id(clash_list[cls][rkey][1]),
-                            sqrt(clash_list[cls][rkey][2])
-                        )
+                        f" {mu.atom_id(clash_list[cls][rkey][0]):12}"
+                        f" {mu.atom_id(clash_list[cls][rkey][1]):12}"
+                        f" {sqrt(clash_list[cls][rkey][2]):8.3f} A"
                     )
                     summary[cls].append({
                         'at1':mu.atom_id(clash_list[cls][rkey][0]),
