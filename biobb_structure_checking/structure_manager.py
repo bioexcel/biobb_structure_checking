@@ -36,21 +36,7 @@ from biobb_structure_checking.modelling.structure import StructureData
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
-CISTHRES = 20  # TODO check values with pdb checking
-TRANSTHRES = 150
 
-ALL_CONTACT_TYPES = [
-    'severe',
-    'apolar',
-    'polar_acceptor',
-    'polar_donor',
-    'positive',
-    'negative'
-]
-AMIDE_CONTACT_TYPES = [
-    'polar_acceptor',
-    'polar_donor',
-]
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
     """
@@ -522,9 +508,9 @@ class StructureManager:
             res2 = at2.get_parent()
             if 'CA' in res1 and 'C' in res1 and 'CA' in res2 and 'N' in res2:
                 dih = mu.calc_bond_dihedral(res1['CA'], res1['C'], res2['N'], res2['CA'])
-                if abs(dih) < CISTHRES:
+                if abs(dih) < mu.CISTHRES:
                     cis_backbone_list.append((res1, res2, dih))
-                elif abs(dih) < TRANSTHRES:
+                elif abs(dih) < mu.TRANSTHRES:
                     lowtrans_backbone_list.append((res1, res2, dih))
         return cis_backbone_list, lowtrans_backbone_list
 
@@ -542,7 +528,7 @@ class StructureManager:
 
         c_list = self.check_r_list_clashes(
             amide_list,
-            AMIDE_CONTACT_TYPES
+            mu.AMIDE_CONTACT_TYPES
         )
         amide_res_to_fix = []
         amide_cont_list = []
@@ -878,7 +864,6 @@ class StructureManager:
                 os.environ[MODELLER_ENV_VAR] = modeller_key
             if not os.environ.get(MODELLER_INSTALL_ENV_VAR):
                 os.environ[MODELLER_INSTALL_ENV_VAR] = modeller_install_dir
-
 
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError

@@ -18,6 +18,7 @@ from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableEr
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.model_utils as mu
 
+
 # Main class
 class StructureChecking():
     """
@@ -400,7 +401,7 @@ class StructureChecking():
         return output_structure_path
 
     def _check_report_clashes(self, residue_list=None, contact_types=None):
-        if contact_types is None: contact_types = stm.ALL_CONTACT_TYPES
+        if contact_types is None: contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list: residue_list = self.strucm.st_data.all_residues
         return self._clash_report(
             contact_types,
