@@ -17,7 +17,7 @@
     1.7. Remove Water (remwat) DONE
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
-        1.9.1 Get sequence from PDB without canonical 
+        1.9.1 Get sequence from PDB without canonical DONE
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
         2.1.1 Amides Automatic fix
@@ -44,9 +44,9 @@
         2.7.2 Add ACE, NME caps DONE
         2.7.3 Use standard FASTA for sequence input (check uniprot and pdb Fasta's) DONE
         2.7.4 Accept/recognize GROMACS (and other non Amber) Atom names OT?
-        2.7.5 Build structure from CA-only 
-        2.7.6 Accept multiple templates
-        2.7.7 Fix modelled junctions
+        2.7.5 Accept multiple templates
+        2.7.6 Fix modelled junctions
+        2.7.8 Rebuild backbone in the context of the complete molecule (also for --rebuild options)
 3. Structure Warnings
     3.1. Detect SS Bonds (getss) DONE
         3.1.1 Mark Cys in SS Bonds as CYX DONE
