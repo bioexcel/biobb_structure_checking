@@ -21,7 +21,7 @@ def _check(strcheck):
     print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check['res_to_fix'])))
     strcheck.summary['chiral_bck']['detected'] = []
     for res in check['res_to_fix']:
-        print(' {:10}'.format(mu.residue_id(res)))
+        print(f" {mu.residue_id(res):10}")
         strcheck.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
     return {}

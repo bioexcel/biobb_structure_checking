@@ -59,6 +59,23 @@ HDIS = 1.08
 PEPDIS = 1.32
 PEPDIH = 180.
 CCDIS = 1.5
+CISTHRES = 20  # TODO check values with pdb checking
+TRANSTHRES = 150
+
+#Contacts
+ALL_CONTACT_TYPES = [
+    'severe',
+    'apolar',
+    'polar_acceptor',
+    'polar_donor',
+    'positive',
+    'negative'
+]
+
+AMIDE_CONTACT_TYPES = [
+    'polar_acceptor',
+    'polar_donor',
+]
 
 
 # TODO: consider replace by Bio.PDB equivalent

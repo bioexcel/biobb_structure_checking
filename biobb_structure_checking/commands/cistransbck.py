@@ -11,12 +11,9 @@ def _check(strcheck):
         for lnk in cis_backbone_list:
             res1, res2, dih = lnk
             print(
-                '{:10} {:10} Dihedral: {:8.3f}'.format(
-                    mu.residue_id(res1),
-                    mu.residue_id(res2),
-                    dih
-                )
-            )
+                f"{mu.residue_id(res1):10}"
+                f" {mu.residue_id(res2):10}"
+                f" Dihedral: {dih:8.3f}")
             strcheck.summary['cistransbck']['cis'].append([
                 mu.residue_id(res1),
                 mu.residue_id(res2),
@@ -32,9 +29,9 @@ def _check(strcheck):
         for lnk in lowtrans_backbone_list:
             res1, res2, dih = lnk
             print(
-                '{:10} {:10} Dihedral: {:8.3f}'.format(
-                    mu.residue_id(res1), mu.residue_id(res2), dih
-                )
+                f"{mu.residue_id(res1):10}"
+                f" {mu.residue_id(res2):10}"
+                f" Dihedral: {dih:8.3f}"
             )
             strcheck.summary['cistransbck']['unusual_trans'].append([
                 mu.residue_id(res1), mu.residue_id(res2), round(float(dih), 3)

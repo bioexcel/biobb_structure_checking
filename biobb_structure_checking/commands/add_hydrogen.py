@@ -24,7 +24,7 @@ def _check(strcheck):
             if r_at[0].get_resname() == res_type
         ]
         if residue_list:
-            print(' {} {}'.format(res_type, ','.join(residue_list)))
+            print(f" {res_type} {','.join(residue_list)}")
 
     strcheck.summary['add_hydrogen']['ionic_detected'] = [
         mu.residue_id(r_at[0]) for r_at in ion_res_list
@@ -36,7 +36,7 @@ def _fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
 
-    if not strcheck.strucm.fixed_side and not opts['no_fix_side']:
+    if not strcheck.strucm.st_data.fixed_side and not opts['no_fix_side']:
         print("WARNING: fixing side chains, override with --no_fix_side")
         strcheck.fixside(['--fix', 'all'])
 

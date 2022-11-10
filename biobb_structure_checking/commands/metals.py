@@ -19,7 +19,7 @@ def _check(strcheck):
         'at_groups': {}
     }
     for atm in sorted(met_list, key=lambda x: x.serial_number):
-        print(" {:12}".format(mu.atom_id(atm)))
+        print(f" {mu.atom_id(atm):12}")
         res = atm.get_parent()
         fix_data['met_rids'].append(mu.residue_num(res))
         if atm.id not in fix_data['at_groups']:

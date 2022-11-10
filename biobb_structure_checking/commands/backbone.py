@@ -15,7 +15,7 @@ def _check(strcheck):
         print(cts.MSGS['BCK_MISSING_RESIDUES'].format(len(miss_bck_at_list)))
         for r_at in miss_bck_at_list:
             [res, at_list] = r_at
-            print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
+            print(f" {mu.residue_id(res):10} {','.join(at_list)}")
             strcheck.summary['backbone']['missing_atoms'][mu.residue_id(res)] = at_list
     else:
         if not strcheck.args['quiet']:
@@ -27,12 +27,7 @@ def _check(strcheck):
         print(cts.MSGS['BACKBONE_BREAKS'].format(len(bck_check['bck_breaks_list'])))
         strcheck.summary['backbone']['breaks'] = {'detected': []}
         for brk in bck_check['bck_breaks_list']:
-            print(
-                " {:10} - {:10} ".format(
-                    mu.residue_id(brk[0]),
-                    mu.residue_id(brk[1])
-                )
-            )
+            print(f" {mu.residue_id(brk[0]):10} - {mu.residue_id(brk[1]):10}")
             strcheck.summary['backbone']['breaks']['detected'].append([
                 mu.residue_id(brk[0]), mu.residue_id(brk[1])
             ])
@@ -42,17 +37,14 @@ def _check(strcheck):
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_BCK_BREAKS'])
 
-
     if bck_check['wrong_link_list']:
         print(cts.MSGS['UNEXPECTED_BCK_LINKS'])
         strcheck.summary['backbone']['wrong_links'] = []
         for brk in bck_check['wrong_link_list']:
             print(
-                " {:10} linked to {:10}, expected {:10} ".format(
-                    mu.residue_id(brk[0]),
-                    mu.residue_id(brk[1]),
-                    mu.residue_id(brk[2])
-                )
+                f" {mu.residue_id(brk[0]):10}"
+                f" linked to {mu.residue_id(brk[1]):10},"
+                f" expected {mu.residue_id(brk[2]):10}"
             )
             strcheck.summary['backbone']['wrong_links'].append([
                 mu.residue_id(brk[0]),
@@ -69,11 +61,9 @@ def _check(strcheck):
         strcheck.summary['backbone']['long_links'] = []
         for brk in bck_check['not_link_seq_list']:
             print(
-                " {:10} - {:10}, bond distance {:8.3f} ".format(
-                    mu.residue_id(brk[0]),
-                    mu.residue_id(brk[1]),
-                    brk[2]
-                )
+                f" {mu.residue_id(brk[0]):10} -"
+                f" {mu.residue_id(brk[1]):10}, "
+                f" bond distance {brk[2]:8.3f} "
             )
             strcheck.summary['backbone']['long_links'].append([
                 mu.residue_id(brk[0]),
@@ -82,11 +72,11 @@ def _check(strcheck):
             ])
         fix_data['not_link_seq_list'] = True
     # TODO move this section to ligands
-    if strcheck.strucm.modified_residue_list:
+    if strcheck.strucm.st_data.modified_residue_list:
         print(cts.MSGS['MODIF_RESIDUES'])
         strcheck.summary['backbone']['mod_residues'] = []
-        for brk in strcheck.strucm.modified_residue_list:
-            print(" {:10} ".format(mu.residue_id(brk)))
+        for brk in strcheck.strucm.st_data.modified_residue_list:
+            print(f" {mu.residue_id(brk):10}")
             strcheck.summary['backbone']['mod_residues'].append(mu.residue_id(brk))
     # Provisional only missing atoms can be fixed
         fix_data['modified_residue_list'] = True
@@ -170,7 +160,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
     print("Main chain fixes")
 
     brk_rnums = [
-        (mu.residue_num(resp[0]) + '-' + mu.residue_num(resp[1])).replace(' ', '')
+        f"({mu.residue_num(resp[0])}-{mu.residue_num(resp[1])})".replace(' ', '')
         for resp in breaks_list
     ]
     input_line = ParamInput('Fix Main Breaks', strcheck.args['non_interactive'])
