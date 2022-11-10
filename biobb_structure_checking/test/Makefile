@@ -46,12 +46,8 @@ models:
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --non_interactive models --select 5 > 1ark_models_test_5.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_1_test.pdb --non_interactive models --select 1 > 1ark_models_test_1.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_sup_test.pdb --non_interactive models --select 3-6 --superimpose --save_split > 1ark_models_3-6_sup_test.log
-<<<<<<< HEAD
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server bsc  --non_interactive -o 1vtk_dimer_test.pdb models --select all --build_complex > 1vtk_build_complex_test.log
-=======
 	@echo "Running models build complex on 1vtk"
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  -o 1vtk_models_complex.pdb --non_interactive models  --select all --build_complex > 1vtk_1_models_complex.log
->>>>>>> refactor_manager
 
 chains: 
 	@echo "Running chains on 2ki5"
