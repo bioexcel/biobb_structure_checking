@@ -97,4 +97,3 @@ class ChainsData():
         for v in self.chain_ids.values():
             has_NA = (has_NA or (v > 1))
         return has_NA
-

@@ -36,7 +36,6 @@ from biobb_structure_checking.modelling.structure import StructureData
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 
-
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
     """
@@ -63,9 +62,6 @@ class StructureManager:
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
 
-        Object structure:
-            {
-            TODO Update and complete
         """
         self.data_library = DataLibManager(data_library_path)
         for ff in self.data_library.ff_data:
@@ -1371,7 +1367,6 @@ class ParseError(Exception):
 class UnknownFFError(Exception):
     def __init__(self, ff):
         self.message = f'{ff} is not a valid ff for assigning atom types'
-
 class SequencesDoNotMatch(Exception):
     def __init__(self, ff):
         self.message = "Sequence lengths do not match"
