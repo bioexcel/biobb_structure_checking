@@ -276,7 +276,7 @@ class SequenceData():
                 for mut in mut_set.mutations:
                     if mut['chain'] != ch_id:
                         continue
-                    res_num = mut['residue'][1]
+                    res_num = mut['resobj'].id[1]
                     seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
