@@ -103,8 +103,8 @@ class StructureManager:
             else:
                 input_pdb_path = input_pdb_path[4:].upper()
                 #Force mmCif as cif is not accepted by biopython
-                if self.file_format == 'cif':
-                    self.file_format = 'mmCif'
+                if file_format == 'cif':
+                    file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format=file_format
                 )

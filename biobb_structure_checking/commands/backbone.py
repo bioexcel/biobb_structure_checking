@@ -87,6 +87,7 @@ def _fix(strcheck, opts, fix_data=None):
     no_int_recheck = opts['fix_atoms'] is not None or strcheck.args['non_interactive']
 
     fix_done = not fix_data['bck_breaks_list']
+    
     fixed_main_res = []
     while not fix_done:
         if opts['extra_gap'] is None:
@@ -208,7 +209,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
     to_fix = [
         rpair
         for rpair in breaks_list
-        if (mu.residue_num(rpair[0]) + '-' + mu.residue_num(rpair[1])).replace(' ', '')\
+        if f"({mu.residue_num(rpair[0])}-{mu.residue_num(rpair[1])})".replace(' ', '')\
             in fix_main_bck.split(',') or input_option == 'all'
     ]
     return strcheck.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)

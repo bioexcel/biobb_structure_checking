@@ -111,17 +111,14 @@ class ParamInput():
                     # To support both 'list' and 'pair_list':
                     val_sp = val.split(':')
                     val = val_sp[0]
-
                     input_ok =\
                         (opt['case'] == 'sensitive' and val in opt['opt_list'])\
                         or (opt['case'] == 'upper' and val.upper() in opt['opt_list'])\
                         or (opt['case'] == 'lower' and val.lower() in opt['opt_list'])\
                         or (not opt['case'] and val.lower() in\
                         list(map(lambda x: x.lower(), opt['opt_list'])))
-
                     if opt['type'] == 'pair_list':
                         input_ok = input_ok and val_sp[1] in opt['list2']
-
             elif opt['type'] in ('int', 'float'):
                 ok = True
                 if opt['multiple']:
