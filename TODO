@@ -16,7 +16,8 @@
     1.7. Remove Water (remwat) DONE
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
-        1.9.1 Get sequence from PDB without canonical 
+        1.9.1 Get sequence from PDB without canonical DONE
+        1.9.2 Provide sequences as Fasta File
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
         2.1.1 Amides Automatic fix
