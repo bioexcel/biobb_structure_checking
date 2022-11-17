@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -23,7 +23,6 @@ Structure pdb:1d23 loaded
 Metal/Ion residues found
  MG A22
  MG B21
-
 Running mutateside. Options: --na_seq AAAAAAAAAA
 Mutations to perform
 A:DC1DA

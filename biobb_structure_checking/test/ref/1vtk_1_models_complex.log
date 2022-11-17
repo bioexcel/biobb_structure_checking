@@ -1,0 +1,32 @@
+================================================================================
+=                   BioBB structure checking utility v3.10.2                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
+Warning: sequence features only available in mmCIF format or with external fasta input
+Structure pdb:1vtk.1 loaded
+ Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
+ Resolution (A): N.A.
+ Biounit no. 1
+
+ Num. models: 2 (type: BioUnit,   42.553 A)
+ Num. chains: 1 (A: Protein)
+ Num. residues:  734
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  108
+ Num. ligands or modified residues:  4
+ Num. water mol.:  104
+ Num. atoms:  4982
+Small mol ligands found
+ADP A400/1
+TMP A500/1
+ADP A400/2
+TMP A500/2
+Running models. Options: --select all --build_complex
+2 Model(s) detected
+Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
+Selecting model num. all
+1 chains added to new complex
+Structure not modified, not saving. Override with --force_save

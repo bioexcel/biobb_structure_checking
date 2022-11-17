@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -25,7 +25,6 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-
 Running altloc. Options: --select occupancy
 Detected 2 residues with alternative location labels
 AC2 A1

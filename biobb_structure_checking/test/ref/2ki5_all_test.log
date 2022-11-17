@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -25,7 +25,6 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-
 
 Step 1: models --select 1
 
@@ -181,12 +180,12 @@ Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no
  SER B263   CA,C,O,OXT
  ALA B375   CA,C,O,OXT
 6 Backbone breaks found
- VAL A70    - ASP A77    
- GLY A148   - PRO A154   
- GLY A264   - PRO A280   
- GLY B73    - ASP B77    
- GLY B148   - PRO B154   
- SER B263   - ALA B278   
+ VAL A70    - ASP A77   
+ GLY A148   - PRO A154  
+ GLY A264   - PRO A280  
+ GLY B73    - ASP B77   
+ GLY B148   - PRO B154  
+ SER B263   - ALA B278  
 No unexpected backbone links
 Main chain fixes
 Nothing to do
@@ -352,6 +351,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  9351
-Total charge -2.531
 Structure saved on 2ki5_all_test.pdb
 Summary data saved on 2ki5_all_test.json

@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -20,7 +20,6 @@ Structure pdb:104l loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  32
  Num. atoms:  2636
-
 Running inscodes.
 4 Residues with insertion codes found
 ALA A44A

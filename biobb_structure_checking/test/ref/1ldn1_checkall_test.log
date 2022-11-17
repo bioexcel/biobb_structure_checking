@@ -1,13 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ld/1ldn_1.pdb'
+Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1ldn.1 loaded
- Title: structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
- Experimental method: x-ray diffraction
  Keywords: oxidoreductase(choh(d)-nad(a))
  Resolution (A): N.A.
  Biounit no. 1
@@ -32,7 +30,6 @@ OXM C351
 NAD C352
 OXM D351
 NAD D352
-
 Running models.
 1 Model(s) detected
 Single model found
@@ -166,7 +163,7 @@ Running cistransbck.
 ASN A138   PRO A139   Dihedral:   -2.457
 ASN D138   PRO D139   Dihedral:    2.871
 ASN C138   PRO C139   Dihedral:   -1.167
-ASN B138   PRO B139   Dihedral:   -1.398
+ASN B138   PRO B139   Dihedral:   -1.397
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.

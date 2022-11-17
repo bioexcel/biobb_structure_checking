@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -33,7 +33,6 @@ Metal/Ion residues found
  CA B305
 Small mol ligands found
 N25 B401
-
 
 Step 1: models --select 1
 
@@ -152,10 +151,7 @@ Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
-3 trans peptide bonds with unusual omega dihedrals
-THR A191   GLY A192   Dihedral:  156.442
-ILE B203   GLY B204   Dihedral:  159.080
-ILE A203   GLY A204   Dihedral: -159.337
+No trans peptide bonds with unusual omega dihedrals found
 
 Step 15: getss --mark All
 
@@ -256,6 +252,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  5294
-Total charge -23.000
 Structure saved on 1bqo_all_test.pdb
 Summary data saved on 1bqo_all_test.json

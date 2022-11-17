@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -43,7 +43,6 @@ GAL D6
 MAN D7
 NAG D8
 FUL D9
-
 Running getss. Options: --mark all
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141

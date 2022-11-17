@@ -106,7 +106,7 @@ class StructureChecking():
                     print(err.message, file=sys.stderr)
             elif not self.strucm.modified:
                 print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
-            self.summary['modified_structure'] = self.strucm.modified 
+            self.summary['modified_structure'] = self.strucm.modified
 
         if self.args['debug']:
             total = time.time() - self.start_time
@@ -249,7 +249,7 @@ class StructureChecking():
                 opts_str = opts
             msg += ' Options: ' + opts_str
             self.summary[command]['opts'] = opts_str
-    
+
         if not self.args['quiet'] or self.args['verbose']:
             print(msg.strip())
 
@@ -288,7 +288,7 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append([command, memsize])
             print(f"#DEBUG Memory used after {command}: {memsize:f} MB ")
-            
+
 # ==============================================================================
     def _load_structure(
             self,
@@ -329,12 +329,11 @@ class StructureChecking():
             print(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
             strucm.st_data.print_headers()
             print()
-        
+
         self.summary['headers'] = strucm.st_data.meta
 
         if print_stats:
             strucm.print_stats()
-            print()
 
         self.summary['stats'] = strucm.get_stats()
 

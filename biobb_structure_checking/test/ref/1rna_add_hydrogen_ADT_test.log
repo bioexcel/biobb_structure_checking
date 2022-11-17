@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -20,7 +20,6 @@ Structure pdb:1rna loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  91
  Num. atoms:  673
-
 
 Step 1: water --remove yes
 Running water. Options: --remove yes
@@ -46,5 +45,4 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  880
-Total charge -26.000
 Structure saved on 1rna.pdbqt

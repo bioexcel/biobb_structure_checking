@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -43,7 +43,6 @@ GAL D6
 MAN D7
 NAG D8
 FUL D9
-
 
 Step 1: models --select 1
 
@@ -211,8 +210,7 @@ Running cistransbck.
 2 cis peptide bonds
 TYR B373   PRO B374   Dihedral:   -5.527
 TYR A373   PRO A374   Dihedral:   -4.211
-1 trans peptide bonds with unusual omega dihedrals
-GLU B382   SER B383   Dihedral:  157.865
+No trans peptide bonds with unusual omega dihedrals found
 
 Step 15: getss --mark All
 
@@ -294,14 +292,6 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
-Warning: unknown residue CYX
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Replacing HIS A268 by HIE
@@ -328,6 +318,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  6587
-Total charge  0.000
 Structure saved on 4ku1_all_test.pdb
 Summary data saved on 4ku1_all_test.json

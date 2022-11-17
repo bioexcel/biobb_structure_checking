@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.1                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -19,7 +19,6 @@ Structure pdb:1ark loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  13575
-
 
 Step 1: models --select 1
 
@@ -164,6 +163,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  905
-Total charge -4.000
 Structure saved on 1ark_all_test.pdb
 Summary data saved on 1ark_all_test.json
