@@ -124,9 +124,9 @@ class ParamInput():
                 if opt['multiple']:
                     values = []
                     if (opt['type'] == 'int') and ('-' in opt_value):
-                        m1, m2 = opt_value.split('-')
-                        for v in range(int(m1), int(m2) + 1):
-                            values.append(v)
+                        min_val, max_val = opt_value.split('-')
+                        for val in range(int(min_val), int(max_val) + 1):
+                            values.append(val)
                     elif ',' in opt_value:
                         values = opt_value.split(',')
                 else:
@@ -148,7 +148,10 @@ class ParamInput():
         # Non interactive enviroment, check available input only
         if self.non_interactive:
             if opt_value is None:
-                print(f" WARNING: No selection provided and non_interactive, using '{self.default_none}'")
+                print(
+                    f" WARNING: No selection provided and non_interactive,"
+                    f" using '{self.default_none}'"
+                )
                 opt_value = self.default_none
             # No options, nothing to do, return original value
             if not self.options:
@@ -246,4 +249,4 @@ class Dialog():  #To check subparsers from argparse
 class NoDialogAvailableError(Exception):
     """ Error on no Dialog available for **command**"""
     def __init__(self, command):
-        self.message = 'ERROR: no dialog available for {}'.format(command)
+        self.message = f"ERROR: no dialog available for {command}"

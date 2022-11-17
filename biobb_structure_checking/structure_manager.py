@@ -4,7 +4,6 @@
 #from re import I
 import warnings
 import os
-import copy
 from os.path import join as opj
 import sys
 #import re
@@ -190,7 +189,7 @@ class StructureManager:
 
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
-                print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
+                print(f"Warning: {rcode} not found in residue library atom charges set to 0.")
                 for atm in res.get_atoms():
                     atm.pqr_charge = 0.
                     atm.radius = 0.
@@ -216,8 +215,9 @@ class StructureManager:
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print("Warning: OXT atom missing in {}. Run backbone --fix_atoms first".format(mu.residue_id(res)))
-        print("Total assigned charge: {:10.2f}".format(self.st_data.total_charge))
+                    print(f"Warning: OXT atom missing in {mu.residue_id(res)}. Run backbone --fix_atoms first")
+
+        print(f"Total assigned charge: {self.st_data.total_charge:10.2f}")
 
         self.revert_terms()
 
@@ -238,13 +238,13 @@ class StructureManager:
 
     def get_SS_bonds(self) -> List[Union[Atom, Atom, float]]:
         """ Stores and returns possible SS Bonds by distance"""
-        self.ss_bonds = mu.get_all_at2at_distances(
+        self.st_data.ss_bonds = mu.get_all_at2at_distances(
             self.st,
             'SG',
             self.data_library.distances['SS_DIST'],
             not self.models_data.has_superimp_models()
         )
-        return self.ss_bonds
+        return self.st_data.ss_bonds
 
     def check_chiral_sides(self) -> Dict[List[Residue], List[Residue]]:
         """ Returns a list of wrong chiral side chains"""
@@ -420,8 +420,8 @@ class StructureManager:
 
         missing = False
 
-        for at in bck_ats:
-            missing = missing or at not in res
+        for atm in bck_ats:
+            missing = missing or atm not in res
 
         return missing
 
@@ -692,13 +692,18 @@ class StructureManager:
         self.modified = True
 
     def superimpose_models(self):
+        ''' Superimpose models by rmsd'''
         self.modified = self.models_data.superimpose_models()
 
     def build_complex(self):
+        ''' Build a complex from biounit models'''
         if self.models_data.models_type['type'] != mu.BUNIT:
             print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
             return 0
-        return self.models_data.build_complex()
+        result = self.models_data.build_complex()
+        self.update_internals()
+        self.modified = True
+        return result
 
     def select_chains(self, select_chains: str) -> None:
         """
@@ -728,11 +733,7 @@ class StructureManager:
                 if to_fix['select'] in atm.child_dict.keys():
                     newat = atm.child_dict[to_fix['select']]
                 else:
-                    print(
-                        'Warning: unknown alternative {} in {}'.format(
-                            to_fix['select'], mu.atom_id(atm)
-                        )
-                    )
+                    print(f"Warning: unknown alternative {to_fix['select']} in {mu.atom_id(atm)}")
                     continue
             newat.disordered_flag = 0
             newat.altloc = ' '
@@ -891,8 +892,8 @@ class StructureManager:
 
                 try:
                     model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
-                except NoCanSeqError as e:
-                    print(e.message)
+                except NoCanSeqError as err:
+                    print(err.message)
                     continue
 
                 parser = PDBParser(PERMISSIVE=1)
@@ -1172,12 +1173,12 @@ class StructureManager:
 
     def rename_terms(self, term_res):
         """ Rename Terminal residues as NXXX or CXXX in proteins or XX5 XX3 in NA """
-        for t in term_res:
-            if t[0] in ('N', 'C'):
-                if t[1].resname not in ('ACE', 'NME') and len(t[1].resname) == 3:
-                    t[1].resname = t[0] + t[1].resname
-            elif t[0] in ('5', '3'):
-                t[1].resname = t[1].resname + t[0]
+        for term in term_res:
+            if term[0] in ('N', 'C'):
+                if term[1].resname not in ('ACE', 'NME') and len(term[1].resname) == 3:
+                    term[1].resname = term[0] + term[1].resname
+            elif term[0] in ('5', '3'):
+                term[1].resname = term[1].resname + term[0]
 
     def revert_terms(self):
         """ Reverts special term residue names to canonical ones"""
@@ -1315,8 +1316,7 @@ class StructureManager:
         mut_list = []
         i = 0
         nch = 0
-        for ch_id in self.sequence_data.data:
-            chn = self.sequence_data.data[ch_id]
+        for ch_id, chn in self.sequence_data.data.items():
             start = chn['pdb'][0]['frgs'][0].features[0].location.start
             seq = chn['pdb'][0]['frgs'][0].seq
             if len(seq) != len(mut_seq[nch]):
@@ -1337,9 +1337,9 @@ def _guess_modeller_env():
         if 'modeller' in line:
             info = line.split()
     if info[1]:
-        print("Modeller v{} detected".format(info[1]))
-        v1, v2 = info[1].split('.')
-        return "KEY_MODELLER{}v{}".format(v1, v2), "MODINSTALL{}v{}".format(v1, v2), f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{v1}.{v2}"
+        print(f"Modeller v{info[1]} detected")
+        ver1, ver2 = info[1].split('.')
+        return f"KEY_MODELLER{ver1}v{ver2}", "MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
 
     print("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
@@ -1368,5 +1368,5 @@ class UnknownFFError(Exception):
     def __init__(self, ff):
         self.message = f'{ff} is not a valid ff for assigning atom types'
 class SequencesDoNotMatch(Exception):
-    def __init__(self, ff):
+    def __init__(self):
         self.message = "Sequence lengths do not match"

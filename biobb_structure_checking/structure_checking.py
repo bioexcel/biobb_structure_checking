@@ -237,7 +237,8 @@ class StructureChecking():
         except ImportError:
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
 
-        if command not in self.summary: self.summary[command] = {}
+        if command not in self.summary:
+            self.summary[command] = {}
 
         msg = f"Running {command}."
         if opts:
@@ -258,7 +259,8 @@ class StructureChecking():
 
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
-            if self.args['verbose']: print(cts.MSGS['CHECK_ONLY_DONE'])
+            if self.args['verbose']:
+                print(cts.MSGS['CHECK_ONLY_DONE'])
         elif data_to_fix:
             if isinstance(opts, (str, list)):
                 if cts.DIALOGS.exists(command):
@@ -276,7 +278,8 @@ class StructureChecking():
 
             if error_status:
                 if isinstance(error_status, tuple):
-                    if error_status[1] is None: error_status = [error_status[0]]
+                    if error_status[1] is None:
+                        error_status = [error_status[0]]
 
                 print('ERROR', ' '.join(error_status), file=sys.stderr)
                 self.summary[command]['error'] = ' '.join(error_status)
@@ -376,8 +379,6 @@ class StructureChecking():
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
 
-        base_name = os.path.splitext(output_structure_path)[0]
-
         if not split_models:
             self.strucm.save_structure(
                 output_structure_path,
@@ -400,8 +401,10 @@ class StructureChecking():
         return output_structure_path
 
     def _check_report_clashes(self, residue_list=None, contact_types=None):
-        if contact_types is None: contact_types = mu.ALL_CONTACT_TYPES
-        if not residue_list: residue_list = self.strucm.st_data.all_residues
+        if contact_types is None:
+            contact_types = mu.ALL_CONTACT_TYPES
+        if not residue_list:
+            residue_list = self.strucm.st_data.all_residues
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types)
@@ -428,7 +431,8 @@ class StructureChecking():
                         'dist': round(float(sqrt(clash_list[cls][rkey][2])), 4)
                     })
             else:
-                if not self.args['quiet']: print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
+                if not self.args['quiet']:
+                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 
 # ==============================================================================
