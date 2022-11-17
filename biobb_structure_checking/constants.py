@@ -2,8 +2,9 @@
     Global constants for structure_checking module
 """
 import argparse
-from os.path import join as opj
 from os.path import dirname
+from os.path import join as opj
+
 from biobb_structure_checking.param_input import Dialog
 
 VERSION = '3.10.2'
@@ -62,9 +63,9 @@ def set_defaults(base_dir_path, args=None):
     if 'fasta_seq_path' not in args:
         args['fasta_seq_path'] = None
 
-    for param in DEFAULTS:
+    for param, value in DEFAULTS.items():
         if param not in args or args[param] is None:
-            args[param] = DEFAULTS[param]
+            args[param] = value
 
     return args
 
@@ -77,7 +78,10 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. 1) Fetch from remote pdb:{pdbid} 2) Local file: Formats pdb(qt)|pqr|cif. Format assumed from extension.'
+    help='Input structure. '
+        '1) Fetch from remote pdb:{pdbid} '
+        '2) Local file: Formats pdb(qt)|pqr|cif. '
+        'Format assumed from extension.'
 )
 
 CMD_LINE.add_argument(
@@ -129,7 +133,9 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
-    help='Output structure. Formats available pdb|pdbqt|pqr|cmip (use file extension or --output_format to set format)'
+    help='Output structure. '
+        'Formats available pdb|pdbqt|pqr|cmip '
+        '(use file extension or --output_format to set format)'
 )
 
 CMD_LINE.add_argument(
@@ -244,7 +250,7 @@ DIALOGS.add_option('models', '--save_split', 'save_split', \
     'Save each model in a separated PDB file', 'bool')
 DIALOGS.add_option('models', '--superimpose', 'superimpose', \
     'Superimpose models', 'bool')
-DIALOGS.add_option('models', '--build_complex', 'build_complex', 
+DIALOGS.add_option('models', '--build_complex', 'build_complex',
     'Build a complex from selected models (biounit type)', 'bool')
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')

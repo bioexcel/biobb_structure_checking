@@ -3,6 +3,7 @@ from Bio.PDB.Superimposer import Superimposer
 import biobb_structure_checking.model_utils as mu
 
 class ModelsData():
+    '''Class to manage models internal data'''
     def __init__(self, st):
         # Checking models type according to RMS among models
         self.st = st
@@ -12,14 +13,9 @@ class ModelsData():
     def stats(self, prefix='') -> None:
         """ Print stats """
         if self.nmodels > 1:
-            return '{} Num. models: {} (type: {}, {:8.3f} A)'.format(
-                    prefix,
-                    self.nmodels,
-                    mu.MODEL_TYPE_LABELS[self.models_type['type']],
-                    self.models_type['rmsd']
-                )
+            return f"{prefix} Num. models: {self.nmodels} (type: {mu.MODEL_TYPE_LABELS[self.models_type['type']]}, {self.models_type['rmsd']:8.3f} A)"
         else:
-            return f'{prefix} Num. models: {self.nmodels}'
+            return f"{prefix} Num. models: {self.nmodels}"
 
     def select(self, keep_model: str) -> None:
         """ Selects model(s) and delete the others from the structure. Model are
@@ -30,11 +26,11 @@ class ModelsData():
         """
         models = []
         if '-' in keep_model:
-            m1, m2 = keep_model.split('-')
-            for v in range(int(m1), int(m2) + 1):
-                models.append(v)
+            mod_1, mod_2 = keep_model.split('-')
+            for mod_id in range(int(mod_1), int(mod_2) + 1):
+                models.append(mod_id)
         elif ',' in keep_model:
-            models = [int(m) for m in keep_model.split(',')]
+            models = [int(mod) for mod in keep_model.split(',')]
         else:
             models = [int(keep_model)]
 
@@ -52,6 +48,7 @@ class ModelsData():
         self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
 
     def superimpose_models(self):
+        '''Superimpose models'''
         spimp = Superimposer()
         if self.nmodels > 1:
             fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
@@ -66,13 +63,15 @@ class ModelsData():
         return False
 
     def build_complex(self):
-        # Use first available model as base
+        '''Build a complex with the available models (suitable for biounits)
+           Use first available model as base
+        '''
         added_chains = 0
         last_chain_id = ''
         for mod in self.st:
             if mod.id == 0:
-                for ch in mod:
-                    last_chain_id = ord(ch.id)
+                for chn in mod:
+                    last_chain_id = ord(chn.id)
                 continue
             new_chain_ids = [ch.id for ch in mod]
             for ch_id in new_chain_ids:
@@ -81,7 +80,7 @@ class ModelsData():
                 new_ch.id = chr(last_chain_id)
                 new_ch.set_parent(self.st[0])
                 self.st[0].add(new_ch)
-                added_chains += 1  
+                added_chains += 1
         self.select('1')
         return added_chains
 

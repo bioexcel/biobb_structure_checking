@@ -79,13 +79,13 @@ class ParamInput():
                 opt_strs.append(','.join(opt['opt_list']))
             elif opt['type'] in ('int', 'float'):
                 if opt['min'] != 0 or opt['max'] != 0:
-                    opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
+                    opt_strs.append(f"{opt['min']} - {opt['max']}")
             elif opt['type'] == 'input':
                 opt_strs.append('Enter text')
             elif opt['type'] == 'pair_list':
                 str_opt = []
                 for oper in opt['opt_list']:
-                    str_opt.append('{}:[{}]'.format(oper, '|'.join(opt['list2'])))
+                    str_opt.append(f"{oper}:[{'|'.join(opt['list2'])}]")
                 opt_strs.append(','.join(str_opt))
             else:
                 opt_strs.append('?')
@@ -120,7 +120,7 @@ class ParamInput():
                     if opt['type'] == 'pair_list':
                         input_ok = input_ok and val_sp[1] in opt['list2']
             elif opt['type'] in ('int', 'float'):
-                ok = True
+                value_ok = True
                 if opt['multiple']:
                     values = []
                     if (opt['type'] == 'int') and ('-' in opt_value):
@@ -135,8 +135,8 @@ class ParamInput():
                     opt_val = float(val)
                     if opt['type'] == "int":
                         opt_val = int(val)
-                    ok = ok and (opt['min'] <= opt_val <= opt['max'])
-                input_ok = ok
+                    value_ok = value_ok and (opt['min'] <= opt_val <= opt['max'])
+                input_ok = value_ok
             elif opt['type'] == 'text':
                 input_ok = opt_value
             if not input_ok:

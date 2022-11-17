@@ -1,12 +1,15 @@
 ''' Class to manage Chain internal data'''
+import sys
 import biobb_structure_checking.model_utils as mu
 
 class ChainsData():
+    ''' Class to manage Chain(s) internal data'''
     def __init__(self, st):
         self.chain_ids = {}
         self.chain_details = {}
         self.has_chains_to_rename = False
         self.st = st
+        self.modified = False
 
     def stats(self, prefix='') -> None:
         """ Print chains info """
@@ -14,20 +17,18 @@ class ChainsData():
         for ch_id in sorted(self.chain_ids):
             if self.chain_ids == mu.UNKNOWN:
                 chids.append(
-                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
-                        ch_id, g=self.chain_details[ch_id]
-                    )
+                    f"{ch_id}: "
+                    f" Unknown (P:{self.chain_details[ch_id][0]:.1%}"
+                    f" DNA:{self.chain_details[ch_id][1]:.1%}"
+                    f" RNA:{self.chain_details[ch_id][2]:.1%}"
+                    f" UNK:{self.chain_details[ch_id][3]:.1%}"
                 )
             else:
-                chids.append(
-                    '{}: {}'.format(
-                        ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
-                    )
-                )
+                chids.append(f"{ch_id}: {mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]}")
 
-        return '{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids))
+        return f"{prefix} Num. chains: {len(self.chain_ids)} ({', '.join(chids)})"
 
-    def set_chain_ids(self, biounit) -> None:
+    def set_chain_ids(self, biounit=False) -> None:
         """
         Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
         """
@@ -41,8 +42,9 @@ class ChainsData():
             self.chain_details[chn.id] = guess['details']
             if chn.id == ' ':
                 self.has_chains_to_rename = self.has_chains_to_rename  or True
-    
+
     def rename_empty_chain_label(self, new_label: str) -> str:
+        '''Add chain label to empty ones'''
         if not self.has_chains_to_rename:
             return False
         if new_label == 'auto':
@@ -57,7 +59,7 @@ class ChainsData():
         self.set_chain_ids()
         self.modified = True
         return new_label
-    
+
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
         if mu.is_hetatm(res):
@@ -93,7 +95,7 @@ class ChainsData():
 
     def has_NA(self):
         """ Checks if any of the chains is NA"""
-        has_NA = False
-        for v in self.chain_ids.values():
-            has_NA = (has_NA or (v > 1))
-        return has_NA
+        has_na = False
+        for ch_type in self.chain_ids.values():
+            has_na = (has_na or (ch_type > 1))
+        return has_na

@@ -44,7 +44,7 @@ class StructureManager:
             input_pdb_path: str,
             data_library_path: str,
             res_library_path: str,
-            pdb_server: str = 'ftp://ftp.wwpdb.org',
+            pdb_server: str,
             cache_dir: str = 'tmpPDB',
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
@@ -91,6 +91,7 @@ class StructureManager:
         biounit = False
         if "pdb:" in input_pdb_path:
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
+            print(pdb_server)
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')

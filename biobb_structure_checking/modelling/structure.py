@@ -2,6 +2,7 @@
 import biobb_structure_checking.model_utils as mu
 
 class StructureData():
+    '''Class to manage internal Structure data'''
     def __init__(self, st, input_format, headers, biounit=False):
         self.st = st
         self.input_format = input_format
@@ -12,7 +13,7 @@ class StructureData():
         self.headers = headers
         self.biounit = biounit
         self.fixed_side = False
-        
+
         self.hetatm = {}
         self.stats = {
             'num_res' : 0,
@@ -26,10 +27,12 @@ class StructureData():
         }
         self.ca_only = False
         self.ss_bonds = []
-        self.has_charges = False      
+        self.has_charges = False
         self.total_charge = None
         self.all_residues = []
         self.non_canonical_residue_list = []
+        self.next_residue = {}
+        self.prev_residue = {}
 
     def residue_renumbering(self, data_library):
         """Sets the Bio.PDB.Residue.index attribute to residues for a unique,
@@ -49,12 +52,12 @@ class StructureData():
             if res.get_resname() in data_library.canonical_codes:
                 self.non_canonical_residue_list.append(
                     {
-                        'res':res, 
-                        'can_res':data_library.canonical_codes[res.get_resname()], 
+                        'res':res,
+                        'can_res':data_library.canonical_codes[res.get_resname()],
                         'new_res':res.resname
                     }
                 )
-            
+
             i += 1
 
     def atom_renumbering(self):
@@ -123,7 +126,8 @@ class StructureData():
         # num_ats should be much larger than num_res
         # waters removed
         # Taking polyGly as a lower limit
-        self.ca_only = self.stats['num_ats'] - self.stats['num_wat'] < (self.stats['num_res'] - self.stats['num_wat']) * 4
+        self.ca_only = self.stats['num_ats'] - self.stats['num_wat'] <\
+            (self.stats['num_res'] - self.stats['num_wat']) * 4
 
     def get_headers(self) -> None:
         """
@@ -148,7 +152,7 @@ class StructureData():
                 self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
-    
+
     def print_headers(self) -> None:
         """
         Prints selected components from structure headers
@@ -187,6 +191,7 @@ class StructureData():
                 self.hetatm[mu.ORGANIC].append(res)
 
     def print_hetatm_stats(self):
+        '''Print statistics on HETATM'''
         if self.hetatm[mu.MODRES]:
             print('Modified residues found')
             for res in self.hetatm[mu.MODRES]:

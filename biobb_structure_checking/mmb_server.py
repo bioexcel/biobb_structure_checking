@@ -99,7 +99,10 @@ class MMBPDBList(PDBList):
         # Retrieve the file
         if self._verbose:
             if biounit:
-                print(f"Downloading PDB structure '{pdb_code}.{biounit}' from {self.pdb_server} ...")
+                print(
+                    f"Downloading PDB structure '{pdb_code}.{biounit}' "
+                    f"from {self.pdb_server} ..."
+                )
             else:
                 print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
         try:
