@@ -4,7 +4,7 @@
 
 import re
 import sys
-from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
+#from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 import numpy as np
 from numpy import arccos, clip, cos, dot, pi, sin, sqrt
@@ -107,7 +107,7 @@ COMPLEMENT_TAB = str.maketrans('ACGTU', 'TGCAA')
 # Residue & Atom friendly ids
 def residue_id(res, models='auto'):
     """  Friendly replacement for residue ids like ASN A324/0 """
-    return '{:>3} {}'.format(res.get_resname(), residue_num(res, models))
+    return f"{res.get_resname():>3} {residue_num(res, models)}"
 
 def residue_num(res, models='auto'):
     """
@@ -126,27 +126,30 @@ def residue_num(res, models='auto'):
 
 def atom_id(atm, models='auto'):
     """ Friendly replacement for atom ids like ASN A324/0.CA """
-    return '{}.{}'.format(residue_id(atm.get_parent(), models), atm.id)
+    return f"{residue_id(atm.get_parent(), models)}.{atm.id}"
 
 def key_sort_atom_pairs(at_pair):
+    '''Fake key to sort atom pairs according to the serial numbers'''
     return at_pair[0].serial_number * 10000 + at_pair[1].serial_number
 
-def get_sequence_symbol(r, chain_type):
+def get_sequence_symbol(res, chain_type):
+    '''Obtain one-letter residue symbol to build sequence strings'''
     seq = ''
-    rn = r.get_resname()
+    res_name = res.get_resname()
     if chain_type == PROTEIN:
-        if rn in ONE_LETTER_RESIDUE_CODE:
-            seq += ONE_LETTER_RESIDUE_CODE[rn]
+        if res_name in ONE_LETTER_RESIDUE_CODE:
+            seq += ONE_LETTER_RESIDUE_CODE[res_name]
         else:
-            print("Warning: unknown protein residue code", residue_id(r))
+            print("Warning: unknown protein residue code", residue_id(res))
             seq += 'X'
     elif chain_type == DNA:
-        seq += rn[1:]
+        seq += res_name[1:] #Removing leading "D" on DNA residue names
     else:
-        seq += rn
+        seq += res_name
     return seq
 
 def get_sequence_from_list(r_list, chain_type):
+    '''Transform residue list onto a sequence string'''
     seq = ''
     for res in r_list:
         seq += get_sequence_symbol(res, chain_type)
@@ -160,13 +163,12 @@ def _protein_residue_check(res_id):
     """
     res_id = res_id.upper()
     rid = ''
-    if res_id in THREE_LETTER_RESIDUE_CODE.keys():
+    if res_id in THREE_LETTER_RESIDUE_CODE:
         rid = THREE_LETTER_RESIDUE_CODE[res_id]
-    elif res_id in ONE_LETTER_RESIDUE_CODE.keys():
+    elif res_id in ONE_LETTER_RESIDUE_CODE:
         rid = res_id
     else:
         return False
-
     return rid
 
 def _na_residue_check(rid, chain_type):
@@ -193,7 +195,6 @@ def valid_residue_check(res, chain_type):
         res : residue
         chain_type (int): Type of chain
     """
-    #return _protein_residue_check(res) if chain_type == PROTEIN else return _na_residue_check(res, chain_type)
     if chain_type == PROTEIN:
         return _protein_residue_check(res)
     else:
@@ -272,6 +273,137 @@ def has_ins_code(res):
     return res.id[2] != ' '
 
 #===============================================================================
+# Metrics =============================================================
+def calc_at_dist(at1, at2):
+    """
+    Calculates distance between two atoms
+    """
+    return np.sqrt(calc_at_sq_dist(at1, at2))
+
+def calc_at_sq_dist(at1, at2):
+    """
+    Calculates distance between two atoms
+    """
+    vec = at1.coord - at2.coord
+    return np.dot(vec, vec)
+
+def calc_bond_angle(at1, at2, at3):
+    """
+    Calculates angle among three atoms at1-at2-at3
+    """
+    vec1 = at1.coord - at2.coord
+    vec2 = at3.coord - at2.coord
+    return _calc_v_angle(vec1, vec2)
+
+def calc_bond_dihedral(at1, at2, at3, at4):
+    """
+    Calculates dihedral angles at1-at2-at3-at4
+    """
+    abv = at1.coord - at2.coord
+    cbv = at3.coord - at2.coord
+    dbv = at4.coord - at3.coord
+    uvec = np.cross(abv, cbv)
+    vvec = np.cross(dbv, cbv)
+    wvec = np.cross(uvec, vvec)
+    angle_uv = _calc_v_angle(uvec, vvec)
+    if norm(wvec) == 0.:
+        angle_cbw = 0.
+    else:
+        angle_cbw = _calc_v_angle(cbv, wvec)
+    try:
+        if angle_cbw > 0.001:
+            angle_uv = -angle_uv
+    except ZeroDivisionError:
+        pass
+    return angle_uv
+
+def get_all_at2at_distances(
+        struc,
+        at_ids='all',
+        d_cutoff=0.,
+        join_models=False
+        ):
+    """ Gets a list of all at-at distances below a cutoff, at ids can be limited """
+    if not isinstance(at_ids, list):
+        at_ids = at_ids.split(',')
+
+    at_list = [atm for atm in struc.get_atoms() if atm.id in at_ids or at_ids == ['all']]
+
+    dist_mat = []
+    d_cut2 = d_cutoff**2
+    for i in range(len(at_list)-1):
+        for j in range(i + 1, len(at_list)):
+            if join_models or same_model(at_list[i].get_parent(), at_list[j].get_parent()):
+                dist2 = calc_at_sq_dist(at_list[i], at_list[j])
+                if d_cutoff > 0. and dist2 < d_cut2:
+                    dist_mat.append([at_list[i], at_list[j], dist2])
+    return dist_mat
+
+def get_all_r2r_distances(struc, r_ids='all', d_cutoff=0., join_models=False):
+    """ Gets all distances from the first atoms of each residue """
+    if not isinstance(r_ids, list):
+        r_ids = r_ids.split(',')
+    dist_mat = []
+    check_ats = {}
+    for mod in struc.get_models():
+        check_ats[mod.id] = []
+        for res in struc[mod.id].get_residues():
+            if res.resname in r_ids or r_ids == ['all']:
+                if join_models:
+                    check_ats[0].append(res.child_list[0])
+                else:
+                    check_ats[mod.id].append(res.child_list[0])
+    for mod in struc.get_models():
+        if check_ats[mod.id]:
+            dist_mat += _get_contacts(check_ats[mod.id], d_cutoff)
+    return dist_mat
+
+def _get_contacts(ats_list, d_cutoff):
+    contact_list = []
+    nbsearch = NeighborSearch(ats_list)
+    for at1, at2 in nbsearch.search_all(d_cutoff):
+        contact_list.append((at1.get_parent(), at2.get_parent(), at1 - at2))
+    return contact_list
+
+def calc_RMSd_ats(ats1, ats2):
+    """ Calcs RMSd between two atom lists, no fit"""
+    if len(ats1) != len(ats2):
+        print(f"Warning: atom lists of different length when calculating RMSd ({len(ats1)}, {len(ats2)})")
+    rmsd = 0
+    i = 0
+    while i < len(ats1) and i < len(ats2):
+        dist2 = calc_at_sq_dist(ats1[i], ats2[i])
+        rmsd = rmsd + dist2
+        i = i + 1
+
+    return sqrt(rmsd / i)
+
+def calc_RMSd_all_ats(st1, st2):
+    """ Calcs RMSd all atoms, no fit """
+    return calc_RMSd_ats(
+        [atm for atm in st1.get_atoms()],
+        [atm for atm in st2.get_atoms()]
+    )
+
+def get_all_rr_distances(res1, res2, with_h=False):
+    """ Gets all atom-atom distances between residues """
+    dist_mat = []
+    for at1 in res1.get_atoms():
+        if at1.element == 'H' and not with_h:
+            continue
+        for at2 in res2.get_atoms():
+            if at2.element == 'H' and not with_h:
+                continue
+            dist2 = calc_at_sq_dist(at1, at2)
+            dist_mat.append((at1, at2, dist2))
+    return dist_mat
+#===============================================================================
+def _calc_v_angle(vec1, vec2, deg=True):
+    angle = arccos(clip(dot(vec1, vec2)/norm(vec1)/norm(vec2), -1., 1.))
+    if deg:
+        angle *= 180./pi
+    return angle
+
 # Guesses
 
 def guess_models_type(struc, threshold=MODELS_MAXRMS):
@@ -327,7 +459,10 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
         else:
             chain_type = UNKNOWN
 
-    return {'type': chain_type, 'details': {'Protein': prot, 'DNA': dna, 'RNA': rna, 'Other': other}}
+    return {
+        'type': chain_type,
+        'details': {'Protein': prot, 'DNA': dna, 'RNA': rna, 'Other': other}
+    }
 
 
 #===============================================================================
@@ -379,9 +514,9 @@ def check_all_at_in_r(res, at_list):
         return miss_at
     return {}
 
-def check_unk_at_in_r(res, at_list, skip_H=True):
+def check_unk_at_in_r(res, at_list, skip_h=True):
     """ Check whether unknown atom names are present. """
-    if skip_H:
+    if skip_h:
         return  [
             at.id for at in res.get_atoms()
             if at.element != 'H' and at.id not in at_list['backbone'] + at_list['side'] + ['OXT']
@@ -401,9 +536,9 @@ def check_r_list_clashes(r_list, rr_list, clash_dist, atom_lists, join_models=Tr
         if (res1 in r_list or res2 in r_list) and not is_wat(res1) and not is_wat(res2):
             c_list = check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models, severe)
             rkey = residue_id(res1) + '-' + residue_id(res2)
-            for cls in c_list:
-                if c_list[cls]:
-                    clash_list[cls][rkey] = c_list[cls]
+            for cls, cls_val in c_list.items():
+                if cls_val:
+                    clash_list[cls][rkey] = cls_val
     return clash_list
 
 def check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models=True, severe=True):
@@ -586,17 +721,6 @@ def swap_atoms(at1, at2):
     at2.name = at1_name
     at2.fullname = at1_fullname
 
-#def invert_chirality(res, at1, at2, at3, at4):
-#    """Inverts chirality of at2 by rotating at4, and the associated end chain atoms
-    #"""
-#    #TODO
-#
-#def invert_chiral_ca(res):
-#    """
-#    Inverts CA Chirality.
-    #"""
-#    #TODO
-
 # Atom management ==============================================================
 def rename_atom(res, old_at, new_at):
     """ Rename atom within a residue """
@@ -611,6 +735,149 @@ def rename_atom(res, old_at, new_at):
 def delete_atom(res, at_id):
     """ delete a atom within a residue """
     res.detach_child(at_id)
+
+def add_new_atom_to_residue(res, at_id, coords):
+    """Adds a new atom a residue """
+    res.add(Atom(at_id, coords, 99.0, 1.0, ' ', ' ' + at_id + ' ', 0, at_id[0:1]))
+
+# Build atom coordinates
+def build_coords_3xSP3(dst, at0, at1, at2):
+    """ Generates coordinates for 3 SP3 atoms
+        **dst** bond distance
+        **at0**  central atom
+        **at1** atom to define bond angles
+        **at2** atom to define dihedrals
+    """
+    #TODO try a pure geometrical generation to avoid at2
+    crs = []
+    for i in range(0, 3):
+        crs.append(build_coords_from_ats_internal(at0, at1, at2, [dst, SP3ANGLE, SP3DIHS[i]]))
+    return crs
+
+def build_coords_2xSP3(dst, at0, at1, at2):
+    """
+        Generates coordinates for two SP3 bonds given the other two
+        **dst** Bond distance
+        **at0** Central atom
+        **at1** atom with existing bond
+        **at2** atom with existing bond
+    """
+    cr0 = Vector(at0.get_coord())
+    cr1 = Vector(at1.get_coord())
+    cr2 = Vector(at2.get_coord())
+    axe = cr0 - cr1
+    mat = rotaxis(120.*pi/180., axe)
+    bond = cr2 - cr0
+    bond.normalize()
+    bond._ar = bond._ar * dst
+    cr3 = cr0 + bond.left_multiply(mat)
+    cr4 = cr0 + bond.left_multiply(mat).left_multiply(mat)
+    crs = []
+    crs.append(cr3._ar)
+    crs.append(cr4._ar)
+    return crs
+
+def build_coords_1xSP3(dst, at0, at1, at2, at3):
+    """
+      Calculated cartesian coordinates to complete a SP3 group
+    """
+    cr0 = at0.get_coord()
+    cr1 = at1.get_coord()
+    cr2 = at2.get_coord()
+    cr3 = at3.get_coord()
+    avg = cr1 + cr2
+    avg = avg + cr3
+    avg /= 3.
+    avec = cr0 - avg
+    avec /= norm(avec)
+    avec *= dst
+    return cr0 + avec
+
+def build_coords_SP2(dst, at0, at1, at2):
+    """
+      Calculates cartesian coordinaties to complete a SP2 group
+    """
+    cr0 = at0.get_coord()
+    cr1 = at1.get_coord()
+    cr2 = at2.get_coord()
+
+    avg = cr1 + cr2
+    avg /= 2.
+    avec = cr0 - avg
+    avec /= norm(avec)
+    avec *= dst
+    return cr0 + avec
+
+def build_coords_from_ats_internal(at1, at2, at3, geom):
+    """ Gets coordinates from internal geometry using ats as parameters for easier usage"""
+    return build_coords_from_internal(
+        at1.get_coord(),
+        at2.get_coord(),
+        at3.get_coord(),
+        geom)
+
+def build_coords_from_internal(at1c, at2c, at3c, geom):
+    """
+     Calculates cartesian coordinates for a new atom from internal coordinates.
+    """
+    dst = geom[0]
+    ang = geom[1] * pi / 180.
+    tor = geom[2] * pi / 180.0
+
+    vec1 = at1c - at2c
+    vec2 = at1c - at3c
+
+    vcr12 = np.cross(vec1, vec2)
+    vcr112 = np.cross(vec1, vcr12)
+
+    vcr12 /= norm(vcr12)
+    vcr112 /= norm(vcr112)
+
+    vcr12 *= -sin(tor)
+    vcr112 *= cos(tor)
+
+    vec3 = vcr12 + vcr112
+    vec3 /= norm(vec3)
+    vec3 *= dst * sin(ang)
+
+    vec1 /= norm(vec1)
+    vec1 *= dst * cos(ang)
+
+    return at1c + vec3 - vec1
+
+def build_coords_from_lib(res, res_lib, new_res, at_id):
+    """
+     Calculates cartesian coordinates for a new atom from internal coordinates definition.
+    """
+    atom_def = res_lib.get_atom_def(new_res, at_id)
+
+    if atom_def is None:
+        sys.exit("#ERROR: Unknown target atom")
+    for at_def in atom_def.link_ats:
+        if at_def not in res:
+            sys.exit(f"Error, required atom {at_def} not available in {residue_id(res)}")
+    return build_coords_from_ats_internal(
+        res[atom_def.link_ats[0]],
+        res[atom_def.link_ats[1]],
+        res[atom_def.link_ats[2]],
+        atom_def.geom
+    )
+
+def build_coords_CB(res): # Get CB from Backbone
+    """ Calculates cartesian coordinates for a new CB atom from backbone.
+    """
+    return build_coords_from_ats_internal(res['CA'], res['N'], res['C'], CBINTERNALS)
+
+def build_coords_O(res): # Get O from Backbone
+    """ Calculates cartesian coordinates for a new O atom from backbone.
+    """
+    return build_coords_from_ats_internal(res['C'], res['CA'], res['N'], OINTERNALS)
+
+def build_coords_trans_CA(at0, at1, at2):
+    """ Builds CA with trans peptide bond conf"""
+    return build_coords_from_ats_internal(at0, at1, at2, [CCDIS, SP2ANGLE, PEPDIH])
+
+
 
 def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
@@ -825,7 +1092,7 @@ def add_ACE_cap_at_res(res, next_res=None):
             if atm.id not in ('C', 'O', 'CA'):
                 print(residue_id(res))
                 remove_atom_from_res(res, atm.id)
-                print("  Removing atom {}".format(atm.id))
+                print(f"  Removing atom {atm.id}")
             if atm.id == 'CA':
                 rename_atom(res, 'CA', 'CA')
         res.resname = 'ACE'
@@ -840,7 +1107,7 @@ def add_ACE_cap_at_res(res, next_res=None):
         for atm in res.get_atoms():
             if atm.id not in ('C', 'O', 'CA'):
                 remove_atom_from_res(res, atm.id)
-                print("  Removing unexpected atom {}".format(atm.id))
+                print(f"  Removing unexpected atom {atm.id}")
         print("  Adding new atom CA")
         add_new_atom_to_residue(
             res,
@@ -896,7 +1163,7 @@ def add_NME_cap_at_res(res, prev_res=None):
             if atm.id not in ('N', 'CA', 'C', 'O'):
                 print(residue_id(res), "Replacing by NME residue")
                 remove_atom_from_res(res, atm.id)
-                print("  Removing atom {}".format(atm.id))
+                print(f"  Removing atom {atm.id}")
         res.resname = 'NME'
     else:
         # Mutate to NME
@@ -908,7 +1175,7 @@ def add_NME_cap_at_res(res, prev_res=None):
         for atm in res.get_atoms():
             if atm.id not in ('N', 'CA', 'C', 'O'):
                 remove_atom_from_res(res, atm.id)
-                print("  Removing unexpected atom {}".format(atm.id))
+                print(f"  Removing unexpected atom {atm.id}")
         print("  Adding new atom CA")
         add_new_atom_to_residue(
             res,
@@ -926,279 +1193,3 @@ def build_atom(res, at_id, res_lib, new_res_id):
     else:
         coords = build_coords_from_lib(res, res_lib, new_res_id, at_id)
     add_new_atom_to_residue(res, at_id, coords)
-
-def add_new_atom_to_residue(res, at_id, coords):
-    """Adds a new atom a residue """
-    res.add(Atom(at_id, coords, 99.0, 1.0, ' ', ' ' + at_id + ' ', 0, at_id[0:1]))
-
-def build_coords_from_lib(res, res_lib, new_res, at_id):
-    """
-     Calculates cartesian coordinates for a new atom from internal coordinates definition.
-    """
-    atom_def = res_lib.get_atom_def(new_res, at_id)
-
-    if atom_def is None:
-        sys.exit("#ERROR: Unknown target atom")
-    for at_def in atom_def.link_ats:
-        if at_def not in res:
-            sys.exit(f"Error, required atom {at_def} not available in {residue_id(res)}")
-    return build_coords_from_ats_internal(
-        res[atom_def.link_ats[0]],
-        res[atom_def.link_ats[1]],
-        res[atom_def.link_ats[2]],
-        atom_def.geom
-    )
-
-def build_coords_CB(res): # Get CB from Backbone
-    """ Calculates cartesian coordinates for a new CB atom from backbone.
-    """
-    return build_coords_from_ats_internal(res['CA'], res['N'], res['C'], CBINTERNALS)
-
-def build_coords_O(res): # Get O from Backbone
-    """ Calculates cartesian coordinates for a new O atom from backbone.
-    """
-    return build_coords_from_ats_internal(res['C'], res['CA'], res['N'], OINTERNALS)
-
-def build_coords_trans_CA(at0, at1, at2):
-    """ Builds CA with trans peptide bond conf"""
-    return build_coords_from_ats_internal(at0, at1, at2, [CCDIS, SP2ANGLE, PEPDIH])
-
-
-def build_coords_3xSP3(dst, at0, at1, at2):
-    """ Generates coordinates for 3 SP3 atoms
-        **dst** bond distance
-        **at0**  central atom
-        **at1** atom to define bond angles
-        **at2** atom to define dihedrals
-    """
-    #TODO try a pure geometrical generation to avoid at2
-    crs = []
-    for i in range(0, 3):
-        crs.append(build_coords_from_ats_internal(at0, at1, at2, [dst, SP3ANGLE, SP3DIHS[i]]))
-    return crs
-
-def build_coords_2xSP3(dst, at0, at1, at2):
-    """
-        Generates coordinates for two SP3 bonds given the other two
-        **dst** Bond distance
-        **at0** Central atom
-        **at1** atom with existing bond
-        **at2** atom with existing bond
-    """
-    cr0 = Vector(at0.get_coord())
-    cr1 = Vector(at1.get_coord())
-    cr2 = Vector(at2.get_coord())
-    axe = cr0 - cr1
-    mat = rotaxis(120.*pi/180., axe)
-    bond = cr2 - cr0
-    bond.normalize()
-    bond._ar = bond._ar * dst
-    cr3 = cr0 + bond.left_multiply(mat)
-    cr4 = cr0 + bond.left_multiply(mat).left_multiply(mat)
-    crs = []
-    crs.append(cr3._ar)
-    crs.append(cr4._ar)
-    return crs
-
-def build_coords_1xSP3(dst, at0, at1, at2, at3):
-    """
-      Calculated cartesian coordinates to complete a SP3 group
-    """
-    cr0 = at0.get_coord()
-    cr1 = at1.get_coord()
-    cr2 = at2.get_coord()
-    cr3 = at3.get_coord()
-    avg = cr1 + cr2
-    avg = avg + cr3
-    avg /= 3.
-    avec = cr0 - avg
-    avec /= norm(avec)
-    avec *= dst
-    return cr0 + avec
-
-def build_coords_SP2(dst, at0, at1, at2):
-    """
-      Calculates cartesian coordinaties to complete a SP2 group
-    """
-    cr0 = at0.get_coord()
-    cr1 = at1.get_coord()
-    cr2 = at2.get_coord()
-
-    avg = cr1 + cr2
-    avg /= 2.
-    avec = cr0 - avg
-    avec /= norm(avec)
-    avec *= dst
-    return cr0 + avec
-
-def build_coords_from_ats_internal(at1, at2, at3, geom):
-    """ Gets coordinates from internal geometry using ats as parameters for easier usage"""
-    return build_coords_from_internal(
-        at1.get_coord(),
-        at2.get_coord(),
-        at3.get_coord(),
-        geom)
-
-def build_coords_from_internal(at1c, at2c, at3c, geom):
-    """
-     Calculates cartesian coordinates for a new atom from internal coordinates.
-    """
-    dst = geom[0]
-    ang = geom[1] * pi / 180.
-    tor = geom[2] * pi / 180.0
-
-    vec1 = at1c - at2c
-    vec2 = at1c - at3c
-
-    vcr12 = np.cross(vec1, vec2)
-    vcr112 = np.cross(vec1, vcr12)
-
-    vcr12 /= norm(vcr12)
-    vcr112 /= norm(vcr112)
-
-    vcr12 *= -sin(tor)
-    vcr112 *= cos(tor)
-
-    vec3 = vcr12 + vcr112
-    vec3 /= norm(vec3)
-    vec3 *= dst * sin(ang)
-
-    vec1 /= norm(vec1)
-    vec1 *= dst * cos(ang)
-
-    return at1c + vec3 - vec1
-
-# Metrics =============================================================
-def calc_at_dist(at1, at2):
-    """
-    Calculates distance between two atoms
-    """
-    return np.sqrt(calc_at_sq_dist(at1, at2))
-
-def calc_at_sq_dist(at1, at2):
-    """
-    Calculates distance between two atoms
-    """
-    vec = at1.coord - at2.coord
-    return np.dot(vec, vec)
-
-def calc_bond_angle(at1, at2, at3):
-    """
-    Calculates angle among three atoms at1-at2-at3
-    """
-    vec1 = at1.coord - at2.coord
-    vec2 = at3.coord - at2.coord
-    return _calc_v_angle(vec1, vec2)
-
-def calc_bond_dihedral(at1, at2, at3, at4):
-    """
-    Calculates dihedral angles at1-at2-at3-at4
-    """
-    abv = at1.coord - at2.coord
-    cbv = at3.coord - at2.coord
-    dbv = at4.coord - at3.coord
-    uvec = np.cross(abv, cbv)
-    vvec = np.cross(dbv, cbv)
-    wvec = np.cross(uvec, vvec)
-    angle_uv = _calc_v_angle(uvec, vvec)
-    if norm(wvec) == 0.:
-        angle_cbw = 0.
-    else:
-        angle_cbw = _calc_v_angle(cbv, wvec)
-    try:
-        if angle_cbw > 0.001:
-            angle_uv = -angle_uv
-    except ZeroDivisionError:
-        pass
-    return angle_uv
-
-def get_all_at2at_distances(
-        struc,
-        at_ids='all',
-        d_cutoff=0.,
-        join_models=False
-        ):
-    """ Gets a list of all at-at distances below a cutoff, at ids can be limited """
-    if not isinstance(at_ids, list):
-        at_ids = at_ids.split(',')
-
-    at_list = [atm for atm in struc.get_atoms() if atm.id in at_ids or at_ids == ['all']]
-
-    dist_mat = []
-    d_cut2 = d_cutoff**2
-    for i in range(len(at_list)-1):
-        for j in range(i + 1, len(at_list)):
-            if join_models or same_model(at_list[i].get_parent(), at_list[j].get_parent()):
-                dist2 = calc_at_sq_dist(at_list[i], at_list[j])
-                if d_cutoff > 0. and dist2 < d_cut2:
-                    dist_mat.append([at_list[i], at_list[j], dist2])
-    return dist_mat
-
-def get_all_r2r_distances(struc, r_ids='all', d_cutoff=0., join_models=False):
-    """ Gets all distances from the first atoms of each residue """
-    if not isinstance(r_ids, list):
-        r_ids = r_ids.split(',')
-    dist_mat = []
-    check_ats = {}
-    for mod in struc.get_models():
-        check_ats[mod.id] = []
-        for res in struc[mod.id].get_residues():
-            if res.resname in r_ids or r_ids == ['all']:
-                if join_models:
-                    check_ats[0].append(res.child_list[0])
-                else:
-                    check_ats[mod.id].append(res.child_list[0])
-    for mod in struc.get_models():
-        if check_ats[mod.id]:
-            dist_mat += _get_contacts(check_ats[mod.id], d_cutoff)
-    return dist_mat
-
-def _get_contacts(ats_list, d_cutoff):
-    contact_list = []
-    nbsearch = NeighborSearch(ats_list)
-    for at1, at2 in nbsearch.search_all(d_cutoff):
-        contact_list.append((at1.get_parent(), at2.get_parent(), at1 - at2))
-    return contact_list
-
-def calc_RMSd_ats(ats1, ats2):
-    """ Calcs RMSd between two atom lists, no fit"""
-    if len(ats1) != len(ats2):
-        print(
-            "Warning: atom lists of different length when calculating RMSd ({}, {})".format(
-                len(ats1), len(ats2)
-            )
-        )
-    rmsd = 0
-    i = 0
-    while i < len(ats1) and i < len(ats2):
-        dist2 = calc_at_sq_dist(ats1[i], ats2[i])
-        rmsd = rmsd + dist2
-        i = i + 1
-
-    return sqrt(rmsd / i)
-
-def calc_RMSd_all_ats(st1, st2):
-    """ Calcs RMSd all atoms, no fit """
-    return calc_RMSd_ats(
-        [atm for atm in st1.get_atoms()],
-        [atm for atm in st2.get_atoms()]
-    )
-
-def get_all_rr_distances(res1, res2, with_h=False):
-    """ Gets all atom-atom distances between residues """
-    dist_mat = []
-    for at1 in res1.get_atoms():
-        if at1.element == 'H' and not with_h:
-            continue
-        for at2 in res2.get_atoms():
-            if at2.element == 'H' and not with_h:
-                continue
-            dist2 = calc_at_sq_dist(at1, at2)
-            dist_mat.append((at1, at2, dist2))
-    return dist_mat
-#===============================================================================
-def _calc_v_angle(vec1, vec2, deg=True):
-    angle = arccos(clip(dot(vec1, vec2)/norm(vec1)/norm(vec2), -1., 1.))
-    if deg:
-        angle *= 180./pi
-    return angle

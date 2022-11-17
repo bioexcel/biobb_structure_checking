@@ -44,7 +44,7 @@ class StructureManager:
             input_pdb_path: str,
             data_library_path: str,
             res_library_path: str,
-            pdb_server: str = 'ftp://ftp.wwpdb.org',
+            pdb_server: str,
             cache_dir: str = 'tmpPDB',
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
@@ -80,9 +80,9 @@ class StructureManager:
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)
         self.st_data = StructureData(self.st, input_format, headers, biounit)
-        
+
         self.modified = False
-        
+
         # Calc internal data
         self.update_internals(cif_warn=True)
 
@@ -91,6 +91,7 @@ class StructureManager:
         biounit = False
         if "pdb:" in input_pdb_path:
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
+            print(pdb_server)
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')
@@ -148,7 +149,7 @@ class StructureManager:
         """ Update internal data when structure is modified """
         # Add .index field for correlative, unique numbering of residues
         self.st_data.residue_renumbering(self.data_library)
-        
+
         # Atom renumbering for mmCIF, PDB uses atom number in file
         self.st_data.atom_renumbering()
         self.chains_data.set_chain_ids(self.st_data.biounit)
@@ -592,7 +593,7 @@ class StructureManager:
         Args:
             prefix: Text prefix to prepend to printed data
         """
-        
+
         print(self.models_data.stats(prefix))
         print(self.chains_data.stats(prefix))
 
@@ -667,7 +668,7 @@ class StructureManager:
             cutoff = self.data_library.distances['R_R_CUTOFF']['NA']
         else:
             cutoff = self.data_library.distances['R_R_CUTOFF']['PROT']
-        
+
         return mu.get_all_r2r_distances(
             self.st,
             res_group,
@@ -693,7 +694,7 @@ class StructureManager:
 
     def superimpose_models(self):
         self.modified = self.models_data.superimpose_models()
-    
+
     def build_complex(self):
         if self.models_data.models_type['type'] != mu.BUNIT:
             print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
@@ -967,9 +968,9 @@ class StructureManager:
                 else:
                     continue
 
-            print(f"Fixing {mu.residue_id(self.st[mod_id][ch_id][gap_start])}" 
+            print(f"Fixing {mu.residue_id(self.st[mod_id][ch_id][gap_start])}"
                   f" - {mu.residue_id(self.st[mod_id][ch_id][gap_end])}")
-            
+
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
             moving_ats = []
@@ -1268,11 +1269,11 @@ class StructureManager:
         #TODO Not tested, to be used on changes in the NTerm residue
         extra_NTerm = 0
         mutated_res = self.run_modeller(
-            ch_to_fix, 
-            brk_list, 
-            modeller_key, 
-            0, 
-            extra_NTerm, 
+            ch_to_fix,
+            brk_list,
+            modeller_key,
+            0,
+            extra_NTerm,
             mutated_sequence_data
         )
 
