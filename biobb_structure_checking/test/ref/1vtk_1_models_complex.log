@@ -29,4 +29,18 @@ Running models. Options: --select all --build_complex
 Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
 Selecting model num. all
 1 chains added to new complex
-Structure not modified, not saving. Override with --force_save
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  734
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  108
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  104
+Final Num. atoms:  4982
+Small mol ligands found
+ADP A400
+TMP A500
+ADP B400
+TMP B500
+Structure saved on 1vtk_models_complex.pdb
