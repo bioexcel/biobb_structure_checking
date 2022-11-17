@@ -91,7 +91,6 @@ class StructureManager:
         biounit = False
         if "pdb:" in input_pdb_path:
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
-            print(pdb_server)
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if '.' in input_pdb_path:
                 [pdbid, biounit] = input_pdb_path.split('.')

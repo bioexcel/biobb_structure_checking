@@ -37,7 +37,7 @@ class StructureChecking():
             args = {}
 
         self.args = cts.set_defaults(base_dir_path, args)
-        print(self.args)
+
         self.summary = {}
 
         if self.args['debug']:
