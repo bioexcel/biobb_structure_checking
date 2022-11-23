@@ -170,6 +170,12 @@ class SequenceData():
             strucm (StructureManager) : Object containing the loaded structure
         """
         # PDB extrated sequences
+        if strucm.st_data.non_canonical_residue_list:
+            strucm.revert_can_resnames(True)
+            can_reverted = True
+        else:
+            can_reverted = False
+        
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -225,6 +231,8 @@ class SequenceData():
                         'wrong_order': wrong_order,
                         'type': strucm.chains_data.chain_ids[chn.id]
                     }
+            if can_reverted:
+                strucm.revert_can_resnames(False)
 
     def match_sequence_numbering(self):
         """ SequenceData.match_sequence_numbering

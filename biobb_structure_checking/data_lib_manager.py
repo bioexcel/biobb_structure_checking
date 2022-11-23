@@ -130,16 +130,25 @@ class DataLibManager:
                 * **apolar** - Involving any apolar atom
                 * **polar_donor** - Involving two Hbond donors
                 * **polar_acceptor** - Involving two HBond acceptors
+                * **polar** - Involving two HBond acceptors or donors
                 * **positive** - Involving two positive atoms
                 * **negative** - Involving two negative atoms
         """
-
+        if 'polar' in contact_types:
+            contact_types += ['polar_donor','polar_acceptor']
+        
         atom_lists = {
             cls_type: self.get_atom_feature_list(cls_type + '_atoms')
             for cls_type in contact_types
             if cls_type != 'severe'
         }
-
+        if 'polar' in contact_types:
+            for c_type in ('polar_donor', 'polar_acceptor'):
+                for at_list in atom_lists[c_type]:
+                    if not at_list in atom_lists['polar']:
+                        atom_lists['polar'][at_list] = atom_lists[c_type][at_list].copy()
+                    else:
+                        atom_lists['polar'][at_list] += atom_lists[c_type][at_list]
         return atom_lists
 
     def get_amide_data(self):

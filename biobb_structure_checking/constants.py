@@ -279,7 +279,7 @@ DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms'
 DIALOGS.add_option('rem_hydrogen', '--remove', 'remove', 'Remove Hydrogen atoms')
 
 DIALOGS.add_entry('amide', 'Checks and optionally fixes wrong amide contacts')
-DIALOGS.add_option('amide', '--fix', 'fix', 'Fix Residues (All | None | List)')
+DIALOGS.add_option('amide', '--fix', 'fix', 'Fix Residues (All | None | auto | List)')
 DIALOGS.add_option('amide', '--no_recheck', 'no_recheck',\
     'Re-check after modification', 'bool')
 
