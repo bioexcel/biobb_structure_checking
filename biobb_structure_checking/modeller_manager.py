@@ -14,7 +14,7 @@ from Bio.SeqRecord import SeqRecord
 
 try:
     from modeller import Environ, log
-    from modeller.automodel import automodel, assess
+    from modeller.automodel import AutoModel, assess
 except ImportError:
     sys.exit("Error importing Modeller package")
 
@@ -117,7 +117,7 @@ class ModellerManager():
 
 
     def _automodel_run(self, alin_file, knowns):
-        amdl = automodel(
+        amdl = AutoModel(
             self.env,
             alnfile=alin_file,
             knowns=knowns,
