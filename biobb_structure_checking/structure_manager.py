@@ -291,7 +291,7 @@ class StructureManager:
             'res_to_fix': [res for res in chiral_bck_list if not mu.check_chiral_ca(res)]
         }
 
-    def check_r_list_clashes(self, residue_list: Iterable[Residue], contact_types: Iterable[str]) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
+    def check_r_list_clashes(self, residue_list: Iterable[Residue], contact_types: Iterable[str], get_all_contacts=False) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
         """ Checks clashes originated by a list of residues"""
         return mu.check_r_list_clashes(
             residue_list,
@@ -299,7 +299,8 @@ class StructureManager:
             self.data_library.distances['CLASH_DIST'],
             self.data_library.get_atom_lists(contact_types),
             not self.models_data.has_superimp_models(),
-            severe='severe' in contact_types
+            severe='severe' in contact_types,
+            get_all_contacts=get_all_contacts
         )
 
     def check_missing_atoms(self) -> List[Tuple[Residue, Dict[str, List[str]]]]:
@@ -485,7 +486,7 @@ class StructureManager:
 
             else:
                 if res2 != self.st_data.next_residue[res1]:
-                    wrong_link_list.append([res1, self.next_residue[res1], res2])
+                    wrong_link_list.append([res1, self.st_data.next_residue[res1], res2])
         return {
             'bck_breaks_list': bck_breaks_list,
             'wrong_link_list': wrong_link_list,
@@ -526,7 +527,7 @@ class StructureManager:
 
         c_list = self.check_r_list_clashes(
             amide_list,
-            mu.AMIDE_CONTACT_TYPES
+            mu.AMIDE_CONTACT_TYPES,
         )
         amide_res_to_fix = []
         amide_cont_list = []
@@ -698,7 +699,10 @@ class StructureManager:
         if self.models_data.models_type['type'] != mu.BUNIT:
             print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
             return 0
-        return self.models_data.build_complex()
+        status = self.models_data.build_complex()
+        self.update_internals()
+        self.modified = True
+        return status
 
     def select_chains(self, select_chains: str) -> None:
         """
@@ -1289,6 +1293,101 @@ class StructureManager:
             res[amide_res[res_type][0]],
             res[amide_res[res_type][1]]
         )
+        
+    def _amide_score(self, matr):
+        score = 0.
+        for amide_res in matr:
+            for atm in matr[amide_res]['cnts']:
+                for atm_cnt in matr[amide_res]['cnts'][atm]:
+                    if matr[amide_res]['mod'] and atm.element != atm_cnt.element:
+                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
+                    if not matr[amide_res]['mod'] and atm.element == atm_cnt.element:
+                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
+        return score
+        
+    def _amide_cluster(self, to_fix):
+        cluster = {}
+
+        for res in to_fix:
+            cluster[res] = set()
+            cluster[res].add(res)
+        
+        for r_pair in self.rr_dist:
+            res1, res2 = r_pair[0:2]
+            if res1 in to_fix and res2 in to_fix:
+                for res in cluster[res2]:
+                    cluster[res1].add(res)
+                cluster[res2] = cluster[res1].copy()
+
+        for res in to_fix:
+            if res in cluster:
+                for res2 in cluster[res]:
+                    if res2 == res:
+                        continue
+                    if res2 in cluster:
+                        del cluster[res2]
+        return cluster
+        
+    def amide_auto_fix(self, to_fix):
+        print("Fixing automatically")
+        amide_res = self.data_library.get_amide_data()[0]
+        c_list = self.check_r_list_clashes(
+            to_fix['res_to_fix'],
+            ['polar'],
+            get_all_contacts=True
+        )
+        matr = {}
+        for res_pair in c_list['polar']:
+            for cnt in c_list['polar'][res_pair]:
+                at1, at2, dist2 = cnt
+                res1 = at1.get_parent()
+                res2 = at2.get_parent()
+                if res1.get_resname() in amide_res and at1.id in amide_res[res1.get_resname()]:
+                    if res1 not in matr:
+                        matr[res1] = {'mod':False,'cnts':{}}
+                    if at1 not in matr[res1]:
+                        matr[res1]['cnts'][at1] = {}
+                    matr[res1]['cnts'][at1][at2] = dist2
+                if res2.get_resname() in amide_res and at2.id in amide_res[res2.get_resname()]:
+                    if res2 not in matr:
+                        matr[res2] = {'mod':False,'cnts':{}}
+                    if at2 not in matr[res2]:
+                        matr[res2]['cnts'][at2] = {}
+                    matr[res2]['cnts'][at2][at1] = dist2
+        print(f"Initial score: {self._amide_score(matr):.3f}")
+        print("Clustering amide residues")
+        clusters = self._amide_cluster(to_fix['res_to_fix'])
+        print(f"{len(clusters)} cluster(s) found, exploring...")
+        to_fix = []
+        nclus = 0
+        for cl_res in clusters:
+            nclus += 1
+            amide_list = []
+            mod_vec = max_vec = ''
+            for amide_res in clusters[cl_res]:
+                amide_list.append(amide_res)
+                max_vec += '1'
+            print(f"Cluster {nclus}:{', '.join([mu.residue_id(r) for r in sorted(amide_list)])}")
+            conf = 0
+            min_score = self._amide_score(matr)
+            opt_conf = 0
+            opt_vec = '0' * len(max_vec)
+            while conf <= int(max_vec, 2):
+                mod_vec = f"{'0' * len(max_vec)}{bin(conf)[2:]}"[-len(max_vec):]
+                for pos, res in enumerate(amide_list):
+                    matr[res]['mod'] = mod_vec[pos] == '1'
+                score = self._amide_score(matr)
+                if score < min_score:
+                    opt_conf = conf
+                    min_score = score
+                    opt_vec = mod_vec
+                conf += 1
+            for pos, res in enumerate(amide_list):
+                if opt_vec[pos] == '1':
+                    to_fix.append(res)
+            print(f"New score: {min_score:.3f}, amides to fix: {', '.join([mu.residue_id(r) for r in to_fix])}")
+        
+        return to_fix
 
     def fix_chiral_chains(self, res: Residue):
         """ Fix sidechains with chiral errors"""

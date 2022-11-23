@@ -34,6 +34,9 @@ class ParamInput():
         """Add 'Yes/No' option to dialog"""
         self.add_option_list('yes', ['Yes'])
         self.add_option_list('no', ['No'])
+    def add_option_auto(self):
+        """Add 'auto' option to dialog"""
+        self.add_option_list('auto',['Auto'])
 
     def add_option_list(self, label, opt_list, case=False, opt_type='list', \
             multiple=False, list2=None):
@@ -155,6 +158,7 @@ class ParamInput():
                 return opt_value
             # Check input
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
+            print(input_ok, iopt, opt_value)
             if not input_ok:
                 print(f'Input not valid ({opt_value})')
                 self.options.append({'label':'error'})

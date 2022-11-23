@@ -49,6 +49,7 @@ def _fix(strcheck, opts, fix_data=None):
         input_line = ParamInput('Fix amide atoms', strcheck.args['non_interactive'])
         input_line.add_option_all()
         input_line.add_option_none()
+        input_line.add_option_auto()
         input_line.add_option_list(
             'resnum',
             sorted(mu.prep_rnums_list(fix_data['res_to_fix'])),
@@ -65,11 +66,15 @@ def _fix(strcheck, opts, fix_data=None):
             if strcheck.args['verbose']:
                 print(cts.MSGS['DO_NOTHING'])
             return False
-        to_fix = [
-            res
-            for res in fix_data['res_to_fix']
-            if mu.residue_num(res) in amide_fix.split(',') or input_option == 'all'
-        ]
+
+        if input_option == 'auto':
+            to_fix = strcheck.strucm.amide_auto_fix(fix_data)   
+        else:
+            to_fix = [
+                res
+                for res in fix_data['res_to_fix']
+                if mu.residue_num(res) in amide_fix.split(',') or input_option == 'all'
+            ]
         fix_num = 0
         done = set()
         for res in to_fix:
