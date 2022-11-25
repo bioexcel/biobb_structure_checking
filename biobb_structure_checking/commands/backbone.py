@@ -1,5 +1,6 @@
 """ Module supporting backbone command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -115,7 +116,7 @@ def _fix(strcheck, opts, fix_data=None):
             fix_data = _check(strcheck)
         else:
             if not strcheck.args['quiet']:
-                print(cts.MSGS['BACKBONE_RECHECK'])
+                logging.info(cts.MSGS['BACKBONE_RECHECK'])
             fix_data = _check(strcheck)
             fix_done = not fix_data['bck_breaks_list']
 
@@ -129,11 +130,11 @@ def _fix(strcheck, opts, fix_data=None):
     strcheck.summary['backbone']['added_caps'] = [mu.residue_id(r) for r in fixed_caps]
 
     if fixed_caps:
-        print('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
+        logging.info(f"Added caps: {', '.join(map(mu.residue_num, fixed_caps))}")
         strcheck.strucm.modified = True
         fix_data = _check(strcheck)
     else:
-        print('No caps added')
+        logging.info('No caps added')
 
     # Add missing atoms
     fixed_res = []
@@ -152,7 +153,7 @@ def _fix(strcheck, opts, fix_data=None):
     res_to_check = fixed_res + fixed_caps + fixed_main_res
     if res_to_check and not opts['no_check_clashes']:
         if not strcheck.args['quiet']:
-            print(cts.MSGS['CHECKING_CLASHES'])
+            logging.info(cts.MSGS['CHECKING_CLASHES'])
         strcheck.summary['backbone']['clashes'] = strcheck._check_report_clashes(res_to_check)
 
     return False
@@ -179,8 +180,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
     strcheck.summary['backbone']['breaks']['option_selected'] = fix_main_bck
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return []
 
     # Checking for canonical sequence
@@ -193,7 +193,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             )
             strcheck.args['fasta_seq_path'] = input_line.run(strcheck.args['fasta_seq_path'])
             if not strcheck.args['fasta_seq_path']:
-                print(cts.MSGS['FASTA_MISSING'])
+                logging.warning(cts.MSGS['FASTA_MISSING'])
 
             read_ok = strcheck.strucm.sequence_data.load_sequence_from_fasta(
                 strcheck.args['fasta_seq_path']
@@ -201,7 +201,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             if not read_ok:
                 strcheck.args['fasta_seq_path'] = None
             if strcheck.args['non_interactive'] and not read_ok:
-                print(cts.MSGS['FASTA_MISSING'])
+                logging.error(cts.MSGS['FASTA_MISSING'])
                 return []
         strcheck.strucm.sequence_data.read_canonical_seqs(strcheck.strucm, False)
         strcheck.strucm.sequence_data.match_sequence_numbering()
@@ -215,7 +215,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
     return strcheck.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
 
 def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
-    print("Capping terminal ends")
+    logging.info("Capping terminal ends")
     term_res = strcheck.strucm.get_term_res()
     term_rnums = [mu.residue_num(p[1]) for p in term_res]
     brk_res = set()
@@ -228,16 +228,14 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
         if r[1] not in brk_res:
             true_term.append(r)
 
-    print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
+    logging.info(
+        f"True terminal residues: "
+        f"{','.join([mu.residue_num(r[1]) for r in true_term])}"
+    )
     if bck_breaks_list:
-        print(
-            "Terminal residues from backbone breaks: ",
-            ','.join(
-                [
-                    mu.residue_num(r0) + '-' + mu.residue_num(r1)
-                    for r0, r1 in bck_breaks_list
-                ]
-            )
+        logging.info(
+            "Terminal residues from backbone breaks: " +\
+            f"{','.join([mu.residue_num(r0) + '-' + mu.residue_num(r1) for r0, r1 in bck_breaks_list])}"
         )
 
     input_line = ParamInput('Cap residues', strcheck.args['non_interactive'])
@@ -258,8 +256,7 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
     strcheck.summary['backbone']['add_caps'] = add_caps
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return []
 
     if input_option == 'terms':
@@ -276,7 +273,7 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
     return strcheck.strucm.add_main_chain_caps(to_fix)
 
 def _backbone_fix_missing(strcheck, fix_back, fix_at_list):
-    print("Fixing missing backbone atoms")
+    logging.info("Fixing missing backbone atoms")
     fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
     input_line = ParamInput('Fix bck missing', strcheck.args['non_interactive'])
     input_line.add_option_all()
@@ -293,8 +290,7 @@ def _backbone_fix_missing(strcheck, fix_back, fix_at_list):
     strcheck.summary['backbone']['missing_atoms']['selected'] = fix_back
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return []
 
     to_fix = [
@@ -304,7 +300,7 @@ def _backbone_fix_missing(strcheck, fix_back, fix_at_list):
     ]
 
     if not strcheck.args['quiet']:
-        print(cts.MSGS['ADDING_BCK_ATOMS'])
+        logging.info(cts.MSGS['ADDING_BCK_ATOMS'])
 
     fix_num = 0
     strcheck.summary['backbone']['missing_atoms']['fixed'] = []
@@ -314,13 +310,13 @@ def _backbone_fix_missing(strcheck, fix_back, fix_at_list):
             if strcheck.strucm.fix_backbone_O_atoms(r_at):
                 fix_num += 1
         except NotEnoughAtomsError as err:
-            print(err.message)
+            logging.error(err.message)
 
         strcheck.summary['backbone']['missing_atoms']['fixed'].append(
             mu.residue_id(r_at[0])
         )
         fixed_res.append(r_at[0])
 
-    print(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
+    logging.info(cts.MSGS['BCK_ATOMS_FIXED'].format(fix_num))
 
     return fixed_res

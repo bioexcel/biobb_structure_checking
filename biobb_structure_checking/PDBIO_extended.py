@@ -1,6 +1,6 @@
 """ Extension for PDBIO to include additional output formats"""
 #import sys
-
+import logging
 from Bio.PDB.PDBIO import PDBIO
 from Bio.Data.IUPACData import atom_weights
 
@@ -91,7 +91,7 @@ class PDBIO_extended(PDBIO):
                 element = "  "
                 line_format = _ATOM_FORMAT_STRING_CMIP
             else:
-                print("Unknown output format, writing standard PDB")
+                logging.warning("Unknown output format, writing standard PDB")
                 line_format = _ATOM_FORMAT_STRING
         else:
             line_format = _ATOM_FORMAT_STRING

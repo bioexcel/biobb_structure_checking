@@ -1,5 +1,5 @@
 """ Module supporting getss command"""
-
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -53,8 +53,7 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], getss_mark
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     cys_to_mark = []

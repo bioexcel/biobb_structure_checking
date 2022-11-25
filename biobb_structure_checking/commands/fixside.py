@@ -1,5 +1,6 @@
 """ Module supporting fixside command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -60,8 +61,7 @@ def _fix(strcheck, opts, fix_data=None):
     strcheck.summary['fixside']['fix'] = fix_side
 
     if input_option_fix == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     if input_option_fix == 'all':
@@ -81,7 +81,7 @@ def _fix(strcheck, opts, fix_data=None):
         ]
 
     if not strcheck.args['quiet']:
-        print(cts.MSGS['FIXING_SIDE_CHAINS'])
+        logging.info(cts.MSGS['FIXING_SIDE_CHAINS'])
 
     fix_num = 0
     rem_num = 0
@@ -108,11 +108,11 @@ def _fix(strcheck, opts, fix_data=None):
         strcheck.strucm.rebuild_side_chains(to_add)
         fixed_res = [r_at[0] for r_at in to_add]
 
-    print(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
+    logging.info(cts.MSGS['SIDE_CHAIN_FIXED'].format(fix_num))
     strcheck.strucm.st_data.fixed_side = True
     strcheck.strucm.modified = True
     # Checking new clashes
     if not opts['no_check_clashes']:
-        print(cts.MSGS['CHECKING_CLASHES'])
+        logging.info(cts.MSGS['CHECKING_CLASHES'])
         strcheck.summary['fixside_clashes'] = strcheck._check_report_clashes(fixed_res)
     return False

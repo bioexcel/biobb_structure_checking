@@ -4,6 +4,7 @@
 
 import re
 import sys
+import logging
 
 class ResidueLib():
     """ Class to manage a residue library taken from AMBER prep files.
@@ -13,7 +14,7 @@ class ResidueLib():
             lib_file_h = open(library_path, "r")
 
         except IOError:
-            print("ERROR: unable to open residue library" + library_path, file=sys.stderr)
+            logging.error("Unable to open residue library" + library_path)
             sys.exit(1)
 
         line = lib_file_h.readline()

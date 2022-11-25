@@ -2,6 +2,7 @@
   Module to manage command line for simple parameter input
 """
 import argparse
+import logging
 
 def _get_input(value, prompt_text, default=None):
     """ Get input data """
@@ -151,7 +152,7 @@ class ParamInput():
         # Non interactive enviroment, check available input only
         if self.non_interactive:
             if opt_value is None:
-                print(
+                logging.warning(
                     f" WARNING: No selection provided and non_interactive,"
                     f" using '{self.default_none}'"
                 )
@@ -162,7 +163,7 @@ class ParamInput():
             # Check input
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print(f'Input not valid ({opt_value})')
+                logging.error(f'Input not valid ({opt_value})')
                 self.options.append({'label':'error'})
             return [self.options[iopt]['label'], opt_value]
 
@@ -177,7 +178,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print(f'Input not valid or out of range ({opt_value})')
+                logging.error(f'Input not valid or out of range ({opt_value})')
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 

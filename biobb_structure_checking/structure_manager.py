@@ -6,7 +6,7 @@ import warnings
 import os
 from os.path import join as opj
 import sys
-#import re
+import logging
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 from Bio.PDB.Residue import Residue
@@ -116,7 +116,7 @@ class StructureManager:
 
         if '.pdb' in real_pdb_path: # accepts .pdbqt
             if '.pdbqt' in real_pdb_path:
-                print("Warning: PDBQT file will be loaded as PDB")
+                logging.warning("PDBQT file will be loaded as PDB")
             parser = PDBParser(PERMISSIVE=1, is_pqr=False)
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path:
@@ -167,7 +167,7 @@ class StructureManager:
     def update_atom_charges(self, ff):
         """ Update atom charges and types from data library """
 
-        print("Updating partial charges and atom types")
+        logging.info("Updating partial charges and atom types")
 
         self.st_data.total_charge = 0.
 
@@ -189,7 +189,7 @@ class StructureManager:
 
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
             if rcode not in self.res_library.residues:
-                print(f"Warning: {rcode} not found in residue library atom charges set to 0.")
+                logging.warning(f"{rcode} not found in residue library atom charges set to 0.")
                 for atm in res.get_atoms():
                     atm.pqr_charge = 0.
                     atm.radius = 0.
@@ -215,7 +215,7 @@ class StructureManager:
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print(f"Warning: OXT atom missing in {mu.residue_id(res)}. Run backbone --fix_atoms first")
+                    logging.warning(f"OXT atom missing in {mu.residue_id(res)}. Run backbone --fix_atoms first")
 
         print(f"Total assigned charge: {self.st_data.total_charge:10.2f}")
 
@@ -279,11 +279,11 @@ class StructureManager:
                         chiral_bck_list.append(res)
 
         if not prot_chains:
-            print("No protein chains detected, skipping")
+            logging.warning("No protein chains detected, skipping")
             return {}
 
         if not chiral_bck_list:
-            print("No residues with chiral CA found, skipping")
+            logging.warning("No residues with chiral CA found, skipping")
             return {}
 
         return {
@@ -373,7 +373,7 @@ class StructureManager:
             ch_type = self.chains_data.get_chain_type(res)
             rcode = res.get_resname().replace(' ', '')
             if rcode not in valid_codes[ch_type]:
-                print(f"Warning: unknown residue {rcode}")
+                logging.warning(f"Unknown residue {rcode}")
                 continue
             if ch_type == mu.PROTEIN:
                 extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][can_rcode])
@@ -642,7 +642,7 @@ class StructureManager:
 
         if keep_resnames:
             self.revert_can_resnames(canonical=True)
-            print("Warning: reverting residue names to canonical on output")
+            logging.warning("Reverting to canonical residue names on output")
 
         if mod_id is None:
             pdbio.set_structure(self.st)
@@ -699,7 +699,7 @@ class StructureManager:
     def build_complex(self):
         ''' Build a complex from biounit models'''
         if self.models_data.models_type['type'] != mu.BUNIT:
-            print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
+            logging.error(f"No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
             return 0
         result = self.models_data.build_complex()
         self.update_internals()
@@ -734,7 +734,7 @@ class StructureManager:
                 if to_fix['select'] in atm.child_dict.keys():
                     newat = atm.child_dict[to_fix['select']]
                 else:
-                    print(f"Warning: unknown alternative {to_fix['select']} in {mu.atom_id(atm)}")
+                    logging.warning(f"Unknown alternative {to_fix['select']} in {mu.atom_id(atm)}")
                     continue
             newat.disordered_flag = 0
             newat.altloc = ' '
@@ -771,7 +771,7 @@ class StructureManager:
 
     def _fix_side_chain_protein(self, r_at):
         for at_id in r_at[1]:
-            print(f"  Adding new atom {at_id}")
+            logging.log(15, f"  Adding new atom {at_id}")
             if at_id == 'CB':
                 coords = mu.build_coords_CB(r_at[0])
             else:
@@ -790,12 +790,12 @@ class StructureManager:
                 ('N9' in r_at[1] or 'C8' in r_at[1]) or\
             r_at[0].get_resname() in ('C', 'DC', 'DT', 'U') and\
                 ('N1' in r_at[1] or 'C6' in r_at[1]):
-            print(f"Not enough atoms left on {mu.residue_id(r_at[0])} "
+            logging.warning(f"Not enough atoms left on {mu.residue_id(r_at[0])} "
                    "to recover base orientation, skipping"
             )
         else:
             for at_id in r_at[1]:
-                print(f"  Adding new atom {at_id}")
+                logging.log(15, f"  Adding new atom {at_id}")
                 coords = mu.build_coords_from_lib(
                     r_at[0],
                     self.res_library,
@@ -867,7 +867,7 @@ class StructureManager:
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
         except ImportError:
-            sys.exit("Error importing modeller")
+            logging.error("Import modeller failed")
 
         mod_mgr = ModellerManager()
         if not sequence_data:
@@ -879,7 +879,7 @@ class StructureManager:
 
         for mod in self.st:
             if self.models_data.has_models():
-                print(f"Processing Model {mod.id + 1}")
+                logging.info(f"Processing Model {mod.id + 1}")
                 self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'), mod.id)
             else:
                 self.save_structure(opj(mod_mgr.tmpdir,'templ.pdb'))
@@ -888,13 +888,13 @@ class StructureManager:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
-                    print(f"Warning: chain {ch_id} has a unusual residue numbering, skipping")
-                print(f"Fixing chain/model {ch_id}/{mod.id}")
+                    logging.warning(f"Chain {ch_id} has a unusual residue numbering, skipping")
+                logging.info(f"Fixing chain/model {ch_id}/{mod.id}")
 
                 try:
                     model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
                 except NoCanSeqError as err:
-                    print(err.message)
+                    logging.error(err.message)
                     continue
 
                 parser = PDBParser(PERMISSIVE=1)
@@ -969,7 +969,7 @@ class StructureManager:
                 else:
                     continue
 
-            print(f"Fixing {mu.residue_id(self.st[mod_id][ch_id][gap_start])}"
+            logging.info(f"Fixing {mu.residue_id(self.st[mod_id][ch_id][gap_start])}"
                   f" - {mu.residue_id(self.st[mod_id][ch_id][gap_end])}")
 
             # Superimposes structures using fragments at both sides of the gap
@@ -1060,12 +1060,12 @@ class StructureManager:
         if len(at_list) == 2 or at_list == ['O']:
             if 'CA' not in res or 'N' not in res or 'C' not in res:
                 raise NotEnoughAtomsError
-            print("  Adding new atom O")
+            logging.log(15, "  Adding new atom O")
             mu.add_new_atom_to_residue(res, 'O', mu.build_coords_O(res))
         if 'OXT' in at_list:
             if 'CA' not in res or 'C' not in res or 'O' not in res:
                 raise NotEnoughAtomsError
-            print("  Adding new atom OXT")
+            logging.log(15, "  Adding new atom OXT")
             mu.add_new_atom_to_residue(
                 res,
                 'OXT',
@@ -1109,7 +1109,7 @@ class StructureManager:
             error_msg = mu.add_hydrogens_backbone(res, prev_residue, next_residue)
 
             if error_msg:
-                print(error_msg, mu.residue_id(res))
+                logging.error(f"{error_msg} {mu.residue_id(res)}")
 
             rcode = res.get_resname()
 
@@ -1126,7 +1126,7 @@ class StructureManager:
                 rcode_can = rcode
 
             if rcode_can not in add_h_rules:
-                print(NotAValidResidueError(rcode).message)
+                logging.error(NotAValidResidueError(rcode).message)
                 continue
 
             if rcode_can == rcode:
@@ -1155,7 +1155,7 @@ class StructureManager:
                 )
 
             if error_msg:
-                print(error_msg, mu.residue_id(res))
+                logging.error(f"{error_msg} {mu.residue_id(res)}")
 
         self.st_data.residue_renumbering(self.data_library)
         if add_charges:
@@ -1257,7 +1257,7 @@ class StructureManager:
                 brk = [start_res, end_res]
                 brk_list.append(brk)
         if not ch_to_fix:
-            print("No protein chains left, exiting")
+            logging.warning("No protein chains left, exiting")
             return []
         mutated_sequence_data = SequenceData()
         mutated_sequence_data.fake_canonical_sequence(self, mutations)
@@ -1293,34 +1293,23 @@ class StructureManager:
         )
         
     def _amide_score(self, matr):
-        # for amide_res in sorted(matr):
-        #     for atm in matr[amide_res]['cnts']:
-        #         for atm_cnt in matr[amide_res]['cnts'][atm]:
-        #             print("M", mu.residue_id(amide_res), mu.atom_id(atm), mu.atom_id(atm_cnt))
-        # sys.exit()    
-
         score = 0.
         for amide_res in sorted(matr):
             for atm in matr[amide_res]['cnts']:
                 for atm_cnt in matr[amide_res]['cnts'][atm]:
-                    #print(mu.atom_id(atm), mu.atom_id(atm_cnt))                    
                     d = atm.element != atm_cnt.element
                     m1 = matr[amide_res]['mod']
                     m2 = atm_cnt.get_parent() in matr and matr[atm_cnt.get_parent()]['mod']
                     # !d !m1 !m2 + !d m1 m2 + d !m1 m2 + d m1 !m2
-                    #print(d,m1,m2)
                     if (not d and not m1 and not m2) or\
                         (not d and m1 and m2) or\
                         (d and not m1 and m2) or\
                         (d and m1 and not m2):
                             score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
-
-                    #print(matr[amide_res]['mod'], mu.atom_id(atm), mu.atom_id(atm_cnt), 1/matr[amide_res]['cnts'][atm][atm_cnt], score)
         return score
         
     def _amide_cluster(self, to_fix):
         cluster = {}
-
         for res in to_fix:
             cluster[res] = set()
             cluster[res].add(res)
@@ -1346,7 +1335,7 @@ class StructureManager:
         return res.get_resname() in amide_res and atm.id in amide_res[res.get_resname()]
 
     def amide_auto_fix(self, to_fix):
-        print("Fixing automatically")
+        logging.info("Fixing amide residues automatically")
         amide_res = self.data_library.get_amide_data()[0]
         c_list = self.check_r_list_clashes(
             to_fix['res_to_fix'],
@@ -1379,10 +1368,10 @@ class StructureManager:
                         matr[res2]['cnts'][at2] = {}
                     matr[res2]['cnts'][at2][at1] = dist2
         
-        print(f"Initial contact score: {self._amide_score(matr):.3f}")
-        print("Clustering amide residues")
+        logging.info(f"Initial contact score: {self._amide_score(matr):.3f}")
+        logging.info("Clustering amide residues")
         clusters = self._amide_cluster(to_fix['res_to_fix'])
-        print(f"{len(clusters)} cluster(s) found, exploring...")
+        logging.info(f"{len(clusters)} cluster(s) found")
         to_fix = []
         nclus = 0
         for cl_res in clusters:
@@ -1396,7 +1385,6 @@ class StructureManager:
             print(f"Cluster {nclus}:{', '.join([mu.residue_id(r) for r in amide_list])}")
             conf = 0
             min_score = self._amide_score(matr)
-            opt_conf = 0
             opt_vec = '0' * len(max_vec)
             while conf <= int(max_vec, 2):
                 mod_vec = f"{'0' * len(max_vec)}{bin(conf)[2:]}"[-len(max_vec):]
@@ -1404,20 +1392,19 @@ class StructureManager:
                     matr[res]['mod'] = mod_vec[pos] == '1'
                 score = self._amide_score(matr)
                 if score < min_score:
-                    opt_conf = conf
                     min_score = score
                     opt_vec = mod_vec
                 conf += 1
-#                print(mod_vec, score, opt_vec, min_score)
             for pos, res in enumerate(amide_list):
                 if opt_vec[pos] == '1':
                     to_fix_part.append(res)
                     to_fix.append(res)
                 matr[res]['mod'] = opt_vec[pos] == '1'
             if len(to_fix_part):
-                print(f"New score: {min_score:.3f}, fixed residue(s): {', '.join([mu.residue_id(r) for r in to_fix_part])}")
+                logging.log(15, f"New score: {min_score:.3f}, fixed residue(s): {', '.join([mu.residue_id(r) for r in to_fix_part])}")
             else:
-                print("Score not improved, skipping")
+                logging.log(15, "Score not improved, skipping")
+        logging.info(f"Final contact score: {min_score:.3f}")
         return to_fix
 
     def fix_chiral_chains(self, res: Residue):
@@ -1466,28 +1453,28 @@ def _guess_modeller_env():
         if 'modeller' in line:
             info = line.split()
     if info[1]:
-        print(f"Modeller v{info[1]} detected")
+        logging.log(15, f"Modeller v{info[1]} detected")
         ver1, ver2 = info[1].split('.')
         return f"KEY_MODELLER{ver1}v{ver2}", "MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
 
-    print("Modeller version not detected, using default")
+    logging.warning("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 class WrongServerError(Exception):
     def __init__(self):
-        self.message = 'ERROR: Biounits supported only on MMB server'
+        self.message = 'Biounits supported only on MMB/BSC servers'
 class UnknownFileTypeError(Exception):
     def __init__(self, typ):
-        self.message = f'ERROR: unknown filetype ({typ})'
+        self.message = f'Unknown filetype ({typ})'
 class OutputPathNotProvidedError(Exception):
     def __init__(self):
-        self.message = 'ERROR: output PDB path not provided'
+        self.message = 'Output PDB path not provided'
 class NotAValidResidueError(Exception):
     def __init__(self, res):
-        self.message = f'Warning: {res} is not a valid residue in this context'
+        self.message = f'{res} is not a valid residue in this context'
 class NotEnoughAtomsError(Exception):
     def __init__(self):
-        self.message = 'Warning: not enough backbone to build missing atoms'
+        self.message = 'Not enough backbone to build missing atoms'
 
 class ParseError(Exception):
     def __init__(self, err_id, err_txt):

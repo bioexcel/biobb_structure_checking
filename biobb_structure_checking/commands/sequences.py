@@ -1,4 +1,5 @@
 """ Command sequences """
+import logging
 import biobb_structure_checking.constants as cts
 
 def _check(strcheck):
@@ -7,7 +8,7 @@ def _check(strcheck):
         can_seq = strcheck.strucm.sequence_data.get_canonical()
         print(can_seq)
     else:
-        print(cts.MSGS['NO_CANONICAL'])
+        logging.warning(cts.MSGS['NO_CANONICAL'])
         can_seq = ''
 
     pdb_seq = strcheck.strucm.sequence_data.get_pdbseq()

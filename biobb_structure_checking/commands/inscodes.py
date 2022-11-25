@@ -1,4 +1,5 @@
 """ Inscodes command """
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 
@@ -19,5 +20,5 @@ def _check(strcheck):
 def _fix(strcheck, opts, fix_data=None):
     # TODO implement method _inscodes_fix
     if opts['renum']:
-        print("--renum option not implemented (yet)")
+        logging.info("--renum option not implemented (yet)")
     return False

@@ -4,6 +4,7 @@
 
 import json
 import sys
+import logging
 
 class DataLibManager:
     """
@@ -30,7 +31,7 @@ class DataLibManager:
                 self.ff_data[charge_set] = {}
 
         except IOError:
-            print("ERROR: unable to open data library " + file_path, file=sys.stderr)
+            logging.error("Unable to open data library " + file_path)
             sys.exit(2)
 
     def get_valid_codes(self, mol_type):
@@ -197,5 +198,5 @@ class DataLibManager:
             json_map = json.load(data_file_h)
             self.ff_data[json_map['id']] = json_map
         except IOError:
-            print("ERROR: unable to open forcefield library " + file_path, file=sys.stderr)
+            logging.error("Unable to open forcefield library " + file_path)
             sys.exit(2)

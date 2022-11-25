@@ -1,5 +1,6 @@
 """ Module supporting chains command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -53,7 +54,7 @@ def _fix(strcheck, opts, fix_data=None):
                     (rename_chains not in strcheck.strucm.chains_data.chain_ids):
                 input_ok = True
             else:
-                print(f"Chain {rename_chains} is already present")
+                logging.warning(f"Chain {rename_chains} is already present")
                 rename_chains = ''
         if input_option != 'none':
             new_label = strcheck.strucm.chains_data.rename_empty_chain_label(rename_chains)
@@ -75,11 +76,11 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], select_chains
 
     if input_option == 'all':
-        print(cts.MSGS['SELECT_ALL_CHAINS'])
+        logging.warning(cts.MSGS['SELECT_ALL_CHAINS'])
         return False
 
     strcheck.strucm.select_chains(select_chains)
-    print(cts.MSGS['SELECT_CHAINS'], select_chains)
+    logging.log(15, f"{cts.MSGS['SELECT_CHAINS']} {select_chains}")
     strcheck.summary['chains']['selected'] = strcheck.strucm.chains_data.chain_ids
 
     return False

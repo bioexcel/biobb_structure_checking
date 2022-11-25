@@ -4,6 +4,7 @@
 
 import re
 import sys
+import logging
 
 import biobb_structure_checking.model_utils as mu
 
@@ -19,7 +20,7 @@ class MutationManager():
         if 'file:' in id_list:
             #Load from file
             id_list = id_list.replace('file:', '')
-            print(f'Reading mutation list from file {id_list}')
+            logging.info(f'Reading mutation list from file {id_list}')
             self.id_list = [
                 line.replace('\n', '').replace('\r', '') for line in open(id_list, 'r')
             ]
@@ -87,12 +88,13 @@ class MutationSet():
                         })
                         mut_ok += 1
                     else:
-                        print(f'#WARNING: Unknown residue {chn}:{old_id}{self.res_num}')
+                        logging.warning(f'Unknown residue {chn}:{old_id}{self.res_num}')
                 else:
-                    print(f'#WARNING: Unknown residue {chn}:{old_id}{self.res_num}')
+                    logging.warning(f'Unknown residue {chn}:{old_id}{self.res_num}')
 
         if not mut_ok and stop_on_error:
-            sys.exit(f'#ERROR: no mutations available for {self.id}')
+            logging.error(f'No mutations available for {self.id}')
+            sys.exit()
 
     def apply(self, mut_map, res_lib, remove_h):
         """ Perform the individual mutations on the set. """
@@ -116,38 +118,40 @@ class MutationSet():
             if mut['type'] == mu.PROTEIN:
                 for at_id in ['N', 'CA', 'C']:
                     if at_id not in bck_atoms:
-                        sys.exit(f'#ERROR: Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        logging.error(f'Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        sys.exit()
             else:
                 for at_id in ["C1'", "O4'", "C4'"]:
                     if at_id not in bck_atoms:
-                        sys.exit(f'#ERROR: Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        logging.error(f'Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        sys.exit()
 
             missing_ats = [
                 at_id
                 for at_id in mut_map[rname]['side_atoms']
                 if at_id not in side_atoms
             ]
-            print(f"Replacing {mu.residue_id(res)} into {mut['new_id']}")
+            logging.info(f"Replacing {mu.residue_id(res)} into {mut['new_id']}")
             in_rules = []
             extra_adds = []
              # Deleting atoms
             if DEL in mut_map[rname][mut['new_id']]:
                 for at_id in mut_map[rname][mut['new_id']][DEL]:
-                    print(f'  Deleting {at_id}')
+                    logging.log(15, f'  Deleting {at_id}')
                     if at_id in side_atoms:
                         mu.delete_atom(res, at_id)
                     else:
-                        print(f'#WARNING: atom {at_id} already missing in {mu.residue_id(res)}')
+                        logging.warning(f'Atom {at_id} already missing in {mu.residue_id(res)}')
                     in_rules.append(at_id)
             # Renaming ats
             if MOV in mut_map[rname][mut['new_id']]:
                 for rule in mut_map[rname][mut['new_id']][MOV]:
                     old_at, new_at = rule.split("-")
-                    print(f'  Renaming {old_at} to {new_at}')
+                    logging.log(15, f'  Renaming {old_at} to {new_at}')
                     if old_at in side_atoms:
                         mu.rename_atom(res, old_at, new_at)
                     else:
-                        print(f'#WARNING: atom {old_at} missing in {mu.residue_id(res)}')
+                        logging.warning(f'Atom {old_at} missing in {mu.residue_id(res)}')
                         extra_adds.append(new_at)
                     in_rules.append(old_at)
 
@@ -155,14 +159,14 @@ class MutationSet():
             # Adding missing atoms that keep name
             for at_id in mut_map[rname]['side_atoms']:
                 if at_id not in in_rules and at_id in missing_ats:
-                    print(f'  Adding missing atom {at_id}')
+                    logging.log(15, f'  Adding missing atom {at_id}')
                     mu.build_atom(res, at_id, res_lib, mut['new_id'])
             for at_id in extra_adds:
-                print(f'  Adding new atom {at_id}')
+                logging.log(15, f'  Adding new atom {at_id}')
                 mu.build_atom(res, at_id, res_lib, mut['new_id'])
             if ADD in mut_map[rname][mut['new_id']]:
                 for at_id in mut_map[rname][mut['new_id']][ADD]:
-                    print(f'  Adding new atom {at_id}')
+                    logging.log(15, f'  Adding new atom {at_id}')
                     mu.build_atom(res, at_id, res_lib, mut['new_id'])
             #Renaming residue
             res.resname = mut['new_id']

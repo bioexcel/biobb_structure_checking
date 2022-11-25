@@ -1,5 +1,5 @@
 """ Module supporting cistransbck command"""
-
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 

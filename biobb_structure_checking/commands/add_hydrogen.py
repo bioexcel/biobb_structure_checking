@@ -1,5 +1,6 @@
 """ Module supporting add_hydrogen command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -29,7 +30,6 @@ def _check(strcheck):
     strcheck.summary['add_hydrogen']['ionic_detected'] = [
         mu.residue_id(r_at[0]) for r_at in ion_res_list
     ]
-    # print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
     return fix_data
 
 def _fix(strcheck, opts, fix_data=None):
@@ -37,7 +37,7 @@ def _fix(strcheck, opts, fix_data=None):
         return False
 
     if not strcheck.strucm.st_data.fixed_side and not opts['no_fix_side']:
-        print("WARNING: fixing side chains, override with --no_fix_side")
+        logging.warning("Fixing side chains, override with --no_fix_side")
         strcheck.fixside(['--fix', 'all'])
 
     # Fixing previously marked N and C terms
@@ -61,8 +61,7 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], add_h_mode
 
     if input_option == "none":
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     std_ion = strcheck.strucm.data_library.std_ion
@@ -76,7 +75,7 @@ def _fix(strcheck, opts, fix_data=None):
 
     if add_h_mode == 'auto':
         if not strcheck.args['quiet']:
-            print('Selection: auto')
+            logging.info('Selection: auto')
         strcheck.summary['add_hydrogen']['selection'] = 'auto'
     else:
         if add_h_mode == 'ph':
@@ -87,7 +86,7 @@ def _fix(strcheck, opts, fix_data=None):
             input_option, ph_value = input_line.run(ph_value)
 
             if not strcheck.args['quiet']:
-                print('Selection: pH', ph_value)
+                logging.info('Selection: pH', ph_value)
             strcheck.summary['add_hydrogen']['selection'] = f"pH {ph_value}"
 
             for r_at in fix_data['ion_res_list']:
@@ -101,7 +100,7 @@ def _fix(strcheck, opts, fix_data=None):
             if add_h_mode == 'list':
                 ions_list = opts['list']
                 if not strcheck.args['quiet']:
-                    print('Selection: list')
+                    logging.info('Selection: list')
                 
                 ions_list = ParamInput(
                     "Enter Forms list as [*:]his22hip",
@@ -118,11 +117,11 @@ def _fix(strcheck, opts, fix_data=None):
             else:
                 if add_h_mode == 'int':
                     if not strcheck.args['quiet']:
-                        print('Selection: interactive')
+                        logging.info('Selection: interactive')
                     res_list = fix_data['ion_res_list']
                 elif add_h_mode == 'int_his':
                     if not strcheck.args['quiet']:
-                        print('Selection: int_his')
+                        logging.info('Selection: int_his')
                     res_list = [
                         r_at for r_at in fix_data['ion_res_list']
                         if r_at[0].get_resname() == 'HIS'

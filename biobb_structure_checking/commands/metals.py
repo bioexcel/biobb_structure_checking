@@ -1,4 +1,5 @@
 """ Module supporting metals command"""
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -52,8 +53,7 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], remove_metals
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     if input_option == 'all':
@@ -77,6 +77,6 @@ def _fix(strcheck, opts, fix_data=None):
         strcheck.strucm.remove_residue(atm.get_parent(), False)
         rmm_num += 1
     strcheck.strucm.update_internals()
-    print(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
+    logging.info(cts.MSGS['METALS_REMOVED'].format(remove_metals, rmm_num))
     strcheck.summary['metals']['n_removed'] = rmm_num
     return False

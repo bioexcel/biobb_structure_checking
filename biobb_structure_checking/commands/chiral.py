@@ -1,5 +1,6 @@
 """ Module supporting chiral command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -49,8 +50,7 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], chiral_fix
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     if input_option == 'all':
@@ -65,11 +65,11 @@ def _fix(strcheck, opts, fix_data=None):
     for res in to_fix:
         strcheck.strucm.fix_chiral_chains(res)
         fix_num += 1
-    print(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
+    logging.info(cts.MSGS['CHIRAL_SIDE_FIXED'].format(chiral_fix, fix_num))
 
     if not opts['no_check_clashes']:
         if not strcheck.args['quiet']:
-            print(cts.MSGS['CHECKING_CLASHES'])
+            logging.info(cts.MSGS['CHECKING_CLASHES'])
 
         strcheck.summary['chiral_clashes'] = strcheck._check_report_clashes(to_fix)
 

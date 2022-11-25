@@ -1,6 +1,7 @@
 """ Module to manage sequence information for structures """
 
 import sys
+import logging
 #from typing import List, Dict
 
 from Bio import pairwise2, SeqIO
@@ -57,9 +58,9 @@ class SequenceData():
                 for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
                     self.fasta.append(record)
             except IOError:
-                sys.exit("Error loading FASTA")
+                logging.error("FASTA file could not be loaded")
         if not self.fasta:
-            print(f"WARNING: No valid FASTA formatted sequences found in {fasta_sequence_path}")
+            logging.warning(f"No valid FASTA formatted sequences found in {fasta_sequence_path}")
             read_ok = False
         return read_ok
 
@@ -100,13 +101,13 @@ class SequenceData():
             hits = self.match_chain_seqs()
             chids = [h['ch_id'] for h in hits]
             seqs = [h['seq'] for h in hits]
-            print('Getting canonical sequences from matching FASTA input')
+            logging.info('Getting canonical sequences from matching FASTA input')
             for hit in sorted(hits, key=lambda hit:hit['ch_id']):
                 print(f"{hit['ch_id']}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
-                    print("Warning: sequence features only available in mmCIF" +\
+                    logging.warning("Full sequence features only available in mmCIF" +\
                     " format or with external fasta input")
                 return True
             if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
@@ -118,7 +119,7 @@ class SequenceData():
                     seqs = strucm.st_data.headers['_entity_poly.pdbx_seq_one_letter_code_can']
             else:
                 if cif_warn:
-                    print("Warning: sequence data unavailable on cif data")
+                    logging.warning("Sequence data unavailable on mmCif data")
                 return True
 
         for index, chid in enumerate(chids):
@@ -143,9 +144,6 @@ class SequenceData():
                     SeqFeature(FeatureLocation(1, len(seqs[index])))
                 )
 
-                # for chn in chids[i].split(','):
-                #     if chn in strucm.chain_ids:
-                #         self.data[ch_id]['chains'].append(chn)
                 seq_matches = self._assign_seq(self.data[ch_id]['can'])
                 max_score = max([match[1] for match in seq_matches])
                 for match in seq_matches:
@@ -154,12 +152,10 @@ class SequenceData():
 
         self.has_canonical = {}
         for ch_id in strucm.chains_data.chain_ids:
-#            if strucm.chain_ids[ch_id] != PROTEIN:
-#                continue
             self.has_canonical[ch_id] = (ch_id in self.data) and\
                 hasattr(self.data[ch_id]['can'], 'seq')
             if not self.has_canonical[ch_id]:
-                print(f"Warning, no canonical sequence available for chain {ch_id}")
+                logging.warning(f"No canonical sequence available for chain {ch_id}")
         return False
 
     def read_structure_seqs(self, strucm):
@@ -187,7 +183,7 @@ class SequenceData():
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                     #TODO patched for a Weird case where a second model lacks a chain
                     if not frags[0]:
-                        print(
+                        logging.warning(
                             f"Warning: no protein residues found for chain {chn.id}"
                             f" at model {mod.id}, adding hetatm to avoid empty chain"
                         )
@@ -219,8 +215,8 @@ class SequenceData():
                         sqr.features.append(SeqFeature(FeatureLocation(start, end)))
                         sqr.features.append(SeqFeature(FeatureLocation(start_index, end_index)))
                     else:
-                        print("Warning: unusual residue numbering at chain ", chn.id)
-                        print("Warning: chain reconstruction may not be available")
+                        logging.warning("Unusual residue numbering at chain ", chn.id)
+                        logging.warning("Chain reconstruction may not be available")
                         sqr.features.append(SeqFeature(FeatureLocation(end, start)))
                         wrong_order = True
                     seqs.append(sqr)
@@ -384,7 +380,7 @@ class SequenceData():
                 )
                 outseq += SeqIO.FastaIO.as_fasta(seq)
             else:
-                print(f"Warning: chain {ch_id} sequence cannot be recongized")
+                logging.warning(f"Chain {ch_id} sequence cannot be recongized")
         return outseq
 
     def match_chain_seqs(self):

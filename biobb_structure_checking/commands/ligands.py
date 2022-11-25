@@ -1,4 +1,5 @@
 """ Module supporting ligands command"""
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -56,8 +57,7 @@ def _fix(strcheck, opts, fix_data=None):
     strcheck.summary['ligands']['removed'] = {'opt':remove_ligands, 'lst':[]}
 
     if input_option == 'none':
-        if strcheck.args['verbose']:
-            print(cts.MSGS['DO_NOTHING'])
+        logging.log(15, cts.MSGS['DO_NOTHING'])
         return False
 
     if input_option == 'all':
@@ -80,6 +80,6 @@ def _fix(strcheck, opts, fix_data=None):
         strcheck.strucm.remove_residue(res, False)
         rl_num += 1
     strcheck.strucm.update_internals()
-    print(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
+    logging.info(cts.MSGS['LIGANDS_REMOVED'].format(remove_ligands, rl_num))
     strcheck.summary['ligands']['n_removed'] = rl_num
     return False

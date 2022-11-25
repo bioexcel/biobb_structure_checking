@@ -1,4 +1,5 @@
 """ Module supporting models command"""
+import logging
 from unittest.util import strclass
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
@@ -41,19 +42,19 @@ def _fix(strcheck, opts, fix_data=None):
     if input_option == 'error':
         return cts.MSGS['UNKNOWN_SELECTION'], select_model
 
-    print(cts.MSGS['SELECT_MODEL'], select_model)
+    logging.info(f"{cts.MSGS['SELECT_MODEL']} {select_model}")
 
     if input_option != 'all':
         strcheck.strucm.select_model(select_model)
 
     if opts['superimpose']:
         strcheck.strucm.superimpose_models()
-        print(cts.MSGS['SUPIMP_MODELS'].format(strcheck.strucm.models_data.models_type["rmsd"]))
+        logging.info(cts.MSGS['SUPIMP_MODELS'].format(strcheck.strucm.models_data.models_type["rmsd"]))
         strcheck.summary['models']['superimp_rmsd'] = strcheck.strucm.models_data.models_type["rmsd"]
 
     if opts['build_complex']:
         added_chains = strcheck.strucm.build_complex()
-        print(cts.MSGS['ADDED_CHAINS_TO_COMPLEX'].format(added_chains))
+        logging.info(cts.MSGS['ADDED_CHAINS_TO_COMPLEX'].format(added_chains))
         strcheck.summary['models']['added_chains'] = added_chains
 
     if opts['save_split']: # tag as modified to force save

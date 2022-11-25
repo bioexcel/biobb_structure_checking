@@ -9,6 +9,7 @@ import os
 from os.path import join as opj
 import uuid
 import shutil
+import logging
 
 from Bio import SeqIO, pairwise2
 from Bio.Seq import Seq
@@ -24,7 +25,8 @@ try:
     from modeller import Environ, log
     from modeller.automodel import AutoModel, assess
 except ImportError:
-    sys.exit("Error importing Modeller package")
+    logging.error("Modeller import failed")
+    sys.exit()
 
 
 TMP_BASE_DIR = '/tmp'

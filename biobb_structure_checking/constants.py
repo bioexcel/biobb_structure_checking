@@ -374,8 +374,8 @@ MSGS = {
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
     #run method
-    'COMMAND_NOT_FOUND': 'Error: {} command unknown or not implemented',
-    'FIX_COMMAND_NOT_FOUND': 'Error: {} command fix not implemented',
+    'COMMAND_NOT_FOUND': '{} command unknown or not implemented',
+    'FIX_COMMAND_NOT_FOUND': '{} command fix not implemented',
     'CHECK_ONLY_DONE': 'Running  check_only. Nothing else to do.',
     #sequences
     'NO_CANONICAL': 'Canonical Sequences requires either mmCIF input or --sequence',
@@ -470,12 +470,12 @@ MSGS = {
     'STRUCTURE_LOADED': 'Structure {} loaded',
     #NA related
     'NO_NA': 'No NA chains found, skipping',
-    'WARN_NOBUILD_NA': 'Warning: --rebuild only available for protein chains',
+    'WARN_NOBUILD_NA': '--rebuild only available for protein chains',
     # Model utils
-    'ATOM_NOT_FOUND': 'Warning: atom {:3} not found in {}',
-    'NO_BACKBONE_ATOMS': 'Warning: No backbone atoms defined',
-    'RESIDUE_NOT_VALID' : "Warning: Residue not valid in this context ",
-    'NOT_ENOUGH_ATOMS' : "Warning: not enough atoms to build {} hydrogen atoms on"
+    'ATOM_NOT_FOUND': 'Atom {:3} not found in {}',
+    'NO_BACKBONE_ATOMS': 'No backbone atoms defined',
+    'RESIDUE_NOT_VALID' : "Residue not valid in this context ",
+    'NOT_ENOUGH_ATOMS' : "Not enough atoms to build {} hydrogen atoms on"
 }
 
 # Help handler

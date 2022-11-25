@@ -4,6 +4,7 @@
 
 import re
 import sys
+import logging
 #from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 import numpy as np
@@ -140,7 +141,7 @@ def get_sequence_symbol(res, chain_type):
         if res_name in ONE_LETTER_RESIDUE_CODE:
             seq += ONE_LETTER_RESIDUE_CODE[res_name]
         else:
-            print("Warning: unknown protein residue code", residue_id(res))
+            logging.warning("Unknown protein residue code", residue_id(res))
             seq += 'X'
     elif chain_type == DNA:
         seq += res_name[1:] #Removing leading "D" on DNA residue names
@@ -368,7 +369,7 @@ def _get_contacts(ats_list, d_cutoff):
 def calc_RMSd_ats(ats1, ats2):
     """ Calcs RMSd between two atom lists, no fit"""
     if len(ats1) != len(ats2):
-        print(f"Warning: atom lists of different length when calculating RMSd ({len(ats1)}, {len(ats2)})")
+        logging.warning(f"Atom lists of different length when calculating RMSd ({len(ats1)}, {len(ats2)})")
     rmsd = 0
     i = 0
     while i < len(ats1) and i < len(ats2):
@@ -496,7 +497,7 @@ def check_chiral(res, at1, at2, at3, at4, sign=1.):
     for atm in (at1, at2, at3, at4):
         at_ok = at_ok and atm in res
         if not at_ok:
-            print(MSGS['ATOM_NOT_FOUND'].format(atm, residue_id(res)))
+            logging.warning(MSGS['ATOM_NOT_FOUND'].format(atm, residue_id(res)))
     if at_ok:
         vec1 = res[at1].coord - res[at2].coord
         vec2 = res[at3].coord - res[at2].coord
@@ -672,7 +673,7 @@ def get_backbone_links(struc, backbone_atoms, covlnk, join_models=True):
                         and (join_models or same_model(at1.get_parent(), at2.get_parent())):
                     cov_links.append(sorted([at1, at2], key=lambda x: x.serial_number))
         else:
-            print(MSGS['NO_BACKBONE_ATOMS'])
+            logging.warning(MSGS['NO_BACKBONE_ATOMS'])
 
     return cov_links
 
@@ -688,15 +689,14 @@ def remove_H_from_r(res, verbose=False):
     h_list = [atm.id for atm in res.get_atoms() if atm.element == 'H']
     for at_id in h_list:
         if verbose:
-            print("  Deleting atom " + at_id)
+            logging.log(15, "  Deleting atom " + at_id)
         res.detach_child(at_id)
 
 def remove_atom_from_res(res, at_id, verbose=False):
     """
     Removes atoms from given residue
     """
-    if verbose:
-        print("  Deleting atom " + at_id)
+    logging.log(15, "  Deleting atom " + at_id)
     res.detach_child(at_id)
 
 def remove_residue(res):
@@ -858,10 +858,12 @@ def build_coords_from_lib(res, res_lib, new_res, at_id):
     atom_def = res_lib.get_atom_def(new_res, at_id)
 
     if atom_def is None:
-        sys.exit("#ERROR: Unknown target atom")
+        logging.error("Unknown target atom")
+        sys.exit()
     for at_def in atom_def.link_ats:
         if at_def not in res:
-            sys.exit(f"Error, required atom {at_def} not available in {residue_id(res)}")
+            logging.error(f"Required atom {at_def} not available in {residue_id(res)}")
+            sys.exit()
     return build_coords_from_ats_internal(
         res[atom_def.link_ats[0]],
         res[atom_def.link_ats[1]],
@@ -882,8 +884,6 @@ def build_coords_O(res): # Get O from Backbone
 def build_coords_trans_CA(at0, at1, at2):
     """ Builds CA with trans peptide bond conf"""
     return build_coords_from_ats_internal(at0, at1, at2, [CCDIS, SP2ANGLE, PEPDIH])
-
-
 
 def add_hydrogens_backbone(res, prev_res, next_res):
     """ Add hydrogen atoms to the backbone"""
@@ -933,7 +933,7 @@ def _add_hydrogens_to_ribose(res, prev_res, next_res):
     #C1
     if "N9" in res: #Purine
         crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N9"])
-    else: #Pyrimidone
+    else: #Pyrimide
         crs = build_coords_1xSP3(HDIS, res["C1'"], res["C2'"], res["O4'"], res["N1"])
     add_new_atom_to_residue(res, "H1'", crs)
 

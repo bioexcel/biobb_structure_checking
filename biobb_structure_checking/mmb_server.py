@@ -4,6 +4,7 @@
 
 import os
 import sys
+import logging
 
 from urllib.request import urlretrieve
 from urllib.request import urlcleanup
@@ -52,7 +53,7 @@ class MMBPDBList(PDBList):
         code = pdb_code.lower()
 
         if file_format not in ('pdb', 'cif', 'mmCif', 'xml'):
-            print(f'Error: MMB/BSC Server: File format {file_format} not supported')
+            logging.error(f'MMB/BSC Server: File format {file_format} not supported')
             sys.exit(1)
 
         if file_format == 'mmCif':
@@ -93,21 +94,21 @@ class MMBPDBList(PDBList):
         if not overwrite:
             if os.path.exists(final_file):
                 if self._verbose:
-                    print(f"Structure exists: '{final_file}' ")
+                    logging.info(f"Structure exists: '{final_file}' ")
                 return final_file
 
         # Retrieve the file
         if self._verbose:
             if biounit:
-                print(
+                logging.info(
                     f"Downloading PDB structure '{pdb_code}.{biounit}' "
                     f"from {self.pdb_server} ..."
                 )
             else:
-                print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
+                logging.info(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)
         except IOError:
-            print(f"Desired structure doesn't exist at {self.pdb_server} server")
+            logging.error(f"Desired structure doesn't exist at {self.pdb_server} server")
         return final_file

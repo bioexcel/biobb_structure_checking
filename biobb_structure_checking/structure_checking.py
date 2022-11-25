@@ -8,6 +8,7 @@ import importlib
 import sys
 import os
 import time
+import logging
 from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
@@ -55,19 +56,22 @@ class StructureChecking():
                 self.args['fasta_seq_path']
             )
         except IOError:
-            sys.exit(f"ERROR: fetching/parsing structure from {self.args['input_structure_path']}")
+            logging.error(f"fetching/parsing structure from {self.args['input_structure_path']}")
+            sys.exit()
         except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
-            sys.exit(err.message)
+            logging.error(err.message)
+            sys.exit()
 
         if self.args['debug']:
             self.timings.append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
-            print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
+            logging.debug(f"Memory used after structure load: {memsize:f} MB ")
 
         if self.args['atom_limit'] and self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
-            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.st_data.stats['num_ats'], self.args['atom_limit']))
+            logging.info(cts.MSGS['ATOM_LIMIT'].format(self.strucm.st_data.stats['num_ats'], self.args['atom_limit']))
+            sys.exit()
 
     def launch(self):
         """ StructureChecking.launch
@@ -84,7 +88,7 @@ class StructureChecking():
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
-                    print(cts.MSGS['FORCE_SAVE_STRUCTURE'])
+                    logging.info(cts.MSGS['FORCE_SAVE_STRUCTURE'])
                 if not self.args['check_only']:
                     self.print_stats('Final')
                     self.summary['final_stats'] = self.strucm.get_stats()
@@ -94,46 +98,42 @@ class StructureChecking():
                         self.args['rename_terms'],
                         split_models='--save_split' in self.args['options']
                     )
-                    print(cts.MSGS['STRUCTURE_SAVED'], output_structure_path)
+                    logging.info(f"{cts.MSGS['STRUCTURE_SAVED']} {output_structure_path}")
                     self.summary['saved_structure'] = output_structure_path
                 except OSError:
-                    print(
-                        'ERROR: unable to save PDB data on ',
-                        output_structure_path,
-                        file=sys.stderr
-                    )
+                    logging.error(f"Unable to save PDB data on {output_structure_path}")
                 except stm.OutputPathNotProvidedError as err:
-                    print(err.message, file=sys.stderr)
+                    logging.error(err.message)
             elif not self.strucm.modified:
-                print(cts.MSGS['NON_MODIFIED_STRUCTURE'])
+                logging.info(cts.MSGS['NON_MODIFIED_STRUCTURE'])
             self.summary['modified_structure'] = self.strucm.modified
 
         if self.args['debug']:
             total = time.time() - self.start_time
             self.summary['elapsed_times']['total'] = total
-            print("#DEBUG TIMINGS")
-            print("#DEBUG =======")
+            logging.debug("TIMINGS")
+            logging.debug("=======")
             ant = 0.
             for operation, timing in self.timings:
                 elapsed = timing - ant
                 self.summary['elapsed_times'][operation] = elapsed
-                print(f"#DEBUG {operation:15s}: {elapsed:10.4f} s ({elapsed / total * 100:6.2f}%)")
+                logging.debug(f"{operation:15s}: {elapsed:10.4f} s ({elapsed / total * 100:6.2f}%)")
                 ant = timing
-            print(f"#DEBUG TOTAL          : {total:10.4F} s")
-            print()
-            print("#DEBUG MEMORY USAGE EVOLUTION")
-            print("#DEBUG ======================")
+            logging.debug(f"TOTAL          : {total:10.4F} s")
+            logging.debug("")
+            logging.debug("MEMORY USAGE EVOLUTION")
+            logging.debug("======================")
             for operation, memsize in self.summary['memsize']:
-                print(f"#DEBUG {operation:15s}: {memsize:.2f} MB")
+                logging.debug(f"{operation:15s}: {memsize:.2f} MB")
 
         if self.args['json_output_path'] is not None:
             json_writer = JSONWriter()
             json_writer.data = self.summary
             try:
                 json_writer.save(self.args['json_output_path'])
-                print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
+                logging.info(f"{cts.MSGS['JSON_SAVED']} {self.args['json_output_path']}")
             except IOError:
-                print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
+                logging.error(f"{cts.MSGS['JSON_NOT_SAVED']} {self.args['json_output_path']}")
 
     def print_stats(self, prefix=None):
         """ StructureChecking.print_stats
@@ -158,13 +158,14 @@ class StructureChecking():
             opts = cts.DIALOGS.get_parameter('command_list', opts)
             op_list = opts['op_list']
         except NoDialogAvailableError as err:
-            print(err.message)
+            logging.error(err.message)
 
         if not op_list:
             if not self.args['non_interactive']:
                 op_list = ParamInput('Command List File', False).run(op_list)
             else:
-                sys.exit('ERROR: command list not provided and non_interactive')
+                logging.error('Command list not provided and non_interactive')
+                sys.exit()
 
         if os.path.isfile(op_list):
             command_list = []
@@ -175,21 +176,23 @@ class StructureChecking():
                             continue
                         command_list.append(line)
             except OSError:
-                sys.exit(f"{cts.MSGS['ERROR_OPEN_FILE']} {op_list}")
+                logging.error(f"{cts.MSGS['ERROR_OPEN_FILE']} {op_list}")
+                sys.exit()
         else:
             command_list = op_list.split(';')
 
         i = 1
         for line in command_list:
             if not self.args['quiet']:
-                print(f"\nStep {i}: {line}")
+                print()
+                logging.info(f"Step {i}: {line}")
             data = line.split()
             command = data[0]
             opts = data[1:]
             self._run_method(command, opts)
             i += 1
 
-        print(cts.MSGS['COMMAND_LIST_COMPLETED'])
+        logging.info(cts.MSGS['COMMAND_LIST_COMPLETED'])
 
     def checkall(self, opts=None):
         """ StructureChecking.checkall
@@ -209,7 +212,7 @@ class StructureChecking():
          Fix all using defaults. Not implemented (yet)
         """
         # TODO Implement method fixall
-        print("Fixall not implemented (yet)")
+        logging.info("Fixall not implemented (yet)")
 
     def revert_changes(self):
         """ StructureChecking.revert_changes
@@ -220,7 +223,7 @@ class StructureChecking():
             self.args['fasta_seq_path']
         )
         self.summary = {}
-        print(cts.MSGS['ALL_UNDO'])
+        logging.info(cts.MSGS['ALL_UNDO'])
 
     def _run_method(self, command, opts):
         """ Private. StructureChecking._run_method
@@ -235,7 +238,8 @@ class StructureChecking():
             f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
             f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
         except ImportError:
-            sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
+            logging.error(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
+            sys.exit()
 
         if command not in self.summary:
             self.summary[command] = {}
@@ -251,16 +255,15 @@ class StructureChecking():
             msg += ' Options: ' + opts_str
             self.summary[command]['opts'] = opts_str
 
-        if not self.args['quiet'] or self.args['verbose']:
-            print(msg.strip())
+        #if not self.args['quiet'] or self.args['verbose']:
+        logging.log(level=15, msg=msg.strip())
 
     # Running checking method
         data_to_fix = f_check(self)
 
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
-            if self.args['verbose']:
-                print(cts.MSGS['CHECK_ONLY_DONE'])
+            logging.log(level=15, msg=cts.MSGS['CHECK_ONLY_DONE'])
         elif data_to_fix:
             if isinstance(opts, (str, list)):
                 if cts.DIALOGS.exists(command):
@@ -281,7 +284,7 @@ class StructureChecking():
                     if error_status[1] is None:
                         error_status = [error_status[0]]
 
-                print('ERROR', ' '.join(error_status), file=sys.stderr)
+                logging.error(' '.join(error_status))
                 self.summary[command]['error'] = ' '.join(error_status)
 
         if self.args['debug']:
@@ -290,7 +293,7 @@ class StructureChecking():
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append([command, memsize])
-            print(f"#DEBUG Memory used after {command}: {memsize:f} MB ")
+            logging.debug(f"Memory used after {command}: {memsize:f} MB ")
 
 # ==============================================================================
     def _load_structure(
@@ -329,7 +332,7 @@ class StructureChecking():
         self.summary['loaded_structure'] = input_structure_path
 
         if verbose:
-            print(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
+            logging.info(cts.MSGS['STRUCTURE_LOADED'].format(input_structure_path))
             strucm.st_data.print_headers()
             print()
 
@@ -396,7 +399,7 @@ class StructureChecking():
                     output_format=output_format,
                     keep_resnames=self.args['keep_canonical']
                 )
-            print(cts.MSGS["SPLIT_MODELS"])
+            logging.info(cts.MSGS["SPLIT_MODELS"])
 
         return output_structure_path
 
@@ -528,7 +531,7 @@ class StructureChecking():
         """  StructureChecking.hetatm
         Manages hetero atoms. Not implemented yet. See Ligands
         """
-        print("Warning: hetatm function not implemented yet, running ligands instead")
+        logging.warning("hetatm function not implemented yet, running ligands instead")
         self._run_method('ligands', opts)
 
     def ligands(self, opts=None):

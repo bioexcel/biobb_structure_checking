@@ -1,5 +1,6 @@
 """ Module supporting amide command"""
 
+import logging
 import numpy as np
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
@@ -86,14 +87,14 @@ def _fix(strcheck, opts, fix_data=None):
                 done.add(res) # To avoid double change
                 fix_num += 1
 
-        print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
+        logging.info(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))
         strcheck.summary['amide']['fixed'] = amide_fix
 
         strcheck.strucm.modified = True
         fix_data = {}
         if not opts['no_recheck']:
             if not strcheck.args['quiet']:
-                print(cts.MSGS['AMIDES_RECHECK'])
+                logging.info(cts.MSGS['AMIDES_RECHECK'])
             fix_data = _check(strcheck)
             amide_fix = ''
             if no_int_recheck:

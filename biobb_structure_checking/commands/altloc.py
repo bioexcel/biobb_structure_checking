@@ -1,5 +1,6 @@
 """ Module supporting altloc command"""
 
+import logging
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.model_utils as mu
 from biobb_structure_checking.param_input import ParamInput
@@ -73,7 +74,7 @@ def _fix(strcheck, opts, fix_data=None):
         return cts.MSGS['UNKNOWN_SELECTION'], select_altloc
 
     if input_option != 'all':
-        print(f"Selecting location {select_altloc}")
+        logging.info(f"Selecting location {select_altloc}")
         if input_option in ('occup', 'altids'):
             select_altloc = select_altloc.upper()
             to_fix = {

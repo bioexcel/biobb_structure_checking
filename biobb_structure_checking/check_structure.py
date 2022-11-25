@@ -10,6 +10,7 @@ __date__ = "$13-jul-2018 15:52:55$"
 
 import sys
 import pydoc
+import logging
 from os.path import join as opj
 
 import biobb_structure_checking
@@ -31,6 +32,17 @@ def main():
     data_dir_path = opj(base_dir_path, cts.DATA_DIR_DEFAULT_PATH)
 
     args = cts.CMD_LINE.parse_args()
+
+    logging.basicConfig(stream=sys.stdout, format='%(levelname)s %(message)s')
+    logging.addLevelName(level=15, levelName='INFO')
+    logging.addLevelName(level=25, levelName='INFO')
+    if args.debug:
+        logging.getLogger().setLevel(10)
+    else:
+        if not args.quiet or args.verbose:
+            logging.getLogger().setLevel(15)
+        else:
+            logging.getLogger().setLevel(20)
 
     if args.command == 'commands':
         help_str = header()
