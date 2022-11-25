@@ -36,6 +36,7 @@ load:
 	${COMMON};${APPBIN} -v -i pdb:1ubq load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:4mdh load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:6m0j load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
@@ -102,6 +103,8 @@ amide:
 	@echo "Running amide on 1ubq"
 	${COMMON};${APPBIN} -v -i pdb:1ubq --non_interactive amide --fix None > 1ubq_amide_test_None.log
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix All > 1ubq_amide_test_All.log
+	@echo "Running amide auto on 6m0j"
+	${COMMON};${APPBIN} -v -i pdb:6m0j -o 6m0j_amide_test_auto.pdb --non_interactive amide --fix auto > 6m0j_amide_test_auto.log
 
 chiral:
 	@echo "Running chiral on modified 1ubq"

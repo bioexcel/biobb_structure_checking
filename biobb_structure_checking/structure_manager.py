@@ -527,7 +527,7 @@ class StructureManager:
 
         c_list = self.check_r_list_clashes(
             amide_list,
-            mu.AMIDE_CONTACT_TYPES,
+            mu.AMIDE_CONTACT_TYPES
         )
         amide_res_to_fix = []
         amide_cont_list = []
@@ -1293,14 +1293,29 @@ class StructureManager:
         )
         
     def _amide_score(self, matr):
+        # for amide_res in sorted(matr):
+        #     for atm in matr[amide_res]['cnts']:
+        #         for atm_cnt in matr[amide_res]['cnts'][atm]:
+        #             print("M", mu.residue_id(amide_res), mu.atom_id(atm), mu.atom_id(atm_cnt))
+        # sys.exit()    
+
         score = 0.
-        for amide_res in matr:
+        for amide_res in sorted(matr):
             for atm in matr[amide_res]['cnts']:
                 for atm_cnt in matr[amide_res]['cnts'][atm]:
-                    if matr[amide_res]['mod'] and atm.element != atm_cnt.element:
-                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
-                    if not matr[amide_res]['mod'] and atm.element == atm_cnt.element:
-                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
+                    #print(mu.atom_id(atm), mu.atom_id(atm_cnt))                    
+                    d = atm.element != atm_cnt.element
+                    m1 = matr[amide_res]['mod']
+                    m2 = atm_cnt.get_parent() in matr and matr[atm_cnt.get_parent()]['mod']
+                    # !d !m1 !m2 + !d m1 m2 + d !m1 m2 + d m1 !m2
+                    #print(d,m1,m2)
+                    if (not d and not m1 and not m2) or\
+                        (not d and m1 and m2) or\
+                        (d and not m1 and m2) or\
+                        (d and m1 and not m2):
+                            score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
+
+                    #print(matr[amide_res]['mod'], mu.atom_id(atm), mu.atom_id(atm_cnt), 1/matr[amide_res]['cnts'][atm][atm_cnt], score)
         return score
         
     def _amide_cluster(self, to_fix):
@@ -1325,7 +1340,11 @@ class StructureManager:
                     if res2 in cluster:
                         del cluster[res2]
         return cluster
-        
+    
+    def _is_amide_atom(self, amide_res, atm):
+        res = atm.get_parent()
+        return res.get_resname() in amide_res and atm.id in amide_res[res.get_resname()]
+
     def amide_auto_fix(self, to_fix):
         print("Fixing automatically")
         amide_res = self.data_library.get_amide_data()[0]
@@ -1334,38 +1353,47 @@ class StructureManager:
             ['polar'],
             get_all_contacts=True
         )
-        matr = {}
         for res_pair in c_list['polar']:
             for cnt in c_list['polar'][res_pair]:
                 at1, at2, dist2 = cnt
+                if at1.serial_number > at2.serial_number:
+                    at2, at1, dist2 = cnt
+        matr = {}        
+        for res_pair in c_list['polar']:
+            for cnt in c_list['polar'][res_pair]:
+                at1, at2, dist2 = cnt
+                if at1.serial_number > at2.serial_number:
+                    at2, at1, dist2 = cnt
                 res1 = at1.get_parent()
                 res2 = at2.get_parent()
-                if res1.get_resname() in amide_res and at1.id in amide_res[res1.get_resname()]:
+                if self._is_amide_atom(amide_res, at1):
                     if res1 not in matr:
                         matr[res1] = {'mod':False,'cnts':{}}
-                    if at1 not in matr[res1]:
+                    if at1 not in matr[res1]['cnts']:
                         matr[res1]['cnts'][at1] = {}
                     matr[res1]['cnts'][at1][at2] = dist2
-                if res2.get_resname() in amide_res and at2.id in amide_res[res2.get_resname()]:
+                if self._is_amide_atom(amide_res, at2):
                     if res2 not in matr:
                         matr[res2] = {'mod':False,'cnts':{}}
-                    if at2 not in matr[res2]:
+                    if at2 not in matr[res2]['cnts']:
                         matr[res2]['cnts'][at2] = {}
                     matr[res2]['cnts'][at2][at1] = dist2
-        print(f"Initial score: {self._amide_score(matr):.3f}")
+        
+        print(f"Initial contact score: {self._amide_score(matr):.3f}")
         print("Clustering amide residues")
         clusters = self._amide_cluster(to_fix['res_to_fix'])
         print(f"{len(clusters)} cluster(s) found, exploring...")
         to_fix = []
         nclus = 0
         for cl_res in clusters:
+            to_fix_part = []
             nclus += 1
             amide_list = []
             mod_vec = max_vec = ''
             for amide_res in clusters[cl_res]:
                 amide_list.append(amide_res)
                 max_vec += '1'
-            print(f"Cluster {nclus}:{', '.join([mu.residue_id(r) for r in sorted(amide_list)])}")
+            print(f"Cluster {nclus}:{', '.join([mu.residue_id(r) for r in amide_list])}")
             conf = 0
             min_score = self._amide_score(matr)
             opt_conf = 0
@@ -1380,11 +1408,16 @@ class StructureManager:
                     min_score = score
                     opt_vec = mod_vec
                 conf += 1
+#                print(mod_vec, score, opt_vec, min_score)
             for pos, res in enumerate(amide_list):
                 if opt_vec[pos] == '1':
+                    to_fix_part.append(res)
                     to_fix.append(res)
-            print(f"New score: {min_score:.3f}, amides to fix: {', '.join([mu.residue_id(r) for r in to_fix])}")
-        
+                matr[res]['mod'] = opt_vec[pos] == '1'
+            if len(to_fix_part):
+                print(f"New score: {min_score:.3f}, fixed residue(s): {', '.join([mu.residue_id(r) for r in to_fix_part])}")
+            else:
+                print("Score not improved, skipping")
         return to_fix
 
     def fix_chiral_chains(self, res: Residue):

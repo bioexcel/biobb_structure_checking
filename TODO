@@ -20,7 +20,7 @@
         1.9.1 Get sequence from PDB without canonical DONE
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
-        2.1.1 Amides Automatic fix
+        2.1.1 Amides Automatic fix DONE
     2.2. Detect/Fix Improper quirality (chiral) DONE (!! check ILE with unusual atom labels)
         2.2.1 Detect Improper quirality on CAs (chiral_ca) DONE
     2.3. Detect insertion codes/Renum (inscode) DONE detection, no fix

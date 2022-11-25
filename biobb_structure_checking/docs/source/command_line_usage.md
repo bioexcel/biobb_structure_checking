@@ -41,13 +41,13 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 **--sequence** FASTA_SEQ_PATH - _Canonical sequence in FASTA format_
 * Header should start >pdb_chain[,chain] for backbone rebuild. Required only for PDB/PQR structures.
 
-**--file_format** {cif,pdb,xml} - _Format for retrieving structures (cif(default)|pdb|xml)_
+**--file_format** {mmCif,cif,pdb,xml} - _Format for retrieving structures (mmCif(default)|cif|pdb|xml)_
 
 **--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB)_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
 
-**--limit** ATOM_LIMIT - _Limit on number of atoms (0: nolimit)_
+**--limit** ATOM_LIMIT - _Limit on number of atoms (0: no limit)_
 
 ***
 ### Additional data input

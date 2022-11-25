@@ -1,3 +1,16 @@
+## v3.XXXXX (2022.4)
+### Extended functions
+- amide
+  - Added --fix auto option to automatically find best fix combination
+- chains
+  - --rename fixes empty chain labels
+- models
+  - Added --build_complex. Converts biounit's selected models into actual complexes
+- json
+  - Extended information on json summary output
+### Bug Fixes
+- Added missing defaults for Notebook execution
+- Ionized/tautomeric residue names recognized
 ## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details

@@ -16,8 +16,9 @@ Commands to manipulate structure composition.
 
 **models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
  * Accept List of Models (comma separated) or Model number range 
- * **--superimpose** - Superimposes currently selected models
+ * **--superimpose** Superimposes currently selected models
  * **--save_split** Split models as separated output files. 
+ * **--build_complex** Builds an actual complex from Biounits stored as collection of models
 
 **chains** [--select chain_ids | molecule_type] - _Detect/Select Chains_
 
@@ -41,7 +42,7 @@ _Mutate side chain with minimal atom replacement_
 * Allows multiple mutations (comma separated). 
 * mutation_list as file: accepts list of mutations in a external file
 * Check generated clashes except **--no_check_clashes** set.
-* **--rebuild** optimize side chains using Modeller. 
+* **--rebuild** optimize side chains using Modeller (experimental). 
 
 **add_hydrogen** [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF] - _Add Hydrogen Atoms to the strucure_  
 * **--add_mode**
@@ -57,8 +58,10 @@ _Mutate side chain with minimal atom replacement_
 ### Fix Structure Errors
 Commands to detect and fix possible structure errors. 
 
-**Amide** [--fix All|None|Residue List] [--no_recheck] - _Detect/Fix Amide atoms Assignment_
-* Amide contacts are rechecked unless **--no_recheck** That can lead to infinite loops if done non-interactively.
+**Amide** [--fix All|None|Auto|Residue List] [--no_recheck] - _Detect/Fix Amide atoms Assignment_
+* Auto option searches for the combinations of fixes that offer less contacts.
+* * Amide contacts are rechecked unless **--no_recheck** That can lead to infinite loops if done non-interactively.
+
   
 **chiral** [--fix All|None|Residue List] [--no_check_clashes] - _Detect/Fix Improper side chain chirality_
 * Checks for generated clashes unless **--no_check_clashes** set

@@ -163,7 +163,7 @@ Running cistransbck.
 ASN A138   PRO A139   Dihedral:   -2.457
 ASN D138   PRO D139   Dihedral:    2.871
 ASN C138   PRO C139   Dihedral:   -1.167
-ASN B138   PRO B139   Dihedral:   -1.397
+ASN B138   PRO B139   Dihedral:   -1.398
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.

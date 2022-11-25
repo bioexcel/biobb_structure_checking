@@ -1,0 +1,79 @@
+================================================================================
+=                   BioBB structure checking utility v3.10.2                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Structure exists: 'tmpPDB/m0/6m0j.cif' 
+Structure pdb:6m0j loaded
+ PDB id: 6M0J
+ Title: Crystal structure of SARS-CoV-2 spike receptor-binding domain bound with ACE2
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: VIRAL PROTEIN/HYDROLASE
+ Resolution (A): 2.4500
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, E: Protein)
+ Num. residues:  878
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  87
+ Num. ligands or modified residues:  7
+ Num. water mol.:  80
+ Num. atoms:  6558
+Metal/Ion residues found
+ ZN A901
+ CL A902
+Small mol ligands found
+NAG A903
+NAG A904
+NAG A905
+NAG A906
+NAG E601
+Running amide. Options: --fix auto
+7 unusual contact(s) involving amide atoms found
+ LYS A31.NZ   GLN E493.NE2    2.926 A
+ GLN A42.NE2  GLN E498.NE2    2.927 A
+ ASN A103.OD1 ASN A194.OD1    2.807 A
+ ASN A134.OD1 GLU A140.OE2    2.785 A
+ ASN A134.ND2 ASN A137.N      3.082 A
+ GLU A150.O   ASN A154.OD1    2.895 A
+ ARG E357.NH1 ASN E394.ND2    2.963 A
+Fixing automatically
+Initial contact score: 1.177
+Clustering amide residues
+6 cluster(s) found, exploring...
+Cluster 1:ASN A134
+New score: 0.837, fixed residue(s): ASN A134
+Cluster 2:ASN A154
+New score: 0.718, fixed residue(s): ASN A154
+Cluster 3:ASN A103, ASN A194
+New score: 0.464, fixed residue(s): ASN A194
+Cluster 4:GLN E498, GLN A42
+New score: 0.231, fixed residue(s): GLN A42
+Cluster 5:ASN E394
+Score not improved, skipping
+Cluster 6:GLN E493
+New score: 0.114, fixed residue(s): GLN E493
+Amide residues fixed auto (5)
+Rechecking
+1 unusual contact(s) involving amide atoms found
+ ARG E357.NH1 ASN E394.ND2    2.963 A
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, E: Protein)
+Final Num. residues:  878
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  87
+Final Num. ligands or modified residues:  7
+Final Num. water mol.:  80
+Final Num. atoms:  6558
+Metal/Ion residues found
+ ZN A901
+ CL A902
+Small mol ligands found
+NAG A903
+NAG A904
+NAG A905
+NAG A906
+NAG E601
+Structure saved on 6m0j_amide_test_auto.pdb

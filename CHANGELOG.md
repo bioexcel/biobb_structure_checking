@@ -1,11 +1,13 @@
-## v3.XXXXX (2023.4)
+## v3.XXXXX (2022.4)
 ### Extended functions
-- json
-  - Extended information on json summary output
-- models
-  - Convert biounit's selected models into actual complexes.
+- amide
+  - Added --fix auto option to automatically find best fix combination
 - chains
   - --rename fixes empty chain labels
+- models
+  - Added --build_complex. Converts biounit's selected models into actual complexes
+- json
+  - Extended information on json summary output
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized
@@ -48,14 +50,7 @@
   - Superimpose current models
   - Output models as multiple PDB files
 
-<<<<<<< HEAD
-- backbone
-  - Accept standard FASTA files as sequence input
-  - Accept multiple templates
-  - Main options default to "none"
-=======
 ### Bug Fixes
->>>>>>> Sept2022_RC
 
 - add_hydrogen
   - Extended to Nucleic Acids
