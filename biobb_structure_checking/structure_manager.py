@@ -715,7 +715,17 @@ class StructureManager:
         self.chains_data.select(select_chains)
         self.update_internals()
         self.modified = True
-
+    
+    def rename_empty_chain_label(self, new_label):
+        result = self.chains_data.rename_empty_chain_label(new_label)
+        self.update_internals()
+        self.modified = True
+    
+    def renumber_chain_residues(self, renum_str, allow_merge=False):
+        if self.chains_data.renumber(renum_str, allow_merge=allow_merge):
+            self.update_internals()
+            self.modified = True
+        
     def select_altloc_residue(self, res: Residue, to_fix: Mapping[str, Union[str, Atom]]) -> None:
         """ Selects one alternative conformation when altloc exists. Selection is
             done on the occupancy basis or from the conformation id.
