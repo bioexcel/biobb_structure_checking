@@ -32,9 +32,11 @@ def _fix(strcheck, opts, fix_data=None):
             rename_chains = opts['rename']
         else:
             rename_chains = ''
+        if 'renumber' in opts:
+            renumber_chains = opts['renumber']
+        print(opts)
 
     if strcheck.strucm.chains_data.has_chains_to_rename:
-        strcheck.summary['chains']['selected'] = {}
         input_line = ParamInput(
             'Add missing chain label',
             strcheck.args['non_interactive'],
@@ -59,6 +61,11 @@ def _fix(strcheck, opts, fix_data=None):
             new_label = strcheck.strucm.chains_data.rename_empty_chain_label(rename_chains)
             _check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
+
+    if renumber_chains:
+        results = strcheck.strucm.chains_data.renumber(renumber_chains)
+        strcheck.summary['chains']['renumbered'] = results
+
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
     input_line.add_option_all()

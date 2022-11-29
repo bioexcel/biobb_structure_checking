@@ -60,6 +60,65 @@ class ChainsData():
         self.modified = True
         return new_label
 
+    def _parse_renumber_str(self, renum_str):
+        renum_to_do = []
+        renum_str = renum_str.replace(' ','')
+        if ',' not in renum_str:
+            tasks = [renum_str]
+        else:
+            tasks = renum_str.split(',')
+        for tsk in tasks:
+            print(tsk)
+            tsk_strs = tsk.split('=')
+            print(tsk_strs)
+            chn = {}
+            ini = {}
+            fin = {}
+            for i in range(2):
+                ts_str = tsk_strs[i]
+                print(ts_str)
+                if ts_str.endswith(':'):
+                    chn[i] = ts_str[:-1]
+                    ini[i] = 0
+                    fin[i] = 0
+                else:
+                    if ':' in ts_str:
+                        chn[i], seq = ts_str.split(':')
+                    else:
+                        chn[i], seq = '*', ts_str
+                    if seq.endswith('-'):
+                        ini[i] = int(seq[:-1])
+                        fin[i] = 0
+                    else:
+                        ini[i], fin[i] = seq.split('-')
+                        ini[i] = int(ini[i])
+                        fin[i] = int(fin[i])
+            if chn[0] == '*':
+                if chn[1] != '*':
+                    print(f"Error, use either wild card or explicit labels in both origin and updated ({tsk['chn']})")
+                    sys.exit()
+                for ch_id in self.chain_ids:
+                    renum_to_do.append(
+                        {'chn':[ch_id, ch_id], 'ini':ini, 'fin':fin}
+                    )
+            else:
+                renum_to_do.append({'chn':chn, 'ini':ini, 'fin':fin})
+        return renum_to_do
+
+    def renumber(self, renum_str):
+        """ Renumber residues"""
+        if renum_str.lower() != 'auto':
+            renum_to_do = self._parse_renumber_str(renum_str)
+
+            print(renum_to_do)
+        else:
+            print("Not implemented (yet)")
+            return 0
+
+
+
+
+
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
         if mu.is_hetatm(res):
