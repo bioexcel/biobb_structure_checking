@@ -68,15 +68,12 @@ class ChainsData():
         else:
             tasks = renum_str.split(',')
         for tsk in tasks:
-            print(tsk)
             tsk_strs = tsk.split('=')
-            print(tsk_strs)
             chn = {}
             ini = {}
             fin = {}
             for i in range(2):
                 ts_str = tsk_strs[i]
-                print(ts_str)
                 if ts_str.endswith(':'):
                     chn[i] = ts_str[:-1]
                     ini[i] = 0
@@ -86,38 +83,59 @@ class ChainsData():
                         chn[i], seq = ts_str.split(':')
                     else:
                         chn[i], seq = '*', ts_str
-                    if seq.endswith('-'):
-                        ini[i] = int(seq[:-1])
-                        fin[i] = 0
-                    else:
+                    if '-' in seq:
                         ini[i], fin[i] = seq.split('-')
                         ini[i] = int(ini[i])
                         fin[i] = int(fin[i])
+                    else:
+                        ini[i] = int(seq)
+                        fin[i] = 0
             if chn[0] == '*':
                 if chn[1] != '*':
                     print(f"Error, use either wild card or explicit labels in both origin and updated ({tsk['chn']})")
                     sys.exit()
                 for ch_id in self.chain_ids:
                     renum_to_do.append(
-                        {'chn':[ch_id, ch_id], 'ini':ini, 'fin':fin}
+                        {'chn':[ch_id, ch_id], 'ini':ini.copy(), 'fin':fin.copy()}
                     )
             else:
-                renum_to_do.append({'chn':chn, 'ini':ini, 'fin':fin})
+                if chn[1] == '*':
+                    chn[1] = chn[0]
+                renum_to_do.append({'chn':chn.copy(), 'ini':ini.copy(), 'fin':fin.copy()})
         return renum_to_do
+
+    def _calc_terms(self, mod, ch_id):
+        n_term = 0
+        c_term = 0
+        for res in mod[ch_id].get_residues():
+            res_num = res.id[1]
+            if not n_term:
+                n_term = res_num
+        c_term = res_num
+        return n_term, c_term
 
     def renumber(self, renum_str):
         """ Renumber residues"""
         if renum_str.lower() != 'auto':
-            renum_to_do = self._parse_renumber_str(renum_str)
-
-            print(renum_to_do)
-        else:
-            print("Not implemented (yet)")
-            return 0
-
-
-
-
+            for mod in self.st:
+                renum_to_do = self._parse_renumber_str(renum_str)
+                print(renum_to_do)
+                for tsk in renum_to_do:
+                    if tsk['chn'][0] != tsk['chn'][1] and tsk['chn'][1] in self.chain_ids:
+                        print(f"ERROR: chain {tsk['chn'][1]} already exists")
+                        sys.exit()
+                    n_term, c_term = self._calc_terms(mod, tsk['chn'][0])
+                    if tsk['ini'][0] == 0:
+                        tsk['ini'][0] = n_term
+                    if tsk['fin'][0] == 0:
+                        tsk['fin'][0] = c_term
+                    if tsk['ini'][1] == 0:
+                        tsk['ini'][1] = tsk['ini'][0]
+                    if tsk['fin'][1] == 0:
+                        tsk['fin'][1] = tsk['fin'][0] - tsk['ini'][0] + tsk['ini'][1]
+                    print(f"Renumbering {tsk['chn'][0]}{tsk['ini'][0]}-{tsk['chn'][0]}{tsk['fin'][0]} to "
+                        f"{tsk['chn'][1]}{tsk['ini'][1]}-{tsk['chn'][1]}{tsk['fin'][1]}"
+                        )
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
