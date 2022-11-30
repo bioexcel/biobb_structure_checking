@@ -58,118 +58,131 @@ class ChainsData():
                     chn.id = new_label
         self.set_chain_ids()
         return new_label
-    
+
+    def _parse_task_str(self, ts_str):
+        #Format [A:]ini[-fin]
+        if ':' not in ts_str:
+            ts_str = '*:' + ts_str
+        chn, rnum = ts_str.split(':')
+        if not rnum:
+            return ts_str[:-1], 0, 0
+        if not '-' in rnum:
+            return chn, int(rnum), 0
+        ini, fin = rnum.split('-')
+        return chn, int(ini), int(fin)
+
     def _parse_renumber_str(self, renum_str):
         renum_to_do = []
         renum_str = renum_str.replace(' ','')
+
         if ',' not in renum_str:
             tasks = [renum_str]
         else:
             tasks = renum_str.split(',')
+
         for tsk in tasks:
-            tsk_strs = tsk.split('=')
-            chn = {}
-            ini = {}
-            fin = {}
-            for i in range(2):
-                ts_str = tsk_strs[i]
-                if ts_str.endswith(':'):
-                    chn[i] = ts_str[:-1]
-                    ini[i] = 0
-                    fin[i] = 0
-                else:
-                    if ':' in ts_str:
-                        chn[i], seq = ts_str.split(':')
-                    else:
-                        chn[i], seq = '*', ts_str
-                    if '-' in seq:
-                        ini[i], fin[i] = seq.split('-')
-                        ini[i] = int(ini[i])
-                        fin[i] = int(fin[i])
-                    else:
-                        ini[i] = int(seq)
-                        fin[i] = 0
-            if chn[0] == '*':
-                if chn[1] != '*':
-                    print(f"Error, use either wild card or explicit labels in both origin and updated ({tsk['chn']})")
+            tsk_0, tsk_1 = tsk.split('=')
+            chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
+            chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
+            if chn_0 != '*':
+                if chn_1 == '*':
+                    chn_1 = chn_0
+                renum_to_do.append([
+                    {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                    {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
+                ])
+            else:
+                # replicate for all chains
+                if chn_1 != '*':
+                    print(
+                        f"Error, use either wild card or explicit labels"
+                        f" in both origin and updated ({chn_0}={chn_1})"
+                    )
                     sys.exit()
                 for ch_id in self.chain_ids:
-                    renum_to_do.append(
-                        {'chn':[ch_id, ch_id], 'ini':ini.copy(), 'fin':fin.copy()}
-                    )
-            else:
-                if chn[1] == '*':
-                    chn[1] = chn[0]
-                renum_to_do.append({'chn':chn.copy(), 'ini':ini.copy(), 'fin':fin.copy()})
+                    renum_to_do.append([
+                        {'chn':ch_id, 'ini':ini_0, 'fin':fin_0},
+                        {'chn':ch_id, 'ini':ini_1, 'fin':fin_1}
+                    ])
         return renum_to_do
-
-    def _get_terms(self, mod, ch_id):
-        n_term = 0
-        c_term = 0
-        res_num = 0
-        for res in mod[ch_id].get_residues():
-            res_num = res.id[1]
-            if not n_term:
-                n_term = res_num
-        c_term = res_num
-        return n_term, c_term
 
     def renumber(self, renum_str, allow_merge=False):
         """ Renumber residues"""
+        renum_to_do = []
         if renum_str.lower() == 'auto':
-            print ("Auto renumbering not implemented")            
-            return 0
-                        
+            tmp_ch_id = 'z'
+            last_res_num = 0
+            for chn in self.chain_ids:
+                n_term, c_term = mu.get_terms(self.st[0], chn)
+                renum_to_do.append([
+                    {'chn': chn, 'ini': n_term.id[1], 'fin': c_term.id[1]},
+                    {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': 0}
+                ]
+                )
+                renum_to_do.append([
+                    {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1},
+                    {'chn':chn, 'ini': last_res_num + 1, 'fin': 0}
+                ])
+                last_res_num = last_res_num + c_term.id[1] - n_term.id[1] + 1
+        else:
+           renum_to_do = self._parse_renumber_str(renum_str)
+
         for mod in self.st:
-            renum_to_do = self._parse_renumber_str(renum_str)
             for tsk in renum_to_do:
-                if not allow_merge and tsk['chn'][0] != tsk['chn'][1] and tsk['chn'][1] in self.chain_ids:
-                    print(f"ERROR: chain {tsk['chn'][1]} already exists and --allow_merge not set")
+                org, tgt = tsk
+                if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
+                    print(f"ERROR: chain {tgt['chn']} already exists and --allow_merge not set")
                     sys.exit()
-                n_term, c_term = self._get_terms(mod, tsk['chn'][0])
-                if not tsk['ini'][0]:
-                    tsk['ini'][0] = n_term
-                if not tsk['fin'][0]:
-                    tsk['fin'][0] = c_term
-                if not tsk['ini'][1]:
-                    tsk['ini'][1] = tsk['ini'][0]
-                if not tsk['fin'][1]:
-                    tsk['fin'][1] = tsk['fin'][0] - tsk['ini'][0] + tsk['ini'][1]
-                print(f"Renumbering {tsk['chn'][0]}{tsk['ini'][0]}-{tsk['chn'][0]}{tsk['fin'][0]} to "
-                    f"{tsk['chn'][1]}{tsk['ini'][1]}-{tsk['chn'][1]}{tsk['fin'][1]}"
+                n_term, c_term = mu.get_terms(mod, org['chn'])
+                if not org['ini']:
+                    org['ini'] = n_term.id[1]
+                if not org['fin']:
+                    org['fin'] = c_term.id[1]
+                if not tgt['ini']:
+                    tgt['ini'] = org['ini']
+                tgt['fin'] = org['fin'] - org['ini'] + tgt['ini']
+                print(
+                    f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
+                    f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
+                )
+                if tgt['chn'] in mod:
+                    n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
+                    if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
+                        n_term1.id[1] <= tgt['fin'] <= c_term1.id[1]:
+                        print("WARNING: new residue numbers overlap with existing ones")
+                        sys.exit()
+                if org['ini'] == tgt['ini'] and\
+                    org['fin'] == tgt['fin'] and\
+                    org['ini'] == n_term.id[1] and\
+                    org['fin'] == c_term.id[1]:
+                    print(
+                        f"Whole chains selected, just replacing chain labels from {org['chn']}"
+                        f" to {tgt['chn']}"
                     )
-                if tsk['chn'][1] in mod:
-                    n_term1, c_term1 = self._get_terms(mod, tsk['chn'][1])
-                    if n_term1 <= tsk['ini'][1] <= c_term1 or n_term1 <= tsk['fin'][1] <= c_term1:
-                        print(f"WARNING: new residue numbers overlap with existing ones")
-                        sys.error()
-                if tsk['ini'][0] == tsk['ini'][1] and\
-                    tsk['fin'][0] == tsk['fin'][1] and\
-                    tsk['ini'][0] == n_term and\
-                    tsk['fin'][0] == c_term:
-                    print(f"Whole chains selected, just replacing chain labels from {tsk['chn'][0]} to {tsk['chn'][1]}")
-                    mod[tsk['chn'][0]].id = tsk['chn'][1]
+                    mod[org['chn']].id = tgt['chn']
+                    self.set_chain_ids()
                 else:
-                    if tsk['chn'][1] not in mod:
-                        print(f"Creating new chain {tsk['chn'][1]}")
-                        new_ch = Chain(tsk['chn'][1])
+                    if tgt['chn'] not in mod:
+                        print(f"Creating new chain {tgt['chn']}")
+                        new_ch = Chain(tgt['chn'])
                         mod.add(new_ch)
                     else:
-                        new_ch = mod[tsk['chn'][1]]
+                        new_ch = mod[tgt['chn']]
                     to_del = []
-                    for res in mod[tsk['chn'][0]].get_residues():
-                        if res.id[1] >= tsk['ini'][0] and res.id[1] <= tsk['fin'][0]:
+                    for res in mod[org['chn']].get_residues():
+                        if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
                             new_res = res.copy()
-                            new_res.id = res.id[0], res.id[1] - tsk['ini'][0] + tsk['ini'][1], res.id[2]
+                            new_res.id = res.id[0], res.id[1] - org['ini'] + tgt['ini'], res.id[2]
                             to_del.append(res.id)
                             new_res.parent = new_ch
                             new_ch.add(new_res)
                     for res_id in to_del:
-                        mod[tsk['chn'][0]].detach_child(res_id)
-                    if not len(mod[tsk['chn'][0]]):
-                        mod.detach_child(tsk['chn'][0])
+                        mod[org['chn']].detach_child(res_id)
+                    if len(mod[org['chn']]) > 0:
+                        mod.detach_child(org['chn'])
+                    self.set_chain_ids()
         return 1
-    
+
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
         if mu.is_hetatm(res):

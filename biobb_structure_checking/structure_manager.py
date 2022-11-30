@@ -715,17 +715,22 @@ class StructureManager:
         self.chains_data.select(select_chains)
         self.update_internals()
         self.modified = True
-    
+
     def rename_empty_chain_label(self, new_label):
+        '''Add labels to unlabelled chains'''
         result = self.chains_data.rename_empty_chain_label(new_label)
         self.update_internals()
         self.modified = True
-    
+        return result
+
     def renumber_chain_residues(self, renum_str, allow_merge=False):
-        if self.chains_data.renumber(renum_str, allow_merge=allow_merge):
+        ''' Allow to relabel chains and residues'''
+        result = self.chains_data.renumber(renum_str, allow_merge=allow_merge)
+        if result:
             self.update_internals()
             self.modified = True
-        
+        return result
+
     def select_altloc_residue(self, res: Residue, to_fix: Mapping[str, Union[str, Atom]]) -> None:
         """ Selects one alternative conformation when altloc exists. Selection is
             done on the occupancy basis or from the conformation id.
@@ -1301,19 +1306,19 @@ class StructureManager:
             res[amide_res[res_type][0]],
             res[amide_res[res_type][1]]
         )
-        
+
     def _amide_score(self, matr):
         # for amide_res in sorted(matr):
         #     for atm in matr[amide_res]['cnts']:
         #         for atm_cnt in matr[amide_res]['cnts'][atm]:
         #             print("M", mu.residue_id(amide_res), mu.atom_id(atm), mu.atom_id(atm_cnt))
-        # sys.exit()    
+        # sys.exit()
 
         score = 0.
         for amide_res in sorted(matr):
             for atm in matr[amide_res]['cnts']:
                 for atm_cnt in matr[amide_res]['cnts'][atm]:
-                    #print(mu.atom_id(atm), mu.atom_id(atm_cnt))                    
+                    #print(mu.atom_id(atm), mu.atom_id(atm_cnt))
                     d = atm.element != atm_cnt.element
                     m1 = matr[amide_res]['mod']
                     m2 = atm_cnt.get_parent() in matr and matr[atm_cnt.get_parent()]['mod']
@@ -1327,14 +1332,14 @@ class StructureManager:
 
                     #print(matr[amide_res]['mod'], mu.atom_id(atm), mu.atom_id(atm_cnt), 1/matr[amide_res]['cnts'][atm][atm_cnt], score)
         return score
-        
+
     def _amide_cluster(self, to_fix):
         cluster = {}
 
         for res in to_fix:
             cluster[res] = set()
             cluster[res].add(res)
-        
+
         for r_pair in self.rr_dist:
             res1, res2 = r_pair[0:2]
             if res1 in to_fix and res2 in to_fix:
@@ -1350,7 +1355,7 @@ class StructureManager:
                     if res2 in cluster:
                         del cluster[res2]
         return cluster
-    
+
     def _is_amide_atom(self, amide_res, atm):
         res = atm.get_parent()
         return res.get_resname() in amide_res and atm.id in amide_res[res.get_resname()]
@@ -1368,7 +1373,7 @@ class StructureManager:
                 at1, at2, dist2 = cnt
                 if at1.serial_number > at2.serial_number:
                     at2, at1, dist2 = cnt
-        matr = {}        
+        matr = {}
         for res_pair in c_list['polar']:
             for cnt in c_list['polar'][res_pair]:
                 at1, at2, dist2 = cnt
@@ -1388,7 +1393,7 @@ class StructureManager:
                     if at2 not in matr[res2]['cnts']:
                         matr[res2]['cnts'][at2] = {}
                     matr[res2]['cnts'][at2][at1] = dist2
-        
+
         print(f"Initial contact score: {self._amide_score(matr):.3f}")
         print("Clustering amide residues")
         clusters = self._amide_cluster(to_fix['res_to_fix'])
