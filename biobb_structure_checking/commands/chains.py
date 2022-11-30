@@ -64,7 +64,7 @@ def _fix(strcheck, opts, fix_data=None):
 
     if renumber_chains:
         if strcheck.strucm.chains_data.has_chains_to_rename:
-            print("WARNING: unlabelled chains detected")
+            logging.warning("Unlabelled chains detected")
         result = strcheck.strucm.renumber_chain_residues(
             renumber_chains,
             opts['allow_merge']

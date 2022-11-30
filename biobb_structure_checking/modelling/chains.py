@@ -1,5 +1,6 @@
 ''' Class to manage Chain internal data'''
 import sys
+import logging
 import biobb_structure_checking.model_utils as mu
 from Bio.PDB.Chain import Chain
 
@@ -61,7 +62,6 @@ class ChainsData():
 
     def _parse_task_str(self, ts_str):
         #Format [A:]ini[-fin]
-        print(ts_str)
         if ':' not in ts_str:
             ts_str = '*:' + ts_str
         chn, rnum = ts_str.split(':')
@@ -72,7 +72,6 @@ class ChainsData():
         ini, fin = rnum.split('-')
         if not fin:
             fin = 0
-        print(chn, ini, fin)
         return chn, int(ini), int(fin)
 
     def _parse_renumber_str(self, renum_str):
@@ -86,7 +85,8 @@ class ChainsData():
 
         for tsk in tasks:
             if '=' not in tsk:
-                print(f"ERROR: wrong syntax {tsk}, use origin=target")
+                logging.error(f"Wrong syntax {tsk}, use origin=target")
+                sys.exit()
             tsk_0, tsk_1 = tsk.split('=')
             chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
             chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
@@ -100,8 +100,8 @@ class ChainsData():
             else:
                 # replicate for all chains
                 if chn_1 != '*':
-                    print(
-                        f"Error, use either wild card or explicit labels"
+                    logging.error(
+                        f"Uuse either wild card or explicit labels"
                         f" in both origin and updated ({chn_0}={chn_1})"
                     )
                     sys.exit()
@@ -137,9 +137,9 @@ class ChainsData():
             for tsk in renum_to_do:
                 org, tgt = tsk
                 if not mu.check_residue_id_order(mod[org['chn']]):
-                    print(f"WARNING: disordered residue ids found in {org['chn']}, use explicit order combinations")
+                    logging.warning(f"Disordered residue ids found in {org['chn']}, use explicit order combinations")
                 if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
-                    print(f"ERROR: chain {tgt['chn']} already exists and --allow_merge not set")
+                    logging.error(f"Chain {tgt['chn']} already exists and --allow_merge not set")
                     sys.exit()
                 n_term, c_term = mu.get_terms(mod, org['chn'])
                 if not org['ini']:
@@ -149,7 +149,7 @@ class ChainsData():
                 if not tgt['ini']:
                     tgt['ini'] = org['ini']
                 tgt['fin'] = org['fin'] - org['ini'] + tgt['ini']
-                print(
+                logging.info(
                     f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
                     f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
                 )
@@ -157,14 +157,14 @@ class ChainsData():
                     n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
                     if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
                         n_term1.id[1] <= tgt['fin'] <= c_term1.id[1]:
-                        print("WARNING: new residue numbers overlap with existing ones")
+                        logging.error("New residue numbers overlap with existing ones")
                         sys.exit()
                 if org['ini'] == tgt['ini'] and\
                     org['fin'] == tgt['fin'] and\
                     org['ini'] == n_term.id[1] and\
                     org['fin'] == c_term.id[1] and\
                     tgt['chn'] not in mod:
-                    print(
+                    logging.info(
                         f"Whole chains selected, just replacing chain labels from {org['chn']}"
                         f" to {tgt['chn']}"
                     )
@@ -217,13 +217,13 @@ class ChainsData():
             ch_ok = select_chains.split(',')
             for chn in ch_ok:
                 if chn not in self.chain_ids:
-                    print('Warning: skipping unknown chain', chn)
+                    logging.warning(f"Skipping unknown chain {chn}")
         for mod in self.st:
             for chn in self.chain_ids:
                 if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
                     self.st[mod.id].detach_child(chn)
             if not self.st[mod.id]:
-                print("ERROR: would remove all chains, exiting")
+                logging.error("Would remove all chains, exiting")
                 sys.exit()
 
     def has_NA(self):
