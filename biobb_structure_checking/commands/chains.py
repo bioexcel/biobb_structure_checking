@@ -33,9 +33,10 @@ def _fix(strcheck, opts, fix_data=None):
             rename_chains = opts['rename']
         else:
             rename_chains = ''
+        if 'renumber' in opts:
+            renumber_chains = opts['renumber']
 
     if strcheck.strucm.chains_data.has_chains_to_rename:
-        strcheck.summary['chains']['selected'] = {}
         input_line = ParamInput(
             'Add missing chain label',
             strcheck.args['non_interactive'],
@@ -57,9 +58,20 @@ def _fix(strcheck, opts, fix_data=None):
                 logging.warning(f"Chain {rename_chains} is already present")
                 rename_chains = ''
         if input_option != 'none':
-            new_label = strcheck.strucm.chains_data.rename_empty_chain_label(rename_chains)
+            new_label = strcheck.strucm.rename_empty_chain_label(rename_chains)
             _check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
+
+    if renumber_chains:
+        if strcheck.strucm.chains_data.has_chains_to_rename:
+            print("WARNING: unlabelled chains detected")
+        result = strcheck.strucm.renumber_chain_residues(
+            renumber_chains,
+            opts['allow_merge']
+        )
+        if result:
+            strcheck.summary['chains']['renumbered'] = renumber_chains
+
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
     input_line.add_option_all()

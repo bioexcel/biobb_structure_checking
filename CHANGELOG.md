@@ -3,7 +3,8 @@
 - amide
   - Added --fix auto option to automatically find best fix combination
 - chains
-  - --rename fixes empty chain labels
+  - Added --rename. fixes empty chain labels
+  - Added --renumber. allow to renumber chains and residues
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
 - json

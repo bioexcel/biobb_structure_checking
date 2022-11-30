@@ -247,6 +247,15 @@ def seq_consecutive_index(res1, res2):
     rnum2 = res2.index
     return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
+def check_residue_id_order(ch):
+    ok = True
+    last = ''
+    for res in ch.get_residues():
+        if last:
+            ok = ok and res.id[1] > last
+        last = res.id[1]
+    return ok
+
 def is_wat(res):
     """
     Shortcut to check for water residues
@@ -272,6 +281,17 @@ def has_ins_code(res):
     """Checks whether residue **r has insertion code
     """
     return res.id[2] != ' '
+
+def get_terms(mod, ch_id):
+    """ Get terminal residues"""
+    n_term = 0
+    c_term = 0
+    res_num = 0
+    for res in mod[ch_id].get_residues():
+        if not n_term:
+            n_term = res
+    c_term = res
+    return n_term, c_term
 
 #===============================================================================
 # Metrics =============================================================
@@ -552,17 +572,17 @@ def check_rr_clashes(res1, res2, clash_dist, atom_lists, join_models=True, sever
     contact_types = set()
     if severe:
         contact_types.add('severe')
-        
+
     for cls in atom_lists:
         contact_types.add(cls)
-    
+
     for cls in contact_types:
         clash_list[cls] = []
         min_dist2[cls] = 99999.
         clash_dist2[cls] = clash_dist[cls]**2
         ats_list1[cls] = set()
         ats_list2[cls] = set()
-    
+
     for atm in res1.get_atoms():
         for cls in atom_lists:
             if is_at_in_list(atm, atom_lists[cls], res1.get_resname()):
