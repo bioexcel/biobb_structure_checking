@@ -81,6 +81,8 @@ class ChainsData():
             tasks = renum_str.split(',')
 
         for tsk in tasks:
+            if '=' not in tsk:
+                print(f"ERROR: wrong syntax {tsk}, use origin=target")
             tsk_0, tsk_1 = tsk.split('=')
             chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
             chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
@@ -130,6 +132,8 @@ class ChainsData():
         for mod in self.st:
             for tsk in renum_to_do:
                 org, tgt = tsk
+                if not mu.check_residue_id_order(mod[org['chn']]):
+                    print(f"WARNING: disordered residue ids found in {org['chn']}, use explicit order combinations")
                 if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
                     print(f"ERROR: chain {tgt['chn']} already exists and --allow_merge not set")
                     sys.exit()
@@ -154,7 +158,8 @@ class ChainsData():
                 if org['ini'] == tgt['ini'] and\
                     org['fin'] == tgt['fin'] and\
                     org['ini'] == n_term.id[1] and\
-                    org['fin'] == c_term.id[1]:
+                    org['fin'] == c_term.id[1] and\
+                    tgt['chn'] not in mod:
                     print(
                         f"Whole chains selected, just replacing chain labels from {org['chn']}"
                         f" to {tgt['chn']}"
@@ -168,17 +173,18 @@ class ChainsData():
                         mod.add(new_ch)
                     else:
                         new_ch = mod[tgt['chn']]
-                    to_del = []
+                    to_move = []
                     for res in mod[org['chn']].get_residues():
                         if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
-                            new_res = res.copy()
-                            new_res.id = res.id[0], res.id[1] - org['ini'] + tgt['ini'], res.id[2]
-                            to_del.append(res.id)
-                            new_res.parent = new_ch
-                            new_ch.add(new_res)
-                    for res_id in to_del:
-                        mod[org['chn']].detach_child(res_id)
-                    if len(mod[org['chn']]) > 0:
+                            to_move.append(res)
+                    for res in sorted(to_move):
+                        new_res = res.copy()
+                        new_res.id = res.id[0], res.id[1] - org['ini'] + tgt['ini'], res.id[2]
+                        new_res.parent = new_ch
+                        new_ch.add(new_res)
+                        mod[org['chn']].detach_child(res.id)
+
+                    if len(mod[org['chn']]) == 0:
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
         return 1

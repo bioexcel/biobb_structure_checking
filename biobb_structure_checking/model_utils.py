@@ -246,6 +246,15 @@ def seq_consecutive_index(res1, res2):
     rnum2 = res2.index
     return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
+def check_residue_id_order(ch):
+    ok = True
+    last = ''
+    for res in ch.get_residues():
+        if last:
+            ok = ok and res.id[1] > last
+        last = res.id[1]
+    return ok
+
 def is_wat(res):
     """
     Shortcut to check for water residues
