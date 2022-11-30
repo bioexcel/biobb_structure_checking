@@ -1,7 +1,7 @@
 """ Module supporting cistransbck command"""
 
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 def _check(strcheck):
     (cis_backbone_list, lowtrans_backbone_list) = strcheck.strucm.check_cis_backbone()

@@ -1,5 +1,5 @@
 ''' Class to manage internal Structure data'''
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 class StructureData():
     '''Class to manage internal Structure data'''

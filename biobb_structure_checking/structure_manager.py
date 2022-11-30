@@ -20,18 +20,20 @@ from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
-from biobb_structure_checking.mmb_server import MMBPDBList, ALT_SERVERS
+from biobb_structure_checking.io.mmb_server import MMBPDBList, ALT_SERVERS
+from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
+
+from biobb_structure_checking.libs.data_lib_manager import DataLibManager
+from biobb_structure_checking.libs.residue_lib_manager import ResidueLib
+
+from biobb_structure_checking.modelling.sequencedata import SequenceData
+from biobb_structure_checking.modelling.modelsdata import ModelsData
+from biobb_structure_checking.modelling.chainsdata import ChainsData
+from biobb_structure_checking.modelling.structuredata import StructureData
+
+import biobb_structure_checking.modelling.utils as mu
+
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
-from biobb_structure_checking.data_lib_manager import DataLibManager
-from biobb_structure_checking.residue_lib_manager import ResidueLib
-from biobb_structure_checking.sequence_manager import SequenceData
-from biobb_structure_checking.PDBIO_extended import PDBIO_extended
-
-import biobb_structure_checking.model_utils as mu
-
-from biobb_structure_checking.modelling.model import ModelsData
-from biobb_structure_checking.modelling.chains import ChainsData
-from biobb_structure_checking.modelling.structure import StructureData
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 

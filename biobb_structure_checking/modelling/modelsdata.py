@@ -1,6 +1,6 @@
 ''' Class to manage models internal data'''
 from Bio.PDB.Superimposer import Superimposer
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 class ModelsData():
     '''Class to manage models internal data'''

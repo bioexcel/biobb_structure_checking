@@ -5,7 +5,7 @@ import argparse
 from os.path import dirname
 from os.path import join as opj
 
-from biobb_structure_checking.param_input import Dialog
+from biobb_structure_checking.io.param_input import Dialog
 
 VERSION = '3.10.2'
 

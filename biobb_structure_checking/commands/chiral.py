@@ -1,8 +1,8 @@
 """ Module supporting chiral command"""
 
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
 def _check(strcheck):
     chiral_check = strcheck.strucm.check_chiral_sides()

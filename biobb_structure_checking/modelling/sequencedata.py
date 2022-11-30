@@ -16,7 +16,7 @@ try:
     has_IUPAC = True
 except ImportError:
     has_IUPAC = False
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 IDENT_THRES = 0.7
 class SequenceData():

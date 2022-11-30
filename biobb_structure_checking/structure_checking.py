@@ -12,11 +12,11 @@ from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.json_writer import JSONWriter
-from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.io.json_writer import JSONWriter
+from biobb_structure_checking.io.param_input import ParamInput, NoDialogAvailableError
 
 import biobb_structure_checking.structure_manager as stm
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 
 # Main class
@@ -234,7 +234,8 @@ class StructureChecking():
             importlib.import_module('biobb_structure_checking.commands.' + command)
             f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
             f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
-        except ImportError:
+        except ImportError as e:
+            print(command,e)
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
 
         if command not in self.summary:

@@ -1,7 +1,7 @@
 """ Module supporting chiral_bck command"""
 
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 def _check(strcheck):
     check = strcheck.strucm.get_chiral_bck_list()

@@ -1,6 +1,6 @@
 """ Inscodes command """
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 def _check(strcheck):
     ins_codes_list = strcheck.strucm.get_ins_codes()

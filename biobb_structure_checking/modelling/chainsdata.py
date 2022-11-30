@@ -1,6 +1,6 @@
 ''' Class to manage Chain internal data'''
 import sys
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 from Bio.PDB.Chain import Chain
 
 class ChainsData():
@@ -61,7 +61,6 @@ class ChainsData():
 
     def _parse_task_str(self, ts_str):
         #Format [A:]ini[-fin]
-        print(ts_str)
         if ':' not in ts_str:
             ts_str = '*:' + ts_str
         chn, rnum = ts_str.split(':')
@@ -72,7 +71,6 @@ class ChainsData():
         ini, fin = rnum.split('-')
         if not fin:
             fin = 0
-        print(chn, ini, fin)
         return chn, int(ini), int(fin)
 
     def _parse_renumber_str(self, renum_str):
@@ -87,6 +85,7 @@ class ChainsData():
         for tsk in tasks:
             if '=' not in tsk:
                 print(f"ERROR: wrong syntax {tsk}, use origin=target")
+                sys.exit()
             tsk_0, tsk_1 = tsk.split('=')
             chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
             chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
