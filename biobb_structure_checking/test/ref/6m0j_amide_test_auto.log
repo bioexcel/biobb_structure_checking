@@ -46,8 +46,8 @@ Cluster 1:ASN A134
 New score: 0.837, fixed residue(s): ASN A134
 Cluster 2:ASN A154
 New score: 0.718, fixed residue(s): ASN A154
-Cluster 3:ASN A194, ASN A103
-New score: 0.464, fixed residue(s): ASN A103
+Cluster 3:ASN A103, ASN A194
+New score: 0.464, fixed residue(s): ASN A194
 Cluster 4:GLN A42, GLN E498
 New score: 0.231, fixed residue(s): GLN E498
 Cluster 5:ASN E394

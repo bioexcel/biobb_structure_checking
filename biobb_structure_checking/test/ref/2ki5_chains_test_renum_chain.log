@@ -29,10 +29,6 @@ Running chains. Options: --select All --renumber A:=C:,B:=D:
 2 Chain(s) detected
  A: Protein
  B: Protein
-A:
-C:
-B:
-D:
 WARNING: disordered residue ids found in A, use explicit order combinations
 Renumbering A46-A791 as C46-C791
 Whole chains selected, just replacing chain labels from A to C
