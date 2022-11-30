@@ -61,6 +61,7 @@ class ChainsData():
 
     def _parse_task_str(self, ts_str):
         #Format [A:]ini[-fin]
+        print(ts_str)
         if ':' not in ts_str:
             ts_str = '*:' + ts_str
         chn, rnum = ts_str.split(':')
@@ -69,6 +70,9 @@ class ChainsData():
         if not '-' in rnum:
             return chn, int(rnum), 0
         ini, fin = rnum.split('-')
+        if not fin:
+            fin = 0
+        print(chn, ini, fin)
         return chn, int(ini), int(fin)
 
     def _parse_renumber_str(self, renum_str):
