@@ -4,11 +4,13 @@
   - Added --fix auto option to automatically find best fix combination
 - chains
   - Added --rename. fixes empty chain labels
-  - Added --renumber. allow to renumber chains and residues
+  - Added --renumber [--allow_merge]. allow to renumber/reorganize chains and residues
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
 - json
   - Extended information on json summary output
+- input format
+  - File format for remote download can be defined using extension as in pdb:2ki5.pdb
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized
@@ -25,7 +27,7 @@
 - sequences
   - Structure sequence is always reported even in the absence of canonical one
 - chains
-  - Unlabelled chains can be fixed.   
+  - Unlabelled chains can be fixed.
 
 ### Bug Fixes
 - Fixed banner format
