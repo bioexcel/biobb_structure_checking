@@ -6,7 +6,7 @@ import warnings
 import os
 from os.path import join as opj
 import sys
-#import re
+import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 from Bio.PDB.Residue import Residue
@@ -36,6 +36,8 @@ import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
+ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
+REMOTE_ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
@@ -90,19 +92,24 @@ class StructureManager:
     def _load_structure_file(self, input_pdb_path, cache_dir, pdb_server, file_format):
         """ Load structure file """
         biounit = False
-        if "pdb:" in input_pdb_path:
+        if input_pdb_path.startswith('pdb:'):
+            input_pdb_path = input_pdb_path[4:]
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
-            if '.' in input_pdb_path:
-                [pdbid, biounit] = input_pdb_path.split('.')
-                input_pdb_path = pdbid[4:].upper()
+            if re.match(r'.[1-9]+', input_pdb_path):
+                pdbid, biounit = input_pdb_path.split('.')
+                input_pdb_path = pdbid.upper()
                 if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format='pdb', biounit=biounit
                 )
             else:
-                input_pdb_path = input_pdb_path[4:].upper()
+                if '.' in input_pdb_path:
+                    pdbid, file_format = input_pdb_path.split('.')
+                    input_pdb_path = pdbid.upper()
+                else:
+                    input_pdb_path = input_pdb_path.upper()
                 #Force mmCif as cif is not accepted by biopython
                 if file_format == 'cif':
                     file_format = 'mmCif'
@@ -111,8 +118,8 @@ class StructureManager:
                 )
                 if file_format == 'pdb':
                     # change file name to id.pdb
-                    os.rename(real_pdb_path, input_pdb_path + ".pdb")
-                    real_pdb_path = input_pdb_path + ".pdb"
+                    os.rename(real_pdb_path, f"{input_pdb_path}.pdb")
+                    real_pdb_path = f"{input_pdb_path}.pdb"
         else:
             real_pdb_path = input_pdb_path
 

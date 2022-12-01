@@ -87,8 +87,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving remote structures (mmCif(default)|pdb|xml)',
-    choices=['mmCif', 'pdb', 'xml', 'cif']
+    help='Format for retrieving remote structures (mmCif(default)|pdb|pqr|pdbqt)',
+    choices=['mmCif', 'pdb', 'cif', 'pqr', 'pdbqt']
 )
 
 CMD_LINE.add_argument(
@@ -256,9 +256,12 @@ DIALOGS.add_option('models', '--build_complex', 'build_complex',
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
-DIALOGS.add_option('chains', '--rename', 'rename','Rename unlabelled chains (auto | label)')
-DIALOGS.add_option('chains', '--renumber', 'renumber','Renumber residues (auto | [A|*:]ini0[-fin0]=[B|*:]ini1[-fin1])')
-DIALOGS.add_option('chains', '--allow_merge', 'allow_merge','Allow merge several chains in a single one', 'bool')
+DIALOGS.add_option('chains', '--rename', 'rename',
+    'Rename unlabelled chains (auto | label)')
+DIALOGS.add_option('chains', '--renumber', 'renumber',
+    'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)')
+DIALOGS.add_option('chains', '--allow_merge', 'allow_merge',
+    'Allow merge several chains in a single one', 'bool')
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option('altloc', '--select', 'select', \

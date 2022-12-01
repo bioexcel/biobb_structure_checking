@@ -9,15 +9,19 @@ load:         Stores structure on local cache and provides basic statistics
 
 1. System Configuration
 =======================
-sequences 
+sequences
     Print canonical and structure sequences in FASTA format
 models [--select model_num] [--superimpose] [--save_split]
     Detect/Select Models
     --superimpose Superimposes currently selected models
-    --save_split Split models as separated output files. 
-chains [--select chain_ids | molecule_type]
+    --save_split Split models as separated output files.
+chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
+    [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--allow_merge]
     Detect/Select Chains
-inscodes 
+    --rename allow to fix unlabelled chains
+    --renumber allow to reorganize residues and chains by moving or renunbering fragments
+    --allow_merge allow to add new residues to existing chains (with --renumber) if there no numbering overlap
+inscodes
     Detects residues with insertion codes. No fix provided (yet)
 altloc [--select occupancy| alt_id | list of res_id:alt_id]
     Detect/Select Alternative Locations
@@ -35,7 +39,7 @@ mutateside [--mut mutation_list|file:mutations_file] [--no_check_clashes]
     Mutate side chain with minimal atom replacement. Allows multiple mutations.
     mutation_list as file: accepts list of mutations in a external file
     Check generated clashes except --no_check_clashes set
-    --rebuild Optimize side chains using Modeller. 
+    --rebuild Optimize side chains using Modeller.
 add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF]
     Add Hydrogen Atoms. Auto: std changes at pH 7.0. His->Hie. pH: set pH value
     list: Explicit list as [*:]HisXXHid, Interactive[_his]: Prompts for all selectable residues
@@ -56,13 +60,13 @@ fixside [--fix All |None|Residue List] [--no_check_clashes]
     Checks generated clashes unless --no_check_clashes set
     --rebuild  Rebuild complete side chain using Modeller
 backbone [--fix_atoms All|None|Residue List]
-         [--fix_chain All|None|Break list] 
-         [--add_caps All|None|Break list] 
+         [--fix_chain All|None|Break list]
+         [--add_caps All|None|Break list]
          [--extra_gap]
          [--no_recheck]
          [--no_check_clashes]
     Analyze main chain missing atoms and fragments (protein only).
-    --fix_atoms Missing O, OXT atoms can be fixed 
+    --fix_atoms Missing O, OXT atoms can be fixed
     --fix_chain Missing fragments filled using comparative modelling (Modeller License needed)
     --add_caps Adds ACE and NME residues as necessary, preserving existing atoms
     --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections (experimental)
