@@ -37,7 +37,7 @@ from biobb_structure_checking.mutation_manager import MutationManager, MutationS
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
 ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
-REMOTE_ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
+ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
@@ -108,6 +108,9 @@ class StructureManager:
                 if '.' in input_pdb_path:
                     pdbid, file_format = input_pdb_path.split('.')
                     input_pdb_path = pdbid.upper()
+                    if file_format not in ACCEPTED_REMOTE_FORMATS:
+                        print(f"WARNING: format {file_format} not available for downloads, reverting to default")
+                        file_format='cif'
                 else:
                     input_pdb_path = input_pdb_path.upper()
                 #Force mmCif as cif is not accepted by biopython
