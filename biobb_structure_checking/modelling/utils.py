@@ -197,8 +197,8 @@ def valid_residue_check(res, chain_type):
     """
     if chain_type == PROTEIN:
         return _protein_residue_check(res)
-    else:
-        return _na_residue_check(res, chain_type)
+
+    return _na_residue_check(res, chain_type)
 
 def is_protein(res):
     """ Checks if a residue is a valid protein one """
@@ -247,6 +247,7 @@ def seq_consecutive_index(res1, res2):
     return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
 def check_residue_id_order(ch):
+    ''' Check whether residue number are properly ordered in PDB'''
     ok = True
     last = ''
     for res in ch.get_residues():
@@ -285,7 +286,6 @@ def get_terms(mod, ch_id):
     """ Get terminal residues"""
     n_term = 0
     c_term = 0
-    res_num = 0
     for res in mod[ch_id].get_residues():
         if not n_term:
             n_term = res
@@ -912,7 +912,8 @@ def add_hydrogens_backbone(res, prev_res, next_res):
 
     if _na_residue_check(rcode, chain_type=NA):
         return _add_hydrogens_to_ribose(res, prev_res, next_res)
-    elif not _protein_residue_check(rcode):
+
+    if not _protein_residue_check(rcode):
         return MSGS['RESIDUE_NOT_VALID']
 
     return _add_hydrogens_protein_backbone(res, prev_res, next_res)

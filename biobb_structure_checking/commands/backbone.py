@@ -87,7 +87,7 @@ def _fix(strcheck, opts, fix_data=None):
     no_int_recheck = opts['fix_atoms'] is not None or strcheck.args['non_interactive']
 
     fix_done = not fix_data['bck_breaks_list']
-    
+
     fixed_main_res = []
     while not fix_done:
         if opts['extra_gap'] is None:

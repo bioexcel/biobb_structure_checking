@@ -159,9 +159,10 @@ class StructureData():
         """
         self.get_headers()
         if 'entry_id' in self.meta:
-            print(f" PDB id: {self.meta['entry_id']}\n"
-                  f" Title: {self.meta['title']}\n"
-                  f" Experimental method: {self.meta['method']}"
+            print(
+                f" PDB id: {self.meta['entry_id']}\n"
+                f" Title: {self.meta['title']}\n"
+                f" Experimental method: {self.meta['method']}"
             )
         if 'keywords' in self.meta:
             print(f" Keywords: {self.meta['keywords']}")

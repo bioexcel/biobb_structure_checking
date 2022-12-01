@@ -135,8 +135,8 @@ class DataLibManager:
                 * **negative** - Involving two negative atoms
         """
         if 'polar' in contact_types:
-            contact_types += ['polar_donor','polar_acceptor']
-        
+            contact_types += ['polar_donor', 'polar_acceptor']
+
         atom_lists = {
             cls_type: self.get_atom_feature_list(cls_type + '_atoms')
             for cls_type in contact_types

@@ -102,7 +102,7 @@ def _fix(strcheck, opts, fix_data=None):
                 ions_list = opts['list']
                 if not strcheck.args['quiet']:
                     print('Selection: list')
-                
+
                 ions_list = ParamInput(
                     "Enter Forms list as [*:]his22hip",
                     strcheck.args['non_interactive']
@@ -141,7 +141,7 @@ def _fix(strcheck, opts, fix_data=None):
                     input_option, form = input_line.run(form)
                     ion_to_fix[r_at[0]] = form.upper()
                     strcheck.summary['add_hydrogen']['selection'].append(f"{rcode} {form.upper()}")
-    
+
     strcheck.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'].upper())
     strcheck.strucm.modified = True
     return False

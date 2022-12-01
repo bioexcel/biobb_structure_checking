@@ -1,7 +1,7 @@
 ''' Class to manage Chain internal data'''
 import sys
-import biobb_structure_checking.modelling.utils as mu
 from Bio.PDB.Chain import Chain
+import biobb_structure_checking.modelling.utils as mu
 
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
@@ -50,7 +50,7 @@ class ChainsData():
         if new_label == 'auto':
             new_label_char = 65
             while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
-                new_label_char =+1
+                new_label_char = +1
             new_label = chr(new_label_char)
         for mod in self.st:
             for chn in mod:
@@ -59,23 +59,9 @@ class ChainsData():
         self.set_chain_ids()
         return new_label
 
-    def _parse_task_str(self, ts_str):
-        #Format [A:]ini[-fin]
-        if ':' not in ts_str:
-            ts_str = '*:' + ts_str
-        chn, rnum = ts_str.split(':')
-        if not rnum:
-            return ts_str[:-1], 0, 0
-        if not '-' in rnum:
-            return chn, int(rnum), 0
-        ini, fin = rnum.split('-')
-        if not fin:
-            fin = 0
-        return chn, int(ini), int(fin)
-
     def _parse_renumber_str(self, renum_str):
         renum_to_do = []
-        renum_str = renum_str.replace(' ','')
+        renum_str = renum_str.replace(' ', '')
 
         if ',' not in renum_str:
             tasks = [renum_str]
@@ -87,8 +73,8 @@ class ChainsData():
                 print(f"ERROR: wrong syntax {tsk}, use origin=target")
                 sys.exit()
             tsk_0, tsk_1 = tsk.split('=')
-            chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
-            chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
+            chn_0, ini_0, fin_0 = _parse_task_str(tsk_0)
+            chn_1, ini_1, fin_1 = _parse_task_str(tsk_1)
             if chn_0 != '*':
                 if chn_1 == '*':
                     chn_1 = chn_0
@@ -122,23 +108,36 @@ class ChainsData():
                 renum_to_do.append([
                     {'chn': chn, 'ini': n_term.id[1], 'fin': c_term.id[1]},
                     {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': 0}
-                ]
-                )
+                ])
                 renum_to_do.append([
-                    {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1},
-                    {'chn':chn, 'ini': last_res_num + 1, 'fin': 0}
+                    {
+                        'chn':tmp_ch_id,
+                        'ini': last_res_num + 1,
+                        'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1
+                    },
+                    {
+                        'chn':chn,
+                        'ini': last_res_num + 1,
+                        'fin': 0
+                    }
                 ])
                 last_res_num = last_res_num + c_term.id[1] - n_term.id[1] + 1
         else:
-           renum_to_do = self._parse_renumber_str(renum_str)
+            renum_to_do = self._parse_renumber_str(renum_str)
 
         for mod in self.st:
             for tsk in renum_to_do:
                 org, tgt = tsk
                 if not mu.check_residue_id_order(mod[org['chn']]):
-                    print(f"WARNING: disordered residue ids found in {org['chn']}, use explicit order combinations")
+                    print(
+                        f"WARNING: disordered residue ids found in {org['chn']}, "
+                        f"use explicit order combinations"
+                    )
                 if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
-                    print(f"ERROR: chain {tgt['chn']} already exists and --allow_merge not set")
+                    print(
+                        f"ERROR: chain {tgt['chn']} already exists and "
+                        f"--allow_merge not set"
+                    )
                     sys.exit()
                 n_term, c_term = mu.get_terms(mod, org['chn'])
                 if not org['ini']:
@@ -187,7 +186,7 @@ class ChainsData():
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)
 
-                    if len(mod[org['chn']]) == 0:
+                    if mod[org['chn']]:
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
         return 1
@@ -231,3 +230,17 @@ class ChainsData():
         for ch_type in self.chain_ids.values():
             has_na = (has_na or (ch_type > 1))
         return has_na
+
+def _parse_task_str(ts_str):
+    #Format [A:]ini[-fin]
+    if ':' not in ts_str:
+        ts_str = '*:' + ts_str
+    chn, rnum = ts_str.split(':')
+    if not rnum:
+        return ts_str[:-1], 0, 0
+    if not '-' in rnum:
+        return chn, int(rnum), 0
+    ini, fin = rnum.split('-')
+    if not fin:
+        fin = 0
+    return chn, int(ini), int(fin)

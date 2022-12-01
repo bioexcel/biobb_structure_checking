@@ -76,7 +76,7 @@ class SequenceData():
             self.data = {}
             self.has_canonical = {}
 
-        self.raw_pdb_seq =  self._get_pack_str_seqs(strucm)
+        self.raw_pdb_seq = self._get_pack_str_seqs(strucm)
 
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
@@ -101,7 +101,7 @@ class SequenceData():
             chids = [h['ch_id'] for h in hits]
             seqs = [h['seq'] for h in hits]
             print('Getting canonical sequences from matching FASTA input')
-            for hit in sorted(hits, key=lambda hit:hit['ch_id']):
+            for hit in sorted(hits, key=lambda hit: hit['ch_id']):
                 print(f"{hit['ch_id']}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
         else:
             if strucm.st_data.input_format != 'cif':
@@ -175,7 +175,7 @@ class SequenceData():
             can_reverted = True
         else:
             can_reverted = False
-        
+
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -406,7 +406,7 @@ class SequenceData():
 
         for ch_id in chids:
             max_score = -100
-            best_hit=''
+            best_hit = ''
             for hit in all_hits:
                 if hit['ch_id'] != ch_id:
                     continue
@@ -419,23 +419,8 @@ class SequenceData():
             hits.append(best_hit)
         return hits
 
-    def _get_pack_str_seqs(self, strucm):
-        strucm.revert_can_resnames(canonical=True)
-        seqs = {}
-        for mod in strucm.st:
-            for chn in mod.get_chains():
-                if chn.id not in seqs:
-                    seqs[chn.id] = []
-                seqs[chn.id].append(mu.get_sequence_from_list(
-                    [res for res in chn.get_residues() if not mu.is_hetatm(res)],
-                    strucm.chains_data.chain_ids[chn.id]
-                    )
-                )
-        strucm.revert_can_resnames(canonical=False)
-        return seqs
-
     def _assign_seq(self, rec):
-        if hasattr(rec,'seq'):
+        if hasattr(rec, 'seq'):
             tgt = rec.seq
         else:
             tgt = rec
@@ -448,3 +433,19 @@ class SequenceData():
                 if score > 0:
                     matches.append((ch_id, score))
         return matches
+
+def _get_pack_str_seqs(strucm):
+    strucm.revert_can_resnames(canonical=True)
+    seqs = {}
+    for mod in strucm.st:
+        for chn in mod.get_chains():
+            if chn.id not in seqs:
+                seqs[chn.id] = []
+            seqs[chn.id].append(
+                mu.get_sequence_from_list(
+                    [res for res in chn.get_residues() if not mu.is_hetatm(res)],
+                    strucm.chains_data.chain_ids[chn.id]
+                )
+            )
+    strucm.revert_can_resnames(canonical=False)
+    return seqs
