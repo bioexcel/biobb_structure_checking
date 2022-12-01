@@ -96,7 +96,7 @@ class StructureManager:
             input_pdb_path = input_pdb_path[4:]
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
-            if re.match(r'.[1-9]+', input_pdb_path):
+            if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
                 if pdb_server not in ALT_SERVERS:
