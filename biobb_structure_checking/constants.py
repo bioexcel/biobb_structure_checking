@@ -250,22 +250,32 @@ DIALOGS.add_option('models', '--save_split', 'save_split', \
     'Save each model in a separated PDB file', 'bool')
 DIALOGS.add_option('models', '--superimpose', 'superimpose', \
     'Superimpose models', 'bool')
-DIALOGS.add_option('models', '--build_complex', 'build_complex',
-    'Build a complex from selected models (biounit type)', 'bool')
+DIALOGS.add_option(
+    'models', '--build_complex', 'build_complex',
+    'Build a complex from selected models (biounit type)', 'bool'
+)
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
-DIALOGS.add_option('chains', '--rename', 'rename',
-    'Rename unlabelled chains (auto | label)')
-DIALOGS.add_option('chains', '--renumber', 'renumber',
-    'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)')
-DIALOGS.add_option('chains', '--allow_merge', 'allow_merge',
-    'Allow merge several chains in a single one', 'bool')
+DIALOGS.add_option(
+    'chains', '--rename', 'rename',
+    'Rename unlabelled chains (auto | label)'
+)
+DIALOGS.add_option(
+    'chains', '--renumber', 'renumber',
+    'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)'
+)
+DIALOGS.add_option(
+    'chains', '--allow_merge', 'allow_merge',
+    'Allow merge several chains in a single one', 'bool'
+)
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
-DIALOGS.add_option('altloc', '--select', 'select', \
-    'Select altloc occupancy|alt_id')
+DIALOGS.add_option(
+    'altloc', '--select', 'select',
+    'Select altloc occupancy|alt_id'
+)
 
 DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
 DIALOGS.add_option('inscodes', '--renum', 'renum', 'Renumber residues', 'bool')

@@ -235,7 +235,7 @@ class StructureChecking():
             f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
             f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
         except ImportError as e:
-            print(command,e)
+            print(command, e)
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
 
         if command not in self.summary:

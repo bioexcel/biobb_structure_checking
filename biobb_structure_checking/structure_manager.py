@@ -110,7 +110,7 @@ class StructureManager:
                     input_pdb_path = pdbid.upper()
                     if file_format not in ACCEPTED_REMOTE_FORMATS:
                         print(f"WARNING: format {file_format} not available for downloads, reverting to default")
-                        file_format='cif'
+                        file_format = 'cif'
                 else:
                     input_pdb_path = input_pdb_path.upper()
                 #Force mmCif as cif is not accepted by biopython
@@ -227,7 +227,10 @@ class StructureManager:
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print(f"Warning: OXT atom missing in {mu.residue_id(res)}. Run backbone --fix_atoms first")
+                    print(
+                        f"Warning: OXT atom missing in {mu.residue_id(res)}. "
+                        f"Run backbone --fix_atoms first"
+                    )
 
         print(f"Total assigned charge: {self.st_data.total_charge:10.2f}")
 
@@ -303,7 +306,12 @@ class StructureManager:
             'res_to_fix': [res for res in chiral_bck_list if not mu.check_chiral_ca(res)]
         }
 
-    def check_r_list_clashes(self, residue_list: Iterable[Residue], contact_types: Iterable[str], get_all_contacts=False) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
+    def check_r_list_clashes(
+            self,
+            residue_list: Iterable[Residue],
+            contact_types: Iterable[str],
+            get_all_contacts=False
+        ) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
         """ Checks clashes originated by a list of residues"""
         return mu.check_r_list_clashes(
             residue_list,
@@ -817,8 +825,9 @@ class StructureManager:
                 ('N9' in r_at[1] or 'C8' in r_at[1]) or\
             r_at[0].get_resname() in ('C', 'DC', 'DT', 'U') and\
                 ('N1' in r_at[1] or 'C6' in r_at[1]):
-            print(f"Not enough atoms left on {mu.residue_id(r_at[0])} "
-                   "to recover base orientation, skipping"
+            print(
+                f"Not enough atoms left on {mu.residue_id(r_at[0])} "
+                "to recover base orientation, skipping"
             )
         else:
             for at_id in r_at[1]:
@@ -859,7 +868,10 @@ class StructureManager:
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
+        modeller_result = self.run_modeller(
+            ch_to_fix, brk_list, modeller_key,
+            extra_gap, extra_NTerm=0
+        )
 
         self.update_internals()
 
@@ -909,7 +921,7 @@ class StructureManager:
                 print(f"Processing Model {mod.id + 1}")
                 self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'), mod.id)
             else:
-                self.save_structure(opj(mod_mgr.tmpdir,'templ.pdb'))
+                self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'))
 
             for ch_id in self.chains_data.chain_ids:
                 if ch_id not in ch_to_fix:
@@ -1390,13 +1402,13 @@ class StructureManager:
                 res2 = at2.get_parent()
                 if self._is_amide_atom(amide_res, at1):
                     if res1 not in matr:
-                        matr[res1] = {'mod':False,'cnts':{}}
+                        matr[res1] = {'mod':False, 'cnts':{}}
                     if at1 not in matr[res1]['cnts']:
                         matr[res1]['cnts'][at1] = {}
                     matr[res1]['cnts'][at1][at2] = dist2
                 if self._is_amide_atom(amide_res, at2):
                     if res2 not in matr:
-                        matr[res2] = {'mod':False,'cnts':{}}
+                        matr[res2] = {'mod':False, 'cnts':{}}
                     if at2 not in matr[res2]['cnts']:
                         matr[res2]['cnts'][at2] = {}
                     matr[res2]['cnts'][at2][at1] = dist2
@@ -1483,7 +1495,7 @@ class StructureManager:
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
-    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
+    conda_info = subprocess.run(['conda', list', 'modeller'], stdout=subprocess.PIPE)
     for line in conda_info.stdout.decode('ASCII').split('\n'):
         if 'modeller' in line:
             info = line.split()
