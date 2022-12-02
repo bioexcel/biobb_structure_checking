@@ -210,6 +210,14 @@ def is_na(res):
     rid = res.get_resname()
     return rid in DNA_RESIDUE_CODE or rid in RNA_RESIDUE_CODE
 
+def is_purine(res):
+    """ Check whether is a purine residue"""
+    return res.get_resname() in ('A', 'DA', 'G', 'DG')
+
+def is_pyrimidine(res):
+    """ Check whether it is a pyrimidine residue"""
+    return res.get_resname() in ('C', 'DC', 'DT', 'U')
+
 def same_residue(at1, at2):
     """
     Checks whether atoms belong to the same residue
