@@ -25,7 +25,7 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running chains. Options: --select All --renumber A:501-=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504-=W:,B:2-3=B:376,W:=B:504
+Running chains. Options: --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504 --allow_merge
 2 Chain(s) detected
  A: Protein
  B: Protein
@@ -36,4 +36,26 @@ WARNING: disordered residue ids found in A, use explicit order combinations
 Renumbering A1-A1 as A376-A376
 WARNING: disordered residue ids found in A, use explicit order combinations
 Renumbering A4-A4 as A377-A377
-ERROR: chain A already exists and --allow_merge not set
+Renumbering W501-W791 as A501-A791
+WARNING: disordered residue ids found in B, use explicit order combinations
+Renumbering B504-B792 as W504-W792
+Creating new chain W
+WARNING: disordered residue ids found in B, use explicit order combinations
+Renumbering B2-B3 as B376-B377
+Renumbering W504-W792 as B504-B792
+Selecting all chains
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  908
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  296
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  292
+Final Num. atoms:  4961
+Small mol ligands found
+AC2 A376
+SO4 A377
+AC2 B376
+SO4 B377
+Structure saved on 2ki5_chains_test_fix_chains.pdb

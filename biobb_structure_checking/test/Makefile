@@ -55,7 +55,7 @@ chains:
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select B > 2ki5_chains_test_B.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_renum_chain.pdb --non_interactive chains --select All --renumber A:=C:,B:=D:  > 2ki5_chains_test_renum_chain.log
-	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_fix_chains.pdb --non_interactive chains --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504  > 2ki5_chains_test_fix_chains.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_fix_chains.pdb --non_interactive chains --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504  --allow_merge > 2ki5_chains_test_fix_chains.log
 	@echo "Running chains on 1svc"
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_protein.pdb --non_interactive chains --select protein > 1svc_chains_test_protein.log
 inscodes:
