@@ -25,7 +25,7 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running chains. Options: --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504 --allow_merge
+Running chains. Options: --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504
 2 Chain(s) detected
  A: Protein
  B: Protein
