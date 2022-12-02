@@ -1495,7 +1495,7 @@ class StructureManager:
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
-    conda_info = subprocess.run(['conda', list', 'modeller'], stdout=subprocess.PIPE)
+    conda_info = subprocess.run(['conda', 'list', 'modeller'], stdout=subprocess.PIPE)
     for line in conda_info.stdout.decode('ASCII').split('\n'):
         if 'modeller' in line:
             info = line.split()

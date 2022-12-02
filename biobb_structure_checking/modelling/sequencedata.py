@@ -76,7 +76,7 @@ class SequenceData():
             self.data = {}
             self.has_canonical = {}
 
-        self.raw_pdb_seq = self._get_pack_str_seqs(strucm)
+        self.raw_pdb_seq = _get_pack_str_seqs(strucm)
 
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)

@@ -128,6 +128,7 @@ class ChainsData():
         for mod in self.st:
             for tsk in renum_to_do:
                 org, tgt = tsk
+
                 if not mu.check_residue_id_order(mod[org['chn']]):
                     print(
                         f"WARNING: disordered residue ids found in {org['chn']}, "
@@ -186,7 +187,7 @@ class ChainsData():
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)
 
-                    if mod[org['chn']]:
+                    if not mod[org['chn']]:
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
         return 1
