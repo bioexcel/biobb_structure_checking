@@ -24,9 +24,10 @@ Commands to manipulate structure composition.
 chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
   * **--rename** Allow to fix unlabelled chains
   * **--renumber** Allow to reorganize residues and chains by moving or renunbering fragments
-  * **--allow_merge** allow to add new residues to existing chains (with **--renumber**) if there no numbering overlap
+  * **--rem_inscodes** removes insertion codes when renumbering chains
 
-**inscodes** - _Detects residues with insertion codes. No fix provided (yet)_
+**inscodes** - _Detects residues with insertion codes.
+  * **--renumber** Fixes insertion codes by renumering chain residues
 
 **altloc** [--select occupancy| alt_id | list of res_id:alt_id] - _Detect/Select Alternative Locations_
 

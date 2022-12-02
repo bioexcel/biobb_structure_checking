@@ -20,9 +20,10 @@ chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
     Detect/Select Chains
     --rename allow to fix unlabelled chains
     --renumber allow to reorganize residues and chains by moving or renunbering fragments
-    --allow_merge allow to add new residues to existing chains (with --renumber) if there no numbering overlap
+    --rem_inscodes removes insertion codes when renumbering chains
 inscodes
-    Detects residues with insertion codes. No fix provided (yet)
+    Detects residues with insertion codes.
+    --renumber fix insertion codes by renumbering chain residuesº
 altloc [--select occupancy| alt_id | list of res_id:alt_id]
     Detect/Select Alternative Locations
 metals [--remove All | None | Met_ids_list | Residue_list]

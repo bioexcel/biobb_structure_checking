@@ -4,7 +4,10 @@
   - Added --fix auto option to automatically find best fix combination
 - chains
   - Added --rename. fixes empty chain labels
-  - Added --renumber [--allow_merge]. allow to renumber/reorganize chains and residues
+  - Added --renumber. allow to renumber/reorganize chains and residues
+  - Added --rem_inscodes. removes insertion codes on renumbering
+- inscodes
+  - Added --renumber. Rebuild residue numbering to remove insertion codes
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
 - json

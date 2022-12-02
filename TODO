@@ -1,4 +1,4 @@
-1. System Selection 
+1. System Selection
     1.1. Detect/Select Models (models) DONE
         1.1.1 Consider multiple DONE
         1.1.2 Save split collection DONE
@@ -25,12 +25,12 @@
         2.1.1 Amides Automatic fix DONE
     2.2. Detect/Fix Improper quirality (chiral) DONE (!! check ILE with unusual atom labels)
         2.2.1 Detect Improper quirality on CAs (chiral_ca) DONE
-    2.3. Detect insertion codes/Renum (inscode) DONE detection, no fix
-        2.3.1 Rebuild chains with proper numbering
-    2.4. Complete side chains (fixside) DONE 
+    2.3. Detect insertion codes/Renum (inscode) DONE
+        2.3.1 Rebuild chains with proper numbering DONE
+    2.4. Complete side chains (fixside) DONE
         2.4.1 Rebuild side chains (using modeller) DONE for protein
     2.5. Mutate residues (mutate) DONE
-        2.5.1 Add/remove modified residues 
+        2.5.1 Add/remove modified residues
         2.5.2 Mutate DNA residues DONE
             2.5.2.1 Mutate DNA following sequence DONE
             2.5.2.2 Extend to RNA DONE
@@ -41,7 +41,8 @@
         2.5.6 Consider Cap residues DONE
         2.6.4 Add hydrogens for NA chains DONE
         2.6.5 Prepare input for AutoDock with flexible residues
-    2.7. Complete backbone (backbone) DONE 
+        2.6.6 Add Metals to residue library
+    2.7. Complete backbone (backbone) DONE
         2.7.1 Complete main chains DONE
         2.7.2 Add ACE, NME caps DONE
         2.7.3 Use standard FASTA for sequence input (check uniprot and pdb Fasta's) DONE
@@ -65,9 +66,9 @@
         3.5.5. Apolar Clashes DONE
         3.5.6. Ionic Positive Clashes DONE
         3.5.7. Ionic Negative Clashes DONE
-4. Prepare alternative main scripts for specific functions 
+4. Prepare alternative main scripts for specific functions
     4.1 Check only
-    4.2 Prepare autodock input 
+    4.2 Prepare autodock input
     4.3 Prepare CMIP input WITHDRAWN (DONE in 2.6.3)
     4.4 Convert from MD formats
 5. General
