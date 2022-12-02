@@ -97,7 +97,7 @@ class ChainsData():
                     ])
         return renum_to_do
 
-    def renumber(self, renum_str, allow_merge=False):
+    def renumber(self, renum_str, rem_inscodes=False):
         """ Renumber residues"""
         renum_to_do = []
         if renum_str.lower() == 'auto':
@@ -134,12 +134,6 @@ class ChainsData():
                         f"WARNING: disordered residue ids found in {org['chn']}, "
                         f"use explicit order combinations"
                     )
-                if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
-                    print(
-                        f"ERROR: chain {tgt['chn']} already exists and "
-                        f"--allow_merge not set"
-                    )
-                    sys.exit()
                 n_term, c_term = mu.get_terms(mod, org['chn'])
                 if not org['ini']:
                     org['ini'] = n_term.id[1]

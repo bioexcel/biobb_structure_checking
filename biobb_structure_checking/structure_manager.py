@@ -67,8 +67,10 @@ class StructureManager:
 
         """
         self.data_library = DataLibManager(data_library_path)
-        for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
+        for ff_name in self.data_library.ff_data:
+            self.data_library.get_ff_data(
+                opj(os.path.dirname(data_library_path), f"{ff_name.upper()}_prm.json")
+            )
 
         self.res_library = ResidueLib(res_library_path)
 
@@ -109,7 +111,10 @@ class StructureManager:
                     pdbid, file_format = input_pdb_path.split('.')
                     input_pdb_path = pdbid.upper()
                     if file_format not in ACCEPTED_REMOTE_FORMATS:
-                        print(f"WARNING: format {file_format} not available for downloads, reverting to default")
+                        print(
+                            f"WARNING: format {file_format} not available for downloads, "
+                            f"reverting to default"
+                        )
                         file_format = 'cif'
                 else:
                     input_pdb_path = input_pdb_path.upper()
@@ -176,43 +181,32 @@ class StructureManager:
         # get canonical and structure sequences
         self.sequence_data.read_sequences(self, clean=True, cif_warn=cif_warn)
 
-    def update_atom_charges(self, ff):
+    def update_atom_charges(self, force_field):
         """ Update atom charges and types from data library """
 
         print("Updating partial charges and atom types")
 
         self.st_data.total_charge = 0.
 
-        if ff not in self.data_library.ff_data:
-            raise UnknownFFError(ff)
-        ff_data = self.data_library.ff_data[ff]
+        if force_field not in self.data_library.ff_data:
+            raise UnknownFFError(force_field)
+        ff_data = self.data_library.ff_data[force_field]
 
         self.rename_terms(self.get_term_res())
         for res in self.st.get_residues():
             ch_type = self.chains_data.get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
+            rcode3 = rcode # Normal residues
             if len(rcode) == 4: # Protein terms
                 rcode3 = rcode[1:]
             elif rcode[-1] in ('3', '5'): # NA Terms
                 rcode3 = rcode[:-1]
-            else:
-                rcode3 = rcode
-
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
-            if rcode not in self.res_library.residues:
-                print(f"Warning: {rcode} not found in residue library atom charges set to 0.")
-                for atm in res.get_atoms():
-                    atm.pqr_charge = 0.
-                    atm.radius = 0.
-                    if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
-                    else:
-                        atm.xtra['atom_type'] = atm.element
-            else:
+
+            if rcode in self.res_library.residues:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
-
                 for atm in res.get_atoms():
                     atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
@@ -231,6 +225,15 @@ class StructureManager:
                         f"Warning: OXT atom missing in {mu.residue_id(res)}. "
                         f"Run backbone --fix_atoms first"
                     )
+            else:
+                print(f"Warning: {rcode} not found in residue library atom, charges set to 0.")
+                for atm in res.get_atoms():
+                    atm.pqr_charge = 0.
+                    atm.radius = 0.
+                    if atm.id in self.data_library.atom_data['metal_atoms']:
+                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
+                    else:
+                        atm.xtra['atom_type'] = atm.element
 
         print(f"Total assigned charge: {self.st_data.total_charge:10.2f}")
 
@@ -513,7 +516,6 @@ class StructureManager:
             'not_link_seq_list': not_link_seq_list
         }
 
-#    def check_cis_backbone(self) -> Tuple[List[Tuple[Residue, Residue, float]], List[Residue, Residue, float]]:
     def check_cis_backbone(self):
         """
         Determines omega dihedrals for two bound residues and classifies them
@@ -621,7 +623,10 @@ class StructureManager:
         print(f"{prefix} Num. residues:  {st_stats['stats']['num_res']}\n"
               f"{prefix} Num. residues with ins. codes:  {st_stats['stats']['res_insc']}")
         if st_stats['stats']['num_h']:
-            print(f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']} (total {st_stats['stats']['num_h']} H atoms)")
+            print(
+                f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']} "
+                f"(total {st_stats['stats']['num_h']} H atoms)"
+            )
         else:
             print(f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']}")
         print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
@@ -674,7 +679,10 @@ class StructureManager:
         if keep_resnames:
             self.revert_can_resnames(canonical=False)
 
-    def get_all_r2r_distances(self, res_group: Union[str, Iterable[str]], join_models: bool) -> List[Tuple[Residue, Residue, float]]:
+    def get_all_r2r_distances(
+        self,
+        res_group: Union[str, Iterable[str]], join_models: bool
+    ) -> List[Tuple[Residue, Residue, float]]:
         """ Determine residue pairs within a given Cutoff distance
             calculated from the first atom available
             Args:
@@ -719,7 +727,10 @@ class StructureManager:
     def build_complex(self):
         ''' Build a complex from biounit models'''
         if self.models_data.models_type['type'] != mu.BUNIT:
-            print(f"ERROR: No complex can be built. Models superimose RMSd {self.models_data.models_type['rmsd']}")
+            print(
+                f"ERROR: No complex can be built. Models superimose "
+                f"RMSd {self.models_data.models_type['rmsd']}"
+            )
             return 0
         result = self.models_data.build_complex()
         self.update_internals()
@@ -743,9 +754,9 @@ class StructureManager:
         self.modified = True
         return result
 
-    def renumber_chain_residues(self, renum_str, allow_merge=False):
+    def renumber_chain_residues(self, renum_str, rem_inscodes=False):
         ''' Allow to relabel chains and residues'''
-        result = self.chains_data.renumber(renum_str, allow_merge=allow_merge)
+        result = self.chains_data.renumber(renum_str, rem_inscodes=rem_inscodes)
         if result:
             self.update_internals()
             self.modified = True
@@ -821,10 +832,8 @@ class StructureManager:
         self.modified = True
 
     def _fix_side_chain_na(self, r_at):
-        if r_at[0].get_resname() in ['A', 'DA', 'G', 'DG'] and\
-                ('N9' in r_at[1] or 'C8' in r_at[1]) or\
-            r_at[0].get_resname() in ('C', 'DC', 'DT', 'U') and\
-                ('N1' in r_at[1] or 'C6' in r_at[1]):
+        if mu.is_purine(r_at[0]) and ('N9' in r_at[1] or 'C8' in r_at[1]) or\
+            mu.is_pyrimidine(r_at[0]) and ('N1' in r_at[1] or 'C6' in r_at[1]):
             print(
                 f"Not enough atoms left on {mu.residue_id(r_at[0])} "
                 "to recover base orientation, skipping"
@@ -1038,7 +1047,8 @@ class StructureManager:
 
             # Find position if the 1st residue in the internal residue list
             pos = 0
-            while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
+            while pos < len(list_res) and\
+                self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
 
             res_pairs = []
@@ -1414,19 +1424,18 @@ class StructureManager:
         clusters = self._amide_cluster(to_fix['res_to_fix'])
         print(f"{len(clusters)} cluster(s) found, exploring...")
         to_fix = []
-        nclus = 0
-        for cl_res in clusters:
+        nclust = 0
+        for clust in clusters.values():
             to_fix_part = []
-            nclus += 1
+            nclust += 1
             amide_list = []
             mod_vec = max_vec = ''
-            for amide_res in sorted(clusters[cl_res]):
+            for amide_res in sorted(clust):
                 amide_list.append(amide_res)
                 max_vec += '1'
-            print(f"Cluster {nclus}:{', '.join([mu.residue_id(r) for r in amide_list])}")
+            print(f"Cluster {nclust}:{', '.join([mu.residue_id(r) for r in amide_list])}")
             conf = 0
             min_score = self._amide_score(matr)
-            opt_conf = 0
             opt_vec = '0' * len(max_vec)
             while conf <= int(max_vec, 2):
                 mod_vec = f"{'0' * len(max_vec)}{bin(conf)[2:]}"[-len(max_vec):]
@@ -1434,18 +1443,19 @@ class StructureManager:
                     matr[res]['mod'] = mod_vec[pos] == '1'
                 score = self._amide_score(matr)
                 if score < min_score:
-                    opt_conf = conf
                     min_score = score
                     opt_vec = mod_vec
                 conf += 1
-#                print(mod_vec, score, opt_vec, min_score)
             for pos, res in enumerate(amide_list):
                 if opt_vec[pos] == '1':
                     to_fix_part.append(res)
                     to_fix.append(res)
                 matr[res]['mod'] = opt_vec[pos] == '1'
-            if len(to_fix_part):
-                print(f"New score: {min_score:.3f}, fixed residue(s): {', '.join([mu.residue_id(r) for r in to_fix_part])}")
+            if to_fix_part:
+                print(
+                    f"New score: {min_score:.3f}, fixed residue(s): "
+                    f"{', '.join([mu.residue_id(r) for r in to_fix_part])}"
+                )
             else:
                 print("Score not improved, skipping")
         return to_fix
@@ -1522,7 +1532,6 @@ class NotEnoughAtomsError(Exception):
 class ParseError(Exception):
     def __init__(self, err_id, err_txt):
         self.message = f'{err_id} ({err_txt}) found when parsing input structure'
-
 class UnknownFFError(Exception):
     def __init__(self, ff):
         self.message = f'{ff} is not a valid ff for assigning atom types'

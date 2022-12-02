@@ -267,8 +267,8 @@ DIALOGS.add_option(
     'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)'
 )
 DIALOGS.add_option(
-    'chains', '--allow_merge', 'allow_merge',
-    'Allow merge several chains in a single one', 'bool'
+    'chains', '--rem_inscodes', 'rem_inscodes',
+    'Remove insertion codes', 'bool'
 )
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')

@@ -66,7 +66,7 @@ def _fix(strcheck, opts, fix_data=None):
             print("WARNING: unlabelled chains detected")
         result = strcheck.strucm.renumber_chain_residues(
             renumber_chains,
-            opts['allow_merge']
+            opts['rem_inscodes']
         )
         if result:
             strcheck.summary['chains']['renumbered'] = renumber_chains
