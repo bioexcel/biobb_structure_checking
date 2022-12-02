@@ -1336,19 +1336,15 @@ class StructureManager:
         for amide_res in sorted(matr):
             for atm in matr[amide_res]['cnts']:
                 for atm_cnt in matr[amide_res]['cnts'][atm]:
-                    #print(mu.atom_id(atm), mu.atom_id(atm_cnt))
                     d = atm.element != atm_cnt.element
                     m1 = matr[amide_res]['mod']
                     m2 = atm_cnt.get_parent() in matr and matr[atm_cnt.get_parent()]['mod']
                     # !d !m1 !m2 + !d m1 m2 + d !m1 m2 + d m1 !m2
-                    #print(d,m1,m2)
-                    if (not d and not m1 and not m2) or\
-                        (not d and m1 and m2) or\
-                        (d and not m1 and m2) or\
-                        (d and m1 and not m2):
-                            score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
-
-                    #print(matr[amide_res]['mod'], mu.atom_id(atm), mu.atom_id(atm_cnt), 1/matr[amide_res]['cnts'][atm][atm_cnt], score)
+                    # !d (!m1 !m2 + m1 m2) + d (!m1 m2 + m1 !m2)
+                    # !d !(m1^m2) + d (m1^m2)
+                    # ! d^(m1^m2)
+                    if not d^(m1^m2):
+                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
         return score
 
     def _amide_cluster(self, to_fix):
