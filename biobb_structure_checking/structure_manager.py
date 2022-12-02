@@ -754,9 +754,9 @@ class StructureManager:
         self.modified = True
         return result
 
-    def renumber_chain_residues(self, renum_str, rem_inscodes=False):
+    def renumber_chain_residues(self, renum_str, rem_inscodes=False, verbose=False):
         ''' Allow to relabel chains and residues'''
-        result = self.chains_data.renumber(renum_str, rem_inscodes=rem_inscodes)
+        result = self.chains_data.renumber(renum_str, rem_inscodes=rem_inscodes, verbose=verbose)
         if result:
             self.update_internals()
             self.modified = True

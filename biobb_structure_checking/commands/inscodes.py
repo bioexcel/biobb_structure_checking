@@ -17,7 +17,19 @@ def _check(strcheck):
     return {'ins_codes_list': ins_codes_list}
 
 def _fix(strcheck, opts, fix_data=None):
-    # TODO implement method _inscodes_fix
-    if opts['renum']:
-        print("--renum option not implemented (yet)")
+    if opts['renumber']:
+        min_res = {}
+        for res in fix_data['ins_codes_list']:
+            ch_id = res.get_parent().id
+            if ch_id not in min_res:
+                min_res[ch_id] = res.id[1]
+        renum_str = []
+        for chn, res_num in min_res.items():
+            renum_str.append(f"{chn}:{res_num}=z:{res_num},z:{res_num}={chn}:{res_num}")
+        strcheck.chains({
+                "renumber": ','.join(renum_str),
+                "rem_inscodes": True,
+                "select": "all",
+                "verbose": False
+        })
     return False

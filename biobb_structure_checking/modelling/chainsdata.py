@@ -97,7 +97,7 @@ class ChainsData():
                     ])
         return renum_to_do
 
-    def renumber(self, renum_str, rem_inscodes=False):
+    def renumber(self, renum_str, rem_inscodes=False, verbose=True):
         """ Renumber residues"""
         renum_to_do = []
         if renum_str.lower() == 'auto':
@@ -129,7 +129,7 @@ class ChainsData():
             for tsk in renum_to_do:
                 org, tgt = tsk
 
-                if not mu.check_residue_id_order(mod[org['chn']]):
+                if verbose and not mu.check_residue_id_order(mod[org['chn']]):
                     print(
                         f"WARNING: disordered residue ids found in {org['chn']}, "
                         f"use explicit order combinations"
@@ -142,10 +142,11 @@ class ChainsData():
                 if not tgt['ini']:
                     tgt['ini'] = org['ini']
                 tgt['fin'] = org['fin'] - org['ini'] + tgt['ini']
-                print(
-                    f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
-                    f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
-                )
+                if verbose:
+                    print(
+                        f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
+                        f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
+                    )
                 if tgt['chn'] in mod:
                     n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
                     if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
@@ -157,15 +158,17 @@ class ChainsData():
                     org['ini'] == n_term.id[1] and\
                     org['fin'] == c_term.id[1] and\
                     tgt['chn'] not in mod:
-                    print(
-                        f"Whole chains selected, just replacing chain labels from {org['chn']}"
-                        f" to {tgt['chn']}"
-                    )
+                    if verbose:
+                        print(
+                            f"Whole chains selected, just replacing chain labels from {org['chn']}"
+                            f" to {tgt['chn']}"
+                        )
                     mod[org['chn']].id = tgt['chn']
                     self.set_chain_ids()
                 else:
                     if tgt['chn'] not in mod:
-                        print(f"Creating new chain {tgt['chn']}")
+                        if verbose:
+                            print(f"Creating new chain {tgt['chn']}")
                         new_ch = Chain(tgt['chn'])
                         mod.add(new_ch)
                     else:
@@ -174,9 +177,17 @@ class ChainsData():
                     for res in mod[org['chn']].get_residues():
                         if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
                             to_move.append(res)
+                    inscodes_shift = 0
                     for res in sorted(to_move):
                         new_res = res.copy()
-                        new_res.id = res.id[0], res.id[1] - org['ini'] + tgt['ini'], res.id[2]
+                        new_res_num = res.id[1]
+                        new_inscode = res.id[2]
+                        if rem_inscodes:
+                            if mu.has_ins_code(res):
+                                inscodes_shift += 1
+                                new_inscode = ' '
+                            new_res_num = res.id[1] + inscodes_shift
+                        new_res.id = res.id[0], new_res_num - org['ini'] + tgt['ini'], new_inscode
                         new_res.parent = new_ch
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)

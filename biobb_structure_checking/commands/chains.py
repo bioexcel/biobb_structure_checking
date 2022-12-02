@@ -64,9 +64,14 @@ def _fix(strcheck, opts, fix_data=None):
     if renumber_chains:
         if strcheck.strucm.chains_data.has_chains_to_rename:
             print("WARNING: unlabelled chains detected")
+        if 'verbose' not in opts and opts['rem_inscodes']:
+            opts['verbose'] = False
+        else:
+            opts['verbose'] = True
         result = strcheck.strucm.renumber_chain_residues(
             renumber_chains,
-            opts['rem_inscodes']
+            rem_inscodes=opts['rem_inscodes'],
+            verbose=opts['verbose']
         )
         if result:
             strcheck.summary['chains']['renumbered'] = renumber_chains
