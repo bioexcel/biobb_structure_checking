@@ -1853,7 +1853,7 @@ class StructureChecking():
         to_fix = [
             rpair
             for rpair in breaks_list
-            if (f"({mu.residue_num(rpair[0])}-{mu.residue_num(rpair[1])})".replace(' ', '')\
+            if (f"({mu.residue_num(rpair[0])}-{mu.residue_num(rpair[1])})".replace(' ', ''))\
                 in fix_main_bck.split(',') or input_option == 'all'
         ]
         return self.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
