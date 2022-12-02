@@ -271,7 +271,7 @@ DIALOGS.add_option(
     'Remove insertion codes', 'bool'
 )
 
-sDIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
+DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
 DIALOGS.add_option(
     'altloc', '--select', 'select',
     'Select altloc occupancy|alt_id'
@@ -280,7 +280,7 @@ DIALOGS.add_option(
 DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
 DIALOGS.add_option('inscodes', '--renumber', 'renumber', 'Renumber chain residues', 'bool')
 
-DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated in v1.1')
+DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated)')
 DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
