@@ -232,8 +232,8 @@ class StructureChecking():
         """
         try:
             importlib.import_module('biobb_structure_checking.commands.' + command)
-            f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
-            f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
+            f_check = sys.modules['biobb_structure_checking.commands.' + command].check
+            f_fix = sys.modules['biobb_structure_checking.commands.' + command].fix
         except ImportError as e:
             print(command, e)
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
@@ -401,7 +401,7 @@ class StructureChecking():
 
         return output_structure_path
 
-    def _check_report_clashes(self, residue_list=None, contact_types=None):
+    def check_report_clashes(self, residue_list=None, contact_types=None):
         if contact_types is None:
             contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list:

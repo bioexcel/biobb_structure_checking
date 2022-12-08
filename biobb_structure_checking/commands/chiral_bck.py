@@ -3,30 +3,30 @@
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 
-def _check(strcheck):
-    check = strcheck.strucm.get_chiral_bck_list()
-    if 'list' not in check:
+def check(strcheck):
+    check_lst = strcheck.strucm.get_chiral_bck_list()
+    if 'list' not in check_lst:
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_BCK_CHIRALS'])
         strcheck.summary['chiral_bck']['n_chirals'] = 0
         return {}
 
-    strcheck.summary['chiral_bck']['n_chirals'] = len(check['list'])
+    strcheck.summary['chiral_bck']['n_chirals'] = len(check_lst['list'])
 
-    if not check['res_to_fix']:
+    if not check_lst['res_to_fix']:
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_CHIRAL_BCK_RESIDUES'])
         return {}
 
-    print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check['res_to_fix'])))
+    print(cts.MSGS['CHIRAL_BCK_RESIDUES'].format(len(check_lst['res_to_fix'])))
     strcheck.summary['chiral_bck']['detected'] = []
-    for res in check['res_to_fix']:
+    for res in check_lst['res_to_fix']:
         print(f" {mu.residue_id(res):10}")
         strcheck.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
     return {}
 
-def _fix(strcheck, opts, fix_data):
+def fix(strcheck, opts, fix_data):
     pass
 
 #    def _chiral_bck_fix(strcheck, chiral_fix, fix_data=None, check_clashes=True):

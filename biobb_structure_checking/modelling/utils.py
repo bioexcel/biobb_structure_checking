@@ -409,8 +409,8 @@ def calc_RMSd_ats(ats1, ats2):
 def calc_RMSd_all_ats(st1, st2):
     """ Calcs RMSd all atoms, no fit """
     return calc_RMSd_ats(
-        [atm for atm in st1.get_atoms()],
-        [atm for atm in st2.get_atoms()]
+        list(st1.get_atoms()),
+        list(st2.get_atoms())
     )
 
 def get_all_rr_distances(res1, res2, with_h=False):

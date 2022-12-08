@@ -1,7 +1,7 @@
 """ Command sequences """
 import biobb_structure_checking.constants as cts
 
-def _check(strcheck):
+def check(strcheck):
     if strcheck.strucm.sequence_data.has_canonical:
         print('Canonical sequence')
         can_seq = strcheck.strucm.sequence_data.get_canonical()
@@ -20,5 +20,5 @@ def _check(strcheck):
 
     return {}
 
-def _fix(strcheck, opts):
+def fix(strcheck, opts, fix_data=None):
     pass

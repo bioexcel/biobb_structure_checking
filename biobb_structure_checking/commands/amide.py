@@ -6,7 +6,7 @@ import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotAValidResidueError
 
-def _check(strcheck):
+def check(strcheck):
     amide_check = strcheck.strucm.check_amide_contacts()
     if 'list' not in amide_check:
         if not strcheck.args['quiet']:
@@ -37,7 +37,7 @@ def _check(strcheck):
         )
     return amide_check
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):
@@ -68,7 +68,7 @@ def _fix(strcheck, opts, fix_data=None):
             return False
 
         if input_option == 'auto':
-            to_fix = strcheck.strucm.amide_auto_fix(fix_data)   
+            to_fix = strcheck.strucm.amide_auto_fix(fix_data)
         else:
             to_fix = [
                 res
@@ -94,7 +94,7 @@ def _fix(strcheck, opts, fix_data=None):
         if not opts['no_recheck']:
             if not strcheck.args['quiet']:
                 print(cts.MSGS['AMIDES_RECHECK'])
-            fix_data = _check(strcheck)
+            fix_data = check(strcheck)
             amide_fix = ''
             if no_int_recheck:
                 fix_data = {}

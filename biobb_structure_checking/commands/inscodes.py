@@ -2,7 +2,7 @@
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 
-def _check(strcheck):
+def check(strcheck):
     ins_codes_list = strcheck.strucm.get_ins_codes()
     if not ins_codes_list:
         if not strcheck.args['quiet']:
@@ -16,7 +16,7 @@ def _check(strcheck):
         strcheck.summary['inscodes'].append(mu.residue_id(res))
     return {'ins_codes_list': ins_codes_list}
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if opts['renumber']:
         min_res = {}
         for res in fix_data['ins_codes_list']:

@@ -1,10 +1,10 @@
 """ Module supporting models command"""
-from unittest.util import strclass
+#from unittest.util import strclass
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     print(cts.MSGS['MODELS_FOUND'].format(strcheck.strucm.models_data.nmodels))
     strcheck.summary['models'] = {'nmodels': strcheck.strucm.models_data.nmodels}
     if strcheck.strucm.models_data.nmodels == 1:
@@ -25,7 +25,7 @@ def _check(strcheck):
     )
     return True
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         select_model = opts
     else:
@@ -60,5 +60,5 @@ def _fix(strcheck, opts, fix_data=None):
         strcheck.strucm.modified = True
 
     strcheck.summary['models']['selected'] = select_model
-    
+
     return False

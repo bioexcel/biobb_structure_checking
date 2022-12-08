@@ -191,7 +191,7 @@ class SequenceData():
                             f"Warning: no protein residues found for chain {chn.id}"
                             f" at model {mod.id}, adding hetatm to avoid empty chain"
                         )
-                        frags = [[res for res in chn.get_residues()]]
+                        frags = list(chn.get_residues())
                 elif strucm.chains_data.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:

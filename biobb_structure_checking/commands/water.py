@@ -3,7 +3,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     wat_list = [
         res
         for res in mu.get_ligands(strcheck.strucm.st, incl_water=True)
@@ -20,7 +20,7 @@ def _check(strcheck):
 
     return {'wat_list': wat_list}
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         remove_wat = opts
     else:

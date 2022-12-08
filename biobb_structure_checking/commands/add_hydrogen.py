@@ -4,7 +4,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
 
     ion_res_list = strcheck.strucm.get_ion_res_list()
 
@@ -32,7 +32,7 @@ def _check(strcheck):
     # print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
     return fix_data
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
 
