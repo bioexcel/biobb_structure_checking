@@ -78,10 +78,21 @@ class ChainsData():
             if chn_0 != '*':
                 if chn_1 == '*':
                     chn_1 = chn_0
-                renum_to_do.append([
-                    {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                    {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
-                ])
+                if chn_0 == chn_1: # chain shift
+                    tmp_ch_id = _get_tmp_ch_id(self.st[0])
+                    renum_to_do.append([
+                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                    ])
+                    renum_to_do.append([
+                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1},
+                    ])
+                else:
+                    renum_to_do.append([
+                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
+                    ])
             else:
                 # replicate for all chains
                 if chn_1 != '*':
@@ -97,11 +108,13 @@ class ChainsData():
                     ])
         return renum_to_do
 
+
     def renumber(self, renum_str, rem_inscodes=False, verbose=True):
         """ Renumber residues"""
+        modified = False
         renum_to_do = []
         if renum_str.lower() == 'auto':
-            tmp_ch_id = 'z'
+            tmp_ch_id = _get_tmp_ch_id(self.st[0])
             last_res_num = 0
             for chn in self.chain_ids:
                 n_term, c_term = mu.get_terms(self.st[0], chn)
@@ -132,8 +145,9 @@ class ChainsData():
                 if verbose and not mu.check_residue_id_order(mod[org['chn']]):
                     print(
                         f"WARNING: disordered residue ids found in {org['chn']}, "
-                        f"use explicit order combinations"
+                        f"may need explicit order combinations"
                     )
+
                 n_term, c_term = mu.get_terms(mod, org['chn'])
                 if not org['ini']:
                     org['ini'] = n_term.id[1]
@@ -166,6 +180,14 @@ class ChainsData():
                     mod[org['chn']].id = tgt['chn']
                     self.set_chain_ids()
                 else:
+                    to_move = []
+                    for res in mod[org['chn']].get_residues():
+                        if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
+                            to_move.append(res)
+                    if not to_move:
+                        print("WARNING: No residues to move, exiting task")
+                        continue
+
                     if tgt['chn'] not in mod:
                         if verbose:
                             print(f"Creating new chain {tgt['chn']}")
@@ -173,10 +195,6 @@ class ChainsData():
                         mod.add(new_ch)
                     else:
                         new_ch = mod[tgt['chn']]
-                    to_move = []
-                    for res in mod[org['chn']].get_residues():
-                        if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
-                            to_move.append(res)
                     inscodes_shift = 0
                     for res in sorted(to_move):
                         new_res = res.copy()
@@ -189,13 +207,23 @@ class ChainsData():
                             new_res_num = res.id[1] + inscodes_shift
                         new_res.id = res.id[0], new_res_num - org['ini'] + tgt['ini'], new_inscode
                         new_res.parent = new_ch
+                        col_res = _check_collision(new_res, new_ch)
+                        if col_res:
+                            print(
+                                f"ERROR. New residue {mu.residue_id(new_res)} collides "
+                                f" with     existing {mu.residue_id(col_res)}"
+                            )
+                            sys.exit()
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)
 
                     if not mod[org['chn']]:
+                        if verbose:
+                            print(f"Removing empty chain {org['chn']}")
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
-        return 1
+                    modified = True
+        return modified
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
@@ -250,3 +278,23 @@ def _parse_task_str(ts_str):
     if not fin:
         fin = 0
     return chn, int(ini), int(fin)
+
+def _get_tmp_ch_id(mod):
+    tmp_id = ord('a')
+    while chr(tmp_id) in mod:
+        tmp_id += 1
+    tmp_id = chr(tmp_id)
+    if tmp_id not in mod:
+        return tmp_id
+    return ''
+
+def _check_collision(new_res, new_ch):
+    found = False
+    col_res = None
+    for res in new_ch.get_residues():
+        if res.id[1] == new_res.id[1]:
+            found = True
+            break
+    if found:
+         return res
+    return None
