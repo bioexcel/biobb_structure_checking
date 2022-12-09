@@ -5,11 +5,6 @@
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
- Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
- Experimental method: X-RAY DIFFRACTION
- Keywords: TRANSFERASE
- Resolution (A): 1.90
 
  Num. models: 1
  Num. chains: 2 (A: Protein, B: Protein)
@@ -29,20 +24,31 @@ Running chains. Options: --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:37
 2 Chain(s) detected
  A: Protein
  B: Protein
-WARNING: disordered residue ids found in A, use explicit order combinations
+WARNING: disordered residue ids found in A, may need explicit order combinations
 Renumbering A501-A791 as W501-W791
 Creating new chain W
-WARNING: disordered residue ids found in A, use explicit order combinations
-Renumbering A1-A1 as A376-A376
-WARNING: disordered residue ids found in A, use explicit order combinations
-Renumbering A4-A4 as A377-A377
+WARNING: disordered residue ids found in A, may need explicit order combinations
+Renumbering A1-A1 as a376-a376
+Creating new chain a
+Renumbering a376-a376 as A376-A376
+Removing empty chain a
+WARNING: disordered residue ids found in A, may need explicit order combinations
+Renumbering A4-A4 as a377-a377
+Creating new chain a
+Renumbering a377-a377 as A377-A377
+Removing empty chain a
 Renumbering W501-W791 as A501-A791
-WARNING: disordered residue ids found in B, use explicit order combinations
+Removing empty chain W
+WARNING: disordered residue ids found in B, may need explicit order combinations
 Renumbering B504-B792 as W504-W792
 Creating new chain W
-WARNING: disordered residue ids found in B, use explicit order combinations
-Renumbering B2-B3 as B376-B377
+WARNING: disordered residue ids found in B, may need explicit order combinations
+Renumbering B2-B3 as a376-a377
+Creating new chain a
+Renumbering a376-a377 as B376-B377
+Removing empty chain a
 Renumbering W504-W792 as B504-B792
+Removing empty chain W
 Selecting all chains
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
