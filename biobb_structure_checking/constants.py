@@ -30,8 +30,7 @@ DEFAULTS = {
     'verbose': False,
     'debug': False,
     'options' : '',
-    'modeller_key': None,
-    'output_format': 'pdb'
+    'modeller_key': None
 }
 
 def set_defaults(base_dir_path, args=None):
@@ -142,8 +141,7 @@ CMD_LINE.add_argument(
     '--output_format',
     dest='output_format',
     help='Format for the Output. When empty output file extension is used.',
-    default='pdb',
-    choices=['pdb', 'pdbqt', 'pqr', 'cmip']
+    choices=['pdb', 'pdbqt', 'pqr', 'cmip', 'cif', 'mmCif']
 )
 
 CMD_LINE.add_argument(

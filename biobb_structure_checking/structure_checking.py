@@ -379,7 +379,8 @@ class StructureChecking():
             output_format = self.args['output_format']
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
-
+        if output_format == 'mmCif':
+            output_format = 'cif'
         if not split_models:
             self.strucm.save_structure(
                 output_structure_path,

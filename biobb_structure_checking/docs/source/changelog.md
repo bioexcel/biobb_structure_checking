@@ -14,6 +14,9 @@
   - Extended information on json summary output
 - input format
   - File format for remote download can be defined using extension as in pdb:2ki5.pdb
+- output format
+  - Added mmCif output (only atom records)
+
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized

@@ -134,14 +134,14 @@ class StructureData():
         Extract selected components from structure headers
         """
         self.meta = {}
-        if self.input_format == 'cif':
+        if self.input_format == 'cif' and '_entry_id' in self.headers:
             self.meta['entry_id'] = ', '.join(self.headers['_entry.id'])
             self.meta['title'] = ', '.join(self.headers['_struct.title'])
             self.meta['method'] = ', '.join(self.headers['_exptl.method'])
             self.meta['keywords'] = ', '.join(self.headers['_struct_keywords.pdbx_keywords'])
             if '_refine_hist.d_res_high' in self.headers:
                 self.meta['resolution'] = ', '.join(self.headers['_refine_hist.d_res_high'])
-        else:
+        elif 'name' in self.headers:
             self.meta['title'] = self.headers['name']
             self.meta['method'] = self.headers['structure_method']
             if 'keywords' in self.headers:

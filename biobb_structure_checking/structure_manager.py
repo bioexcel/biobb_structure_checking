@@ -16,6 +16,7 @@ from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
 from Bio.PDB.PDBParser import PDBParser
+from Bio.PDB.mmcifio import MMCIFIO
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
@@ -658,7 +659,10 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO_extended(is_pqr=self.st_data.has_charges, output_format=output_format)
+        if output_format in ('cif', 'mmCif'):
+            io = MMCIFIO()
+        else:
+            io = PDBIO_extended(is_pqr=self.st_data.has_charges, output_format=output_format)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
@@ -670,11 +674,11 @@ class StructureManager:
             print("Warning: reverting residue names to canonical on output")
 
         if mod_id is None:
-            pdbio.set_structure(self.st)
-            pdbio.save(output_pdb_path)
+            io.set_structure(self.st)
+            io.save(output_pdb_path)
         else:
-            pdbio.set_structure(self.st[mod_id])
-            pdbio.save(output_pdb_path)
+            io.set_structure(self.st[mod_id])
+            io.save(output_pdb_path)
 
         if keep_resnames:
             self.revert_can_resnames(canonical=False)
