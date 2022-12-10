@@ -30,14 +30,16 @@ Running chains. Options: {'renumber': 'A:44=z:44,z:44=A:44,B:44=z:44,z:44=B:44',
 2 Chain(s) detected
  A: Protein
  B: Protein
-WARNING: disordered residue ids found in A, use explicit order combinations
+WARNING: disordered residue ids found in A, may need explicit order combinations
 Renumbering A44-A187 as z44-z187
 Creating new chain z
 Renumbering z44-z189 as A44-A189
-WARNING: disordered residue ids found in B, use explicit order combinations
+Removing empty chain z
+WARNING: disordered residue ids found in B, may need explicit order combinations
 Renumbering B44-B173 as z44-z173
 Creating new chain z
 Renumbering z44-z175 as B44-B175
+Removing empty chain z
 Selecting all chains
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)

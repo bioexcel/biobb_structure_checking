@@ -6,7 +6,10 @@
 Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1svc.1 loaded
- Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
+ PDB id: 
+ Title: nfkb p50 homodimer bound to dna
+ Experimental method: x-ray diffraction
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, dna, transcription-dna complex
  Resolution (A): N.A.
  Biounit no. 1
 

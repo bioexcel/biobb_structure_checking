@@ -134,18 +134,28 @@ class StructureData():
         Extract selected components from structure headers
         """
         self.meta = {}
-        if self.input_format == 'cif' and '_entry_id' in self.headers:
-            self.meta['entry_id'] = ', '.join(self.headers['_entry.id'])
-            self.meta['title'] = ', '.join(self.headers['_struct.title'])
-            self.meta['method'] = ', '.join(self.headers['_exptl.method'])
-            self.meta['keywords'] = ', '.join(self.headers['_struct_keywords.pdbx_keywords'])
-            if '_refine_hist.d_res_high' in self.headers:
-                self.meta['resolution'] = ', '.join(self.headers['_refine_hist.d_res_high'])
-        elif 'name' in self.headers:
-            self.meta['title'] = self.headers['name']
-            self.meta['method'] = self.headers['structure_method']
-            if 'keywords' in self.headers:
-                self.meta['keywords'] = self.headers['keywords']
+        if self.input_format == 'cif':
+            map_fields = {
+                '_entry.id' : 'entry_id',
+                '_struct.title' : 'title',
+                '_exptl.method' : 'method',
+                '_struct_keywords.pdbx_keywords': 'keywords',
+                '_refine_hist.d_res_high': 'resolution'
+            }
+            for org, fin in map_fields.items():
+                if org in self.headers:
+                    self.meta[fin] = ', '.join(self.headers[org])
+
+        else:
+            map_fields = {
+                'idcode': 'entry_id',
+                'name': 'title',
+                'structure_method': 'method',
+                'keywords': 'keywords'
+            }
+            for org, fin in map_fields.items():
+                if org in self.headers:
+                    self.meta[fin] = self.headers[org]
             if 'resolution' not in self.headers or not self.headers['resolution']:
                 self.meta['resolution'] = 'N.A.'
             else:

@@ -37,8 +37,8 @@ Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Updating partial charges and atom types
-Warning: MG not found in residue library atom charges set to 0.
-Warning: MG not found in residue library atom charges set to 0.
+Warning: MG not found in residue library atom, charges set to 0.
+Warning: MG not found in residue library atom, charges set to 0.
 Total assigned charge:     -18.00
 Command list completed
 Final Num. models: 1

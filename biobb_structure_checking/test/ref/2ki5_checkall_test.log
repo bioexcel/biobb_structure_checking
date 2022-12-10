@@ -6,6 +6,9 @@
 Structure exists: 'tmpPDB/ki/2ki5_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:2ki5.1 loaded
+ PDB id: 
+ Title: herpes simplex type-1 thymidine kinase in complex with the drug aciclovir at 1.9a resolution
+ Experimental method: x-ray diffraction
  Keywords: transferase (phosphotransferase) thymid, transferase (phosphotransferase) thymidine kinase; viridae; ds-dna enveloped viruses; herpesviridae; alphaherpesvirinae antiviral drug (aciclovir)
  Resolution (A): N.A.
  Biounit no. 1
