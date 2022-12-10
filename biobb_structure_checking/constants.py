@@ -116,8 +116,8 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
-    '--get_copy',
-    dest='get_copy',
+    '--copy_input',
+    dest='copy_input',
     help='Copy the downloaded structure in the indicated folder'
 )
 

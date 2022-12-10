@@ -50,7 +50,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 
 **--nocache** - _Do not cache downloaded structures_
 
-**--get_copy** DIR - _Copy the downloaded structure in the indicated folder_
+**--copy_input** DIR - _Copy the downloaded structure in the indicated folder_
 
 **--limit** ATOM_LIMIT - _Limit on number of atoms (0: no limit)_
 

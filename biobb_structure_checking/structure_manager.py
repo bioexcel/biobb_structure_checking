@@ -52,7 +52,7 @@ class StructureManager:
             pdb_server: str,
             cache_dir: str = 'tmpPDB',
             nocache: bool= False,
-            get_copy_dir: str= './',
+            copy_dir: str= './',
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
         ) -> None:
@@ -67,6 +67,7 @@ class StructureManager:
             **pdb_server** (str): **default** for Bio.PDB defaults (RCSB), **mmb** for MMB PDB API
             **cache_dir** (str): path to temporary dir to store downloaded structures
             **nocache** (bool): Do not cache downloaded structures
+            **copy_dir** (str=: Folder to copy input structure
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
 
@@ -84,7 +85,7 @@ class StructureManager:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
         self.st, headers, input_format, biounit = self._load_structure_file(
-            input_pdb_path, cache_dir, nocache, get_copy_dir, pdb_server, file_format
+            input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format
         )
 
         self.models_data = ModelsData(self.st)
@@ -96,7 +97,7 @@ class StructureManager:
         # Calc internal data
         self.update_internals(cif_warn=True)
 
-    def _load_structure_file(self, input_pdb_path, cache_dir, nocache, get_copy_dir, pdb_server, file_format):
+    def _load_structure_file(self, input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format):
         """ Load structure file """
         biounit = False
         pdb_id = 'User'
@@ -168,12 +169,12 @@ class StructureManager:
         else:
             headers = MMCIF2Dict(real_pdb_path)
 
-        if get_copy_dir:
+        if copy_dir:
             try:
-                shutil.copy(real_pdb_path, get_copy_dir)
+                shutil.copy(real_pdb_path, copy_dir)
                 print(
                     f"Storing a copy of the input structure as "
-                    f"{opj(get_copy_dir, os.path.basename(real_pdb_path))}"
+                    f"{opj(copy_dir, os.path.basename(real_pdb_path))}"
                 )
             except Exception as err:
 #                print(err)

@@ -331,7 +331,7 @@ class StructureChecking():
             cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
             nocache=self.args['nocache'],
-            get_copy_dir=self.args['get_copy'],
+            copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path
         )
 

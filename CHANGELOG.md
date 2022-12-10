@@ -18,7 +18,7 @@
   - Added mmCif output (only atom records)
 - input management
   - Added --nocache to avoid caching downloaded structures
-  - Added --get_copy to recover a copy of the input structure
+  - Added --copy_input to recover a copy of the input structure
 
 ### Bug Fixes
 - Added missing defaults for Notebook execution
