@@ -14,6 +14,7 @@ check_structure can be run interactively. It will prompt for any missing paramet
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
                        [--file_format {mmCif,cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
+                       [--nocache] [--get_copy DIR]
                        [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
@@ -46,6 +47,10 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 **--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB|BSC)_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
+
+**--nocache** - _Do not cache downloaded structures_
+
+**--get_copy** DIR - _Copy the downloaded structure in the indicated folder_
 
 **--limit** ATOM_LIMIT - _Limit on number of atoms (0: no limit)_
 

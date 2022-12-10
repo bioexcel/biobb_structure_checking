@@ -294,6 +294,7 @@ def get_terms(mod, ch_id):
     """ Get terminal residues"""
     n_term = 0
     c_term = 0
+    res = None
     for res in mod[ch_id].get_residues():
         if not n_term:
             n_term = res

@@ -5,6 +5,7 @@
 import warnings
 import os
 from os.path import join as opj
+import shutil
 import sys
 import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
@@ -50,6 +51,8 @@ class StructureManager:
             res_library_path: str,
             pdb_server: str,
             cache_dir: str = 'tmpPDB',
+            nocache: bool= False,
+            get_copy_dir: str= './',
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
         ) -> None:
@@ -63,6 +66,7 @@ class StructureManager:
             **res_library_path** (str): Path to residue library
             **pdb_server** (str): **default** for Bio.PDB defaults (RCSB), **mmb** for MMB PDB API
             **cache_dir** (str): path to temporary dir to store downloaded structures
+            **nocache** (bool): Do not cache downloaded structures
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
 
@@ -80,7 +84,7 @@ class StructureManager:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
         self.st, headers, input_format, biounit = self._load_structure_file(
-            input_pdb_path, cache_dir, pdb_server, file_format
+            input_pdb_path, cache_dir, nocache, get_copy_dir, pdb_server, file_format
         )
 
         self.models_data = ModelsData(self.st)
@@ -92,9 +96,10 @@ class StructureManager:
         # Calc internal data
         self.update_internals(cif_warn=True)
 
-    def _load_structure_file(self, input_pdb_path, cache_dir, pdb_server, file_format):
+    def _load_structure_file(self, input_pdb_path, cache_dir, nocache, get_copy_dir, pdb_server, file_format):
         """ Load structure file """
         biounit = False
+        pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
@@ -105,7 +110,7 @@ class StructureManager:
                 if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format='pdb', biounit=biounit
+                    input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
                 )
             else:
                 if '.' in input_pdb_path:
@@ -119,16 +124,19 @@ class StructureManager:
                         file_format = 'cif'
                 else:
                     input_pdb_path = input_pdb_path.upper()
+
                 #Force mmCif as cif is not accepted by biopython
                 if file_format == 'cif':
                     file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format=file_format
+                    input_pdb_path, file_format=file_format, nocache=nocache
                 )
+                pdb_id = input_pdb_path
                 if file_format == 'pdb':
                     # change file name to id.pdb
-                    os.rename(real_pdb_path, f"{input_pdb_path}.pdb")
-                    real_pdb_path = f"{input_pdb_path}.pdb"
+                    new_path = opj(os.path.dirname(real_pdb_path), f"{input_pdb_path.lower()}.pdb")
+                    os.rename(real_pdb_path, new_path)
+                    real_pdb_path = new_path
         else:
             real_pdb_path = input_pdb_path
 
@@ -149,17 +157,31 @@ class StructureManager:
         warnings.simplefilter('ignore', BiopythonWarning)
 
         try:
-            st = parser.get_structure('st', real_pdb_path)
+            new_st = parser.get_structure(pdb_id, real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
+
         if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(real_pdb_path)
         else:
             headers = MMCIF2Dict(real_pdb_path)
 
-        return st, headers, input_format, biounit
+        if get_copy_dir:
+            try:
+                shutil.copy(real_pdb_path, get_copy_dir)
+                print(
+                    f"Storing a copy of the input structure as "
+                    f"{opj(get_copy_dir, os.path.basename(real_pdb_path))}"
+                )
+            except Exception as err:
+#                print(err)
+                print("WARNING: requested copy will overwrite input file, skipping")
+
+        if nocache:
+            os.remove(real_pdb_path)
+        return new_st, headers, input_format, biounit
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """

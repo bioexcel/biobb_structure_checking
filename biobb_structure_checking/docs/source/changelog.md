@@ -16,10 +16,14 @@
   - File format for remote download can be defined using extension as in pdb:2ki5.pdb
 - output format
   - Added mmCif output (only atom records)
+- input management
+  - Added --nocache to avoid caching downloaded structures
+  - Added --get_copy to recover a copy of the input structure
 
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized
+- Fixed behaviour of structure headers output with missing entries
 ## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details

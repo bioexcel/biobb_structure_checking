@@ -109,6 +109,19 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--nocache',
+    dest='nocache',
+    action='store_true',
+    help='Do not cache remote downloaded structures'
+)
+
+CMD_LINE.add_argument(
+    '--get_copy',
+    dest='get_copy',
+    help='Copy the downloaded structure in the indicated folder'
+)
+
+CMD_LINE.add_argument(
     '--modeller_key',
     dest='modeller_key',
     help='User key for modeller, required for backbone fix, ' +\
@@ -146,14 +159,14 @@ CMD_LINE.add_argument(
 
 CMD_LINE.add_argument(
     '--keep_canonical_resnames',
-    action="store_true",
+    action='store_true',
     dest='keep_canonical',
     help='Keep canonical names for ionized residues in output files'
 )
 
 CMD_LINE.add_argument(
     '--rename_terms',
-    action="store_true",
+    action='store_true',
     dest='rename_terms',
     help='Show terminal residues as NXXX, CXXX in output files'
 )
@@ -166,14 +179,14 @@ CMD_LINE.add_argument(
 
 CMD_LINE.add_argument(
     '-nv', '--quiet',
-    action="store_true",
+    action='store_true',
     dest='quiet',
     help='Minimal output, removing labels and progress info'
 )
 
 CMD_LINE.add_argument(
     '-v', '--verbose',
-    action="store_true",
+    action='store_true',
     dest='verbose',
     help='Add extra progress info'
 )
@@ -202,7 +215,7 @@ CMD_LINE.add_argument(
 #Operations
 CMD_LINE.add_argument(
     '--check_only',
-    action="store_true",
+    action='store_true',
     dest='check_only',
     help='Perform checks only, structure is not modified'
 )

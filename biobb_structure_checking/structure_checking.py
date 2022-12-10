@@ -79,7 +79,13 @@ class StructureChecking():
             self.checkall(self.args['options'])
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
-        elif self.args['command'] != 'load':
+        elif self.args['command'] == 'load':
+            if self.args['nocache'] and not self.args['force_save'] and not self.args['get_copy']:
+                print(
+                    "WARNING: load with --nocache will not "
+                    "have any effect unless --get_copy is set"
+                )
+        else:
             self._run_method(self.args['command'], self.args['options'])
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
@@ -324,6 +330,8 @@ class StructureChecking():
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
+            nocache=self.args['nocache'],
+            get_copy_dir=self.args['get_copy'],
             fasta_sequence_path=fasta_seq_path
         )
 

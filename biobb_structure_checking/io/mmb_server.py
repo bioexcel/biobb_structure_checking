@@ -37,16 +37,20 @@ class MMBPDBList(PDBList):
             pdir=None,
             file_format=None,
             overwrite=False,
-            biounit=False):
+            biounit=False,
+            nocache=False
+        ):
         """
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
             MMB PDB API. Defaults to Biopython super() if standard server is used.
         """
+        if nocache:
+            pdir='/tmp'
+            self.flat_tree = False
         if self.pdb_server.lower() not in ALT_SERVERS:
             return super().retrieve_pdb_file(
                 pdb_code, obsolete, pdir, file_format, overwrite
             )
-
         self._verbose = True
 
         code = pdb_code.lower()
