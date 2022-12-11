@@ -41,7 +41,6 @@ class StructureChecking():
         self.summary = {}
 
         if self.args['debug']:
-
             import psutil
 
             self.start_time = time.time()
@@ -411,6 +410,13 @@ class StructureChecking():
         return output_structure_path
 
     def check_report_clashes(self, residue_list=None, contact_types=None):
+        """ StructureChecking.check_report_clashes
+            Check and reports clashes
+
+            Args:
+                residue_list (res (list)) : Residues to check
+                contact_types (int (list)): Types of contacts to consider
+        """
         if contact_types is None:
             contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list:
