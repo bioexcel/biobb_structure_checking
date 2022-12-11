@@ -14,7 +14,7 @@ check_structure can be run interactively. It will prompt for any missing paramet
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
                        [--file_format {mmCif,cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
-                       [--nocache] [--get_copy DIR]
+                       [--nocache] [--copy_input DIR]
                        [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
