@@ -153,7 +153,7 @@ def fix(strcheck, opts, fix_data=None):
     if res_to_check and not opts['no_check_clashes']:
         if not strcheck.args['quiet']:
             logging.info(cts.MSGS['CHECKING_CLASHES'])
-        strcheck.summary['backbone']['clashes'] = strcheck._check_report_clashes(res_to_check)
+        strcheck.summary['backbone']['clashes'] = strcheck.check_report_clashes(res_to_check)
 
     return False
 

@@ -114,5 +114,5 @@ def fix(strcheck, opts, fix_data=None):
     # Checking new clashes
     if not opts['no_check_clashes']:
         logging.info(cts.MSGS['CHECKING_CLASHES'])
-        strcheck.summary['fixside_clashes'] = strcheck._check_report_clashes(fixed_res)
+        strcheck.summary['fixside_clashes'] = strcheck.check_report_clashes(fixed_res)
     return False

@@ -95,7 +95,7 @@ def fix(strcheck, opts, fix_data=None):
         if not opts['no_recheck']:
             if not strcheck.args['quiet']:
                 logging.info(cts.MSGS['AMIDES_RECHECK'])
-            fix_data = _check(strcheck)
+            fix_data = check(strcheck)
             amide_fix = ''
             if no_int_recheck:
                 fix_data = {}
