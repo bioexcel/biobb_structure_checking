@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "ARG A51",
    "TYR A53",
@@ -151,7 +150,8 @@
    "GLU B371",
    "GLU B374"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "AC2 A1": {
@@ -329,7 +329,8 @@
   "selected": {
    "A": 1,
    "B": 1
-  }
+  },
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 84,
@@ -543,14 +544,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 9351,
-  "num_h": 4706,
-  "num_res": 612,
-  "num_wat": 0,
-  "res_h": 604,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 9351,
+   "num_h": 4706,
+   "num_res": 612,
+   "num_wat": 0,
+   "res_h": 604,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": -2.531111999999998
  },
  "fixside": {
@@ -691,15 +694,18 @@
    "opt": "All"
   }
  },
+ "loaded_structure": "pdb:2ki5",
  "metals": {
   "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "opts": "--remove Yes"
  },
+ "saved_structure": "2ki5_all_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
@@ -724,14 +730,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 4961,
-  "num_h": 0,
-  "num_res": 908,
-  "num_wat": 292,
-  "res_h": 0,
-  "res_hetats": 296,
-  "res_insc": 0,
-  "res_ligands": 4,
+  "stats": {
+   "num_ats": 9351,
+   "num_h": 4706,
+   "num_res": 612,
+   "num_wat": 0,
+   "res_h": 604,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {

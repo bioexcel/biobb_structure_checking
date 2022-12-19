@@ -23,14 +23,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 4959,
-  "num_h": 0,
-  "num_res": 908,
-  "num_wat": 292,
-  "res_h": 0,
-  "res_hetats": 296,
-  "res_insc": 0,
-  "res_ligands": 4,
+  "stats": {
+   "num_ats": 4959,
+   "num_h": 0,
+   "num_res": 908,
+   "num_wat": 292,
+   "res_h": 0,
+   "res_hetats": 296,
+   "res_insc": 0,
+   "res_ligands": 4
+  },
   "total_charge": null
  },
  "headers": {
@@ -40,6 +42,8 @@
   "resolution": "1.90",
   "title": "HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION"
  },
+ "loaded_structure": "pdb:2ki5",
+ "modified_structure": true,
  "mutateside": {
   "opts": "--mut Leu49Ile,B:arg51Lys"
  },
@@ -72,6 +76,7 @@
   "positive": [],
   "severe": []
  },
+ "saved_structure": "2ki5_mutateside_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
@@ -96,14 +101,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 4961,
-  "num_h": 0,
-  "num_res": 908,
-  "num_wat": 292,
-  "res_h": 0,
-  "res_hetats": 296,
-  "res_insc": 0,
-  "res_ligands": 4,
+  "stats": {
+   "num_ats": 4959,
+   "num_h": 0,
+   "num_res": 908,
+   "num_wat": 292,
+   "res_h": 0,
+   "res_hetats": 296,
+   "res_insc": 0,
+   "res_ligands": 4
+  },
   "total_charge": null
  }
 }

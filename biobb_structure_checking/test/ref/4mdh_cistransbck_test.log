@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -28,12 +28,9 @@ SO4 A334
 NAD A335
 SO4 B334
 NAD B335
-
 Running cistransbck.
 2 cis peptide bonds
 ASN A130   PRO A131   Dihedral:   -0.784
 ASN B130   PRO B131   Dihedral:   -2.078
-2 trans peptide bonds with unusual omega dihedrals
-ASP A93    GLY A94    Dihedral: -159.766
-VAL B105   LYS B106   Dihedral:  156.996
+No trans peptide bonds with unusual omega dihedrals found
 Structure not modified, not saving. Override with --force_save

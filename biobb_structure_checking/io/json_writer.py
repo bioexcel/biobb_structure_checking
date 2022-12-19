@@ -46,4 +46,4 @@ class JSONWriter:
             file (str) : Path to output file
         """
         with open(file, "w+") as jsout:
-            jsout.write(self.__str__())
+            jsout.write(str(self))

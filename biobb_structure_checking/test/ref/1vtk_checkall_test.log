@@ -1,11 +1,12 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure pdb:1vtk.1 loaded
+ PDB id: 
  Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
  Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
@@ -26,7 +27,6 @@ ADP A400/1
 TMP A500/1
 ADP A400/2
 TMP A500/2
-
 Running models.
 2 Model(s) detected
 Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
@@ -89,10 +89,10 @@ Running backbone.
  SER A149/2 OXT
  GLY A264/2 OXT
 4 Backbone breaks found
- SER A149/1 - PRO A153/1 
- GLY A264/1 - PRO A280/1 
- SER A149/2 - PRO A153/2 
- GLY A264/2 - PRO A280/2 
+ SER A149/1 - PRO A153/1
+ GLY A264/1 - PRO A280/1
+ SER A149/2 - PRO A153/2
+ GLY A264/2 - PRO A280/2
 No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.

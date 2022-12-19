@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "ARG A84",
    "LYS A91",
@@ -110,7 +109,8 @@
    "ASP B251",
    "GLU B254"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -123,6 +123,7 @@
     "dist": 3.022
    }
   ],
+  "fixed": "All",
   "n_amides": 18,
   "opts": "--fix All"
  },
@@ -154,7 +155,8 @@
   "selected": {
    "A": 1,
    "B": 1
-  }
+  },
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 43,
@@ -163,25 +165,7 @@
  "chiral_bck": {
   "n_chirals": 316
  },
- "cistransbck": {
-  "unusual_trans": [
-   [
-    "THR A191",
-    "GLY A192",
-    156.442
-   ],
-   [
-    "ILE B203",
-    "GLY B204",
-    159.08
-   ],
-   [
-    "ILE A203",
-    "GLY A204",
-    -159.337
-   ]
-  ]
- },
+ "cistransbck": {},
  "clashes": {
   "detected": {
    "apolar": [
@@ -325,14 +309,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 5294,
-  "num_h": 2571,
-  "num_res": 342,
-  "num_wat": 0,
-  "res_h": 342,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 5294,
+   "num_h": 2571,
+   "num_res": 342,
+   "num_wat": 0,
+   "res_h": 342,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": -23.00000099999987
  },
  "fixside": {
@@ -373,6 +359,7 @@
    "opt": "All"
   }
  },
+ "loaded_structure": "pdb:1bqo",
  "metals": {
   "detected": [
    " ZN A301",
@@ -397,9 +384,11 @@
  "models": {
   "nmodels": 1
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "opts": "--remove Yes"
  },
+ "saved_structure": "1bqo_all_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
@@ -424,14 +413,16 @@
   "models_type": 0,
   "nchains": 2,
   "nmodels": 1,
-  "num_ats": 2841,
-  "num_h": 0,
-  "num_res": 428,
-  "num_wat": 75,
-  "res_h": 0,
-  "res_hetats": 86,
-  "res_insc": 0,
-  "res_ligands": 11,
+  "stats": {
+   "num_ats": 5294,
+   "num_h": 2571,
+   "num_res": 342,
+   "num_wat": 0,
+   "res_h": 342,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {
