@@ -10,6 +10,8 @@
   - Added --renumber. Rebuild residue numbering to remove insertion codes
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
+- sequences
+  - Added --output_fasta. Writes sequences found in an external FASTA file
 - json
   - Extended information on json summary output
 - input format

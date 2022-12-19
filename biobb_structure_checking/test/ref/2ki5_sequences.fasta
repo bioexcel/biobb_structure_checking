@@ -1,32 +1,3 @@
-================================================================================
-=                   BioBB structure checking utility v3.10.2                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
-================================================================================
-
-Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Structure pdb:2ki5 loaded
- PDB id: 2KI5
- Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
- Experimental method: X-RAY DIFFRACTION
- Keywords: TRANSFERASE
- Resolution (A): 1.90
-
- Num. models: 1
- Num. chains: 2 (A: Protein, B: Protein)
- Num. residues:  908
- Num. residues with ins. codes:  0
- Num. residues with H atoms: 0
- Num. HETATM residues:  296
- Num. ligands or modified residues:  4
- Num. water mol.:  292
- Num. atoms:  4961
-Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
-Running sequences. Options: --output_fasta 2ki5_sequences.fasta
-Canonical sequence
 >can_sq_A canonical sequence chain A
 SAFDQAARSRGHSNRRTALRPRRQQEATEVRPEQKMPTLLRVYIDGPHGMGKTTTTQLLV
 ALGSRDDIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGM
@@ -43,8 +14,6 @@ VALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQ
 CGGSWREDWGQLSGTAVPPQGAEPQSNAGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAW
 ALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAR
 EMGEAN
-
-Structure sequence
 >pdb_sq_A Frags: 77-148,154-264,280-375
 -----------------------------------MPTLLRVYIDGPHGMGKTTTTQLLV
 ------DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGM
@@ -61,6 +30,3 @@ VALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQ
 CGGSWREDWGQLS--------------AGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAW
 ALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAR
 EMGEA-
-
-Sequences written on 2ki5_sequences.fasta
-Structure not modified, not saving. Override with --force_save

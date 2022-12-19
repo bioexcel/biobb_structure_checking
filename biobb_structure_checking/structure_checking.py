@@ -262,7 +262,6 @@ class StructureChecking():
 
     # Running checking method
         data_to_fix = f_check(self)
-
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             if self.args['verbose']:

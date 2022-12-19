@@ -13,6 +13,7 @@
 Commands to manipulate structure composition.
 
 **sequences** - _Print canonical and structure sequences in FASTA format_
+  * **--output_fasta** Writes sequences found in an external FASTA file
 
 **models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
  * Accept List of Models (comma separated) or Model number range
@@ -20,8 +21,8 @@ Commands to manipulate structure composition.
  * **--save_split** Split models as separated output files.
  * **--build_complex** Builds an actual complex from Biounits stored as collection of models
 
-**chains** [--select chain_ids | molecule_type] [--rename (auto|new label)] [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--allow_merge] - _Detect/Select/Reorganize Chains_
-chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
+**chains** [--select chain_ids | molecule_type] [--rename (auto|new label)] [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--rem_inscodes] - _Detect/Select/Reorganize Chains_
+  * **--select** Select chains ids or chain types (PROTEIN|NA|DNA|RNA) to keep
   * **--rename** Allow to fix unlabelled chains
   * **--renumber** Allow to reorganize residues and chains by moving or renunbering fragments
   * **--rem_inscodes** removes insertion codes when renumbering chains

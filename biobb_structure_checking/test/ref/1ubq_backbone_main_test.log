@@ -61,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg6 5.15.79.1-microsoft-standard-WSL2 x86_64
 Date and time of compilation         : 2021/11/15 19:12:27
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2022/12/10 11:18:21
+Job starting time (YY/MM/DD HH:MM:SS): 2022/12/19 17:16:36
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

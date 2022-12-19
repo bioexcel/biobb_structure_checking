@@ -15,6 +15,7 @@ RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
+ATOM_LIMIT = 1000000
 
 DEFAULTS = {
     'file_format' : 'mmCif',
@@ -23,7 +24,7 @@ DEFAULTS = {
     'force_save' : False,
     'check_only' : False,
     'non_interactive' : False,
-    'atom_limit': 1000000,
+    'atom_limit': ATOM_LIMIT,
     'mem_check': False,
     'rename_terms': False,
     'keep_canonical': False,
@@ -78,7 +79,7 @@ CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
     help='Input structure. '
-        '1) Fetch from remote pdb:{pdbid} '
+        '1) Fetch from remote pdb:{pdbid}[.format] '
         '2) Local file: Formats pdb(qt)|pqr|cif. '
         'Format assumed from extension.'
 )
@@ -86,8 +87,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving remote structures (mmCif(default)|pdb|pqr|pdbqt)',
-    choices=['mmCif', 'pdb', 'cif', 'pqr', 'pdbqt']
+    help='Format for retrieving remote structures (mmCif(=cif, default)|pdb|xml)',
+    choices=['mmCif', 'pdb', 'cif', 'xml']
 )
 
 CMD_LINE.add_argument(
@@ -99,7 +100,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default|MMB)'
+    help='Server for retrieving structures (default(RCSB)|MMB|BSC)'
 )
 
 CMD_LINE.add_argument(
@@ -146,14 +147,15 @@ CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
     help='Output structure. '
-        'Formats available pdb|pdbqt|pqr|cmip '
+        'Formats available cif|pdb|pdbqt|pqr|cmip '
         '(use file extension or --output_format to set format)'
+        'Note than cif output format includes atom records only'
 )
 
 CMD_LINE.add_argument(
     '--output_format',
     dest='output_format',
-    help='Format for the Output. When empty output file extension is used.',
+    help='Format for the output. When empty, output file extension is used.',
     choices=['pdb', 'pdbqt', 'pqr', 'cmip', 'cif', 'mmCif']
 )
 
@@ -195,7 +197,8 @@ CMD_LINE.add_argument(
     '--limit',
     dest='atom_limit',
     type=int,
-    help='Limit on number of atoms,0:nolimit'
+    default=ATOM_LIMIT,
+    help='Set limit on the number of atoms, 0: nolimit. Default: 1000000'
 )
 
 CMD_LINE.add_argument(
@@ -378,6 +381,7 @@ DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
+DIALOGS.add_option('sequences', '--output_fasta', 'output_fasta', 'Store results as FASTA file')
 
 # All methods to perform checkall
 AVAILABLE_METHODS = [

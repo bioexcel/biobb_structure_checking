@@ -6,10 +6,10 @@ SHELL = /bin/csh
 COMMON = setenv PYTHONPATH ${BASEDIR}; cd ${TESTDIR}
 
 clean:
-	rm *pdb *log *json *diff *cmip *pqr *pdbqt
+	rm *pdb *log *json *diff *cmip *pqr *pdbqt *fasta
 
 update:
-	cp *pdb *log *json *cmip *pqr *pdbqt ref
+	cp *pdb *log *json *cmip *pqr *pdbqt *fasta ref
 
 
 all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
@@ -145,7 +145,7 @@ cistransbck:
 
 sequences:
 	@echo "Running sequences on 2ki5"
-	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences > 2ki5_sequences_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_sequences_test.pdb --non_interactive sequences --output_fasta 2ki5_sequences.fasta > 2ki5_sequences_test.log
 
 dnamut:
 	@echo "Running dnamut on 1D23"
