@@ -34,6 +34,9 @@ class ParamInput():
         """Add 'Yes/No' option to dialog"""
         self.add_option_list('yes', ['Yes'])
         self.add_option_list('no', ['No'])
+    def add_option_auto(self):
+        """Add 'auto' option to dialog"""
+        self.add_option_list('auto', ['Auto'])
 
     def add_option_list(self, label, opt_list, case=False, opt_type='list', \
             multiple=False, list2=None):
@@ -79,13 +82,13 @@ class ParamInput():
                 opt_strs.append(','.join(opt['opt_list']))
             elif opt['type'] in ('int', 'float'):
                 if opt['min'] != 0 or opt['max'] != 0:
-                    opt_strs.append('{} - {}'.format(opt['min'], opt['max']))
+                    opt_strs.append(f"{opt['min']} - {opt['max']}")
             elif opt['type'] == 'input':
                 opt_strs.append('Enter text')
             elif opt['type'] == 'pair_list':
                 str_opt = []
                 for oper in opt['opt_list']:
-                    str_opt.append('{}:[{}]'.format(oper, '|'.join(opt['list2'])))
+                    str_opt.append(f"{oper}:[{'|'.join(opt['list2'])}]")
                 opt_strs.append(','.join(str_opt))
             else:
                 opt_strs.append('?')
@@ -111,25 +114,22 @@ class ParamInput():
                     # To support both 'list' and 'pair_list':
                     val_sp = val.split(':')
                     val = val_sp[0]
-
                     input_ok =\
                         (opt['case'] == 'sensitive' and val in opt['opt_list'])\
                         or (opt['case'] == 'upper' and val.upper() in opt['opt_list'])\
                         or (opt['case'] == 'lower' and val.lower() in opt['opt_list'])\
                         or (not opt['case'] and val.lower() in\
                         list(map(lambda x: x.lower(), opt['opt_list'])))
-
                     if opt['type'] == 'pair_list':
                         input_ok = input_ok and val_sp[1] in opt['list2']
-
             elif opt['type'] in ('int', 'float'):
-                ok = True
+                value_ok = True
                 if opt['multiple']:
                     values = []
                     if (opt['type'] == 'int') and ('-' in opt_value):
-                        m1, m2 = opt_value.split('-')
-                        for v in range(int(m1), int(m2) + 1):
-                            values.append(v)
+                        min_val, max_val = opt_value.split('-')
+                        for val in range(int(min_val), int(max_val) + 1):
+                            values.append(val)
                     elif ',' in opt_value:
                         values = opt_value.split(',')
                 else:
@@ -138,8 +138,8 @@ class ParamInput():
                     opt_val = float(val)
                     if opt['type'] == "int":
                         opt_val = int(val)
-                    ok = ok and (opt['min'] <= opt_val <= opt['max'])
-                input_ok = ok
+                    value_ok = value_ok and (opt['min'] <= opt_val <= opt['max'])
+                input_ok = value_ok
             elif opt['type'] == 'text':
                 input_ok = opt_value
             if not input_ok:
@@ -151,7 +151,10 @@ class ParamInput():
         # Non interactive enviroment, check available input only
         if self.non_interactive:
             if opt_value is None:
-                print(f" WARNING: No selection provided and non_interactive, using '{self.default_none}'")
+                print(
+                    f" WARNING: No selection provided and non_interactive,"
+                    f" using '{self.default_none}'"
+                )
                 opt_value = self.default_none
             # No options, nothing to do, return original value
             if not self.options:
@@ -174,7 +177,7 @@ class ParamInput():
             opt_value = _get_input(opt_value, prompt_str, self.default)
             input_ok, iopt, opt_value = self._check_dialog_value(opt_value)
             if not input_ok:
-                print(f'Input not valid ({opt_value})')
+                print(f'Input not valid or out of range ({opt_value})')
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 
@@ -249,4 +252,4 @@ class Dialog():  #To check subparsers from argparse
 class NoDialogAvailableError(Exception):
     """ Error on no Dialog available for **command**"""
     def __init__(self, command):
-        self.message = 'ERROR: no dialog available for {}'.format(command)
+        self.message = f"ERROR: no dialog available for {command}"

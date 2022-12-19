@@ -1,5 +1,7 @@
 """
-    Module to handle an interface to modeller, used to rebuild main and side chains and to optimize side chain orientation
+    Module to handle an interface to modeller,
+    used to rebuild main and side chains and
+    to optimize side chain orientation
 """
 
 import sys
@@ -11,19 +13,19 @@ import shutil
 from Bio import SeqIO, pairwise2
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
-
-try:
-    from modeller import Environ, log
-    from modeller.automodel import automodel, assess
-except ImportError:
-    sys.exit("Error importing Modeller package")
-
 # Check for back-compatiblity with biopython < 1.77
 try:
     from Bio.Seq import IUPAC
     has_IUPAC = True
 except ImportError:
     has_IUPAC = False
+
+try:
+    from modeller import Environ, log
+    from modeller.automodel import AutoModel, assess
+except ImportError:
+    sys.exit("Error importing Modeller package")
+
 
 TMP_BASE_DIR = '/tmp'
 DEBUG = False
@@ -44,11 +46,7 @@ class ModellerManager():
         except IOError as err:
             print(err)
             sys.exit(err)
-        # Class changed in Modeller >= 10
-        try:
-            self.env = Environ()
-        except:
-            self.env = environ()
+        self.env = Environ()
 
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
@@ -98,13 +96,7 @@ class ModellerManager():
                     pdb_seq,
                     'templ' + ch_id,
                     '',
-                    'structureX:{}:{}:{}:{}:{}:::-1.00: -1.00'.format(
-                        self.templ_file,
-                        frgs[0].features[0].location.start,
-                        ch_id,
-                        frgs[-1].features[0].location.end,
-                        ch_id
-                    ),
+                    f"structureX:{self.templ_file}:{frgs[0].features[0].location.start}:{ch_id}:{frgs[-1].features[0].location.end}:{ch_id}:::-1.00: -1.00'",
                     annotations={'molecule_type':'protein'} # required for writing PIR aligment
                 )
             )
@@ -123,7 +115,7 @@ class ModellerManager():
 
 
     def _automodel_run(self, alin_file, knowns):
-        amdl = automodel(
+        amdl = AutoModel(
             self.env,
             alnfile=alin_file,
             knowns=knowns,
@@ -170,4 +162,4 @@ class NoCanSeqError(Exception):
     | Error raised when no canonical sequence exists
     """
     def __init__(self, ch_id):
-        self.message = 'No canonical sequence found for chain {}.'.format(ch_id)
+        self.message = f"No canonical sequence found for chain {ch_id}"

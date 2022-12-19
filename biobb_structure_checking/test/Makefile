@@ -36,6 +36,7 @@ load:
 	${COMMON};${APPBIN} -v -i pdb:1ubq load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:4mdh load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:6m0j load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
@@ -46,18 +47,21 @@ models:
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --non_interactive models --select 5 > 1ark_models_test_5.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_1_test.pdb --non_interactive models --select 1 > 1ark_models_test_1.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_sup_test.pdb --non_interactive models --select 3-6 --superimpose --save_split > 1ark_models_3-6_sup_test.log
+	@echo "Running models build complex on 1vtk"
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  -o 1vtk_models_complex.pdb --non_interactive models  --select all --build_complex > 1vtk_1_models_complex.log
 
 chains: 
 	@echo "Running chains on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select B > 2ki5_chains_test_B.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_renum_chain.pdb --non_interactive chains --select All --renumber A:=C:,B:=D:  > 2ki5_chains_test_renum_chain.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_fix_chains.pdb --non_interactive chains --select All --renumber A:501=W:,A:1-1=A:376,A:4-4=A:377,W:=A:501,B:504=W:,B:2-3=B:376,W:=B:504  > 2ki5_chains_test_fix_chains.log
 	@echo "Running chains on 1svc"
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_protein.pdb --non_interactive chains --select protein > 1svc_chains_test_protein.log
-	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_chains_test_dna.pdb --non_interactive chains --select dna > 1svc_chains_test_dna.log
-
 inscodes:
 	@echo "Running inscodes on 104l"
-	${COMMON};${APPBIN} -v -i pdb:104l -o 104l_chains_test.pdb --non_interactive inscodes > 104l_chains_test.log
+	${COMMON};${APPBIN} -v -i pdb:104l -o 104l_inscodes_test.pdb --non_interactive inscodes > 104l_inscodes_test.log
+	${COMMON};${APPBIN} -v -i pdb:104l -o 104l_inscodes_renum_test.pdb --non_interactive inscodes --renumber > 104l_inscodes_renum_test.log
 
 altloc: 
 	@echo "Running altloc on 2ki5"
@@ -100,6 +104,8 @@ amide:
 	@echo "Running amide on 1ubq"
 	${COMMON};${APPBIN} -v -i pdb:1ubq --non_interactive amide --fix None > 1ubq_amide_test_None.log
 	${COMMON};${APPBIN} -v -i pdb:1ubq -o 1ubq_amide_test_All.pdb --non_interactive amide --fix All > 1ubq_amide_test_All.log
+	@echo "Running amide auto on 6m0j"
+	${COMMON};${APPBIN} -v -i pdb:6m0j -o 6m0j_amide_test_auto.pdb --non_interactive amide --fix auto > 6m0j_amide_test_auto.log
 
 chiral:
 	@echo "Running chiral on modified 1ubq"

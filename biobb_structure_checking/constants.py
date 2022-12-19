@@ -2,12 +2,12 @@
     Global constants for structure_checking module
 """
 import argparse
-from os.path import join as opj
 from os.path import dirname
-from biobb_structure_checking.param_input import Dialog
+from os.path import join as opj
 
-VERSION = '3.10.1'
+from biobb_structure_checking.io.param_input import Dialog
 
+VERSION = '3.10.2'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -26,9 +26,11 @@ DEFAULTS = {
     'atom_limit': 1000000,
     'mem_check': False,
     'rename_terms': False,
+    'keep_canonical': False,
     'verbose': False,
     'debug': False,
-    'options' : ''
+    'options' : '',
+    'modeller_key': None
 }
 
 def set_defaults(base_dir_path, args=None):
@@ -60,9 +62,9 @@ def set_defaults(base_dir_path, args=None):
     if 'fasta_seq_path' not in args:
         args['fasta_seq_path'] = None
 
-    for param in DEFAULTS:
+    for param, value in DEFAULTS.items():
         if param not in args or args[param] is None:
-            args[param] = DEFAULTS[param]
+            args[param] = value
 
     return args
 
@@ -75,14 +77,17 @@ CMD_LINE = argparse.ArgumentParser(
 CMD_LINE.add_argument(
     '-i', '--input',
     dest='input_structure_path',
-    help='Input structure. 1) Fetch from remote pdb:{pdbid} 2) Local file: Formats pdb(qt)|pqr|cif. Format assumed from extension.'
+    help='Input structure. '
+        '1) Fetch from remote pdb:{pdbid} '
+        '2) Local file: Formats pdb(qt)|pqr|cif. '
+        'Format assumed from extension.'
 )
 
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving remote structures (cif(default)|pdb|xml)',
-    choices=['cif', 'pdb', 'xml']
+    help='Format for retrieving remote structures (mmCif(default)|pdb|pqr|pdbqt)',
+    choices=['mmCif', 'pdb', 'cif', 'pqr', 'pdbqt']
 )
 
 CMD_LINE.add_argument(
@@ -110,6 +115,19 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--nocache',
+    dest='nocache',
+    action='store_true',
+    help='Do not cache remote downloaded structures'
+)
+
+CMD_LINE.add_argument(
+    '--copy_input',
+    dest='copy_input',
+    help='Copy the downloaded structure in the indicated folder'
+)
+
+CMD_LINE.add_argument(
     '--modeller_key',
     dest='modeller_key',
     help='User key for modeller, required for backbone fix, ' +\
@@ -133,29 +151,32 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
-    help='Output structure. Formats available pdb|pdbqt|pqr|cmip (use file extension or --output_format to set format)'
+    help='Output structure. '
+        'Formats available pdb|pdbqt|pqr|cmip '
+        '(use file extension or --output_format to set format)'
 )
 
 CMD_LINE.add_argument(
     '--output_format',
     dest='output_format',
     help='Format for the Output. When empty output file extension is used.',
-    choices=['pdb', 'pdbqt', 'pqr', 'cmip']
+    choices=['pdb', 'pdbqt', 'pqr', 'cmip', 'cif', 'mmCif']
 )
 
 CMD_LINE.add_argument(
     '--keep_canonical_resnames',
-    action="store_true",
+    action='store_true',
     dest='keep_canonical',
     help='Keep canonical names for ionized residues in output files'
 )
 
 CMD_LINE.add_argument(
     '--rename_terms',
-    action="store_true",
+    action='store_true',
     dest='rename_terms',
     help='Show terminal residues as NXXX, CXXX in output files'
 )
+
 CMD_LINE.add_argument(
     '--json',
     dest='json_output_path',
@@ -164,18 +185,17 @@ CMD_LINE.add_argument(
 
 CMD_LINE.add_argument(
     '-nv', '--quiet',
-    action="store_true",
+    action='store_true',
     dest='quiet',
     help='Minimal output, removing labels and progress info'
 )
 
 CMD_LINE.add_argument(
     '-v', '--verbose',
-    action="store_true",
+    action='store_true',
     dest='verbose',
     help='Add extra progress info'
 )
-
 
 CMD_LINE.add_argument(
     '--limit',
@@ -183,6 +203,7 @@ CMD_LINE.add_argument(
     type=int,
     help='Limit on number of atoms,0:nolimit'
 )
+
 CMD_LINE.add_argument(
     '--debug',
     dest='debug',
@@ -200,7 +221,7 @@ CMD_LINE.add_argument(
 #Operations
 CMD_LINE.add_argument(
     '--check_only',
-    action="store_true",
+    action='store_true',
     dest='check_only',
     help='Perform checks only, structure is not modified'
 )
@@ -229,8 +250,8 @@ CMD_LINE.add_argument(
     version="%(prog)s " + VERSION
 )
 
-
 # Interactive DIALOGS to complete command_line missing parameters
+# ===============================================================
 DIALOGS = Dialog()
 
 #DIALOGS.add_option(command, prompt, destination, help_text, type(str))
@@ -246,19 +267,37 @@ DIALOGS.add_option('models', '--save_split', 'save_split', \
     'Save each model in a separated PDB file', 'bool')
 DIALOGS.add_option('models', '--superimpose', 'superimpose', \
     'Superimpose models', 'bool')
+DIALOGS.add_option(
+    'models', '--build_complex', 'build_complex',
+    'Build a complex from selected models (biounit type)', 'bool'
+)
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
+DIALOGS.add_option(
+    'chains', '--rename', 'rename',
+    'Rename unlabelled chains (auto | label)'
+)
+DIALOGS.add_option(
+    'chains', '--renumber', 'renumber',
+    'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)'
+)
+DIALOGS.add_option(
+    'chains', '--rem_inscodes', 'rem_inscodes',
+    'Remove insertion codes', 'bool'
+)
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
-DIALOGS.add_option('altloc', '--select', 'select', \
-    'Select altloc occupancy|alt_id')
+DIALOGS.add_option(
+    'altloc', '--select', 'select',
+    'Select altloc occupancy|alt_id'
+)
 
 DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
-DIALOGS.add_option('inscodes', '--renum', 'renum', 'Renumber residues', 'bool')
+DIALOGS.add_option('inscodes', '--renumber', 'renumber', 'Renumber chain residues', 'bool')
 
-DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated in v1.1')
+DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated)')
 DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
@@ -272,7 +311,7 @@ DIALOGS.add_entry('rem_hydrogen', 'Checks and optionally removes hydrogen atoms'
 DIALOGS.add_option('rem_hydrogen', '--remove', 'remove', 'Remove Hydrogen atoms')
 
 DIALOGS.add_entry('amide', 'Checks and optionally fixes wrong amide contacts')
-DIALOGS.add_option('amide', '--fix', 'fix', 'Fix Residues (All | None | List)')
+DIALOGS.add_option('amide', '--fix', 'fix', 'Fix Residues (All | None | auto | List)')
 DIALOGS.add_option('amide', '--no_recheck', 'no_recheck',\
     'Re-check after modification', 'bool')
 
@@ -319,6 +358,7 @@ DIALOGS.add_option('mutateside', '--rebuild', 'rebuild',\
     'Rebuild complete side chain', 'bool')
 DIALOGS.add_option('mutateside', '--na_seq', 'na_seq',\
     'Mutate DNA duplex to generate sequence')
+
 DIALOGS.add_entry('add_hydrogen', 'Add hydrogen atoms with tautomer/ion selection')
 DIALOGS.add_option('add_hydrogen', '--add_mode', 'add_mode',\
     'Selection mode (None | auto | list | ph | int | int_his )')
@@ -332,6 +372,7 @@ DIALOGS.add_option('add_hydrogen', '--keep_h', 'keep_h',\
     'Keep original hydrogen atoms', 'bool')
 DIALOGS.add_option('add_hydrogen', '--add_charges', 'add_charges',\
     'Update atom partial charges and add atom types from given forcefield (ADT|CMIP)', default="")
+
 DIALOGS.add_entry('clashes', 'Checks atom clashes')
 #DIALOGS.add_option('clashes', '--no_wat', 'discard_wat', 'Discard water molecules', 'bool')
 
@@ -339,7 +380,9 @@ DIALOGS.add_entry('getss', 'Checks SS bonds by distance')
 DIALOGS.add_option('getss', '--mark', 'mark', 'Mark Cys pairs as SS bond (All | None | List)')
 
 DIALOGS.add_entry('cistransbck', 'Checks or cis peptide bonds')
+
 DIALOGS.add_entry('checkall', 'Runs all checks, no modification')
+
 DIALOGS.add_entry('fixall', 'Fix all found issues with default options')
 
 DIALOGS.add_entry('sequences', 'Print Canonical and Structure sequences on FASTA format')
@@ -377,6 +420,7 @@ MSGS = {
     'SELECT_MODEL': 'Selecting model num.',
     'SPLIT_MODELS': 'Splitting models for output',
     'SUPIMP_MODELS': 'Models superimposed: final RMSd {:8.3f} A',
+    'ADDED_CHAINS_TO_COMPLEX': '{} chains added to new complex',
     #chains
     'CHAINS_DETECTED': '{} Chain(s) detected',
     'UNKNOWN_CHAINS':   ' {}: Unknown (PROTEIN: {s[0]:4.2f} DNA: {s[1]:4.2f} ' +\

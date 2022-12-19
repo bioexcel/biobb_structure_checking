@@ -1,12 +1,14 @@
-1. System Selection 
+1. System Selection
     1.1. Detect/Select Models (models) DONE
         1.1.1 Consider multiple DONE
         1.1.2 Save split collection DONE
         1.1.3 Superimpose models DONE
+        1.1.4 Build complex from biounit models DONE
     1.2. Detect/Select Chains (chains) DONE
         1.2.1 Detect mixed NA/protein chains
-        1.2.2 Rebuild/fix chains
+        1.2.2 Rebuild/fix chains  (DONE check and fix unlabelled)
         1.2.3 Select chains according to molecule type DONE
+        1.2.4 Renumber chains & Residues DONE
     1.3. Detect/Select Alt Locations (altloc) DONE
     1.4. Detect Heavy Metals /Remove (metals) DONE
     1.5. Detect Ligands /Remove (ligands) DONE
@@ -16,36 +18,38 @@
     1.7. Remove Water (remwat) DONE
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
-        1.9.1 Get sequence from PDB without canonical 
+        1.9.1 Get sequence from PDB without canonical DONE
+        1.9.2 Output FASTA file
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
-        2.1.1 Amides Automatic fix
+        2.1.1 Amides Automatic fix DONE
     2.2. Detect/Fix Improper quirality (chiral) DONE (!! check ILE with unusual atom labels)
         2.2.1 Detect Improper quirality on CAs (chiral_ca) DONE
-    2.3. Detect insertion codes/Renum (inscode) DONE detection, no fix
-        2.3.1 Rebuild chains with proper numbering
-    2.4. Complete side chains (fixside) DONE 
+    2.3. Detect insertion codes/Renum (inscode) DONE
+        2.3.1 Rebuild chains with proper numbering DONE
+    2.4. Complete side chains (fixside) DONE
         2.4.1 Rebuild side chains (using modeller) DONE for protein
     2.5. Mutate residues (mutate) DONE
-        2.5.1 Add/remove modified residues 
+        2.5.1 Add/remove modified residues
         2.5.2 Mutate DNA residues DONE
             2.5.2.1 Mutate DNA following sequence DONE
             2.5.2.2 Extend to RNA DONE
     2.6. Add hydrogens (add_hydrogens) DONE
         2.6.1 Determine protonation from environment (Hbond network, metals)
-        2.6.2 Consider -SS- DONE
+        2.6.2 Consider -SSDD- DONE
         2.6.3 PDBQT|PQR|CMIP formats DONE
         2.5.6 Consider Cap residues DONE
         2.6.4 Add hydrogens for NA chains DONE
         2.6.5 Prepare input for AutoDock with flexible residues
-    2.7. Complete backbone (backbone) DONE 
+        2.6.6 Add Metals to residue library
+    2.7. Complete backbone (backbone) DONE
         2.7.1 Complete main chains DONE
         2.7.2 Add ACE, NME caps DONE
         2.7.3 Use standard FASTA for sequence input (check uniprot and pdb Fasta's) DONE
         2.7.4 Accept/recognize GROMACS (and other non Amber) Atom names OT?
-        2.7.5 Build structure from CA-only 
-        2.7.6 Accept multiple templates
-        2.7.7 Fix modelled junctions
+        2.7.5 Accept multiple templates
+        2.7.6 Fix modelled junctions
+        2.7.8 Rebuild backbone in the context of the complete molecule (also for --rebuild options)
 3. Structure Warnings
     3.1. Detect SS Bonds (getss) DONE
         3.1.1 Mark Cys in SS Bonds as CYX DONE
@@ -62,8 +66,11 @@
         3.5.5. Apolar Clashes DONE
         3.5.6. Ionic Positive Clashes DONE
         3.5.7. Ionic Negative Clashes DONE
-4. Prepare alternative main scripts for specific functions 
+4. Prepare alternative main scripts for specific functions
     4.1 Check only
-    4.2 Prepare autodock input 
+    4.2 Prepare autodock input
     4.3 Prepare CMIP input WITHDRAWN (DONE in 2.6.3)
     4.4 Convert from MD formats
+5. General
+    5.1. Generate PDB Metadata
+    5.2. Generate CIF output files DONE

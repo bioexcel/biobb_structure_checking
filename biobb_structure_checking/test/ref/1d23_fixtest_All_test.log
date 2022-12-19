@@ -1,10 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure dna_test/1d23_fixtest.pdb loaded
+ PDB id: 
  Title: 
  Experimental method: unknown
  Resolution (A): N.A.
@@ -18,7 +19,6 @@ Structure dna_test/1d23_fixtest.pdb loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  391
-
 Running fixside. Options: --fix All
 2 Residues with missing side chain atoms found
   DG A2     C6,O6,N1,C2,N2,N3

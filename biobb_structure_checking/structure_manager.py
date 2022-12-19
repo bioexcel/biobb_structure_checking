@@ -5,10 +5,10 @@
 import warnings
 import os
 from os.path import join as opj
+import shutil
 import sys
-#import re
+import re
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
-
 
 from Bio.PDB.Residue import Residue
 from Bio.PDB.Atom import Atom
@@ -17,48 +17,42 @@ from Bio import BiopythonWarning
 from Bio.PDB.MMCIF2Dict import MMCIF2Dict
 from Bio.PDB.MMCIFParser import MMCIFParser
 from Bio.PDB.PDBParser import PDBParser
+from Bio.PDB.mmcifio import MMCIFIO
 from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
-from biobb_structure_checking.mmb_server import MMBPDBList, ALT_SERVERS
+from biobb_structure_checking.io.mmb_server import MMBPDBList, ALT_SERVERS
+from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
+
+from biobb_structure_checking.libs.data_lib_manager import DataLibManager
+from biobb_structure_checking.libs.residue_lib_manager import ResidueLib
+
+from biobb_structure_checking.modelling.sequencedata import SequenceData
+from biobb_structure_checking.modelling.modelsdata import ModelsData
+from biobb_structure_checking.modelling.chainsdata import ChainsData
+from biobb_structure_checking.modelling.structuredata import StructureData
+
+import biobb_structure_checking.modelling.utils as mu
+
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
-from biobb_structure_checking.data_lib_manager import DataLibManager
-from biobb_structure_checking.residue_lib_manager import ResidueLib
-from biobb_structure_checking.sequence_manager import SequenceData
-from biobb_structure_checking.PDBIO_extended import PDBIO_extended
-import biobb_structure_checking.model_utils as mu
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
-
-CISTHRES = 20  # TODO check values with pdb checking
-TRANSTHRES = 160
-
-ALL_CONTACT_TYPES = [
-    'severe',
-    'apolar',
-    'polar_acceptor',
-    'polar_donor',
-    'positive',
-    'negative'
-]
-AMIDE_CONTACT_TYPES = [
-    'polar_acceptor',
-    'polar_donor',
-]
-
+ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
+ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
     """
-
     def __init__(
             self,
             input_pdb_path: str,
             data_library_path: str,
             res_library_path: str,
-            pdb_server: str = 'ftp://ftp.wwpdb.org',
+            pdb_server: str,
             cache_dir: str = 'tmpPDB',
+            nocache: bool= False,
+            copy_dir: str= './',
             file_format: str = 'mmCif',
             fasta_sequence_path: str = ''
         ) -> None:
@@ -72,110 +66,78 @@ class StructureManager:
             **res_library_path** (str): Path to residue library
             **pdb_server** (str): **default** for Bio.PDB defaults (RCSB), **mmb** for MMB PDB API
             **cache_dir** (str): path to temporary dir to store downloaded structures
+            **nocache** (bool): Do not cache downloaded structures
+            **copy_dir** (str=: Folder to copy input structure
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
 
-        Object structure:
-            {
-                "input_format" (str): Format of input file pdb(qt)|pqr|cif
-                "models_type" (int): Guessed model type when num. models > 1 NMR|Bunit
-                "num_ats" (int): Total Number of atoms
-                "nmodels" (int): Number of Models
-                "chain_ids" (List): Chain composition as [chain_id:{}]
-                "modified" (Boolean): Flag to indicated that structure has been modified
-                "all_residues" (list): List of pointer to Bio.PDB.Residue objects, ordered acording to input file
-                "num_res" (int): Number of residues
-                "res_insc" (int): Number of residues with insertion codes
-                "res_hetats" (int): Number of residues flagged as HETATM
-                "res_ligands" (int): Number of non water residues flagged as HETATM
-                "num_wat" (int): Number of water residues
-                "ca_only" (boolead): Flag to indicate a possible CA-only structure
-                "modified_residue_list" []: List of residues being connected HETATM as PDB.Bio.Residue
-                "backbone_links" []: List of found canonical backbone links as [at1, at2] tuples, according to a distance criterium
-            TODO Update and complete
         """
-
-        self.chain_ids = {}
-        self.chain_details = {}
-        self.has_chains_to_rename = False
-
-        self.backbone_links = []
-        self.modified_residue_list = []
-        self.non_canonical_residue_list = []
-
-        self.hetatm = {}
-        self.num_res = 0
-        self.num_ats = 0
-        self.res_hetats = 0
-        self.num_wat = 0
-        self.num_h = 0
-        self.res_h = 0
-        self.res_insc = 0
-        self.res_ligands = 0
-        self.ca_only = False
-
-        self.ss_bonds = []
-
-        self.meta = {}
-
-        self.all_residues = []
-        self.next_residue = {}
-        self.prev_residue = {}
-
-        self.sequence_data = SequenceData()
-
-        self.modified = False
-        self.biounit = False
-        self.fixed_side = False
-        self.file_format = file_format
-        self.has_charges = False
-        self.total_charge = None
-
         self.data_library = DataLibManager(data_library_path)
-        for ff in self.data_library.ff_data:
-            self.data_library.get_ff_data(os.path.dirname(data_library_path) + '/' + ff.upper() + '_prm.json')
+        for ff_name in self.data_library.ff_data:
+            self.data_library.get_ff_data(
+                opj(os.path.dirname(data_library_path), f"{ff_name.upper()}_prm.json")
+            )
 
         self.res_library = ResidueLib(res_library_path)
 
-        self.st, self.headers, self.input_format = self._load_structure_file(
-            input_pdb_path, cache_dir, pdb_server, file_format
-        )
-
+        self.sequence_data = SequenceData()
         if fasta_sequence_path:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
-        self.templates = []
+        self.st, headers, input_format, biounit = self._load_structure_file(
+            input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format
+        )
 
-        # Checking models type according to RMS among models
-        self.nmodels = len(self.st)
-        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
+        self.models_data = ModelsData(self.st)
+        self.chains_data = ChainsData(self.st)
+        self.st_data = StructureData(self.st, input_format, headers, biounit)
+
+        self.modified = False
 
         # Calc internal data
         self.update_internals(cif_warn=True)
 
-    def _load_structure_file(self, input_pdb_path, cache_dir, pdb_server, file_format):
+    def _load_structure_file(self, input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format):
         """ Load structure file """
-        if "pdb:" in input_pdb_path:
-            # MMBPDBList child defaults to Bio.PDB.PDBList if MMB server is not selected
+        biounit = False
+        pdb_id = 'User'
+        if input_pdb_path.startswith('pdb:'):
+            input_pdb_path = input_pdb_path[4:]
+            # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
-            if '.' in input_pdb_path:
-                [pdbid, biounit] = input_pdb_path.split('.')
-                input_pdb_path = pdbid[4:].upper()
+            if re.search(r'\.[1-9]+$', input_pdb_path):
+                pdbid, biounit = input_pdb_path.split('.')
+                input_pdb_path = pdbid.upper()
                 if pdb_server not in ALT_SERVERS:
                     raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format='pdb', biounit=biounit
+                    input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
                 )
-                self.biounit = biounit
             else:
-                input_pdb_path = input_pdb_path[4:].upper()
+                if '.' in input_pdb_path:
+                    pdbid, file_format = input_pdb_path.split('.')
+                    input_pdb_path = pdbid.upper()
+                    if file_format not in ACCEPTED_REMOTE_FORMATS:
+                        print(
+                            f"WARNING: format {file_format} not available for downloads, "
+                            f"reverting to default"
+                        )
+                        file_format = 'cif'
+                else:
+                    input_pdb_path = input_pdb_path.upper()
+
+                #Force mmCif as cif is not accepted by biopython
+                if file_format == 'cif':
+                    file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format=self.file_format
+                    input_pdb_path, file_format=file_format, nocache=nocache
                 )
+                pdb_id = input_pdb_path
                 if file_format == 'pdb':
                     # change file name to id.pdb
-                    os.rename(real_pdb_path, input_pdb_path + ".pdb")
-                    real_pdb_path = input_pdb_path + ".pdb"
+                    new_path = opj(os.path.dirname(real_pdb_path), f"{input_pdb_path.lower()}.pdb")
+                    os.rename(real_pdb_path, new_path)
+                    real_pdb_path = new_path
         else:
             real_pdb_path = input_pdb_path
 
@@ -196,108 +158,79 @@ class StructureManager:
         warnings.simplefilter('ignore', BiopythonWarning)
 
         try:
-            st = parser.get_structure('st', real_pdb_path)
+            new_st = parser.get_structure(pdb_id, real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
+
         if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(real_pdb_path)
         else:
             headers = MMCIF2Dict(real_pdb_path)
-        return st, headers, input_format
+
+        if copy_dir:
+            try:
+                shutil.copy(real_pdb_path, copy_dir)
+                print(
+                    f"Storing a copy of the input structure as "
+                    f"{opj(copy_dir, os.path.basename(real_pdb_path))}"
+                )
+            except Exception as err:
+#                print(err)
+                print("WARNING: requested copy will overwrite input file, skipping")
+
+        if nocache:
+            os.remove(real_pdb_path)
+        return new_st, headers, input_format, biounit
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """
         # Add .index field for correlative, unique numbering of residues
-        self.residue_renumbering()
+        self.st_data.residue_renumbering(self.data_library)
+
         # Atom renumbering for mmCIF, PDB uses atom number in file
-        self.atom_renumbering()
-        self.set_chain_ids()
-        self.calc_stats()
-        self.guess_hetatm()
+        self.st_data.atom_renumbering()
+        self.chains_data.set_chain_ids(self.st_data.biounit)
+        self.st_data.calc_stats()
+        self.st_data.guess_hetatm()
 
         self.rr_dist = self.get_all_r2r_distances('all', join_models=False)
 
         # Precalc backbone
-        self.check_backbone_connect(
+        self.st_data.check_backbone_connect(
             ("N", "C", "P", "O3'"),
             self.data_library.distances['COVLNK']
         )
         # get canonical and structure sequences
         self.sequence_data.read_sequences(self, clean=True, cif_warn=cif_warn)
 
-    def residue_renumbering(self):
-        """Sets the Bio.PDB.Residue.index attribute to residues for a unique,
-        consecutive, residue number, and generates the corresponding list
-        in **all_residues**
-        """
-        i = 1
-        self.all_residues = []
-        for res in self.st.get_residues():
-            res.index = i
-            res.resname = res.resname.strip()
-            if type(res).__name__ == 'DisorderedResidue':
-                for ch_r in res.child_dict:
-                    res.child_dict[ch_r].index = i
-            self.all_residues.append(res)
-            i += 1
-
-    def atom_renumbering(self):
-        """ Sets  Bio.PDB.Atom.serial_number for all atoms in the structure,
-            overriding original if any.
-        """
-        if self.input_format == 'pqr' or self.has_charges:
-            self.total_charge = 0.
-        else:
-            self.total_charge = None
-        i = 1
-        for atm in self.st.get_atoms():
-            atm.serial_number = i
-            if hasattr(atm, 'selected_child'):
-                atm.selected_child.serial_number = i
-            if atm.pqr_charge is not None and self.total_charge is not None:
-                self.total_charge += atm.pqr_charge
-            i += 1
-        #self.has_charges = (self.total_charge is not None)
-
-    def update_atom_charges(self, ff):
+    def update_atom_charges(self, force_field):
         """ Update atom charges and types from data library """
 
         print("Updating partial charges and atom types")
 
-        self.total_charge = 0.
+        self.st_data.total_charge = 0.
 
-        if ff not in self.data_library.ff_data:
-            raise UnknownFFError(ff)
-        ff_data = self.data_library.ff_data[ff]
+        if force_field not in self.data_library.ff_data:
+            raise UnknownFFError(force_field)
+        ff_data = self.data_library.ff_data[force_field]
 
         self.rename_terms(self.get_term_res())
         for res in self.st.get_residues():
-            ch_type = self._get_chain_type(res)
+            ch_type = self.chains_data.get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
+            rcode3 = rcode # Normal residues
             if len(rcode) == 4: # Protein terms
                 rcode3 = rcode[1:]
             elif rcode[-1] in ('3', '5'): # NA Terms
                 rcode3 = rcode[:-1]
-            else:
-                rcode3 = rcode
-
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
-            if rcode not in self.res_library.residues:
-                print("Warning: {} not found in residue library atom charges set to 0.".format(rcode))
-                for atm in res.get_atoms():
-                    atm.pqr_charge = 0.
-                    atm.radius = 0.
-                    if atm.id in self.data_library.atom_data['metal_atoms']:
-                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
-                    else:
-                        atm.xtra['atom_type'] = atm.element
-            else:
+
+            if rcode in self.res_library.residues:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
-
                 for atm in res.get_atoms():
                     atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
@@ -308,66 +241,30 @@ class StructureManager:
                         atm.xtra['atom_type'] = atm.element
                     atm.radius = ff_data['rvdw'][atm.xtra['atom_type']]
                     res_chr += atm.pqr_charge
-                    self.total_charge += atm.pqr_charge
+                    self.st_data.total_charge += atm.pqr_charge
                     if atm.id == 'OXT':
                         oxt_ok = True
                 if not oxt_ok:
-                    print("Warning: OXT atom missing in {}. Run backbone --fix_atoms first".format(mu.residue_id(res)))
-        print("Total assigned charge: {:10.2f}".format(self.total_charge))
+                    print(
+                        f"Warning: OXT atom missing in {mu.residue_id(res)}. "
+                        f"Run backbone --fix_atoms first"
+                    )
+            else:
+                print(f"Warning: {rcode} not found in residue library atom, charges set to 0.")
+                for atm in res.get_atoms():
+                    atm.pqr_charge = 0.
+                    atm.radius = 0.
+                    if atm.id in self.data_library.atom_data['metal_atoms']:
+                        atm.xtra['atom_type'] = atm.id.lower().capitalize()
+                    else:
+                        atm.xtra['atom_type'] = atm.element
+
+        print(f"Total assigned charge: {self.st_data.total_charge:10.2f}")
 
         self.revert_terms()
 
-        self.has_charges = True
+        self.st_data.has_charges = True
 
-    def guess_hetatm(self):
-        """ Guesses HETATM type as modified res, metal, wat, organic
-        """
-        self.hetatm = {}
-        for typ in [mu.UNKNOWN, mu.MODRES, mu.METAL, mu.ORGANIC, mu.COVORGANIC, mu.WAT]:
-            self.hetatm[typ] = []
-        for res in self.st.get_residues():
-            if not mu.is_hetatm(res):
-                continue
-            if mu.is_wat(res):
-                self.hetatm[mu.WAT].append(res)
-            elif len(res) == 1:
-                self.hetatm[mu.METAL].append(res)
-            elif 'N' in res or 'C' in res:
-                # modified aminoacid candidate, TODO check connectivity with n-1 or n+1
-                self.hetatm[mu.MODRES].append(res)
-                # TODO check modified nucleotides
-            else:
-                self.hetatm[mu.ORGANIC].append(res)
-
-    def calc_stats(self):
-        """ Calculates general statistics about the structure, and guesses whether
-            it is a CA-only structure
-        """
-        self.num_res = 0
-        self.num_ats = 0
-        self.res_hetats = 0
-        self.num_wat = 0
-        self.res_insc = 0
-        self.num_h = 0
-        self.res_h = 0
-        for res in self.st.get_residues():
-            self.num_res += 1
-            if mu.is_wat(res):
-                self.num_wat += 1
-            if mu.is_hetatm(res):
-                self.res_hetats += 1
-            if mu.has_ins_code(res):
-                self.res_insc += 1
-            self.num_ats += len(res.get_list())
-        self.res_ligands = self.res_hetats - self.num_wat
-        for pair in mu.get_residues_with_H(self.st):
-            self.res_h += 1
-            self.num_h += pair['num_h']
-        # Detecting whether it is a CA-only structure
-        # num_ats should be much larger than num_res
-        # waters removed
-        # Taking polyGly as a lower limit
-        self.ca_only = self.num_ats - self.num_wat < (self.num_res - self.num_wat) * 4
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -383,13 +280,13 @@ class StructureManager:
 
     def get_SS_bonds(self) -> List[Union[Atom, Atom, float]]:
         """ Stores and returns possible SS Bonds by distance"""
-        self.ss_bonds = mu.get_all_at2at_distances(
+        self.st_data.ss_bonds = mu.get_all_at2at_distances(
             self.st,
             'SG',
             self.data_library.distances['SS_DIST'],
-            not self.has_superimp_models()
+            not self.models_data.has_superimp_models()
         )
-        return self.ss_bonds
+        return self.st_data.ss_bonds
 
     def check_chiral_sides(self) -> Dict[List[Residue], List[Residue]]:
         """ Returns a list of wrong chiral side chains"""
@@ -417,7 +314,7 @@ class StructureManager:
         prot_chains = 0
         chiral_bck_list = []
         for chn in self.st.get_chains():
-            if self.chain_ids[chn.id] == mu.PROTEIN:
+            if self.chains_data.chain_ids[chn.id] == mu.PROTEIN:
                 prot_chains += 1
                 for res in chn.get_residues():
                     if res.get_resname() != 'GLY' and not mu.is_hetatm(res):
@@ -436,15 +333,21 @@ class StructureManager:
             'res_to_fix': [res for res in chiral_bck_list if not mu.check_chiral_ca(res)]
         }
 
-    def check_r_list_clashes(self, residue_list: Iterable[Residue], contact_types: Iterable[str]) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
+    def check_r_list_clashes(
+            self,
+            residue_list: Iterable[Residue],
+            contact_types: Iterable[str],
+            get_all_contacts=False
+        ) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
         """ Checks clashes originated by a list of residues"""
         return mu.check_r_list_clashes(
             residue_list,
             self.rr_dist,
             self.data_library.distances['CLASH_DIST'],
             self.data_library.get_atom_lists(contact_types),
-            not self.has_superimp_models(),
-            severe='severe' in contact_types
+            not self.models_data.has_superimp_models(),
+            severe='severe' in contact_types,
+            get_all_contacts=get_all_contacts
         )
 
     def check_missing_atoms(self) -> List[Tuple[Residue, Dict[str, List[str]]]]:
@@ -458,15 +361,22 @@ class StructureManager:
         residue_data = {}
         for chain_type in ('protein', 'dna', 'rna'):
             valid_codes[mu.TYPE_LABEL[chain_type]] = self.data_library.get_valid_codes(chain_type)
+            if chain_type == 'protein':
+                valid_codes[mu.TYPE_LABEL[chain_type]] += list(self.data_library.canonical_codes)
             residue_data[mu.TYPE_LABEL[chain_type]] = self.data_library.get_all_atom_lists(chain_type)
         miss_at_list = []
         for res in self.st.get_residues():
-            ch_type = self._get_chain_type(res)
+            ch_type = self.chains_data.get_chain_type(res)
             if ch_type not in (mu.PROTEIN, mu.NA, mu.DNA, mu.RNA):
                 continue
-            if res.get_resname() in valid_codes[ch_type] and not mu.is_hetatm(res):
+
+            if res.get_resname() in valid_codes[ch_type]  and not mu.is_hetatm(res):
+                if res.get_resname() in self.data_library.canonical_codes:
+                    can_rcode = self.data_library.canonical_codes[res.get_resname()]
+                else:
+                    can_rcode = res.get_resname()
                 miss_at = mu.check_all_at_in_r(
-                    res, residue_data[ch_type][res.get_resname().replace(' ', '')]
+                    res, residue_data[ch_type][can_rcode]
                 )
                 bck_miss = []
                 if ch_type == mu.PROTEIN:
@@ -496,22 +406,28 @@ class StructureManager:
         residue_data = {}
         for chain_type in ('protein', 'dna', 'rna'):
             valid_codes[mu.TYPE_LABEL[chain_type]] = self.data_library.get_valid_codes(chain_type)
+            if chain_type == 'protein':
+                valid_codes[mu.TYPE_LABEL[chain_type]] += list(self.data_library.canonical_codes)
             residue_data[mu.TYPE_LABEL[chain_type]] = self.data_library.get_all_atom_lists(chain_type)
         extra_at_list = []
         for res in self.st.get_residues():
             if mu.is_hetatm(res):
                 continue
-            ch_type = self._get_chain_type(res)
+            if res.get_resname() in self.data_library.canonical_codes:
+                can_rcode = self.data_library.canonical_codes[res.get_resname()]
+            else:
+                can_rcode = res.get_resname()
+            ch_type = self.chains_data.get_chain_type(res)
             rcode = res.get_resname().replace(' ', '')
             if rcode not in valid_codes[ch_type]:
                 print(f"Warning: unknown residue {rcode}")
                 continue
             if ch_type == mu.PROTEIN:
-                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][rcode])
+                extra_ats = mu.check_unk_at_in_r(res, residue_data[ch_type][can_rcode])
                 if extra_ats:
                     extra_at_list.append((res, extra_ats))
             else:
-                res_at_list = residue_data[ch_type][rcode]
+                res_at_list = residue_data[ch_type][can_rcode]
                 add_ats = []
                 if not self.is_5_term(res):
                     if 'P' not in res_at_list['backbone']: # fix to avoid chain many
@@ -545,15 +461,15 @@ class StructureManager:
 
     def _missing_bck_atoms(self, res):
         """ Check whether backbone atoms required to build side chains are present"""
-        if self._get_chain_type(res) == mu.PROTEIN:
+        if self.chains_data.get_chain_type(res) == mu.PROTEIN:
             bck_ats = ("N", "CA", "C")
         else:
             bck_ats = ("C1'", "O4'", "C4'")
 
         missing = False
 
-        for at in bck_ats:
-            missing = missing or at not in res
+        for atm in bck_ats:
+            missing = missing or atm not in res
 
         return missing
 
@@ -569,7 +485,7 @@ class StructureManager:
         hydrogen_lists = self.data_library.get_hydrogen_atoms()
 
         ion_res_list = []
-        for res in self.all_residues:
+        for res in self.st_data.all_residues:
             rcode = res.get_resname()
             if len(rcode) == 4:
                 rcode = rcode[1:]
@@ -589,25 +505,25 @@ class StructureManager:
         bck_breaks_list = []
         wrong_link_list = []
         not_link_seq_list = []
-        self.modified_residue_list = []
-        for i in range(0, len(self.all_residues)-1):
-            res1 = self.all_residues[i]
-            res2 = self.all_residues[i + 1]
+        self.st_data.modified_residue_list = []
+        for i in range(0, len(self.st_data.all_residues)-1):
+            res1 = self.st_data.all_residues[i]
+            res2 = self.st_data.all_residues[i + 1]
             if not mu.same_chain(res1, res2):
                 continue
             if mu.is_hetatm(res1) or mu.is_hetatm(res2):
-                if res1 in self.next_residue:
-                    if self.next_residue[res1] == res2:
+                if res1 in self.st_data.next_residue:
+                    if self.st_data.next_residue[res1] == res2:
                         if mu.is_hetatm(res1):
-                            self.modified_residue_list.append(res1)
+                            self.st_data.modified_residue_list.append(res1)
                 else:
                     continue
             # Skip NA
             # TODO include NA Backbone
-            if self.chain_ids[res1.get_parent().id] != mu.PROTEIN:
+            if self.chains_data.chain_ids[res1.get_parent().id] != mu.PROTEIN:
                 continue
 
-            if res1 not in self.next_residue:
+            if res1 not in self.st_data.next_residue:
                 bck_breaks_list.append([res1, res2])
                 if mu.seq_consecutive(res1, res2):
                     dist = 0.
@@ -616,53 +532,30 @@ class StructureManager:
                     not_link_seq_list.append([res1, res2, dist])
 
             else:
-                if res2 != self.next_residue[res1]:
-                    wrong_link_list.append([res1, self.next_residue[res1], res2])
+                if res2 != self.st_data.next_residue[res1]:
+                    wrong_link_list.append([res1, self.st_data.next_residue[res1], res2])
         return {
             'bck_breaks_list': bck_breaks_list,
             'wrong_link_list': wrong_link_list,
             'not_link_seq_list': not_link_seq_list
         }
 
-    def check_backbone_connect(self, backbone_atoms: Iterable[Atom], covlnk: float):
-        """
-        Determines backbone links usign a distance criterium and produces a dict with
-        link relationships in the N-term to C-term direction
-
-        Args:
-            backbone_atoms: atoms to be considered as backbone
-            covlnk: Threshold distance for a covalent bond
-        """
-        self.backbone_links = mu.get_backbone_links(
-            self.st, backbone_atoms, covlnk
-        )
-        self.next_residue = {}
-        self.prev_residue = {}
-        for lnk in self.backbone_links:
-            [at1, at2] = lnk
-            res1 = at1.get_parent()
-            res2 = at2.get_parent()
-            self.prev_residue[res2] = res1
-            self.next_residue[res1] = res2
-
-#    def check_cis_backbone(self) -> Tuple[List[Tuple[Residue, Residue, float]], List[Residue, Residue, float]]:
     def check_cis_backbone(self):
-
         """
         Determines omega dihedrals for two bound residues and classifies them
         as normal trans, low angle trans, and cis
         """
         cis_backbone_list = []
         lowtrans_backbone_list = []
-        for lnk in self.backbone_links:
+        for lnk in self.st_data.backbone_links:
             [at1, at2] = lnk
             res1 = at1.get_parent()
             res2 = at2.get_parent()
             if 'CA' in res1 and 'C' in res1 and 'CA' in res2 and 'N' in res2:
                 dih = mu.calc_bond_dihedral(res1['CA'], res1['C'], res2['N'], res2['CA'])
-                if abs(dih) < CISTHRES:
+                if abs(dih) < mu.CISTHRES:
                     cis_backbone_list.append((res1, res2, dih))
-                elif abs(dih) < TRANSTHRES:
+                elif abs(dih) < mu.TRANSTHRES:
                     lowtrans_backbone_list.append((res1, res2, dih))
         return cis_backbone_list, lowtrans_backbone_list
 
@@ -680,7 +573,7 @@ class StructureManager:
 
         c_list = self.check_r_list_clashes(
             amide_list,
-            AMIDE_CONTACT_TYPES
+            mu.AMIDE_CONTACT_TYPES
         )
         amide_res_to_fix = []
         amide_cont_list = []
@@ -712,28 +605,21 @@ class StructureManager:
             Dict as {}
         """
         return {
-            'nmodels': self.nmodels,
-            'models_type': self.models_type,
-            'nchains': len(self.chain_ids),
-            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chain_ids.items()},
-            'chain_guess_details' : self.chain_details,
-            'num_res': self.num_res,
-            'num_ats': self.num_ats,
-            'res_insc': self.res_insc,
-            'res_hetats': self.res_hetats,
-            'res_ligands': self.res_ligands,
-            'num_wat': self.num_wat,
-            'ca_only': self.ca_only,
-            'biounit': self.biounit,
-            'total_charge': self.total_charge,
-            'res_h': self.res_h,
-            'num_h': self.num_h
+            'nmodels': self.models_data.nmodels,
+            'models_type': self.models_data.models_type,
+            'nchains': len(self.chains_data.chain_ids),
+            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chains_data.chain_ids.items()},
+            'chain_guess_details' : self.chains_data.chain_details,
+            'stats': self.st_data.stats,
+            'ca_only': self.st_data.ca_only,
+            'biounit': self.st_data.biounit,
+            'total_charge': self.st_data.total_charge
         }
 
     def get_term_res(self) -> List[Tuple[str, Residue]]:
         """ Get terminal residues """
         term_res = []
-        for res in self.all_residues:
+        for res in self.st_data.all_residues:
             if mu.is_hetatm(res):
                 continue
             if self.is_N_term(res):
@@ -746,80 +632,6 @@ class StructureManager:
                 term_res.append(('3', res))
         return term_res
 
-    def print_headers(self) -> None:
-        """
-        Prints selected components from structure headers
-        """
-        self.get_headers()
-        if 'entry_id' in self.meta:
-            print(' PDB id: {}'.format(self.meta['entry_id']))
-        print(' Title: {}'.format(self.meta['title']))
-        print(' Experimental method: {}'.format(self.meta['method']))
-        if 'keywords' in self.meta:
-            print(' Keywords: {}'.format(self.meta['keywords']))
-        if 'resolution' in self.meta:
-            print(' Resolution (A): {}'.format(self.meta['resolution']))
-        if self.biounit:
-            print(' Biounit no. {}'. format(self.meta['biounit']))
-
-    def get_headers(self) -> None:
-        """
-        Extract selected components from structure headers
-        """
-        self.meta = {}
-        if self.input_format == 'cif':
-            self.meta['entry_id'] = ', '.join(self.headers['_entry.id'])
-            self.meta['title'] = ', '.join(self.headers['_struct.title'])
-            self.meta['method'] = ', '.join(self.headers['_exptl.method'])
-            self.meta['keywords'] = ', '.join(self.headers['_struct_keywords.pdbx_keywords'])
-            if '_refine_hist.d_res_high' in self.headers:
-                self.meta['resolution'] = ', '.join(self.headers['_refine_hist.d_res_high'])
-        else:
-            self.meta['title'] = self.headers['name']
-            self.meta['method'] = self.headers['structure_method']
-            if 'keywords' in self.headers:
-                self.meta['keywords'] = self.headers['keywords']
-            if 'resolution' not in self.headers or not self.headers['resolution']:
-                self.meta['resolution'] = 'N.A.'
-            else:
-                self.meta['resolution'] = self.headers['resolution']
-        if self.biounit:
-            self.meta['biounit'] = self.biounit
-
-    def print_model_stats(self, prefix='') -> None:
-        """ Print stats """
-        if self.nmodels > 1:
-            print(
-                '{} Num. models: {} (type: {}, {:8.3f} A)'.format(
-                    prefix,
-                    self.nmodels,
-                    mu.MODEL_TYPE_LABELS[self.models_type['type']],
-                    self.models_type['rmsd']
-                )
-            )
-        else:
-            print('{} Num. models: {}'.format(prefix, self.nmodels))
-
-    def print_chain_stats(self, prefix='') -> None:
-        """ Print chains info """
-        chids = []
-        for ch_id in sorted(self.chain_ids):
-            if self.chain_ids == mu.UNKNOWN:
-                chids.append(
-                    '{}: Unknown (P:{g[0]:.1%} DNA:{g[1]:.1%} RNA:{g[2]:.1%} UNK:{g[3]:.1%})'.format(
-                        ch_id, g=self.chain_details[ch_id]
-                    )
-                )
-            else:
-                chids.append(
-                    '{}: {}'.format(
-                        ch_id, mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]
-                    )
-                )
-
-        print('{} Num. chains: {} ({})'.format(prefix, len(self.chain_ids), ', '.join(chids)))
-
-
     def print_stats(self, prefix='') -> None:
         """
         Prints statistics to stdout
@@ -827,36 +639,27 @@ class StructureManager:
         Args:
             prefix: Text prefix to prepend to printed data
         """
-        stats = self.get_stats()
-        self.print_model_stats(prefix)
-        self.print_chain_stats(prefix)
 
-        print('{} Num. residues:  {}'.format(prefix, stats['num_res']))
-        print('{} Num. residues with ins. codes:  {}'.format(prefix, stats['res_insc']))
-        if stats['num_h']:
-            print('{} Num. residues with H atoms: {} (total {} H atoms)'.format(prefix, stats['res_h'], stats['num_h']))
+        print(self.models_data.stats(prefix))
+        print(self.chains_data.stats(prefix))
+
+        st_stats = self.get_stats()
+        print(f"{prefix} Num. residues:  {st_stats['stats']['num_res']}\n"
+              f"{prefix} Num. residues with ins. codes:  {st_stats['stats']['res_insc']}")
+        if st_stats['stats']['num_h']:
+            print(
+                f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']} "
+                f"(total {st_stats['stats']['num_h']} H atoms)"
+            )
         else:
-            print('{} Num. residues with H atoms: {}'.format(prefix, stats['res_h']))
-        print('{} Num. HETATM residues:  {}'.format(prefix, stats['res_hetats']))
-        print('{} Num. ligands or modified residues:  {}'.format(prefix, stats['res_ligands']))
-        print('{} Num. water mol.:  {}'.format(prefix, stats['num_wat']))
-        print('{} Num. atoms:  {}'.format(prefix, stats['num_ats']))
-        if stats['ca_only']:
+            print(f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']}")
+        print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
+              f"{prefix} Num. ligands or modified residues:  {st_stats['stats']['res_ligands']}\n"
+              f"{prefix} Num. water mol.:  {st_stats['stats']['num_wat']}\n"
+              f"{prefix} Num. atoms:  {st_stats['stats']['num_ats']}")
+        if st_stats['ca_only']:
             print('Possible CA-Only structure')
-        if self.hetatm[mu.MODRES]:
-            print('Modified residues found')
-            for res in self.hetatm[mu.MODRES]:
-                print(mu.residue_id(res))
-        if self.hetatm[mu.METAL]:
-            print('Metal/Ion residues found')
-            for res in self.hetatm[mu.METAL]:
-                print(mu.residue_id(res))
-        if self.hetatm[mu.ORGANIC]:
-            print('Small mol ligands found')
-            for res in self.hetatm[mu.ORGANIC]:
-                print(mu.residue_id(res))
-        if self.has_charges:
-            print("Total charge {:6.3f}".format(self.total_charge))
+        self.st_data.print_hetatm_stats()
 
     def save_structure(
             self,
@@ -879,7 +682,10 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
-        pdbio = PDBIO_extended(is_pqr=self.has_charges, output_format=output_format)
+        if output_format in ('cif', 'mmCif'):
+            io = MMCIFIO()
+        else:
+            io = PDBIO_extended(is_pqr=self.st_data.has_charges, output_format=output_format)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
@@ -891,16 +697,19 @@ class StructureManager:
             print("Warning: reverting residue names to canonical on output")
 
         if mod_id is None:
-            pdbio.set_structure(self.st)
-            pdbio.save(output_pdb_path)
+            io.set_structure(self.st)
+            io.save(output_pdb_path)
         else:
-            pdbio.set_structure(self.st[mod_id])
-            pdbio.save(output_pdb_path)
+            io.set_structure(self.st[mod_id])
+            io.save(output_pdb_path)
 
         if keep_resnames:
             self.revert_can_resnames(canonical=False)
 
-    def get_all_r2r_distances(self, res_group: Union[str, Iterable[str]], join_models: bool) -> List[Tuple[Residue, Residue, float]]:
+    def get_all_r2r_distances(
+        self,
+        res_group: Union[str, Iterable[str]], join_models: bool
+    ) -> List[Tuple[Residue, Residue, float]]:
         """ Determine residue pairs within a given Cutoff distance
             calculated from the first atom available
             Args:
@@ -910,10 +719,11 @@ class StructureManager:
                 List of tupes (r1,r2,dist)
 
         """
-        if self.has_NA():
+        if self.chains_data.has_NA():
             cutoff = self.data_library.distances['R_R_CUTOFF']['NA']
         else:
             cutoff = self.data_library.distances['R_R_CUTOFF']['PROT']
+
         return mu.get_all_r2r_distances(
             self.st,
             res_group,
@@ -933,98 +743,26 @@ class StructureManager:
             Args:
                 keep_model: Model number(s) to keep
         """
-        models = []
-        if '-' in keep_model:
-            m1, m2 = keep_model.split('-')
-            for v in range(int(m1), int(m2) + 1):
-                models.append(v)
-        elif ',' in keep_model:
-            models = [int(m) for m in keep_model.split(',')]
-        else:
-            models = [int(keep_model)]
-
-        ids = [mod.id for mod in self.st.get_models()]
-        for md_id in ids:
-            if self.st[md_id].serial_num not in models:
-                self.st.detach_child(md_id)
-
-        # renumbering models
-        for i, mod in enumerate(self.st):
-            mod.id = i
-            mod.serial_num = i + 1
-
-        self.nmodels = len(self.st)
-        self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
-
-        # Update internal data
+        self.models_data.select(keep_model)
         self.update_internals()
         self.modified = True
 
     def superimpose_models(self):
-        spimp = Superimposer()
-        if self.nmodels > 1:
-            fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
-            for mod in self.st.get_models():
-                if mod.id == 0:
-                    continue
-                mov_atoms = [at for at in self.st[mod.id].get_atoms() if at.id == 'CA']
-                spimp.set_atoms(fix_atoms, mov_atoms)
-                spimp.apply(self.st[mod.id].get_atoms())
-            self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
-            self.modified = True
+        ''' Superimpose models by rmsd'''
+        self.modified = self.models_data.superimpose_models()
 
-    def has_models(self) -> bool:
-        """ Shotcut method to check whether the structure has more than one model
-
-            Returns: Boolean
-        """
-        return self.nmodels > 1
-
-    def has_superimp_models(self) -> bool:
-        """ Shotcut method to check whether the structure has superimposed
-            models (i.e. NMR or ensemble)
-
-            Returns: Boolean
-        """
-        return self.models_type and self.models_type['type'] == mu.ENSM
-
-    def set_chain_ids(self) -> None:
-        """
-        Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
-        """
-        self.chain_ids = {}
-        self.has_chains_to_rename = False
-        for chn in self.st.get_chains():
-            if not self.biounit and chn.get_parent().id > 0:
-                continue
-            guess = mu.guess_chain_type(chn)
-            self.chain_ids[chn.id] = guess['type']
-            self.chain_details[chn.id] = guess['details']
-            if chn.id == ' ':
-                self.has_chains_to_rename = self.has_chains_to_rename  or True
-    
-    def rename_empty_chain_label(self, new_label) -> None:
-        if not self.has_chains_to_rename:
-            return False
-        if new_label == 'auto':
-            new_label_char = 65
-            while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
-                new_label_char =+1
-            new_label = chr(new_label_char)
-        for mod in self.st:
-            for chn in mod:
-                if chn.id == ' ':
-                    chn.id = new_label
-        self.set_chain_ids()
+    def build_complex(self):
+        ''' Build a complex from biounit models'''
+        if self.models_data.models_type['type'] != mu.BUNIT:
+            print(
+                f"ERROR: No complex can be built. Models superimose "
+                f"RMSd {self.models_data.models_type['rmsd']}"
+            )
+            return 0
+        result = self.models_data.build_complex()
+        self.update_internals()
         self.modified = True
-        return True
-
-    def has_NA(self):
-        """ Checks if any of the chains is NA"""
-        has_NA = False
-        for v in self.chain_ids.values():
-            has_NA = (has_NA or (v > 1))
-        return has_NA
+        return result
 
     def select_chains(self, select_chains: str) -> None:
         """
@@ -1032,29 +770,24 @@ class StructureManager:
         Args:
             select_chains: Comma separated chain ids, | protein | dna | rna | na
         """
-        if not self.chain_ids:
-            self.set_chain_ids()
-
-        if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
-            if select_chains.lower() == 'na':
-                ch_ok = [mu.DNA, mu.RNA]
-            else:
-                ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
-        else:
-            ch_ok = select_chains.split(',')
-            for chn in ch_ok:
-                if chn not in self.chain_ids:
-                    print('Warning: skipping unknown chain', chn)
-        for mod in self.st:
-            for chn in self.chain_ids:
-                if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
-                    self.st[mod.id].detach_child(chn)
-            if not self.st[mod.id]:
-                print("ERROR: would remove all chains, exiting")
-                sys.exit()
-        # Update internal data
+        self.chains_data.select(select_chains)
         self.update_internals()
         self.modified = True
+
+    def rename_empty_chain_label(self, new_label):
+        '''Add labels to unlabelled chains'''
+        result = self.chains_data.rename_empty_chain_label(new_label)
+        self.update_internals()
+        self.modified = True
+        return result
+
+    def renumber_chain_residues(self, renum_str, rem_inscodes=False, verbose=False):
+        ''' Allow to relabel chains and residues'''
+        result = self.chains_data.renumber(renum_str, rem_inscodes=rem_inscodes, verbose=verbose)
+        if result:
+            self.update_internals()
+            self.modified = True
+        return result
 
     def select_altloc_residue(self, res: Residue, to_fix: Mapping[str, Union[str, Atom]]) -> None:
         """ Selects one alternative conformation when altloc exists. Selection is
@@ -1074,11 +807,7 @@ class StructureManager:
                 if to_fix['select'] in atm.child_dict.keys():
                     newat = atm.child_dict[to_fix['select']]
                 else:
-                    print(
-                        'Warning: unknown alternative {} in {}'.format(
-                            to_fix['select'], mu.atom_id(atm)
-                        )
-                    )
+                    print(f"Warning: unknown alternative {to_fix['select']} in {mu.atom_id(atm)}")
                     continue
             newat.disordered_flag = 0
             newat.altloc = ' '
@@ -1108,14 +837,14 @@ class StructureManager:
             **r_at**: tuple as [Bio.PDB.Residue, [list of atom ids]]
         """
         print(mu.residue_id(r_at[0]))
-        if self._get_chain_type(r_at[0]) == mu.PROTEIN:
+        if self.chains_data.get_chain_type(r_at[0]) == mu.PROTEIN:
             self._fix_side_chain_protein(r_at)
         else:
             self._fix_side_chain_na(r_at)
 
     def _fix_side_chain_protein(self, r_at):
         for at_id in r_at[1]:
-            print("  Adding new atom " + at_id)
+            print(f"  Adding new atom {at_id}")
             if at_id == 'CB':
                 coords = mu.build_coords_CB(r_at[0])
             else:
@@ -1126,15 +855,16 @@ class StructureManager:
                     at_id
                 )
             mu.add_new_atom_to_residue(r_at[0], at_id, coords)
-        self.atom_renumbering()
+        self.st_data.atom_renumbering()
         self.modified = True
 
     def _fix_side_chain_na(self, r_at):
-        if r_at[0].get_resname() in ['A', 'DA', 'G', 'DG'] and\
-                ('N9' in r_at[1] or 'C8' in r_at[1]) or\
-            r_at[0].get_resname() in ('C', 'DC', 'DT', 'U') and\
-                ('N1' in r_at[1] or 'C6' in r_at[1]):
-            print(f"Not enough atoms left on {mu.residue_id(r_at[0])} to recover base orientation, skipping")
+        if mu.is_purine(r_at[0]) and ('N9' in r_at[1] or 'C8' in r_at[1]) or\
+            mu.is_pyrimidine(r_at[0]) and ('N1' in r_at[1] or 'C6' in r_at[1]):
+            print(
+                f"Not enough atoms left on {mu.residue_id(r_at[0])} "
+                "to recover base orientation, skipping"
+            )
         else:
             for at_id in r_at[1]:
                 print(f"  Adding new atom {at_id}")
@@ -1145,7 +875,7 @@ class StructureManager:
                     at_id
                 )
                 mu.add_new_atom_to_residue(r_at[0], at_id, coords)
-            self.atom_renumbering()
+            self.st_data.atom_renumbering()
             self.modified = True
 
     def rebuild_side_chains(self, r_list: Iterable[str]) -> None:
@@ -1160,9 +890,8 @@ class StructureManager:
 
         self.rebuild_mutations(self.prepare_mutations(','.join(mut_list)))
 
-        self.atom_renumbering()
+        self.st_data.atom_renumbering()
         self.modified = True
-
 
     def fix_backbone_chain(
             self,
@@ -1175,7 +904,10 @@ class StructureManager:
         for brk in brk_list:
             ch_to_fix.add(brk[0].get_parent().id)
 
-        modeller_result = self.run_modeller(ch_to_fix, brk_list, modeller_key, extra_gap, extra_NTerm=0)
+        modeller_result = self.run_modeller(
+            ch_to_fix, brk_list, modeller_key,
+            extra_gap, extra_NTerm=0
+        )
 
         self.update_internals()
 
@@ -1204,8 +936,11 @@ class StructureManager:
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
         if modeller_key:
-            MODELLER_ENV_VAR = _guess_modeller_env()
-            os.environ[MODELLER_ENV_VAR] = modeller_key
+            MODELLER_ENV_VAR, MODELLER_INSTALL_ENV_VAR, modeller_install_dir = _guess_modeller_env()
+            if not os.environ.get(MODELLER_ENV_VAR):
+                os.environ[MODELLER_ENV_VAR] = modeller_key
+            if not os.environ.get(MODELLER_INSTALL_ENV_VAR):
+                os.environ[MODELLER_INSTALL_ENV_VAR] = modeller_install_dir
 
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
@@ -1213,9 +948,9 @@ class StructureManager:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
-        
+
         print(mod_mgr.tmpdir)
-        
+
         if not sequence_data:
             sequence_data = self.sequence_data
         mod_mgr.sequences = sequence_data
@@ -1228,23 +963,23 @@ class StructureManager:
             templ.save_structure(opj(mod_mgr.tmpdir, f"add_templ{i}.pdb"))
 
         for mod in self.st:
-            if self.has_models():
+            if self.models_data.has_models():
                 print(f"Processing Model {mod.id + 1}")
-                self.save_structure(opj(mod_mgr.tmpdir, mod_mgr.templ_file), mod.id)
+                self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'), mod.id)
             else:
-                self.save_structure(opj(mod_mgr.tmpdir, mod_mgr.templ_file))
+                self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'))
 
-            for ch_id in self.chain_ids:
+            for ch_id in self.chains_data.chain_ids:
                 if ch_id not in ch_to_fix:
                     continue
                 if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
-                    print(f"Warning: chain {ch_id} has a unexpected residue numbering, skipping")
+                    print(f"Warning: chain {ch_id} has a unusual residue numbering, skipping")
                 print(f"Fixing chain/model {ch_id}/{mod.id}")
 
                 try:
-                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm, self.templates)
-                except NoCanSeqError as e:
-                    print(e.message)
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                except NoCanSeqError as err:
+                    print(err.message)
                     continue
 
                 parser = PDBParser(PERMISSIVE=1)
@@ -1319,9 +1054,8 @@ class StructureManager:
                 else:
                     continue
 
-            print('Fixing {} - {}'.format(
-                mu.residue_id(self.st[mod_id][ch_id][gap_start]),
-                mu.residue_id(self.st[mod_id][ch_id][gap_end])))
+            print(f"Fixing {mu.residue_id(self.st[mod_id][ch_id][gap_start])}"
+                  f" - {mu.residue_id(self.st[mod_id][ch_id][gap_end])}")
 
             # Superimposes structures using fragments at both sides of the gap
             fixed_ats = []
@@ -1350,7 +1084,8 @@ class StructureManager:
 
             # Find position if the 1st residue in the internal residue list
             pos = 0
-            while pos < len(list_res) and self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
+            while pos < len(list_res) and\
+                self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
 
             res_pairs = []
@@ -1369,9 +1104,9 @@ class StructureManager:
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1
                 if nres < gap_start or nres > gap_end:
-                    print("  Replacing " + mu.residue_id(res))
+                    print(f"  Replacing {mu.residue_id(res)}")
                 else:
-                    print("  Adding " + mu.residue_id(res))
+                    print(f"  Adding {mu.residue_id(res)}")
 
                 modif_residues.append(self.st[mod_id][ch_id][nres])
 
@@ -1385,13 +1120,13 @@ class StructureManager:
         fixed = []
         for cap in caps_list:
             if cap[0] == 'N':
-                if cap[1] in self.next_residue:
-                    mu.add_ACE_cap_at_res(cap[1], self.next_residue[cap[1]])
+                if cap[1] in self.st_data.next_residue:
+                    mu.add_ACE_cap_at_res(cap[1], self.st_data.next_residue[cap[1]])
                 else:
                     raise NotEnoughAtomsError
             else:
-                if cap[1] in self.prev_residue:
-                    mu.add_NME_cap_at_res(cap[1], self.prev_residue[cap[1]])
+                if cap[1] in self.st_data.prev_residue:
+                    mu.add_NME_cap_at_res(cap[1], self.st_data.prev_residue[cap[1]])
                 else:
                     raise NotEnoughAtomsError
             fixed.append(cap[1])
@@ -1423,7 +1158,7 @@ class StructureManager:
                 mu.build_coords_SP2(mu.OINTERNALS[0], res['C'], res['CA'], res['O'])
             )
 
-        self.atom_renumbering()
+        self.st_data.atom_renumbering()
         self.modified = True
         return True
 
@@ -1438,24 +1173,24 @@ class StructureManager:
         """
         add_h_rules = self.data_library.get_add_h_rules()
 
-        for res in self.all_residues:
+        for res in self.st_data.all_residues:
             if mu.is_hetatm(res):
                 continue
 
-            protein_res = self.chain_ids[res.get_parent().id] == mu.PROTEIN
+            protein_res = self.chains_data.chain_ids[res.get_parent().id] == mu.PROTEIN
 
             if remove_h:
                 mu.remove_H_from_r(res, verbose=False)
 
-            if res not in self.prev_residue:
+            if res not in self.st_data.prev_residue:
                 prev_residue = None
             else:
-                prev_residue = self.prev_residue[res]
+                prev_residue = self.st_data.prev_residue[res]
 
-            if res not in self.next_residue:
+            if res not in self.st_data.next_residue:
                 next_residue = None
             else:
-                next_residue = self.next_residue[res]
+                next_residue = self.st_data.next_residue[res]
 
             error_msg = mu.add_hydrogens_backbone(res, prev_residue, next_residue)
 
@@ -1487,11 +1222,8 @@ class StructureManager:
 
             if res in ion_res_list:
                 if rcode != ion_res_list[res]:
-                    print(
-                        'Replacing {} by {}'.format(
-                            mu.residue_id(res), ion_res_list[res]
-                        )
-                    )
+                    print(f"Replacing {mu.residue_id(res)} by {ion_res_list[res]}")
+
                 error_msg = mu.add_hydrogens_side(
                     res,
                     self.res_library,
@@ -1500,17 +1232,21 @@ class StructureManager:
                     protein_res
                 )
                 res.resname = ion_res_list[res]
-                self.non_canonical_residue_list.append({'res':res, 'can_res':rcode_can, 'new_res':res.resname})
+                self.st_data.non_canonical_residue_list.append(
+                    {'res':res, 'can_res':rcode_can, 'new_res':res.resname}
+                )
             else:
-                error_msg = mu.add_hydrogens_side(res, self.res_library, rcode, h_rules, protein_res)
+                error_msg = mu.add_hydrogens_side(
+                    res, self.res_library, rcode, h_rules, protein_res
+                )
 
             if error_msg:
                 print(error_msg, mu.residue_id(res))
 
-        self.residue_renumbering()
+        self.st_data.residue_renumbering(self.data_library)
         if add_charges:
             self.update_atom_charges(add_charges)
-        self.atom_renumbering()
+        self.st_data.atom_renumbering()
         self.modified = True
 
     def mark_ssbonds(self, cys_list):
@@ -1519,63 +1255,62 @@ class StructureManager:
             if 'HG' in res:
                 mu.remove_atom_from_res(res, 'HG')
             res.resname = 'CYX'
-            self.non_canonical_residue_list.append({'res':res, 'can_res':'CYS', 'new_res':res.resname})
+            self.st_data.non_canonical_residue_list.append({'res':res, 'can_res':'CYS', 'new_res':res.resname})
         self.modified = True
 
     def rename_terms(self, term_res):
         """ Rename Terminal residues as NXXX or CXXX in proteins or XX5 XX3 in NA """
-        for t in term_res:
-            if t[0] in ('N', 'C'):
-                if t[1].resname not in ('ACE', 'NME') and len(t[1].resname) == 3:
-                    t[1].resname = t[0] + t[1].resname
-            elif t[0] in ('5', '3'):
-                t[1].resname = t[1].resname + t[0]
+        for term in term_res:
+            if term[0] in ('N', 'C'):
+                if term[1].resname not in ('ACE', 'NME') and len(term[1].resname) == 3:
+                    term[1].resname = term[0] + term[1].resname
+            elif term[0] in ('5', '3'):
+                term[1].resname = term[1].resname + term[0]
 
     def revert_terms(self):
         """ Reverts special term residue names to canonical ones"""
         for res in self.st.get_residues():
             if mu.is_hetatm(res):
                 continue
-            if self._get_chain_type(res) == mu.PROTEIN:
+            if self.chains_data.get_chain_type(res) == mu.PROTEIN:
                 if len(res.get_resname()) == 4:
                     res.resname = res.resname[1:]
-            elif self._get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
+            elif self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA, mu.NA):
                 if res.get_resname()[-1] in ('5', '3'):
                     res.resname = res.resname[:-1]
 
     def revert_can_resnames(self, canonical=True):
         """ Revert residue names to canonical ones """
-        for mod_res in self.non_canonical_residue_list:
-            if canonical:
+        if canonical:
+            for mod_res in self.st_data.non_canonical_residue_list:
                 mod_res['res'].resname = mod_res['can_res']
-            else:
+        else:
+            for mod_res in self.st_data.non_canonical_residue_list:
                 mod_res['res'].resname = mod_res['new_res']
 
     def is_N_term(self, res: Residue) -> bool:
         """ Detects whether it is N terminal residue."""
-        return self._get_chain_type(res) == mu.PROTEIN and res not in self.prev_residue
+        return self.chains_data.get_chain_type(res) == mu.PROTEIN and\
+            res not in self.st_data.prev_residue
 
     def is_C_term(self, res: Residue) -> bool:
         """ Detects whether it is C terminal residue."""
-        return self._get_chain_type(res) == mu.PROTEIN and res not in self.next_residue
+        return self.chains_data.get_chain_type(res) == mu.PROTEIN and\
+            res not in self.st_data.next_residue
 
     def is_5_term(self, res: Residue) -> bool:
         """ Detects whether it is 5' terminal residue."""
-        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.prev_residue
+        return self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA) and\
+            res not in self.st_data.prev_residue
 
     def is_3_term(self, res: Residue) -> bool:
         """ Detects whether it is 3' terminal residue."""
-        return self._get_chain_type(res) in (mu.DNA, mu.RNA) and res not in self.next_residue
-
-    def _get_chain_type(self, res):
-        """ Return type of chain for residue"""
-        if mu.is_hetatm(res):
-            return mu.UNKNOWN
-        return self.chain_ids[res.get_parent().id]
+        return self.chains_data.get_chain_type(res) in (mu.DNA, mu.RNA) and\
+            res not in self.st_data.next_residue
 
     def prepare_mutations(self, mut_list: str) -> List[MutationSet]:
         """ Find residues to mutate from mut_list"""
-        mutations = MutationManager(mut_list, self.chain_ids)
+        mutations = MutationManager(mut_list, self.chains_data.chain_ids)
         mutations.prepare_mutations(self.st)
         return mutations
 
@@ -1585,8 +1320,8 @@ class StructureManager:
             self.data_library.get_mutation_map(),
             self.res_library
         )
-        self.residue_renumbering()
-        self.atom_renumbering()
+        self.st_data.residue_renumbering(self.data_library)
+        self.st_data.atom_renumbering()
         self.modified = True
         return mutated_res
 
@@ -1596,19 +1331,19 @@ class StructureManager:
         brk_list = []
         for mut_set in mutations.mutation_list:
             for mut in mut_set.mutations:
-                if self.chain_ids[mut['chain']] > 1:
+                if self.chains_data.chain_ids[mut['chain']] > 1:
                     continue
                 ch_to_fix.add(mut['chain'])
                 start_res = mut['resobj']
-                if start_res in self.prev_residue:
-                    start_res = self.prev_residue[start_res]
+                if start_res in self.st_data.prev_residue:
+                    start_res = self.st_data.prev_residue[start_res]
                 end_res = mut['resobj']
-                if end_res in self.next_residue:
-                    end_res = self.next_residue[end_res]
+                if end_res in self.st_data.next_residue:
+                    end_res = self.st_data.next_residue[end_res]
                 brk = [start_res, end_res]
                 brk_list.append(brk)
         if not ch_to_fix:
-            print("No proteins chains left, exiting")
+            print("No protein chains left, exiting")
             return []
         mutated_sequence_data = SequenceData()
         mutated_sequence_data.fake_canonical_sequence(self, mutations)
@@ -1620,7 +1355,14 @@ class StructureManager:
 
         #TODO Not tested, to be used on changes in the NTerm residue
         extra_NTerm = 0
-        mutated_res = self.run_modeller(ch_to_fix, brk_list, modeller_key, 0, extra_NTerm, mutated_sequence_data)
+        mutated_res = self.run_modeller(
+            ch_to_fix,
+            brk_list,
+            modeller_key,
+            0,
+            extra_NTerm,
+            mutated_sequence_data
+        )
 
         self.update_internals()
         return mutated_res
@@ -1635,6 +1377,125 @@ class StructureManager:
             res[amide_res[res_type][0]],
             res[amide_res[res_type][1]]
         )
+
+    def _amide_score(self, matr):
+        score = 0.
+        for amide_res in sorted(matr):
+            for atm in matr[amide_res]['cnts']:
+                for atm_cnt in matr[amide_res]['cnts'][atm]:
+                    d = atm.element != atm_cnt.element
+                    m1 = matr[amide_res]['mod']
+                    m2 = atm_cnt.get_parent() in matr and matr[atm_cnt.get_parent()]['mod']
+                    # !d !m1 !m2 + !d m1 m2 + d !m1 m2 + d m1 !m2
+                    # !d (!m1 !m2 + m1 m2) + d (!m1 m2 + m1 !m2)
+                    # !d !(m1^m2) + d (m1^m2)
+                    # ! d^(m1^m2)
+                    if not d^(m1^m2):
+                        score += 1/matr[amide_res]['cnts'][atm][atm_cnt]
+        return score
+
+    def _amide_cluster(self, to_fix):
+        cluster = {}
+
+        for res in to_fix:
+            cluster[res] = set()
+            cluster[res].add(res)
+
+        for r_pair in self.rr_dist:
+            res1, res2 = r_pair[0:2]
+            if res1 in to_fix and res2 in to_fix:
+                for res in cluster[res2]:
+                    cluster[res1].add(res)
+                cluster[res2] = cluster[res1].copy()
+
+        for res in to_fix:
+            if res in cluster:
+                for res2 in cluster[res]:
+                    if res2 == res:
+                        continue
+                    if res2 in cluster:
+                        del cluster[res2]
+        return cluster
+
+    def _is_amide_atom(self, amide_res, atm):
+        res = atm.get_parent()
+        return res.get_resname() in amide_res and atm.id in amide_res[res.get_resname()]
+
+    def amide_auto_fix(self, to_fix):
+        ''' Fix amide residues automatically'''
+        print("Fixing automatically")
+        amide_res = self.data_library.get_amide_data()[0]
+        c_list = self.check_r_list_clashes(
+            to_fix['res_to_fix'],
+            ['polar'],
+            get_all_contacts=True
+        )
+        for res_pair in c_list['polar']:
+            for cnt in c_list['polar'][res_pair]:
+                at1, at2, dist2 = cnt
+                if at1.serial_number > at2.serial_number:
+                    at2, at1, dist2 = cnt
+        matr = {}
+        for res_pair in c_list['polar']:
+            for cnt in c_list['polar'][res_pair]:
+                at1, at2, dist2 = cnt
+                if at1.serial_number > at2.serial_number:
+                    at2, at1, dist2 = cnt
+                res1 = at1.get_parent()
+                res2 = at2.get_parent()
+                if self._is_amide_atom(amide_res, at1):
+                    if res1 not in matr:
+                        matr[res1] = {'mod':False, 'cnts':{}}
+                    if at1 not in matr[res1]['cnts']:
+                        matr[res1]['cnts'][at1] = {}
+                    matr[res1]['cnts'][at1][at2] = dist2
+                if self._is_amide_atom(amide_res, at2):
+                    if res2 not in matr:
+                        matr[res2] = {'mod':False, 'cnts':{}}
+                    if at2 not in matr[res2]['cnts']:
+                        matr[res2]['cnts'][at2] = {}
+                    matr[res2]['cnts'][at2][at1] = dist2
+
+        print(f"Initial contact score: {self._amide_score(matr):.3f}")
+        print("Clustering amide residues")
+        clusters = self._amide_cluster(to_fix['res_to_fix'])
+        print(f"{len(clusters)} cluster(s) found, exploring...")
+        to_fix = []
+        nclust = 0
+        for clust in clusters.values():
+            to_fix_part = []
+            nclust += 1
+            amide_list = []
+            mod_vec = max_vec = ''
+            for amide_res in sorted(clust):
+                amide_list.append(amide_res)
+                max_vec += '1'
+            print(f"Cluster {nclust}:{', '.join([mu.residue_id(r) for r in amide_list])}")
+            conf = 0
+            min_score = self._amide_score(matr)
+            opt_vec = '0' * len(max_vec)
+            while conf <= int(max_vec, 2):
+                mod_vec = f"{'0' * len(max_vec)}{bin(conf)[2:]}"[-len(max_vec):]
+                for pos, res in enumerate(amide_list):
+                    matr[res]['mod'] = mod_vec[pos] == '1'
+                score = self._amide_score(matr)
+                if score < min_score:
+                    min_score = score
+                    opt_vec = mod_vec
+                conf += 1
+            for pos, res in enumerate(amide_list):
+                if opt_vec[pos] == '1':
+                    to_fix_part.append(res)
+                    to_fix.append(res)
+                matr[res]['mod'] = opt_vec[pos] == '1'
+            if to_fix_part:
+                print(
+                    f"New score: {min_score:.3f}, fixed residue(s): "
+                    f"{', '.join([mu.residue_id(r) for r in to_fix_part])}"
+                )
+            else:
+                print("Score not improved, skipping")
+        return to_fix
 
     def fix_chiral_chains(self, res: Residue):
         """ Fix sidechains with chiral errors"""
@@ -1661,35 +1522,34 @@ class StructureManager:
         mut_list = []
         i = 0
         nch = 0
-        for ch_id in self.sequence_data.data:
-            chn = self.sequence_data.data[ch_id]
+        for ch_id, chn in self.sequence_data.data.items():
             start = chn['pdb'][0]['frgs'][0].features[0].location.start
             seq = chn['pdb'][0]['frgs'][0].seq
             if len(seq) != len(mut_seq[nch]):
-                sys.exit("Sequence lengths do not match")
+                raise SequencesDoNotMatch()
             prefix = ''
             if chn['pdb'][0]['type'] == mu.DNA:
                 prefix = 'D'
             for i, r in enumerate(seq):
-                mut_list.append('{}:{}{}{}{}{}'.format(ch_id, prefix, r, start + i, prefix, mut_seq[nch][i]))
+                mut_list.append(f"{ch_id}:{prefix}{r}{start + i}{prefix}{mut_seq[nch][i]}")
             nch += 1
         return ','.join(mut_list)
 # ===============================================================================
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
-    conda_info = subprocess.run(['conda','list','modeller'], stdout=subprocess.PIPE)
+    conda_info = subprocess.run(['conda', 'list', 'modeller'], stdout=subprocess.PIPE)
     for line in conda_info.stdout.decode('ASCII').split('\n'):
         if 'modeller' in line:
             info = line.split()
     if info[1]:
-        print("Modeller v{} detected".format(info[1]))
-        v1,v2 = info[1].split('.')
-        return "KEY_MODELLER{}v{}".format(v1,v2)
-    print("Modeller version not detected, using default")
-    return MODELLER_ENV_VAR
-# ===============================================================================
+        print(f"Modeller v{info[1]} detected")
+        ver1, ver2 = info[1].split('.')
+        return f"KEY_MODELLER{ver1}v{ver2}", "MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
 
+    print("Modeller version not detected, using default")
+    return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
+# ===============================================================================
 class WrongServerError(Exception):
     def __init__(self):
         self.message = 'ERROR: Biounits supported only on MMB server'
@@ -1709,7 +1569,9 @@ class NotEnoughAtomsError(Exception):
 class ParseError(Exception):
     def __init__(self, err_id, err_txt):
         self.message = f'{err_id} ({err_txt}) found when parsing input structure'
-
 class UnknownFFError(Exception):
     def __init__(self, ff):
         self.message = f'{ff} is not a valid ff for assigning atom types'
+class SequencesDoNotMatch(Exception):
+    def __init__(self):
+        self.message = "Sequence lengths do not match"

@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "LYS A4",
    "ARG A7",
@@ -21,7 +20,8 @@
    "TYR A56",
    "GLU A58"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -34,6 +34,7 @@
     "dist": 2.5977
    }
   ],
+  "fixed": "All",
   "n_amides": 4,
   "opts": "--fix All"
  },
@@ -43,7 +44,8 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein"
+  "A": "Protein",
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 9,
@@ -117,14 +119,16 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 905,
-  "num_h": 442,
-  "num_res": 60,
-  "num_wat": 0,
-  "res_h": 60,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 905,
+   "num_h": 442,
+   "num_res": 60,
+   "num_wat": 0,
+   "res_h": 60,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": -4.0000000000000036
  },
  "fixside": {
@@ -143,6 +147,7 @@
  "ligands": {
   "opts": "--remove All"
  },
+ "loaded_structure": "pdb:1ark",
  "metals": {
   "opts": "--remove ZN"
  },
@@ -154,11 +159,13 @@
    "type": 2
   }
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "n_detected": 60,
   "n_removed": 60,
   "opts": "--remove Yes"
  },
+ "saved_structure": "1ark_all_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
@@ -179,14 +186,16 @@
   },
   "nchains": 1,
   "nmodels": 15,
-  "num_ats": 13575,
-  "num_h": 6630,
-  "num_res": 900,
-  "num_wat": 0,
-  "res_h": 900,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 905,
+   "num_h": 442,
+   "num_res": 60,
+   "num_wat": 0,
+   "res_h": 60,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {

@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "ARG A51",
    "TYR A53",
@@ -79,7 +78,8 @@
    "GLU A371",
    "GLU A374"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -92,6 +92,7 @@
     "dist": 2.8022
    }
   ],
+  "fixed": "All",
   "n_amides": 17,
   "opts": "--fix All"
  },
@@ -141,7 +142,8 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein"
+  "A": "Protein",
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 42,
@@ -247,14 +249,16 @@
   "models_type": 0,
   "nchains": 1,
   "nmodels": 1,
-  "num_ats": 4809,
-  "num_h": 2416,
-  "num_res": 313,
-  "num_wat": 0,
-  "res_h": 313,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 4809,
+   "num_h": 2416,
+   "num_res": 313,
+   "num_wat": 0,
+   "res_h": 313,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": -3.1999499999999887
  },
  "fixside": {
@@ -265,6 +269,7 @@
  },
  "headers": {
   "biounit": "1",
+  "entry_id": "",
   "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
   "method": "x-ray diffraction",
   "resolution": "N.A.",
@@ -285,6 +290,7 @@
    "opt": "All"
   }
  },
+ "loaded_structure": "pdb:1vtk.1",
  "metals": {
   "opts": "--remove ZN"
  },
@@ -296,9 +302,11 @@
    "type": 2
   }
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "opts": "--remove Yes"
  },
+ "saved_structure": "1vtk_1_all_test.pdb",
  "stats": {
   "biounit": "1",
   "ca_only": false,
@@ -319,14 +327,16 @@
   },
   "nchains": 1,
   "nmodels": 2,
-  "num_ats": 4982,
-  "num_h": 0,
-  "num_res": 734,
-  "num_wat": 104,
-  "res_h": 0,
-  "res_hetats": 108,
-  "res_insc": 0,
-  "res_ligands": 4,
+  "stats": {
+   "num_ats": 4809,
+   "num_h": 2416,
+   "num_res": 313,
+   "num_wat": 0,
+   "res_h": 313,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {

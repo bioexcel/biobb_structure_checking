@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
+=                   BioBB structure checking utility v3.10.2                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -24,7 +24,6 @@ Metal/Ion residues found
  MG A22
  MG B21
 
-
 Step 1: water --remove yes
 Running water. Options: --remove yes
 154 Water molecules detected
@@ -38,8 +37,8 @@ Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
 Selection: auto
 Updating partial charges and atom types
-Warning: MG not found in residue library atom charges set to 0.
-Warning: MG not found in residue library atom charges set to 0.
+Warning: MG not found in residue library atom, charges set to 0.
+Warning: MG not found in residue library atom, charges set to 0.
 Total assigned charge:     -18.00
 Command list completed
 Final Num. models: 1
@@ -54,5 +53,4 @@ Final Num. atoms:  634
 Metal/Ion residues found
  MG A22
  MG B21
-Total charge -18.000
 Structure saved on 1d23.pdb
