@@ -1,8 +1,7 @@
 ''' Class to manage Chain internal data'''
 import sys
-import logging
-import biobb_structure_checking.model_utils as mu
 from Bio.PDB.Chain import Chain
+import biobb_structure_checking.modelling.utils as mu
 
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
@@ -51,7 +50,7 @@ class ChainsData():
         if new_label == 'auto':
             new_label_char = 65
             while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
-                new_label_char =+1
+                new_label_char = +1
             new_label = chr(new_label_char)
         for mod in self.st:
             for chn in mod:
@@ -60,23 +59,9 @@ class ChainsData():
         self.set_chain_ids()
         return new_label
 
-    def _parse_task_str(self, ts_str):
-        #Format [A:]ini[-fin]
-        if ':' not in ts_str:
-            ts_str = '*:' + ts_str
-        chn, rnum = ts_str.split(':')
-        if not rnum:
-            return ts_str[:-1], 0, 0
-        if not '-' in rnum:
-            return chn, int(rnum), 0
-        ini, fin = rnum.split('-')
-        if not fin:
-            fin = 0
-        return chn, int(ini), int(fin)
-
     def _parse_renumber_str(self, renum_str):
         renum_to_do = []
-        renum_str = renum_str.replace(' ','')
+        renum_str = renum_str.replace(' ', '')
 
         if ',' not in renum_str:
             tasks = [renum_str]
@@ -85,23 +70,34 @@ class ChainsData():
 
         for tsk in tasks:
             if '=' not in tsk:
-                logging.error(f"Wrong syntax {tsk}, use origin=target")
+                print(f"ERROR: wrong syntax {tsk}, use origin=target")
                 sys.exit()
             tsk_0, tsk_1 = tsk.split('=')
-            chn_0, ini_0, fin_0 = self._parse_task_str(tsk_0)
-            chn_1, ini_1, fin_1 = self._parse_task_str(tsk_1)
+            chn_0, ini_0, fin_0 = _parse_task_str(tsk_0)
+            chn_1, ini_1, fin_1 = _parse_task_str(tsk_1)
             if chn_0 != '*':
                 if chn_1 == '*':
                     chn_1 = chn_0
-                renum_to_do.append([
-                    {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                    {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
-                ])
+                if chn_0 == chn_1: # chain shift
+                    tmp_ch_id = _get_tmp_ch_id(self.st[0])
+                    renum_to_do.append([
+                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                    ])
+                    renum_to_do.append([
+                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1},
+                    ])
+                else:
+                    renum_to_do.append([
+                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
+                    ])
             else:
                 # replicate for all chains
                 if chn_1 != '*':
-                    logging.error(
-                        f"Uuse either wild card or explicit labels"
+                    print(
+                        f"Error, use either wild card or explicit labels"
                         f" in both origin and updated ({chn_0}={chn_1})"
                     )
                     sys.exit()
@@ -112,35 +108,46 @@ class ChainsData():
                     ])
         return renum_to_do
 
-    def renumber(self, renum_str, allow_merge=False):
+
+    def renumber(self, renum_str, rem_inscodes=False, verbose=True):
         """ Renumber residues"""
+        modified = False
         renum_to_do = []
         if renum_str.lower() == 'auto':
-            tmp_ch_id = 'z'
+            tmp_ch_id = _get_tmp_ch_id(self.st[0])
             last_res_num = 0
             for chn in self.chain_ids:
                 n_term, c_term = mu.get_terms(self.st[0], chn)
                 renum_to_do.append([
                     {'chn': chn, 'ini': n_term.id[1], 'fin': c_term.id[1]},
                     {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': 0}
-                ]
-                )
+                ])
                 renum_to_do.append([
-                    {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1},
-                    {'chn':chn, 'ini': last_res_num + 1, 'fin': 0}
+                    {
+                        'chn':tmp_ch_id,
+                        'ini': last_res_num + 1,
+                        'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1
+                    },
+                    {
+                        'chn':chn,
+                        'ini': last_res_num + 1,
+                        'fin': 0
+                    }
                 ])
                 last_res_num = last_res_num + c_term.id[1] - n_term.id[1] + 1
         else:
-           renum_to_do = self._parse_renumber_str(renum_str)
+            renum_to_do = self._parse_renumber_str(renum_str)
 
         for mod in self.st:
             for tsk in renum_to_do:
                 org, tgt = tsk
-                if not mu.check_residue_id_order(mod[org['chn']]):
-                    logging.warning(f"Disordered residue ids found in {org['chn']}, use explicit order combinations")
-                if not allow_merge and org['chn'] != tgt['chn'] and tgt['chn'] in self.chain_ids:
-                    logging.error(f"Chain {tgt['chn']} already exists and --allow_merge not set")
-                    sys.exit()
+
+                if verbose and not mu.check_residue_id_order(mod[org['chn']]):
+                    print(
+                        f"WARNING: disordered residue ids found in {org['chn']}, "
+                        f"may need explicit order combinations"
+                    )
+
                 n_term, c_term = mu.get_terms(mod, org['chn'])
                 if not org['ini']:
                     org['ini'] = n_term.id[1]
@@ -149,49 +156,74 @@ class ChainsData():
                 if not tgt['ini']:
                     tgt['ini'] = org['ini']
                 tgt['fin'] = org['fin'] - org['ini'] + tgt['ini']
-                logging.info(
-                    f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
-                    f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
-                )
+                if verbose:
+                    print(
+                        f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
+                        f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
+                    )
                 if tgt['chn'] in mod:
                     n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
                     if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
                         n_term1.id[1] <= tgt['fin'] <= c_term1.id[1]:
-                        logging.error("New residue numbers overlap with existing ones")
+                        print("WARNING: new residue numbers overlap with existing ones")
                         sys.exit()
                 if org['ini'] == tgt['ini'] and\
                     org['fin'] == tgt['fin'] and\
                     org['ini'] == n_term.id[1] and\
                     org['fin'] == c_term.id[1] and\
                     tgt['chn'] not in mod:
-                    logging.info(
-                        f"Whole chains selected, just replacing chain labels from {org['chn']}"
-                        f" to {tgt['chn']}"
-                    )
+                    if verbose:
+                        print(
+                            f"Whole chains selected, just replacing chain labels from {org['chn']}"
+                            f" to {tgt['chn']}"
+                        )
                     mod[org['chn']].id = tgt['chn']
                     self.set_chain_ids()
                 else:
-                    if tgt['chn'] not in mod:
-                        print(f"Creating new chain {tgt['chn']}")
-                        new_ch = Chain(tgt['chn'])
-                        mod.add(new_ch)
-                    else:
-                        new_ch = mod[tgt['chn']]
                     to_move = []
                     for res in mod[org['chn']].get_residues():
                         if res.id[1] >= org['ini'] and res.id[1] <= org['fin']:
                             to_move.append(res)
+                    if not to_move:
+                        print("WARNING: No residues to move, exiting task")
+                        continue
+
+                    if tgt['chn'] not in mod:
+                        if verbose:
+                            print(f"Creating new chain {tgt['chn']}")
+                        new_ch = Chain(tgt['chn'])
+                        mod.add(new_ch)
+                    else:
+                        new_ch = mod[tgt['chn']]
+                    inscodes_shift = 0
                     for res in sorted(to_move):
                         new_res = res.copy()
-                        new_res.id = res.id[0], res.id[1] - org['ini'] + tgt['ini'], res.id[2]
+                        new_res_num = res.id[1]
+                        new_inscode = res.id[2]
+                        if rem_inscodes:
+                            if mu.has_ins_code(res):
+                                inscodes_shift += 1
+                                new_inscode = ' '
+                            new_res_num = res.id[1] + inscodes_shift
+                        new_res.id = res.id[0], new_res_num - org['ini'] + tgt['ini'], new_inscode
                         new_res.parent = new_ch
+                        col_res = _check_collision(new_res, new_ch)
+                        if col_res:
+                            print(
+                                f"ERROR. New residue {mu.residue_id(new_res)} collides "
+                                f" with     existing {mu.residue_id(col_res)}"
+                            )
+                            sys.exit()
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)
 
-                    if len(mod[org['chn']]) == 0:
+                    if not mod[org['chn']]:
+                        if verbose:
+                            print(f"Removing empty chain {org['chn']}")
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
-        return 1
+                    modified = True
+        return modified
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
@@ -217,13 +249,13 @@ class ChainsData():
             ch_ok = select_chains.split(',')
             for chn in ch_ok:
                 if chn not in self.chain_ids:
-                    logging.warning(f"Skipping unknown chain {chn}")
+                    print('Warning: skipping unknown chain', chn)
         for mod in self.st:
             for chn in self.chain_ids:
                 if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
                     self.st[mod.id].detach_child(chn)
             if not self.st[mod.id]:
-                logging.error("Would remove all chains, exiting")
+                print("ERROR: would remove all chains, exiting")
                 sys.exit()
 
     def has_NA(self):
@@ -232,3 +264,37 @@ class ChainsData():
         for ch_type in self.chain_ids.values():
             has_na = (has_na or (ch_type > 1))
         return has_na
+
+def _parse_task_str(ts_str):
+    #Format [A:]ini[-fin]
+    if ':' not in ts_str:
+        ts_str = '*:' + ts_str
+    chn, rnum = ts_str.split(':')
+    if not rnum:
+        return ts_str[:-1], 0, 0
+    if not '-' in rnum:
+        return chn, int(rnum), 0
+    ini, fin = rnum.split('-')
+    if not fin:
+        fin = 0
+    return chn, int(ini), int(fin)
+
+def _get_tmp_ch_id(mod):
+    tmp_id = ord('a')
+    while chr(tmp_id) in mod:
+        tmp_id += 1
+    tmp_id = chr(tmp_id)
+    if tmp_id not in mod:
+        return tmp_id
+    return ''
+
+def _check_collision(new_res, new_ch):
+    found = False
+    col_res = None
+    for res in new_ch.get_residues():
+        if res.id[1] == new_res.id[1]:
+            found = True
+            break
+    if found:
+         return res
+    return None

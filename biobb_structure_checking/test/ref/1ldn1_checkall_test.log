@@ -3,9 +3,12 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
-Warning: sequence features only available in mmCIF format or with external fasta input
-Structure pdb:1ldn.1 loaded
+INFO Structure exists: 'tmpPDB/ld/1ldn_1.pdb' 
+WARNING Full sequence features only available in mmCIF format or with external fasta input
+INFO Structure pdb:1ldn.1 loaded
+ PDB id: 
+ Title: structure of a ternary complex of an allosteric lactate dehydrogenase from bacillus stearothermophilus at 2.5 angstroms resolution
+ Experimental method: x-ray diffraction
  Keywords: oxidoreductase(choh(d)-nad(a))
  Resolution (A): N.A.
  Biounit no. 1
@@ -30,21 +33,21 @@ OXM C351
 NAD C352
 OXM D351
 NAD D352
-Running models.
+INFO Running models.
 1 Model(s) detected
 Single model found
-Running  check_only. Nothing else to do.
-Running chains.
+INFO Running  check_only. Nothing else to do.
+INFO Running chains.
 4 Chain(s) detected
  A: Protein
  B: Protein
  C: Protein
  D: Protein
-Running  check_only. Nothing else to do.
-Running inscodes.
+INFO Running  check_only. Nothing else to do.
+INFO Running inscodes.
 No residues with insertion codes found
-Running  check_only. Nothing else to do.
-Running altloc.
+INFO Running  check_only. Nothing else to do.
+INFO Running altloc.
 Detected 2 residues with alternative location labels
 FBP A353
   P1   A (0.50) C (0.50)
@@ -88,11 +91,11 @@ FBP B353
   O4P  B (0.50) D (0.50)
   O5P  B (0.50) D (0.50)
   O6P  B (0.50) D (0.50)
-Running  check_only. Nothing else to do.
-Running rem_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running rem_hydrogen.
 No residues with Hydrogen atoms found
-Running  check_only. Nothing else to do.
-Running add_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running add_hydrogen.
 372 Residues requiring selection on adding H atoms
  CYS A86,A95,B86,B95,C86,C95,D86,D95
  ASP A46,A52,A61,A64,A77,A82,A84,A85,A88,A90,A108,A111,A141,A166,A195,A225,A235,A277,A284,A308,A309,B46,B52,B61,B64,B77,B82,B84,B85,B88,B90,B108,B111,B141,B166,B195,B225,B235,B277,B284,B308,B309,C46,C52,C61,C64,C77,C82,C84,C85,C88,C90,C108,C111,C141,C166,C195,C225,C235,C277,C284,C308,C309,D46,D52,D61,D64,D77,D82,D84,D85,D88,D90,D108,D111,D141,D166,D195,D225,D235,D277,D284,D308,D309
@@ -101,14 +104,14 @@ Running add_hydrogen.
  LYS A16,A57,A69,A74,A101,A112,A149,A213,A218,A224,A243,A244,A311,A322,B16,B57,B69,B74,B101,B112,B149,B213,B218,B224,B243,B244,B311,B322,C16,C57,C69,C74,C101,C112,C149,C213,C218,C224,C243,C244,C311,C322,D16,D57,D69,D74,D101,D112,D149,D213,D218,D224,D243,D244,D311,D322
  ARG A22,A87,A106,A118,A157,A169,A171,A212,A228,A234,A257,A260,A283,A295,A299,A313,A327,B22,B87,B106,B118,B157,B169,B171,B212,B228,B234,B257,B260,B283,B295,B299,B313,B327,C22,C87,C106,C118,C157,C169,C171,C212,C228,C234,C257,C260,C283,C295,C299,C313,C327,D22,D87,D106,D118,D157,D169,D171,D212,D228,D234,D257,D260,D283,D295,D299,D313,D327
  TYR A35,A83,A145,A177,A188,A205,A238,A248,A249,A275,A280,A286,B35,B83,B145,B177,B188,B205,B238,B248,B249,B275,B280,B286,C35,C83,C145,C177,C188,C205,C238,C248,C249,C275,C280,C286,D35,D83,D145,D177,D188,D205,D238,D248,D249,D275,D280,D286
-Running  check_only. Nothing else to do.
-Running water.
+INFO Running  check_only. Nothing else to do.
+INFO Running water.
 287 Water molecules detected
-Running  check_only. Nothing else to do.
-Running metals.
+INFO Running  check_only. Nothing else to do.
+INFO Running metals.
 No metal ions found
-Running  check_only. Nothing else to do.
-Running ligands.
+INFO Running  check_only. Nothing else to do.
+INFO Running ligands.
 10 Ligands detected
  FBP A353
  OXM A351
@@ -120,11 +123,11 @@ Running ligands.
  NAD C352
  OXM D351
  NAD D352
-Running  check_only. Nothing else to do.
-Running getss.
+INFO Running  check_only. Nothing else to do.
+INFO Running getss.
 No SS bonds detected
-Running  check_only. Nothing else to do.
-Running amide.
+INFO Running  check_only. Nothing else to do.
+INFO Running amide.
 13 unusual contact(s) involving amide atoms found
  ASN A54.ND2  SER A56.N       2.851 A
  ASN A54.ND2  LYS A57.N       2.631 A
@@ -139,17 +142,17 @@ Running amide.
  GLN D100.OE1 GLU D104.O      2.562 A
  ASN D138.ND2 VAL D140.N      3.043 A
  ASN D294.ND2 ASN D296.N      2.757 A
-Running  check_only. Nothing else to do.
-Running chiral.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral.
 No residues with incorrect side-chain chirality found
-Running  check_only. Nothing else to do.
-Running chiral_bck.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
-Running  check_only. Nothing else to do.
-Running fixside.
+INFO Running  check_only. Nothing else to do.
+INFO Running fixside.
 No residues with missing or unknown side chain atoms found
-Running  check_only. Nothing else to do.
-Running backbone.
+INFO Running  check_only. Nothing else to do.
+INFO Running backbone.
 4 Residues with missing backbone atoms found
  THR A330   OXT
  THR B330   OXT
@@ -157,16 +160,16 @@ Running backbone.
  THR D330   OXT
 No backbone breaks
 No unexpected backbone links
-Running  check_only. Nothing else to do.
-Running cistransbck.
+INFO Running  check_only. Nothing else to do.
+INFO Running cistransbck.
 4 cis peptide bonds
 ASN A138   PRO A139   Dihedral:   -2.457
 ASN D138   PRO D139   Dihedral:    2.871
 ASN C138   PRO C139   Dihedral:   -1.167
 ASN B138   PRO B139   Dihedral:   -1.398
 No trans peptide bonds with unusual omega dihedrals found
-Running  check_only. Nothing else to do.
-Running clashes.
+INFO Running  check_only. Nothing else to do.
+INFO Running clashes.
 No severe clashes detected
 162 Steric apolar clashes detected
  MET A15.CB   GLY A19.CA      2.625 A
@@ -405,9 +408,9 @@ No severe clashes detected
  ASP B166.OD2 GLU B197.OE1    2.318 A
  ASP C166.OD1 GLU C197.OE1    2.624 A
  ASP D166.OD2 GLU D197.OE1    2.608 A
-Running  check_only. Nothing else to do.
-Running sequences.
-Canonical Sequences requires either mmCIF input or --sequence
+INFO Running  check_only. Nothing else to do.
+INFO Running sequences.
+WARNING Canonical Sequences requires either mmCIF input or --sequence
 Structure sequence
 >pdb_sq_A Frags: 15-330
 MKNNGGARVVVIGAGFVGASYVFALMNQGIADEIVLIDANESKAIGDAMDFNHGKVFAPK
@@ -438,5 +441,5 @@ DTELPVWSQAYIGVMPIRKLVESKGEEAQKDLERIFVNVRDAAYQIIEKKGATYYGIAMG
 LARVTRAILHNENAILTVSAYLDGLYGERDVYIGVPAVINRNGIREVIEIELNDDEKNRF
 HHSAATLKSVLARAFT
 
-Running  check_only. Nothing else to do.
-Structure not modified, not saving. Override with --force_save
+INFO Running  check_only. Nothing else to do.
+INFO Structure not modified, not saving. Override with --force_save

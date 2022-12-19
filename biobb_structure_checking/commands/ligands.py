@@ -1,10 +1,10 @@
 """ Module supporting ligands command"""
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     lig_list = mu.get_ligands(strcheck.strucm.st, incl_water=False)
 
     if not lig_list:
@@ -34,7 +34,7 @@ def _check(strcheck):
 
     return fix_data
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         remove_ligands = opts
     else:

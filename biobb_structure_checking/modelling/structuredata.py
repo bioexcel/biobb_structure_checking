@@ -1,5 +1,5 @@
 ''' Class to manage internal Structure data'''
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 class StructureData():
     '''Class to manage internal Structure data'''
@@ -135,17 +135,27 @@ class StructureData():
         """
         self.meta = {}
         if self.input_format == 'cif':
-            self.meta['entry_id'] = ', '.join(self.headers['_entry.id'])
-            self.meta['title'] = ', '.join(self.headers['_struct.title'])
-            self.meta['method'] = ', '.join(self.headers['_exptl.method'])
-            self.meta['keywords'] = ', '.join(self.headers['_struct_keywords.pdbx_keywords'])
-            if '_refine_hist.d_res_high' in self.headers:
-                self.meta['resolution'] = ', '.join(self.headers['_refine_hist.d_res_high'])
+            map_fields = {
+                '_entry.id' : 'entry_id',
+                '_struct.title' : 'title',
+                '_exptl.method' : 'method',
+                '_struct_keywords.pdbx_keywords': 'keywords',
+                '_refine_hist.d_res_high': 'resolution'
+            }
+            for org, fin in map_fields.items():
+                if org in self.headers:
+                    self.meta[fin] = ', '.join(self.headers[org])
+
         else:
-            self.meta['title'] = self.headers['name']
-            self.meta['method'] = self.headers['structure_method']
-            if 'keywords' in self.headers:
-                self.meta['keywords'] = self.headers['keywords']
+            map_fields = {
+                'idcode': 'entry_id',
+                'name': 'title',
+                'structure_method': 'method',
+                'keywords': 'keywords'
+            }
+            for org, fin in map_fields.items():
+                if org in self.headers:
+                    self.meta[fin] = self.headers[org]
             if 'resolution' not in self.headers or not self.headers['resolution']:
                 self.meta['resolution'] = 'N.A.'
             else:
@@ -159,9 +169,10 @@ class StructureData():
         """
         self.get_headers()
         if 'entry_id' in self.meta:
-            print(f" PDB id: {self.meta['entry_id']}\n"
-                  f" Title: {self.meta['title']}\n"
-                  f" Experimental method: {self.meta['method']}"
+            print(
+                f" PDB id: {self.meta['entry_id']}\n"
+                f" Title: {self.meta['title']}\n"
+                f" Experimental method: {self.meta['method']}"
             )
         if 'keywords' in self.meta:
             print(f" Keywords: {self.meta['keywords']}")

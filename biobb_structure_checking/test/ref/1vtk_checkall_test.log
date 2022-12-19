@@ -3,9 +3,12 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
-Warning: sequence features only available in mmCIF format or with external fasta input
-Structure pdb:1vtk.1 loaded
+INFO Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
+WARNING Full sequence features only available in mmCIF format or with external fasta input
+INFO Structure pdb:1vtk.1 loaded
+ PDB id: 
+ Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
+ Experimental method: x-ray diffraction
  Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
  Resolution (A): N.A.
  Biounit no. 1
@@ -24,24 +27,24 @@ ADP A400/1
 TMP A500/1
 ADP A400/2
 TMP A500/2
-Running models.
+INFO Running models.
 2 Model(s) detected
 Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
-Running  check_only. Nothing else to do.
-Running chains.
+INFO Running  check_only. Nothing else to do.
+INFO Running chains.
 1 Chain(s) detected
  A: Protein
-Running  check_only. Nothing else to do.
-Running inscodes.
+INFO Running  check_only. Nothing else to do.
+INFO Running inscodes.
 No residues with insertion codes found
-Running  check_only. Nothing else to do.
-Running altloc.
+INFO Running  check_only. Nothing else to do.
+INFO Running altloc.
 No residues with alternative location labels detected
-Running  check_only. Nothing else to do.
-Running rem_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running rem_hydrogen.
 No residues with Hydrogen atoms found
-Running  check_only. Nothing else to do.
-Running add_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running add_hydrogen.
 152 Residues requiring selection on adding H atoms
  CYS A171/1,A251/1,A336/1,A362/1,A171/2,A251/2,A336/2,A362/2
  ASP A55/1,A76/1,A77/1,A108/1,A116/1,A136/1,A162/1,A211/1,A215/1,A228/1,A258/1,A286/1,A303/1,A313/1,A328/1,A330/1,A338/1,A363/1,A55/2,A76/2,A77/2,A108/2,A116/2,A136/2,A162/2,A211/2,A215/2,A228/2,A258/2,A286/2,A303/2,A313/2,A328/2,A330/2,A338/2,A363/2
@@ -50,36 +53,36 @@ Running add_hydrogen.
  LYS A62/1,A219/1,A317/1,A62/2,A219/2,A317/2
  ARG A51/1,A75/1,A89/1,A106/1,A163/1,A176/1,A212/1,A216/1,A220/1,A222/1,A226/1,A236/1,A237/1,A247/1,A256/1,A281/1,A293/1,A318/1,A320/1,A337/1,A366/1,A370/1,A51/2,A75/2,A89/2,A106/2,A163/2,A176/2,A212/2,A216/2,A220/2,A222/2,A226/2,A236/2,A237/2,A247/2,A256/2,A281/2,A293/2,A318/2,A320/2,A337/2,A366/2,A370/2
  TYR A53/1,A80/1,A87/1,A101/1,A132/1,A172/1,A177/1,A239/1,A248/1,A305/1,A329/1,A53/2,A80/2,A87/2,A101/2,A132/2,A172/2,A177/2,A239/2,A248/2,A305/2,A329/2
-Running  check_only. Nothing else to do.
-Running water.
+INFO Running  check_only. Nothing else to do.
+INFO Running water.
 104 Water molecules detected
-Running  check_only. Nothing else to do.
-Running metals.
+INFO Running  check_only. Nothing else to do.
+INFO Running metals.
 No metal ions found
-Running  check_only. Nothing else to do.
-Running ligands.
+INFO Running  check_only. Nothing else to do.
+INFO Running ligands.
 4 Ligands detected
  ADP A400/*
  TMP A500/*
-Running  check_only. Nothing else to do.
-Running getss.
+INFO Running  check_only. Nothing else to do.
+INFO Running getss.
 No SS bonds detected
-Running  check_only. Nothing else to do.
-Running amide.
+INFO Running  check_only. Nothing else to do.
+INFO Running amide.
 2 unusual contact(s) involving amide atoms found
  PRO A153/1.O GLN A349/1.OE1    3.093 A
  PRO A153/2.O GLN A349/2.OE1    3.093 A
-Running  check_only. Nothing else to do.
-Running chiral.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral.
 No residues with incorrect side-chain chirality found
-Running  check_only. Nothing else to do.
-Running chiral_bck.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
-Running  check_only. Nothing else to do.
-Running fixside.
+INFO Running  check_only. Nothing else to do.
+INFO Running fixside.
 No residues with missing or unknown side chain atoms found
-Running  check_only. Nothing else to do.
-Running backbone.
+INFO Running  check_only. Nothing else to do.
+INFO Running backbone.
 4 Residues with missing backbone atoms found
  SER A149/1 OXT
  GLY A264/1 OXT
@@ -91,12 +94,12 @@ Running backbone.
  SER A149/2 - PRO A153/2
  GLY A264/2 - PRO A280/2
 No unexpected backbone links
-Running  check_only. Nothing else to do.
-Running cistransbck.
+INFO Running  check_only. Nothing else to do.
+INFO Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
-Running  check_only. Nothing else to do.
-Running clashes.
+INFO Running  check_only. Nothing else to do.
+INFO Running clashes.
 No severe clashes detected
 4 Steric apolar clashes detected
  GLY A59/1.O  HIS A213/1.CD2    2.824 A
@@ -127,9 +130,9 @@ No severe clashes detected
  ARG A212/2.NH2 ARG A216/2.NH2    3.171 A
  ARG A220/2.NH1 ARG A222/2.NH1    2.991 A
 No negative clashes detected
-Running  check_only. Nothing else to do.
-Running sequences.
-Canonical Sequences requires either mmCIF input or --sequence
+INFO Running  check_only. Nothing else to do.
+INFO Running sequences.
+WARNING Canonical Sequences requires either mmCIF input or --sequence
 Structure sequence
 >pdb_sq_A Frags: 46-149,153-264,280-376
 MPTLLRVYIDGPHGMGKTTTTQLLVALGSRDDIVYVPEPMTYWRVLGASETIANIYTTQH
@@ -139,5 +142,5 @@ RLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG---------------PRPHIG
 DTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTS
 GMVQTHVTTPGSIPTICDLARTFAREMGEAN
 
-Running  check_only. Nothing else to do.
-Structure not modified, not saving. Override with --force_save
+INFO Running  check_only. Nothing else to do.
+INFO Structure not modified, not saving. Override with --force_save

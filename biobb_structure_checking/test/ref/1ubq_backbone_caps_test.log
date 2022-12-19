@@ -3,8 +3,11 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Warning: sequence features only available in mmCIF format or with external fasta input
-Structure backbone_test/1ubq_caps.pdb loaded
+WARNING Full sequence features only available in mmCIF format or with external fasta input
+INFO Structure backbone_test/1ubq_caps.pdb loaded
+ PDB id: 1UBQ
+ Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
+ Experimental method: unknown
  Resolution (A): N.A.
 
  Num. models: 1
@@ -16,7 +19,7 @@ Structure backbone_test/1ubq_caps.pdb loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  564
-Running backbone. Options: --no_recheck --fix_chain none --add_caps all --fix_atoms all
+INFO Running backbone. Options: --no_recheck --fix_chain none --add_caps all --fix_atoms all
 7 Residues with missing backbone atoms found
  VAL A5     CA,C,O,OXT
  LEU A8     N,CA,O
@@ -32,10 +35,10 @@ Running backbone. Options: --no_recheck --fix_chain none --add_caps all --fix_at
  ILE A44    - ALA A46   
 No unexpected backbone links
 Main chain fixes
-Nothing to do
-Capping terminal ends
-True terminal residues:  A1,A76
-Terminal residues from backbone breaks:  A5-A8,A11-A14,A16-A20,A44-A46
+INFO Nothing to do
+INFO Capping terminal ends
+INFO True terminal residues: A1,A76
+INFO Terminal residues from backbone breaks: A5-A8,A11-A14,A16-A20,A44-A46
 MET A1 Adding extra ACE residue
   Adding new atom C
   Adding new atom CA
@@ -56,14 +59,16 @@ SER A20 Adding extra ACE residue
   Adding new atom CA
   Adding new atom O
 ILE A44 Replacing by NME residue
+INFO   Deleting atom CG2
   Removing atom CG2
 ALA A46 No CA, Replacing by ACE residue
+INFO   Deleting atom CB
   Removing unexpected atom CB
   Adding new atom CA
 GLY A76 Adding extra NME residue
   Adding new atom N
   Adding new atom CA
-Added caps: A1, A5, A8, A11, A14, A16, A20, A44, A46, A76
+INFO Added caps: A1, A5, A8, A11, A14, A16, A20, A44, A46, A76
 No residues with missing backbone atoms found
 4 Backbone breaks found
  NME A5     - ACE A8    
@@ -71,7 +76,7 @@ No residues with missing backbone atoms found
  NME A17    - ACE A19   
  NME A44    - ACE A46   
 No unexpected backbone links
-Checking for steric clashes
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected
@@ -87,4 +92,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  575
-Structure saved on 1ubq_backbone_caps_test.pdb
+INFO Structure saved on 1ubq_backbone_caps_test.pdb

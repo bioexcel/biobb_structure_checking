@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
-Structure pdb:1d23 loaded
+INFO Structure pdb:1d23 loaded
  PDB id: 1D23
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
@@ -24,23 +24,23 @@ Metal/Ion residues found
  MG A22
  MG B21
 
-Step 1: water --remove yes
-Running water. Options: --remove yes
+INFO Step 1: water --remove yes
+INFO Running water. Options: --remove yes
 154 Water molecules detected
 154 Water molecules removed
 
-Step 2:  add_hydrogen --add_mode auto --add_charges CMIP
-Running add_hydrogen. Options: --add_mode auto --add_charges CMIP
+INFO Step 2:  add_hydrogen --add_mode auto --add_charges CMIP
+INFO Running add_hydrogen. Options: --add_mode auto --add_charges CMIP
 No residues requiring selection on adding H atoms
-WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all
+WARNING Fixing side chains, override with --no_fix_side
+INFO Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-Selection: auto
-Updating partial charges and atom types
-Warning: MG not found in residue library atom charges set to 0.
-Warning: MG not found in residue library atom charges set to 0.
+INFO Selection: auto
+INFO Updating partial charges and atom types
+WARNING MG not found in residue library atom charges set to 0.
+WARNING MG not found in residue library atom charges set to 0.
 Total assigned charge:     -18.00
-Command list completed
+INFO Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: DNA, B: DNA)
 Final Num. residues:  22
@@ -53,4 +53,4 @@ Final Num. atoms:  634
 Metal/Ion residues found
  MG A22
  MG B21
-Structure saved on 1d23.pdb
+INFO Structure saved on 1d23.pdb

@@ -30,7 +30,7 @@ class ResidueLib():
             if line == '':
                 continue
 
-            elif re.match('DONE', line):
+            if re.match('DONE', line):
                 self.residues[res.id] = res
                 at_group = False
                 ch_group = False

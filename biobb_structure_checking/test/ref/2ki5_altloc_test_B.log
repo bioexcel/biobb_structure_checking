@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Structure pdb:2ki5 loaded
+INFO Structure pdb:2ki5 loaded
  PDB id: 2KI5
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -25,7 +25,7 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running altloc. Options: --select B
+INFO Running altloc. Options: --select B
 Detected 2 residues with alternative location labels
 AC2 A1
   C3'  A (1.00) B (0.01)
@@ -35,8 +35,8 @@ AC2 A1
   C1'  A (1.00) B (0.01)
 HOH A779
   O    A (1.00)
-Selecting location B
-Warning: unknown alternative B in HOH A779.O
+INFO Selecting location B
+WARNING Unknown alternative B in HOH A779.O
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908
@@ -51,4 +51,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Structure saved on 2ki5_altloc_test_B.pdb
+INFO Structure saved on 2ki5_altloc_test_B.pdb

@@ -269,6 +269,7 @@
  },
  "headers": {
   "biounit": "1",
+  "entry_id": "",
   "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
   "method": "x-ray diffraction",
   "resolution": "N.A.",

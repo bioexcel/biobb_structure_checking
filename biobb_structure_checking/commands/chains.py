@@ -2,10 +2,10 @@
 
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     print(cts.MSGS['CHAINS_DETECTED'].format(len(strcheck.strucm.chains_data.chain_ids)))
     for ch_id in sorted(strcheck.strucm.chains_data.chain_ids):
         if isinstance(strcheck.strucm.chains_data.chain_ids[ch_id], list):
@@ -23,7 +23,7 @@ def _check(strcheck):
     strcheck.summary['chains']['unlabelled'] = strcheck.strucm.chains_data.has_chains_to_rename
     return len(strcheck.strucm.chains_data.chain_ids) > 1 or strcheck.strucm.chains_data.has_chains_to_rename
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         select_chains = opts
         rename_chains = ''
@@ -59,15 +59,20 @@ def _fix(strcheck, opts, fix_data=None):
                 rename_chains = ''
         if input_option != 'none':
             new_label = strcheck.strucm.rename_empty_chain_label(rename_chains)
-            _check(strcheck)
+            check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
 
     if renumber_chains:
         if strcheck.strucm.chains_data.has_chains_to_rename:
-            logging.warning("Unlabelled chains detected")
+            print("WARNING: unlabelled chains detected")
+        if 'verbose' not in opts and opts['rem_inscodes']:
+            opts['verbose'] = False
+        else:
+            opts['verbose'] = True
         result = strcheck.strucm.renumber_chain_residues(
             renumber_chains,
-            opts['allow_merge']
+            rem_inscodes=opts['rem_inscodes'],
+            verbose=opts['verbose']
         )
         if result:
             strcheck.summary['chains']['renumbered'] = renumber_chains

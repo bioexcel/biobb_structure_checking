@@ -4,9 +4,9 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
-Structure pdb:4ku1 loaded
+WARNING No canonical sequence available for chain C
+WARNING No canonical sequence available for chain D
+INFO Structure pdb:4ku1 loaded
  PDB id: 4KU1
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
  Experimental method: X-RAY DIFFRACTION
@@ -44,30 +44,30 @@ MAN D7
 NAG D8
 FUL D9
 
-Step 1: models --select 1
+INFO Step 1: models --select 1
 
-Running models. Options: --select 1
+INFO Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select All
+INFO Step 2: chains --select All
 
-Running chains. Options: --select All
+INFO Running chains. Options: --select All
 4 Chain(s) detected
  A: Protein
  B: Protein
  C: Unknown
  D: Unknown
-Selecting all chains
+WARNING Selecting all chains
 
-Step 3: inscodes
+INFO Step 3: inscodes
 
-Running inscodes.
+INFO Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select occupancy
+INFO Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy
+INFO Running altloc. Options: --select occupancy
 Detected 6 residues with alternative location labels
 LYS A340
   N    A (0.50) B (0.50)
@@ -111,16 +111,16 @@ GLN B418
   CD   A (0.38) B (0.62)
   OE1  A (0.38) B (0.62)
   NE2  A (0.38) B (0.62)
-Selecting location occupancy
+INFO Selecting location occupancy
 
-Step 5: metals --remove ZN
+INFO Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN
+INFO Running metals. Options: --remove ZN
 No metal ions found
 
-Step 6: ligands --remove SO4
+INFO Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+INFO Running ligands. Options: --remove SO4
 20 Ligands detected
  PG4 A511
  NAG C1
@@ -142,61 +142,62 @@ Running ligands. Options: --remove SO4
  MAN D7
  NAG D8
  FUL D9
-Input not valid (SO4)
+ERROR Input not valid (SO4)
+ERROR Unknown selection SO4
 
-Step 7: water --remove Yes
+INFO Step 7: water --remove Yes
 
-Running water. Options: --remove Yes
+INFO Running water. Options: --remove Yes
 148 Water molecules detected
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+WARNING No canonical sequence available for chain C
+WARNING No canonical sequence available for chain D
 148 Water molecules removed
 
-Step 8: rem_hydrogen --remove Yes
+INFO Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes
+INFO Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
-Step 9: amide --fix All
+INFO Step 9: amide --fix All
 
-Running amide. Options: --fix All
+INFO Running amide. Options: --fix All
 No unusual contact(s) involving amide atoms found
 
-Step 10: chiral --fix All
+INFO Step 10: chiral --fix All
 
-Running chiral. Options: --fix All
+INFO Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
-Step 11: chiral_bck
+INFO Step 11: chiral_bck
 
-Running chiral_bck.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 12: fixside --fix All
+INFO Step 12: fixside --fix All
 
-Running fixside. Options: --fix All
+INFO Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 2 Residues with missing backbone atoms found
  LEU A443   OXT
  SER B444   OXT
 No backbone breaks
 No unexpected backbone links
-Capping terminal ends
-True terminal residues:  A237,A443,B237,B444
-Nothing to do
-No caps added
-Fixing missing backbone atoms
-Adding missing backbone atoms
+INFO Capping terminal ends
+INFO True terminal residues: A237,A443,B237,B444
+INFO Nothing to do
+INFO No caps added
+INFO Fixing missing backbone atoms
+INFO Adding missing backbone atoms
 LEU A443
-  Adding new atom OXT
+INFO   Adding new atom OXT
 SER B444
-  Adding new atom OXT
-Fixed 2 backbone atom(s)
-Checking for steric clashes
+INFO   Adding new atom OXT
+INFO Fixed 2 backbone atom(s)
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected
@@ -204,28 +205,28 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 14: cistransbck
+INFO Step 14: cistransbck
 
-Running cistransbck.
+INFO Running cistransbck.
 2 cis peptide bonds
 TYR B373   PRO B374   Dihedral:   -5.527
 TYR A373   PRO A374   Dihedral:   -4.211
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss --mark All
+INFO Step 15: getss --mark All
 
-Running getss. Options: --mark All
+INFO Running getss. Options: --mark All
 4 Possible SS Bonds detected
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981
  CYS B261.SG  CYS B321.SG     4.126
  CYS B367.SG  CYS B425.SG     4.188
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+WARNING No canonical sequence available for chain C
+WARNING No canonical sequence available for chain D
 
-Step 16: clashes
+INFO Step 16: clashes
 
-Running clashes.
+INFO Running clashes.
 No severe clashes detected
 6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
@@ -242,9 +243,9 @@ No positive clashes detected
 1 Steric negative clashes detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
 
-Step 17: ligands --remove All
+INFO Step 17: ligands --remove All
 
-Running ligands. Options: --remove All
+INFO Running ligands. Options: --remove All
 20 Ligands detected
  PG4 A511
  NAG C1
@@ -266,23 +267,23 @@ Running ligands. Options: --remove All
  MAN D7
  NAG D8
  FUL D9
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
-Ligands removed All (20)
+WARNING No canonical sequence available for chain C
+WARNING No canonical sequence available for chain D
+INFO Ligands removed All (20)
 
-Step 18: chains --select protein
+INFO Step 18: chains --select protein
 
-Running chains. Options: --select protein
+INFO Running chains. Options: --select protein
 4 Chain(s) detected
  A: Protein
  B: Protein
  C: Water
  D: Water
-Selecting chain(s) protein
+INFO Selecting chain(s) protein
 
-Step 19: add_hydrogen --add_mode auto --add_charges ADT
+INFO Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
-Running add_hydrogen. Options: --add_mode auto --add_charges ADT
+INFO Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 126 Residues requiring selection on adding H atoms
  ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
  GLU A258,A269,A272,A283,A293,A294,A318,A333,A345,A357,A380,A382,A388,A430,B258,B269,B272,B283,B293,B294,B318,B333,B345,B357,B380,B382,B388,B430
@@ -290,10 +291,10 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  LYS A246,A248,A274,A288,A290,A317,A320,A322,A326,A334,A338,A340,A360,A370,A392,A409,A414,A439,B246,B248,B274,B288,B290,B317,B320,B322,B326,B334,B338,B340,B360,B370,B392,B409,B414,B439
  ARG A255,A292,A301,A344,A355,A416,B255,B292,B301,B344,B355,B416
  TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
-WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all
+WARNING Fixing side chains, override with --no_fix_side
+INFO Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-Selection: auto
+INFO Selection: auto
 Replacing HIS A268 by HIE
 Replacing HIS A285 by HIE
 Replacing HIS A310 by HIE
@@ -306,9 +307,9 @@ Replacing HIS B310 by HIE
 Replacing HIS B429 by HIE
 Replacing HIS B433 by HIE
 Replacing HIS B435 by HIE
-Updating partial charges and atom types
+INFO Updating partial charges and atom types
 Total assigned charge:       0.00
-Command list completed
+INFO Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  415
@@ -318,5 +319,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  6587
-Structure saved on 4ku1_all_test.pdb
-Summary data saved on 4ku1_all_test.json
+INFO Structure saved on 4ku1_all_test.pdb
+INFO Summary data saved on 4ku1_all_test.json

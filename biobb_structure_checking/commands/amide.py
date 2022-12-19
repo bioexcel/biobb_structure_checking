@@ -3,11 +3,11 @@
 import logging
 import numpy as np
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotAValidResidueError
 
-def _check(strcheck):
+def check(strcheck):
     amide_check = strcheck.strucm.check_amide_contacts()
     if 'list' not in amide_check:
         if not strcheck.args['quiet']:
@@ -38,7 +38,7 @@ def _check(strcheck):
         )
     return amide_check
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):
@@ -69,7 +69,7 @@ def _fix(strcheck, opts, fix_data=None):
             return False
 
         if input_option == 'auto':
-            to_fix = strcheck.strucm.amide_auto_fix(fix_data)   
+            to_fix = strcheck.strucm.amide_auto_fix(fix_data)
         else:
             to_fix = [
                 res

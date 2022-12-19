@@ -6,18 +6,19 @@ check_structure performs [MDWeb](https://mmb.irbbarcelona.org/MDWeb) structure c
 
 It includes structure manipulation options like selecting models or chains, removing components of the system, completing side chains and backbone, and quality checking as residue quirality, amide orientation, or vdw clashes.
 
-check_structure can be run interactively. It will prompt for any missing parameter or information, but also can be run standalone providing a list of operations. 
+check_structure can be run interactively. It will prompt for any missing parameter or information, but also can be run standalone providing a list of operations.
 
 
 
 ~~~
 usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
-                       [--file_format {cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
+                       [--file_format {mmCif,cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
+                       [--nocache] [--copy_input DIR]
                        [--modeller_key MODELLER_KEY]
                        [--res_lib RES_LIBRARY_PATH]
                        [--data_lib DATA_LIBRARY_PATH]
-                       [-o OUTPUT_STRUCTURE_PATH {pdb,pdbqt,pqr,cmip}] 
+                       [-o OUTPUT_STRUCTURE_PATH {pdb,pdbqt,pqr,cmip}]
                        [--rename_terms] [--keep_canonical_resnames]
                        [--json JSON_OUTPUT_PATH] [-nv] [-v]
                        [--limit ATOM_LIMIT] [--debug] [--force_save]
@@ -29,23 +30,27 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
   **command** - _Command to execute (required)_
 
   **command_options** - _Specific command options (optional)_
-* On a interactive session, parameters required for **command** execution will be prompt as necessary, but can be also introduced as command options in the command line. see [Commands Help](https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html). 
+* On a interactive session, parameters required for **command** execution will be prompt as necessary, but can be also introduced as command options in the command line. see [Commands Help](https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html).
 ***
 ### Arguments for input:
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
 * Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted, but read as pdb.
-* Remote **pdb:{pdbid}**. See **--file_format** for selecting download format (default: cif)
-* Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB server (**--pdb_server MMB**). Format PDB.
+* Remote **pdb:{pdbid}[.format]**. See alsp **--file_format** for selecting download format (default: cif)
+* Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB or BSC servers (**--pdb_server MMB**). Format PDB.
 
 **--sequence** FASTA_SEQ_PATH - _Canonical sequence in FASTA format_
 * Header should start >pdb_chain[,chain] for backbone rebuild. Required only for PDB/PQR structures.
 
 **--file_format** {mmCif,cif,pdb,xml} - _Format for retrieving structures (mmCif(default)|cif|pdb|xml)_
 
-**--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB)_
+**--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB|BSC)_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
+
+**--nocache** - _Do not cache downloaded structures_
+
+**--copy_input** DIR - _Copy the downloaded structure in the indicated folder_
 
 **--limit** ATOM_LIMIT - _Limit on number of atoms (0: no limit)_
 
@@ -81,7 +86,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 
 ***
 ### Configuration arguments
-  
+
 **--check_only** - _Perform checks only, structure is not modified_
 
 **--non_interactive** - _Do not prompt for missing parameters_
@@ -89,7 +94,7 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 ***
 ### Miscelanea
 **--modeller_key** MODELLER_KEY - _User key for Modeller, required for backbone rebuild unless included in Modeller installation. Register at https://salilab.org/modeller/registration.html_
-  
+
 **-h, --help** - _show this help message and exit_
 
 **--version** - _show program's version number and exit_

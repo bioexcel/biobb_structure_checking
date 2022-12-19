@@ -37,7 +37,7 @@ class ParamInput():
         self.add_option_list('no', ['No'])
     def add_option_auto(self):
         """Add 'auto' option to dialog"""
-        self.add_option_list('auto',['Auto'])
+        self.add_option_list('auto', ['Auto'])
 
     def add_option_list(self, label, opt_list, case=False, opt_type='list', \
             multiple=False, list2=None):

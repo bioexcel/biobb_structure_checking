@@ -2,11 +2,11 @@
 
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotEnoughAtomsError
 
-def _check(strcheck):
+def check(strcheck):
     fix_data = {}
     # Residues with missing backbone
     miss_bck_at_list = strcheck.strucm.get_missing_atoms('backbone')
@@ -83,12 +83,12 @@ def _check(strcheck):
         fix_data['modified_residue_list'] = True
     return fix_data
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
 
     no_int_recheck = opts['fix_atoms'] is not None or strcheck.args['non_interactive']
 
     fix_done = not fix_data['bck_breaks_list']
-    
+
     fixed_main_res = []
     while not fix_done:
         if opts['extra_gap'] is None:
@@ -103,8 +103,7 @@ def _fix(strcheck, opts, fix_data=None):
         if not fixed_main:
             fix_done = True
             continue
-        else:
-            fixed_main_res += fixed_main
+        fixed_main_res += fixed_main
 
         strcheck.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
         if fixed_main:
@@ -113,7 +112,7 @@ def _fix(strcheck, opts, fix_data=None):
         if no_int_recheck or not fixed_main or opts['no_recheck']:
             fix_done = True
             # Force silent re-checking to update modified residue pointers
-            fix_data = _check(strcheck)
+            fix_data = check(strcheck)
         else:
             if not strcheck.args['quiet']:
                 logging.info(cts.MSGS['BACKBONE_RECHECK'])
@@ -132,7 +131,7 @@ def _fix(strcheck, opts, fix_data=None):
     if fixed_caps:
         logging.info(f"Added caps: {', '.join(map(mu.residue_num, fixed_caps))}")
         strcheck.strucm.modified = True
-        fix_data = _check(strcheck)
+        fix_data = check(strcheck)
     else:
         logging.info('No caps added')
 
@@ -220,13 +219,13 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
     term_rnums = [mu.residue_num(p[1]) for p in term_res]
     brk_res = set()
 
-    for r0, r1 in bck_breaks_list:
-        brk_res.add(r0)
-        brk_res.add(r1)
+    for res_0, res_1 in bck_breaks_list:
+        brk_res.add(res_0)
+        brk_res.add(res_1)
     true_term = []
-    for r in term_res:
-        if r[1] not in brk_res:
-            true_term.append(r)
+    for res in term_res:
+        if res[1] not in brk_res:
+            true_term.append(res)
 
     logging.info(
         f"True terminal residues: "

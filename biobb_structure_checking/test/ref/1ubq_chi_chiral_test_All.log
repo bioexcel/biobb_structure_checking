@@ -3,8 +3,11 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Warning: sequence features only available in mmCIF format or with external fasta input
-Structure chiral_pdb_test/1ubq_chi.pdb loaded
+WARNING Full sequence features only available in mmCIF format or with external fasta input
+INFO Structure chiral_pdb_test/1ubq_chi.pdb loaded
+ PDB id: 1UBQ
+ Title: structure of ubiquitin refined at 1.8 angstroms resolution
+ Experimental method: x-ray diffraction
  Keywords: chromosomal protein
  Resolution (A): 1.8
 
@@ -17,12 +20,12 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  658
-Running chiral. Options: --fix All
+INFO Running chiral. Options: --fix All
 2 residues with incorrect side-chain chirality found
  ILE A3    
  THR A7    
-Chiral side chains fixed All (2)
-Checking for steric clashes
+INFO Chiral side chains fixed All (2)
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected
@@ -38,4 +41,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  658
-Structure saved on 1ubq_chi_chiral_test.pdb
+INFO Structure saved on 1ubq_chi_chiral_test.pdb

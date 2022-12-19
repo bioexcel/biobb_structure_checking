@@ -3,10 +3,13 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
-Warning: sequence features only available in mmCIF format or with external fasta input
-Structure pdb:1svc.1 loaded
- Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
+INFO Structure exists: 'tmpPDB/sv/1svc_1.pdb' 
+WARNING Full sequence features only available in mmCIF format or with external fasta input
+INFO Structure pdb:1svc.1 loaded
+ PDB id: 
+ Title: nfkb p50 homodimer bound to dna
+ Experimental method: x-ray diffraction
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, dna, transcription-dna complex
  Resolution (A): N.A.
  Biounit no. 1
 
@@ -19,25 +22,25 @@ Structure pdb:1svc.1 loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  126
  Num. atoms:  5806
-Running models.
+INFO Running models.
 2 Model(s) detected
 Models do not superimpose, RMSd:   50.749 A, guessed as BioUnit 
-Running  check_only. Nothing else to do.
-Running chains.
+INFO Running  check_only. Nothing else to do.
+INFO Running chains.
 2 Chain(s) detected
  D: DNA
  P: Protein
-Running  check_only. Nothing else to do.
-Running inscodes.
+INFO Running  check_only. Nothing else to do.
+INFO Running inscodes.
 No residues with insertion codes found
-Running  check_only. Nothing else to do.
-Running altloc.
+INFO Running  check_only. Nothing else to do.
+INFO Running altloc.
 No residues with alternative location labels detected
-Running  check_only. Nothing else to do.
-Running rem_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running rem_hydrogen.
 No residues with Hydrogen atoms found
-Running  check_only. Nothing else to do.
-Running add_hydrogen.
+INFO Running  check_only. Nothing else to do.
+INFO Running add_hydrogen.
 212 Residues requiring selection on adding H atoms
  CYS P88/1,P119/1,P124/1,P162/1,P262/1,P273/1,P88/2,P119/2,P124/2,P162/2,P262/2,P273/2
  ASP P121/1,P132/1,P175/1,P186/1,P191/1,P209/1,P223/1,P238/1,P242/1,P257/1,P274/1,P279/1,P280/1,P300/1,P305/1,P321/1,P339/1,P121/2,P132/2,P175/2,P186/2,P191/2,P209/2,P223/2,P238/2,P242/2,P257/2,P274/2,P279/2,P280/2,P300/2,P305/2,P321/2,P339/2
@@ -46,45 +49,45 @@ Running add_hydrogen.
  LYS P52/1,P77/1,P79/1,P80/1,P86/1,P95/1,P105/1,P117/1,P131/1,P147/1,P148/1,P149/1,P194/1,P206/1,P244/1,P252/1,P275/1,P278/1,P315/1,P318/1,P320/1,P326/1,P337/1,P346/1,P52/2,P77/2,P79/2,P80/2,P86/2,P95/2,P105/2,P117/2,P131/2,P147/2,P148/2,P149/2,P194/2,P206/2,P244/2,P252/2,P275/2,P278/2,P315/2,P318/2,P320/2,P326/2,P337/2,P346/2
  ARG P54/1,P57/1,P59/1,P157/1,P164/1,P187/1,P192/1,P198/1,P214/1,P230/1,P231/1,P255/1,P258/1,P284/1,P308/1,P335/1,P336/1,P54/2,P57/2,P59/2,P157/2,P164/2,P187/2,P192/2,P198/2,P214/2,P230/2,P231/2,P255/2,P258/2,P284/2,P308/2,P335/2,P336/2
  TYR P44/1,P60/1,P82/1,P90/1,P166/1,P178/1,P241/1,P270/1,P286/1,P319/1,P350/1,P351/1,P44/2,P60/2,P82/2,P90/2,P166/2,P178/2,P241/2,P270/2,P286/2,P319/2,P350/2,P351/2
-Running  check_only. Nothing else to do.
-Running water.
+INFO Running  check_only. Nothing else to do.
+INFO Running water.
 126 Water molecules detected
-Running  check_only. Nothing else to do.
-Running metals.
+INFO Running  check_only. Nothing else to do.
+INFO Running metals.
 No metal ions found
-Running  check_only. Nothing else to do.
-Running ligands.
+INFO Running  check_only. Nothing else to do.
+INFO Running ligands.
 No ligands found
-Running  check_only. Nothing else to do.
-Running getss.
+INFO Running  check_only. Nothing else to do.
+INFO Running getss.
 No SS bonds detected
-Running  check_only. Nothing else to do.
-Running amide.
+INFO Running  check_only. Nothing else to do.
+INFO Running amide.
 2 unusual contact(s) involving amide atoms found
  GLN P180/1.NE2 ARG P231/1.NH1    2.845 A
  GLN P180/2.NE2 ARG P231/2.NH1    2.845 A
-Running  check_only. Nothing else to do.
-Running chiral.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral.
 No residues with incorrect side-chain chirality found
-Running  check_only. Nothing else to do.
-Running chiral_bck.
+INFO Running  check_only. Nothing else to do.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
-Running  check_only. Nothing else to do.
-Running fixside.
+INFO Running  check_only. Nothing else to do.
+INFO Running fixside.
 No residues with missing or unknown side chain atoms found
-Running  check_only. Nothing else to do.
-Running backbone.
+INFO Running  check_only. Nothing else to do.
+INFO Running backbone.
 2 Residues with missing backbone atoms found
  GLU P353/1 OXT
  GLU P353/2 OXT
 No backbone breaks
 No unexpected backbone links
-Running  check_only. Nothing else to do.
-Running cistransbck.
+INFO Running  check_only. Nothing else to do.
+INFO Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
-Running  check_only. Nothing else to do.
-Running clashes.
+INFO Running  check_only. Nothing else to do.
+INFO Running clashes.
 No severe clashes detected
 26 Steric apolar clashes detected
  PRO P43/1.O  LEU P232/1.CD2    2.898 A
@@ -145,9 +148,9 @@ No severe clashes detected
  GLU P287/1.OE1 GLU P289/1.OE2    3.216 A
  ASP P121/2.OD2 GLU P160/2.OE2    3.177 A
  GLU P287/2.OE1 GLU P289/2.OE2    3.216 A
-Running  check_only. Nothing else to do.
-Running sequences.
-Canonical Sequences requires either mmCIF input or --sequence
+INFO Running  check_only. Nothing else to do.
+INFO Running sequences.
+WARNING Canonical Sequences requires either mmCIF input or --sequence
 Structure sequence
 >pdb_sq_D Frags: 1-19
 AGATGGGGAATCCCCTAGA
@@ -159,5 +162,5 @@ DSTGSFTRRLEPVVSDAIYDSKAPNASNLKIVRMDRTAGCVTGGEEIYLLCDKVQKDDIQ
 IRFYEEEENGGVWEGFGDFSPTDVHRQFAIVFKTPKYKDINITKPASVFVQLRRKSDLET
 SEPKPFLYYPE
 
-Running  check_only. Nothing else to do.
-Structure not modified, not saving. Override with --force_save
+INFO Running  check_only. Nothing else to do.
+INFO Structure not modified, not saving. Override with --force_save

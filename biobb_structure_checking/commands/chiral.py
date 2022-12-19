@@ -2,10 +2,10 @@
 
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     chiral_check = strcheck.strucm.check_chiral_sides()
 
     if 'list' not in chiral_check:
@@ -27,7 +27,7 @@ def _check(strcheck):
 
     return chiral_check
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):
@@ -71,7 +71,7 @@ def _fix(strcheck, opts, fix_data=None):
         if not strcheck.args['quiet']:
             logging.info(cts.MSGS['CHECKING_CLASHES'])
 
-        strcheck.summary['chiral_clashes'] = strcheck._check_report_clashes(to_fix)
+        strcheck.summary['chiral_clashes'] = strcheck.check_report_clashes(to_fix)
 
     strcheck.strucm.modified = True
     return False

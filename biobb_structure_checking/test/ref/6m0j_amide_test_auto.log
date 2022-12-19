@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/m0/6m0j.cif' 
-Structure pdb:6m0j loaded
+INFO Structure pdb:6m0j loaded
  PDB id: 6M0J
  Title: Crystal structure of SARS-CoV-2 spike receptor-binding domain bound with ACE2
  Experimental method: X-RAY DIFFRACTION
@@ -29,7 +29,7 @@ NAG A904
 NAG A905
 NAG A906
 NAG E601
-Running amide. Options: --fix auto
+INFO Running amide. Options: --fix auto
 7 unusual contact(s) involving amide atoms found
  LYS A31.NZ   GLN E493.NE2    2.926 A
  GLN A42.NE2  GLN E498.NE2    2.927 A
@@ -38,24 +38,25 @@ Running amide. Options: --fix auto
  ASN A134.ND2 ASN A137.N      3.082 A
  GLU A150.O   ASN A154.OD1    2.895 A
  ARG E357.NH1 ASN E394.ND2    2.963 A
-Fixing automatically
-Initial contact score: 1.177
-Clustering amide residues
-6 cluster(s) found, exploring...
+INFO Fixing amide residues automatically
+INFO Initial contact score: 1.177
+INFO Clustering amide residues
+INFO 6 cluster(s) found
 Cluster 1:ASN A134
-New score: 0.837, fixed residue(s): ASN A134
+INFO New score: 0.837, fixed residue(s): ASN A134
 Cluster 2:ASN A154
-New score: 0.718, fixed residue(s): ASN A154
-Cluster 3:ASN A194, ASN A103
-New score: 0.464, fixed residue(s): ASN A103
+INFO New score: 0.718, fixed residue(s): ASN A154
+Cluster 3:ASN A103, ASN A194
+INFO New score: 0.464, fixed residue(s): ASN A194
 Cluster 4:GLN A42, GLN E498
-New score: 0.231, fixed residue(s): GLN E498
+INFO New score: 0.231, fixed residue(s): GLN E498
 Cluster 5:ASN E394
-Score not improved, skipping
+INFO Score not improved, skipping
 Cluster 6:GLN E493
-New score: 0.114, fixed residue(s): GLN E493
-Amide residues fixed auto (5)
-Rechecking
+INFO New score: 0.114, fixed residue(s): GLN E493
+INFO Final contact score: 0.114
+INFO Amide residues fixed auto (5)
+INFO Rechecking
 1 unusual contact(s) involving amide atoms found
  ARG E357.NH1 ASN E394.ND2    2.963 A
 Final Num. models: 1
@@ -76,4 +77,4 @@ NAG A904
 NAG A905
 NAG A906
 NAG E601
-Structure saved on 6m0j_amide_test_auto.pdb
+INFO Structure saved on 6m0j_amide_test_auto.pdb

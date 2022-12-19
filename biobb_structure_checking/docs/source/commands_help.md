@@ -10,19 +10,24 @@
 * **load** - _Stores structure on local cache and provides basic statistics_
 ***
 ### System Configuration Commands
-Commands to manipulate structure composition. 
+Commands to manipulate structure composition.
 
 **sequences** - _Print canonical and structure sequences in FASTA format_
 
 **models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
- * Accept List of Models (comma separated) or Model number range 
+ * Accept List of Models (comma separated) or Model number range
  * **--superimpose** Superimposes currently selected models
- * **--save_split** Split models as separated output files. 
+ * **--save_split** Split models as separated output files.
  * **--build_complex** Builds an actual complex from Biounits stored as collection of models
 
-**chains** [--select chain_ids | molecule_type] - _Detect/Select Chains_
+**chains** [--select chain_ids | molecule_type] [--rename (auto|new label)] [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--allow_merge] - _Detect/Select/Reorganize Chains_
+chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
+  * **--rename** Allow to fix unlabelled chains
+  * **--renumber** Allow to reorganize residues and chains by moving or renunbering fragments
+  * **--rem_inscodes** removes insertion codes when renumbering chains
 
-**inscodes** - _Detects residues with insertion codes. No fix provided (yet)_
+**inscodes** - _Detects residues with insertion codes.
+  * **--renumber** Fixes insertion codes by renumering chain residues
 
 **altloc** [--select occupancy| alt_id | list of res_id:alt_id] - _Detect/Select Alternative Locations_
 
@@ -30,7 +35,7 @@ Commands to manipulate structure composition.
 
 **ligands** [--remove All | None | Res_type_list | Residue_list] - _Detect/Remove Ligands_
 
-**getss** [--mark All | None | Residue_list] - _Detect SS Bonds_  
+**getss** [--mark All | None | Residue_list] - _Detect SS Bonds_
  * **--mark** - Replace relevant CYS by CYX to mark SS Bond (HG atom removed if present)
 
 **water** [--remove Yes|No] - _Remove Water molecules_
@@ -38,38 +43,38 @@ Commands to manipulate structure composition.
 **rem_hydrogen** [--remove Yes|No] - _Remove Hydrogen atoms from structure_
 
 **mutateside** [--mut mutation_list|file:mutations_file] [--no_check_clashes] [--rebuild] -
-_Mutate side chain with minimal atom replacement_  
-* Allows multiple mutations (comma separated). 
+_Mutate side chain with minimal atom replacement_
+* Allows multiple mutations (comma separated).
 * mutation_list as file: accepts list of mutations in a external file
 * Check generated clashes except **--no_check_clashes** set.
-* **--rebuild** optimize side chains using Modeller (experimental). 
+* **--rebuild** optimize side chains using Modeller (experimental).
 
-**add_hydrogen** [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF] - _Add Hydrogen Atoms to the strucure_  
+**add_hydrogen** [--add_mode auto | pH | list | interactive | interactive_his] [--no_fix_side] [--keep_h] [--add_charges FF] - _Add Hydrogen Atoms to the strucure_
 * **--add_mode**
-  * **Auto** - std changes at pH 7.0. His->Hie. pH: set pH value  
+  * **Auto** - std changes at pH 7.0. His->Hie. pH: set pH value
   * **list** - Explicit list as [*:]HisXXHid
-  * **Interactive[_his]**: Prompts for all selectable residues  
-* Fixes missing side chain atoms unless **--no_fix_side** is set.  
-* Existing hydrogen atoms are removed before adding new ones unless **--keep_h** is set.  
-* **--add_charges FF** adds partial charges (from RES_LIBRARY) and atom types from FF forcefield (Accepted: ATD, CMIP).  
+  * **Interactive[_his]**: Prompts for all selectable residues
+* Fixes missing side chain atoms unless **--no_fix_side** is set.
+* Existing hydrogen atoms are removed before adding new ones unless **--keep_h** is set.
+* **--add_charges FF** adds partial charges (from RES_LIBRARY) and atom types from FF forcefield (Accepted: ATD, CMIP).
 * Output format taken from file extension (Accepted: pdb, pdbqt, pqr) or --output_format.
 * Residue names are modified according to ionization state (e.g. HIS-> HIE, HID, HIP). Use --keep_canonical_resnames to avoid this behaviour
 
 ### Fix Structure Errors
-Commands to detect and fix possible structure errors. 
+Commands to detect and fix possible structure errors.
 
 **Amide** [--fix All|None|Auto|Residue List] [--no_recheck] - _Detect/Fix Amide atoms Assignment_
 * Auto option searches for the combinations of fixes that offer less contacts.
 * * Amide contacts are rechecked unless **--no_recheck** That can lead to infinite loops if done non-interactively.
 
-  
+
 **chiral** [--fix All|None|Residue List] [--no_check_clashes] - _Detect/Fix Improper side chain chirality_
 * Checks for generated clashes unless **--no_check_clashes** set
 
 **fixside** [--fix All |None|Residue List] [--no_check_clashes] - _Complete side chains (heavy atoms, protein only)_
 * Checks generated clashes unless **--no_check_clashes** set
 * **--rebuild**  Rebuild complete side chain using Modeller
-  
+
 **backbone** [--fix_atoms All|None|Residue List] [--fix_chain All|None|Break list] [--add_caps All|None|Break list] [--extra_gap]        [--no_recheck] [--no_check_clashes] - _Analyze main chain missing atoms and fragments (protein only)_
 * **--fix_atoms** Add missing O, OXT backbone atoms.
 * **--fix_chain** Missing fragments filled using comparative modelling (Modeller License needed)

@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Structure pdb:2ki5 loaded
+INFO Structure pdb:2ki5 loaded
  PDB id: 2KI5
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -25,7 +25,7 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running fixside. Options: --fix All
+INFO Running fixside. Options: --fix All
 6 Residues with missing side chain atoms found
  MET A46    CG,SD,CE
  PRO A154   CG,CD
@@ -33,33 +33,33 @@ Running fixside. Options: --fix All
  MET B46    CG,SD,CE
  PRO B154   CG,CD
  ARG B220   CG,CD,NE,CZ,NH1,NH2
-Fixing side chains
+INFO Fixing side chains
 MET A46
-  Adding new atom CG
-  Adding new atom SD
-  Adding new atom CE
+INFO   Adding new atom CG
+INFO   Adding new atom SD
+INFO   Adding new atom CE
 PRO A154
-  Adding new atom CG
-  Adding new atom CD
+INFO   Adding new atom CG
+INFO   Adding new atom CD
 PRO A280
-  Adding new atom CG
-  Adding new atom CD
+INFO   Adding new atom CG
+INFO   Adding new atom CD
 MET B46
-  Adding new atom CG
-  Adding new atom SD
-  Adding new atom CE
+INFO   Adding new atom CG
+INFO   Adding new atom SD
+INFO   Adding new atom CE
 PRO B154
-  Adding new atom CG
-  Adding new atom CD
+INFO   Adding new atom CG
+INFO   Adding new atom CD
 ARG B220
-  Adding new atom CG
-  Adding new atom CD
-  Adding new atom NE
-  Adding new atom CZ
-  Adding new atom NH1
-  Adding new atom NH2
-Fixed 6 side chain(s)
-Checking for steric clashes
+INFO   Adding new atom CG
+INFO   Adding new atom CD
+INFO   Adding new atom NE
+INFO   Adding new atom CZ
+INFO   Adding new atom NH1
+INFO   Adding new atom NH2
+INFO Fixed 6 side chain(s)
+INFO Checking for steric clashes
 1 Steric severe clashes detected
  MET B46.CE   VAL B352.O      0.921 A
 5 Steric apolar clashes detected
@@ -92,4 +92,4 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Structure saved on 2ki5_fixside_All_test.pdb
+INFO Structure saved on 2ki5_fixside_All_test.pdb

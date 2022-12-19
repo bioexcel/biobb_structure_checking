@@ -17,7 +17,7 @@ try:
     has_IUPAC = True
 except ImportError:
     has_IUPAC = False
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 IDENT_THRES = 0.7
 class SequenceData():
@@ -77,7 +77,7 @@ class SequenceData():
             self.data = {}
             self.has_canonical = {}
 
-        self.raw_pdb_seq =  self._get_pack_str_seqs(strucm)
+        self.raw_pdb_seq = _get_pack_str_seqs(strucm)
 
         if not self.has_canonical:
             self.read_canonical_seqs(strucm, cif_warn)
@@ -171,7 +171,7 @@ class SequenceData():
             can_reverted = True
         else:
             can_reverted = False
-        
+
         for mod in strucm.st:
             ppb = PPBuilder()
             for chn in mod.get_chains():
@@ -187,7 +187,7 @@ class SequenceData():
                             f"Warning: no protein residues found for chain {chn.id}"
                             f" at model {mod.id}, adding hetatm to avoid empty chain"
                         )
-                        frags = [[res for res in chn.get_residues()]]
+                        frags = list(chn.get_residues())
                 elif strucm.chains_data.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
@@ -402,7 +402,7 @@ class SequenceData():
 
         for ch_id in chids:
             max_score = -100
-            best_hit=''
+            best_hit = ''
             for hit in all_hits:
                 if hit['ch_id'] != ch_id:
                     continue
@@ -415,23 +415,8 @@ class SequenceData():
             hits.append(best_hit)
         return hits
 
-    def _get_pack_str_seqs(self, strucm):
-        strucm.revert_can_resnames(canonical=True)
-        seqs = {}
-        for mod in strucm.st:
-            for chn in mod.get_chains():
-                if chn.id not in seqs:
-                    seqs[chn.id] = []
-                seqs[chn.id].append(mu.get_sequence_from_list(
-                    [res for res in chn.get_residues() if not mu.is_hetatm(res)],
-                    strucm.chains_data.chain_ids[chn.id]
-                    )
-                )
-        strucm.revert_can_resnames(canonical=False)
-        return seqs
-
     def _assign_seq(self, rec):
-        if hasattr(rec,'seq'):
+        if hasattr(rec, 'seq'):
             tgt = rec.seq
         else:
             tgt = rec
@@ -444,3 +429,19 @@ class SequenceData():
                 if score > 0:
                     matches.append((ch_id, score))
         return matches
+
+def _get_pack_str_seqs(strucm):
+    strucm.revert_can_resnames(canonical=True)
+    seqs = {}
+    for mod in strucm.st:
+        for chn in mod.get_chains():
+            if chn.id not in seqs:
+                seqs[chn.id] = []
+            seqs[chn.id].append(
+                mu.get_sequence_from_list(
+                    [res for res in chn.get_residues() if not mu.is_hetatm(res)],
+                    strucm.chains_data.chain_ids[chn.id]
+                )
+            )
+    strucm.revert_can_resnames(canonical=False)
+    return seqs

@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
-Structure pdb:1bqo loaded
+INFO Structure pdb:1bqo loaded
  PDB id: 1BQO
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
@@ -33,7 +33,7 @@ Metal/Ion residues found
  CA B305
 Small mol ligands found
 N25 B401
-Running metals. Options: --remove All
+INFO Running metals. Options: --remove All
 10 Metal ions found
   ZN A301.ZN 
   ZN A302.ZN 
@@ -45,7 +45,7 @@ Running metals. Options: --remove All
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
-Metal Atoms removed All (10)
+INFO Metal Atoms removed All (10)
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  418
@@ -57,4 +57,4 @@ Final Num. water mol.:  75
 Final Num. atoms:  2831
 Small mol ligands found
 N25 B401
-Structure saved on 1bqo_metals_test_All.pdb
+INFO Structure saved on 1bqo_metals_test_All.pdb

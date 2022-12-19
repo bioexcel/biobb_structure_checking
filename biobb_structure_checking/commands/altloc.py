@@ -2,10 +2,10 @@
 
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck): #TODO improve output
+def check(strcheck):
     alt_loc_res = strcheck.strucm.get_altloc_residues()
     if not alt_loc_res:
         if not strcheck.args['quiet']:
@@ -39,7 +39,7 @@ def _check(strcheck): #TODO improve output
 
     return fix_data
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
 
     if isinstance(opts, str):
         select_altloc = opts

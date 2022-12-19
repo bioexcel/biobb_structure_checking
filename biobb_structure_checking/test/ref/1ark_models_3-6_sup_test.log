@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
-Structure pdb:1ark loaded
+INFO Structure pdb:1ark loaded
  PDB id: 1ARK
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
@@ -19,11 +19,11 @@ Structure pdb:1ark loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  0
  Num. atoms:  13575
-Running models. Options: --select 3-6 --superimpose --save_split
+INFO Running models. Options: --select 3-6 --superimpose --save_split
 15 Model(s) detected
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
-Selecting model num. 3-6
-Models superimposed: final RMSd    2.615 A
+INFO Selecting model num. 3-6
+INFO Models superimposed: final RMSd    2.615 A
 Final Num. models: 4 (type: Ensembl/NMR,    2.615 A)
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  240
@@ -33,5 +33,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  3620
-Splitting models for output
-Structure saved on 1ark_models_sup_test.pdb
+INFO Splitting models for output
+INFO Structure saved on 1ark_models_sup_test.pdb

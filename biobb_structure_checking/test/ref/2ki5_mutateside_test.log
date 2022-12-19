@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Structure pdb:2ki5 loaded
+INFO Structure pdb:2ki5 loaded
  PDB id: 2KI5
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -25,28 +25,28 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running mutateside. Options: --mut Leu49Ile,B:arg51Lys
-Mutations to perform
+INFO Running mutateside. Options: --mut Leu49Ile,B:arg51Lys
+INFO Mutations to perform
 *:LEU49ILE
 B:ARG51LYS
-Replacing LEU A49 into ILE
-  Deleting CD2
-  Renaming CG to CG1
-  Adding new atom CG2
-Replacing LEU B49 into ILE
-  Deleting CD2
-  Renaming CG to CG1
-  Adding new atom CG2
+INFO Replacing LEU A49 into ILE
+INFO   Deleting CD2
+INFO   Renaming CG to CG1
+INFO   Adding new atom CG2
+INFO Replacing LEU B49 into ILE
+INFO   Deleting CD2
+INFO   Renaming CG to CG1
+INFO   Adding new atom CG2
 
-Replacing ARG B51 into LYS
-  Deleting NE
-  Deleting CZ
-  Deleting NH1
-  Deleting NH2
-  Adding new atom CE
-  Adding new atom NZ
+INFO Replacing ARG B51 into LYS
+INFO   Deleting NE
+INFO   Deleting CZ
+INFO   Deleting NH1
+INFO   Deleting NH2
+INFO   Adding new atom CE
+INFO   Adding new atom NZ
 
-Checking for steric clashes
+INFO Checking for steric clashes
 No severe clashes detected
 4 Steric apolar clashes detected
  ILE A49.CG2  THR A350.OG1    2.815 A
@@ -71,5 +71,5 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Structure saved on 2ki5_mutateside_test.pdb
-Summary data saved on 2ki5_mutateside_test.json
+INFO Structure saved on 2ki5_mutateside_test.pdb
+INFO Summary data saved on 2ki5_mutateside_test.json

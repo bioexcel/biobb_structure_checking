@@ -3,9 +3,12 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
-Getting canonical sequences from matching FASTA input
+INFO Getting canonical sequences from matching FASTA input
 A: "1ubq_A  protein 76  UBIQUITIN", score: 46.0 
-Structure backbone_test/1ubq_caps.pdb loaded
+INFO Structure backbone_test/1ubq_caps.pdb loaded
+ PDB id: 1UBQ
+ Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
+ Experimental method: unknown
  Resolution (A): N.A.
 
  Num. models: 1
@@ -17,7 +20,7 @@ Structure backbone_test/1ubq_caps.pdb loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  564
-Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_atoms none
+INFO Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_atoms none
 7 Residues with missing backbone atoms found
  VAL A5     CA,C,O,OXT
  LEU A8     N,CA,O
@@ -34,12 +37,12 @@ Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_at
 No unexpected backbone links
 Main chain fixes
 
-                         MODELLER 10.3, 2022/07/08, r12388
+                         MODELLER 10.2, 2021/11/15, r12267
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2022 Andrej Sali
+                     Copyright(c) 1989-2021 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -55,12 +58,12 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.3.18-150300.59.98-default x86_64
-Date and time of compilation         : 2022/07/08 22:21:48
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg6 5.15.79.1-microsoft-standard-WSL2 x86_64
+Date and time of compilation         : 2021/11/15 19:12:27
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2022/11/30 14:35:21
+Job starting time (YY/MM/DD HH:MM:SS): 2022/12/19 12:55:57
 
-Fixing chain/model A/0
+INFO Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
 to protein atoms within 2.30 angstroms
 and protein CA atoms within 10.00 angstroms
@@ -74,31 +77,31 @@ Filename                          molpdf     DOPE score    GA341 score
 ----------------------------------------------------------------------
 target.B99990001.pdb           812.45667    -6567.33350        1.00000
 
-Fixing VAL A5 - LEU A8
+INFO Fixing VAL A5 - LEU A8
   Adding VAL A5
   Adding LYS A6
   Adding THR A7
   Adding LEU A8
 
-Fixing LYS A11 - THR A14
+INFO Fixing LYS A11 - THR A14
   Adding LYS A11
   Adding THR A12
   Adding ILE A13
   Adding THR A14
 
-Fixing GLU A16 - SER A20
+INFO Fixing GLU A16 - SER A20
   Adding GLU A16
   Adding VAL A17
   Adding GLU A18
   Adding PRO A19
   Adding SER A20
 
-Fixing ILE A44 - ALA A46
+INFO Fixing ILE A44 - ALA A46
   Adding ILE A44
   Adding PHE A45
   Adding ALA A46
 
-Getting canonical sequences from matching FASTA input
+INFO Getting canonical sequences from matching FASTA input
 A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0 
 2 Residues with missing backbone atoms found
  LEU A8     OXT
@@ -110,14 +113,14 @@ No unexpected backbone links
 Consecutive residues too far away to be covalently linked
  LEU A8     - THR A9    ,  bond distance    5.303 
  THR A14    - LEU A15   ,  bond distance    9.068 
-Capping terminal ends
-True terminal residues:  A1,A76
-Terminal residues from backbone breaks:  A8-A9,A14-A15
-Nothing to do
-No caps added
-Fixing missing backbone atoms
-Nothing to do
-Checking for steric clashes
+INFO Capping terminal ends
+INFO True terminal residues: A1,A76
+INFO Terminal residues from backbone breaks: A8-A9,A14-A15
+INFO Nothing to do
+INFO No caps added
+INFO Fixing missing backbone atoms
+INFO Nothing to do
+INFO Checking for steric clashes
 2 Steric severe clashes detected
  LEU A15.C    VAL A17.C       0.491 A
  LEU A15.CG   GLU A18.CD      0.428 A
@@ -162,4 +165,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  660
-Structure saved on 1ubq_backbone_main_test.pdb
+INFO Structure saved on 1ubq_backbone_main_test.pdb

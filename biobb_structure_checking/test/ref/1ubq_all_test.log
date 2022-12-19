@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
-Structure pdb:1ubq loaded
+INFO Structure pdb:1ubq loaded
  PDB id: 1UBQ
  Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -21,98 +21,98 @@ Structure pdb:1ubq loaded
  Num. water mol.:  58
  Num. atoms:  660
 
-Step 1: models --select 1
+INFO Step 1: models --select 1
 
-Running models. Options: --select 1
+INFO Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select All
+INFO Step 2: chains --select All
 
-Running chains. Options: --select All
+INFO Running chains. Options: --select All
 1 Chain(s) detected
  A: Protein
 
-Step 3: inscodes
+INFO Step 3: inscodes
 
-Running inscodes.
+INFO Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select occupancy
+INFO Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy
+INFO Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
 
-Step 5: metals --remove ZN
+INFO Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN
+INFO Running metals. Options: --remove ZN
 No metal ions found
 
-Step 6: ligands --remove SO4
+INFO Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+INFO Running ligands. Options: --remove SO4
 No ligands found
 
-Step 7: water --remove Yes
+INFO Step 7: water --remove Yes
 
-Running water. Options: --remove Yes
+INFO Running water. Options: --remove Yes
 58 Water molecules detected
 58 Water molecules removed
 
-Step 8: rem_hydrogen --remove Yes
+INFO Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes
+INFO Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
-Step 9: amide --fix All
+INFO Step 9: amide --fix All
 
-Running amide. Options: --fix All
+INFO Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
-Amide residues fixed All (1)
-Rechecking
+INFO Amide residues fixed All (1)
+INFO Rechecking
 No unusual contact(s) involving amide atoms found
 
-Step 10: chiral --fix All
+INFO Step 10: chiral --fix All
 
-Running chiral. Options: --fix All
+INFO Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
-Step 11: chiral_bck
+INFO Step 11: chiral_bck
 
-Running chiral_bck.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 12: fixside --fix All
+INFO Step 12: fixside --fix All
 
-Running fixside. Options: --fix All
+INFO Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 No residues with missing backbone atoms found
 No backbone breaks
 No unexpected backbone links
-Capping terminal ends
-True terminal residues:  A1,A76
-Nothing to do
-No caps added
+INFO Capping terminal ends
+INFO True terminal residues: A1,A76
+INFO Nothing to do
+INFO No caps added
 
-Step 14: cistransbck
+INFO Step 14: cistransbck
 
-Running cistransbck.
+INFO Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss --mark All
+INFO Step 15: getss --mark All
 
-Running getss. Options: --mark All
+INFO Running getss. Options: --mark All
 No SS bonds detected
 
-Step 16: clashes
+INFO Step 16: clashes
 
-Running clashes.
+INFO Running clashes.
 No severe clashes detected
 No apolar clashes detected
 1 Steric polar_acceptor clashes detected
@@ -121,20 +121,20 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 17: ligands --remove All
+INFO Step 17: ligands --remove All
 
-Running ligands. Options: --remove All
+INFO Running ligands. Options: --remove All
 No ligands found
 
-Step 18: chains --select protein
+INFO Step 18: chains --select protein
 
-Running chains. Options: --select protein
+INFO Running chains. Options: --select protein
 1 Chain(s) detected
  A: Protein
 
-Step 19: add_hydrogen --add_mode auto --add_charges ADT
+INFO Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
-Running add_hydrogen. Options: --add_mode auto --add_charges ADT
+INFO Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 24 Residues requiring selection on adding H atoms
  ASP A21,A32,A39,A52,A58
  GLU A16,A18,A24,A34,A51,A64
@@ -142,14 +142,14 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  LYS A6,A11,A27,A29,A33,A48,A63
  ARG A42,A54,A72,A74
  TYR A59
-WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all
+WARNING Fixing side chains, override with --no_fix_side
+INFO Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-Selection: auto
+INFO Selection: auto
 Replacing HIS A68 by HIE
-Updating partial charges and atom types
+INFO Updating partial charges and atom types
 Total assigned charge:      -0.00
-Command list completed
+INFO Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  76
@@ -159,5 +159,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  1231
-Structure saved on 1ubq_all_test.pdb
-Summary data saved on 1ubq_all_test.json
+INFO Structure saved on 1ubq_all_test.pdb
+INFO Summary data saved on 1ubq_all_test.json

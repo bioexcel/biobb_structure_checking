@@ -4,14 +4,26 @@
   - Added --fix auto option to automatically find best fix combination
 - chains
   - Added --rename. fixes empty chain labels
-  - Added --renumber. allow to renumber chains and residues
+  - Added --renumber. allow to renumber/reorganize chains and residues
+  - Added --rem_inscodes. removes insertion codes on renumbering
+- inscodes
+  - Added --renumber. Rebuild residue numbering to remove insertion codes
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
 - json
   - Extended information on json summary output
+- input format
+  - File format for remote download can be defined using extension as in pdb:2ki5.pdb
+- output format
+  - Added mmCif output (only atom records)
+- input management
+  - Added --nocache to avoid caching downloaded structures
+  - Added --copy_input to recover a copy of the input structure
+
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized
+- Fixed behaviour of structure headers output with missing entries
 
 ## v3.10.1 (2022.3)
 ### Extended functions

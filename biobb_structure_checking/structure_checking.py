@@ -13,11 +13,11 @@ from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.json_writer import JSONWriter
-from biobb_structure_checking.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.io.json_writer import JSONWriter
+from biobb_structure_checking.io.param_input import ParamInput, NoDialogAvailableError
 
 import biobb_structure_checking.structure_manager as stm
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 
 # Main class
@@ -42,7 +42,6 @@ class StructureChecking():
         self.summary = {}
 
         if self.args['debug']:
-
             import psutil
 
             self.start_time = time.time()
@@ -83,7 +82,13 @@ class StructureChecking():
             self.checkall(self.args['options'])
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
-        elif self.args['command'] != 'load':
+        elif self.args['command'] == 'load':
+            if self.args['nocache'] and not self.args['force_save'] and not self.args['get_copy']:
+                print(
+                    "WARNING: load with --nocache will not "
+                    "have any effect unless --get_copy is set"
+                )
+        else:
             self._run_method(self.args['command'], self.args['options'])
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
@@ -235,8 +240,8 @@ class StructureChecking():
         """
         try:
             importlib.import_module('biobb_structure_checking.commands.' + command)
-            f_check = sys.modules['biobb_structure_checking.commands.' + command]._check
-            f_fix = sys.modules['biobb_structure_checking.commands.' + command]._fix
+            f_check = sys.modules['biobb_structure_checking.commands.' + command].check
+            f_fix = sys.modules['biobb_structure_checking.commands.' + command].fix
         except ImportError:
             logging.error(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
             sys.exit()
@@ -326,6 +331,8 @@ class StructureChecking():
             pdb_server=self.args['pdb_server'],
             cache_dir=self.args['cache_dir_path'],
             file_format=self.args['file_format'],
+            nocache=self.args['nocache'],
+            copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path
         )
 
@@ -381,7 +388,8 @@ class StructureChecking():
             output_format = self.args['output_format']
         else:
             output_format = os.path.splitext(output_structure_path)[1][1:]
-
+        if output_format == 'mmCif':
+            output_format = 'cif'
         if not split_models:
             self.strucm.save_structure(
                 output_structure_path,
@@ -403,7 +411,14 @@ class StructureChecking():
 
         return output_structure_path
 
-    def _check_report_clashes(self, residue_list=None, contact_types=None):
+    def check_report_clashes(self, residue_list=None, contact_types=None):
+        """ StructureChecking.check_report_clashes
+            Check and reports clashes
+
+            Args:
+                residue_list (res (list)) : Residues to check
+                contact_types (int (list)): Types of contacts to consider
+        """
         if contact_types is None:
             contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list:

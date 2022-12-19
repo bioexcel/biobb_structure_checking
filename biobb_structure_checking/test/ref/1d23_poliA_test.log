@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
-Structure pdb:1d23 loaded
+INFO Structure pdb:1d23 loaded
  PDB id: 1D23
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
@@ -23,8 +23,8 @@ Structure pdb:1d23 loaded
 Metal/Ion residues found
  MG A22
  MG B21
-Running mutateside. Options: --na_seq AAAAAAAAAA
-Mutations to perform
+INFO Running mutateside. Options: --na_seq AAAAAAAAAA
+INFO Mutations to perform
 A:DC1DA
 A:DG2DA
 A:DA3DA
@@ -45,229 +45,229 @@ B:DA17DT
 B:DT18DT
 B:DC19DT
 B:DG20DT
-Replacing  DC A1 into DA
-  Deleting C2
-  Deleting O2
-  Deleting N3
-  Deleting C4
-  Deleting N4
-  Deleting C5
-  Renaming N1 to N9
-  Renaming C6 to C8
-  Adding new atom N7
-  Adding new atom C5
-  Adding new atom C6
-  Adding new atom N6
-  Adding new atom N1
-  Adding new atom C2
-  Adding new atom N3
-  Adding new atom C4
+INFO Replacing  DC A1 into DA
+INFO   Deleting C2
+INFO   Deleting O2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting N4
+INFO   Deleting C5
+INFO   Renaming N1 to N9
+INFO   Renaming C6 to C8
+INFO   Adding new atom N7
+INFO   Adding new atom C5
+INFO   Adding new atom C6
+INFO   Adding new atom N6
+INFO   Adding new atom N1
+INFO   Adding new atom C2
+INFO   Adding new atom N3
+INFO   Adding new atom C4
 
-Replacing  DG A2 into DA
-  Deleting N2
-  Renaming O6 to N6
+INFO Replacing  DG A2 into DA
+INFO   Deleting N2
+INFO   Renaming O6 to N6
 
-Replacing  DA A3 into DA
+INFO Replacing  DA A3 into DA
 
-Replacing  DT A4 into DA
-  Deleting C2
-  Deleting O2
-  Deleting N3
-  Deleting C4
-  Deleting O4
-  Deleting C5
-  Deleting C7
-  Renaming N1 to N9
-  Renaming C6 to C8
-  Adding new atom N7
-  Adding new atom C5
-  Adding new atom C6
-  Adding new atom N6
-  Adding new atom N1
-  Adding new atom C2
-  Adding new atom N3
-  Adding new atom C4
+INFO Replacing  DT A4 into DA
+INFO   Deleting C2
+INFO   Deleting O2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting O4
+INFO   Deleting C5
+INFO   Deleting C7
+INFO   Renaming N1 to N9
+INFO   Renaming C6 to C8
+INFO   Adding new atom N7
+INFO   Adding new atom C5
+INFO   Adding new atom C6
+INFO   Adding new atom N6
+INFO   Adding new atom N1
+INFO   Adding new atom C2
+INFO   Adding new atom N3
+INFO   Adding new atom C4
 
-Replacing  DC A5 into DA
-  Deleting C2
-  Deleting O2
-  Deleting N3
-  Deleting C4
-  Deleting N4
-  Deleting C5
-  Renaming N1 to N9
-  Renaming C6 to C8
-  Adding new atom N7
-  Adding new atom C5
-  Adding new atom C6
-  Adding new atom N6
-  Adding new atom N1
-  Adding new atom C2
-  Adding new atom N3
-  Adding new atom C4
+INFO Replacing  DC A5 into DA
+INFO   Deleting C2
+INFO   Deleting O2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting N4
+INFO   Deleting C5
+INFO   Renaming N1 to N9
+INFO   Renaming C6 to C8
+INFO   Adding new atom N7
+INFO   Adding new atom C5
+INFO   Adding new atom C6
+INFO   Adding new atom N6
+INFO   Adding new atom N1
+INFO   Adding new atom C2
+INFO   Adding new atom N3
+INFO   Adding new atom C4
 
-Replacing  DG A6 into DA
-  Deleting N2
-  Renaming O6 to N6
+INFO Replacing  DG A6 into DA
+INFO   Deleting N2
+INFO   Renaming O6 to N6
 
-Replacing  DA A7 into DA
+INFO Replacing  DA A7 into DA
 
-Replacing  DT A8 into DA
-  Deleting C2
-  Deleting O2
-  Deleting N3
-  Deleting C4
-  Deleting O4
-  Deleting C5
-  Deleting C7
-  Renaming N1 to N9
-  Renaming C6 to C8
-  Adding new atom N7
-  Adding new atom C5
-  Adding new atom C6
-  Adding new atom N6
-  Adding new atom N1
-  Adding new atom C2
-  Adding new atom N3
-  Adding new atom C4
+INFO Replacing  DT A8 into DA
+INFO   Deleting C2
+INFO   Deleting O2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting O4
+INFO   Deleting C5
+INFO   Deleting C7
+INFO   Renaming N1 to N9
+INFO   Renaming C6 to C8
+INFO   Adding new atom N7
+INFO   Adding new atom C5
+INFO   Adding new atom C6
+INFO   Adding new atom N6
+INFO   Adding new atom N1
+INFO   Adding new atom C2
+INFO   Adding new atom N3
+INFO   Adding new atom C4
 
-Replacing  DC A9 into DA
-  Deleting C2
-  Deleting O2
-  Deleting N3
-  Deleting C4
-  Deleting N4
-  Deleting C5
-  Renaming N1 to N9
-  Renaming C6 to C8
-  Adding new atom N7
-  Adding new atom C5
-  Adding new atom C6
-  Adding new atom N6
-  Adding new atom N1
-  Adding new atom C2
-  Adding new atom N3
-  Adding new atom C4
+INFO Replacing  DC A9 into DA
+INFO   Deleting C2
+INFO   Deleting O2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting N4
+INFO   Deleting C5
+INFO   Renaming N1 to N9
+INFO   Renaming C6 to C8
+INFO   Adding new atom N7
+INFO   Adding new atom C5
+INFO   Adding new atom C6
+INFO   Adding new atom N6
+INFO   Adding new atom N1
+INFO   Adding new atom C2
+INFO   Adding new atom N3
+INFO   Adding new atom C4
 
-Replacing  DG A10 into DA
-  Deleting N2
-  Renaming O6 to N6
+INFO Replacing  DG A10 into DA
+INFO   Deleting N2
+INFO   Renaming O6 to N6
 
-Replacing  DC B11 into DT
-  Renaming N4 to O4
-  Adding new atom C7
+INFO Replacing  DC B11 into DT
+INFO   Renaming N4 to O4
+INFO   Adding new atom C7
 
-Replacing  DG B12 into DT
-  Deleting N1
-  Deleting C2
-  Deleting N3
-  Deleting C4
-  Deleting C5
-  Deleting C6
-  Deleting O6
-  Deleting N2
-  Deleting N7
-  Renaming N9 to N1
-  Renaming C8 to C6
-  Adding new atom C5
-  Adding new atom C7
-  Adding new atom C4
-  Adding new atom O4
-  Adding new atom N3
-  Adding new atom C2
-  Adding new atom O2
+INFO Replacing  DG B12 into DT
+INFO   Deleting N1
+INFO   Deleting C2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting C5
+INFO   Deleting C6
+INFO   Deleting O6
+INFO   Deleting N2
+INFO   Deleting N7
+INFO   Renaming N9 to N1
+INFO   Renaming C8 to C6
+INFO   Adding new atom C5
+INFO   Adding new atom C7
+INFO   Adding new atom C4
+INFO   Adding new atom O4
+INFO   Adding new atom N3
+INFO   Adding new atom C2
+INFO   Adding new atom O2
 
-Replacing  DA B13 into DT
-  Deleting N1
-  Deleting C2
-  Deleting N3
-  Deleting C4
-  Deleting C5
-  Deleting C6
-  Deleting N6
-  Deleting N7
-  Renaming N9 to N1
-  Renaming C8 to C6
-  Adding new atom C5
-  Adding new atom C7
-  Adding new atom C4
-  Adding new atom O4
-  Adding new atom N3
-  Adding new atom C2
-  Adding new atom O2
+INFO Replacing  DA B13 into DT
+INFO   Deleting N1
+INFO   Deleting C2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting C5
+INFO   Deleting C6
+INFO   Deleting N6
+INFO   Deleting N7
+INFO   Renaming N9 to N1
+INFO   Renaming C8 to C6
+INFO   Adding new atom C5
+INFO   Adding new atom C7
+INFO   Adding new atom C4
+INFO   Adding new atom O4
+INFO   Adding new atom N3
+INFO   Adding new atom C2
+INFO   Adding new atom O2
 
-Replacing  DT B14 into DT
+INFO Replacing  DT B14 into DT
 
-Replacing  DC B15 into DT
-  Renaming N4 to O4
-  Adding new atom C7
+INFO Replacing  DC B15 into DT
+INFO   Renaming N4 to O4
+INFO   Adding new atom C7
 
-Replacing  DG B16 into DT
-  Deleting N1
-  Deleting C2
-  Deleting N3
-  Deleting C4
-  Deleting C5
-  Deleting C6
-  Deleting O6
-  Deleting N2
-  Deleting N7
-  Renaming N9 to N1
-  Renaming C8 to C6
-  Adding new atom C5
-  Adding new atom C7
-  Adding new atom C4
-  Adding new atom O4
-  Adding new atom N3
-  Adding new atom C2
-  Adding new atom O2
+INFO Replacing  DG B16 into DT
+INFO   Deleting N1
+INFO   Deleting C2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting C5
+INFO   Deleting C6
+INFO   Deleting O6
+INFO   Deleting N2
+INFO   Deleting N7
+INFO   Renaming N9 to N1
+INFO   Renaming C8 to C6
+INFO   Adding new atom C5
+INFO   Adding new atom C7
+INFO   Adding new atom C4
+INFO   Adding new atom O4
+INFO   Adding new atom N3
+INFO   Adding new atom C2
+INFO   Adding new atom O2
 
-Replacing  DA B17 into DT
-  Deleting N1
-  Deleting C2
-  Deleting N3
-  Deleting C4
-  Deleting C5
-  Deleting C6
-  Deleting N6
-  Deleting N7
-  Renaming N9 to N1
-  Renaming C8 to C6
-  Adding new atom C5
-  Adding new atom C7
-  Adding new atom C4
-  Adding new atom O4
-  Adding new atom N3
-  Adding new atom C2
-  Adding new atom O2
+INFO Replacing  DA B17 into DT
+INFO   Deleting N1
+INFO   Deleting C2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting C5
+INFO   Deleting C6
+INFO   Deleting N6
+INFO   Deleting N7
+INFO   Renaming N9 to N1
+INFO   Renaming C8 to C6
+INFO   Adding new atom C5
+INFO   Adding new atom C7
+INFO   Adding new atom C4
+INFO   Adding new atom O4
+INFO   Adding new atom N3
+INFO   Adding new atom C2
+INFO   Adding new atom O2
 
-Replacing  DT B18 into DT
+INFO Replacing  DT B18 into DT
 
-Replacing  DC B19 into DT
-  Renaming N4 to O4
-  Adding new atom C7
+INFO Replacing  DC B19 into DT
+INFO   Renaming N4 to O4
+INFO   Adding new atom C7
 
-Replacing  DG B20 into DT
-  Deleting N1
-  Deleting C2
-  Deleting N3
-  Deleting C4
-  Deleting C5
-  Deleting C6
-  Deleting O6
-  Deleting N2
-  Deleting N7
-  Renaming N9 to N1
-  Renaming C8 to C6
-  Adding new atom C5
-  Adding new atom C7
-  Adding new atom C4
-  Adding new atom O4
-  Adding new atom N3
-  Adding new atom C2
-  Adding new atom O2
+INFO Replacing  DG B20 into DT
+INFO   Deleting N1
+INFO   Deleting C2
+INFO   Deleting N3
+INFO   Deleting C4
+INFO   Deleting C5
+INFO   Deleting C6
+INFO   Deleting O6
+INFO   Deleting N2
+INFO   Deleting N7
+INFO   Renaming N9 to N1
+INFO   Renaming C8 to C6
+INFO   Adding new atom C5
+INFO   Adding new atom C7
+INFO   Adding new atom C4
+INFO   Adding new atom O4
+INFO   Adding new atom N3
+INFO   Adding new atom C2
+INFO   Adding new atom O2
 
-Checking for steric clashes
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 2 Steric polar_acceptor clashes detected
@@ -289,4 +289,4 @@ Final Num. atoms:  560
 Metal/Ion residues found
  MG A22
  MG B21
-Structure saved on 1d23_poliA_test.pdb
+INFO Structure saved on 1d23_poliA_test.pdb

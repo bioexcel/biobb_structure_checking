@@ -1,10 +1,11 @@
 """ Module supporting models command"""
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
+    """ Check for existing hydrogens atoms"""
     remh_list = mu.get_residues_with_H(strcheck.strucm.st)
     if not remh_list:
         if not strcheck.args['quiet']:
@@ -15,7 +16,8 @@ def _check(strcheck):
     strcheck.summary['rem_hydrogen']['n_detected'] = len(remh_list)
     return {'remh_list': remh_list}
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
+    """ Removes selected hydrogen atoms"""
     if isinstance(opts, str):
         remove_h = opts
     else:

@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
-Structure pdb:1ubq loaded
+INFO Structure pdb:1ubq loaded
  PDB id: 1UBQ
  Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -20,11 +20,11 @@ Structure pdb:1ubq loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  660
-Running amide. Options: --fix All
+INFO Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  ARG A42.NE   GLN A49.NE2     2.750 A
-Amide residues fixed All (1)
-Rechecking
+INFO Amide residues fixed All (1)
+INFO Rechecking
 No unusual contact(s) involving amide atoms found
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
@@ -35,4 +35,4 @@ Final Num. HETATM residues:  58
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  58
 Final Num. atoms:  660
-Structure saved on 1ubq_amide_test_All.pdb
+INFO Structure saved on 1ubq_amide_test_All.pdb

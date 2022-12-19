@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
-Structure pdb:1bqo loaded
+INFO Structure pdb:1bqo loaded
  PDB id: 1BQO
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
@@ -34,33 +34,33 @@ Metal/Ion residues found
 Small mol ligands found
 N25 B401
 
-Step 1: models --select 1
+INFO Step 1: models --select 1
 
-Running models. Options: --select 1
+INFO Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select All
+INFO Step 2: chains --select All
 
-Running chains. Options: --select All
+INFO Running chains. Options: --select All
 2 Chain(s) detected
  A: Protein
  B: Protein
-Selecting all chains
+WARNING Selecting all chains
 
-Step 3: inscodes
+INFO Step 3: inscodes
 
-Running inscodes.
+INFO Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select occupancy
+INFO Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy
+INFO Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
 
-Step 5: metals --remove ZN
+INFO Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN
+INFO Running metals. Options: --remove ZN
 10 Metal ions found
   ZN A301.ZN 
   ZN A302.ZN 
@@ -72,11 +72,11 @@ Running metals. Options: --remove ZN
   CA B303.CA 
   CA B304.CA 
   CA B305.CA 
-Metal Atoms removed ZN (4)
+INFO Metal Atoms removed ZN (4)
 
-Step 6: ligands --remove SO4
+INFO Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+INFO Running ligands. Options: --remove SO4
 7 Ligands detected
   CA A303
   CA A304
@@ -85,61 +85,62 @@ Running ligands. Options: --remove SO4
   CA B304
   CA B305
  N25 B401
-Input not valid (SO4)
+ERROR Input not valid (SO4)
+ERROR Unknown selection SO4
 
-Step 7: water --remove Yes
+INFO Step 7: water --remove Yes
 
-Running water. Options: --remove Yes
+INFO Running water. Options: --remove Yes
 75 Water molecules detected
 75 Water molecules removed
 
-Step 8: rem_hydrogen --remove Yes
+INFO Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes
+INFO Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
-Step 9: amide --fix All
+INFO Step 9: amide --fix All
 
-Running amide. Options: --fix All
+INFO Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  GLN B236.O   ASN B240.OD1    2.980 A
-Amide residues fixed All (1)
-Rechecking
+INFO Amide residues fixed All (1)
+INFO Rechecking
 1 unusual contact(s) involving amide atoms found
  GLN B236.NE2 ASN B240.ND2    3.022 A
 
-Step 10: chiral --fix All
+INFO Step 10: chiral --fix All
 
-Running chiral. Options: --fix All
+INFO Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
-Step 11: chiral_bck
+INFO Step 11: chiral_bck
 
-Running chiral_bck.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 12: fixside --fix All
+INFO Step 12: fixside --fix All
 
-Running fixside. Options: --fix All
+INFO Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 1 Residues with missing backbone atoms found
  ASP A251   OXT
 No backbone breaks
 No unexpected backbone links
-Capping terminal ends
-True terminal residues:  A83,A251,B83,B255
-Nothing to do
-No caps added
-Fixing missing backbone atoms
-Adding missing backbone atoms
+INFO Capping terminal ends
+INFO True terminal residues: A83,A251,B83,B255
+INFO Nothing to do
+INFO No caps added
+INFO Fixing missing backbone atoms
+INFO Adding missing backbone atoms
 ASP A251
-  Adding new atom OXT
-Fixed 1 backbone atom(s)
-Checking for steric clashes
+INFO   Adding new atom OXT
+INFO Fixed 1 backbone atom(s)
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected
@@ -147,20 +148,20 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 14: cistransbck
+INFO Step 14: cistransbck
 
-Running cistransbck.
+INFO Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss --mark All
+INFO Step 15: getss --mark All
 
-Running getss. Options: --mark All
+INFO Running getss. Options: --mark All
 No SS bonds detected
 
-Step 16: clashes
+INFO Step 16: clashes
 
-Running clashes.
+INFO Running clashes.
 No severe clashes detected
 3 Steric apolar clashes detected
  THR A95.CG2  PRO A129.O      2.770 A
@@ -189,9 +190,9 @@ No positive clashes detected
  ASP B107.OD2 ASP B182.OD1    3.482 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
 
-Step 17: ligands --remove All
+INFO Step 17: ligands --remove All
 
-Running ligands. Options: --remove All
+INFO Running ligands. Options: --remove All
 7 Ligands detected
   CA A303
   CA A304
@@ -200,19 +201,19 @@ Running ligands. Options: --remove All
   CA B304
   CA B305
  N25 B401
-Ligands removed All (7)
+INFO Ligands removed All (7)
 
-Step 18: chains --select protein
+INFO Step 18: chains --select protein
 
-Running chains. Options: --select protein
+INFO Running chains. Options: --select protein
 2 Chain(s) detected
  A: Protein
  B: Protein
-Selecting chain(s) protein
+INFO Selecting chain(s) protein
 
-Step 19: add_hydrogen --add_mode auto --add_charges ADT
+INFO Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
-Running add_hydrogen. Options: --add_mode auto --add_charges ADT
+INFO Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 107 Residues requiring selection on adding H atoms
  ASP A107,A111,A114,A141,A153,A158,A177,A181,A182,A183,A189,A228,A237,A238,A251,B107,B111,B114,B141,B153,B158,B177,B181,B182,B183,B189,B228,B237,B238,B251
  GLU A118,A125,A126,A137,A139,A150,A184,A202,A216,B118,B125,B126,B137,B139,B150,B184,B202,B216,B254
@@ -220,10 +221,10 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  LYS A91,A94,A110,A119,A122,A188,B91,B94,B110,B119,B122,B188
  ARG A84,A93,A100,A134,A149,A231,A233,B84,B93,B100,B134,B149,B231,B233
  TYR A99,A104,A136,A155,A168,A220,A223,A246,B99,B104,B136,B155,B168,B220,B223,B246
-WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all
+WARNING Fixing side chains, override with --no_fix_side
+INFO Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-Selection: auto
+INFO Selection: auto
 Replacing HIS A96 by HIE
 Replacing HIS A151 by HIE
 Replacing HIS A166 by HIE
@@ -240,9 +241,9 @@ Replacing HIS B201 by HIE
 Replacing HIS B205 by HIE
 Replacing HIS B211 by HIE
 Replacing HIS B224 by HIE
-Updating partial charges and atom types
+INFO Updating partial charges and atom types
 Total assigned charge:     -23.00
-Command list completed
+INFO Command list completed
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  342
@@ -252,5 +253,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  5294
-Structure saved on 1bqo_all_test.pdb
-Summary data saved on 1bqo_all_test.json
+INFO Structure saved on 1bqo_all_test.pdb
+INFO Summary data saved on 1bqo_all_test.json

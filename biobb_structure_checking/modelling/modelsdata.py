@@ -1,6 +1,6 @@
 ''' Class to manage models internal data'''
 from Bio.PDB.Superimposer import Superimposer
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
 class ModelsData():
     '''Class to manage models internal data'''
@@ -14,8 +14,7 @@ class ModelsData():
         """ Print stats """
         if self.nmodels > 1:
             return f"{prefix} Num. models: {self.nmodels} (type: {mu.MODEL_TYPE_LABELS[self.models_type['type']]}, {self.models_type['rmsd']:8.3f} A)"
-        else:
-            return f"{prefix} Num. models: {self.nmodels}"
+        return f"{prefix} Num. models: {self.nmodels}"
 
     def select(self, keep_model: str) -> None:
         """ Selects model(s) and delete the others from the structure. Model are

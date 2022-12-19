@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
-Structure pdb:1d23 loaded
+INFO Structure pdb:1d23 loaded
  PDB id: 1D23
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
@@ -23,15 +23,15 @@ Structure pdb:1d23 loaded
 Metal/Ion residues found
  MG A22
  MG B21
-Running mutateside. Options: --mut DA3DG
-#WARNING: Unknown residue B:DA3
-Mutations to perform
+INFO Running mutateside. Options: --mut DA3DG
+WARNING Unknown residue B:DA3
+INFO Mutations to perform
 *:DA3DG
-Replacing  DA A3 into DG
-  Renaming N6 to O6
-  Adding new atom N2
+INFO Replacing  DA A3 into DG
+INFO   Renaming N6 to O6
+INFO   Adding new atom N2
 
-Checking for steric clashes
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 1 Steric polar_acceptor clashes detected
@@ -52,4 +52,4 @@ Final Num. atoms:  561
 Metal/Ion residues found
  MG A22
  MG B21
-Structure saved on 1d23_dnamut_test.pdb
+INFO Structure saved on 1d23_dnamut_test.pdb

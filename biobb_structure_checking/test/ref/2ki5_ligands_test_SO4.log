@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Structure pdb:2ki5 loaded
+INFO Structure pdb:2ki5 loaded
  PDB id: 2KI5
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -25,13 +25,13 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running ligands. Options: --remove SO4
+INFO Running ligands. Options: --remove SO4
 4 Ligands detected
  SO4 A4
  AC2 A1
  SO4 B3
  AC2 B2
-Ligands removed SO4 (2)
+INFO Ligands removed SO4 (2)
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  906
@@ -44,4 +44,4 @@ Final Num. atoms:  4951
 Small mol ligands found
 AC2 A1
 AC2 B2
-Structure saved on 2ki5_ligands_test_SO4.pdb
+INFO Structure saved on 2ki5_ligands_test_SO4.pdb

@@ -1,10 +1,10 @@
 """ Module supporting getss command"""
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     SS_bonds = strcheck.strucm.get_SS_bonds()
     if not SS_bonds:
         if not strcheck.args['quiet']:
@@ -18,7 +18,7 @@ def _check(strcheck):
             f" {mu.atom_id(ssb[1]):12}"
             f" {ssb[2]:8.3f}"
         )
-        
+
         strcheck.summary['getss']['found'].append(
             {
                 'at1':mu.atom_id(ssb[0]),
@@ -28,7 +28,7 @@ def _check(strcheck):
         )
     return SS_bonds
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if not fix_data:
         return False
     if isinstance(opts, str):

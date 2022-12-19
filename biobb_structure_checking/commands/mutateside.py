@@ -1,14 +1,14 @@
 """ Module supporting fixside command"""
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     # TODO Check _mutateside_check function?
     return True
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         mut_list = opts
     else:
@@ -40,7 +40,7 @@ def _fix(strcheck, opts, fix_data=None):
         if not strcheck.args['quiet']:
             logging.info(cts.MSGS['CHECKING_CLASHES'])
 
-        strcheck.summary['mutateside_clashes'] = strcheck._check_report_clashes(mutated_res)
+        strcheck.summary['mutateside_clashes'] = strcheck.check_report_clashes(mutated_res)
 
     strcheck.strucm.modified = True
     return False

@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
-Structure pdb:1svc loaded
+INFO Structure pdb:1svc loaded
  PDB id: 1SVC
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
@@ -21,92 +21,92 @@ Structure pdb:1svc loaded
  Num. water mol.:  63
  Num. atoms:  2903
 
-Step 1: models --select 1
+INFO Step 1: models --select 1
 
-Running models. Options: --select 1
+INFO Running models. Options: --select 1
 1 Model(s) detected
 Single model found
 
-Step 2: chains --select All
+INFO Step 2: chains --select All
 
-Running chains. Options: --select All
+INFO Running chains. Options: --select All
 2 Chain(s) detected
  D: DNA
  P: Protein
-Selecting all chains
+WARNING Selecting all chains
 
-Step 3: inscodes
+INFO Step 3: inscodes
 
-Running inscodes.
+INFO Running inscodes.
 No residues with insertion codes found
 
-Step 4: altloc --select occupancy
+INFO Step 4: altloc --select occupancy
 
-Running altloc. Options: --select occupancy
+INFO Running altloc. Options: --select occupancy
 No residues with alternative location labels detected
 
-Step 5: metals --remove ZN
+INFO Step 5: metals --remove ZN
 
-Running metals. Options: --remove ZN
+INFO Running metals. Options: --remove ZN
 No metal ions found
 
-Step 6: ligands --remove SO4
+INFO Step 6: ligands --remove SO4
 
-Running ligands. Options: --remove SO4
+INFO Running ligands. Options: --remove SO4
 No ligands found
 
-Step 7: water --remove Yes
+INFO Step 7: water --remove Yes
 
-Running water. Options: --remove Yes
+INFO Running water. Options: --remove Yes
 63 Water molecules detected
 63 Water molecules removed
 
-Step 8: rem_hydrogen --remove Yes
+INFO Step 8: rem_hydrogen --remove Yes
 
-Running rem_hydrogen. Options: --remove Yes
+INFO Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
 
-Step 9: amide --fix All
+INFO Step 9: amide --fix All
 
-Running amide. Options: --fix All
+INFO Running amide. Options: --fix All
 1 unusual contact(s) involving amide atoms found
  GLN P180.NE2 ARG P231.NH1    2.845 A
-Amide residues fixed All (1)
-Rechecking
+INFO Amide residues fixed All (1)
+INFO Rechecking
 No unusual contact(s) involving amide atoms found
 
-Step 10: chiral --fix All
+INFO Step 10: chiral --fix All
 
-Running chiral. Options: --fix All
+INFO Running chiral. Options: --fix All
 No residues with incorrect side-chain chirality found
 
-Step 11: chiral_bck
+INFO Step 11: chiral_bck
 
-Running chiral_bck.
+INFO Running chiral_bck.
 No residues with incorrect backbone chirality found
 
-Step 12: fixside --fix All
+INFO Step 12: fixside --fix All
 
-Running fixside. Options: --fix All
+INFO Running fixside. Options: --fix All
 No residues with missing or unknown side chain atoms found
 
-Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
-Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
+INFO Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
 1 Residues with missing backbone atoms found
  GLU P353   OXT
 No backbone breaks
 No unexpected backbone links
-Capping terminal ends
-True terminal residues:  D1,D19,P43,P353
-Nothing to do
-No caps added
-Fixing missing backbone atoms
-Adding missing backbone atoms
+INFO Capping terminal ends
+INFO True terminal residues: D1,D19,P43,P353
+INFO Nothing to do
+INFO No caps added
+INFO Fixing missing backbone atoms
+INFO Adding missing backbone atoms
 GLU P353
-  Adding new atom OXT
-Fixed 1 backbone atom(s)
-Checking for steric clashes
+INFO   Adding new atom OXT
+INFO Fixed 1 backbone atom(s)
+INFO Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
 No polar_acceptor clashes detected
@@ -114,20 +114,20 @@ No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
 
-Step 14: cistransbck
+INFO Step 14: cistransbck
 
-Running cistransbck.
+INFO Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 
-Step 15: getss --mark All
+INFO Step 15: getss --mark All
 
-Running getss. Options: --mark All
+INFO Running getss. Options: --mark All
 No SS bonds detected
 
-Step 16: clashes
+INFO Step 16: clashes
 
-Running clashes.
+INFO Running clashes.
 No severe clashes detected
 13 Steric apolar clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A
@@ -161,22 +161,22 @@ No severe clashes detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  GLU P287.OE1 GLU P289.OE2    3.216 A
 
-Step 17: ligands --remove All
+INFO Step 17: ligands --remove All
 
-Running ligands. Options: --remove All
+INFO Running ligands. Options: --remove All
 No ligands found
 
-Step 18: chains --select protein
+INFO Step 18: chains --select protein
 
-Running chains. Options: --select protein
+INFO Running chains. Options: --select protein
 2 Chain(s) detected
  D: DNA
  P: Protein
-Selecting chain(s) protein
+INFO Selecting chain(s) protein
 
-Step 19: add_hydrogen --add_mode auto --add_charges ADT
+INFO Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
-Running add_hydrogen. Options: --add_mode auto --add_charges ADT
+INFO Running add_hydrogen. Options: --add_mode auto --add_charges ADT
 106 Residues requiring selection on adding H atoms
  CYS P88,P119,P124,P162,P262,P273
  ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
@@ -185,10 +185,10 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  LYS P52,P77,P79,P80,P86,P95,P105,P117,P131,P147,P148,P149,P194,P206,P244,P252,P275,P278,P315,P318,P320,P326,P337,P346
  ARG P54,P57,P59,P157,P164,P187,P192,P198,P214,P230,P231,P255,P258,P284,P308,P335,P336
  TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
-WARNING: fixing side chains, override with --no_fix_side
-Running fixside. Options: --fix all
+WARNING Fixing side chains, override with --no_fix_side
+INFO Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
-Selection: auto
+INFO Selection: auto
 Replacing HIS P67 by HIE
 Replacing HIS P108 by HIE
 Replacing HIS P110 by HIE
@@ -197,9 +197,9 @@ Replacing HIS P118 by HIE
 Replacing HIS P144 by HIE
 Replacing HIS P173 by HIE
 Replacing HIS P307 by HIE
-Updating partial charges and atom types
+INFO Updating partial charges and atom types
 Total assigned charge:       1.90
-Command list completed
+INFO Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (P: Protein)
 Final Num. residues:  311
@@ -209,5 +209,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  4905
-Structure saved on 1svc_all_test.pdb
-Summary data saved on 1svc_all_test.json
+INFO Structure saved on 1svc_all_test.pdb
+INFO Summary data saved on 1svc_all_test.json

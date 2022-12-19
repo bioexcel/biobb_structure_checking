@@ -5,7 +5,7 @@ import argparse
 from os.path import dirname
 from os.path import join as opj
 
-from biobb_structure_checking.param_input import Dialog
+from biobb_structure_checking.io.param_input import Dialog
 
 VERSION = '3.10.2'
 
@@ -30,8 +30,7 @@ DEFAULTS = {
     'verbose': False,
     'debug': False,
     'options' : '',
-    'modeller_key': None,
-    'output_format': 'pdb'
+    'modeller_key': None
 }
 
 def set_defaults(base_dir_path, args=None):
@@ -87,8 +86,8 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
-    help='Format for retrieving remote structures (mmCif(default)|pdb|xml)',
-    choices=['mmCif', 'pdb', 'xml', 'cif']
+    help='Format for retrieving remote structures (mmCif(default)|pdb|pqr|pdbqt)',
+    choices=['mmCif', 'pdb', 'cif', 'pqr', 'pdbqt']
 )
 
 CMD_LINE.add_argument(
@@ -107,6 +106,19 @@ CMD_LINE.add_argument(
     '--cache_dir',
     dest='cache_dir_path',
     help='Path for structure\'s cache directory (default: ./tmpPDB)'
+)
+
+CMD_LINE.add_argument(
+    '--nocache',
+    dest='nocache',
+    action='store_true',
+    help='Do not cache remote downloaded structures'
+)
+
+CMD_LINE.add_argument(
+    '--copy_input',
+    dest='copy_input',
+    help='Copy the downloaded structure in the indicated folder'
 )
 
 CMD_LINE.add_argument(
@@ -142,20 +154,19 @@ CMD_LINE.add_argument(
     '--output_format',
     dest='output_format',
     help='Format for the Output. When empty output file extension is used.',
-    default='pdb',
-    choices=['pdb', 'pdbqt', 'pqr', 'cmip']
+    choices=['pdb', 'pdbqt', 'pqr', 'cmip', 'cif', 'mmCif']
 )
 
 CMD_LINE.add_argument(
     '--keep_canonical_resnames',
-    action="store_true",
+    action='store_true',
     dest='keep_canonical',
     help='Keep canonical names for ionized residues in output files'
 )
 
 CMD_LINE.add_argument(
     '--rename_terms',
-    action="store_true",
+    action='store_true',
     dest='rename_terms',
     help='Show terminal residues as NXXX, CXXX in output files'
 )
@@ -168,14 +179,14 @@ CMD_LINE.add_argument(
 
 CMD_LINE.add_argument(
     '-nv', '--quiet',
-    action="store_true",
+    action='store_true',
     dest='quiet',
     help='Minimal output, removing labels and progress info'
 )
 
 CMD_LINE.add_argument(
     '-v', '--verbose',
-    action="store_true",
+    action='store_true',
     dest='verbose',
     help='Add extra progress info'
 )
@@ -204,7 +215,7 @@ CMD_LINE.add_argument(
 #Operations
 CMD_LINE.add_argument(
     '--check_only',
-    action="store_true",
+    action='store_true',
     dest='check_only',
     help='Perform checks only, structure is not modified'
 )
@@ -250,24 +261,37 @@ DIALOGS.add_option('models', '--save_split', 'save_split', \
     'Save each model in a separated PDB file', 'bool')
 DIALOGS.add_option('models', '--superimpose', 'superimpose', \
     'Superimpose models', 'bool')
-DIALOGS.add_option('models', '--build_complex', 'build_complex',
-    'Build a complex from selected models (biounit type)', 'bool')
+DIALOGS.add_option(
+    'models', '--build_complex', 'build_complex',
+    'Build a complex from selected models (biounit type)', 'bool'
+)
 
 DIALOGS.add_entry('chains', 'Checks and selects chains')
 DIALOGS.add_option('chains', '--select', 'select',\
     'Chains (All | protein | na | dna | rna | Chain list comma separated)')
-DIALOGS.add_option('chains', '--rename', 'rename','Rename unlabelled chains (auto | label)')
-DIALOGS.add_option('chains', '--renumber', 'renumber','Renumber residues (auto | [A|*:]ini0[-fin0]=[B|*:]ini1[-fin1])')
-DIALOGS.add_option('chains', '--allow_merge', 'allow_merge','Allow merge several chains in a single one', 'bool')
+DIALOGS.add_option(
+    'chains', '--rename', 'rename',
+    'Rename unlabelled chains (auto | label)'
+)
+DIALOGS.add_option(
+    'chains', '--renumber', 'renumber',
+    'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)'
+)
+DIALOGS.add_option(
+    'chains', '--rem_inscodes', 'rem_inscodes',
+    'Remove insertion codes', 'bool'
+)
 
 DIALOGS.add_entry('altloc', 'Checks and selects alternative locations')
-DIALOGS.add_option('altloc', '--select', 'select', \
-    'Select altloc occupancy|alt_id')
+DIALOGS.add_option(
+    'altloc', '--select', 'select',
+    'Select altloc occupancy|alt_id'
+)
 
 DIALOGS.add_entry('inscodes', 'Checks residues with insertion codes')
-DIALOGS.add_option('inscodes', '--renum', 'renum', 'Renumber residues', 'bool')
+DIALOGS.add_option('inscodes', '--renumber', 'renumber', 'Renumber chain residues', 'bool')
 
-DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated in v1.1')
+DIALOGS.add_entry('metals', 'Checks and optionally removes metal atoms (will be deprecated)')
 DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')

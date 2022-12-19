@@ -1,9 +1,9 @@
 """ Module supporting cistransbck command"""
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
+import biobb_structure_checking.modelling.utils as mu
 
-def _check(strcheck):
+def check(strcheck):
     (cis_backbone_list, lowtrans_backbone_list) = strcheck.strucm.check_cis_backbone()
     if cis_backbone_list:
         strcheck.summary['cistransbck']['cis'] = []
@@ -42,5 +42,5 @@ def _check(strcheck):
 
     return {}
 
-def _fix(strcheck, opts, fix_data):
+def fix(strcheck, opts, fix_data):
     pass

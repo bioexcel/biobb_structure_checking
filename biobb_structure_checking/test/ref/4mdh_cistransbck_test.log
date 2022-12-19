@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/md/4mdh.cif' 
-Structure pdb:4mdh loaded
+INFO Structure pdb:4mdh loaded
  PDB id: 4MDH
  Title: REFINED CRYSTAL STRUCTURE OF CYTOPLASMIC MALATE DEHYDROGENASE AT 2.5-ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
@@ -28,9 +28,9 @@ SO4 A334
 NAD A335
 SO4 B334
 NAD B335
-Running cistransbck.
+INFO Running cistransbck.
 2 cis peptide bonds
 ASN A130   PRO A131   Dihedral:   -0.784
 ASN B130   PRO B131   Dihedral:   -2.078
 No trans peptide bonds with unusual omega dihedrals found
-Structure not modified, not saving. Override with --force_save
+INFO Structure not modified, not saving. Override with --force_save

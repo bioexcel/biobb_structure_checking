@@ -2,10 +2,10 @@
 
 import logging
 import biobb_structure_checking.constants as cts
-import biobb_structure_checking.model_utils as mu
-from biobb_structure_checking.param_input import ParamInput
+import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.io.param_input import ParamInput
 
-def _check(strcheck):
+def check(strcheck):
     miss_at_list = strcheck.strucm.get_missing_atoms('side')
     extra_at_list = strcheck.strucm.check_extra_atoms()
 
@@ -35,7 +35,7 @@ def _check(strcheck):
 
     return fix_data
 
-def _fix(strcheck, opts, fix_data=None):
+def fix(strcheck, opts, fix_data=None):
 
     if not fix_data:
         return False
