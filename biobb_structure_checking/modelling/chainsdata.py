@@ -2,7 +2,7 @@
 import sys
 from Bio.PDB.Chain import Chain
 import biobb_structure_checking.modelling.utils as mu
-
+from biobb_structure_checking.modelling.residue_set import ResidueSetList
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
     def __init__(self, st):
@@ -224,6 +224,22 @@ class ChainsData():
                     self.set_chain_ids()
                     modified = True
         return modified
+
+    def rebuild(self, pairs_list=None):
+        '''Rebuild chains from coordinates'''
+        renumber_rules = []
+        recover_chain_rules = []
+        build_chains = ResidueSetList(pairs_list=pairs_list)
+        new_chid = chr(ord('z') - len(build_chains.sets))
+        print(f"{len(build_chains.sets)} chains/fragments found")
+        for rset in sorted(build_chains.sets, key=lambda ss: ss.id):
+            print(rset)
+            renumber_rules.append(f"{rset.inir.get_parent().id}:{rset.inir.id[1]}-{rset.finr.id[1]}={new_chid}:")
+            recover_chain_rules.append(f"{new_chid}:={rset.inir.get_parent().id}:")
+            new_chid = chr(ord(new_chid) + 1)
+        self.renumber(','.join(renumber_rules))
+        #self.renumber(','.join(recover_chain_rules))
+        return build_chains.sets
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""

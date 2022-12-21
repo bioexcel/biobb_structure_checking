@@ -281,6 +281,11 @@ DIALOGS.add_option(
     'Renumber residues (auto | [A:]ini0[-fin0]=[B:]ini1)'
 )
 DIALOGS.add_option(
+    'chains', '--rebuild', 'rebuild',
+    'Rebuild chains from coordinates',
+    'bool'
+)
+DIALOGS.add_option(
     'chains', '--rem_inscodes', 'rem_inscodes',
     'Remove insertion codes', 'bool'
 )

@@ -20,7 +20,10 @@ def check(strcheck):
         for k, v in strcheck.strucm.chains_data.chain_ids.items()
     }
     strcheck.summary['chains']['unlabelled'] = strcheck.strucm.chains_data.has_chains_to_rename
-    return len(strcheck.strucm.chains_data.chain_ids) > 1 or strcheck.strucm.chains_data.has_chains_to_rename
+    return len(strcheck.strucm.chains_data.chain_ids) > 1 or\
+        strcheck.strucm.chains_data.has_chains_to_rename or\
+        '--rebuild' in strcheck.args['options'] or\
+        '--renumber' in strcheck.args['options']
 
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -34,6 +37,11 @@ def fix(strcheck, opts, fix_data=None):
             rename_chains = ''
         if 'renumber' in opts:
             renumber_chains = opts['renumber']
+        if 'rebuild' in opts:
+            rebuild_chains = opts['rebuild']
+        else:
+            rebuild_chains = False
+
 
     if strcheck.strucm.chains_data.has_chains_to_rename:
         input_line = ParamInput(
@@ -60,6 +68,11 @@ def fix(strcheck, opts, fix_data=None):
             new_label = strcheck.strucm.rename_empty_chain_label(rename_chains)
             check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
+
+    if rebuild_chains:
+        result = strcheck.strucm.rebuild_chains(verbose='verbose' in opts)
+        if result:
+            strcheck.summary['chains']['rebuild'] = result
 
     if renumber_chains:
         if strcheck.strucm.chains_data.has_chains_to_rename:

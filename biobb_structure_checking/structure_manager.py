@@ -653,7 +653,7 @@ class StructureManager:
             )
         else:
             print(f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']}")
-        print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
+            print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
               f"{prefix} Num. ligands or modified residues:  {st_stats['stats']['res_ligands']}\n"
               f"{prefix} Num. water mol.:  {st_stats['stats']['num_wat']}\n"
               f"{prefix} Num. atoms:  {st_stats['stats']['num_ats']}")
@@ -788,6 +788,14 @@ class StructureManager:
             self.update_internals()
             self.modified = True
         return result
+
+    def rebuild_chains(self, verbose=False):
+        ''' Rebuild chains from coordinates'''
+        result = self.chains_data.rebuild(self.st_data.backbone_links)
+        if result:
+            self.modified = True
+        return result
+
 
     def select_altloc_residue(self, res: Residue, to_fix: Mapping[str, Union[str, Atom]]) -> None:
         """ Selects one alternative conformation when altloc exists. Selection is
