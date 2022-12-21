@@ -510,7 +510,7 @@ class StructureChecking():
 
         Args:
             opts (str | dict - Options dictionary):
-                * --renumber: Renumber residues to remove insertion codes.
+                * renumber (bool): Renumber residues to remove insertion codes.
         """
         self._run_method('inscodes', opts)
 
