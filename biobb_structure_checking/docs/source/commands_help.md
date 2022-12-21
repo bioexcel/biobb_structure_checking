@@ -12,7 +12,7 @@
 ### System Configuration Commands
 Commands to manipulate structure composition.
 
-**sequences** - _Print canonical and structure sequences in FASTA format_
+**sequences** [--output_fasta FASTA] - _Print canonical and structure sequences in FASTA format_
   * **--output_fasta** Writes sequences found in an external FASTA file
 
 **models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
