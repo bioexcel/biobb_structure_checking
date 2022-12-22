@@ -230,15 +230,15 @@ class ChainsData():
         renumber_rules = []
         recover_chain_rules = []
         build_chains = ResidueSetList(pairs_list=pairs_list)
-        new_chid = chr(ord('z') - len(build_chains.sets))
         print(f"{len(build_chains.sets)} chains/fragments found")
         for rset in sorted(build_chains.sets, key=lambda ss: ss.id):
             print(rset)
+            new_chid = rset.id
             renumber_rules.append(f"{rset.inir.get_parent().id}:{rset.inir.id[1]}-{rset.finr.id[1]}={new_chid}:")
-            recover_chain_rules.append(f"{new_chid}:={rset.inir.get_parent().id}:")
-            new_chid = chr(ord(new_chid) + 1)
+            fin_chid = chr(ord('A') + int(new_chid) - 1)
+            recover_chain_rules.append(f"{new_chid}:={fin_chid}:")
         self.renumber(','.join(renumber_rules))
-        #self.renumber(','.join(recover_chain_rules))
+        self.renumber(','.join(recover_chain_rules))
         return build_chains.sets
 
     def get_chain_type(self, res):

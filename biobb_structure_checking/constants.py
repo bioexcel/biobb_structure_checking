@@ -92,6 +92,12 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--coords_only',
+    action='store_true',
+    help='Ignores chain labels and residue ids. Used to recover faulty PDB/cif files',
+)
+
+CMD_LINE.add_argument(
     '--sequence',
     dest='fasta_seq_path',
     help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'

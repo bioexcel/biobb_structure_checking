@@ -24,6 +24,7 @@ from Bio.PDB.PDBExceptions import PDBConstructionException
 
 from biobb_structure_checking.io.mmb_server import MMBPDBList, ALT_SERVERS
 from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
+from biobb_structure_checking.io.bare_builder import BareStructureBuilder
 
 from biobb_structure_checking.libs.data_lib_manager import DataLibManager
 from biobb_structure_checking.libs.residue_lib_manager import ResidueLib
@@ -54,7 +55,9 @@ class StructureManager:
             nocache: bool= False,
             copy_dir: str= './',
             file_format: str = 'mmCif',
-            fasta_sequence_path: str = ''
+            fasta_sequence_path: str = '',
+            nowarn: bool = True,
+            coords_only: bool = False
         ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -70,6 +73,7 @@ class StructureManager:
             **copy_dir** (str=: Folder to copy input structure
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
+            **nowarn** (bool): No warnings on Structure Building
 
         """
         self.data_library = DataLibManager(data_library_path)
@@ -85,7 +89,14 @@ class StructureManager:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
         self.st, headers, input_format, biounit = self._load_structure_file(
-            input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format
+            input_pdb_path,
+            cache_dir,
+            nocache,
+            copy_dir,
+            pdb_server,
+            file_format,
+            QUIET=nowarn,
+            coords_only=coords_only
         )
 
         self.models_data = ModelsData(self.st)
@@ -97,7 +108,17 @@ class StructureManager:
         # Calc internal data
         self.update_internals(cif_warn=True)
 
-    def _load_structure_file(self, input_pdb_path, cache_dir, nocache, copy_dir, pdb_server, file_format):
+    def _load_structure_file(
+            self,
+            input_pdb_path,
+            cache_dir,
+            nocache,
+            copy_dir,
+            pdb_server,
+            file_format,
+            QUIET=False,
+            coords_only=False
+        ):
         """ Load structure file """
         biounit = False
         pdb_id = 'User'
@@ -141,21 +162,31 @@ class StructureManager:
         else:
             real_pdb_path = input_pdb_path
 
+        if coords_only:
+            builder = BareStructureBuilder
+        else:
+            builder = None
+
         if '.pdb' in real_pdb_path: # accepts .pdbqt
             if '.pdbqt' in real_pdb_path:
                 print("Warning: PDBQT file will be loaded as PDB")
-            parser = PDBParser(PERMISSIVE=1, is_pqr=False)
+            parser = PDBParser(
+                PERMISSIVE=1,
+                is_pqr=False,
+                structure_builder=builder(),
+                QUIET=QUIET
+            )
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path:
-            parser = PDBParser(PERMISSIVE=1, is_pqr=True)
+            parser = PDBParser(PERMISSIVE=1, is_pqr=True, structure_builder=builder())
             input_format = 'pqr'
         elif '.cif' in real_pdb_path:
-            parser = MMCIFParser()
+            parser = MMCIFParser(structure_builder=builder(), QUIET=QUIET)
             input_format = 'cif'
         else:
             raise UnknownFileTypeError(input_pdb_path)
 
-        warnings.simplefilter('ignore', BiopythonWarning)
+        #warnings.simplefilter('ignore', BiopythonWarning)
 
         try:
             new_st = parser.get_structure(pdb_id, real_pdb_path)

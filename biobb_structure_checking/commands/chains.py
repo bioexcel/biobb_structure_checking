@@ -70,24 +70,30 @@ def fix(strcheck, opts, fix_data=None):
             strcheck.summary['chains']['renamed'] = new_label
 
     if rebuild_chains:
-        result = strcheck.strucm.rebuild_chains(verbose='verbose' in opts)
-        if result:
-            strcheck.summary['chains']['rebuild'] = result
+        if strcheck.strucm.models_data.has_models():
+            print("WARNING: Rebuild chains not (yet) implemented for Models, skipping")
+        else:
+            result = strcheck.strucm.rebuild_chains(verbose='verbose' in opts)
+            if result:
+                strcheck.summary['chains']['rebuild'] = result
 
     if renumber_chains:
-        if strcheck.strucm.chains_data.has_chains_to_rename:
-            print("WARNING: unlabelled chains detected")
-        if 'verbose' not in opts and opts['rem_inscodes']:
-            opts['verbose'] = False
+        if strcheck.strucm.models_data.has_models():
+            print("WARNING: Renumber chains not (yet) implemented for Models, skipping")
         else:
-            opts['verbose'] = True
-        result = strcheck.strucm.renumber_chain_residues(
-            renumber_chains,
-            rem_inscodes=opts['rem_inscodes'],
-            verbose=opts['verbose']
-        )
-        if result:
-            strcheck.summary['chains']['renumbered'] = renumber_chains
+            if strcheck.strucm.chains_data.has_chains_to_rename:
+                print("WARNING: unlabelled chains detected")
+            if 'verbose' not in opts and opts['rem_inscodes']:
+                opts['verbose'] = False
+            else:
+                opts['verbose'] = True
+            result = strcheck.strucm.renumber_chain_residues(
+                renumber_chains,
+                rem_inscodes=opts['rem_inscodes'],
+                verbose=opts['verbose']
+            )
+            if result:
+                strcheck.summary['chains']['renumbered'] = renumber_chains
 
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')

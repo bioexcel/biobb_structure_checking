@@ -330,7 +330,9 @@ class StructureChecking():
             file_format=self.args['file_format'],
             nocache=self.args['nocache'],
             copy_dir=self.args['copy_input'],
-            fasta_sequence_path=fasta_seq_path
+            fasta_sequence_path=fasta_seq_path,
+            nowarn=not self.args['verbose'] and not self.args['debug'],
+            coords_only=self.args['coords_only']
         )
 
         self.summary['loaded_structure'] = input_structure_path
@@ -501,6 +503,7 @@ class StructureChecking():
                 * renumber:
                     * **auto** - Renumbers all residues from 1 without repeating residue numbers. Chains are preserved but relabelled from A
                     * **str** - Specific renumbering recipe indicated as a list of tasks: [OldChain:]i0[-j0]=[NewChain:]i1. No j0 implies to the end of chain. No chain implies do the transformation in all chains.
+                * rebuild: - Creates chain labels and renumbers residues based on backbone connectivity
         """
         self._run_method('chains', opts)
 
