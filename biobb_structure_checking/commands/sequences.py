@@ -23,7 +23,7 @@ def check(strcheck):
     return fasta
 
 def fix(strcheck, opts, fix_data=None):
-    if 'output_fasta' in opts:
+    if opts['output_fasta']:
         try:
             with open(opts['output_fasta'], 'w') as fasta:
                 fasta.write(fix_data)
