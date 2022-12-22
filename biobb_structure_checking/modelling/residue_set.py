@@ -111,18 +111,13 @@ class ResidueSet():
         return seql
 
     def _get_residues(self):
-        return [res for res in self.items]
+        return [res for res in sorted(self.items)]
 
     def get_sequence(self):
         residue_list = self._get_residues()
         return mu.get_sequence_from_list(residue_list, mu.guess_chain_type_list(residue_list)['type'])
 
-    def __str__(self, mode=0):
+    def __str__(self):
          residue_list = self._get_residues()
-         if mode == 0:
-             return f"{self.id} ({mu.residue_id(self.inir)}-{mu.residue_id(self.finr)}) ({self.type}): {self.get_sequence()}"
-         elif mode == 1:
-             return f"{self.id} ({mu.residue_id(self.inir)}-{mu.residue_id(self.finr)}): {','.join([mu.residue_id(res) for res in residue_list])}"
-         else:
-             return ''
+         return f"{self.id} ({mu.residue_id(self.inir)}-{mu.residue_id(self.finr)}) ({self.type}): {self.get_sequence()}"
 
