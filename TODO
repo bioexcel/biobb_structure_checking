@@ -6,7 +6,7 @@
         1.1.4 Build complex from biounit models DONE
     1.2. Detect/Select Chains (chains) DONE
         1.2.1 Detect mixed NA/protein chains
-        1.2.2 Rebuild/fix chains  (DONE check and fix unlabelled)
+        1.2.2 Rebuild/fix chains DONE
         1.2.3 Select chains according to molecule type DONE
         1.2.4 Renumber chains & Residues DONE
     1.3. Detect/Select Alt Locations (altloc) DONE
@@ -19,7 +19,7 @@
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
-        1.9.2 Output FASTA file
+        1.9.2 Output FASTA file DONE
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
         2.1.1 Amides Automatic fix DONE
