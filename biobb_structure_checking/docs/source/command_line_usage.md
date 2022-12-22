@@ -11,7 +11,7 @@ check_structure can be run interactively. It will prompt for any missing paramet
 
 
 ~~~
-usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
+usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--coords_only]
                        [--file_format {mmCif,cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
                        [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
                        [--nocache] [--copy_input DIR]
@@ -39,6 +39,8 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH]
 * Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted, but read as pdb.
 * Remote **pdb:{pdbid}[.format]**. See alsp **--file_format** for selecting download format (default: cif)
 * Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB or BSC servers (**--pdb_server MMB**). Format PDB.
+
+**--coords_only** - _Loads structure coordinates, discards chain labels and residue ids from input_
 
 **--sequence** FASTA_SEQ_PATH - _Canonical sequence in FASTA format_
 * Header should start >pdb_chain[,chain] for backbone rebuild. Required only for PDB/PQR structures.

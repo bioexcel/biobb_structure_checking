@@ -331,7 +331,7 @@ class StructureChecking():
             nocache=self.args['nocache'],
             copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path,
-            nowarn=not self.args['verbose'] and not self.args['debug'],
+            nowarn=not self.args['debug'], # TODO think on verbose
             coords_only=self.args['coords_only']
         )
 

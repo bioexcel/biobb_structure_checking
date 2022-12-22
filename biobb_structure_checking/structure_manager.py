@@ -163,7 +163,7 @@ class StructureManager:
             real_pdb_path = input_pdb_path
 
         if coords_only:
-            builder = BareStructureBuilder
+            builder = BareStructureBuilder()
         else:
             builder = None
 
@@ -173,15 +173,15 @@ class StructureManager:
             parser = PDBParser(
                 PERMISSIVE=1,
                 is_pqr=False,
-                structure_builder=builder(),
+                structure_builder=builder,
                 QUIET=QUIET
             )
             input_format = 'pdb'
         elif '.pqr' in real_pdb_path:
-            parser = PDBParser(PERMISSIVE=1, is_pqr=True, structure_builder=builder())
+            parser = PDBParser(PERMISSIVE=1, is_pqr=True, structure_builder=builder)
             input_format = 'pqr'
         elif '.cif' in real_pdb_path:
-            parser = MMCIFParser(structure_builder=builder(), QUIET=QUIET)
+            parser = MMCIFParser(structure_builder=builder, QUIET=QUIET)
             input_format = 'cif'
         else:
             raise UnknownFileTypeError(input_pdb_path)

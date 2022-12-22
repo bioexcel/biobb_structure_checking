@@ -26,6 +26,7 @@ Commands to manipulate structure composition.
   * **--rename** Allow to fix unlabelled chains
   * **--renumber** Allow to reorganize residues and chains by moving or renunbering fragments
   * **--rem_inscodes** removes insertion codes when renumbering chains
+  * **--rebuild** rebuild chain and residue ids from backbone connectivity
 
 **inscodes** - _Detects residues with insertion codes.
   * **--renumber** Fixes insertion codes by renumering chain residues
