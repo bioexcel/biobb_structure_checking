@@ -102,7 +102,6 @@ class StructureManager:
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)
         self.st_data = StructureData(self.st, input_format, headers, biounit)
-
         self.modified = False
 
         # Calc internal data
@@ -673,7 +672,6 @@ class StructureManager:
 
         print(self.models_data.stats(prefix))
         print(self.chains_data.stats(prefix))
-
         st_stats = self.get_stats()
         print(f"{prefix} Num. residues:  {st_stats['stats']['num_res']}\n"
               f"{prefix} Num. residues with ins. codes:  {st_stats['stats']['res_insc']}")
@@ -684,10 +682,10 @@ class StructureManager:
             )
         else:
             print(f"{prefix} Num. residues with H atoms: {st_stats['stats']['res_h']}")
-            print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
-              f"{prefix} Num. ligands or modified residues:  {st_stats['stats']['res_ligands']}\n"
-              f"{prefix} Num. water mol.:  {st_stats['stats']['num_wat']}\n"
-              f"{prefix} Num. atoms:  {st_stats['stats']['num_ats']}")
+        print(f"{prefix} Num. HETATM residues:  {st_stats['stats']['res_hetats']}\n"
+            f"{prefix} Num. ligands or modified residues:  {st_stats['stats']['res_ligands']}\n"
+            f"{prefix} Num. water mol.:  {st_stats['stats']['num_wat']}\n"
+            f"{prefix} Num. atoms:  {st_stats['stats']['num_ats']}")
         if st_stats['ca_only']:
             print('Possible CA-Only structure')
         self.st_data.print_hetatm_stats()
