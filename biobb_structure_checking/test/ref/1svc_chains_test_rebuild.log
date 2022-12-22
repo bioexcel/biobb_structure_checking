@@ -1,0 +1,48 @@
+================================================================================
+=                   BioBB structure checking utility v3.11.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Structure exists: 'tmpPDB/sv/1svc.cif' 
+Structure pdb:1svc loaded
+ PDB id: 1SVC
+ Title: NFKB P50 HOMODIMER BOUND TO DNA
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSCRIPTION/DNA
+ Resolution (A): 2.600
+
+ Num. models: 1
+ Num. chains: 2 (D: DNA, P: Protein)
+ Num. residues:  393
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  63
+ Num. ligands or modified residues:  0
+ Num. water mol.:  63
+ Num. atoms:  2903
+Running chains. Options: --select all --rebuild
+2 Chain(s) detected
+ D: DNA
+ P: Protein
+2 chains/fragments found
+1 ( DA D1- DA D19) (na): CGAGGAATTAGCATCCAGG
+2 (PRO P43-GLU P353) (prot): KITYRHGTEAQTKPPQQIARTEDGKIRRVREGLNQEGSKALALDEMKLLKPEELGVPIDGPVGTGSPKLSQSCFAVGSYVALRPDMVGRVRQILQDSYKFDAKLVLRTICYAGIAFPIILFRLKDNYKNKEFEDEVGDSGLSGKTLTEVGMTCQHFLESNGKFKQDPGVKAKNQGYEVGSVLEQFQHLPYDRLTHADLAVDIGLKYSMVFNQIVGLYSAAEATLTPIFEKCRYGNESVFPYDIPKENTCLVPVHVPHIDRKIPGKAAPVASTYVRENEDCSVLMTIFHTPFRGHEGKRFKVNDRWGELQAV
+Renumbering D1-D19 as 11-119
+Creating new chain 1
+Renumbering P43-P353 as 243-2353
+Creating new chain 2
+Renumbering 11-119 as A1-A19
+Whole chains selected, just replacing chain labels from 1 to A
+Renumbering 243-2353 as B43-B353
+Whole chains selected, just replacing chain labels from 2 to B
+Selecting all chains
+Final Num. models: 1
+Final Num. chains: 4 (A: DNA, B: Protein, D: Water, P: Water)
+Final Num. residues:  393
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  63
+Final Num. ligands or modified residues:  0
+Final Num. water mol.:  63
+Final Num. atoms:  2903
+Structure saved on 1svc_chains_rebuild.pdb
