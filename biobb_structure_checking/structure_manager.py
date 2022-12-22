@@ -185,14 +185,13 @@ class StructureManager:
         else:
             raise UnknownFileTypeError(input_pdb_path)
 
-        #warnings.simplefilter('ignore', BiopythonWarning)
-
         try:
             new_st = parser.get_structure(pdb_id, real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err)
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err)
+
 
         if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(real_pdb_path)
@@ -1009,11 +1008,14 @@ class StructureManager:
                     print(err.message)
                     continue
 
+                warnings.filterwarnings('ignore', 'BioPythonWarning')
+
                 parser = PDBParser(PERMISSIVE=1)
                 model_st = parser.get_structure(
                     'model_st',
                     opj(mod_mgr.tmpdir, model_pdb['name'])
                 )
+
 
                 modif_set_residues = self.merge_structure(
                     sequence_data,
