@@ -8,6 +8,7 @@ from os.path import join as opj
 import shutil
 import sys
 import re
+from Bio.PDB.Chain import Chain
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 from Bio.PDB.Residue import Residue
@@ -211,7 +212,29 @@ class StructureManager:
 
         if nocache:
             os.remove(real_pdb_path)
+
+        if coords_only:
+            for mod in new_st:
+                hetatms = []
+                waters = []
+                for res in mod.get_residues():
+                    if mu.is_wat(res):
+                        waters.append(res)
+                    elif mu.is_hetatm(res):
+                        hetatms.append(res)
+                if hetatms:
+                    h_ch = Chain("H")
+                    mod.add(h_ch)
+                    for res in hetatms:
+                        mu.move_residue(res, h_ch)
+                if waters:
+                    w_ch = Chain("W")
+                    mod.add(w_ch)
+                    for res in waters:
+                        mu.move_residue(res, w_ch)
+
         return new_st, headers, input_format, biounit
+
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """

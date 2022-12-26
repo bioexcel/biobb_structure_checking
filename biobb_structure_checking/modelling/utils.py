@@ -740,6 +740,14 @@ def remove_residue(res):
     """
     res.get_parent().detach_child(res.id)
 
+def move_residue(res, new_ch):
+    """ Move a residue to a new chain"""
+    new_res = res.copy()
+    old_ch = res.get_parent()
+    new_res.parent = new_ch
+    new_ch.add(new_res)
+    old_ch.detach_child(res.id)
+
 def swap_atoms(at1, at2):
     """
     Swaps names for two given atoms. Useful to fix labelling issues
