@@ -164,6 +164,7 @@ class StructureManager:
 
         if coords_only:
             builder = BareStructureBuilder()
+            print("Loading structure coord_only: Chain and residue ids will be ignored")
         else:
             builder = None
 
@@ -212,26 +213,6 @@ class StructureManager:
 
         if nocache:
             os.remove(real_pdb_path)
-
-        if coords_only:
-            for mod in new_st:
-                hetatms = []
-                waters = []
-                for res in mod.get_residues():
-                    if mu.is_wat(res):
-                        waters.append(res)
-                    elif mu.is_hetatm(res):
-                        hetatms.append(res)
-                if hetatms:
-                    h_ch = Chain("H")
-                    mod.add(h_ch)
-                    for res in hetatms:
-                        mu.move_residue(res, h_ch)
-                if waters:
-                    w_ch = Chain("W")
-                    mod.add(w_ch)
-                    for res in waters:
-                        mu.move_residue(res, w_ch)
 
         return new_st, headers, input_format, biounit
 

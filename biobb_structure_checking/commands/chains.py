@@ -73,6 +73,7 @@ def fix(strcheck, opts, fix_data=None):
         if strcheck.strucm.models_data.has_models():
             print("WARNING: Rebuild chains not (yet) implemented for Models, skipping")
         else:
+            print("Rebuilding chains from backbone connectivity")
             result = strcheck.strucm.rebuild_chains(verbose='verbose' in opts)
             if result:
                 strcheck.summary['chains']['rebuild'] = result

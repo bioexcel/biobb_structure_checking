@@ -29,11 +29,11 @@ class BareStructureBuilder(StructureBuilder):
         """Create a new Chain object with given id.
 
         Arguments:
-         - chain_id - string (Ignored)
-
+         - chain_id - string
         """
-        # All residues loaded in a single chain "0"
-        chain_id = '0'
+        # All residues loaded in chains ATOM:"0", HETATM:"h", or WAT:"w"
+        if chain_id not in ['0', 'h', 'w']:
+            chain_id = '0'
         if self.model.has_id(chain_id):
             self.chain = self.model[chain_id]
         else:
@@ -54,6 +54,12 @@ class BareStructureBuilder(StructureBuilder):
         if field == "H":
             # The hetero field consists of H_ + the residue name (e.g. H_FUC)
             field = "H_" + resname
+            self.init_chain('h')
+        elif field == "W":
+            self.init_chain('w')
+        else:
+            self.chain = self.model['0']
+
         # Set consecutive residue ids
         self.residue_counter += 1
         res_id = (field, self.residue_counter, icode)

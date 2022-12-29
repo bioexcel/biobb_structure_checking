@@ -4,7 +4,10 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Loading structure coord_only: Chain and residue ids will be ignored
 Warning, no canonical sequence available for chain 0
+Warning, no canonical sequence available for chain h
+Warning, no canonical sequence available for chain w
 Structure pdb:2ki5 loaded
  PDB id: 2KI5
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
@@ -13,7 +16,7 @@ Structure pdb:2ki5 loaded
  Resolution (A): 1.90
 
  Num. models: 1
- Num. chains: 1 (0: Protein)
+ Num. chains: 3 (0: Protein, h: Unknown, w: Water)
  Num. residues:  908
  Num. residues with ins. codes:  0
  Num. residues with H atoms: 0
@@ -22,22 +25,25 @@ Structure pdb:2ki5 loaded
  Num. water mol.:  292
  Num. atoms:  4961
 Small mol ligands found
-SO4 0613
-AC2 0614
-SO4 0615
-AC2 0616
+SO4 h613
+AC2 h614
+SO4 h615
+AC2 h616
 Running chains. Options: --select all --rebuild
-1 Chain(s) detected
+3 Chain(s) detected
  0: Protein
+ h: Unknown
+ w: Water
+Rebuilding chains from backbone connectivity
 8 chains/fragments found
-1 (MET 01-VAL 025) (prot): TGILLRTHKPTMLVGPQDTGLVTYM
-2 (ASP 026-GLY 097) (prot): DTIIPPEGMNAYATTVYTHEEEGVVPGQAGSPMIVVALMTARMSAQIIVHDAALDDSGGGATIYYAVRTQWL
-3 (PRO 098-GLY 0208) (prot): LATLQYVLSTRRPGEMPRLLREIPHMTINDPGIGWGARLPPGLAPALAARCRIDYYLAFSPGHDPQVARRWMGLLVKAIYAVAVLLAGLRSQFDLLDAPTQCNREITGLLA
-4 (PRO 0209-ALA 0304) (prot): RNSTELILQLIGAHIDVPGSSYLTKDADNAATLWFAMGDPLETDLPGFVVPLAERLTCYRRHFFRATHAPPVDSIFMLRGLVPCQGTLDTAALQRM
-5 (MET 0305-GLY 0332) (prot): LLTTVGITQLKLMGPLVTHPRAYTDMGG
-6 (ASP 0333-GLY 0404) (prot): AMDHTIEAADHTMNGAEVTAGTATLDSYGLRVGSEPGVIYYPMAADGPQVWVTSTLQAQEMIIIVAIGRYVP
-7 (PRO 0405-SER 0514) (prot): KRQGIDDPVIQAVAALAANCAFLYAQRLLETILLAAPLLMGNHDTWRQPLGRRMGLLIRGLYLDREGIPGLTWRSPAPLYYSLPDGPALRTSRATVPCIFPAARVVHLEM
-8 (ALA 0515-ALA 0612) (prot): CTLADAMLTFRNSAVAAQGLDIRTQPGTSTKDNVDSFMAIRLSLMLWGFYLGDPLATPDAGELLREPLIILYATCRHPVAFRETPLGQAPVHDRFHGV
+ 1 (MET 01-VAL 025) (prot): MPTLLRVYIDGPHGMGKTTTTQLLV
+ 2 (ASP 026-GLY 097) (prot): DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG
+ 3 (PRO 098-GLY 0208) (prot): PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG
+ 4 (PRO 0209-ALA 0304) (prot): PRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEA
+ 5 (MET 0305-GLY 0332) (prot): MPTLLRVYIDGPHGMGKTTTTQLLVALG
+ 6 (ASP 0333-GLY 0404) (prot): DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG
+ 7 (PRO 0405-SER 0514) (prot): PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLS
+ 8 (ALA 0515-ALA 0612) (prot): AGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEA
 Renumbering 01-025 as 11-125
 Creating new chain 1
 Renumbering 026-097 as 226-297
@@ -53,7 +59,7 @@ Creating new chain 6
 Renumbering 0405-0514 as 7405-7514
 Creating new chain 7
 Renumbering 0515-0612 as 8515-8612
-Creating new chain 8
+Whole chains selected, just replacing chain labels from 0 to 8
 Renumbering 11-125 as A1-A25
 Whole chains selected, just replacing chain labels from 1 to A
 Renumbering 226-297 as B26-B97
@@ -72,7 +78,7 @@ Renumbering 8515-8612 as H515-H612
 Whole chains selected, just replacing chain labels from 8 to H
 Selecting all chains
 Final Num. models: 1
-Final Num. chains: 9 (0: Unknown, A: Protein, B: Protein, C: Protein, D: Protein, E: Protein, F: Protein, G: Protein, H: Protein)
+Final Num. chains: 10 (A: Protein, B: Protein, C: Protein, D: Protein, E: Protein, F: Protein, G: Protein, H: Protein, h: Unknown, w: Water)
 Final Num. residues:  908
 Final Num. residues with ins. codes:  0
 Final Num. residues with H atoms: 0
@@ -81,8 +87,8 @@ Final Num. ligands or modified residues:  4
 Final Num. water mol.:  292
 Final Num. atoms:  4961
 Small mol ligands found
-SO4 0613
-AC2 0614
-SO4 0615
-AC2 0616
+SO4 h613
+AC2 h614
+SO4 h615
+AC2 h616
 Structure saved on 2ki5_chains_rebuild.pdb
