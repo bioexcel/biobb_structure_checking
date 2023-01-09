@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.11.1                   =
+=                   BioBB structure checking utility v3.12.0                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -9,7 +9,7 @@ Structure pdb:1svc.1 loaded
  PDB id: 
  Title: nfkb p50 homodimer bound to dna
  Experimental method: x-ray diffraction
- Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, repeat, dna, transcription/dna complex
+ Keywords: dna-binding, transcription regulation, activator, nuclear protein, phosphorylation, dna, transcription-dna complex
  Resolution (A): N.A.
  Biounit no. 1
 
