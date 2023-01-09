@@ -1,4 +1,4 @@
-## v3.11.1 (2022.4)
+## v3.12.0 (2022.4)
 ### Extended functions
 - amide
   - Added --fix auto option to automatically find best fix combination
