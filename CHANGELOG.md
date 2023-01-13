@@ -1,4 +1,4 @@
-## v3.XXXXX (2022.4)
+## v3.12.1 (2022.4)
 ### Extended functions
 - amide
   - Added --fix auto option to automatically find best fix combination
@@ -6,10 +6,13 @@
   - Added --rename. fixes empty chain labels
   - Added --renumber. allow to renumber/reorganize chains and residues
   - Added --rem_inscodes. removes insertion codes on renumbering
+  - Added --rebuild. rebuild chains labels and residue ids from backbone connectivity
 - inscodes
   - Added --renumber. Rebuild residue numbering to remove insertion codes
 - models
   - Added --build_complex. Converts biounit's selected models into actual complexes
+- sequences
+  - Added --output_fasta. Writes sequences found in an external FASTA file
 - json
   - Extended information on json summary output
 - input format
@@ -19,7 +22,7 @@
 - input management
   - Added --nocache to avoid caching downloaded structures
   - Added --copy_input to recover a copy of the input structure
-
+  - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized

@@ -2,7 +2,7 @@
 import sys
 from Bio.PDB.Chain import Chain
 import biobb_structure_checking.modelling.utils as mu
-
+from biobb_structure_checking.modelling.residue_set import ResidueSetList
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
     def __init__(self, st):
@@ -161,12 +161,16 @@ class ChainsData():
                         f"Renumbering {org['chn']}{org['ini']}-{org['chn']}{org['fin']} as "
                         f"{tgt['chn']}{tgt['ini']}-{tgt['chn']}{tgt['fin']}"
                     )
-                if tgt['chn'] in mod:
-                    n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
-                    if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
-                        n_term1.id[1] <= tgt['fin'] <= c_term1.id[1]:
-                        print("WARNING: new residue numbers overlap with existing ones")
-                        sys.exit()
+                # Not needed as checked per residue
+                # if tgt['chn'] in mod:
+                #     n_term1, c_term1 = mu.get_terms(mod, tgt['chn'])
+                #     if n_term1.id[1] <= tgt['ini'] <= c_term1.id[1] or\
+                #         n_term1.id[1] <= tgt['fin'] <= c_term1.id[1]:
+                #         print(
+                #             f"ERROR: new residue numbers ({tgt['ini']}-{tgt['fin']})"
+                #             f" overlap with existing ones ({n_term1.id[1]}-{c_term1.id[1]}), "
+                #             f" consider using --coords_only")
+                #         sys.exit()
                 if org['ini'] == tgt['ini'] and\
                     org['fin'] == tgt['fin'] and\
                     org['ini'] == n_term.id[1] and\
@@ -211,7 +215,7 @@ class ChainsData():
                         if col_res:
                             print(
                                 f"ERROR. New residue {mu.residue_id(new_res)} collides "
-                                f" with     existing {mu.residue_id(col_res)}"
+                                f"with existing {mu.residue_id(col_res)}"
                             )
                             sys.exit()
                         new_ch.add(new_res)
@@ -223,7 +227,33 @@ class ChainsData():
                         mod.detach_child(org['chn'])
                     self.set_chain_ids()
                     modified = True
+            self._reorder_chains()
         return modified
+
+    def rebuild(self, pairs_list=None):
+        '''Rebuild chains from coordinates'''
+        renumber_rules = []
+        recover_chain_rules = []
+        build_chains = ResidueSetList(pairs_list=pairs_list)
+        print(f"{len(build_chains.sets)} chains/fragments found")
+        for rset in sorted(build_chains.sets, key=lambda ss: ss.id):
+            print(f" {rset}")
+            new_chid = rset.id
+            renumber_rules.append(f"{rset.inir.get_parent().id}:{rset.inir.id[1]}-{rset.finr.id[1]}={new_chid}:")
+            fin_chid = chr(ord('A') + int(new_chid) - 1)
+            recover_chain_rules.append(f"{new_chid}:={fin_chid}:")
+        self.renumber(','.join(renumber_rules))
+        self.renumber(','.join(recover_chain_rules))
+        self._reorder_chains()
+        return build_chains.sets
+
+    def _reorder_chains(self):
+        #print("Ordering chains")
+        for mod in self.st:
+            for chn in sorted(mod):
+                new_chn = mod[chn.id]
+                mod.detach_child(chn.id)
+                mod.add(new_chn)
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
