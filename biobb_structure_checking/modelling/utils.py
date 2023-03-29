@@ -454,17 +454,24 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
     Allow for non-std residues.
     """
     #TODO improve guessing for hybrid chains
+    return guess_chain_type_list(list(chn.get_residues()), thres=thres)
+
+def guess_chain_type_list(residue_list, thres=SEQ_THRESHOLD):
+    """
+    Guesses chain type (protein, dna, or rna) from residue composition
+    Allow for non-std residues.
+    """
+    #TODO improve guessing for hybrid chains
     prot = 0.
     dna = 0.
     rna = 0.
     other = 0.
     total = 0.
-    for res in chn.get_residues():
+    for res in residue_list:
         if is_wat(res):
             continue
 
         total += 1
-
         rname = res.get_resname().replace(' ', '')
         if rname in THREE_LETTER_RESIDUE_CODE.values():
             prot += 1
@@ -472,7 +479,6 @@ def guess_chain_type(chn, thres=SEQ_THRESHOLD):
             dna += 1
         elif rname in RNA_RESIDUE_CODE:
             rna += 1
-
     chain_type = ALLWAT
 
     if total > 0.:
@@ -733,6 +739,14 @@ def remove_residue(res):
     Removes residue completely
     """
     res.get_parent().detach_child(res.id)
+
+def move_residue(res, new_ch):
+    """ Move a residue to a new chain"""
+    new_res = res.copy()
+    old_ch = res.get_parent()
+    new_res.parent = new_ch
+    new_ch.add(new_res)
+    old_ch.detach_child(res.id)
 
 def swap_atoms(at1, at2):
     """

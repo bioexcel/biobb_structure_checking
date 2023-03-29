@@ -9,21 +9,24 @@ load:         Stores structure on local cache and provides basic statistics
 
 1. System Configuration
 =======================
-sequences
+sequences [--output_fasta FASTA]
     Print canonical and structure sequences in FASTA format
+    --output_fasta Write sequences found in an externla FASTA file
 models [--select model_num] [--superimpose] [--save_split]
     Detect/Select Models
     --superimpose Superimposes currently selected models
     --save_split Split models as separated output files.
+    --build_complex Build an actual complex from Biounits stored as collection of models
 chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
-    [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--allow_merge]
+    [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--rem_inscodes]
     Detect/Select Chains
+    --select chains ids or chain types (PROTEIN|NA|DNA|RNA) to keep
     --rename allow to fix unlabelled chains
-    --renumber allow to reorganize residues and chains by moving or renunbering fragments
+    --renumber allow to reorganize residues and chains by moving or renunbering fragments. Auto generate consecutive residue numbers.
     --rem_inscodes removes insertion codes when renumbering chains
 inscodes
     Detects residues with insertion codes.
-    --renumber fix insertion codes by renumbering chain residuesº
+    --renumber fix insertion codes by renumbering chain residues
 altloc [--select occupancy| alt_id | list of res_id:alt_id]
     Detect/Select Alternative Locations
 metals [--remove All | None | Met_ids_list | Residue_list]
@@ -48,6 +51,7 @@ add_hydrogen [--add_mode auto | pH | list | interactive | interactive_his] [--no
     Existing hydrogen atoms are removed before adding new ones unless --keep_h set.
     --add_charges FF adds partial charges (from RES_LIBRARY) and atom types from FF forcefield. Output format taken from file extension or --output_format
     Residue names are modified according to ionization state (e.g. HIS-> HIE, HID, HIP). Use --keep_canonical_resnames to avoid this behaviour
+
 2. Fix Structure Errors
 
 amide  [--fix All|None|Residue List] [--no_recheck]
@@ -73,7 +77,6 @@ backbone [--fix_atoms All|None|Residue List]
     --extra_gap Recovers additional residues from model either side of the break, helps to fix loop connections (experimental)
     Rechecks beckbone on each op unless --no_recheck is set.
     Generated clashes are checked unless --no_check_clashes
-
 
 3. Structure Warnings (no fix)
 

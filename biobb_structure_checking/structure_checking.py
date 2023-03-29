@@ -30,7 +30,7 @@ class StructureChecking():
 
     Args:
         base_dir_path (str): Base directory path where application resides.
-        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html. Recommended 'non-interactive':True for Notebook use.
+        args (dict): Arguments dictionary see https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html.
     """
     def __init__(self, base_dir_path, args):
 
@@ -157,7 +157,7 @@ class StructureChecking():
         Manages command_list workflows
 
         Args:
-            opts (str | list(str)): Command options as str or str list.
+            opts (str | list(str)): Command options as str, file or str list (';' separated).
         """
         try:
             opts = cts.DIALOGS.get_parameter('command_list', opts)
@@ -265,7 +265,6 @@ class StructureChecking():
 
     # Running checking method
         data_to_fix = f_check(self)
-
     # Running fix method if needed
         if self.args['check_only'] or opts in (None, ''):
             logging.log(level=15, msg=cts.MSGS['CHECK_ONLY_DONE'])
@@ -333,7 +332,9 @@ class StructureChecking():
             file_format=self.args['file_format'],
             nocache=self.args['nocache'],
             copy_dir=self.args['copy_input'],
-            fasta_sequence_path=fasta_seq_path
+            fasta_sequence_path=fasta_seq_path,
+            nowarn=not self.args['debug'], # TODO think on verbose
+            coords_only=self.args['coords_only']
         )
 
         self.summary['loaded_structure'] = input_structure_path
@@ -360,7 +361,6 @@ class StructureChecking():
             output_structure_path (str): Path to saved File
             rename_terms (bool): (False) Rename terminal residues as NXXX, CXXX
             split_models (bool): (False) Save models in separated output files
-            keep_resnames (bool): (False) Keep canonical residue names
         """
         return self._save_structure(
             output_structure_path,
@@ -468,6 +468,10 @@ class StructureChecking():
     def sequences(self, opts=None):
         """ StructureChecking.sequences
         Print canonical and structure sequences in FASTA format
+
+        Args:
+            opts (str | dict - Options dictionary):
+                * output_fasta (str) - File name to output (FASTA format)
         """
         self._run_method('sequences', opts)
 
@@ -479,6 +483,7 @@ class StructureChecking():
             opts (str | dict - Options dictionary):
                 * select (int) - model(s) to select
                 * superimpose (bool) - superimpose models
+                * build_complex (bool) - Build a complex from selected models
         """
         self._run_method('models', opts)
 
@@ -497,14 +502,22 @@ class StructureChecking():
                 * rename:
                     * **auto** - Add first possible label staring on A to unlabeled chains
                     * **label** - Use indicated label
+                * renumber:
+                    * **auto** - Renumbers all residues from 1 without repeating residue numbers. Chains are preserved but relabelled from A
+                    * **str** - Specific renumbering recipe indicated as a list of tasks: [OldChain:]i0[-j0]=[NewChain:]i1. No j0 implies to the end of chain. No chain implies do the transformation in all chains.
+                * rebuild: - Creates chain labels and renumbers residues based on backbone connectivity
         """
         self._run_method('chains', opts)
 
-    def inscodes(self):
+    def inscodes(self, opts=None):
         """ StructureChecking.inscodes
-        Detects residues with insertion codes. No fix provided (yet)
+        Detects residues with insertion codes.
+
+        Args:
+            opts (str | dict - Options dictionary):
+                * renumber (bool): Renumber residues to remove insertion codes.
         """
-        self._run_method('inscodes', None)
+        self._run_method('inscodes', opts)
 
     def altloc(self, opts=None):
         """ StructureChecking.altloc
@@ -593,6 +606,7 @@ class StructureChecking():
                 * fix:
                     * **all** - Fix all residues,
                     * **residue_list** - Fix indicated residues
+                    * **auto** - Find the best combination to minimize amide contacts .
                 * no_recheck (bool) - (False) Do not recheck amide residues after modification.
         """
         self._run_method('amide', opts)

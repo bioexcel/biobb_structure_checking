@@ -19,7 +19,7 @@ from biobb_structure_checking.structure_checking import StructureChecking
 
 BANNER = "================================================================================\n"\
          "=                   BioBB structure checking utility v{:10}               =\n"\
-         "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =\n"\
+         "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =\n"\
          "================================================================================\n"
 def header():
     """ Prints general application headers"""
