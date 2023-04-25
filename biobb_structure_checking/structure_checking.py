@@ -79,10 +79,10 @@ class StructureChecking():
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
         elif self.args['command'] == 'load':
-            if self.args['nocache'] and not self.args['force_save'] and not self.args['get_copy']:
+            if self.args['nocache'] and not self.args['force_save'] and not self.args['copy_input']:
                 print(
                     "WARNING: load with --nocache will not "
-                    "have any effect unless --get_copy is set"
+                    "have any effect unless --copy_input is set"
                 )
         else:
             self._run_method(self.args['command'], self.args['options'])
