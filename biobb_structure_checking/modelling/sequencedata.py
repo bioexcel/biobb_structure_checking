@@ -107,8 +107,8 @@ class SequenceData():
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
-                    print("Warning: sequence features only available in mmCIF" +\
-                    " format or with external fasta input")
+                    print("Warning: sequence features only available in mmCIF",
+                            "format or with external fasta input")
                 return True
             if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
                 if not isinstance(strucm.st_data.headers['_entity_poly.pdbx_strand_id'], list):
@@ -148,10 +148,14 @@ class SequenceData():
                 #     if chn in strucm.chain_ids:
                 #         self.data[ch_id]['chains'].append(chn)
                 seq_matches = self._assign_seq(self.data[ch_id]['can'])
-                max_score = max([match[1] for match in seq_matches])
-                for match in seq_matches:
-                    if match[1] > IDENT_THRES * max_score:
-                        self.data[ch_id]['chains'].append(match[0])
+                if not seq_matches:
+                    print("Warning: unable to match sequences with structure")
+                    self.data[ch_id]['chains'].append(ch_id)
+                else:
+                    max_score = max([match[1] for match in seq_matches])
+                    for match in seq_matches:
+                        if match[1] > IDENT_THRES * max_score:
+                            self.data[ch_id]['chains'].append(match[0])
 
         self.has_canonical = {}
         for ch_id in strucm.chains_data.chain_ids:
