@@ -1,4 +1,4 @@
-BASEDIR = /Users/pau/projects/biobb_structure_checking
+BASEDIR = ../..
 APPBIN = ${BASEDIR}/bin/check_structure
 TESTDIR = ${BASEDIR}/biobb_structure_checking/test
 SHELL = /bin/csh
