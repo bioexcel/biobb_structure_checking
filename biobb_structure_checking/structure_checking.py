@@ -86,6 +86,7 @@ class StructureChecking():
                 )
         else:
             self._run_method(self.args['command'], self.args['options'])
+
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
@@ -331,7 +332,7 @@ class StructureChecking():
             nocache=self.args['nocache'],
             copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path,
-            nowarn=not self.args['debug'], # TODO think on verbose
+            nowarn=not self.args['build_warnings'],
             coords_only=self.args['coords_only']
         )
 

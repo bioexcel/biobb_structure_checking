@@ -39,9 +39,10 @@ import biobb_structure_checking.modelling.utils as mu
 
 from biobb_structure_checking.mutation_manager import MutationManager, MutationSet
 
-MODELLER_ENV_VAR = 'KEY_MODELLER10v3'
+MODELLER_ENV_VAR = 'KEY_MODELLER10v4'
 ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
 ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
+
 
 class StructureManager:
     """Main Class wrapping Bio.PDB structure object
@@ -59,7 +60,7 @@ class StructureManager:
             fasta_sequence_path: str = '',
             nowarn: bool = True,
             coords_only: bool = False
-        ) -> None:
+    ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
             according to parameters
@@ -118,7 +119,7 @@ class StructureManager:
             file_format,
             QUIET=False,
             coords_only=False
-        ):
+    ):
         """ Load structure file """
         biounit = False
         pdb_id = 'User'
@@ -147,7 +148,7 @@ class StructureManager:
                 else:
                     input_pdb_path = input_pdb_path.upper()
 
-                #Force mmCif as cif is not accepted by biopython
+                # Force mmCif as cif is not accepted by biopython
                 if file_format == 'cif':
                     file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
@@ -190,10 +191,9 @@ class StructureManager:
         try:
             new_st = parser.get_structure(pdb_id, real_pdb_path)
         except ValueError as err:
-            raise ParseError('ValueError', err)
+            raise ParseError('ValueError', err) from err
         except PDBConstructionException as err:
-            raise ParseError('PDBBuildError', err)
-
+            raise ParseError('PDBBuildError', err) from err
 
         if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(real_pdb_path)
@@ -208,14 +208,12 @@ class StructureManager:
                     f"{opj(copy_dir, os.path.basename(real_pdb_path))}"
                 )
             except Exception as err:
-#                print(err)
                 print("WARNING: requested copy will overwrite input file, skipping")
 
         if nocache:
             os.remove(real_pdb_path)
 
         return new_st, headers, input_format, biounit
-
 
     def update_internals(self, cif_warn: bool = False):
         """ Update internal data when structure is modified """

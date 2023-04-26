@@ -34,6 +34,7 @@ DEFAULTS = {
     'modeller_key': None
 }
 
+
 def set_defaults(base_dir_path, args=None):
     """
     | Constants set_defaults
@@ -68,6 +69,7 @@ def set_defaults(base_dir_path, args=None):
             args[param] = value
 
     return args
+
 
 # Main Command Line Management
 CMD_LINE = argparse.ArgumentParser(
@@ -135,7 +137,7 @@ CMD_LINE.add_argument(
         'register at https://salilab.org/modeller/registration.html'
 )
 
-#Settings, reference data
+# Settings, reference data
 CMD_LINE.add_argument(
     '--res_lib',
     dest='res_library_path',
@@ -148,7 +150,7 @@ CMD_LINE.add_argument(
     help="Override settings default data library"
 )
 
-#output
+# Output
 CMD_LINE.add_argument(
     '-o', '--output',
     dest='output_structure_path',
@@ -212,6 +214,13 @@ CMD_LINE.add_argument(
     dest='debug',
     action='store_true',
     help='Add debug information (timings, resources)'
+)
+
+CMD_LINE.add_argument(
+    '--build_warnings',
+    dest='build_warnings',
+    action='store_true',
+    help='Show structure building warnings (may indicate PDB errors)'
 )
 
 CMD_LINE.add_argument(

@@ -15,6 +15,7 @@ ALT_SERVERS = {
     'bsc': 'http://mdb-login.bsc.es/api/pdb'
 }
 
+
 class MMBPDBList(PDBList):
     """
     | mmb_server MMBPDBList
@@ -39,13 +40,13 @@ class MMBPDBList(PDBList):
             overwrite=False,
             biounit=False,
             nocache=False
-        ):
+    ):
         """
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
             MMB PDB API. Defaults to Biopython super() if standard server is used.
         """
         if nocache:
-            pdir='/tmp'
+            pdir = '/tmp'
             self.flat_tree = False
         if self.pdb_server.lower() not in ALT_SERVERS:
             return super().retrieve_pdb_file(
@@ -67,7 +68,7 @@ class MMBPDBList(PDBList):
         else:
             file_format = 'pdb'
             url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
-        #Where does the final PDB file get saved?
+        # Where does the final PDB file get saved?
         if pdir is None:
             path = self.local_pdb if not obsolete else self.obsolete_pdb
             if not self.flat_tree:  # Put in PDB-style directory tree
