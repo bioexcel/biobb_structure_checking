@@ -449,6 +449,8 @@ class StructureManager:
             else:
                 can_rcode = res.get_resname()
             ch_type = self.chains_data.get_chain_type(res)
+            if ch_type == mu.UNKNOWN:
+                continue
             rcode = res.get_resname().replace(' ', '')
             if rcode not in valid_codes[ch_type]:
                 print(f"Warning: unknown residue {rcode}")
@@ -461,7 +463,7 @@ class StructureManager:
                 res_at_list = residue_data[ch_type][can_rcode]
                 add_ats = []
                 if not self.is_5_term(res):
-                    if 'P' not in res_at_list['backbone']: # fix to avoid chain many
+                    if 'P' not in res_at_list['backbone']:  # fix to avoid add many groups
                         add_ats = ["P", "OP1", "OP2"]
                 extra_ats = mu.check_unk_at_in_r(
                     res,

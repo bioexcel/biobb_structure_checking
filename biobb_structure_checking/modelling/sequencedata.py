@@ -6,8 +6,8 @@ import sys
 from Bio import pairwise2, SeqIO
 from Bio.PDB.Polypeptide import PPBuilder
 from Bio.Seq import Seq, MutableSeq
-#Deprecated in Biopython 1.78
-#from Bio.Seq import IUPAC
+# Deprecated in Biopython 1.78
+# from Bio.Seq import IUPAC
 from Bio.SeqUtils import IUPACData
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
@@ -19,6 +19,7 @@ except ImportError:
 import biobb_structure_checking.modelling.utils as mu
 
 IDENT_THRES = 0.7
+
 class SequenceData():
     """
     | sequence_manager SequenceData
@@ -185,7 +186,7 @@ class SequenceData():
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
-                    #TODO patched for a Weird case where a second model lacks a chain
+                    # TODO patched for a Weird case where a second model lacks a chain
                     if not frags[0]:
                         print(
                             f"Warning: no protein residues found for chain {chn.id}"
@@ -253,7 +254,7 @@ class SequenceData():
                         SeqFeature(FeatureLocation(inic, fin))
                     )
                     if inic != frag.features[0].location.start or\
-                        fin != frag.features[0].location.end:
+                            fin != frag.features[0].location.end:
                         ch_data['pdb'][mod_id]['match_numbering'] = False
         return True
 
@@ -270,8 +271,8 @@ class SequenceData():
         for ch_id in strucm.chains_data.chain_ids:
             if strucm.chain_ids[ch_id] != mu.PROTEIN:
                 continue
-            #build sequence from frags filling gaps with G
-            #Warning IUPAC deprecated in Biopython 1.78
+            # build sequence from frags filling gaps with G
+            # Warning IUPAC deprecated in Biopython 1.78
             if has_IUPAC:
                 seq = MutableSeq('', IUPAC.protein)
             else:
@@ -282,7 +283,7 @@ class SequenceData():
                 if not start_pos:
                     start_pos = frag.features[0].location.start
                 if last_pos:
-                    seq += ins_res_type*(frag.features[0].location.start - last_pos-1)
+                    seq += ins_res_type * (frag.features[0].location.start - last_pos - 1)
 
                 seq += frag.seq
                 last_pos = frag.features[0].location.end
@@ -294,7 +295,7 @@ class SequenceData():
                     seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
             if ch_id not in self.data:
                 self.add_empty_chain(ch_id)
-            #Warning IUPAC deprecated in Biopython 1.78
+            # Warning IUPAC deprecated in Biopython 1.78
             if has_IUPAC:
                 new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
             else:
@@ -326,7 +327,7 @@ class SequenceData():
         """ SequenceData.get_pdbseq
         Prepares a FASTA string with the structure sequence, and fragments
         """
-        #TODO re-use this on modeller_manager
+        # TODO re-use this on modeller_manager
         outseq = ''
         for ch_id in sorted(self.data):
             if ch_id in self.has_canonical and self.has_canonical[ch_id]:
@@ -384,7 +385,7 @@ class SequenceData():
                 )
                 outseq += SeqIO.FastaIO.as_fasta(seq)
             else:
-                print(f"Warning: chain {ch_id} sequence cannot be recongized")
+                print(f"Warning: chain {ch_id} sequence cannot be recognized")
         return outseq
 
     def match_chain_seqs(self):
