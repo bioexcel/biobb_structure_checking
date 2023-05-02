@@ -66,7 +66,8 @@ class StructureManager:
             according to parameters
 
         Args:
-            **input_pdb_path** (str): path to input structure either in pdb or mmCIF format. Format is taken from file extension. Alternatively **pdb:pdbId** fetches the mmCIF file from RCSB
+            **input_pdb_path** (str): path to input structure either in pdb or mmCIF format.
+                Format is taken from file extension. Alternatively **pdb:pdbId** fetches the mmCIF file from RCSB
             **data_library_path** (str): Path to json data library
             **res_library_path** (str): Path to residue library
             **pdb_server** (str): **default** for Bio.PDB defaults (RCSB), **mmb** for MMB PDB API
@@ -130,11 +131,16 @@ class StructureManager:
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
-                #if pdb_server not in ALT_SERVERS:
+                # if pdb_server not in ALT_SERVERS:
                 #    raise WrongServerError
-                real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
-                )
+                if not biounit:
+                    real_pdb_path = pdbl.retrieve_pdb_file(
+                        input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
+                    )
+                else:
+                    real_pdb_path = pdbl.retrieve_assembly_file(
+                        input_pdb_path, biounit, nocache=nocache
+                    )
             else:
                 if '.' in input_pdb_path:
                     pdbid, file_format = input_pdb_path.split('.')
@@ -169,7 +175,7 @@ class StructureManager:
         else:
             builder = None
 
-        if '.pdb' in real_pdb_path: # accepts .pdbqt
+        if '.pdb' in real_pdb_path:  # accepts .pdbqt
             if '.pdbqt' in real_pdb_path:
                 print("Warning: PDBQT file will be loaded as PDB")
             parser = PDBParser(
