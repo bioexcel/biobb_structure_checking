@@ -1,5 +1,5 @@
 """
-    Class to support interaction with MMB PDB API to include support to biounits.
+    Class to support interaction with  biounits/assemblies.
 """
 
 import os
