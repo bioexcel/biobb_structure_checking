@@ -130,8 +130,8 @@ class StructureManager:
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
-                if pdb_server not in ALT_SERVERS:
-                    raise WrongServerError
+                #if pdb_server not in ALT_SERVERS:
+                #    raise WrongServerError
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
                 )
