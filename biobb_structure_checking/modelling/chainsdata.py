@@ -11,48 +11,62 @@ class ChainsData():
         self.has_chains_to_rename = False
         self.st = st
 
-    def stats(self, prefix='') -> None:
+    def stats(self, prefix='', use_models=False) -> None:
         """ Print chains info """
-        chids = []
-        for ch_id in sorted(self.chain_ids):
-            if self.chain_ids == mu.UNKNOWN:
-                chids.append(
-                    f"{ch_id}: "
-                    f" Unknown (P:{self.chain_details[ch_id][0]:.1%}"
-                    f" DNA:{self.chain_details[ch_id][1]:.1%}"
-                    f" RNA:{self.chain_details[ch_id][2]:.1%}"
-                    f" UNK:{self.chain_details[ch_id][3]:.1%}"
-                )
-            else:
-                chids.append(f"{ch_id}: {mu.CHAIN_TYPE_LABELS[self.chain_ids[ch_id]]}")
+        chids = {}
+        num_chains = 0
+        chains_str = ""
+        for mod in self.st:
+            chids[mod.id] = []
+            for ch_id in sorted(self.chain_ids[mod.id]):
+                if not use_models:
+                    mod_txt = ""
+                    if mod.id > 1:
+                        continue
+                else:
+                    mod_txt = f"/{mod.id}"
+                if self.chain_ids[mod.id] == mu.UNKNOWN:
+                    chids[mod.id].append(
+                        f"{ch_id}{mod_txt}: "
+                        f" Unknown (P:{self.chain_details[mod.id][ch_id][0]:.1%}"
+                        f" DNA:{self.chain_details[mod.id][ch_id][1]:.1%}"
+                        f" RNA:{self.chain_details[mod.id][ch_id][2]:.1%}"
+                        f" UNK:{self.chain_details[mod.id][ch_id][3]:.1%}"
+                    )
+                else:
+                    chids[mod.id].append(f"{ch_id}{mod_txt}: {mu.CHAIN_TYPE_LABELS[self.chain_ids[mod.id][ch_id]]}")
+                num_chains += len(self.chain_ids[mod.id])
+                chains_str += ', '.join(chids[mod.id])
+        return f"{prefix} Num. chains: {num_chains} ({chains_str})"
 
-        return f"{prefix} Num. chains: {len(self.chain_ids)} ({', '.join(chids)})"
-
-    def set_chain_ids(self, biounit=False) -> None:
+    def set_chain_ids(self) -> None:
         """
         Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
         """
         self.chain_ids = {}
+        self.chain_details = {}
         self.has_chains_to_rename = False
-        for chn in self.st.get_chains():
-            if not biounit and chn.get_parent().id > 0:
-                continue
-            guess = mu.guess_chain_type(chn)
-            self.chain_ids[chn.id] = guess['type']
-            self.chain_details[chn.id] = guess['details']
-            if chn.id == ' ':
-                self.has_chains_to_rename = self.has_chains_to_rename  or True
+
+        for mod in self.st:
+            self.chain_ids[mod.id] = {}
+            self.chain_details[mod.id] = {}
+            for chn in mod.get_chains():
+                guess = mu.guess_chain_type(chn)
+                self.chain_ids[mod.id][chn.id] = guess['type']
+                self.chain_details[mod.id][chn.id] = guess['details']
+                if chn.id == ' ':
+                    self.has_chains_to_rename = self.has_chains_to_rename  or True
 
     def rename_empty_chain_label(self, new_label: str) -> str:
         '''Add chain label to empty ones'''
         if not self.has_chains_to_rename:
             return False
-        if new_label == 'auto':
-            new_label_char = 65
-            while chr(new_label_char) in self.chain_ids and new_label_char < ord('z'):
-                new_label_char = +1
-            new_label = chr(new_label_char)
         for mod in self.st:
+            if new_label == 'auto':
+                new_label_char = 65
+                while chr(new_label_char) in self.chain_ids[mod.id] and new_label_char < ord('z'):
+                    new_label_char = +1
+                new_label = chr(new_label_char)
             for chn in mod:
                 if chn.id == ' ':
                     chn.id = new_label
@@ -101,13 +115,13 @@ class ChainsData():
                         f" in both origin and updated ({chn_0}={chn_1})"
                     )
                     sys.exit()
-                for ch_id in self.chain_ids:
-                    renum_to_do.append([
-                        {'chn':ch_id, 'ini':ini_0, 'fin':fin_0},
-                        {'chn':ch_id, 'ini':ini_1, 'fin':fin_1}
-                    ])
+                for mod in self.st:
+                    for ch_id in self.chain_ids[mod.id]:
+                        renum_to_do.append([
+                            {'mod': mod.id, 'chn':ch_id, 'ini':ini_0, 'fin':fin_0},
+                            {'mod': mod.id, 'chn':ch_id, 'ini':ini_1, 'fin':fin_1}
+                        ])
         return renum_to_do
-
 
     def renumber(self, renum_str, rem_inscodes=False, verbose=True):
         """ Renumber residues"""
@@ -116,32 +130,36 @@ class ChainsData():
         if renum_str.lower() == 'auto':
             tmp_ch_id = _get_tmp_ch_id(self.st[0])
             last_res_num = 0
-            for chn in self.chain_ids:
-                n_term, c_term = mu.get_terms(self.st[0], chn)
-                renum_to_do.append([
-                    {'chn': chn, 'ini': n_term.id[1], 'fin': c_term.id[1]},
-                    {'chn':tmp_ch_id, 'ini': last_res_num + 1, 'fin': 0}
-                ])
-                renum_to_do.append([
-                    {
-                        'chn':tmp_ch_id,
-                        'ini': last_res_num + 1,
-                        'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1
-                    },
-                    {
-                        'chn':chn,
-                        'ini': last_res_num + 1,
-                        'fin': 0
-                    }
-                ])
-                last_res_num = last_res_num + c_term.id[1] - n_term.id[1] + 1
+            for mod in self.st:
+                for chn in self.chain_ids:
+                    n_term, c_term = mu.get_terms(mod, chn)
+                    renum_to_do.append([
+                        {'mod': mod.id, 'chn': chn, 'ini': n_term.id[1], 'fin': c_term.id[1]},
+                        {'mod': mod.id, 'chn': tmp_ch_id, 'ini': last_res_num + 1, 'fin': 0}
+                    ])
+                    renum_to_do.append([
+                        {
+                            'mod': mod.id,
+                            'chn':tmp_ch_id,
+                            'ini': last_res_num + 1,
+                            'fin': last_res_num + c_term.id[1] - n_term.id[1] + 1
+                        },
+                        {
+                            'mod': mod.id,
+                            'chn':chn,
+                            'ini': last_res_num + 1,
+                            'fin': 0
+                        }
+                    ])
+                    last_res_num = last_res_num + c_term.id[1] - n_term.id[1] + 1
         else:
             renum_to_do = self._parse_renumber_str(renum_str)
 
         for mod in self.st:
             for tsk in renum_to_do:
                 org, tgt = tsk
-
+                if org['mod'] != mod.id:
+                    continue
                 if verbose and not mu.check_residue_id_order(mod[org['chn']]):
                     print(
                         f"WARNING: disordered residue ids found in {org['chn']}, "
@@ -257,9 +275,10 @@ class ChainsData():
 
     def get_chain_type(self, res):
         """ Return type of chain for residue"""
+        mod = res.get_parent().get_parent()
         if mu.is_hetatm(res):
             return mu.UNKNOWN
-        return self.chain_ids[res.get_parent().id]
+        return self.chain_ids[mod.id][res.get_parent().id]
 
     def select(self, select_chains: str) -> None:
         """
@@ -270,19 +289,19 @@ class ChainsData():
         if not self.chain_ids:
             self.set_chain_ids()
 
-        if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
-            if select_chains.lower() == 'na':
-                ch_ok = [mu.DNA, mu.RNA]
-            else:
-                ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
-        else:
-            ch_ok = select_chains.split(',')
-            for chn in ch_ok:
-                if chn not in self.chain_ids:
-                    print('Warning: skipping unknown chain', chn)
         for mod in self.st:
-            for chn in self.chain_ids:
-                if chn not in ch_ok and self.chain_ids[chn] not in ch_ok:
+            if select_chains.lower() in ('protein', 'dna', 'rna', 'na'):
+                if select_chains.lower() == 'na':
+                    ch_ok = [mu.DNA, mu.RNA]
+                else:
+                    ch_ok = [mu.TYPE_LABEL[select_chains.lower()]]
+            else:
+                ch_ok = select_chains.split(',')
+                for chn in ch_ok:
+                    if chn not in self.chain_ids[mod.id]:
+                        print('Warning: skipping unknown chain', chn)
+            for chn in self.chain_ids[mod.id]:
+                if chn not in ch_ok and self.chain_ids[mod.id][chn] not in ch_ok:
                     self.st[mod.id].detach_child(chn)
             if not self.st[mod.id]:
                 print("ERROR: would remove all chains, exiting")
@@ -291,23 +310,26 @@ class ChainsData():
     def has_NA(self):
         """ Checks if any of the chains is NA"""
         has_na = False
-        for ch_type in self.chain_ids.values():
-            has_na = (has_na or (ch_type > 1))
+        for mod in self.st:
+            for ch_type in self.chain_ids[mod.id].values():
+                has_na = (has_na or (ch_type > 1))
         return has_na
 
+
 def _parse_task_str(ts_str):
-    #Format [A:]ini[-fin]
+    # Format [A:]ini[-fin]
     if ':' not in ts_str:
         ts_str = '*:' + ts_str
     chn, rnum = ts_str.split(':')
     if not rnum:
         return ts_str[:-1], 0, 0
-    if not '-' in rnum:
+    if '-' not in rnum:
         return chn, int(rnum), 0
     ini, fin = rnum.split('-')
     if not fin:
         fin = 0
     return chn, int(ini), int(fin)
+
 
 def _get_tmp_ch_id(mod):
     tmp_id = ord('a')
@@ -318,13 +340,13 @@ def _get_tmp_ch_id(mod):
         return tmp_id
     return ''
 
+
 def _check_collision(new_res, new_ch):
     found = False
-    col_res = None
     for res in new_ch.get_residues():
         if res.id[1] == new_res.id[1]:
             found = True
             break
     if found:
-         return res
+        return res
     return None

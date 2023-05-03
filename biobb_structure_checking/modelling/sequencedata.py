@@ -1,7 +1,7 @@
 """ Module to manage sequence information for structures """
 
 import sys
-#from typing import List, Dict
+# from typing import List, Dict
 
 from Bio import pairwise2, SeqIO
 from Bio.PDB.Polypeptide import PPBuilder
@@ -27,21 +27,23 @@ class SequenceData():
     """
     def __init__(self):
         self.data = {}
-        self.has_canonical = False
+        self.has_canonical = {}
         self.fasta = []
         self.raw_pdb_seq = ''
 
-    def add_empty_chain(self, ch_id: str):
+    def add_empty_chain(self, mod, ch_id: str):
         """ SequenceData.add_empty_chain
         Add base structure for a new chain
 
         Args:
             ch_id (str) : Id of the new chain
         """
-        self.data[ch_id] = {
-            'can':None,
+        if mod.id not in self.data:
+            self.data[mod.id] = {}
+        self.data[mod.id][ch_id] = {
+            'can': None,
             'chains': [],
-            'pdb':{}
+            'pdb': {}
         }
 
     def load_sequence_from_fasta(self, fasta_sequence_path):
@@ -73,17 +75,18 @@ class SequenceData():
             clean (bool) : (True) Clean existing sequence data
             cif_warn (bool) : (False) Issue a warning when structure is not CIF
         """
-        if clean:
-            self.data = {}
-            self.has_canonical = {}
+        self.raw_pdb_seq = {}
+        for mod in strucm.st:
+            if clean:
+                self.data[mod.id] = {}
+                self.has_canonical[mod.id] = {}
+            self.raw_pdb_seq[mod.id] = _get_pack_str_seqs(strucm)
 
-        self.raw_pdb_seq = _get_pack_str_seqs(strucm)
+            if not self.has_canonical[mod.id]:
+                self.read_canonical_seqs(strucm, cif_warn)
 
-        if not self.has_canonical:
-            self.read_canonical_seqs(strucm, cif_warn)
-
-        self.read_structure_seqs(strucm)
-        self.match_sequence_numbering()
+            self.read_structure_seqs(strucm)
+            self.match_sequence_numbering(strucm)
 
     def read_canonical_seqs(self, strucm, cif_warn):
         """ SequenceData.reachains_data.d_canonical_seqs
@@ -93,17 +96,17 @@ class SequenceData():
             strucm (StructureManager) : Object containing the loaded structure
             cif_warn (bool) : Issue a warning when structure is not CIF
         """
-
         if not strucm.chains_data.chain_ids:
             strucm.chains_data.set_chain_ids()
 
         if self.fasta:
             hits = self.match_chain_seqs()
+            modids = [h['mod_id'] for h in hits]
             chids = [h['ch_id'] for h in hits]
             seqs = [h['seq'] for h in hits]
             print('Getting canonical sequences from matching FASTA input')
             for hit in sorted(hits, key=lambda hit: hit['ch_id']):
-                print(f"{hit['ch_id']}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
+                print(f"{hit['ch_id']}/{hit['mod_id']}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
@@ -121,50 +124,50 @@ class SequenceData():
                 if cif_warn:
                     print("Warning: sequence data unavailable on cif data")
                 return True
+        for mod in strucm.st:
+            if mod not in self.data:
+                self.data[mod.id] = {}
+            for index, chid in enumerate(chids):
+                for ch_id in chid.split(','):
+                    if ch_id not in strucm.chains_data.chain_ids[mod.id]:
+                        continue
+                    if strucm.chains_data.chain_ids[mod.id][ch_id] == mu.UNKNOWN:
+                        continue
+                    if ch_id not in self.data[mod.id]:
+                        self.add_empty_chain(mod, ch_id)
+                    if has_IUPAC:
+                        new_seq = Seq(seqs[index].replace('\n', ''), IUPAC.protein)
+                    else:
+                        new_seq = Seq(seqs[index].replace('\n', ''))
+                    self.data[mod.id][ch_id]['can'] = SeqRecord(
+                        new_seq,
+                        f"can_sq_{ch_id}/{mod.id}",
+                        f"can_sq_{ch_id}/{mod.id}",
+                        f"canonical sequence chain {ch_id} model {mod.id}"
+                    )
+                    self.data[mod.id][ch_id]['can'].features.append(
+                        SeqFeature(FeatureLocation(1, len(seqs[index])))
+                    )
 
-        for index, chid in enumerate(chids):
-            for ch_id in chid.split(','):
-                if ch_id not in strucm.chains_data.chain_ids:
-                    continue
-                if strucm.chains_data.chain_ids[ch_id] == mu.UNKNOWN:
-                    continue
-                if ch_id not in self.data:
-                    self.add_empty_chain(ch_id)
-                if has_IUPAC:
-                    new_seq = Seq(seqs[index].replace('\n', ''), IUPAC.protein)
-                else:
-                    new_seq = Seq(seqs[index].replace('\n', ''))
-                self.data[ch_id]['can'] = SeqRecord(
-                    new_seq,
-                    'can_sq_' + ch_id,
-                    'can_sq_' + ch_id,
-                    'canonical sequence chain ' + ch_id
-                )
-                self.data[ch_id]['can'].features.append(
-                    SeqFeature(FeatureLocation(1, len(seqs[index])))
-                )
+                    # for chn in chids[i].split(','):
+                    #     if chn in strucm.chain_ids:
+                    #         self.data[ch_id]['chains'].append(chn)
+                    seq_matches = self._assign_seq(self.data[mod.id][ch_id]['can'])
+                    if not seq_matches:
+                        print("Warning: unable to match sequences with structure")
+                        self.data[mod.id][ch_id]['chains'].append(ch_id)
+                    else:
+                        max_score = max([match[2] for match in seq_matches])
+                        for match in seq_matches:
+                            if match[2] > IDENT_THRES * max_score:
+                                self.data[mod.id][ch_id]['chains'].append(match[0])
 
-                # for chn in chids[i].split(','):
-                #     if chn in strucm.chain_ids:
-                #         self.data[ch_id]['chains'].append(chn)
-                seq_matches = self._assign_seq(self.data[ch_id]['can'])
-                if not seq_matches:
-                    print("Warning: unable to match sequences with structure")
-                    self.data[ch_id]['chains'].append(ch_id)
-                else:
-                    max_score = max([match[1] for match in seq_matches])
-                    for match in seq_matches:
-                        if match[1] > IDENT_THRES * max_score:
-                            self.data[ch_id]['chains'].append(match[0])
-
-        self.has_canonical = {}
-        for ch_id in strucm.chains_data.chain_ids:
-#            if strucm.chain_ids[ch_id] != PROTEIN:
-#                continue
-            self.has_canonical[ch_id] = (ch_id in self.data) and\
-                hasattr(self.data[ch_id]['can'], 'seq')
-            if not self.has_canonical[ch_id]:
-                print(f"Warning, no canonical sequence available for chain {ch_id}")
+            self.has_canonical[mod.id] = {}
+            for ch_id in strucm.chains_data.chain_ids[mod.id]:
+                self.has_canonical[mod.id][ch_id] = (ch_id in self.data[mod.id]) and\
+                    hasattr(self.data[mod.id][ch_id]['can'], 'seq')
+                if not self.has_canonical[mod.id][ch_id]:
+                    print(f"Warning, no canonical sequence available for chain {ch_id}/{mod.id}")
         return False
 
     def read_structure_seqs(self, strucm):
@@ -186,7 +189,7 @@ class SequenceData():
             for chn in mod.get_chains():
                 seqs = []
                 wrong_order = False
-                if strucm.chains_data.chain_ids[chn.id] == mu.PROTEIN:
+                if strucm.chains_data.chain_ids[mod.id][chn.id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
                     if not frags:
                         frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
@@ -197,10 +200,10 @@ class SequenceData():
                             f" at model {mod.id}, adding hetatm to avoid empty chain"
                         )
                         frags = list(chn.get_residues())
-                elif strucm.chains_data.chain_ids[chn.id] in (mu.DNA, mu.RNA, mu.NA):
+                elif strucm.chains_data.chain_ids[mod.id][chn.id] in (mu.DNA, mu.RNA, mu.NA):
                     frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
                 else:
-                    self.add_empty_chain(chn.id)
+                    self.add_empty_chain(mod, chn.id)
                     frags = []
 
                 for frag in frags:
@@ -212,7 +215,7 @@ class SequenceData():
                     if hasattr(frag, 'get_sequence'):
                         seq = frag.get_sequence()
                     else:
-                        seq = mu.get_sequence_from_list(frag, strucm.chains_data.chain_ids[chn.id])
+                        seq = mu.get_sequence_from_list(frag, strucm.chains_data.chain_ids[mod.id][chn.id])
 
                     sqr = SeqRecord(
                         seq,
@@ -229,37 +232,37 @@ class SequenceData():
                         sqr.features.append(SeqFeature(FeatureLocation(end, start)))
                         wrong_order = True
                     seqs.append(sqr)
-                    if chn.id not in self.data:
-                        self.add_empty_chain(chn.id)
-                    self.data[chn.id]['pdb'][mod.id] = {
+                    if chn.id not in self.data[mod.id]:
+                        self.add_empty_chain(mod, chn.id)
+                    self.data[mod.id][chn.id]['pdb'] = {
                         'frgs': seqs,
                         'wrong_order': wrong_order,
-                        'type': strucm.chains_data.chain_ids[chn.id]
+                        'type': strucm.chains_data.chain_ids[mod.id][chn.id]
                     }
             if can_reverted:
                 strucm.revert_can_resnames(False)
 
-    def match_sequence_numbering(self):
+    def match_sequence_numbering(self, strucm):
         """ SequenceData.match_sequence_numbering
         Assign canonical sequence numbering to structural fragments
         """
         if not hasattr(self, 'has_canonical'):
             return False
-        for ch_id, ch_data in self.data.items():
-            if ch_id not in self.has_canonical or not self.has_canonical[ch_id]:
-                continue
-            for mod_id in ch_data['pdb']:
-                frgs = ch_data['pdb'][mod_id]['frgs']
-                ch_data['pdb'][mod_id]['match_numbering'] = True
+        for mod in strucm.st:
+            for ch_id, ch_data in self.data[mod.id].items():
+                if ch_id not in self.has_canonical[mod.id] or not self.has_canonical[mod.id][ch_id]:
+                    continue
+                frgs = ch_data['pdb']['frgs']
+                ch_data['pdb']['match_numbering'] = True
                 for nfrag, frag in enumerate(frgs):
                     inic = ch_data['can'].seq.find(frag.seq) + 1
                     fin = inic + len(frag.seq) - 1
-                    ch_data['pdb'][mod_id]['frgs'][nfrag].features.append(
+                    ch_data['pdb']['frgs'][nfrag].features.append(
                         SeqFeature(FeatureLocation(inic, fin))
                     )
                     if inic != frag.features[0].location.start or\
                             fin != frag.features[0].location.end:
-                        ch_data['pdb'][mod_id]['match_numbering'] = False
+                        ch_data['pdb']['match_numbering'] = False
         return True
 
     def fake_canonical_sequence(self, strucm, mutations, ins_res_type='G'):
@@ -272,59 +275,61 @@ class SequenceData():
         """
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
-        for ch_id in strucm.chains_data.chain_ids:
-            if strucm.chain_ids[ch_id] != mu.PROTEIN:
-                continue
-            # build sequence from frags filling gaps with G
-            # Warning IUPAC deprecated in Biopython 1.78
-            if has_IUPAC:
-                seq = MutableSeq('', IUPAC.protein)
-            else:
-                seq = MutableSeq('')
-            last_pos = 0
-            start_pos = 0
-            for frag in self.data[ch_id]['pdb'][0]['frgs']:
-                if not start_pos:
-                    start_pos = frag.features[0].location.start
-                if last_pos:
-                    seq += ins_res_type * (frag.features[0].location.start - last_pos - 1)
+        for mod in strucm.st:
+            for ch_id in strucm.chains_data.chain_ids[mod.id]:
+                if strucm.chain_ids[mod.id][ch_id] != mu.PROTEIN:
+                    continue
+                # build sequence from frags filling gaps with G
+                # Warning IUPAC deprecated in Biopython 1.78
+                if has_IUPAC:
+                    seq = MutableSeq('', IUPAC.protein)
+                else:
+                    seq = MutableSeq('')
+                last_pos = 0
+                start_pos = 0
+                for frag in self.data[mod.id][ch_id]['pdb']['frgs']:
+                    if not start_pos:
+                        start_pos = frag.features[0].location.start
+                    if last_pos:
+                        seq += ins_res_type * (frag.features[0].location.start - last_pos - 1)
 
-                seq += frag.seq
-                last_pos = frag.features[0].location.end
-            for mut_set in mutations.mutation_list:
-                for mut in mut_set.mutations:
-                    if mut['chain'] != ch_id:
-                        continue
-                    res_num = mut['resobj'].id[1]
-                    seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
-            if ch_id not in self.data:
-                self.add_empty_chain(ch_id)
-            # Warning IUPAC deprecated in Biopython 1.78
-            if has_IUPAC:
-                new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
-            else:
-                new_seq = Seq(str(seq).replace('\n', ''))
-            self.data[ch_id]['can'] = SeqRecord(
-                new_seq,
-                'csq_' + ch_id,
-                'csq_' + ch_id,
-                'canonical sequence chain ' + ch_id,
-                annotations={'molecule_type':'protein'}
-            )
-            self.data[ch_id]['can'].features.append(
-                SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
-            )
-            self.data[ch_id]['chains'].append(ch_id)
-            self.has_canonical[ch_id] = True
+                    seq += frag.seq
+                    last_pos = frag.features[0].location.end
+                for mut_set in mutations.mutation_list:
+                    for mut in mut_set.mutations:
+                        if mut['chain'] != ch_id:
+                            continue
+                        res_num = mut['resobj'].id[1]
+                        seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
+                if ch_id not in self.data[mod.id]:
+                    self.add_empty_chain(mod, ch_id)
+                # Warning IUPAC deprecated in Biopython 1.78
+                if has_IUPAC:
+                    new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
+                else:
+                    new_seq = Seq(str(seq).replace('\n', ''))
+                self.data[mod.id][ch_id]['can'] = SeqRecord(
+                    new_seq,
+                    f"csq_{ch_id}/{mod.id}",
+                    f"csq_{ch_id}/{mod.id}",
+                    f"canonical sequence chain {ch_id} Model {mod.id}",
+                    annotations={'molecule_type':'protein'}
+                )
+                self.data[mod.id][ch_id]['can'].features.append(
+                    SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
+                )
+                self.data[mod.id][ch_id]['chains'].append(ch_id)
+                self.has_canonical[mod.id][ch_id] = True
 
     def get_canonical(self):
         """ SequenceData.get_canonical
         Prepares a FASTA string with the canonical sequence
         """
         outseq = ''
-        for ch_id in sorted(self.data):
-            if self.has_canonical[ch_id]:
-                outseq += SeqIO.FastaIO.as_fasta(self.data[ch_id]['can'])
+        for mod_id, data in self.data.items():
+            for ch_id in sorted(data):
+                if self.has_canonical[mod_id][ch_id]:
+                    outseq += SeqIO.FastaIO.as_fasta(data[ch_id]['can'])
         return outseq
 
     def get_pdbseq(self):
@@ -333,63 +338,64 @@ class SequenceData():
         """
         # TODO re-use this on modeller_manager
         outseq = ''
-        for ch_id in sorted(self.data):
-            if ch_id in self.has_canonical and self.has_canonical[ch_id]:
-                tgt_seq = self.data[ch_id]['can'].seq
-                frgs = self.data[ch_id]['pdb'][0]['frgs']
-                frags_num = []
-                pdb_seq = frgs[0].seq
-                for i in range(1, len(frgs)):
-                    frag_seq = frgs[i].seq
-                    pdb_seq += frag_seq
-                    frags_num.append(
-                        f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
+        for mod_id, data in self.data.items():
+            for ch_id in sorted(data):
+                if ch_id in self.has_canonical[mod_id] and self.has_canonical[mod_id][ch_id]:
+                    tgt_seq = data[ch_id]['can'].seq
+                    frgs = data[ch_id]['pdb']['frgs']
+                    frags_num = []
+                    pdb_seq = frgs[0].seq
+                    for i in range(1, len(frgs)):
+                        frag_seq = frgs[i].seq
+                        pdb_seq += frag_seq
+                        frags_num.append(
+                            f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
+                        )
+                    # tuned to open gaps on missing loops
+                    alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+
+                    if has_IUPAC:
+                        pdb_seq = Seq(alin[0][1], IUPAC.protein)
+                    else:
+                        pdb_seq = Seq(alin[0][1])
+
+                    seq = SeqRecord(
+                        pdb_seq,
+                        f"pdb_sq_{ch_id}/{mod_id}",
+                        '',
+                        'Frags: ' + ','.join(frags_num)
                     )
-                # tuned to open gaps on missing loops
-                alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+                    outseq += SeqIO.FastaIO.as_fasta(seq)
+                elif data[ch_id]['pdb']:
+                    last_pos = 0
+                    start_pos = 0
+                    sequence = ''
+                    frags_num = []
+                    for frag in data[ch_id]['pdb']['frgs']:
+                        if not start_pos:
+                            start_pos = frag.features[0].location.start
+                        if last_pos:
+                            sequence += '-'*(frag.features[0].location.start - last_pos-1)
+                        sequence += frag.seq
+                        last_pos = frag.features[0].location.end
+                        frags_num.append(
+                            f"{frag.features[0].location.start}-{frag.features[0].location.end}"
+                        )
 
-                if has_IUPAC:
-                    pdb_seq = Seq(alin[0][1], IUPAC.protein)
-                else:
-                    pdb_seq = Seq(alin[0][1])
+                    if has_IUPAC:
+                        pdb_seq = Seq(str(sequence), IUPAC.protein)
+                    else:
+                        pdb_seq = Seq(str(sequence))
 
-                seq = SeqRecord(
-                    pdb_seq,
-                    'pdb_sq_' + ch_id,
-                    '',
-                    'Frags: ' + ','.join(frags_num)
-                )
-                outseq += SeqIO.FastaIO.as_fasta(seq)
-            elif self.data[ch_id]['pdb']:
-                last_pos = 0
-                start_pos = 0
-                sequence = ''
-                frags_num = []
-                for frag in self.data[ch_id]['pdb'][0]['frgs']:
-                    if not start_pos:
-                        start_pos = frag.features[0].location.start
-                    if last_pos:
-                        sequence += '-'*(frag.features[0].location.start - last_pos-1)
-                    sequence += frag.seq
-                    last_pos = frag.features[0].location.end
-                    frags_num.append(
-                        f"{frag.features[0].location.start}-{frag.features[0].location.end}"
+                    seq = SeqRecord(
+                        pdb_seq,
+                        f"pdb_sq_{ch_id}/{mod_id}",
+                        '',
+                        'Frags: ' + ','.join(frags_num)
                     )
-
-                if has_IUPAC:
-                    pdb_seq = Seq(str(sequence), IUPAC.protein)
+                    outseq += SeqIO.FastaIO.as_fasta(seq)
                 else:
-                    pdb_seq = Seq(str(sequence))
-
-                seq = SeqRecord(
-                    pdb_seq,
-                    'pdb_sq_' + ch_id,
-                    '',
-                    'Frags: ' + ','.join(frags_num)
-                )
-                outseq += SeqIO.FastaIO.as_fasta(seq)
-            else:
-                print(f"Warning: chain {ch_id} sequence cannot be recognized")
+                    print(f"Warning: chain {ch_id}/{mod_id} sequence cannot be recognized")
         return outseq
 
     def match_chain_seqs(self):
@@ -398,10 +404,11 @@ class SequenceData():
         chids = set()
         for rec in self.fasta:
             for hit in self._assign_seq(rec):
-                ch_id, score = hit
-                chids.add(ch_id)
+                mod_id, ch_id, score = hit
+                chids.add((mod_id, ch_id))
                 all_hits.append({
-                    'ch_id':ch_id,
+                    'mod_id': mod_id,
+                    'ch_id': ch_id,
                     'seq': str(rec.seq),
                     'desc': rec.description,
                     'score': score
@@ -409,11 +416,12 @@ class SequenceData():
 
         hits = []
 
-        for ch_id in chids:
+        for chain in chids:
+            mod_id, ch_id = chain
             max_score = -100
             best_hit = ''
             for hit in all_hits:
-                if hit['ch_id'] != ch_id:
+                if hit['ch_id'] != ch_id and hit['mod_id'] != mod_id:
                     continue
                 if hit['score'] > max_score:
                     best_hit = hit
@@ -430,13 +438,14 @@ class SequenceData():
         else:
             tgt = rec
         matches = []
-        for ch_id in self.raw_pdb_seq:
-            for seq in self.raw_pdb_seq[ch_id]:
-                if not seq: # for not protein/NA chains
-                    continue
-                score = pairwise2.align.globalxs(tgt, seq, -5, -1, score_only=True)
-                if score > 0:
-                    matches.append((ch_id, score))
+        for mod_id in self.raw_pdb_seq:
+            for ch_id in self.raw_pdb_seq[mod_id]:
+                for seq in self.raw_pdb_seq[mod_id][ch_id]:
+                    if not seq: # for not protein/NA chains
+                        continue
+                    score = pairwise2.align.globalxs(tgt, seq, -5, -1, score_only=True)
+                    if score > 0:
+                        matches.append((mod_id, ch_id, score))
         return matches
 
 def _get_pack_str_seqs(strucm):
@@ -449,7 +458,7 @@ def _get_pack_str_seqs(strucm):
             seqs[chn.id].append(
                 mu.get_sequence_from_list(
                     [res for res in chn.get_residues() if not mu.is_hetatm(res)],
-                    strucm.chains_data.chain_ids[chn.id]
+                    strucm.chains_data.chain_ids[mod.id][chn.id]
                 )
             )
     strucm.revert_can_resnames(canonical=False)

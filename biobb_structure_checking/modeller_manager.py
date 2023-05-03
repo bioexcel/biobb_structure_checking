@@ -61,22 +61,22 @@ class ModellerManager():
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
-        if not self.sequences.has_canonical[target_chain]:
-            raise NoCanSeqError(target_chain)
+        if not self.sequences.has_canonical[target_model][target_chain]:
+            raise NoCanSeqError(target_model, target_chain)
 
-        tgt_seq = self.sequences.data[target_chain]['can'].seq
+        tgt_seq = self.sequences.data[target_model][target_chain]['can'].seq
 
-        #triming N-term of canonical seq
-        pdb_seq = self.sequences.data[target_chain]['pdb'][target_model]['frgs'][0].seq
+        # triming N-term of canonical seq
+        pdb_seq = self.sequences.data[target_model][target_chain]['pdb']['frgs'][0].seq
         nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
         tgt_seq = tgt_seq[nt_pos:]
 
-        #TODO trim trailing residues in tgt_seq
+        # TODO trim trailing residues in tgt_seq
 
         templs = []
         knowns = []
-        for ch_id in self.sequences.data[target_chain]['chains']:
-            frgs = self.sequences.data[ch_id]['pdb'][target_model]['frgs']
+        for ch_id in self.sequences.data[target_model][target_chain]['chains']:
+            frgs = self.sequences.data[target_model][ch_id]['pdb']['frgs']
             pdb_seq = frgs[0].seq
             for i in range(1, len(frgs)):
                 frag_seq = frgs[i].seq
@@ -107,7 +107,6 @@ class ModellerManager():
 
         return self._automodel_run(alin_file, knowns)
 
-
     def _automodel_run(self, alin_file, knowns):
         amdl = AutoModel(
             self.env,
@@ -133,6 +132,7 @@ class ModellerManager():
         if not DEBUG:
             shutil.rmtree(self.tmpdir)
 
+
 def _write_alin(tgt_seq, templs, alin_file):
     SeqIO.write(
         [
@@ -153,5 +153,5 @@ class NoCanSeqError(Exception):
     | modeller_manager NoCanSeqError
     | Error raised when no canonical sequence exists
     """
-    def __init__(self, ch_id):
-        self.message = f"No canonical sequence found for chain {ch_id}"
+    def __init__(self, mod_id, ch_id):
+        self.message = f"No canonical sequence found for chain {ch_id}/{mod_id}"

@@ -228,7 +228,7 @@ class StructureManager:
 
         # Atom renumbering for mmCIF, PDB uses atom number in file
         self.st_data.atom_renumbering()
-        self.chains_data.set_chain_ids(self.st_data.biounit)
+        self.chains_data.set_chain_ids()
         self.st_data.calc_stats()
         self.st_data.guess_hetatm()
 
@@ -258,10 +258,10 @@ class StructureManager:
             ch_type = self.chains_data.get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
-            rcode3 = rcode # Normal residues
-            if len(rcode) == 4: # Protein terms
+            rcode3 = rcode  # Normal residues
+            if len(rcode) == 4:  # Protein terms
                 rcode3 = rcode[1:]
-            elif rcode[-1] in ('3', '5'): # NA Terms
+            elif rcode[-1] in ('3', '5'):  # NA Terms
                 rcode3 = rcode[:-1]
             can_rcode3 = self.data_library.get_canonical_resname(rcode3)
 
@@ -301,7 +301,6 @@ class StructureManager:
         self.revert_terms()
 
         self.st_data.has_charges = True
-
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -351,7 +350,7 @@ class StructureManager:
         prot_chains = 0
         chiral_bck_list = []
         for chn in self.st.get_chains():
-            if self.chains_data.chain_ids[chn.id] == mu.PROTEIN:
+            if self.chains_data.chain_ids[chn.get_parent().id][chn.id] == mu.PROTEIN:
                 prot_chains += 1
                 for res in chn.get_residues():
                     if res.get_resname() != 'GLY' and not mu.is_hetatm(res):
@@ -454,6 +453,7 @@ class StructureManager:
                 can_rcode = self.data_library.canonical_codes[res.get_resname()]
             else:
                 can_rcode = res.get_resname()
+            mod = res.get_parent().get_parent()
             ch_type = self.chains_data.get_chain_type(res)
             if ch_type == mu.UNKNOWN:
                 continue
@@ -469,7 +469,7 @@ class StructureManager:
                 res_at_list = residue_data[ch_type][can_rcode]
                 add_ats = []
                 if not self.is_5_term(res):
-                    if 'P' not in res_at_list['backbone']:  # fix to avoid add many groups
+                    if 'P' not in res_at_list['backbone']:  # fix to avoid add repeated groups
                         add_ats = ["P", "OP1", "OP2"]
                 extra_ats = mu.check_unk_at_in_r(
                     res,
@@ -559,7 +559,8 @@ class StructureManager:
                     continue
             # Skip NA
             # TODO include NA Backbone
-            if self.chains_data.chain_ids[res1.get_parent().id] != mu.PROTEIN:
+            chn1 = res1.get_parent()
+            if self.chains_data.chain_ids[chn1.get_parent().id][res1.get_parent().id] != mu.PROTEIN:
                 continue
 
             if res1 not in self.st_data.next_residue:
@@ -646,9 +647,15 @@ class StructureManager:
         return {
             'nmodels': self.models_data.nmodels,
             'models_type': self.models_data.models_type,
-            'nchains': len(self.chains_data.chain_ids),
-            'chain_ids': {k:mu.CHAIN_TYPE_LABELS[v] for k, v in self.chains_data.chain_ids.items()},
-            'chain_guess_details' : self.chains_data.chain_details,
+            'nchains': [len(self.chains_data.chain_ids[mod_id]) for mod_id in self.chains_data.chain_ids],
+            'chain_ids': [
+                {
+                    k:mu.CHAIN_TYPE_LABELS[v]
+                    for k, v in self.chains_data.chain_ids[mod_id].items()
+                }
+                for mod_id in self.chains_data.chain_ids
+            ],
+            'chain_guess_details' : [self.chains_data.chain_details[mod_id] for mod_id in self.chains_data.chain_details],
             'stats': self.st_data.stats,
             'ca_only': self.st_data.ca_only,
             'biounit': self.st_data.biounit,
@@ -1005,10 +1012,10 @@ class StructureManager:
             else:
                 self.save_structure(opj(mod_mgr.tmpdir, 'templ.pdb'))
 
-            for ch_id in self.chains_data.chain_ids:
+            for ch_id in self.chains_data.chain_ids[mod.id]:
                 if ch_id not in ch_to_fix:
                     continue
-                if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
+                if sequence_data.data[mod.id][ch_id]['pdb'][mod.id]['wrong_order']:
                     print(f"Warning: chain {ch_id} has a unusual residue numbering, skipping")
                 print(f"Fixing chain/model {ch_id}/{mod.id}")
 
@@ -1026,14 +1033,13 @@ class StructureManager:
                     opj(mod_mgr.tmpdir, model_pdb['name'])
                 )
 
-
                 modif_set_residues = self.merge_structure(
                     sequence_data,
                     model_st,
                     mod.id,
                     ch_id,
                     brk_list,
-                    sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
+                    sequence_data.data[mod.id][ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
                     extra_gap
                 ) #TODO consider use canonical numbering instead of defining offset
                 modif_residues += modif_set_residues
@@ -1058,11 +1064,11 @@ class StructureManager:
 
         modif_residues = []
 
-        for i in range(0, len(sequence_data.data[ch_id]['pdb'][mod_id]['frgs']) - 1):
-            loc_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[0].location
-            loc_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[0].location
-            seq_i = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
-            seq_ii = sequence_data.data[ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
+        for i in range(0, len(sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs']) - 1):
+            loc_i = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i].features[0].location
+            loc_ii = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i + 1].features[0].location
+            seq_i = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
+            seq_ii = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
 
             gap_start = loc_i.end
             gap_end = loc_ii.start
@@ -1124,7 +1130,7 @@ class StructureManager:
             # Find position if the 1st residue in the internal residue list
             pos = 0
             while pos < len(list_res) and\
-                self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
+                    self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
                 pos += 1
 
             res_pairs = []
@@ -1215,8 +1221,7 @@ class StructureManager:
         for res in self.st_data.all_residues:
             if mu.is_hetatm(res):
                 continue
-
-            protein_res = self.chains_data.chain_ids[res.get_parent().id] == mu.PROTEIN
+            protein_res = self.chains_data.get_chain_type(res) == mu.PROTEIN
 
             if remove_h:
                 mu.remove_H_from_r(res, verbose=False)
@@ -1561,17 +1566,18 @@ class StructureManager:
         mut_list = []
         i = 0
         nch = 0
-        for ch_id, chn in self.sequence_data.data.items():
-            start = chn['pdb'][0]['frgs'][0].features[0].location.start
-            seq = chn['pdb'][0]['frgs'][0].seq
-            if len(seq) != len(mut_seq[nch]):
-                raise SequencesDoNotMatch()
-            prefix = ''
-            if chn['pdb'][0]['type'] == mu.DNA:
-                prefix = 'D'
-            for i, r in enumerate(seq):
-                mut_list.append(f"{ch_id}:{prefix}{r}{start + i}{prefix}{mut_seq[nch][i]}")
-            nch += 1
+        for mod in self.st:
+            for ch_id, chn in self.sequence_data[mod.id].data.items():
+                start = chn['pdb'][0]['frgs'][0].features[0].location.start
+                seq = chn['pdb'][0]['frgs'][0].seq
+                if len(seq) != len(mut_seq[nch]):
+                    raise SequencesDoNotMatch()
+                prefix = ''
+                if chn['pdb'][0]['type'] == mu.DNA:
+                    prefix = 'D'
+                for i, r in enumerate(seq):
+                    mut_list.append(f"{ch_id}/{mod.id}:{prefix}{r}{start + i}{prefix}{mut_seq[nch][i]}")
+                nch += 1
         return ','.join(mut_list)
 # ===============================================================================
 def _guess_modeller_env():
