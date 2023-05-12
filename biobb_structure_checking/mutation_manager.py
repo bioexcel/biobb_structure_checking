@@ -11,6 +11,7 @@ ADD = 'Add'
 DEL = 'Del'
 MOV = 'Mov'
 
+
 class MutationManager():
     """ Class to manage list of mutations. """
     def __init__(self, id_list, chain_ids):
@@ -21,12 +22,16 @@ class MutationManager():
             id_list = id_list.replace('file:', '')
             print(f'Reading mutation list from file {id_list}')
             self.id_list = [
-                line.replace('\n', '').replace('\r', '') for line in open(id_list, 'r')
+                line.replace('\n', '').replace('\r', '')
+                for line in open(id_list, 'r')
             ]
         else:
             self.id_list = id_list.replace(' ', '').split(',')
-        #convert to list ids to MutationSet instances and make the list
-        self.mutation_list = [MutationSet(mut_id, self.chain_ids) for mut_id in self.id_list]
+        # convert to list ids to MutationSet instances and make the list
+        self.mutation_list = [
+            MutationSet(mut_id, self.chain_ids)
+            for mut_id in self.id_list
+        ]
 
     def prepare_mutations(self, struc, stop_on_error=True):
         """  Check mutation_list and unroll chains/models."""
@@ -42,8 +47,9 @@ class MutationManager():
 
     def __str__(self):
         return ','.join(self.id_list)
+# ===============================================================================
 
-#===============================================================================
+
 class MutationSet():
     """ Class to manage instances of a mutation. """
     def __init__(self, mut_id, chain_ids):
@@ -59,7 +65,8 @@ class MutationSet():
         self.new_id = mut_comps.group(3).upper()
         self.res_num = mut_comps.group(2)
 
-        self.id = ''.join([self.chain, ":", self.old_id, self.res_num, self.new_id])
+        self.id = f"{self.chain}:{self.old_id}{self.res_num}{self.new_id}"
+
         self.mutations = []
 
     def prepare(self, struc, stop_on_error=True):
@@ -67,20 +74,30 @@ class MutationSet():
         mut_ok = 0
         for model in struc.get_models():
             if self.chain == '*':
-                chains = self.chain_ids.keys()
+                chains = self.chain_ids[model.id].keys()
             else:
                 chains = [self.chain]
-
             for chn in chains:
-                old_id = mu.valid_residue_check(self.old_id, self.chain_ids[chn])
-                new_id = mu.valid_residue_check(self.new_id, self.chain_ids[chn])
+                if '/' in chn:
+                    chn, mod = chn.split('/')
+                    mod = int(mod)
+                    if mod != model.id:
+                        continue
+                old_id = mu.valid_residue_check(
+                    self.old_id,
+                    self.chain_ids[model.id][chn]
+                )
+                new_id = mu.valid_residue_check(
+                    self.new_id,
+                    self.chain_ids[model.id][chn]
+                )
                 if int(self.res_num) in model[chn]:
                     res = model[chn][int(self.res_num)]
                     if res.get_resname() == old_id:
                         self.mutations.append({
                             'model':model.get_id(),
                             'chain':chn,
-                            'type': self.chain_ids[chn],
+                            'type': self.chain_ids[model.id][chn],
                             'residue':old_id,
                             'new_id':new_id,
                             'resobj': res
@@ -99,7 +116,7 @@ class MutationSet():
         mutated_res = []
         for mut in self.mutations:
             res = mut['resobj']
-            #struc[mut['model']][mut['chain']][mut['residue']]
+            # struc[mut['model']][mut['chain']][mut['residue']]
             rname = res.get_resname().replace(' ', '')
             # Deleting H
             if remove_h == 'mut':
@@ -130,7 +147,7 @@ class MutationSet():
             print(f"Replacing {mu.residue_id(res)} into {mut['new_id']}")
             in_rules = []
             extra_adds = []
-             # Deleting atoms
+            # Deleting atoms
             if DEL in mut_map[rname][mut['new_id']]:
                 for at_id in mut_map[rname][mut['new_id']][DEL]:
                     print(f'  Deleting {at_id}')
@@ -164,7 +181,7 @@ class MutationSet():
                 for at_id in mut_map[rname][mut['new_id']][ADD]:
                     print(f'  Adding new atom {at_id}')
                     mu.build_atom(res, at_id, res_lib, mut['new_id'])
-            #Renaming residue
+            # Renaming residue
             res.resname = mut['new_id']
             mutated_res.append(res)
         print("")

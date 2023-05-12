@@ -97,17 +97,17 @@ class ChainsData():
                 if chn_0 == chn_1: # chain shift
                     tmp_ch_id = _get_tmp_ch_id(self.st[0])
                     renum_to_do.append([
-                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                        {'mod': 0, 'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'mod': 0, 'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
                     ])
                     renum_to_do.append([
-                        {'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
-                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1},
+                        {'mod': 0, 'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                        {'mod': 0, 'chn':chn_1, 'ini': ini_1, 'fin':fin_1},
                     ])
                 else:
                     renum_to_do.append([
-                        {'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                        {'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
+                        {'mod': 0, 'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
+                        {'mod': 0, 'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
                     ])
             else:
                 # replicate for all chains
@@ -118,6 +118,8 @@ class ChainsData():
                     )
                     sys.exit()
                 for mod in self.st:
+                    if mod.id > 0:
+                        continue  # Not implemented for multiple models
                     for ch_id in self.chain_ids[mod.id]:
                         renum_to_do.append([
                             {'mod': mod.id, 'chn':ch_id, 'ini':ini_0, 'fin':fin_0},
