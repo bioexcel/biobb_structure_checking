@@ -37,10 +37,10 @@ load:
 	${COMMON};${APPBIN} -v -i pdb:4mdh load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:6m0j load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server mmb load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1ldn.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 load >> load_cache.log
 
 models: 
 	@echo "Running models on 1ark"
@@ -157,13 +157,13 @@ dnamut:
 biounits:
 	@echo "Running checkall on biounits"
 	@echo " 1ldn.1 "
-	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --non_interactive checkall > 1ldn1_checkall_test.log
 	@echo " 2ki5.1 "
-	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server bsc  --non_interactive checkall > 2ki5_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --non_interactive checkall > 2ki5_checkall_test.log
 	@echo " 1vtk.1 "
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall > 1vtk_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --non_interactive checkall > 1vtk_checkall_test.log
 	@echo " 1svc.1 "
-	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server bsc  --non_interactive checkall > 1svc_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 --non_interactive checkall > 1svc_checkall_test.log
 
 add_hydrogen:
 	@echo "Running add_hydrogen on 1ubq"
@@ -189,7 +189,7 @@ all_checks:
 	@echo " 1svc "
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 	@echo " 1vtk.1 "
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_svc_all_test.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_svc_all_test.log
 
 diffs:
 	cd ${TESTDIR};scripts/calcDiffs.csh
