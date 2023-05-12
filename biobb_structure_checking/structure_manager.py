@@ -729,10 +729,20 @@ class StructureManager:
         """
         if not output_pdb_path:
             raise OutputPathNotProvidedError
+
+        chain_labels_chr = True
+        for chn in self.st.get_chains():
+            chain_labels_chr = chain_labels_chr and len(chn.id) == 1
+
         if output_format in ('cif', 'mmCif'):
             io = MMCIFIO()
         else:
-            io = PDBIO_extended(is_pqr=self.st_data.has_charges, output_format=output_format)
+            if not chain_labels_chr:
+                print("WARNING: current structure cannot be saved as PDB, using mmCIF instead")
+                io = MMCIFIO()
+                output_pdb_path += ".cif"
+            else:
+                io = PDBIO_extended(is_pqr=self.st_data.has_charges, output_format=output_format)
 
         if rename_terms:
             self.rename_terms(self.get_term_res())
@@ -1397,9 +1407,9 @@ class StructureManager:
             for mut in mut_set.mutations:
                 mu.remove_residue(mut['resobj'])
         mutated_sequence_data.read_structure_seqs(self)
-        mutated_sequence_data.match_sequence_numbering()
+        mutated_sequence_data.match_sequence_numbering(self)
 
-        #TODO Not tested, to be used on changes in the NTerm residue
+        # TODO Not tested, to be used on changes in the NTerm residue
         extra_NTerm = 0
         mutated_res = self.run_modeller(
             ch_to_fix,
@@ -1564,24 +1574,26 @@ class StructureManager:
             mut_seq = new_seq.split(':')
         else:
             mut_seq = [new_seq, mu.rev_complement_na_seq(new_seq)]
-        #Prepared for std Duplexes
+        # Prepared for std Duplexes
         mut_list = []
         i = 0
         nch = 0
         for mod in self.st:
-            for ch_id, chn in self.sequence_data[mod.id].data.items():
-                start = chn['pdb'][0]['frgs'][0].features[0].location.start
-                seq = chn['pdb'][0]['frgs'][0].seq
+            for ch_id, chn in self.sequence_data.data[mod.id].items():
+                start = chn['pdb']['frgs'][0].features[0].location.start
+                seq = chn['pdb']['frgs'][0].seq
                 if len(seq) != len(mut_seq[nch]):
                     raise SequencesDoNotMatch()
                 prefix = ''
-                if chn['pdb'][0]['type'] == mu.DNA:
+                if chn['pdb']['type'] == mu.DNA:
                     prefix = 'D'
                 for i, r in enumerate(seq):
                     mut_list.append(f"{ch_id}/{mod.id}:{prefix}{r}{start + i}{prefix}{mut_seq[nch][i]}")
                 nch += 1
         return ','.join(mut_list)
 # ===============================================================================
+
+
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
@@ -1597,6 +1609,7 @@ def _guess_modeller_env():
     print("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
+
 class WrongServerError(Exception):
     def __init__(self):
         self.message = 'ERROR: Biounits supported only on MMB server'
