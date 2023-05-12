@@ -17,13 +17,14 @@ def check(strcheck):
         'ion_res_list': ion_res_list,
     }
     print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
+
     for res_type in strcheck.strucm.data_library.residue_codes['protein']:
         residue_list = [
             mu.residue_num(r_at[0])
             for r_at in ion_res_list
             if r_at[0].get_resname() == res_type
         ]
-        if residue_list:
+        if residue_list and strcheck.args['verbose']:
             print(f" {res_type} {','.join(residue_list)}")
 
     strcheck.summary['add_hydrogen']['ionic_detected'] = [
