@@ -15,7 +15,7 @@ class ChainsData():
         """ Print chains info """
         chids = {}
         num_chains = 0
-        chains_str = ""
+        chains_str = []
         for mod in self.st:
             chids[mod.id] = []
             for ch_id in sorted(self.chain_ids[mod.id]):
@@ -35,9 +35,11 @@ class ChainsData():
                     )
                 else:
                     chids[mod.id].append(f"{ch_id}{mod_txt}: {mu.CHAIN_TYPE_LABELS[self.chain_ids[mod.id][ch_id]]}")
-                num_chains += len(self.chain_ids[mod.id])
-                chains_str += ', '.join(chids[mod.id])
-        return f"{prefix} Num. chains: {num_chains} ({chains_str})"
+
+            num_chains += len(self.chain_ids[mod.id])
+            chains_str.append(', '.join(chids[mod.id]))
+
+        return f"{prefix} Num. chains: {num_chains} ({'|'.join(chains_str)})"
 
     def set_chain_ids(self) -> None:
         """

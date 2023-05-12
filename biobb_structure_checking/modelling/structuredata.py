@@ -162,6 +162,8 @@ class StructureData():
                 self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
+        if self.meta['entry_id'] == 'XXXX':
+            self.meta['entry_id'] = self.st.id
 
     def print_headers(self) -> None:
         """
@@ -169,8 +171,12 @@ class StructureData():
         """
         self.get_headers()
         if 'entry_id' in self.meta:
+            if self.biounit:
+                asstxt = f"(Assembly {self.meta['biounit']})"
+            else:
+                asstxt = ""
             print(
-                f" PDB id: {self.meta['entry_id']}\n"
+                f" PDB id: {self.meta['entry_id']} {asstxt}\n"
                 f" Title: {self.meta['title']}\n"
                 f" Experimental method: {self.meta['method']}"
             )
@@ -178,8 +184,6 @@ class StructureData():
             print(f" Keywords: {self.meta['keywords']}")
         if 'resolution' in self.meta:
             print(f" Resolution (A): {self.meta['resolution']}")
-        if self.biounit:
-            print(f" Biounit no. {self.meta['biounit']}")
 
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic

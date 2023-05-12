@@ -274,7 +274,7 @@ class StructureChecking():
                 else:
                     opts = {}
             else:
-                #Adding default parameters
+                # Adding default parameters
                 if cts.DIALOGS.exists(command):
                     defaults = cts.DIALOGS.get_parameter(command, '')
                     for k in defaults:

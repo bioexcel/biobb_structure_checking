@@ -123,7 +123,7 @@ class StructureManager:
     ):
         """ Load structure file """
         biounit = False
-        pdb_id = 'User'
+        self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
             # MMBPDBList child defaults to Bio.PDB.PDBList if MMB/BSC server is not selected
@@ -141,6 +141,7 @@ class StructureManager:
                     real_pdb_path = pdbl.retrieve_assembly_file(
                         input_pdb_path, biounit, nocache=nocache
                     )
+                self.pdb_id = pdbid
             else:
                 if '.' in input_pdb_path:
                     pdbid, file_format = input_pdb_path.split('.')
@@ -151,6 +152,7 @@ class StructureManager:
                             f"reverting to default"
                         )
                         file_format = 'cif'
+                    self.pdb_id = pdbid
                 else:
                     input_pdb_path = input_pdb_path.upper()
 
@@ -160,7 +162,7 @@ class StructureManager:
                 real_pdb_path = pdbl.retrieve_pdb_file(
                     input_pdb_path, file_format=file_format, nocache=nocache
                 )
-                pdb_id = input_pdb_path
+                self.pdb_id = input_pdb_path
                 if file_format == 'pdb':
                     # change file name to id.pdb
                     new_path = opj(os.path.dirname(real_pdb_path), f"{input_pdb_path.lower()}.pdb")
@@ -195,7 +197,7 @@ class StructureManager:
             raise UnknownFileTypeError(input_pdb_path)
 
         try:
-            new_st = parser.get_structure(pdb_id, real_pdb_path)
+            new_st = parser.get_structure(self.pdb_id, real_pdb_path)
         except ValueError as err:
             raise ParseError('ValueError', err) from err
         except PDBConstructionException as err:
@@ -650,7 +652,7 @@ class StructureManager:
             'nchains': [len(self.chains_data.chain_ids[mod_id]) for mod_id in self.chains_data.chain_ids],
             'chain_ids': [
                 {
-                    k:mu.CHAIN_TYPE_LABELS[v]
+                    k: mu.CHAIN_TYPE_LABELS[v]
                     for k, v in self.chains_data.chain_ids[mod_id].items()
                 }
                 for mod_id in self.chains_data.chain_ids
@@ -687,7 +689,7 @@ class StructureManager:
         """
 
         print(self.models_data.stats(prefix))
-        print(self.chains_data.stats(prefix))
+        print(self.chains_data.stats(prefix, use_models=self.models_data.has_models()))
         st_stats = self.get_stats()
         print(f"{prefix} Num. residues:  {st_stats['stats']['num_res']}\n"
               f"{prefix} Num. residues with ins. codes:  {st_stats['stats']['res_insc']}")
