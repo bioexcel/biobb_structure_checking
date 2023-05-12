@@ -986,7 +986,7 @@ class StructureManager:
             extra_gap: int = 0,
             extra_NTerm: int = 0,
             sequence_data=None
-        ):
+    ):
         """ Runs modeller
             Args:
                 *ch_to_fix* (list(str)): List of chain ids to be fixed
@@ -1027,7 +1027,7 @@ class StructureManager:
             for ch_id in self.chains_data.chain_ids[mod.id]:
                 if ch_id not in ch_to_fix:
                     continue
-                if sequence_data.data[mod.id][ch_id]['pdb'][mod.id]['wrong_order']:
+                if sequence_data.data[mod.id][ch_id]['pdb']['wrong_order']:
                     print(f"Warning: chain {ch_id} has a unusual residue numbering, skipping")
                 print(f"Fixing chain/model {ch_id}/{mod.id}")
 
@@ -1051,9 +1051,9 @@ class StructureManager:
                     mod.id,
                     ch_id,
                     brk_list,
-                    sequence_data.data[mod.id][ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
+                    sequence_data.data[mod.id][ch_id]['pdb']['frgs'][0].features[0].location.start,
                     extra_gap
-                ) #TODO consider use canonical numbering instead of defining offset
+                )  #TODO consider use canonical numbering instead of defining offset
                 modif_residues += modif_set_residues
 
         return modif_residues
@@ -1076,11 +1076,11 @@ class StructureManager:
 
         modif_residues = []
 
-        for i in range(0, len(sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs']) - 1):
-            loc_i = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i].features[0].location
-            loc_ii = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i + 1].features[0].location
-            seq_i = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i].features[2].location
-            seq_ii = sequence_data.data[mod_id][ch_id]['pdb'][mod_id]['frgs'][i + 1].features[2].location
+        for i in range(0, len(sequence_data.data[mod_id][ch_id]['pdb']['frgs']) - 1):
+            loc_i = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i].features[0].location
+            loc_ii = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i + 1].features[0].location
+            seq_i = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i].features[2].location
+            seq_ii = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i + 1].features[2].location
 
             gap_start = loc_i.end
             gap_end = loc_ii.start
@@ -1090,7 +1090,7 @@ class StructureManager:
             seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
-                #Checking for incomplete gap build needed for fixing side chains with rebuild
+                # Checking for incomplete gap build needed for fixing side chains with rebuild
                 n_br = 0
                 while n_br < len(brk_list) - 1 and \
                         (self.st[mod_id][ch_id][gap_start] != brk_list[n_br][0]) and\
@@ -1118,7 +1118,7 @@ class StructureManager:
             fixed_ats = []
             moving_ats = []
 
-            #checking whether there is a chain id in the model (Support for Modeller >= 10)
+            # checking whether there is a chain id in the model (Support for Modeller >= 10)
             new_ch_id = new_st[0].child_list[0].id
 
             for nres in range(loc_i.start, loc_i.end):

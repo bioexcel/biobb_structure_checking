@@ -160,7 +160,7 @@ class SequenceData():
                         max_score = max([match[2] for match in seq_matches])
                         for match in seq_matches:
                             if match[2] > IDENT_THRES * max_score:
-                                self.data[mod.id][ch_id]['chains'].append(match[0])
+                                self.data[mod.id][ch_id]['chains'].append(match[1])
 
             self.has_canonical[mod.id] = {}
             for ch_id in strucm.chains_data.chain_ids[mod.id]:
