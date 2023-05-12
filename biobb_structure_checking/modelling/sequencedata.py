@@ -99,14 +99,18 @@ class SequenceData():
         if not strucm.chains_data.chain_ids:
             strucm.chains_data.set_chain_ids()
 
+        has_models = strucm.models_data.has_models()
+
         if self.fasta:
             hits = self.match_chain_seqs()
-            modids = [h['mod_id'] for h in hits]
             chids = [h['ch_id'] for h in hits]
             seqs = [h['seq'] for h in hits]
             print('Getting canonical sequences from matching FASTA input')
             for hit in sorted(hits, key=lambda hit: hit['ch_id']):
-                print(f"{hit['ch_id']}/{hit['mod_id']}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
+                modtxt = ''
+                if has_models:
+                    modtxt = f"/{hit['mod_id']}"
+                print(f"{hit['ch_id']}{modtxt}: \"{hit['desc']}\", score: {hit['score']} {hit['low']}")
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
@@ -139,11 +143,16 @@ class SequenceData():
                         new_seq = Seq(seqs[index].replace('\n', ''), IUPAC.protein)
                     else:
                         new_seq = Seq(seqs[index].replace('\n', ''))
+                    modtxt = ''
+                    modtxt2 = ''
+                    if has_models:
+                        modtxt = f"/{mod.id}"
+                        modtxt2 = f" model {mod.id}"
                     self.data[mod.id][ch_id]['can'] = SeqRecord(
                         new_seq,
-                        f"can_sq_{ch_id}/{mod.id}",
-                        f"can_sq_{ch_id}/{mod.id}",
-                        f"canonical sequence chain {ch_id} model {mod.id}"
+                        f"can_sq_{ch_id}{modtxt}",
+                        f"can_sq_{ch_id}{modtxt}",
+                        f"canonical sequence chain {ch_id}{modtxt2}"
                     )
                     self.data[mod.id][ch_id]['can'].features.append(
                         SeqFeature(FeatureLocation(1, len(seqs[index])))
@@ -273,6 +282,7 @@ class SequenceData():
             strucm (StructureManager) : Object containing the loaded structure
             mutations (MutationsManager) : Object containing the list of mutations to perform
         """
+        has_models = strucm.models_data.has_models()
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
         for mod in strucm.st:
@@ -308,11 +318,16 @@ class SequenceData():
                     new_seq = Seq(str(seq).replace('\n', ''), IUPAC.protein)
                 else:
                     new_seq = Seq(str(seq).replace('\n', ''))
+                modtxt = ''
+                modtxt2 = ''
+                if has_models:
+                    modtxt = f"/{mod.id}"
+                    modtxt2 = f" Model {mod.id}"
                 self.data[mod.id][ch_id]['can'] = SeqRecord(
                     new_seq,
-                    f"csq_{ch_id}/{mod.id}",
-                    f"csq_{ch_id}/{mod.id}",
-                    f"canonical sequence chain {ch_id} Model {mod.id}",
+                    f"csq_{ch_id}{modtxt}",
+                    f"csq_{ch_id}{modtxt}",
+                    f"canonical sequence chain {ch_id}{modtxt2}",
                     annotations={'molecule_type':'protein'}
                 )
                 self.data[mod.id][ch_id]['can'].features.append(
@@ -336,6 +351,7 @@ class SequenceData():
         """ SequenceData.get_pdbseq
         Prepares a FASTA string with the structure sequence, and fragments
         """
+        has_models = len(self.data) > 1
         # TODO re-use this on modeller_manager
         outseq = ''
         for mod_id, data in self.data.items():
@@ -358,10 +374,12 @@ class SequenceData():
                         pdb_seq = Seq(alin[0][1], IUPAC.protein)
                     else:
                         pdb_seq = Seq(alin[0][1])
-
+                    modtxt = ''
+                    if has_models:
+                        modtxt = f"/{mod_id}"
                     seq = SeqRecord(
                         pdb_seq,
-                        f"pdb_sq_{ch_id}/{mod_id}",
+                        f"pdb_sq_{ch_id}{modtxt}",
                         '',
                         'Frags: ' + ','.join(frags_num)
                     )
