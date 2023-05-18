@@ -4,6 +4,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     alt_loc_res = strcheck.strucm.get_altloc_residues()
     if not alt_loc_res:
@@ -16,8 +17,8 @@ def check(strcheck):
     strcheck.summary['altloc'] = {}
 
     fix_data = {
-        'alt_loc_res' : alt_loc_res,
-        'altlocs' : {}
+        'alt_loc_res': alt_loc_res,
+        'altlocs': {}
     }
 
     for res in sorted(alt_loc_res, key=lambda x: x.index):
@@ -38,6 +39,7 @@ def check(strcheck):
 
     return fix_data
 
+
 def fix(strcheck, opts, fix_data=None):
 
     if isinstance(opts, str):
@@ -53,7 +55,11 @@ def fix(strcheck, opts, fix_data=None):
             altlocs = fix_data['altlocs'][res]
             max_al_len = len(fix_data['altlocs'][res])
 
-    input_line = ParamInput('Select alternative', strcheck.args['non_interactive'], set_none='All')
+    input_line = ParamInput(
+        'Select alternative',
+        strcheck.args['non_interactive'],
+        set_none='All'
+    )
     input_line.add_option_all()
     input_line.add_option_list('occup', ['occupancy'])
     input_line.add_option_list('altids', altlocs, case='upper')
@@ -90,9 +96,9 @@ def fix(strcheck, opts, fix_data=None):
                 rnum, alt = rsel.split(':')
                 selected_rnums[rnum] = alt
             to_fix = {
-                res : {
-                    'ats' : value,
-                    'select' : selected_rnums[mu.residue_num(res)]
+                res: {
+                    'ats': value,
+                    'select': selected_rnums[mu.residue_num(res)]
                 }
                 for res, value in fix_data['alt_loc_res'].items()
                 if mu.residue_num(res) in selected_rnums

@@ -1,12 +1,7 @@
-# Copyright (C) 2002, Thomas Hamelryck (thamelry@binf.ku.dk)
-# This code is part of the Biopython distribution and governed by its
-# license.  Please see the LICENSE file that should have been included
-# as part of this package.
-
-"""Consumer class that builds a Structure object, ignoring Chain labels and Residue Ids.
-User to recover coordinates from incorrect PDB/mmCif files
-
-This is used by the PDBParser and MMCIFparser classes.
+""" Consumer class that builds a Structure object,
+    ignoring Chain labels and Residue Ids.
+    User to recover coordinates from incorrect PDB/mmCif files
+    This is used by the PDBParser and MMCIFparser classes.
 """
 
 from Bio.PDB.StructureBuilder import StructureBuilder
@@ -15,9 +10,11 @@ from Bio.PDB.StructureBuilder import StructureBuilder
 from Bio.PDB.Chain import Chain
 from Bio.PDB.Residue import Residue
 
+
 class BareStructureBuilder(StructureBuilder):
-    """Deals with constructing the Structure object. Discards original chain labels and residue ids.
-    Used to rebuild faulty structure files
+    """ Deals with constructing the Structure object.
+        Discards original chain labels and residue ids.
+        Used to rebuild faulty structure files
     """
 
     def __init__(self):

@@ -26,9 +26,9 @@ try:
 except ImportError:
     sys.exit("Error importing Modeller package")
 
-
 TMP_BASE_DIR = '/tmp'
 DEBUG = False
+
 
 class ModellerManager():
     """
@@ -57,7 +57,8 @@ class ModellerManager():
         Args:
             target_model (int) : Model to repair
             target_chain (str) : Chain to repair
-            extra_NTerm_res (int) : Number of additional residues at NTerm (to fix NTerm, experimental)
+            extra_NTerm_res (int) : Number of additional residues
+                at NTerm (to fix NTerm, experimental)
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
@@ -92,18 +93,21 @@ class ModellerManager():
             templs.append(
                 SeqRecord(
                     pdb_seq,
-                    'templ' + ch_id,
-                    '',
-                    f"structureX:{self.templ_file}:{frgs[0].features[0].location.start}:{ch_id}:{frgs[-1].features[0].location.end}:{ch_id}:::-1.00: -1.00'",
-                    annotations={'molecule_type':'protein'} # required for writing PIR aligment
+                    f"templ{ch_id}",
+                    "",
+                    f"structureX:{self.templ_file}:"
+                    f"{frgs[0].features[0].location.start}:"
+                    f"{ch_id}:{frgs[-1].features[0].location.end}:"
+                    f"{ch_id}:::-1.00: -1.00",
+                    annotations={'molecule_type': 'protein'}  # required for writing PIR aligment
                 )
             )
-            knowns.append('templ' + ch_id)
+            knowns.append(f'templ{ch_id}')
 
             if ch_id == target_chain:
                 tgt_seq = tgt_seq[0:len(pdb_seq)]
 
-        _write_alin(tgt_seq, templs, alin_file)
+        _write_align(tgt_seq, templs, alin_file)
 
         return self._automodel_run(alin_file, knowns)
 
@@ -118,8 +122,8 @@ class ModellerManager():
         amdl.starting_model = 1
         amdl.ending_model = 1
 
-        #amdl.loop.starting_model = 1
-        #amdl.loop.ending_model = 1
+        # amdl.loop.starting_model = 1
+        # amdl.loop.ending_model = 1
 
         orig_dir = os.getcwd()
         os.chdir(self.tmpdir)
@@ -133,7 +137,7 @@ class ModellerManager():
             shutil.rmtree(self.tmpdir)
 
 
-def _write_alin(tgt_seq, templs, alin_file):
+def _write_align(tgt_seq, templs, alin_file):
     SeqIO.write(
         [
             SeqRecord(
@@ -141,12 +145,13 @@ def _write_alin(tgt_seq, templs, alin_file):
                 'target',
                 '',
                 'sequence:target:::::::0.00: 0.00',
-                annotations={'molecule_type':'protein'}
+                annotations={'molecule_type': 'protein'}
             )
         ] + templs,
         alin_file,
         'pir'
     )
+
 
 class NoCanSeqError(Exception):
     """

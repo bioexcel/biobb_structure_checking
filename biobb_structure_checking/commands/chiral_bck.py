@@ -3,6 +3,7 @@
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 
+
 def check(strcheck):
     check_lst = strcheck.strucm.get_chiral_bck_list()
     if 'list' not in check_lst:
@@ -25,6 +26,7 @@ def check(strcheck):
         strcheck.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
     return {}
+
 
 def fix(strcheck, opts, fix_data):
     pass

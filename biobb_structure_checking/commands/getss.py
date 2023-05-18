@@ -4,6 +4,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     SS_bonds = strcheck.strucm.get_SS_bonds()
     if not SS_bonds:
@@ -18,15 +19,13 @@ def check(strcheck):
             f" {mu.atom_id(ssb[1]):12}"
             f" {ssb[2]:8.3f}"
         )
-
-        strcheck.summary['getss']['found'].append(
-            {
-                'at1':mu.atom_id(ssb[0]),
-                'at2':mu.atom_id(ssb[1]),
-                'dist': round(float(ssb[2]), 4)
-            }
-        )
+        strcheck.summary['getss']['found'].append({
+            'at1': mu.atom_id(ssb[0]),
+            'at2': mu.atom_id(ssb[1]),
+            'dist': round(float(ssb[2]), 4)
+        })
     return SS_bonds
+
 
 def fix(strcheck, opts, fix_data=None):
     if not fix_data:
@@ -64,7 +63,10 @@ def fix(strcheck, opts, fix_data=None):
         if input_option == 'all' or pair_id in getss_mark.split(','):
             cys_to_mark.append(pair[0].get_parent())
             cys_to_mark.append(pair[1].get_parent())
-    strcheck.summary['getss']['marked'] = [mu.residue_id(a) for a in cys_to_mark]
+    strcheck.summary['getss']['marked'] = [
+        mu.residue_id(a)
+        for a in cys_to_mark
+    ]
     strcheck.strucm.mark_ssbonds(cys_to_mark)
     strcheck.strucm.update_internals()
     return False

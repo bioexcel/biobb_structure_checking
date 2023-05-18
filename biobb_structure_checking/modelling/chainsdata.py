@@ -3,6 +3,7 @@ import sys
 from Bio.PDB.Chain import Chain
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.modelling.residue_set import ResidueSetList
+
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
     def __init__(self, st):
@@ -34,7 +35,10 @@ class ChainsData():
                         f" UNK:{self.chain_details[mod.id][ch_id][3]:.1%}"
                     )
                 else:
-                    chids[mod.id].append(f"{ch_id}{mod_txt}: {mu.CHAIN_TYPE_LABELS[self.chain_ids[mod.id][ch_id]]}")
+                    chids[mod.id].append(
+                        f"{ch_id}{mod_txt}:"
+                        f" {mu.CHAIN_TYPE_LABELS[self.chain_ids[mod.id][ch_id]]}"
+                    )
 
             num_chains += len(self.chain_ids[mod.id])
             chains_str.append(', '.join(chids[mod.id]))
@@ -43,7 +47,8 @@ class ChainsData():
 
     def set_chain_ids(self) -> None:
         """
-        Identifies and sets the chain ids, guessing its nature (protein, dna, rna, ...)
+        Identifies and sets the chain ids, guessing its nature
+        (protein, dna, rna, ...)
         """
         self.chain_ids = {}
         self.chain_details = {}
@@ -66,7 +71,8 @@ class ChainsData():
         for mod in self.st:
             if new_label == 'auto':
                 new_label_char = 65
-                while chr(new_label_char) in self.chain_ids[mod.id] and new_label_char < ord('z'):
+                while chr(new_label_char) in self.chain_ids[mod.id]\
+                        and new_label_char < ord('z'):
                     new_label_char = +1
                 new_label = chr(new_label_char)
             for chn in mod:
@@ -97,17 +103,17 @@ class ChainsData():
                 if chn_0 == chn_1: # chain shift
                     tmp_ch_id = _get_tmp_ch_id(self.st[0])
                     renum_to_do.append([
-                        {'mod': 0, 'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                        {'mod': 0, 'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
+                        {'mod': 0, 'chn': chn_0, 'ini': ini_0, 'fin': fin_0},
+                        {'mod': 0, 'chn': tmp_ch_id, 'ini': ini_1, 'fin': fin_1},
                     ])
                     renum_to_do.append([
-                        {'mod': 0, 'chn':tmp_ch_id, 'ini': ini_1, 'fin':fin_1},
-                        {'mod': 0, 'chn':chn_1, 'ini': ini_1, 'fin':fin_1},
+                        {'mod': 0, 'chn': tmp_ch_id, 'ini': ini_1, 'fin': fin_1},
+                        {'mod': 0, 'chn': chn_1, 'ini': ini_1, 'fin': fin_1},
                     ])
                 else:
                     renum_to_do.append([
-                        {'mod': 0, 'chn':chn_0, 'ini': ini_0, 'fin':fin_0},
-                        {'mod': 0, 'chn':chn_1, 'ini': ini_1, 'fin':fin_1}
+                        {'mod': 0, 'chn': chn_0, 'ini': ini_0, 'fin': fin_0},
+                        {'mod': 0, 'chn': chn_1, 'ini': ini_1, 'fin': fin_1}
                     ])
             else:
                 # replicate for all chains
@@ -122,8 +128,8 @@ class ChainsData():
                         continue  # Not implemented for multiple models
                     for ch_id in self.chain_ids[mod.id]:
                         renum_to_do.append([
-                            {'mod': mod.id, 'chn':ch_id, 'ini':ini_0, 'fin':fin_0},
-                            {'mod': mod.id, 'chn':ch_id, 'ini':ini_1, 'fin':fin_1}
+                            {'mod': mod.id, 'chn': ch_id, 'ini': ini_0, 'fin': fin_0},
+                            {'mod': mod.id, 'chn': ch_id, 'ini': ini_1, 'fin': fin_1}
                         ])
         return renum_to_do
 
@@ -194,13 +200,14 @@ class ChainsData():
                 #             f" consider using --coords_only")
                 #         sys.exit()
                 if org['ini'] == tgt['ini'] and\
-                    org['fin'] == tgt['fin'] and\
-                    org['ini'] == n_term.id[1] and\
-                    org['fin'] == c_term.id[1] and\
-                    tgt['chn'] not in mod:
+                        org['fin'] == tgt['fin'] and\
+                        org['ini'] == n_term.id[1] and\
+                        org['fin'] == c_term.id[1] and\
+                        tgt['chn'] not in mod:
                     if verbose:
                         print(
-                            f"Whole chains selected, just replacing chain labels from {org['chn']}"
+                            f"Whole chains selected, just replacing chain"
+                            f" labels from {org['chn']}"
                             f" to {tgt['chn']}"
                         )
                     mod[org['chn']].id = tgt['chn']
@@ -236,8 +243,8 @@ class ChainsData():
                         col_res = _check_collision(new_res, new_ch)
                         if col_res:
                             print(
-                                f"ERROR. New residue {mu.residue_id(new_res)} collides "
-                                f"with existing {mu.residue_id(col_res)}"
+                                f"ERROR. New residue {mu.residue_id(new_res)}"
+                                f" collides with existing {mu.residue_id(col_res)}"
                             )
                             sys.exit()
                         new_ch.add(new_res)
@@ -261,7 +268,9 @@ class ChainsData():
         for rset in sorted(build_chains.sets, key=lambda ss: ss.id):
             print(f" {rset}")
             new_chid = rset.id
-            renumber_rules.append(f"{rset.inir.get_parent().id}:{rset.inir.id[1]}-{rset.finr.id[1]}={new_chid}:")
+            renumber_rules.append(
+                f"{rset.inir.get_parent().id}:{rset.inir.id[1]}-{rset.finr.id[1]}={new_chid}:"
+            )
             fin_chid = chr(ord('A') + int(new_chid) - 1)
             recover_chain_rules.append(f"{new_chid}:={fin_chid}:")
         self.renumber(','.join(renumber_rules))
@@ -346,11 +355,7 @@ def _get_tmp_ch_id(mod):
 
 
 def _check_collision(new_res, new_ch):
-    found = False
     for res in new_ch.get_residues():
         if res.id[1] == new_res.id[1]:
-            found = True
-            break
-    if found:
-        return res
+            return res
     return None

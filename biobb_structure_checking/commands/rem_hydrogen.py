@@ -3,6 +3,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     """ Check for existing hydrogens atoms"""
     remh_list = mu.get_residues_with_H(strcheck.strucm.st)
@@ -14,6 +15,7 @@ def check(strcheck):
     print(cts.MSGS['RESIDUES_H_FOUND'].format(len(remh_list)))
     strcheck.summary['rem_hydrogen']['n_detected'] = len(remh_list)
     return {'remh_list': remh_list}
+
 
 def fix(strcheck, opts, fix_data=None):
     """ Removes selected hydrogen atoms"""

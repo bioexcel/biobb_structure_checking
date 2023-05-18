@@ -18,7 +18,7 @@ class MutationManager():
         self.mutation_list = []
         self.chain_ids = chain_ids
         if 'file:' in id_list:
-            #Load from file
+            # Load from file
             id_list = id_list.replace('file:', '')
             print(f'Reading mutation list from file {id_list}')
             self.id_list = [
@@ -104,12 +104,18 @@ class MutationSet():
                         })
                         mut_ok += 1
                     else:
-                        print(f'#WARNING: Unknown residue {chn}:{old_id}{self.res_num}')
+                        print(
+                            f'WARNING: Unknown residue {chn}:'
+                            f'{old_id}{self.res_num}'
+                        )
                 else:
-                    print(f'#WARNING: Unknown residue {chn}:{old_id}{self.res_num}')
+                    print(
+                        f'#WARNING: Unknown residue {chn}:'
+                        f'{old_id}{self.res_num}'
+                    )
 
         if not mut_ok and stop_on_error:
-            sys.exit(f'#ERROR: no mutations available for {self.id}')
+            sys.exit(f'ERROR: no mutations available for {self.id}')
 
     def apply(self, mut_map, res_lib, remove_h):
         """ Perform the individual mutations on the set. """
@@ -133,11 +139,17 @@ class MutationSet():
             if mut['type'] == mu.PROTEIN:
                 for at_id in ['N', 'CA', 'C']:
                     if at_id not in bck_atoms:
-                        sys.exit(f'#ERROR: Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        sys.exit(
+                            'ERROR: Backbone atoms missing for '
+                            f'{mu.residue_id(res)}, aborting'
+                        )
             else:
                 for at_id in ["C1'", "O4'", "C4'"]:
                     if at_id not in bck_atoms:
-                        sys.exit(f'#ERROR: Backbone atoms missing for {mu.residue_id(res)}, aborting')
+                        sys.exit(
+                            'ERROR: Backbone atoms missing for '
+                            f'{mu.residue_id(res)}, aborting'
+                        )
 
             missing_ats = [
                 at_id
@@ -154,7 +166,10 @@ class MutationSet():
                     if at_id in side_atoms:
                         mu.delete_atom(res, at_id)
                     else:
-                        print(f'#WARNING: atom {at_id} already missing in {mu.residue_id(res)}')
+                        print(
+                            f'WARNING: atom {at_id} already missing '
+                            f'in {mu.residue_id(res)}'
+                        )
                     in_rules.append(at_id)
             # Renaming ats
             if MOV in mut_map[rname][mut['new_id']]:
@@ -164,7 +179,10 @@ class MutationSet():
                     if old_at in side_atoms:
                         mu.rename_atom(res, old_at, new_at)
                     else:
-                        print(f'#WARNING: atom {old_at} missing in {mu.residue_id(res)}')
+                        print(
+                            f'#WARNING: atom {old_at} missing in '
+                            f'{mu.residue_id(res)}'
+                        )
                         extra_adds.append(new_at)
                     in_rules.append(old_at)
 

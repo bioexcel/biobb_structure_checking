@@ -9,10 +9,18 @@ def check(strcheck):
     single_chain = len(strcheck.strucm.chains_data.chain_ids[0]) == 1
     for mod_id in strcheck.strucm.chains_data.chain_ids:
         if not strcheck.strucm.models_data.has_models():
-            print(cts.MSGS['CHAINS_DETECTED'].format(len(strcheck.strucm.chains_data.chain_ids[0])))
+            print(cts.MSGS['CHAINS_DETECTED'].format(
+                len(strcheck.strucm.chains_data.chain_ids[0])
+            ))
         else:
-            print(f"Model {mod_id}: ", cts.MSGS['CHAINS_DETECTED'].format(len(strcheck.strucm.chains_data.chain_ids[mod_id])))
-            single_chain = single_chain and (len(strcheck.strucm.chains_data.chain_ids[mod_id]) == 1)
+            print(
+                f"Model {mod_id}: ",
+                cts.MSGS['CHAINS_DETECTED'].format(
+                    len(strcheck.strucm.chains_data.chain_ids[mod_id])
+                ))
+
+            single_chain = single_chain and\
+                (len(strcheck.strucm.chains_data.chain_ids[mod_id]) == 1)
 
         for ch_id in sorted(strcheck.strucm.chains_data.chain_ids[mod_id]):
             modtxt = ''
@@ -21,11 +29,13 @@ def check(strcheck):
             if isinstance(strcheck.strucm.chains_data.chain_ids[mod_id][ch_id], list):
                 print(
                     cts.MSGS['UNKNOWN_CHAINS'].format(
-                        ch_id, s=strcheck.strucm.chains_data.chain_ids[mod_id][ch_id]
+                        ch_id,
+                        s=strcheck.strucm.chains_data.chain_ids[mod_id][ch_id]
                     )
                 )
             else:
                 print(f" {ch_id}{modtxt}: {mu.CHAIN_TYPE_LABELS[strcheck.strucm.chains_data.chain_ids[mod_id][ch_id]]}")
+
         strcheck.summary['chains'] = {
             k: f"{mu.CHAIN_TYPE_LABELS[v]}/{mod_id}"
             for k, v in strcheck.strucm.chains_data.chain_ids[mod_id].items()
@@ -36,6 +46,7 @@ def check(strcheck):
         strcheck.strucm.chains_data.has_chains_to_rename or\
         '--rebuild' in strcheck.args['options'] or\
         '--renumber' in strcheck.args['options']
+
 
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -108,7 +119,11 @@ def fix(strcheck, opts, fix_data=None):
                 strcheck.summary['chains']['renumbered'] = renumber_chains
 
     strcheck.summary['chains']['selected'] = {}
-    input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
+    input_line = ParamInput(
+        'Select chain',
+        strcheck.args['non_interactive'],
+        set_none='All'
+    )
     input_line.add_option_all()
     for typ in 'protein', 'na', 'dna', 'rna':
         input_line.add_option_list('type', [typ], multiple=False)
@@ -122,7 +137,10 @@ def fix(strcheck, opts, fix_data=None):
     else:
         input_line.add_option_list(
             'chid',
-            [sorted(strcheck.strucm.chains_data.chain_ids[mod.id]) for mod in strcheck.strucm.st],
+            [
+                sorted(strcheck.strucm.chains_data.chain_ids[mod.id])
+                for mod in strcheck.strucm.st
+            ],
             multiple=True,
             case="sensitive"
         )

@@ -20,9 +20,12 @@ BANNER = "======================================================================
          "=                   BioBB structure checking utility v{:10}               =\n"\
          "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =\n"\
          "================================================================================\n"
+
+
 def header():
     """ Prints general application headers"""
     return BANNER.format(cts.VERSION)
+
 
 def main():
     """ Command-line version of BioBB's structure checking facility"""
@@ -47,6 +50,7 @@ def main():
 #    args.quiet = not args.verbose
 
     StructureChecking(base_dir_path, vars(args)).launch()
+
 
 if __name__ == "__main__":
     main()

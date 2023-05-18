@@ -3,6 +3,7 @@
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 
+
 def check(strcheck):
     (cis_backbone_list, lowtrans_backbone_list) = strcheck.strucm.check_cis_backbone()
     if cis_backbone_list:
@@ -41,6 +42,7 @@ def check(strcheck):
             print(cts.MSGS['NO_LOWTRANS_BONDS'])
 
     return {}
+
 
 def fix(strcheck, opts, fix_data):
     pass

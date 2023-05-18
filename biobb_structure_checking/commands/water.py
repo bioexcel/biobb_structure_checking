@@ -3,6 +3,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     wat_list = [
         res
@@ -20,13 +21,18 @@ def check(strcheck):
 
     return {'wat_list': wat_list}
 
+
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         remove_wat = opts
     else:
         remove_wat = opts['remove']
 
-    input_line = ParamInput('Remove', strcheck.args['non_interactive'], set_none='no')
+    input_line = ParamInput(
+        'Remove',
+        strcheck.args['non_interactive'],
+        set_none='no'
+    )
     input_line.add_option_yes_no()
     input_line.set_default('yes')
     input_option, remove_wat = input_line.run(remove_wat)
