@@ -248,6 +248,7 @@ class SequenceData():
                         'wrong_order': wrong_order,
                         'type': strucm.chains_data.chain_ids[mod.id][chn.id]
                     }
+
             if can_reverted:
                 strucm.revert_can_resnames(False)
 
@@ -359,14 +360,17 @@ class SequenceData():
                 if ch_id in self.has_canonical[mod_id] and self.has_canonical[mod_id][ch_id]:
                     tgt_seq = data[ch_id]['can'].seq
                     frgs = data[ch_id]['pdb']['frgs']
-                    frags_num = []
                     pdb_seq = frgs[0].seq
-                    for i in range(1, len(frgs)):
-                        frag_seq = frgs[i].seq
-                        pdb_seq += frag_seq
-                        frags_num.append(
-                            f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
-                        )
+                    if len(frgs) == 1:
+                        frags_num = [f"{frgs[0].features[0].location.start}-{frgs[0].features[0].location.end}"]
+                    else:
+                        frags_num = []
+                        for i in range(1, len(frgs)):
+                            frag_seq = frgs[i].seq
+                            pdb_seq += frag_seq
+                            frags_num.append(
+                                f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
+                            )
                     # tuned to open gaps on missing loops
                     alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
