@@ -4,10 +4,10 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 Structure pdb:4ku1 loaded
- PDB id: 4KU1
+ PDB id: 4KU1 
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
  Experimental method: X-RAY DIFFRACTION
  Keywords: IMMUNE SYSTEM
@@ -148,8 +148,8 @@ Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
 148 Water molecules detected
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 148 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
@@ -220,8 +220,8 @@ Running getss. Options: --mark All
  CYS A367.SG  CYS A425.SG     3.981
  CYS B261.SG  CYS B321.SG     4.126
  CYS B367.SG  CYS B425.SG     4.188
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 
 Step 16: clashes
 
@@ -266,8 +266,8 @@ Running ligands. Options: --remove All
  MAN D7
  NAG D8
  FUL D9
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 Ligands removed All (20)
 
 Step 18: chains --select protein

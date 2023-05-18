@@ -537,13 +537,15 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein",
-  "B": "Protein",
-  "C": "Water",
-  "D": "Water",
+  "A": "Protein/0",
+  "B": "Protein/0",
+  "C": "Water/0",
+  "D": "Water/0",
   "selected": {
-   "A": 1,
-   "B": 1
+   "0": {
+    "A": 1,
+    "B": 1
+   }
   },
   "unlabelled": false
  },
@@ -629,38 +631,32 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.019323671497584516,
-    "Protein": 0.9806763285024155,
-    "RNA": 0.0
-   },
-   "B": {
-    "DNA": 0.0,
-    "Other": 0.019230769230769273,
-    "Protein": 0.9807692307692307,
-    "RNA": 0.0
-   },
-   "C": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
-   },
-   "D": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.019323671497584516,
+     "Protein": 0.9806763285024155,
+     "RNA": 0.0
+    },
+    "B": {
+     "DNA": 0.0,
+     "Other": 0.019230769230769273,
+     "Protein": 0.9807692307692307,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein",
-   "B": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "B": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 2,
+  "nchains": [
+   2
+  ],
   "nmodels": 1,
   "stats": {
    "num_ats": 6587,
@@ -784,40 +780,46 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.019323671497584516,
-    "Protein": 0.9806763285024155,
-    "RNA": 0.0
-   },
-   "B": {
-    "DNA": 0.0,
-    "Other": 0.019230769230769273,
-    "Protein": 0.9807692307692307,
-    "RNA": 0.0
-   },
-   "C": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
-   },
-   "D": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.004807692307692291,
+     "Protein": 0.9951923076923077,
+     "RNA": 0.0
+    },
+    "B": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    },
+    "C": {
+     "DNA": 0.0,
+     "Other": 1.0,
+     "Protein": 0.0,
+     "RNA": 0.0
+    },
+    "D": {
+     "DNA": 0.0,
+     "Other": 1.0,
+     "Protein": 0.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein",
-   "B": "Protein",
-   "C": "Unknown",
-   "D": "Unknown"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "B": "Protein",
+    "C": "Unknown",
+    "D": "Unknown"
+   }
+  ],
   "models_type": 0,
-  "nchains": 4,
+  "nchains": [
+   4
+  ],
   "nmodels": 1,
   "stats": {
    "num_ats": 6587,

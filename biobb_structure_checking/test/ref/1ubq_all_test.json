@@ -50,7 +50,7 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein",
+  "A": "Protein/0",
   "unlabelled": false
  },
  "chiral": {
@@ -80,19 +80,25 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 1,
+  "nchains": [
+   1
+  ],
   "nmodels": 1,
   "stats": {
    "num_ats": 1231,
@@ -138,19 +144,25 @@
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 1,
+  "nchains": [
+   1
+  ],
   "nmodels": 1,
   "stats": {
    "num_ats": 1231,

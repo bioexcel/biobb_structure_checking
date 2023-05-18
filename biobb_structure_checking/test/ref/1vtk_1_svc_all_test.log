@@ -3,18 +3,15 @@
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk_1.pdb' 
-Warning: sequence features only available in mmCIF format or with external fasta input
+Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
 Structure pdb:1vtk.1 loaded
- PDB id: 
- Title: thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate
- Experimental method: x-ray diffraction
- Keywords: key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase
- Resolution (A): N.A.
- Biounit no. 1
+ PDB id: 1vtk (Assembly 1)
+ Title: THYMIDINE KINASE FROM HERPES SIMPLEX VIRUS TYPE 1 IN COMPLEX WITH ADP AND DEOXYTHYMIDINE-MONOPHOSPHATE
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
 
- Num. models: 2 (type: BioUnit,   42.553 A)
- Num. chains: 1 (A: Protein)
+ Num. models: 1
+ Num. chains: 2 (A: Protein, A-2: Protein)
  Num. residues:  734
  Num. residues with ins. codes:  0
  Num. residues with H atoms: 0
@@ -23,23 +20,24 @@ Structure pdb:1vtk.1 loaded
  Num. water mol.:  104
  Num. atoms:  4982
 Small mol ligands found
-ADP A400/1
-TMP A500/1
-ADP A400/2
-TMP A500/2
+ADP A400
+TMP A500
+ADP A-2400
+TMP A-2500
 
 Step 1: models --select 1
 
 Running models. Options: --select 1
-2 Model(s) detected
-Models do not superimpose, RMSd:   42.553 A, guessed as BioUnit 
-Selecting model num. 1
+1 Model(s) detected
+Single model found
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-1 Chain(s) detected
+2 Chain(s) detected
  A: Protein
+ A-2: Protein
+Selecting all chains
 
 Step 3: inscodes
 
@@ -59,16 +57,18 @@ No metal ions found
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-2 Ligands detected
+4 Ligands detected
  ADP A400
  TMP A500
+ ADP A-2400
+ TMP A-2500
 Input not valid (SO4)
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-52 Water molecules detected
-52 Water molecules removed
+104 Water molecules detected
+104 Water molecules removed
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -78,12 +78,14 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-1 unusual contact(s) involving amide atoms found
+2 unusual contact(s) involving amide atoms found
  PRO A153.O   GLN A349.OE1    3.093 A
-Amide residues fixed All (1)
+ PRO A-2153.O GLN A-2349.OE1    3.093 A
+Amide residues fixed All (2)
 Rechecking
-1 unusual contact(s) involving amide atoms found
+2 unusual contact(s) involving amide atoms found
  PRO A153.O   GLN A349.OE1    2.802 A
+ PRO A-2153.O GLN A-2349.OE1    2.802 A
 
 Step 10: chiral --fix All
 
@@ -103,18 +105,22 @@ No residues with missing or unknown side chain atoms found
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-2 Residues with missing backbone atoms found
+4 Residues with missing backbone atoms found
  SER A149   OXT
  GLY A264   OXT
-2 Backbone breaks found
+ SER A-2149 OXT
+ GLY A-2264 OXT
+4 Backbone breaks found
  SER A149   - PRO A153  
  GLY A264   - PRO A280  
+ SER A-2149 - PRO A-2153
+ GLY A-2264 - PRO A-2280
 No unexpected backbone links
 Main chain fixes
 Nothing to do
 Capping terminal ends
-True terminal residues:  A46,A376
-Terminal residues from backbone breaks:  A149-A153,A264-A280
+True terminal residues:  A46,A376,A-246,A-2376
+Terminal residues from backbone breaks:  A149-A153,A264-A280,A-2149-A-2153,A-2264-A-2280
 Nothing to do
 No caps added
 Fixing missing backbone atoms
@@ -123,12 +129,17 @@ SER A149
   Adding new atom OXT
 GLY A264
   Adding new atom OXT
-Fixed 2 backbone atom(s)
+SER A-2149
+  Adding new atom OXT
+GLY A-2264
+  Adding new atom OXT
+Fixed 4 backbone atom(s)
 Checking for steric clashes
 No severe clashes detected
 No apolar clashes detected
-1 Steric polar_acceptor clashes detected
+2 Steric polar_acceptor clashes detected
  SER A149.OXT GLN A349.OE1    2.827 A
+ SER A-2149.OXT GLN A-2349.OE1    2.827 A
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
@@ -148,50 +159,67 @@ Step 16: clashes
 
 Running clashes.
 No severe clashes detected
-2 Steric apolar clashes detected
+4 Steric apolar clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A
  ALA A118.CA  SER A181.O      2.890 A
-6 Steric polar_acceptor clashes detected
+ GLY A-259.O  HIS A-2213.CD2    2.824 A
+ ALA A-2118.CA SER A-2181.O    2.890 A
+12 Steric polar_acceptor clashes detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
  SER A149.OXT GLN A349.OE1    2.827 A
  PRO A153.O   GLN A349.OE1    2.802 A
  LEU A217.O   ARG A220.O      2.862 A
  GLU A225.OE1 TMP A500.O3'    2.895 A
-2 Steric polar_donor clashes detected
+ SER A-274.O  ASP A-277.OD2    2.685 A
+ GLN A-2104.O ASP A-2108.OD2    3.061 A
+ SER A-2149.OXT GLN A-2349.OE1    2.827 A
+ PRO A-2153.O GLN A-2349.OE1    2.802 A
+ LEU A-2217.O ARG A-2220.O    2.862 A
+ GLU A-2225.OE1 TMP A-2500.O3'    2.895 A
+4 Steric polar_donor clashes detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
  TRP A259.NE1 ARG A293.NH1    3.094 A
-3 Steric positive clashes detected
+ ARG A-2220.NH1 ARG A-2222.NH1    2.991 A
+ TRP A-2259.NE1 ARG A-2293.NH1    3.094 A
+6 Steric positive clashes detected
  LYS A62.NZ   ARG A163.NH1    3.439 A
  ARG A212.NH2 ARG A216.NH2    3.171 A
  ARG A220.NH1 ARG A222.NH1    2.991 A
+ LYS A-262.NZ ARG A-2163.NH1    3.439 A
+ ARG A-2212.NH2 ARG A-2216.NH2    3.171 A
+ ARG A-2220.NH1 ARG A-2222.NH1    2.991 A
 No negative clashes detected
 
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
-2 Ligands detected
+4 Ligands detected
  ADP A400
  TMP A500
-Ligands removed All (2)
+ ADP A-2400
+ TMP A-2500
+Ligands removed All (4)
 
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-1 Chain(s) detected
+2 Chain(s) detected
  A: Protein
+ A-2: Protein
+Selecting chain(s) protein
 
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-76 Residues requiring selection on adding H atoms
- CYS A171,A251,A336,A362
- ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363
- GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374
- HIS A58,A105,A142,A164,A213,A283,A323,A351
- LYS A62,A219,A317
- ARG A51,A75,A89,A106,A163,A176,A212,A216,A220,A222,A226,A236,A237,A247,A256,A281,A293,A318,A320,A337,A366,A370
- TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329
+152 Residues requiring selection on adding H atoms
+ CYS A171,A251,A336,A362,A-2171,A-2251,A-2336,A-2362
+ ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,A-255,A-276,A-277,A-2108,A-2116,A-2136,A-2162,A-2211,A-2215,A-2228,A-2258,A-2286,A-2303,A-2313,A-2328,A-2330,A-2338,A-2363
+ GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,A-283,A-295,A-2111,A-2146,A-2210,A-2225,A-2257,A-2296,A-2371,A-2374
+ HIS A58,A105,A142,A164,A213,A283,A323,A351,A-258,A-2105,A-2142,A-2164,A-2213,A-2283,A-2323,A-2351
+ LYS A62,A219,A317,A-262,A-2219,A-2317
+ ARG A51,A75,A89,A106,A163,A176,A212,A216,A220,A222,A226,A236,A237,A247,A256,A281,A293,A318,A320,A337,A366,A370,A-251,A-275,A-289,A-2106,A-2163,A-2176,A-2212,A-2216,A-2220,A-2222,A-2226,A-2236,A-2237,A-2247,A-2256,A-2281,A-2293,A-2318,A-2320,A-2337,A-2366,A-2370
+ TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329,A-253,A-280,A-287,A-2101,A-2132,A-2172,A-2177,A-2239,A-2248,A-2305,A-2329
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 No residues with missing or unknown side chain atoms found
@@ -204,17 +232,26 @@ Replacing HIS A213 by HIE
 Replacing HIS A283 by HIE
 Replacing HIS A323 by HIE
 Replacing HIS A351 by HIE
+Replacing HIS A-258 by HIE
+Replacing HIS A-2105 by HIE
+Replacing HIS A-2142 by HIE
+Replacing HIS A-2164 by HIE
+Replacing HIS A-2213 by HIE
+Replacing HIS A-2283 by HIE
+Replacing HIS A-2323 by HIE
+Replacing HIS A-2351 by HIE
 Updating partial charges and atom types
-Total assigned charge:      -3.20
+Total assigned charge:      -6.40
 Command list completed
 Final Num. models: 1
-Final Num. chains: 1 (A: Protein)
-Final Num. residues:  313
+Final Num. chains: 2 (A: Protein, A-2: Protein)
+Final Num. residues:  626
 Final Num. residues with ins. codes:  0
-Final Num. residues with H atoms: 313 (total 2416 H atoms)
+Final Num. residues with H atoms: 626 (total 4832 H atoms)
 Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
-Final Num. atoms:  4809
+Final Num. atoms:  9618
+WARNING: current structure cannot be saved as PDB, using mmCIF instead
 Structure saved on 1vtk_1_all_test.pdb
 Summary data saved on 1vtk_1_all_test.json
