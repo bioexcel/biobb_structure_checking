@@ -125,7 +125,7 @@ class MMBPDBList(PDBList):
             #     )
             # else:
             #     print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
-            print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
+            print(f"Downloading structure '{pdb_code}' from {self.pdb_server} as {file_format} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)
@@ -214,7 +214,7 @@ class MMBPDBList(PDBList):
         # Otherwise,retrieve the file(s)
         if self._verbose:
             print(
-                f"Downloading assembly ({assembly_num}) for PDB entry "
+                f"Downloading assembly ({assembly_num}) for entry "
                 f"'{pdb_code}'..."
             )
         try:
