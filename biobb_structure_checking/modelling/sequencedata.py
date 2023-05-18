@@ -20,6 +20,7 @@ import biobb_structure_checking.modelling.utils as mu
 
 IDENT_THRES = 0.7
 
+
 class SequenceData():
     """
     | sequence_manager SequenceData
@@ -62,7 +63,10 @@ class SequenceData():
             except IOError:
                 sys.exit("Error loading FASTA")
         if not self.fasta:
-            print(f"WARNING: No valid FASTA formatted sequences found in {fasta_sequence_path}")
+            print(
+                f"WARNING: No valid FASTA formatted sequences found in"
+                f" {fasta_sequence_path}"
+            )
             read_ok = False
         return read_ok
 
@@ -193,7 +197,9 @@ class SequenceData():
         else:
             can_reverted = False
 
-        for mod in strucm.st:
+        for mod in strucm.st.get_models():
+            if mod.id not in self.data:
+                self.data[mod.id] = {}
             ppb = PPBuilder()
             for chn in mod.get_chains():
                 seqs = []
@@ -201,7 +207,11 @@ class SequenceData():
                 if strucm.chains_data.chain_ids[mod.id][chn.id] == mu.PROTEIN:
                     frags = ppb.build_peptides(chn)
                     if not frags:
-                        frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
+                        frags = [[
+                            res
+                            for res in chn.get_residues()
+                            if not mu.is_hetatm(res)
+                        ]]
                     # TODO patched for a Weird case where a second model lacks a chain
                     if not frags[0]:
                         print(
@@ -209,8 +219,13 @@ class SequenceData():
                             f" at model {mod.id}, adding hetatm to avoid empty chain"
                         )
                         frags = list(chn.get_residues())
-                elif strucm.chains_data.chain_ids[mod.id][chn.id] in (mu.DNA, mu.RNA, mu.NA):
-                    frags = [[res for res in chn.get_residues() if not mu.is_hetatm(res)]]
+                elif strucm.chains_data.chain_ids[mod.id][chn.id] in\
+                        (mu.DNA, mu.RNA, mu.NA):
+                    frags = [[
+                        res
+                        for res in chn.get_residues()
+                        if not mu.is_hetatm(res)
+                    ]]
                 else:
                     self.add_empty_chain(mod, chn.id)
                     frags = []
@@ -224,7 +239,10 @@ class SequenceData():
                     if hasattr(frag, 'get_sequence'):
                         seq = frag.get_sequence()
                     else:
-                        seq = mu.get_sequence_from_list(frag, strucm.chains_data.chain_ids[mod.id][chn.id])
+                        seq = mu.get_sequence_from_list(
+                            frag,
+                            strucm.chains_data.chain_ids[mod.id][chn.id]
+                        )
 
                     sqr = SeqRecord(
                         seq,
@@ -233,8 +251,12 @@ class SequenceData():
                         'PDB sequence chain ' + frid
                     )
                     if start < end:
-                        sqr.features.append(SeqFeature(FeatureLocation(start, end)))
-                        sqr.features.append(SeqFeature(FeatureLocation(start_index, end_index)))
+                        sqr.features.append(
+                            SeqFeature(FeatureLocation(start, end))
+                        )
+                        sqr.features.append(
+                            SeqFeature(FeatureLocation(start_index, end_index))
+                        )
                     else:
                         print("Warning: unusual residue numbering at chain ", chn.id)
                         print("Warning: chain reconstruction may not be available")
@@ -260,7 +282,8 @@ class SequenceData():
             return False
         for mod in strucm.st:
             for ch_id, ch_data in self.data[mod.id].items():
-                if ch_id not in self.has_canonical[mod.id] or not self.has_canonical[mod.id][ch_id]:
+                if ch_id not in self.has_canonical[mod.id] or\
+                        not self.has_canonical[mod.id][ch_id]:
                     continue
                 frgs = ch_data['pdb']['frgs']
                 ch_data['pdb']['match_numbering'] = True
@@ -277,18 +300,21 @@ class SequenceData():
 
     def fake_canonical_sequence(self, strucm, mutations, ins_res_type='G'):
         """ SequenceData.fake_canonical_sequence
-        Fakes a canonical sequence to support modeller use in fixside and mutateside --rebuild
+        Fakes a canonical sequence to support modeller use in fixside
+            and mutateside --rebuild
 
         Args:
             strucm (StructureManager) : Object containing the loaded structure
-            mutations (MutationsManager) : Object containing the list of mutations to perform
+            mutations (MutationsManager) : Object containing the list of
+                mutations to perform
         """
         has_models = strucm.models_data.has_models()
         self.read_structure_seqs(strucm)
         self.has_canonical = {}
         for mod in strucm.st:
+            self.has_canonical[mod.id] = {}
             for ch_id in strucm.chains_data.chain_ids[mod.id]:
-                if strucm.chain_ids[mod.id][ch_id] != mu.PROTEIN:
+                if strucm.chains_data.chain_ids[mod.id][ch_id] != mu.PROTEIN:
                     continue
                 # build sequence from frags filling gaps with G
                 # Warning IUPAC deprecated in Biopython 1.78
@@ -302,7 +328,9 @@ class SequenceData():
                     if not start_pos:
                         start_pos = frag.features[0].location.start
                     if last_pos:
-                        seq += ins_res_type * (frag.features[0].location.start - last_pos - 1)
+                        seq += ins_res_type * (
+                            frag.features[0].location.start - last_pos - 1
+                        )
 
                     seq += frag.seq
                     last_pos = frag.features[0].location.end
@@ -329,10 +357,12 @@ class SequenceData():
                     f"csq_{ch_id}{modtxt}",
                     f"csq_{ch_id}{modtxt}",
                     f"canonical sequence chain {ch_id}{modtxt2}",
-                    annotations={'molecule_type':'protein'}
+                    annotations={'molecule_type': 'protein'}
                 )
                 self.data[mod.id][ch_id]['can'].features.append(
-                    SeqFeature(FeatureLocation(start_pos, start_pos + len(seq) - 1))
+                    SeqFeature(
+                        FeatureLocation(start_pos, start_pos + len(seq) - 1)
+                    )
                 )
                 self.data[mod.id][ch_id]['chains'].append(ch_id)
                 self.has_canonical[mod.id][ch_id] = True
@@ -357,12 +387,15 @@ class SequenceData():
         outseq = ''
         for mod_id, data in self.data.items():
             for ch_id in sorted(data):
-                if ch_id in self.has_canonical[mod_id] and self.has_canonical[mod_id][ch_id]:
+                if ch_id in self.has_canonical[mod_id] and\
+                        self.has_canonical[mod_id][ch_id]:
                     tgt_seq = data[ch_id]['can'].seq
                     frgs = data[ch_id]['pdb']['frgs']
                     pdb_seq = frgs[0].seq
                     if len(frgs) == 1:
-                        frags_num = [f"{frgs[0].features[0].location.start}-{frgs[0].features[0].location.end}"]
+                        frags_num = [
+                            f"{frgs[0].features[0].location.start}-{frgs[0].features[0].location.end}"
+                        ]
                     else:
                         frags_num = []
                         for i in range(1, len(frgs)):
@@ -385,7 +418,7 @@ class SequenceData():
                         pdb_seq,
                         f"pdb_sq_{ch_id}{modtxt}",
                         '',
-                        'Frags: ' + ','.join(frags_num)
+                        f"Frags: {','.join(frags_num)}"
                     )
                     outseq += SeqIO.FastaIO.as_fasta(seq)
                 elif data[ch_id]['pdb']:
@@ -397,7 +430,9 @@ class SequenceData():
                         if not start_pos:
                             start_pos = frag.features[0].location.start
                         if last_pos:
-                            sequence += '-'*(frag.features[0].location.start - last_pos-1)
+                            sequence += '-' * (
+                                frag.features[0].location.start - last_pos-1
+                            )
                         sequence += frag.seq
                         last_pos = frag.features[0].location.end
                         frags_num.append(
@@ -413,7 +448,7 @@ class SequenceData():
                         pdb_seq,
                         f"pdb_sq_{ch_id}/{mod_id}",
                         '',
-                        'Frags: ' + ','.join(frags_num)
+                        f"Frags: {','.join(frags_num)}"
                     )
                     outseq += SeqIO.FastaIO.as_fasta(seq)
                 else:
@@ -465,10 +500,13 @@ class SequenceData():
                 for seq in self.raw_pdb_seq[mod_id][ch_id]:
                     if not seq: # for not protein/NA chains
                         continue
-                    score = pairwise2.align.globalxs(tgt, seq, -5, -1, score_only=True)
+                    score = pairwise2.align.globalxs(
+                        tgt, seq, -5, -1, score_only=True
+                    )
                     if score > 0:
                         matches.append((mod_id, ch_id, score))
         return matches
+
 
 def _get_pack_str_seqs(strucm):
     strucm.revert_can_resnames(canonical=True)
