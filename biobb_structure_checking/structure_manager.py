@@ -22,6 +22,8 @@ from Bio.PDB.parse_pdb_header import parse_pdb_header
 from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
+import biobb_structure_checking.constants as cts
+
 from biobb_structure_checking.io.mmb_server import MMBPDBList
 from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
 from biobb_structure_checking.io.bare_builder import BareStructureBuilder
@@ -58,7 +60,8 @@ class StructureManager:
             file_format: str = 'mmCif',
             fasta_sequence_path: str = '',
             nowarn: bool = True,
-            coords_only: bool = False
+            coords_only: bool = False,
+            atom_limit = 0
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -100,6 +103,16 @@ class StructureManager:
             QUIET=nowarn,
             coords_only=coords_only
         )
+        # Check limit of atoms to avoid delays
+        num_ats = len(list(self.st.get_atoms()))
+        if atom_limit and num_ats > atom_limit:
+            sys.exit(
+                cts.MSGS['ATOM_LIMIT'].format(
+                    num_ats,
+                    atom_limit
+             )
+            )
+
 
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)

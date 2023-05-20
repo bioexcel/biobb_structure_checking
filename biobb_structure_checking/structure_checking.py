@@ -72,14 +72,14 @@ class StructureChecking():
             self.summary['memsize'].append(['load', memsize])
             print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
 
-        if self.args['atom_limit'] and \
-                self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
-            sys.exit(
-                cts.MSGS['ATOM_LIMIT'].format(
-                    self.strucm.st_data.stats['num_ats'],
-                    self.args['atom_limit']
-                )
-            )
+        # if self.args['atom_limit'] and \
+        #         self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
+        #     sys.exit(
+        #         cts.MSGS['ATOM_LIMIT'].format(
+        #             self.strucm.st_data.stats['num_ats'],
+        #             self.args['atom_limit']
+        #         )
+        #     )
 
     def launch(self):
         """ StructureChecking.launch
@@ -363,7 +363,8 @@ class StructureChecking():
             copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path,
             nowarn=not self.args['build_warnings'],
-            coords_only=self.args['coords_only']
+            coords_only=self.args['coords_only'],
+            atom_limit=self.args['atom_limit']
         )
 
         self.summary['loaded_structure'] = input_structure_path
