@@ -39,11 +39,11 @@ class StructureChecking():
         self.args = cts.set_defaults(base_dir_path, args)
 
         self.summary = {}
+        if self.args['debug'] or args['time_limit']:
+            import psutil
+            self.start_time = time.time()
 
         if self.args['debug']:
-            import psutil
-
-            self.start_time = time.time()
             self.timings = []
             self.summary['elapsed_times'] = {}
             self.summary['memsize'] = []
@@ -65,12 +65,16 @@ class StructureChecking():
         ) as err:
             sys.exit(err.message)
 
+
         if self.args['debug']:
             self.timings.append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append(['load', memsize])
             print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
+
+        if self.args['time_limit'] and self._check_time_limit():
+            sys.exit()
 
         # if self.args['atom_limit'] and \
         #         self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
@@ -219,7 +223,8 @@ class StructureChecking():
             data = line.split()
             command = data[0]
             opts = data[1:]
-            self._run_method(command, opts)
+            if self._run_method(command, opts):
+                break
             i += 1
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
@@ -233,7 +238,8 @@ class StructureChecking():
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
-            self._run_method(meth, None)
+            if self._run_method(meth, None):
+                break
 
         self.args['check_only'] = old_check_only
 
@@ -327,6 +333,8 @@ class StructureChecking():
             memsize = process.memory_info().rss/1024/1024
             self.summary['memsize'].append([command, memsize])
             print(f"#DEBUG Memory used after {command}: {memsize:f} MB ")
+
+        return self.args['time_limit'] and self._check_time_limit()
 
 # ==============================================================================
     def _load_structure(
@@ -499,6 +507,11 @@ class StructureChecking():
                     print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 
+    def _check_time_limit(self):
+        if time.time() - self.start_time > self.args['time_limit']:
+            print(cts.MSGS['TIME_LIMIT'])
+            return True
+        return False
 # ==============================================================================
 # Entry points for direct notebook calls and Docstrings for commands' help
 

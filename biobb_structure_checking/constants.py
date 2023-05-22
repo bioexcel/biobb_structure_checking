@@ -16,6 +16,7 @@ DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
 ATOM_LIMIT = 1000000
+TIME_LIMIT = 3600
 
 DEFAULTS = {
     'file_format': 'mmCif',
@@ -219,7 +220,15 @@ CMD_LINE.add_argument(
     dest='atom_limit',
     type=int,
     default=ATOM_LIMIT,
-    help='Set limit on the number of atoms, 0: nolimit. Default: 1000000'
+    help=f'Set limit on the number of atoms, 0: nolimit. Default: {ATOM_LIMIT}'
+)
+
+CMD_LINE.add_argument(
+    '--time_limit',
+    dest='time_limit',
+    type=int,
+    default=TIME_LIMIT,
+    help=f'Set limit on the execution time (sec), 0: nolimit. Default: {TIME_LIMIT}'
 )
 
 CMD_LINE.add_argument(
@@ -612,6 +621,7 @@ MSGS = {
     'ALL_UNDO': 'All changes reverted to original structure',
     'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), '
                   'use --limit to adjust',
+    'TIME_LIMIT': 'Execution time limit exceeded, aborting, use --time_limit to adjust',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
