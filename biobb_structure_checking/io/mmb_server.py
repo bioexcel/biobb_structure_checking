@@ -39,7 +39,7 @@ class MMBPDBList(PDBList):
             pdir=None,
             file_format=None,
             overwrite=False,
-            biounit=False,
+            biounit=False,  # Kept for compatibility
             nocache=False
     ):
         """
@@ -154,7 +154,7 @@ class MMBPDBList(PDBList):
             pdir = '/tmp'
             self.flat_tree = False
 
-#       retrieve_assembly_file only available on biopython > 1.80, added here
+#       retrieve_assembly_file only available on biopython >= 1.80, added here to ensure
 #           if self.pdb_server.lower() not in ALT_SERVERS:
 #                return super().retrieve_assembly_file(
 #                    pdb_code, assembly_num, pdir, file_format, overwrite

@@ -125,6 +125,13 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--overwrite_cache',
+    dest='overwrite',
+    action='store_true',
+    help='Overwrite cached file if any'
+)
+
+CMD_LINE.add_argument(
     '--copy_input',
     dest='copy_input',
     help='Copy the downloaded structure in the indicated folder'

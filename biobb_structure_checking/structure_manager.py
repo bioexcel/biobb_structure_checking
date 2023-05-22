@@ -59,7 +59,8 @@ class StructureManager:
             file_format: str = 'mmCif',
             fasta_sequence_path: str = '',
             nowarn: bool = True,
-            coords_only: bool = False
+            coords_only: bool = False,
+            overwrite: bool = False
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -99,7 +100,8 @@ class StructureManager:
             pdb_server,
             file_format,
             QUIET=nowarn,
-            coords_only=coords_only
+            coords_only=coords_only,
+            overwrite=overwrite
         )
 
         self.models_data = ModelsData(self.st)
@@ -119,7 +121,9 @@ class StructureManager:
             pdb_server,
             file_format,
             QUIET=False,
-            coords_only=False
+            coords_only=False,
+            overwrite=False
+
     ):
         """ Load structure file """
         biounit = False
@@ -131,15 +135,24 @@ class StructureManager:
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
+
                 # if pdb_server not in ALT_SERVERS:
                 #    raise WrongServerError
+
                 if not biounit:
                     real_pdb_path = pdbl.retrieve_pdb_file(
-                        input_pdb_path, file_format='pdb', biounit=biounit, nocache=nocache
+                        input_pdb_path,
+                        file_format='pdb',
+                        biounit=biounit,
+                        nocache=nocache,
+                        overwrite=overwrite
                     )
                 else:
                     real_pdb_path = pdbl.retrieve_assembly_file(
-                        input_pdb_path, biounit, nocache=nocache
+                        input_pdb_path,
+                        biounit,
+                        nocache=nocache,
+                        overwrite=overwrite
                     )
             else:
                 if '.' in input_pdb_path:
@@ -158,7 +171,10 @@ class StructureManager:
                 if file_format == 'cif':
                     file_format = 'mmCif'
                 real_pdb_path = pdbl.retrieve_pdb_file(
-                    input_pdb_path, file_format=file_format, nocache=nocache
+                    input_pdb_path,
+                    file_format=file_format,
+                    nocache=nocache,
+                    overwrite=overwrite
                 )
                 pdb_id = input_pdb_path
                 if file_format == 'pdb':
@@ -258,7 +274,7 @@ class StructureManager:
             ch_type = self.chains_data.get_chain_type(res)
             ch_type_label = mu.CHAIN_TYPE_LABELS[ch_type].lower()
             rcode = res.get_resname()
-            rcode3 = rcode # Normal residues
+            rcode3 = rcode  # Normal residues
             if len(rcode) == 4: # Protein terms
                 rcode3 = rcode[1:]
             elif rcode[-1] in ('3', '5'): # NA Terms
@@ -301,7 +317,6 @@ class StructureManager:
         self.revert_terms()
 
         self.st_data.has_charges = True
-
 
     def get_ins_codes(self) -> List[Residue]:
         """Makes a list with residues having insertion codes"""
@@ -375,7 +390,7 @@ class StructureManager:
             residue_list: Iterable[Residue],
             contact_types: Iterable[str],
             get_all_contacts=False
-        ) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
+    ) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
         """ Checks clashes originated by a list of residues"""
         return mu.check_r_list_clashes(
             residue_list,
@@ -967,7 +982,7 @@ class StructureManager:
             extra_gap: int = 0,
             extra_NTerm: int = 0,
             sequence_data=None
-        ):
+    ):
         """ Runs modeller
             Args:
                 *ch_to_fix* (list(str)): List of chain ids to be fixed
@@ -1026,7 +1041,6 @@ class StructureManager:
                     opj(mod_mgr.tmpdir, model_pdb['name'])
                 )
 
-
                 modif_set_residues = self.merge_structure(
                     sequence_data,
                     model_st,
@@ -1035,7 +1049,7 @@ class StructureManager:
                     brk_list,
                     sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start,
                     extra_gap
-                ) #TODO consider use canonical numbering instead of defining offset
+                ) # TODO consider use canonical numbering instead of defining offset
                 modif_residues += modif_set_residues
 
         return modif_residues
@@ -1049,7 +1063,7 @@ class StructureManager:
             brk_list: Iterable[Atom],
             offset: int,
             extra_gap: int = 0
-        ) -> str:
+    ) -> str:
         """ Merges the required fragments of Modeller results"""
 
         spimp = Superimposer()
@@ -1072,7 +1086,7 @@ class StructureManager:
             seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
-                #Checking for incomplete gap build needed for fixing side chains with rebuild
+                # Checking for incomplete gap build needed for fixing side chains with rebuild
                 n_br = 0
                 while n_br < len(brk_list) - 1 and \
                         (self.st[mod_id][ch_id][gap_start] != brk_list[n_br][0]) and\
@@ -1100,7 +1114,7 @@ class StructureManager:
             fixed_ats = []
             moving_ats = []
 
-            #checking whether there is a chain id in the model (Support for Modeller >= 10)
+            # checking whether there is a chain id in the model (Support for Modeller >= 10)
             new_ch_id = new_st[0].child_list[0].id
 
             for nres in range(loc_i.start, loc_i.end):
@@ -1392,7 +1406,7 @@ class StructureManager:
         mutated_sequence_data.read_structure_seqs(self)
         mutated_sequence_data.match_sequence_numbering()
 
-        #TODO Not tested, to be used on changes in the NTerm residue
+        # TODO Not tested, to be used on changes in the NTerm residue
         extra_NTerm = 0
         mutated_res = self.run_modeller(
             ch_to_fix,
@@ -1573,6 +1587,8 @@ class StructureManager:
                 mut_list.append(f"{ch_id}:{prefix}{r}{start + i}{prefix}{mut_seq[nch][i]}")
             nch += 1
         return ','.join(mut_list)
+
+
 # ===============================================================================
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """

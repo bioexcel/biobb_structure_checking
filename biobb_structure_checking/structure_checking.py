@@ -201,7 +201,7 @@ class StructureChecking():
         """ StructureChecking.checkall
         Predefined workflow for complete checking
         """
-        #Required for interactive run in Notebooks
+        # Required for interactive run in Notebooks
         old_check_only = self.args['check_only']
         self.args['check_only'] = True
 
@@ -333,7 +333,8 @@ class StructureChecking():
             copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path,
             nowarn=not self.args['build_warnings'],
-            coords_only=self.args['coords_only']
+            coords_only=self.args['coords_only'],
+            overwrite=self.args['overwrite']
         )
 
         self.summary['loaded_structure'] = input_structure_path
@@ -367,7 +368,7 @@ class StructureChecking():
             split_models=split_models
         )
 
-    #Kept for back compatibility
+    # Kept for back compatibility
     def _save_structure(self, output_structure_path, rename_terms=False, split_models=False):
         """ Private. StuctureChecking._save_structure
         Saving the current structure in a the output file
