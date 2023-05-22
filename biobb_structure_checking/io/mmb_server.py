@@ -44,18 +44,29 @@ class MMBPDBList(PDBList):
     ):
         """
             Replacement for Bio.PDB.PDBList.retrieve_pdb_file to support
-            MMB PDB API. Defaults to Biopython super() if standard server is used.
+            MMB PDB API. Defaults to Biopython super() if standard server
+            is used.
         """
         if nocache:
             pdir = '/tmp'
             self.flat_tree = False
 
         if biounit:
-            return self.retrieve_assembly_file(pdb_code, biounit, pdir, file_format, overwrite)
+            return self.retrieve_assembly_file(
+                pdb_code,
+                biounit,
+                pdir,
+                file_format,
+                overwrite
+            )
 
         if self.pdb_server.lower() not in ALT_SERVERS:
             return super().retrieve_pdb_file(
-                pdb_code, obsolete, pdir, file_format, overwrite
+                pdb_code,
+                obsolete,
+                pdir,
+                file_format,
+                overwrite
             )
         self._verbose = True
 
@@ -125,7 +136,7 @@ class MMBPDBList(PDBList):
             #     )
             # else:
             #     print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
-            print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
+            print(f"Downloading structure '{pdb_code}' from {self.pdb_server} as {file_format} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)
@@ -174,8 +185,8 @@ class MMBPDBList(PDBList):
         file_format = file_format.lower()  # we should standardize this.
         if file_format not in archive:
             raise (
-                f"Specified file_format '{file_format}' is not supported. Use one of the "
-                "following: 'mmcif' or 'pdb'."
+                f"Specified file_format '{file_format}' is not supported. "
+                " Use one of ('mmcif', 'pdb')."
             )
 
         # Get the compressed assembly structure name
@@ -214,7 +225,7 @@ class MMBPDBList(PDBList):
         # Otherwise,retrieve the file(s)
         if self._verbose:
             print(
-                f"Downloading assembly ({assembly_num}) for PDB entry "
+                f"Downloading assembly ({assembly_num}) for entry "
                 f"'{pdb_code}'..."
             )
         try:

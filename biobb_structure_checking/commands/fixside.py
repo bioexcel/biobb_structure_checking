@@ -4,13 +4,14 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     miss_at_list = strcheck.strucm.get_missing_atoms('side')
     extra_at_list = strcheck.strucm.check_extra_atoms()
 
     if not miss_at_list and not extra_at_list:
         if not strcheck.args['quiet']:
-            print("No residues with missing or unknown side chain atoms found")
+            print(cts.MSGS['NO_MISSING_SIDE_ATOMS'])
         return {}
 
     fix_data = {
@@ -34,6 +35,7 @@ def check(strcheck):
 
     return fix_data
 
+
 def fix(strcheck, opts, fix_data=None):
 
     if not fix_data:
@@ -43,7 +45,10 @@ def fix(strcheck, opts, fix_data=None):
     else:
         fix_side = opts['fix']
 
-    fixside_rnums = [mu.residue_num(r_at[0]) for r_at in fix_data['miss_at_list']]
+    fixside_rnums = [
+        mu.residue_num(r_at[0])
+        for r_at in fix_data['miss_at_list']
+    ]
 
     input_line = ParamInput('fixside', strcheck.args['non_interactive'])
     input_line.add_option_all()
@@ -95,7 +100,9 @@ def fix(strcheck, opts, fix_data=None):
                 print("  Removing", at_id)
                 mu.remove_atom_from_res(r_at[0], at_id)
                 rem_num += 1
-            strcheck.summary['fixside']['removed'].append(mu.residue_id(r_at[0]))
+            strcheck.summary['fixside']['removed'].append(
+                mu.residue_id(r_at[0])
+            )
             fixed_res.append(r_at[0])
     if not opts['rebuild']:
         for r_at in to_add:

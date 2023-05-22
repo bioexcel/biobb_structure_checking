@@ -4,6 +4,7 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     chiral_check = strcheck.strucm.check_chiral_sides()
 
@@ -18,7 +19,9 @@ def check(strcheck):
             print(cts.MSGS['NO_WRONG_CHIRAL_SIDE'])
         return {}
 
-    print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(len(chiral_check['res_to_fix'])))
+    print(cts.MSGS['WRONG_CHIRAL_SIDE'].format(
+        len(chiral_check['res_to_fix'])
+    ))
     strcheck.summary['chiral']['detected'] = []
     for res in chiral_check['res_to_fix']:
         print(f" {mu.residue_id(res):10}")
@@ -33,7 +36,10 @@ def fix(strcheck, opts, fix_data=None):
         chiral_fix = opts
     else:
         chiral_fix = opts['fix']
-    input_line = ParamInput('Fix chiralities', strcheck.args['non_interactive'])
+    input_line = ParamInput(
+        'Fix chiralities',
+        strcheck.args['non_interactive']
+    )
     input_line.add_option_all()
     input_line.add_option_none()
     input_line.add_option_list(

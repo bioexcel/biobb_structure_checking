@@ -1,6 +1,7 @@
 ''' Class to manage internal Structure data'''
 import biobb_structure_checking.modelling.utils as mu
 
+
 class StructureData():
     '''Class to manage internal Structure data'''
     def __init__(self, st, input_format, headers, biounit=False):
@@ -16,14 +17,14 @@ class StructureData():
 
         self.hetatm = {}
         self.stats = {
-            'num_res' : 0,
-            'num_ats' : 0,
-            'res_hetats' : 0,
-            'num_wat' : 0,
-            'num_h' : 0,
-            'res_h' : 0,
-            'res_insc' : 0,
-            'res_ligands' : 0
+            'num_res': 0,
+            'num_ats': 0,
+            'res_hetats': 0,
+            'num_wat': 0,
+            'num_h': 0,
+            'res_h': 0,
+            'res_insc': 0,
+            'res_ligands': 0
         }
         self.ca_only = False
         self.ss_bonds = []
@@ -35,9 +36,9 @@ class StructureData():
         self.prev_residue = {}
 
     def residue_renumbering(self, data_library):
-        """Sets the Bio.PDB.Residue.index attribute to residues for a unique,
-        consecutive, residue number, and generates the corresponding list
-        in **all_residues**
+        """ Sets the Bio.PDB.Residue.index attribute to residues for a unique,
+            consecutive, residue number, and generates the corresponding list
+            in **all_residues**
         """
         i = 1
         self.all_residues = []
@@ -50,13 +51,11 @@ class StructureData():
                     res.child_dict[ch_r].index = i
             self.all_residues.append(res)
             if res.get_resname() in data_library.canonical_codes:
-                self.non_canonical_residue_list.append(
-                    {
-                        'res':res,
-                        'can_res':data_library.canonical_codes[res.get_resname()],
-                        'new_res':res.resname
-                    }
-                )
+                self.non_canonical_residue_list.append({
+                    'res': res,
+                    'can_res': data_library.canonical_codes[res.get_resname()],
+                    'new_res': res.resname
+                })
 
             i += 1
 
@@ -79,8 +78,8 @@ class StructureData():
 
     def check_backbone_connect(self, backbone_atoms, covlnk):
         """
-        Determines backbone links usign a distance criterium and produces a dict with
-        link relationships in the N-term to C-term direction
+        Determines backbone links usign a distance criterium and
+        produces a dict with link relationships in the N-term to C-term direction
 
         Args:
             backbone_atoms: atoms to be considered as backbone
@@ -99,8 +98,8 @@ class StructureData():
             self.next_residue[res1] = res2
 
     def calc_stats(self):
-        """ Calculates general statistics about the structure, and guesses whether
-            it is a CA-only structure
+        """ Calculates general statistics about the structure,
+            and guesses whether it can be a CA-only structure
         """
         self.stats['num_res'] = 0
         self.stats['num_ats'] = 0
@@ -136,9 +135,9 @@ class StructureData():
         self.meta = {}
         if self.input_format == 'cif':
             map_fields = {
-                '_entry.id' : 'entry_id',
-                '_struct.title' : 'title',
-                '_exptl.method' : 'method',
+                '_entry.id': 'entry_id',
+                '_struct.title': 'title',
+                '_exptl.method': 'method',
                 '_struct_keywords.pdbx_keywords': 'keywords',
                 '_refine_hist.d_res_high': 'resolution'
             }
@@ -156,12 +155,15 @@ class StructureData():
             for org, fin in map_fields.items():
                 if org in self.headers:
                     self.meta[fin] = self.headers[org]
-            if 'resolution' not in self.headers or not self.headers['resolution']:
+            if 'resolution' not in self.headers or\
+                    not self.headers['resolution']:
                 self.meta['resolution'] = 'N.A.'
             else:
                 self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
+        if self.meta['entry_id'] == 'XXXX':  # Recovering PDB id for Assemblies
+            self.meta['entry_id'] = self.st.id
 
     def print_headers(self) -> None:
         """
@@ -169,8 +171,12 @@ class StructureData():
         """
         self.get_headers()
         if 'entry_id' in self.meta:
+            if self.biounit:
+                asstxt = f"(Assembly {self.meta['biounit']})"
+            else:
+                asstxt = ""
             print(
-                f" PDB id: {self.meta['entry_id']}\n"
+                f" PDB id: {self.meta['entry_id']} {asstxt}\n"
                 f" Title: {self.meta['title']}\n"
                 f" Experimental method: {self.meta['method']}"
             )
@@ -178,14 +184,14 @@ class StructureData():
             print(f" Keywords: {self.meta['keywords']}")
         if 'resolution' in self.meta:
             print(f" Resolution (A): {self.meta['resolution']}")
-        if self.biounit:
-            print(f" Biounit no. {self.meta['biounit']}")
 
     def guess_hetatm(self):
         """ Guesses HETATM type as modified res, metal, wat, organic
         """
         self.hetatm = {}
-        for typ in [mu.UNKNOWN, mu.MODRES, mu.METAL, mu.ORGANIC, mu.COVORGANIC, mu.WAT]:
+        for typ in [
+            mu.UNKNOWN, mu.MODRES, mu.METAL, mu.ORGANIC, mu.COVORGANIC, mu.WAT
+        ]:
             self.hetatm[typ] = []
         for res in self.st.get_residues():
             if not mu.is_hetatm(res):
@@ -195,7 +201,8 @@ class StructureData():
             elif len(res) == 1:
                 self.hetatm[mu.METAL].append(res)
             elif 'N' in res or 'C' in res:
-                # modified aminoacid candidate, TODO check connectivity with n-1 or n+1
+                # modified aminoacid candidate,
+                # TODO check connectivity with n-1 or n+1
                 self.hetatm[mu.MODRES].append(res)
                 # TODO check modified nucleotides
             else:

@@ -15,7 +15,7 @@ update:
 all_nomodeller: models chains inscodes altloc ligands metals water rem_hydrogen getss clashes amide chiral mutateside fixside chiral_bck \
   backbone backbone_caps cistransbck biounits sequences dnamut add_hydrogen all_checks
 
-modeller: backbone_main 
+modeller: backbone_main
 
 all_nodebug: all_nomodeller modeller
 
@@ -37,20 +37,20 @@ load:
 	${COMMON};${APPBIN} -v -i pdb:4mdh load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:1d23 load >> load_cache.log
 	${COMMON};${APPBIN} -v -i pdb:6m0j load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server mmb load >> load_cache.log
-	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server mmb load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1ldn.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 load >> load_cache.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 load >> load_cache.log
 
-models: 
+models:
 	@echo "Running models on 1ark"
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_5_test.pdb --non_interactive models --select 5 > 1ark_models_test_5.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_1_test.pdb --non_interactive models --select 1 > 1ark_models_test_1.log
 	${COMMON};${APPBIN} -v -i pdb:1ark -o 1ark_models_sup_test.pdb --non_interactive models --select 3-6 --superimpose --save_split > 1ark_models_3-6_sup_test.log
 	@echo "Running models build complex on 1vtk"
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  -o 1vtk_models_complex.pdb --non_interactive models  --select all --build_complex > 1vtk_1_models_complex.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --file_format pdb -o 1vtk_models_complex.pdb --non_interactive models  --select all --build_complex > 1vtk_1_models_complex.log
 
-chains: 
+chains:
 	@echo "Running chains on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_all.pdb --non_interactive chains --select All > 2ki5_chains_test_all.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_chains_test_B.pdb --non_interactive chains --select B > 2ki5_chains_test_B.log
@@ -65,7 +65,7 @@ inscodes:
 	${COMMON};${APPBIN} -v -i pdb:104l -o 104l_inscodes_test.pdb --non_interactive inscodes > 104l_inscodes_test.log
 	${COMMON};${APPBIN} -v -i pdb:104l -o 104l_inscodes_renum_test.pdb --non_interactive inscodes --renumber > 104l_inscodes_renum_test.log
 
-altloc: 
+altloc:
 	@echo "Running altloc on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_altloc_test_occ.pdb --non_interactive altloc --select occupancy > 2ki5_altloc_test_occ.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_altloc_test_B.pdb --non_interactive altloc --select B > 2ki5_altloc_test_B.log
@@ -76,18 +76,18 @@ ligands:
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_ligands_test_All.pdb --non_interactive ligands --remove All > 2ki5_ligands_test_All.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_ligands_test_None.pdb --non_interactive ligands --remove None > 2ki5_ligands_test_None.log
 
-metals: 
+metals:
 	@echo "Running metals on 1bqo"
 	${COMMON};${APPBIN} -v -i pdb:1bqo -o 1bqo_metals_test_ZN.pdb --non_interactive metals --remove ZN > 1bqo_metals_test_ZN.log
 	${COMMON};${APPBIN} -v -i pdb:1bqo -o 1bqo_metals_test_A305.pdb --non_interactive metals --remove A305 > 1bqo_metals_test_A305.log
-	${COMMON};${APPBIN} -v -i pdb:1bqo -o 1bqo_metals_test_All.pdb --non_interactive metals --remove All > 1bqo_metals_test_All.log    
+	${COMMON};${APPBIN} -v -i pdb:1bqo -o 1bqo_metals_test_All.pdb --non_interactive metals --remove All > 1bqo_metals_test_All.log
 	${COMMON};${APPBIN} -v -i pdb:1bqo -o 1bqo_metals_test_None.pdb --non_interactive metals --remove None > 1bqo_metals_test_None.log
 
 water:
 	@echo "Running water on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 --non_interactive water --remove No > 2ki5_remwat_test_None.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive water --remove Yes > 2ki5_remwat_test_Yes.log
-	
+
 rem_hydrogen:
 	@echo "Running rem_hydrogen on 1ark"
 	${COMMON};${APPBIN} -v -i pdb:1ark --non_interactive rem_hydrogen --remove No > 1ark_remh_test_None.log
@@ -117,11 +117,13 @@ chiral:
 mutateside:
 	@echo "Running mutateside on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_mutateside_test.pdb --json 2ki5_mutateside_test.json  mutateside --mut Leu49Ile,B:arg51Lys > 2ki5_mutateside_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_mutateside_test.pdb --json 2ki5_mutateside_rb_test.json  mutateside --mut Leu49Ile,B:arg51Lys --rebuild> 2ki5_mutateside_rb_test.log
 
-fixside: 
+fixside:
 	@echo "Running fixside on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 fixside --fix None > 2ki5_fixside_None_test.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_fixside_All_test.pdb fixside --fix All > 2ki5_fixside_All_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_fixside_All_rb_test.pdb fixside --fix All --rebuild > 2ki5_fixside_All_rb_test.log
 	@echo "Running fixside on 1d23_fixtest"
 	${COMMON};${APPBIN} -v -i dna_test/1d23_fixtest.pdb -o 1d23_fixtest_All_test.pdb fixside --fix All > 1d23_fixtest_All_test.log
 
@@ -157,13 +159,13 @@ dnamut:
 biounits:
 	@echo "Running checkall on biounits"
 	@echo " 1ldn.1 "
-	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --pdb_server mmb  --non_interactive checkall > 1ldn1_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1ldn.1 --non_interactive checkall > 1ldn1_checkall_test.log
 	@echo " 2ki5.1 "
-	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --pdb_server bsc  --non_interactive checkall > 2ki5_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5.1 --non_interactive checkall > 2ki5_checkall_test.log
 	@echo " 1vtk.1 "
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb  --non_interactive checkall > 1vtk_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --non_interactive checkall > 1vtk_checkall_test.log
 	@echo " 1svc.1 "
-	${COMMON};${APPBIN} -v -i pdb:1svc.1 --pdb_server bsc  --non_interactive checkall > 1svc_checkall_test.log
+	${COMMON};${APPBIN} -v -i pdb:1svc.1 --non_interactive checkall > 1svc_checkall_test.log
 
 add_hydrogen:
 	@echo "Running add_hydrogen on 1ubq"
@@ -174,6 +176,7 @@ add_hydrogen:
 	${COMMON};${APPBIN} -v -i pdb:1d23 -o 1d23.pdb --output_format cmip  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges CMIP' > 1d23_add_hydrogen_CMIP_test.log
 	@echo "Running add_hydrogen on 1rna"
 	${COMMON};${APPBIN} -v -i pdb:1rna -o 1rna.pdbqt --output_format pdbqt  --non_interactive command_list --list 'water --remove yes; add_hydrogen --add_mode auto --add_charges adt' > 1rna_add_hydrogen_ADT_test.log
+
 all_checks:
 	@echo "Running all checks"
 	@echo " 1ark "
@@ -189,7 +192,7 @@ all_checks:
 	@echo " 1svc "
 	${COMMON};${APPBIN} -v -i pdb:1svc -o 1svc_all_test.pdb --json 1svc_all_test.json --non_interactive command_list --list scripts/all_checks > 1svc_all_test.log
 	@echo " 1vtk.1 "
-	${COMMON};${APPBIN} -v -i pdb:1vtk.1 --pdb_server mmb -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_svc_all_test.log
+	${COMMON};${APPBIN} -v -i pdb:1vtk.1 -o 1vtk_1_all_test.pdb --json 1vtk_1_all_test.json --non_interactive command_list --list scripts/all_checks > 1vtk_1_svc_all_test.log
 
 diffs:
 	cd ${TESTDIR};scripts/calcDiffs.csh

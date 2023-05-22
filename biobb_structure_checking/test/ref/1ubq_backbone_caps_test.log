@@ -5,7 +5,7 @@
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure backbone_test/1ubq_caps.pdb loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
  Resolution (A): N.A.

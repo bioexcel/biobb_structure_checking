@@ -66,12 +66,12 @@ class PDBIO_extended(PDBIO):
                 from Bio import BiopythonWarning
 
                 warnings.warn(
-                    "Missing occupancy in atom %s written as blank" % repr(atom.get_full_id()),
+                    f"Missing occupancy in atom {repr(atom.get_full_id())} written as blank",
                     BiopythonWarning,
                 )
             else:
                 raise TypeError(
-                    "Invalid occupancy %r in atom %r" % (occupancy, atom.get_full_id())
+                    f"Invalid occupancy {occupancy} in atom {atom.get_full_id()}"
                 )
         # Added charges (from res_library and atom_types from data_library)
         # Format PDBQT for Autodock

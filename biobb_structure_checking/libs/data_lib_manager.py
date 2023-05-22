@@ -5,6 +5,7 @@
 import json
 import sys
 
+
 class DataLibManager:
     """
     | data_lib_manager DataLibManager
@@ -30,7 +31,10 @@ class DataLibManager:
                 self.ff_data[charge_set] = {}
 
         except IOError:
-            print("ERROR: unable to open data library " + file_path, file=sys.stderr)
+            print(
+                f"ERROR: unable to open data library {file_path}",
+                file=sys.stderr
+            )
             sys.exit(2)
 
     def get_valid_codes(self, mol_type):
@@ -67,7 +71,7 @@ class DataLibManager:
             for rcode in self.residue_codes['cap_residues']:
                 atom_lists[rcode] = {
                     'backbone': self.residue_data[rcode]['bck_atoms'],
-                    'side' : []
+                    'side': []
                 }
         return atom_lists
 
@@ -197,5 +201,8 @@ class DataLibManager:
             json_map = json.load(data_file_h)
             self.ff_data[json_map['id']] = json_map
         except IOError:
-            print("ERROR: unable to open forcefield library " + file_path, file=sys.stderr)
+            print(
+                f"ERROR: unable to open forcefield library {file_path}",
+                file=sys.stderr
+            )
             sys.exit(2)
