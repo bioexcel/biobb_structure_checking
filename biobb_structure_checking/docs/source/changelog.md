@@ -1,3 +1,13 @@
+## v3.12 (2023.2)
+### Extended functions
+- input
+  - Added assembly download from wwpdb
+  - Added --overwrite_cache to refresh cached structures
+- output
+  - Added optional logging of building errors (--build-warnings)
+### Bug Fixes
+  - sequences. Fixed errors in sequence recognition when non-protein and non-na chain
+
 ## v3.12.1 (2022.4)
 ### Extended functions
 - amide
@@ -22,7 +32,7 @@
 - input management
   - Added --nocache to avoid caching downloaded structures
   - Added --copy_input to recover a copy of the input structure
-  - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files
+  - Added --coords_only to discard chain labels and residue ids from input. Used to recover faulty structure files
 
 ### Bug Fixes
 - Added missing defaults for Notebook execution
