@@ -7,6 +7,7 @@
   - Added optional logging of building errors (--build-warnings)
 ### Bug Fixes
   - sequences. Fixed errors in sequence recognition when non-protein and non-na chain
+  - models/chains. Fixed errors when differences in chain composition among models
 
 ## v3.12.1 (2022.4)
 ### Extended functions
