@@ -1,3 +1,25 @@
+## v3.13.X (2023.2)
+### Extended functions
+- input
+  - Added assembly download from wwpdb
+  - Moved default download to https (instead of ftp) to avoid network restrictions
+  - Added --overwrite_cache to refresh cached structures
+- output
+  - Added optional logging of building errors (as --build-warnings)
+- general
+  - Atom limit check made after download to avoid useless work
+  - Added --time_limit to avoid too lengthy runs. Useful on massive analysis
+  - Improved some log errors
+- add_hydrogen
+  - Full list of residues now requires --verbose
+- models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities
+- improved recognition of CA-only structures
+
+### Bug Fixes
+  - sequences.
+    - Fixed errors in sequence recognition when non-protein and non-na chain
+    - Fixed FASTA headers when no gaps
+
 ## v3.12.1 (2022.4)
 ### Extended functions
 - amide
@@ -23,11 +45,11 @@
   - Added --nocache to avoid caching downloaded structures
   - Added --copy_input to recover a copy of the input structure
   - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files
-
 ### Bug Fixes
 - Added missing defaults for Notebook execution
 - Ionized/tautomeric residue names recognized
 - Fixed behaviour of structure headers output with missing entries
+
 ## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details
@@ -42,7 +64,6 @@
   - Structure sequence is always reported even in the absence of canonical one
 - chains
   - Unlabelled chains can be fixed.
-
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
@@ -70,7 +91,7 @@
 ### Bug Fixes
 
 - add_hydrogen
-  - Extended to support Nucleic Acids
+  - Extended to Nucleic Acids
   - added option to keep canonical residue names
 ### Bug Fixes
 - add_hydrogen
@@ -123,7 +144,7 @@
 
 ### Extended functions
 - mutateside
-    - added support for mutation of DNA residues
+    - added support for mutation of DNA/RNA residues
     - --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes)
 - chains
     - allows to select chains according to molecular type (protein | dna | rna | na).

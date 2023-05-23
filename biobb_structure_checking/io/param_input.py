@@ -3,6 +3,7 @@
 """
 import argparse
 
+
 def _get_input(value, prompt_text, default=None):
     """ Get input data """
     while value is None or value == '':
@@ -12,6 +13,7 @@ def _get_input(value, prompt_text, default=None):
     if isinstance(value, str):
         value = value.replace(' ', '')
     return value
+
 
 class ParamInput():
     """ Class to generate and manage interactive parameter dialogs"""
@@ -38,8 +40,15 @@ class ParamInput():
         """Add 'auto' option to dialog"""
         self.add_option_list('auto', ['Auto'])
 
-    def add_option_list(self, label, opt_list, case=False, opt_type='list', \
-            multiple=False, list2=None):
+    def add_option_list(
+        self,
+        label,
+        opt_list,
+        case=False,
+        opt_type='list',
+        multiple=False,
+        list2=None
+    ):
         """ Add a list based option to dialog """
         self.options.append({
             'label':label,
@@ -50,8 +59,15 @@ class ParamInput():
             'list2':list2
         })
 
-
-    def add_option_numeric(self, label, opt_list, opt_type, min_val, max_val, multiple=False):
+    def add_option_numeric(
+        self,
+        label,
+        opt_list,
+        opt_type,
+        min_val,
+        max_val,
+        multiple=False
+    ):
         """ Add a numeric option to dialog """
         self.options.append({
             'label':label,
@@ -181,6 +197,7 @@ class ParamInput():
                 opt_value = ''
         return self.options[iopt]['label'], opt_value
 
+
 class Dialog():  #To check subparsers from argparse
     """Dialog to complete command options"""
     def __init__(self):
@@ -247,8 +264,9 @@ class Dialog():  #To check subparsers from argparse
     def exists(self, command):
         """Checks whether a Dialog for **command** is defined"""
         return command in self.options
+# ===============================================================================
 
-#===============================================================================
+
 class NoDialogAvailableError(Exception):
     """ Error on no Dialog available for **command**"""
     def __init__(self, command):

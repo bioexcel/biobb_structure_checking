@@ -5,7 +5,7 @@
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure dna_test/1d23_fixtest.pdb loaded
- PDB id: 
+ PDB id:  
  Title: 
  Experimental method: unknown
  Resolution (A): N.A.
@@ -20,7 +20,7 @@ Structure dna_test/1d23_fixtest.pdb loaded
  Num. water mol.:  0
  Num. atoms:  391
 Running fixside. Options: --fix All
-2 Residues with missing side chain atoms found
+Found 2 Residues with missing side chain atoms
   DG A2     C6,O6,N1,C2,N2,N3
   DC A5     C6,C5,C4,N4,N3,C2,O2
 Fixing side chains

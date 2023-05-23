@@ -76,7 +76,83 @@
    "ARG A366",
    "ARG A370",
    "GLU A371",
-   "GLU A374"
+   "GLU A374",
+   "ARG A-251",
+   "TYR A-253",
+   "ASP A-255",
+   "HIS A-258",
+   "LYS A-262",
+   "ARG A-275",
+   "ASP A-276",
+   "ASP A-277",
+   "TYR A-280",
+   "GLU A-283",
+   "TYR A-287",
+   "ARG A-289",
+   "GLU A-295",
+   "TYR A-2101",
+   "HIS A-2105",
+   "ARG A-2106",
+   "ASP A-2108",
+   "GLU A-2111",
+   "ASP A-2116",
+   "TYR A-2132",
+   "ASP A-2136",
+   "HIS A-2142",
+   "GLU A-2146",
+   "ASP A-2162",
+   "ARG A-2163",
+   "HIS A-2164",
+   "CYS A-2171",
+   "TYR A-2172",
+   "ARG A-2176",
+   "TYR A-2177",
+   "GLU A-2210",
+   "ASP A-2211",
+   "ARG A-2212",
+   "HIS A-2213",
+   "ASP A-2215",
+   "ARG A-2216",
+   "LYS A-2219",
+   "ARG A-2220",
+   "ARG A-2222",
+   "GLU A-2225",
+   "ARG A-2226",
+   "ASP A-2228",
+   "ARG A-2236",
+   "ARG A-2237",
+   "TYR A-2239",
+   "ARG A-2247",
+   "TYR A-2248",
+   "CYS A-2251",
+   "ARG A-2256",
+   "GLU A-2257",
+   "ASP A-2258",
+   "ARG A-2281",
+   "HIS A-2283",
+   "ASP A-2286",
+   "ARG A-2293",
+   "GLU A-2296",
+   "ASP A-2303",
+   "TYR A-2305",
+   "ASP A-2313",
+   "LYS A-2317",
+   "ARG A-2318",
+   "ARG A-2320",
+   "HIS A-2323",
+   "ASP A-2328",
+   "TYR A-2329",
+   "ASP A-2330",
+   "CYS A-2336",
+   "ARG A-2337",
+   "ASP A-2338",
+   "HIS A-2351",
+   "CYS A-2362",
+   "ASP A-2363",
+   "ARG A-2366",
+   "ARG A-2370",
+   "GLU A-2371",
+   "GLU A-2374"
   ],
   "opts": "--add_mode auto --add_charges ADT",
   "selection": "auto"
@@ -90,10 +166,15 @@
     "at1": "PRO A153.O",
     "at2": "GLN A349.OE1",
     "dist": 2.8022
+   },
+   {
+    "at1": "PRO A-2153.O",
+    "at2": "GLN A-2349.OE1",
+    "dist": 2.8022
    }
   ],
   "fixed": "All",
-  "n_amides": 17,
+  "n_amides": 34,
   "opts": "--fix All"
  },
  "backbone": {
@@ -108,6 +189,14 @@
     [
      "GLY A264",
      "PRO A280"
+    ],
+    [
+     "SER A-2149",
+     "PRO A-2153"
+    ],
+    [
+     "GLY A-2264",
+     "PRO A-2280"
     ]
    ],
    "option_selected": "none"
@@ -120,6 +209,11 @@
      "at1": "SER A149.OXT",
      "at2": "GLN A349.OE1",
      "dist": 2.8269
+    },
+    {
+     "at1": "SER A-2149.OXT",
+     "at2": "GLN A-2349.OE1",
+     "dist": 2.8269
     }
    ],
    "polar_donor": [],
@@ -127,7 +221,13 @@
    "severe": []
   },
   "missing_atoms": {
+   "GLY A-2264": [
+    "OXT"
+   ],
    "GLY A264": [
+    "OXT"
+   ],
+   "SER A-2149": [
     "OXT"
    ],
    "SER A149": [
@@ -135,22 +235,31 @@
    ],
    "fixed": [
     "SER A149",
-    "GLY A264"
+    "GLY A264",
+    "SER A-2149",
+    "GLY A-2264"
    ],
    "selected": "All"
   },
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein",
+  "A": "Protein/0",
+  "A-2": "Protein/0",
+  "selected": {
+   "0": {
+    "A": 1,
+    "A-2": 1
+   }
+  },
   "unlabelled": false
  },
  "chiral": {
-  "n_chirals": 42,
+  "n_chirals": 84,
   "opts": "--fix All"
  },
  "chiral_bck": {
-  "n_chirals": 287
+  "n_chirals": 574
  },
  "cistransbck": {},
  "clashes": {
@@ -164,6 +273,16 @@
     {
      "at1": "ALA A118.CA",
      "at2": "SER A181.O",
+     "dist": 2.8897
+    },
+    {
+     "at1": "GLY A-259.O",
+     "at2": "HIS A-2213.CD2",
+     "dist": 2.824
+    },
+    {
+     "at1": "ALA A-2118.CA",
+     "at2": "SER A-2181.O",
      "dist": 2.8897
     }
    ],
@@ -198,6 +317,36 @@
      "at1": "GLU A225.OE1",
      "at2": "TMP A500.O3'",
      "dist": 2.8949
+    },
+    {
+     "at1": "SER A-274.O",
+     "at2": "ASP A-277.OD2",
+     "dist": 2.6848
+    },
+    {
+     "at1": "GLN A-2104.O",
+     "at2": "ASP A-2108.OD2",
+     "dist": 3.0609
+    },
+    {
+     "at1": "SER A-2149.OXT",
+     "at2": "GLN A-2349.OE1",
+     "dist": 2.8269
+    },
+    {
+     "at1": "PRO A-2153.O",
+     "at2": "GLN A-2349.OE1",
+     "dist": 2.8022
+    },
+    {
+     "at1": "LEU A-2217.O",
+     "at2": "ARG A-2220.O",
+     "dist": 2.8619
+    },
+    {
+     "at1": "GLU A-2225.OE1",
+     "at2": "TMP A-2500.O3'",
+     "dist": 2.8949
     }
    ],
    "polar_donor": [
@@ -209,6 +358,16 @@
     {
      "at1": "TRP A259.NE1",
      "at2": "ARG A293.NH1",
+     "dist": 3.0938
+    },
+    {
+     "at1": "ARG A-2220.NH1",
+     "at2": "ARG A-2222.NH1",
+     "dist": 2.9914
+    },
+    {
+     "at1": "TRP A-2259.NE1",
+     "at2": "ARG A-2293.NH1",
      "dist": 3.0938
     }
    ],
@@ -227,6 +386,21 @@
      "at1": "ARG A220.NH1",
      "at2": "ARG A222.NH1",
      "dist": 2.9914
+    },
+    {
+     "at1": "LYS A-262.NZ",
+     "at2": "ARG A-2163.NH1",
+     "dist": 3.4394
+    },
+    {
+     "at1": "ARG A-2212.NH2",
+     "at2": "ARG A-2216.NH2",
+     "dist": 3.171
+    },
+    {
+     "at1": "ARG A-2220.NH1",
+     "at2": "ARG A-2222.NH1",
+     "dist": 2.9914
     }
    ],
    "severe": []
@@ -235,31 +409,44 @@
  "final_stats": {
   "biounit": "1",
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    },
+    "A-2": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "A-2": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 1,
+  "nchains": [
+   2
+  ],
   "nmodels": 1,
   "stats": {
-   "num_ats": 4809,
-   "num_h": 2416,
-   "num_res": 313,
+   "num_ats": 9618,
+   "num_h": 4832,
+   "num_res": 626,
    "num_wat": 0,
-   "res_h": 313,
+   "res_h": 626,
    "res_hetats": 0,
    "res_insc": 0,
    "res_ligands": 0
   },
-  "total_charge": -3.1999499999999887
+  "total_charge": -6.3998999999998745
  },
  "fixside": {
   "opts": "--fix all"
@@ -269,23 +456,26 @@
  },
  "headers": {
   "biounit": "1",
-  "entry_id": "",
-  "keywords": "key enzyme in thymidine salvage pathway, additional thymidylate kinase activity, target for anti-herpes viral drugs, transferase",
-  "method": "x-ray diffraction",
-  "resolution": "N.A.",
-  "title": "thymidine kinase from herpes simplex virus type 1 in complex with adp and deoxythymidine-monophosphate"
+  "entry_id": "1vtk",
+  "keywords": "TRANSFERASE",
+  "method": "X-RAY DIFFRACTION",
+  "title": "THYMIDINE KINASE FROM HERPES SIMPLEX VIRUS TYPE 1 IN COMPLEX WITH ADP AND DEOXYTHYMIDINE-MONOPHOSPHATE"
  },
  "inscodes": {},
  "ligands": {
   "detected": [
    "ADP A400",
-   "TMP A500"
+   "TMP A500",
+   "ADP A-2400",
+   "TMP A-2500"
   ],
-  "n_removed": 2,
+  "n_removed": 4,
   "removed": {
    "lst": [
     "ADP A400",
-    "TMP A500"
+    "TMP A500",
+    "ADP A-2400",
+    "TMP A-2500"
    ],
    "opt": "All"
   }
@@ -295,12 +485,7 @@
   "opts": "--remove ZN"
  },
  "models": {
-  "nmodels": 2,
-  "selected": "1",
-  "type": {
-   "rmsd": 42.5525,
-   "type": 2
-  }
+  "nmodels": 1
  },
  "modified_structure": true,
  "rem_hydrogen": {
@@ -310,29 +495,39 @@
  "stats": {
   "biounit": "1",
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.006349206349206327,
+     "Protein": 0.9936507936507937,
+     "RNA": 0.0
+    },
+    "A-2": {
+     "DNA": 0.0,
+     "Other": 0.006349206349206327,
+     "Protein": 0.9936507936507937,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein"
-  },
-  "models_type": {
-   "rmsd": 42.5525,
-   "type": 2
-  },
-  "nchains": 1,
-  "nmodels": 2,
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "A-2": "Protein"
+   }
+  ],
+  "models_type": 0,
+  "nchains": [
+   2
+  ],
+  "nmodels": 1,
   "stats": {
-   "num_ats": 4809,
-   "num_h": 2416,
-   "num_res": 313,
+   "num_ats": 9618,
+   "num_h": 4832,
+   "num_res": 626,
    "num_wat": 0,
-   "res_h": 313,
+   "res_h": 626,
    "res_hetats": 0,
    "res_insc": 0,
    "res_ligands": 0
@@ -340,8 +535,8 @@
   "total_charge": null
  },
  "water": {
-  "n_detected": 52,
-  "n_removed": 52,
+  "n_detected": 104,
+  "n_removed": 104,
   "opts": "--remove Yes"
  }
 }

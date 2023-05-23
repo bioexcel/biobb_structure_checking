@@ -5,7 +5,7 @@
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
- PDB id: 
+ PDB id:  
  Title: 
  Experimental method: unknown
  Resolution (A): N.A.
@@ -20,6 +20,6 @@ Structure chiral_pdb_test/1ark_m1_chica_nh.pdb loaded
  Num. water mol.:  0
  Num. atoms:  463
 Running chiral_bck.
-1 residues with incorrect backbone chirality found
+Found 1 residues with incorrect backbone chirality
  ALA A2    
 Structure not modified, not saving. Override with --force_save

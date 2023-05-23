@@ -5,6 +5,7 @@
 import re
 import sys
 
+
 class ResidueLib():
     """ Class to manage a residue library taken from AMBER prep files.
     """
@@ -13,7 +14,10 @@ class ResidueLib():
             lib_file_h = open(library_path, "r")
 
         except IOError:
-            print("ERROR: unable to open residue library" + library_path, file=sys.stderr)
+            print(
+                f"ERROR: unable to open residue library {library_path}",
+                file=sys.stderr
+            )
             sys.exit(1)
 
         line = lib_file_h.readline()
@@ -76,6 +80,7 @@ class ResidueLib():
             return resid_def.ats[i]
         return None
 
+
 class ResidueDef():
     """ Class to pack a residue definition."""
     def __init__(self):
@@ -84,6 +89,7 @@ class ResidueDef():
         self.ats = ['']
         self.improper = []
         self.charges = []
+
 
 class AtomDef():
     """ Class to pack an atom definition."""

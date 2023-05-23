@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
- PDB id: 1SVC
+ PDB id: 1SVC 
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA
@@ -21,7 +21,7 @@ Structure pdb:1svc loaded
  Num. water mol.:  63
  Num. atoms:  2903
 Running chains. Options: --select all --rebuild
-2 Chain(s) detected
+Detected 2 Chain(s)
  D: DNA
  P: Protein
 Rebuilding chains from backbone connectivity

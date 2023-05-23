@@ -6,24 +6,28 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 def check(strcheck):
 
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     ion_res_list = strcheck.strucm.get_ion_res_list()
 
     if not ion_res_list:
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_SELECT_ADDH'])
-        return {'ion_res_list':[]}
+        return {'ion_res_list': []}
 
     fix_data = {
         'ion_res_list': ion_res_list,
     }
     print(cts.MSGS['SELECT_ADDH_RESIDUES'].format(len(ion_res_list)))
+
     for res_type in strcheck.strucm.data_library.residue_codes['protein']:
         residue_list = [
             mu.residue_num(r_at[0])
             for r_at in ion_res_list
             if r_at[0].get_resname() == res_type
         ]
-        if residue_list:
+        if residue_list and strcheck.args['verbose']:
             print(f" {res_type} {','.join(residue_list)}")
 
     strcheck.summary['add_hydrogen']['ionic_detected'] = [
@@ -31,6 +35,7 @@ def check(strcheck):
     ]
     # print(' {:10} {}'.format(mu.residue_id(res), ','.join(at_list)))
     return fix_data
+
 
 def fix(strcheck, opts, fix_data=None):
     if not fix_data:
@@ -81,13 +86,24 @@ def fix(strcheck, opts, fix_data=None):
     else:
         if add_h_mode == 'ph':
             ph_value = opts['pH']
-            input_line = ParamInput("pH Value", strcheck.args['non_interactive'], set_none=7.0)
-            input_line.add_option_numeric("pH", [], opt_type="float", min_val=0., max_val=14.)
+            input_line = ParamInput(
+                "pH Value",
+                strcheck.args['non_interactive'],
+                set_none=7.0
+            )
+            input_line.add_option_numeric(
+                "pH",
+                [],
+                opt_type="float",
+                min_val=0.,
+                max_val=14.
+            )
             input_line.set_default(7.0)
             input_option, ph_value = input_line.run(ph_value)
 
             if not strcheck.args['quiet']:
                 print('Selection: pH', ph_value)
+
             strcheck.summary['add_hydrogen']['selection'] = f"pH {ph_value}"
 
             for r_at in fix_data['ion_res_list']:
@@ -140,8 +156,13 @@ def fix(strcheck, opts, fix_data=None):
                     form = None
                     input_option, form = input_line.run(form)
                     ion_to_fix[r_at[0]] = form.upper()
-                    strcheck.summary['add_hydrogen']['selection'].append(f"{rcode} {form.upper()}")
+                    strcheck.summary['add_hydrogen']['selection'].append(
+                        f"{rcode} {form.upper()}"
+                    )
 
-    strcheck.strucm.add_hydrogens(ion_to_fix, add_charges=opts['add_charges'].upper())
+    strcheck.strucm.add_hydrogens(
+        ion_to_fix,
+        add_charges=opts['add_charges'].upper()
+    )
     strcheck.strucm.modified = True
     return False

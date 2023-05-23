@@ -1,7 +1,8 @@
 """
-Module to support json-formatted summary of structure checking, and fixes
+    Module to support json-formatted summary of structure checking, and fixes
 """
 import json
+
 
 class JSONWriter:
     """

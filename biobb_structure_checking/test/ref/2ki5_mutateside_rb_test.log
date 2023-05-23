@@ -1,0 +1,103 @@
+================================================================================
+=                   BioBB structure checking utility v3.12.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+================================================================================
+
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+ PDB id: 2KI5 
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution (A): 1.90
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  296
+ Num. ligands or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+Running mutateside. Options: --mut Leu49Ile,B:arg51Lys --rebuild
+Mutations to perform
+*:LEU49ILE
+B:ARG51LYS
+
+                         MODELLER 10.1, 2021/03/12, r12156
+
+     PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
+
+
+                     Copyright(c) 1989-2021 Andrej Sali
+                            All Rights Reserved
+
+                             Written by A. Sali
+                               with help from
+              B. Webb, M.S. Madhusudhan, M-Y. Shen, G.Q. Dong,
+          M.A. Marti-Renom, N. Eswar, F. Alber, M. Topf, B. Oliva,
+             A. Fiser, R. Sanchez, B. Yerkovich, A. Badretdinov,
+                     F. Melo, J.P. Overington, E. Feyfant
+                 University of California, San Francisco, USA
+                    Rockefeller University, New York, USA
+                      Harvard University, Cambridge, USA
+                   Imperial Cancer Research Fund, London, UK
+              Birkbeck College, University of London, London, UK
+
+
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150400.24.60-default x86_64
+Date and time of compilation         : 2021/03/12 00:04:35
+MODELLER executable type             : x86_64-intel8
+Job starting time (YY/MM/DD HH:MM:SS): 2023/05/23 13:01:38
+
+Checking for steric clashes
+No severe clashes detected
+13 Steric apolar clashes detected
+ GLY A61.O    THR A65.CG2     2.799 A
+ MET A85.CG   GLU A374.OE1    2.857 A
+ ARG A89.CD   GLU A95.OE1     2.776 A
+ LEU A232.O   ARG A236.CG     2.741 A
+ MET A372.SD  VAL B307.CG1    2.777 A
+ HIS B58.CD2  TYR B172.OH     2.675 A
+ LYS B62.O    THR B66.CG2     2.878 A
+ THR B66.OG1  TYR B80.CE1     2.890 A
+ THR B86.OG1  GLU B374.CB     2.892 A
+ HIS B105.CE1 GLN B109.OE1    2.773 A
+ GLU B210.O   ILE B214.CG1    2.842 A
+ ARG B212.CZ  ASP B330.OD1    2.875 A
+ SER B357.O   ILE B361.CG1    2.861 A
+5 Steric polar_acceptor clashes detected
+ ASP A55.O    VAL A204.O      3.035 A
+ ARG B89.O    GLU B95.OE1     2.792 A
+ ASP B211.O   ASP B215.OD2    2.914 A
+ ALA B334.O   ASP B338.OD2    3.100 A
+ PRO B359.O   ASP B363.OD2    3.073 A
+2 Steric polar_donor clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578 A
+ ARG A212.NH2 ARG A216.NH2    3.075 A
+2 Steric positive clashes detected
+ LYS A62.NZ   ARG A163.NH1    2.578 A
+ ARG A212.NH2 ARG A216.NH2    3.075 A
+No negative clashes detected
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  905
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  296
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  292
+Final Num. atoms:  4934
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+Structure saved on 2ki5_mutateside_test.pdb
+Summary data saved on 2ki5_mutateside_rb_test.json

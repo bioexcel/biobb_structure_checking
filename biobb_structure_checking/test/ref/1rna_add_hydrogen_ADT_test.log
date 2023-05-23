@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/rn/1rna.cif' 
 Structure pdb:1rna loaded
- PDB id: 1RNA
+ PDB id: 1RNA 
  Title: CRYSTALLOGRAPHIC STRUCTURE OF AN RNA HELIX: [U(U-A)6A]2
  Experimental method: X-RAY DIFFRACTION
  Keywords: RNA
@@ -23,15 +23,15 @@ Structure pdb:1rna loaded
 
 Step 1: water --remove yes
 Running water. Options: --remove yes
-91 Water molecules detected
-91 Water molecules removed
+Detected 91 Water molecules
+Removed 91 Water molecules
 
 Step 2:  add_hydrogen --add_mode auto --add_charges adt
 Running add_hydrogen. Options: --add_mode auto --add_charges adt
 No residues requiring selection on adding H atoms
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Updating partial charges and atom types
 Total assigned charge:     -26.00
