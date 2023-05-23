@@ -26,7 +26,7 @@ def check(strcheck):
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_BCK_MISSING'])
 
-    #Not bound consecutive residues
+    # Not bound consecutive residues
     bck_check = strcheck.strucm.get_backbone_breaks()
     if bck_check['bck_breaks_list']:
         print(
