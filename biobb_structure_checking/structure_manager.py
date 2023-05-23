@@ -629,6 +629,8 @@ class StructureManager:
                     dist = 0.
                     if 'N' in res1 and 'C' in res2:
                         dist = res1['N'] - res2['C']
+                    else:
+                        dist = res1['CA'] - res2['CA']
                     not_link_seq_list.append([res1, res2, dist])
 
             else:
@@ -798,7 +800,7 @@ class StructureManager:
             f"{st_stats['stats']['num_ats']}"
         )
         if st_stats['ca_only']:
-            print('CA-Only structure')
+            print(' CA-ONLY structure')
         self.st_data.print_hetatm_stats()
 
     def save_structure(
