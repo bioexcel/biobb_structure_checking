@@ -74,7 +74,7 @@ class StructureChecking():
             print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
 
         if self.args['time_limit'] and self._check_time_limit():
-            sys.exit()
+            sys.exit(1)
 
         # if self.args['atom_limit'] and \
         #         self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
@@ -509,7 +509,7 @@ class StructureChecking():
 
     def _check_time_limit(self):
         if time.time() - self.start_time > self.args['time_limit']:
-            print(cts.MSGS['TIME_LIMIT'])
+            print(cts.MSGS['TIME_LIMIT'], file=sys.stderr)
             return True
         return False
 # ==============================================================================
