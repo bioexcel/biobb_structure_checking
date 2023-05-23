@@ -298,7 +298,7 @@ class SequenceData():
                         ch_data['pdb']['match_numbering'] = False
         return True
 
-    def fake_canonical_sequence(self, strucm, mutations, ins_res_type='G'):
+    def fake_canonical_sequence(self, strucm, mutations=None, ins_res_type='G'):
         """ SequenceData.fake_canonical_sequence
         Fakes a canonical sequence to support modeller use in fixside
             and mutateside --rebuild
@@ -334,12 +334,13 @@ class SequenceData():
 
                     seq += frag.seq
                     last_pos = frag.features[0].location.end
-                for mut_set in mutations.mutation_list:
-                    for mut in mut_set.mutations:
-                        if mut['chain'] != ch_id:
-                            continue
-                        res_num = mut['resobj'].id[1]
-                        seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
+                if mutations is not None:
+                    for mut_set in mutations.mutation_list:
+                        for mut in mut_set.mutations:
+                            if mut['chain'] != ch_id:
+                                continue
+                            res_num = mut['resobj'].id[1]
+                            seq[res_num - int(start_pos)] = IUPACData.protein_letters_3to1[mut['new_id'].capitalize()]
                 if ch_id not in self.data[mod.id]:
                     self.add_empty_chain(mod, ch_id)
                 # Warning IUPAC deprecated in Biopython 1.78

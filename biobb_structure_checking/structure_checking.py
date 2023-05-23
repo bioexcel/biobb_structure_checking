@@ -65,7 +65,6 @@ class StructureChecking():
         ) as err:
             sys.exit(err.message)
 
-
         if self.args['debug']:
             self.timings.append(['load', time.time() - self.start_time])
             process = psutil.Process(os.getpid())

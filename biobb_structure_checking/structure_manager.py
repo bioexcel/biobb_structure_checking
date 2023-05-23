@@ -573,13 +573,6 @@ class StructureManager:
 
         return missing
 
-    def check_ca_only(self):
-        for ch_id in self.chain_ids:
-            ca_only = True
-            for at in self.st[0].get_atoms():
-                ca_only = ca_only and (at.id == 'CA')
-        return ca_only
-
     def get_ion_res_list(self) -> List[Tuple[Residue, List[str]]]:
         """returns list of residues with potencial selection on adding H
 
@@ -1123,14 +1116,14 @@ class StructureManager:
         mod_mgr.sequences = sequence_data
 
         for mod in self.st:
-            if self.has_models():
+            if self.models_data.has_models():
                 print('Processing Model {}'.format(mod.id + 1))
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir), mod.id)
             else:
                 self.save_structure('{}/templ.pdb'.format(mod_mgr.tmpdir))
 
-            for ch_id in self.chain_ids:
-                if sequence_data.data[ch_id]['pdb'][mod.id]['wrong_order']:
+            for ch_id in self.chains_data.chain_ids[mod.id]:
+                if sequence_data.data[mod.id][ch_id]['pdb']['wrong_order']:
                     print("Warning: chain {} has a unusual residue numbering, skipping".format(ch_id))
                 print("Fixing chain/model {}/{}".format(ch_id, mod.id))
                 try:
@@ -1144,7 +1137,7 @@ class StructureManager:
                     'model_st',
                     mod_mgr.tmpdir + "/" + model_pdb['name']
                 )
-                offset =  sequence_data.data[ch_id]['pdb'][mod.id]['frgs'][0].features[0].location.start
+                offset = sequence_data.data[mod.id][ch_id]['pdb']['frgs'][0].features[0].location.start
 
                 spimp = Superimposer()
 
