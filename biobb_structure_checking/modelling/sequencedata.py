@@ -443,10 +443,12 @@ class SequenceData():
                         pdb_seq = Seq(str(sequence), IUPAC.protein)
                     else:
                         pdb_seq = Seq(str(sequence))
-
+                    modtxt = ''
+                    if has_models:
+                        modtxt = f"/{mod_id}"
                     seq = SeqRecord(
                         pdb_seq,
-                        f"pdb_sq_{ch_id}/{mod_id}",
+                        f"pdb_sq_{ch_id}{modtxt}",
                         '',
                         f"Frags: {','.join(frags_num)}"
                     )
