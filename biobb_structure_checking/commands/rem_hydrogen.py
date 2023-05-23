@@ -5,6 +5,9 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     """ Check for existing hydrogens atoms"""
     remh_list = mu.get_residues_with_H(strcheck.strucm.st)
     if not remh_list:

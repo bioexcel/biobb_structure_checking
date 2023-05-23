@@ -7,6 +7,10 @@ from biobb_structure_checking.structure_manager import NotEnoughAtomsError
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     fix_data = {}
     # Residues with missing backbone
     miss_bck_at_list = strcheck.strucm.get_missing_atoms('backbone')

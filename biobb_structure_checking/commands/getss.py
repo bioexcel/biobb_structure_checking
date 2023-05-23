@@ -6,6 +6,10 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 
 def check(strcheck):
+
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     SS_bonds = strcheck.strucm.get_SS_bonds()
     if not SS_bonds:
         if not strcheck.args['quiet']:

@@ -5,6 +5,10 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     met_list = strcheck.strucm.get_metal_atoms()
 
     if not met_list:

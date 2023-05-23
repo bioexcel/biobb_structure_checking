@@ -4,7 +4,7 @@ import biobb_structure_checking.constants as cts
 
 def check(strcheck):
     fasta = ''
-    if strcheck.strucm.sequence_data.has_canonical:
+    if strcheck.strucm.sequence_data.has_canonical[0]:
         print('Canonical sequence')
         can_seq = strcheck.strucm.sequence_data.get_canonical()
         print(can_seq)

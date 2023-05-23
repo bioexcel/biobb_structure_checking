@@ -798,7 +798,7 @@ class StructureManager:
             f"{st_stats['stats']['num_ats']}"
         )
         if st_stats['ca_only']:
-            print('Possible CA-Only structure')
+            print('CA-Only structure')
         self.st_data.print_hetatm_stats()
 
     def save_structure(

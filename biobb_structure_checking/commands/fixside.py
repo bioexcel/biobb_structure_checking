@@ -6,6 +6,9 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     miss_at_list = strcheck.strucm.get_missing_atoms('side')
     extra_at_list = strcheck.strucm.check_extra_atoms()
 
