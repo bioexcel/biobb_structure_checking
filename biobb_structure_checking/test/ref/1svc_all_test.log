@@ -24,13 +24,13 @@ Structure pdb:1svc loaded
 Step 1: models --select 1
 
 Running models. Options: --select 1
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-2 Chain(s) detected
+Detected 2 Chain(s)
  D: DNA
  P: Protein
 Selecting all chains
@@ -38,12 +38,12 @@ Selecting all chains
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 
 Step 5: metals --remove ZN
 
@@ -58,8 +58,8 @@ No ligands found
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-63 Water molecules detected
-63 Water molecules removed
+Detected 63 Water molecules
+Removed 63 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -69,36 +69,36 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  GLN P180.NE2 ARG P231.NH1    2.845 A
 Amide residues fixed All (1)
 Rechecking
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-1 Residues with missing backbone atoms found
+Found 1 Residues with missing backbone atoms
  GLU P353   OXT
 No backbone breaks
 No unexpected backbone links
 Capping terminal ends
-True terminal residues:  D1,D19,P43,P353
+True terminal residues: D1,D19,P43,P353
 Nothing to do
 No caps added
 Fixing missing backbone atoms
@@ -169,7 +169,7 @@ No ligands found
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-2 Chain(s) detected
+Detected 2 Chain(s)
  D: DNA
  P: Protein
 Selecting chain(s) protein
@@ -177,7 +177,7 @@ Selecting chain(s) protein
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-106 Residues requiring selection on adding H atoms
+Found 106 Residues requiring selection on adding H atoms
  CYS P88,P119,P124,P162,P262,P273
  ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339
  GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344,P353
@@ -187,7 +187,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Replacing HIS P67 by HIE
 Replacing HIS P108 by HIE

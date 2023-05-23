@@ -28,13 +28,13 @@ TMP A-2500
 Step 1: models --select 1
 
 Running models. Options: --select 1
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  A-2: Protein
 Selecting all chains
@@ -42,12 +42,12 @@ Selecting all chains
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 
 Step 5: metals --remove ZN
 
@@ -57,7 +57,7 @@ No metal ions found
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-4 Ligands detected
+Detected 4 Ligands
  ADP A400
  TMP A500
  ADP A-2400
@@ -67,8 +67,8 @@ Input not valid (SO4)
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-104 Water molecules detected
-104 Water molecules removed
+Detected 104 Water molecules
+Removed 104 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -78,39 +78,39 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-2 unusual contact(s) involving amide atoms found
+Found 2 unusual contact(s) involving amide atoms
  PRO A153.O   GLN A349.OE1    3.093 A
  PRO A-2153.O GLN A-2349.OE1    3.093 A
 Amide residues fixed All (2)
 Rechecking
-2 unusual contact(s) involving amide atoms found
+Found 2 unusual contact(s) involving amide atoms
  PRO A153.O   GLN A349.OE1    2.802 A
  PRO A-2153.O GLN A-2349.OE1    2.802 A
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-4 Residues with missing backbone atoms found
+Found 4 Residues with missing backbone atoms
  SER A149   OXT
  GLY A264   OXT
  SER A-2149 OXT
  GLY A-2264 OXT
-4 Backbone breaks found
+Found 4 Backbone breaks
  SER A149   - PRO A153  
  GLY A264   - PRO A280  
  SER A-2149 - PRO A-2153
@@ -119,7 +119,7 @@ No unexpected backbone links
 Main chain fixes
 Nothing to do
 Capping terminal ends
-True terminal residues:  A46,A376,A-246,A-2376
+True terminal residues: A46,A376,A-246,A-2376
 Terminal residues from backbone breaks:  A149-A153,A264-A280,A-2149-A-2153,A-2264-A-2280
 Nothing to do
 No caps added
@@ -194,7 +194,7 @@ No negative clashes detected
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
-4 Ligands detected
+Detected 4 Ligands
  ADP A400
  TMP A500
  ADP A-2400
@@ -204,7 +204,7 @@ Ligands removed All (4)
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  A-2: Protein
 Selecting chain(s) protein
@@ -212,7 +212,7 @@ Selecting chain(s) protein
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-152 Residues requiring selection on adding H atoms
+Found 152 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,A-2171,A-2251,A-2336,A-2362
  ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,A-255,A-276,A-277,A-2108,A-2116,A-2136,A-2162,A-2211,A-2215,A-2228,A-2258,A-2286,A-2303,A-2313,A-2328,A-2330,A-2338,A-2363
  GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,A-283,A-295,A-2111,A-2146,A-2210,A-2225,A-2257,A-2296,A-2371,A-2374
@@ -222,7 +222,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329,A-253,A-280,A-287,A-2101,A-2132,A-2172,A-2177,A-2239,A-2248,A-2305,A-2329
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Replacing HIS A58 by HIE
 Replacing HIS A105 by HIE

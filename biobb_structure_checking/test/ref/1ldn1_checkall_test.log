@@ -31,18 +31,18 @@ NAD C352
 OXM D351
 NAD D352
 Running models.
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 Running  check_only. Nothing else to do.
 Running chains.
-4 Chain(s) detected
+Detected 4 Chain(s)
  A: Protein
  B: Protein
  C: Protein
  D: Protein
 Running  check_only. Nothing else to do.
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 Running  check_only. Nothing else to do.
 Running altloc.
 Detected 2 residues with alternative location labels
@@ -93,7 +93,7 @@ Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
 Running add_hydrogen.
-372 Residues requiring selection on adding H atoms
+Found 372 Residues requiring selection on adding H atoms
  CYS A86,A95,B86,B95,C86,C95,D86,D95
  ASP A46,A52,A61,A64,A77,A82,A84,A85,A88,A90,A108,A111,A141,A166,A195,A225,A235,A277,A284,A308,A309,B46,B52,B61,B64,B77,B82,B84,B85,B88,B90,B108,B111,B141,B166,B195,B225,B235,B277,B284,B308,B309,C46,C52,C61,C64,C77,C82,C84,C85,C88,C90,C108,C111,C141,C166,C195,C225,C235,C277,C284,C308,C309,D46,D52,D61,D64,D77,D82,D84,D85,D88,D90,D108,D111,D141,D166,D195,D225,D235,D277,D284,D308,D309
  GLU A47,A55,A104,A122,A156,A176,A192,A197,A216,A220,A221,A227,A242,A266,A282,A300,A303,A305,A310,B47,B55,B104,B122,B156,B176,B192,B197,B216,B220,B221,B227,B242,B266,B282,B300,B303,B305,B310,C47,C55,C104,C122,C156,C176,C192,C197,C216,C220,C221,C227,C242,C266,C282,C300,C303,C305,C310,D47,D55,D104,D122,D156,D176,D192,D197,D216,D220,D221,D227,D242,D266,D282,D300,D303,D305,D310
@@ -103,13 +103,13 @@ Running add_hydrogen.
  TYR A35,A83,A145,A177,A188,A205,A238,A248,A249,A275,A280,A286,B35,B83,B145,B177,B188,B205,B238,B248,B249,B275,B280,B286,C35,C83,C145,C177,C188,C205,C238,C248,C249,C275,C280,C286,D35,D83,D145,D177,D188,D205,D238,D248,D249,D275,D280,D286
 Running  check_only. Nothing else to do.
 Running water.
-287 Water molecules detected
+Detected 287 Water molecules
 Running  check_only. Nothing else to do.
 Running metals.
 No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-10 Ligands detected
+Detected 10 Ligands
  FBP A353
  OXM A351
  NAD A352
@@ -125,7 +125,7 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-13 unusual contact(s) involving amide atoms found
+Found 13 unusual contact(s) involving amide atoms
  ASN A54.ND2  SER A56.N       2.851 A
  ASN A54.ND2  LYS A57.N       2.631 A
  ASN A294.ND2 ASN A296.N      2.601 A
@@ -141,16 +141,16 @@ Running amide.
  ASN D294.ND2 ASN D296.N      2.757 A
 Running  check_only. Nothing else to do.
 Running chiral.
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 Running  check_only. Nothing else to do.
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 Running  check_only. Nothing else to do.
 Running fixside.
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Running  check_only. Nothing else to do.
 Running backbone.
-4 Residues with missing backbone atoms found
+Found 4 Residues with missing backbone atoms
  THR A330   OXT
  THR B330   OXT
  THR C330   OXT
@@ -159,7 +159,7 @@ No backbone breaks
 No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
-4 cis peptide bonds
+Found 4 cis peptide bonds
 ASN A138   PRO A139   Dihedral:   -2.457
 ASN D138   PRO D139   Dihedral:    2.871
 ASN C138   PRO C139   Dihedral:   -1.167

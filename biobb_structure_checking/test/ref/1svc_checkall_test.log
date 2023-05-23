@@ -20,27 +20,27 @@ Structure pdb:1svc.1 loaded
  Num. water mol.:  126
  Num. atoms:  5806
 Running models.
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 Running  check_only. Nothing else to do.
 Running chains.
-4 Chain(s) detected
+Detected 4 Chain(s)
  D: DNA
  D-2: DNA
  P: Protein
  P-2: Protein
 Running  check_only. Nothing else to do.
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 Running  check_only. Nothing else to do.
 Running altloc.
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 Running  check_only. Nothing else to do.
 Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
 Running add_hydrogen.
-212 Residues requiring selection on adding H atoms
+Found 212 Residues requiring selection on adding H atoms
  CYS P88,P119,P124,P162,P262,P273,P-288,P-2119,P-2124,P-2162,P-2262,P-2273
  ASP P121,P132,P175,P186,P191,P209,P223,P238,P242,P257,P274,P279,P280,P300,P305,P321,P339,P-2121,P-2132,P-2175,P-2186,P-2191,P-2209,P-2223,P-2238,P-2242,P-2257,P-2274,P-2279,P-2280,P-2300,P-2305,P-2321,P-2339
  GLU P49,P63,P76,P120,P152,P155,P160,P182,P193,P195,P207,P233,P267,P268,P287,P288,P289,P290,P296,P341,P344,P353,P-249,P-263,P-276,P-2120,P-2152,P-2155,P-2160,P-2182,P-2193,P-2195,P-2207,P-2233,P-2267,P-2268,P-2287,P-2288,P-2289,P-2290,P-2296,P-2341,P-2344,P-2353
@@ -50,7 +50,7 @@ Running add_hydrogen.
  TYR P44,P60,P82,P90,P166,P178,P241,P270,P286,P319,P350,P351,P-244,P-260,P-282,P-290,P-2166,P-2178,P-2241,P-2270,P-2286,P-2319,P-2350,P-2351
 Running  check_only. Nothing else to do.
 Running water.
-126 Water molecules detected
+Detected 126 Water molecules
 Running  check_only. Nothing else to do.
 Running metals.
 No metal ions found
@@ -62,23 +62,23 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-4 unusual contact(s) involving amide atoms found
+Found 4 unusual contact(s) involving amide atoms
   DT D4.OP2   ASN P-2139.OD1    2.805 A
  ASN P139.OD1  DT D-24.OP2    2.805 A
  GLN P180.NE2 ARG P231.NH1    2.845 A
  GLN P-2180.NE2 ARG P-2231.NH1    2.845 A
 Running  check_only. Nothing else to do.
 Running chiral.
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 Running  check_only. Nothing else to do.
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 Running  check_only. Nothing else to do.
 Running fixside.
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Running  check_only. Nothing else to do.
 Running backbone.
-2 Residues with missing backbone atoms found
+Found 2 Residues with missing backbone atoms
  GLU P353   OXT
  GLU P-2353 OXT
 No backbone breaks

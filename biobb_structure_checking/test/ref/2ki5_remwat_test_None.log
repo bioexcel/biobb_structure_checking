@@ -26,5 +26,5 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running water. Options: --remove No
-292 Water molecules detected
+Detected 292 Water molecules
 Structure not modified, not saving. Override with --force_save

@@ -21,7 +21,7 @@ Structure backbone_test/1ubq_caps.pdb loaded
  Num. water mol.:  58
  Num. atoms:  564
 Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_atoms none
-7 Residues with missing backbone atoms found
+Found 7 Residues with missing backbone atoms
  VAL A5     CA,C,O,OXT
  LEU A8     N,CA,O
  LYS A11    C,O,OXT
@@ -29,7 +29,7 @@ Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_at
  GLU A16    OXT
  ILE A44    C,O,OXT
  ALA A46    N,CA
-4 Backbone breaks found
+Found 4 Backbone breaks
  VAL A5     - LEU A8    
  LYS A11    - THR A14   
  GLU A16    - SER A20   
@@ -61,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150400.24.60-default x86_64
 Date and time of compilation         : 2021/03/12 00:04:35
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2023/05/18 09:36:13
+Job starting time (YY/MM/DD HH:MM:SS): 2023/05/23 13:01:52
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -103,10 +103,10 @@ Fixing ILE A44 - ALA A46
 
 Getting canonical sequences from matching FASTA input
 A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0 
-2 Residues with missing backbone atoms found
+Found 2 Residues with missing backbone atoms
  LEU A8     OXT
  THR A14    OXT
-2 Backbone breaks found
+Found 2 Backbone breaks
  LEU A8     - THR A9    
  THR A14    - LEU A15   
 No unexpected backbone links
@@ -114,7 +114,7 @@ Consecutive residues too far away to be covalently linked
  LEU A8     - THR A9    ,  bond distance    5.303 
  THR A14    - LEU A15   ,  bond distance    9.068 
 Capping terminal ends
-True terminal residues:  A1,A76
+True terminal residues: A1,A76
 Terminal residues from backbone breaks:  A8-A9,A14-A15
 Nothing to do
 No caps added

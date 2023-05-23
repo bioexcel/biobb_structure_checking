@@ -29,13 +29,13 @@ AC2 B2
 Step 1: models --select 1
 
 Running models. Options: --select 1
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Selecting all chains
@@ -43,7 +43,7 @@ Selecting all chains
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
@@ -67,7 +67,7 @@ No metal ions found
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-4 Ligands detected
+Detected 4 Ligands
  SO4 A4
  AC2 A1
  SO4 B3
@@ -77,8 +77,8 @@ Ligands removed SO4 (2)
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-292 Water molecules detected
-292 Water molecules removed
+Detected 292 Water molecules
+Removed 292 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -88,12 +88,12 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
@@ -110,12 +110,12 @@ Warning: atom CB  not found in SER B263
 Warning: atom CA  not found in ALA B375
 Warning: atom C   not found in ALA B375
 Warning: atom CB  not found in ALA B375
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-6 Residues with missing side chain atoms found
+Found 6 Residues with missing side chain atoms
  MET A46    CG,SD,CE
  PRO A154   CG,CD
  PRO A280   CG,CD
@@ -170,7 +170,7 @@ No negative clashes detected
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-8 Residues with missing backbone atoms found
+Found 8 Residues with missing backbone atoms
  VAL A70    CA,C,O,OXT
  GLY A148   CA,C,O,OXT
  GLY A264   CA,C,O,OXT
@@ -179,7 +179,7 @@ Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no
  GLY B148   CA,C,O,OXT
  SER B263   CA,C,O,OXT
  ALA B375   CA,C,O,OXT
-6 Backbone breaks found
+Found 6 Backbone breaks
  VAL A70    - ASP A77   
  GLY A148   - PRO A154  
  GLY A264   - PRO A280  
@@ -190,7 +190,7 @@ No unexpected backbone links
 Main chain fixes
 Nothing to do
 Capping terminal ends
-True terminal residues:  A46,A375,B46,B375
+True terminal residues: A46,A375,B46,B375
 Terminal residues from backbone breaks:  A70-A77,A148-A154,A264-A280,B73-B77,B148-B154,B263-B278
 Nothing to do
 No caps added
@@ -278,7 +278,7 @@ No negative clashes detected
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
-2 Ligands detected
+Detected 2 Ligands
  AC2 A1
  AC2 B2
 Ligands removed All (2)
@@ -286,7 +286,7 @@ Ligands removed All (2)
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Selecting chain(s) protein
@@ -294,7 +294,7 @@ Selecting chain(s) protein
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-148 Residues requiring selection on adding H atoms
+Found 148 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,B171,B251,B336,B362
  ASP A55,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363
  GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,B83,B95,B111,B146,B210,B225,B257,B296,B371,B374

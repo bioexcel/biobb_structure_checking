@@ -25,25 +25,25 @@ TMP A500
 ADP A-2400
 TMP A-2500
 Running models.
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 Running  check_only. Nothing else to do.
 Running chains.
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  A-2: Protein
 Running  check_only. Nothing else to do.
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 Running  check_only. Nothing else to do.
 Running altloc.
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 Running  check_only. Nothing else to do.
 Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
 Running add_hydrogen.
-152 Residues requiring selection on adding H atoms
+Found 152 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,A-2171,A-2251,A-2336,A-2362
  ASP A55,A76,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,A-255,A-276,A-277,A-2108,A-2116,A-2136,A-2162,A-2211,A-2215,A-2228,A-2258,A-2286,A-2303,A-2313,A-2328,A-2330,A-2338,A-2363
  GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,A-283,A-295,A-2111,A-2146,A-2210,A-2225,A-2257,A-2296,A-2371,A-2374
@@ -53,13 +53,13 @@ Running add_hydrogen.
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329,A-253,A-280,A-287,A-2101,A-2132,A-2172,A-2177,A-2239,A-2248,A-2305,A-2329
 Running  check_only. Nothing else to do.
 Running water.
-104 Water molecules detected
+Detected 104 Water molecules
 Running  check_only. Nothing else to do.
 Running metals.
 No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected
+Detected 4 Ligands
  ADP A400
  TMP A500
  ADP A-2400
@@ -69,26 +69,26 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-2 unusual contact(s) involving amide atoms found
+Found 2 unusual contact(s) involving amide atoms
  PRO A153.O   GLN A349.OE1    3.093 A
  PRO A-2153.O GLN A-2349.OE1    3.093 A
 Running  check_only. Nothing else to do.
 Running chiral.
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 Running  check_only. Nothing else to do.
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 Running  check_only. Nothing else to do.
 Running fixside.
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Running  check_only. Nothing else to do.
 Running backbone.
-4 Residues with missing backbone atoms found
+Found 4 Residues with missing backbone atoms
  SER A149   OXT
  GLY A264   OXT
  SER A-2149 OXT
  GLY A-2264 OXT
-4 Backbone breaks found
+Found 4 Backbone breaks
  SER A149   - PRO A153  
  GLY A264   - PRO A280  
  SER A-2149 - PRO A-2153

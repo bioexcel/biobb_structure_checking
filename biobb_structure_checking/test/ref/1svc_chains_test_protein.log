@@ -21,7 +21,7 @@ Structure pdb:1svc loaded
  Num. water mol.:  63
  Num. atoms:  2903
 Running chains. Options: --select protein
-2 Chain(s) detected
+Detected 2 Chain(s)
  D: DNA
  P: Protein
 Selecting chain(s) protein

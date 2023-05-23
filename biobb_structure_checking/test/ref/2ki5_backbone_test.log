@@ -26,7 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running backbone.
-8 Residues with missing backbone atoms found
+Found 8 Residues with missing backbone atoms
  VAL A70    CA,C,O,OXT
  GLY A148   CA,C,O,OXT
  GLY A264   CA,C,O,OXT
@@ -35,7 +35,7 @@ Running backbone.
  GLY B148   CA,C,O,OXT
  SER B263   CA,C,O,OXT
  ALA B375   CA,C,O,OXT
-6 Backbone breaks found
+Found 6 Backbone breaks
  VAL A70    - ASP A77   
  GLY A148   - PRO A154  
  GLY A264   - PRO A280  
