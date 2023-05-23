@@ -1,13 +1,26 @@
-## v3.12 (2023.2)
+## v3.13.X (2023.2)
 ### Extended functions
 - input
   - Added assembly download from wwpdb
+  - Moved default download to https (instead of ftp) to avoid network restrictions
   - Added --overwrite_cache to refresh cached structures
 - output
-  - Added optional logging of building errors (--build-warnings)
+  - Added optional logging of building errors (as --build-warnings)
+- general
+  - Atom limit check made after download to avoid useless work
+  - Added --time_limit to avoid too lengthy runs. Useful on massive analysis
+  - Improved some log errors
+- add_hydrogen
+  - Full list of residues now requires --verbose
+- models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities
+- improved recognition of CA-only structures
+
 ### Bug Fixes
-  - sequences. Fixed errors in sequence recognition when non-protein and non-na chain
-  - models/chains. Fixed errors when differences in chain composition among models## v3.12.1 (2022.4)
+  - sequences.
+    - Fixed errors in sequence recognition when non-protein and non-na chain
+    - Fixed FASTA headers when no gaps
+
+## v3.12.1 (2022.4)
 ### Extended functions
 - amide
   - Added --fix auto option to automatically find best fix combination
