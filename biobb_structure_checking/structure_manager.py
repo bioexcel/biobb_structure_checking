@@ -91,6 +91,7 @@ class StructureManager:
         self.res_library = ResidueLib(res_library_path)
 
         self.sequence_data = SequenceData()
+
         if fasta_sequence_path:
             self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
 
@@ -142,6 +143,7 @@ class StructureManager:
         self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
+            fasta_sequence_path = input_pdb_path
             # MMBPDBList child defaults to Bio.PDB.PDBList
             # if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
@@ -200,6 +202,9 @@ class StructureManager:
                     )
                     os.rename(real_pdb_path, new_path)
                     real_pdb_path = new_path
+                    # Adding sequence input
+                    self.sequence_data.load_sequence_from_fasta(f"pdb:{pdbid}")
+
         else:
             real_pdb_path = input_pdb_path
 

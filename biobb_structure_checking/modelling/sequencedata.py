@@ -65,7 +65,7 @@ class SequenceData():
                 try:
                     tmp_file = f"/tmp/{fasta_sequence_path}.fasta"
                     url = f"{FASTA_DOWNLOAD_PREFIX}/{fasta_sequence_path}"
-                    print(url)
+                    print(f"Retrieving sequence from {url}")
                     urlcleanup()
                     urlretrieve(url, tmp_file)
                     for record in SeqIO.parse(tmp_file, 'fasta'):
