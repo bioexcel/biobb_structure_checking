@@ -10,12 +10,7 @@ from urllib.request import urlretrieve
 from urllib.request import urlcleanup
 
 from Bio.PDB.PDBList import PDBList
-
-ALT_SERVERS = {
-    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
-    'bsc': 'http://mdb-login.bsc.es/api/pdb'
-}
-
+from biobb_structure_checking.constants import PDB_DOWNLOAD_PREFIX, ALT_SERVERS
 
 class MMBPDBList(PDBList):
     """
@@ -193,7 +188,7 @@ class MMBPDBList(PDBList):
         archive_fn = archive[file_format]
 
         # Provisional before fixing local servers
-        self.pdb_server = 'https://ftp.wwpdb.org'
+        self.pdb_server = PDB_DOWNLOAD_PREFIX
 
         if file_format == "mmcif":
             url = self.pdb_server + f"/pub/pdb/data/assemblies/mmCIF/all/{archive_fn}"
