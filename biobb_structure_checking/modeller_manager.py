@@ -62,7 +62,7 @@ class ModellerManager():
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
-        if not self.sequences.has_canonical[target_model][target_chain]:
+        if target_chain not in self.sequences.has_canonical[target_model]:
             raise NoCanSeqError(target_model, target_chain)
 
         tgt_seq = self.sequences.data[target_model][target_chain]['can'].seq
