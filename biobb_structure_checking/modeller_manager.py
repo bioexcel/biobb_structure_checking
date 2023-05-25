@@ -22,7 +22,7 @@ except ImportError:
 
 try:
     from modeller import Environ, log
-    from modeller.automodel import AutoModel, assess
+    from modeller.automodel import AutoModel, assess, LoopModel, refine
 except ImportError:
     sys.exit("Error importing Modeller package")
 
@@ -122,9 +122,9 @@ class ModellerManager():
         amdl.starting_model = 1
         amdl.ending_model = 1
 
-        # amdl.loop.starting_model = 1
-        # amdl.loop.ending_model = 1
-
+        #amdl.loop.starting_model = 1
+        #amdl.loop.ending_model = 1
+        amdl.md_level = refine.slow
         orig_dir = os.getcwd()
         os.chdir(self.tmpdir)
         amdl.make()
