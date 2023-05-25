@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.10.2                   =
+=                   BioBB structure checking utility v3.11.1                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
 ================================================================================
 
@@ -37,12 +37,12 @@ Running backbone. Options: --no_recheck --fix_chain all --add_caps none --fix_at
 No unexpected backbone links
 Main chain fixes
 
-                         MODELLER 10.2, 2021/11/15, r12267
+                         MODELLER 10.3, 2022/07/08, r12388
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2021 Andrej Sali
+                     Copyright(c) 1989-2022 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -58,10 +58,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg6 5.15.79.1-microsoft-standard-WSL2 x86_64
-Date and time of compilation         : 2021/11/15 19:12:27
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.14.21-150400.24.33-default x86_64
+Date and time of compilation         : 2022/07/08 22:21:48
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2022/12/10 11:18:21
+Job starting time (YY/MM/DD HH:MM:SS): 2022/12/22 11:40:16
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

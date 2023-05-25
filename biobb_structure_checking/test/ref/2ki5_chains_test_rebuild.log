@@ -1,0 +1,94 @@
+================================================================================
+=                   BioBB structure checking utility v3.11.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+================================================================================
+
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Loading structure coord_only: Chain and residue ids will be ignored
+Warning, no canonical sequence available for chain 0
+Warning, no canonical sequence available for chain h
+Warning, no canonical sequence available for chain w
+Structure pdb:2ki5 loaded
+ PDB id: 2KI5
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution (A): 1.90
+
+ Num. models: 1
+ Num. chains: 3 (0: Protein, h: Unknown, w: Water)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  296
+ Num. ligands or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+Small mol ligands found
+SO4 h613
+AC2 h614
+SO4 h615
+AC2 h616
+Running chains. Options: --select all --rebuild
+3 Chain(s) detected
+ 0: Protein
+ h: Unknown
+ w: Water
+Rebuilding chains from backbone connectivity
+8 chains/fragments found
+ 1 (MET 01-VAL 025) (prot): MPTLLRVYIDGPHGMGKTTTTQLLV
+ 2 (ASP 026-GLY 097) (prot): DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG
+ 3 (PRO 098-GLY 0208) (prot): PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLSG
+ 4 (PRO 0209-ALA 0304) (prot): PRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEA
+ 5 (MET 0305-GLY 0332) (prot): MPTLLRVYIDGPHGMGKTTTTQLLVALG
+ 6 (ASP 0333-GLY 0404) (prot): DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGMPYAVTDAVLAPHIGGEAG
+ 7 (PRO 0405-SER 0514) (prot): PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAFVALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQCGGSWREDWGQLS
+ 8 (ALA 0515-ALA 0612) (prot): AGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAWALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAREMGEA
+Renumbering 01-025 as 11-125
+Creating new chain 1
+Renumbering 026-097 as 226-297
+Creating new chain 2
+Renumbering 098-0208 as 398-3208
+Creating new chain 3
+Renumbering 0209-0304 as 4209-4304
+Creating new chain 4
+Renumbering 0305-0332 as 5305-5332
+Creating new chain 5
+Renumbering 0333-0404 as 6333-6404
+Creating new chain 6
+Renumbering 0405-0514 as 7405-7514
+Creating new chain 7
+Renumbering 0515-0612 as 8515-8612
+Whole chains selected, just replacing chain labels from 0 to 8
+Renumbering 11-125 as A1-A25
+Whole chains selected, just replacing chain labels from 1 to A
+Renumbering 226-297 as B26-B97
+Whole chains selected, just replacing chain labels from 2 to B
+Renumbering 398-3208 as C98-C208
+Whole chains selected, just replacing chain labels from 3 to C
+Renumbering 4209-4304 as D209-D304
+Whole chains selected, just replacing chain labels from 4 to D
+Renumbering 5305-5332 as E305-E332
+Whole chains selected, just replacing chain labels from 5 to E
+Renumbering 6333-6404 as F333-F404
+Whole chains selected, just replacing chain labels from 6 to F
+Renumbering 7405-7514 as G405-G514
+Whole chains selected, just replacing chain labels from 7 to G
+Renumbering 8515-8612 as H515-H612
+Whole chains selected, just replacing chain labels from 8 to H
+Selecting all chains
+Final Num. models: 1
+Final Num. chains: 10 (A: Protein, B: Protein, C: Protein, D: Protein, E: Protein, F: Protein, G: Protein, H: Protein, h: Unknown, w: Water)
+Final Num. residues:  908
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  296
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  292
+Final Num. atoms:  4961
+Small mol ligands found
+SO4 h613
+AC2 h614
+SO4 h615
+AC2 h616
+Structure saved on 2ki5_chains_rebuild.pdb

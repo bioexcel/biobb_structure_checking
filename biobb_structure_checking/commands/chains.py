@@ -20,7 +20,10 @@ def check(strcheck):
         for k, v in strcheck.strucm.chains_data.chain_ids.items()
     }
     strcheck.summary['chains']['unlabelled'] = strcheck.strucm.chains_data.has_chains_to_rename
-    return len(strcheck.strucm.chains_data.chain_ids) > 1 or strcheck.strucm.chains_data.has_chains_to_rename
+    return len(strcheck.strucm.chains_data.chain_ids) > 1 or\
+        strcheck.strucm.chains_data.has_chains_to_rename or\
+        '--rebuild' in strcheck.args['options'] or\
+        '--renumber' in strcheck.args['options']
 
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -34,6 +37,11 @@ def fix(strcheck, opts, fix_data=None):
             rename_chains = ''
         if 'renumber' in opts:
             renumber_chains = opts['renumber']
+        if 'rebuild' in opts:
+            rebuild_chains = opts['rebuild']
+        else:
+            rebuild_chains = False
+
 
     if strcheck.strucm.chains_data.has_chains_to_rename:
         input_line = ParamInput(
@@ -61,20 +69,32 @@ def fix(strcheck, opts, fix_data=None):
             check(strcheck)
             strcheck.summary['chains']['renamed'] = new_label
 
-    if renumber_chains:
-        if strcheck.strucm.chains_data.has_chains_to_rename:
-            print("WARNING: unlabelled chains detected")
-        if 'verbose' not in opts and opts['rem_inscodes']:
-            opts['verbose'] = False
+    if rebuild_chains:
+        if strcheck.strucm.models_data.has_models():
+            print("WARNING: Rebuild chains not (yet) implemented for Models, skipping")
         else:
-            opts['verbose'] = True
-        result = strcheck.strucm.renumber_chain_residues(
-            renumber_chains,
-            rem_inscodes=opts['rem_inscodes'],
-            verbose=opts['verbose']
-        )
-        if result:
-            strcheck.summary['chains']['renumbered'] = renumber_chains
+            print("Rebuilding chains from backbone connectivity")
+            result = strcheck.strucm.rebuild_chains(verbose='verbose' in opts)
+            if result:
+                strcheck.summary['chains']['rebuild'] = result
+
+    if renumber_chains:
+        if strcheck.strucm.models_data.has_models():
+            print("WARNING: Renumber chains not (yet) implemented for Models, skipping")
+        else:
+            if strcheck.strucm.chains_data.has_chains_to_rename:
+                print("WARNING: unlabelled chains detected")
+            if 'verbose' not in opts and opts['rem_inscodes']:
+                opts['verbose'] = False
+            else:
+                opts['verbose'] = True
+            result = strcheck.strucm.renumber_chain_residues(
+                renumber_chains,
+                rem_inscodes=opts['rem_inscodes'],
+                verbose=opts['verbose']
+            )
+            if result:
+                strcheck.summary['chains']['renumbered'] = renumber_chains
 
     strcheck.summary['chains']['selected'] = {}
     input_line = ParamInput('Select chain', strcheck.args['non_interactive'], set_none='All')
