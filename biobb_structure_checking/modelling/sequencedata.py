@@ -273,8 +273,9 @@ class SequenceData():
                         'type': strucm.chains_data.chain_ids[mod.id][chn.id]
                     }
                 # Added NTerminus offset from canonical to structure sequences
-                self.data[mod.id][chn.id]['nt_pos'] =   \
-                    self.data[mod.id][chn.id]['can'].seq.find(self.data[mod.id][chn.id]['pdb']['frgs'][0].seq)
+                if mod.id in self.has_canonical and chn.id in self.has_canonical[mod.id]:
+                    self.data[mod.id][chn.id]['nt_pos'] =   \
+                        self.data[mod.id][chn.id]['can'].seq.find(self.data[mod.id][chn.id]['pdb']['frgs'][0].seq)
             if can_reverted:
                 strucm.revert_can_resnames(False)
 
@@ -370,6 +371,8 @@ class SequenceData():
                 )
                 self.data[mod.id][ch_id]['chains'].append(ch_id)
                 self.has_canonical[mod.id][ch_id] = True
+                self.data[mod.id][ch_id]['nt_pos'] =   \
+                    self.data[mod.id][ch_id]['can'].seq.find(self.data[mod.id][ch_id]['pdb']['frgs'][0].seq)
 
     def get_canonical(self):
         """ SequenceData.get_canonical

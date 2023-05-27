@@ -1499,6 +1499,7 @@ class StructureManager:
         brk_list = {}
         num_fix = 0
         for mod in self.st.get_models():
+            add_n_term_gap = False  # Required to mutate Nterminus
             ch_to_fix[mod.id] = set()
             brk_list[mod.id] = []
             for mut_set in mutations.mutation_list:
@@ -1510,33 +1511,39 @@ class StructureManager:
                     start_res = mut['resobj']
                     if start_res in self.st_data.prev_residue:
                         start_res = self.st_data.prev_residue[start_res]
+                    else:
+                        print(
+                            f"N-terminal residue {mu.residue_id(mut['resobj'])} "
+                            "cannot fixed/mutated (yet) using --rebuild"
+                        )
+                        continue
                     end_res = mut['resobj']
                     if end_res in self.st_data.next_residue:
                         end_res = self.st_data.next_residue[end_res]
                     brk = [start_res, end_res]
                     brk_list[mod.id].append(brk)
             num_fix += len(ch_to_fix[mod.id])
-
         if not num_fix:
             print("No protein chains left, exiting")
             return []
-
+        if not brk_list[0]:
+            print("No fixes/mutations left, exiting")
+            return []
         mutated_sequence_data = SequenceData()
         mutated_sequence_data.fake_canonical_sequence(self, mutations)
         for mut_set in mutations.mutation_list:
             for mut in mut_set.mutations:
                 mu.remove_residue(mut['resobj'])
+
         mutated_sequence_data.read_structure_seqs(self)
         mutated_sequence_data.match_sequence_numbering(self)
 
-        # TODO Not tested, to be used on changes in the NTerm residue
-        extra_NTerm = 0
         mutated_res = self.run_modeller(
             ch_to_fix,
             brk_list,
             modeller_key,
             0,
-            extra_NTerm,
+            0,
             mutated_sequence_data
         )
 
