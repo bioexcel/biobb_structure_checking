@@ -135,6 +135,7 @@ class SequenceData():
         for mod in strucm.st:
             if mod not in self.data:
                 self.data[mod.id] = {}
+
             for index, chid in enumerate(chids):
                 for ch_id in chid.split(','):
                     if ch_id not in strucm.chains_data.chain_ids[mod.id]:
@@ -200,6 +201,7 @@ class SequenceData():
         for mod in strucm.st.get_models():
             if mod.id not in self.data:
                 self.data[mod.id] = {}
+
             ppb = PPBuilder()
             for chn in mod.get_chains():
                 seqs = []
@@ -270,7 +272,9 @@ class SequenceData():
                         'wrong_order': wrong_order,
                         'type': strucm.chains_data.chain_ids[mod.id][chn.id]
                     }
-
+                # Added NTerminus offset from canonical to structure sequences
+                self.data[mod.id][chn.id]['nt_pos'] =   \
+                    self.data[mod.id][chn.id]['can'].seq.find(self.data[mod.id][chn.id]['pdb']['frgs'][0].seq)
             if can_reverted:
                 strucm.revert_can_resnames(False)
 

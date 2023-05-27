@@ -1125,7 +1125,6 @@ class StructureManager:
         mod_mgr.sequences = sequence_data
 
         modif_residues = []
-
         for mod in self.st:
             if self.models_data.has_models():
                 print(f"Processing Model {mod.id + 1}")
@@ -1138,8 +1137,8 @@ class StructureManager:
                     continue
                 if sequence_data.data[mod.id][ch_id]['pdb']['wrong_order']:
                     print(f"Warning: chain {ch_id} has a unusual residue numbering, skipping")
+                    continue
                 print(f"Fixing chain/model {ch_id}/{mod.id}")
-
                 try:
                     model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
                 except NoCanSeqError as err:
@@ -1182,9 +1181,9 @@ class StructureManager:
         spimp = Superimposer()
 
         list_res = self.st[mod_id][ch_id].get_list()
+        nt_offset = sequence_data.data[mod_id][ch_id]['nt_pos']
 
         modif_residues = []
-
         for i in range(0, len(sequence_data.data[mod_id][ch_id]['pdb']['frgs']) - 1):
             loc_i = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i].features[0].location
             loc_ii = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i + 1].features[0].location
@@ -1207,7 +1206,7 @@ class StructureManager:
                     n_br += 1
                 if self.st[mod_id][ch_id][gap_start] == brk_list[n_br][0] or\
                         self.st[mod_id][ch_id][gap_end] == brk_list[n_br][1]:
-                    # adjusting gap ends to existint residues
+                    # adjusting gap ends to existing residues
                     gap_start = brk_list[n_br][0].id[1]
                     while gap_start not in self.st[mod_id][ch_id]:
                         gap_start += 1
@@ -1234,7 +1233,7 @@ class StructureManager:
                 mod_nres = nres - offset + 1
                 if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres + nt_offset]['CA'])
 
             for nres in range(loc_ii.start, loc_ii.end):
                 mod_nres = nres - offset + 1 - seq_off_i_ii
@@ -1242,7 +1241,7 @@ class StructureManager:
                         'CA' in self.st[mod_id][ch_id][nres] and\
                         mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
-                    moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
+                    moving_ats.append(new_st[0][new_ch_id][mod_nres + nt_offset]['CA'])
 
             moving_ats = moving_ats[:len(fixed_ats)]
             spimp.set_atoms(fixed_ats, moving_ats)
@@ -1265,7 +1264,7 @@ class StructureManager:
                 if nres in self.st[mod_id][ch_id]:
                     self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
 
-                res = new_st[0][new_ch_id][mod_nres].copy()
+                res = new_st[0][new_ch_id][mod_nres  + nt_offset].copy()
                 res.id = (' ', nres, ' ')
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1

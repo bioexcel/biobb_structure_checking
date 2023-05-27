@@ -27,7 +27,7 @@ except ImportError:
     sys.exit("Error importing Modeller package")
 
 TMP_BASE_DIR = '/tmp'
-DEBUG = False
+DEBUG = True
 
 
 class ModellerManager():
@@ -67,13 +67,7 @@ class ModellerManager():
 
         tgt_seq = self.sequences.data[target_model][target_chain]['can'].seq
 
-        # triming N-term of canonical seq
         pdb_seq = self.sequences.data[target_model][target_chain]['pdb']['frgs'][0].seq
-        nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
-        tgt_seq = tgt_seq[nt_pos:]
-
-        # TODO trim trailing residues in tgt_seq
-
         templs = []
         knowns = []
         for ch_id in self.sequences.data[target_model][target_chain]['chains']:
@@ -135,6 +129,8 @@ class ModellerManager():
     def __del__(self):
         if not DEBUG:
             shutil.rmtree(self.tmpdir)
+        else:
+            print(f"Temporary folder: {self.tmpdir}")
 
 
 def _write_align(tgt_seq, templs, alin_file):
