@@ -630,7 +630,7 @@ MSGS = {
     'ALL_UNDO': 'All changes reverted to original structure',
     'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), '
                   'use --limit to adjust',
-    'TIME_LIMIT': 'Execution time limit exceeded, aborting, use --time_limit to adjust',
+    'TIME_LIMIT': 'Execution time limit ({}s) exceeded, aborting, use --time_limit to adjust',
     'CA_ONLY_STRUCTURE': 'CA-Only structure, skipping',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
