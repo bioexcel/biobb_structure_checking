@@ -1578,7 +1578,7 @@ def _guess_modeller_env():
     if info[1]:
         print(f"Modeller v{info[1]} detected")
         ver1, ver2 = info[1].split('.')
-        return f"KEY_MODELLER{ver1}v{ver2}", "MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
+        return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
 
     print("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
