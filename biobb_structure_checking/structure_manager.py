@@ -635,7 +635,7 @@ class StructureManager:
                     if 'N' in res1 and 'C' in res2:
                         dist = res1['N'] - res2['C']
                     else:
-                        dist = res1['CA'] - res2['CA']
+                        dist = res1.child_list[0] - res2.child_list[0]
                     not_link_seq_list.append([res1, res2, dist])
 
             else:
