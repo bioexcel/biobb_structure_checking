@@ -25,16 +25,16 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running models.
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 Running  check_only. Nothing else to do.
 Running chains.
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Running  check_only. Nothing else to do.
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 Running  check_only. Nothing else to do.
 Running altloc.
 Detected 2 residues with alternative location labels
@@ -51,7 +51,7 @@ Running rem_hydrogen.
 No residues with Hydrogen atoms found
 Running  check_only. Nothing else to do.
 Running add_hydrogen.
-148 Residues requiring selection on adding H atoms
+Found 148 Residues requiring selection on adding H atoms
  CYS A171,A251,A336,A362,B171,B251,B336,B362
  ASP A55,A77,A108,A116,A136,A162,A211,A215,A228,A258,A286,A303,A313,A328,A330,A338,A363,B55,B77,B108,B116,B136,B162,B211,B215,B228,B258,B286,B303,B313,B328,B330,B338,B363
  GLU A83,A95,A111,A146,A210,A225,A257,A296,A371,A374,B83,B95,B111,B146,B210,B225,B257,B296,B371,B374
@@ -61,13 +61,13 @@ Running add_hydrogen.
  TYR A53,A80,A87,A101,A132,A172,A177,A239,A248,A305,A329,B53,B80,B87,B101,B132,B172,B177,B239,B248,B305,B329
 Running  check_only. Nothing else to do.
 Running water.
-292 Water molecules detected
+Detected 292 Water molecules
 Running  check_only. Nothing else to do.
 Running metals.
 No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
-4 Ligands detected
+Detected 4 Ligands
  SO4 A4
  AC2 A1
  SO4 B3
@@ -77,10 +77,10 @@ Running getss.
 No SS bonds detected
 Running  check_only. Nothing else to do.
 Running amide.
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 Running  check_only. Nothing else to do.
 Running chiral.
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 Running  check_only. Nothing else to do.
 Running chiral_bck.
 Warning: atom CA  not found in VAL A70
@@ -95,10 +95,10 @@ Warning: atom CB  not found in SER B263
 Warning: atom CA  not found in ALA B375
 Warning: atom C   not found in ALA B375
 Warning: atom CB  not found in ALA B375
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 Running  check_only. Nothing else to do.
 Running fixside.
-6 Residues with missing side chain atoms found
+Found 6 Residues with missing side chain atoms
  MET A46    CG,SD,CE
  PRO A154   CG,CD
  PRO A280   CG,CD
@@ -107,7 +107,7 @@ Running fixside.
  ARG B220   CG,CD,NE,CZ,NH1,NH2
 Running  check_only. Nothing else to do.
 Running backbone.
-8 Residues with missing backbone atoms found
+Found 8 Residues with missing backbone atoms
  VAL A70    CA,C,O,OXT
  GLY A148   CA,C,O,OXT
  GLY A264   CA,C,O,OXT
@@ -116,7 +116,7 @@ Running backbone.
  GLY B148   CA,C,O,OXT
  SER B263   CA,C,O,OXT
  ALA B375   CA,C,O,OXT
-6 Backbone breaks found
+Found 6 Backbone breaks
  VAL A70    - ASP A77   
  GLY A148   - PRO A154  
  GLY A264   - PRO A280  

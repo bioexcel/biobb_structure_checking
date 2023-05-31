@@ -20,7 +20,7 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 Running models. Options: --select 1
-15 Model(s) detected
+Detected 15 Model(s)
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
 Final Num. models: 1

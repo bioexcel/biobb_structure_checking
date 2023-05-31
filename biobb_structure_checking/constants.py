@@ -2,8 +2,10 @@
     Global constants for structure_checking module
 """
 import argparse
+import os
 from os.path import dirname
 from os.path import join as opj
+
 
 from biobb_structure_checking.io.param_input import Dialog
 
@@ -15,12 +17,19 @@ RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
+PDB_DOWNLOAD_PREFIX = 'https://ftp.wwpdb.org'
+FASTA_DOWNLOAD_PREFIX = 'https://www.rcsb.org/fasta/entry'
 ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
 
+ALT_SERVERS = {
+    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
+    'bsc': 'http://mdb-login.bsc.es/api/pdb'
+}
+
 DEFAULTS = {
     'file_format': 'mmCif',
-    'pdb_server': 'ftp://ftp.wwpdb.org',
+    'pdb_server': PDB_DOWNLOAD_PREFIX,
     'quiet': False,
     'force_save': False,
     'check_only': False,
@@ -621,7 +630,8 @@ MSGS = {
     'ALL_UNDO': 'All changes reverted to original structure',
     'ATOM_LIMIT': 'Number of atoms limit exceeded ({} > {}), '
                   'use --limit to adjust',
-    'TIME_LIMIT': 'Execution time limit exceeded, aborting, use --time_limit to adjust',
+    'TIME_LIMIT': 'Execution time limit ({}s) exceeded, aborting, use --time_limit to adjust',
+    'CA_ONLY_STRUCTURE': 'CA-Only structure, skipping',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',

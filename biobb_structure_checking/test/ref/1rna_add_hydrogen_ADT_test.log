@@ -23,15 +23,15 @@ Structure pdb:1rna loaded
 
 Step 1: water --remove yes
 Running water. Options: --remove yes
-91 Water molecules detected
-91 Water molecules removed
+Detected 91 Water molecules
+Removed 91 Water molecules
 
 Step 2:  add_hydrogen --add_mode auto --add_charges adt
 Running add_hydrogen. Options: --add_mode auto --add_charges adt
 No residues requiring selection on adding H atoms
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Updating partial charges and atom types
 Total assigned charge:     -26.00

@@ -26,7 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running chains. Options: --select All --renumber A:=C:,B:=D:
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 WARNING: disordered residue ids found in A, may need explicit order combinations

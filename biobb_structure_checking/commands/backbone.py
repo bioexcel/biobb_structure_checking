@@ -7,6 +7,10 @@ from biobb_structure_checking.structure_manager import NotEnoughAtomsError
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     fix_data = {}
     # Residues with missing backbone
     miss_bck_at_list = strcheck.strucm.get_missing_atoms('backbone')
@@ -22,7 +26,7 @@ def check(strcheck):
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_BCK_MISSING'])
 
-    #Not bound consecutive residues
+    # Not bound consecutive residues
     bck_check = strcheck.strucm.get_backbone_breaks()
     if bck_check['bck_breaks_list']:
         print(
@@ -222,6 +226,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             if strcheck.args['non_interactive'] and not read_ok:
                 print(cts.MSGS['FASTA_MISSING'])
                 return []
+
         strcheck.strucm.sequence_data.read_canonical_seqs(
             strcheck.strucm,
             False

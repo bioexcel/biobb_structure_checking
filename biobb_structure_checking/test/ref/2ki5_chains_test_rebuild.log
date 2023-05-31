@@ -4,7 +4,7 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Loading structure coord_only: Chain and residue ids will be ignored
+Loading structure coord_only: Chain and residue idswill be ignored
 Warning, no canonical sequence available for chain 0/0
 Warning, no canonical sequence available for chain h/0
 Warning, no canonical sequence available for chain w/0
@@ -30,7 +30,7 @@ AC2 h614
 SO4 h615
 AC2 h616
 Running chains. Options: --select all --rebuild
-3 Chain(s) detected
+Detected 3 Chain(s)
  0: Protein
  h: Unknown
  w: Water

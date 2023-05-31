@@ -25,6 +25,6 @@ TMP A500
 ADP A-2400
 TMP A-2500
 Running models. Options: --select all --build_complex
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 Structure not modified, not saving. Override with --force_save

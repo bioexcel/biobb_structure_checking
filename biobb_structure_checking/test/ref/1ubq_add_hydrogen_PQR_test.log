@@ -23,12 +23,12 @@ Structure pdb:1ubq loaded
 
 Step 1: water --remove yes
 Running water. Options: --remove yes
-58 Water molecules detected
-58 Water molecules removed
+Detected 58 Water molecules
+Removed 58 Water molecules
 
 Step 2:  add_hydrogen --add_mode auto --add_charges ADT
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-24 Residues requiring selection on adding H atoms
+Found 24 Residues requiring selection on adding H atoms
  ASP A21,A32,A39,A52,A58
  GLU A16,A18,A24,A34,A51,A64
  HIS A68
@@ -37,7 +37,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A59
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Replacing HIS A68 by HIE
 Updating partial charges and atom types

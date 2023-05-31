@@ -26,7 +26,7 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running fixside. Options: --fix None
-6 Residues with missing side chain atoms found
+Found 6 Residues with missing side chain atoms
  MET A46    CG,SD,CE
  PRO A154   CG,CD
  PRO A280   CG,CD

@@ -30,7 +30,7 @@ NAG A905
 NAG A906
 NAG E601
 Running amide. Options: --fix auto
-7 unusual contact(s) involving amide atoms found
+Found 7 unusual contact(s) involving amide atoms
  LYS A31.NZ   GLN E493.NE2    2.926 A
  GLN A42.NE2  GLN E498.NE2    2.927 A
  ASN A103.OD1 ASN A194.OD1    2.807 A
@@ -56,7 +56,7 @@ Cluster 6:GLN E493
 New score: 0.114, fixed residue(s): GLN E493
 Amide residues fixed auto (5)
 Rechecking
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  ARG E357.NH1 ASN E394.ND2    2.963 A
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, E: Protein)

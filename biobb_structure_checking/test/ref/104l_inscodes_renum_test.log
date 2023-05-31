@@ -21,13 +21,13 @@ Structure pdb:104l loaded
  Num. water mol.:  32
  Num. atoms:  2636
 Running inscodes. Options: --renumber
-4 Residues with insertion codes found
+Found 4 Residues with insertion codes
 ALA A44A
 ALA A44B
 ALA B44A
 ALA B44B
 Running chains. Options: {'renumber': 'A:44=z:44,z:44=A:44,B:44=z:44,z:44=B:44', 'rem_inscodes': True, 'select': 'all', 'verbose': False}
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 WARNING: disordered residue ids found in A, may need explicit order combinations

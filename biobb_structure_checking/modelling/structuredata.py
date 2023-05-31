@@ -121,12 +121,15 @@ class StructureData():
         for pair in mu.get_residues_with_H(self.st):
             self.stats['res_h'] += 1
             self.stats['num_h'] += pair['num_h']
+
         # Detecting whether it is a CA-only structure
         # num_ats should be much larger than num_res
         # waters removed
         # Taking polyGly as a lower limit
-        self.ca_only = self.stats['num_ats'] - self.stats['num_wat'] <\
-            (self.stats['num_res'] - self.stats['num_wat']) * 4
+        self.ca_only = False
+        if (self.stats['num_ats'] - self.stats['num_wat']) < \
+                (self.stats['num_res'] - self.stats['num_wat']) * 4:
+            self.ca_only = self._check_ca_only()
 
     def get_headers(self) -> None:
         """
@@ -222,3 +225,11 @@ class StructureData():
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
                 print(mu.residue_id(res))
+
+    def _check_ca_only(self):
+        ca_only = True
+        for atom in self.st.get_atoms():
+            if mu.is_wat(atom.get_parent()):
+                continue
+            ca_only = ca_only or atom.id != 'CA'
+        return ca_only

@@ -7,6 +7,9 @@ from biobb_structure_checking.io.param_input import ParamInput
 
 def check(strcheck):
     # TODO Check _mutateside_check function?
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     return True
 
 

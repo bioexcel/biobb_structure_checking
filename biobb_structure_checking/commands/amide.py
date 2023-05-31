@@ -8,6 +8,10 @@ from biobb_structure_checking.structure_manager import NotAValidResidueError
 
 
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     amide_check = strcheck.strucm.check_amide_contacts()
     if 'list' not in amide_check:
         if not strcheck.args['quiet']:
