@@ -116,7 +116,6 @@ class StructureManager:
              )
             )
 
-
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)
         self.st_data = StructureData(self.st, input_format, headers, biounit)
@@ -143,7 +142,6 @@ class StructureManager:
         self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
-            fasta_sequence_path = input_pdb_path
             # MMBPDBList child defaults to Bio.PDB.PDBList
             # if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
@@ -1155,7 +1153,7 @@ class StructureManager:
 
                 warnings.filterwarnings('ignore', 'BioPythonWarning')
 
-                parser = PDBParser(PERMISSIVE=1)
+                parser = PDBParser(PERMISSIVE=1, QUIET=True)
                 model_st = parser.get_structure(
                     'model_st',
                     opj(mod_mgr.tmpdir, model_pdb['name'])
