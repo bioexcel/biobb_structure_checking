@@ -62,7 +62,7 @@ class StructureManager:
             nowarn: bool = True,
             coords_only: bool = False,
             overwrite: bool = False,
-            atom_limit = 0
+            atom_limit: int = 0
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -106,14 +106,14 @@ class StructureManager:
             coords_only=coords_only,
             overwrite=overwrite
         )
-        # Check limit of atoms to avoid delays
+        # Check limit of atoms now to avoid delays
         num_ats = len(list(self.st.get_atoms()))
         if atom_limit and num_ats > atom_limit:
             sys.exit(
                 cts.MSGS['ATOM_LIMIT'].format(
                     num_ats,
                     atom_limit
-             )
+                )
             )
 
         self.models_data = ModelsData(self.st)
@@ -1167,7 +1167,7 @@ class StructureManager:
                     brk_list,
                     sequence_data.data[mod.id][ch_id]['pdb']['frgs'][0].features[0].location.start,
                     extra_gap
-                )  #TODO consider use canonical numbering instead of defining offset
+                )  # TODO consider use canonical numbering instead of defining offset
                 modif_residues += modif_set_residues
 
         return modif_residues
