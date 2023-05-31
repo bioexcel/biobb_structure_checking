@@ -1,9 +1,14 @@
 """ Module to manage sequence information for structures """
 
 import sys
+import os
 # from typing import List, Dict
+from urllib.request import urlretrieve, urlcleanup
 
-from Bio import pairwise2, SeqIO
+# pairwise2 to be deprecated, replaced by PairwiseAligner
+# from Bio import pairwise2, SeqIO
+from Bio import SeqIO
+from Bio.Align import PairwiseAligner
 from Bio.PDB.Polypeptide import PPBuilder
 from Bio.Seq import Seq, MutableSeq
 # Deprecated in Biopython 1.78
@@ -17,6 +22,7 @@ try:
 except ImportError:
     has_IUPAC = False
 import biobb_structure_checking.modelling.utils as mu
+from biobb_structure_checking.constants import FASTA_DOWNLOAD_PREFIX
 
 IDENT_THRES = 0.7
 
@@ -31,6 +37,10 @@ class SequenceData():
         self.has_canonical = {}
         self.fasta = []
         self.raw_pdb_seq = ''
+        self.aligner = PairwiseAligner()
+        self.aligner.mode = 'global'
+        self.aligner.open_gap_score = -5
+        self.aligner.extend_gap_score = -1
 
     def add_empty_chain(self, mod, ch_id: str):
         """ SequenceData.add_empty_chain
@@ -52,16 +62,30 @@ class SequenceData():
         Load canonical sequence from external FASTA file
 
         Args:
-            fasta_sequence_path (str) : Path to FASTA file
+            fasta_sequence_path (str) : Path to FASTA file (pdb: forces download)
         """
         read_ok = True
         self.fasta = []
         if fasta_sequence_path:
-            try:
-                for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
-                    self.fasta.append(record)
-            except IOError:
-                sys.exit("Error loading FASTA")
+            if fasta_sequence_path.startswith('pdb:'):
+                fasta_sequence_path = fasta_sequence_path[4:]
+                try:
+                    tmp_file = f"/tmp/{fasta_sequence_path}.fasta"
+                    url = f"{FASTA_DOWNLOAD_PREFIX}/{fasta_sequence_path}"
+                    print(f"Retrieving sequence from {url}")
+                    urlcleanup()
+                    urlretrieve(url, tmp_file)
+                    for record in SeqIO.parse(tmp_file, 'fasta'):
+                        self.fasta.append(record)
+                    os.remove(tmp_file)
+                except IOError:
+                    sys.exit("Error retrieving FASTA")
+            else:
+                try:
+                    for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
+                        self.fasta.append(record)
+                except IOError:
+                    sys.exit("Error loading FASTA")
         if not self.fasta:
             print(
                 f"WARNING: No valid FASTA formatted sequences found in"
@@ -406,8 +430,8 @@ class SequenceData():
                                 f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
                             )
                     # tuned to open gaps on missing loops
-                    alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
-
+#                    alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+                    alin = self.aligner.align(tgt_seq, pdb_seq)
                     if has_IUPAC:
                         pdb_seq = Seq(alin[0][1], IUPAC.protein)
                     else:
@@ -481,7 +505,7 @@ class SequenceData():
             max_score = -100
             best_hit = ''
             for hit in all_hits:
-                if hit['ch_id'] != ch_id and hit['mod_id'] != mod_id:
+                if hit['ch_id'] != ch_id or hit['mod_id'] != mod_id:
                     continue
                 if hit['score'] > max_score:
                     best_hit = hit
@@ -503,13 +527,13 @@ class SequenceData():
                 for seq in self.raw_pdb_seq[mod_id][ch_id]:
                     if not seq: # for not protein/NA chains
                         continue
-                    score = pairwise2.align.globalxs(
-                        tgt, seq, -5, -1, score_only=True
-                    )
+                    # score = pairwise2.align.globalxs(
+                    #     tgt, seq, -5, -1, score_only=True
+                    # )
+                    score = self.aligner.align(tgt, seq).score
                     if score > 0:
                         matches.append((mod_id, ch_id, score))
         return matches
-
 
 def _get_pack_str_seqs(strucm):
     strucm.revert_can_resnames(canonical=True)

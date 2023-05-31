@@ -1,54 +1,54 @@
 ## v3.13.X (2023.2)
 ### Extended functions
 - input
-  - Added assembly download from wwpdb
-  - Moved default download to https (instead of ftp) to avoid network restrictions
-  - Added --overwrite_cache to refresh cached structures
+  - Added assembly download from wwpdb.
+  - Moved default download to https (instead of ftp) to avoid network restrictions.
+  - Added --overwrite_cache to refresh cached structures.
 - output
-  - Added optional logging of building errors (as --build-warnings)
+  - Added optional logging of building errors (as --build-warnings).
 - general
-  - Atom limit check made after download to avoid useless work
-  - Added --time_limit to avoid too lengthy runs. Useful on massive analysis
-  - Improved some log errors
+  - Atom limit check made after download to avoid useless work.
+  - Added --time_limit to avoid too lengthy runs. Useful on massive analysis.
+  - Improved some log errors.
 - add_hydrogen
-  - Full list of residues now requires --verbose
-- models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities
-- improved recognition of CA-only structures
+  - Full list of residues now requires --verbose.
+- models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities.
+- improved recognition of CA-only structures.
 
 ### Bug Fixes
   - sequences.
-    - Fixed errors in sequence recognition when non-protein and non-na chain
-    - Fixed FASTA headers when no gaps
+    - Fixed errors in sequence recognition when non-protein and non-NA chain.
+    - Fixed FASTA headers when no gaps.
 
 ## v3.12.1 (2022.4)
 ### Extended functions
 - amide
-  - Added --fix auto option to automatically find best fix combination
+  - Added --fix auto option to automatically find best fix combination.
 - chains
-  - Added --rename. fixes empty chain labels
-  - Added --renumber. allow to renumber/reorganize chains and residues
-  - Added --rem_inscodes. removes insertion codes on renumbering
-  - Added --rebuild. rebuild chains labels and residue ids from backbone connectivity
+  - Added --rename. fixes empty chain labels.
+  - Added --renumber. allow to renumber/reorganize chains and residues.
+  - Added --rem_inscodes. removes insertion codes on renumbering.
+  - Added --rebuild. rebuild chains labels and residue ids from backbone connectivity.
 - inscodes
-  - Added --renumber. Rebuild residue numbering to remove insertion codes
+  - Added --renumber. Rebuild residue numbering to remove insertion codes.
 - models
-  - Added --build_complex. Converts biounit's selected models into actual complexes
+  - Added --build_complex. Converts biounit's selected models into actual complexes.
 - sequences
-  - Added --output_fasta. Writes sequences found in an external FASTA file
+  - Added --output_fasta. Writes sequences found in an external FASTA file.
 - json
-  - Extended information on json summary output
+  - Extended information on json summary output.
 - input format
   - File format for remote download can be defined using extension as in pdb:2ki5.pdb
 - output format
-  - Added mmCif output (only atom records)
+  - Added mmCif output (only atom records).
 - input management
-  - Added --nocache to avoid caching downloaded structures
-  - Added --copy_input to recover a copy of the input structure
-  - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files
+  - Added --nocache to avoid caching downloaded structures.
+  - Added --copy_input to recover a copy of the input structure.
+  - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files.
 ### Bug Fixes
-- Added missing defaults for Notebook execution
-- Ionized/tautomeric residue names recognized
-- Fixed behaviour of structure headers output with missing entries
+- Added missing defaults for Notebook execution.
+- Ionized/tautomeric residue names recognized.
+- Fixed behaviour of structure headers output with missing entries.
 
 ## v3.10.1 (2022.3)
 ### Extended functions

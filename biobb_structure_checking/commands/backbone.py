@@ -226,6 +226,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             if strcheck.args['non_interactive'] and not read_ok:
                 print(cts.MSGS['FASTA_MISSING'])
                 return []
+
         strcheck.strucm.sequence_data.read_canonical_seqs(
             strcheck.strucm,
             False

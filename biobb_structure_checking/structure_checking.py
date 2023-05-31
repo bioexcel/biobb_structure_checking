@@ -508,7 +508,7 @@ class StructureChecking():
 
     def _check_time_limit(self):
         if time.time() - self.start_time > self.args['time_limit']:
-            print(cts.MSGS['TIME_LIMIT'], file=sys.stderr)
+            print(cts.MSGS['TIME_LIMIT'].format(self.args['time_limit']), file=sys.stderr)
             return True
         return False
 # ==============================================================================
