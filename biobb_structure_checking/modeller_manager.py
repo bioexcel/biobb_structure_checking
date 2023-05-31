@@ -10,7 +10,9 @@ from os.path import join as opj
 import uuid
 import shutil
 
-from Bio import SeqIO, pairwise2
+#from Bio import SeqIO, pairwise2
+from Bio import SeqIO
+from Bio.Align import PairwiseAligner
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 # Check for back-compatiblity with biopython < 1.77
@@ -83,7 +85,8 @@ class ModellerManager():
                 frag_seq = frgs[i].seq
                 pdb_seq += frag_seq
             # tuned to open gaps on missing loops only
-            alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+            alin = self.sequences.aligner.align(tgt_seq, pdb_seq)
+#            alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
 
             if has_IUPAC:
                 pdb_seq = Seq(alin[0][1], IUPAC.protein)
