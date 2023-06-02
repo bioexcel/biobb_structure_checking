@@ -139,7 +139,7 @@ class ModellerManager():
         if not DEBUG:
             shutil.rmtree(self.tmpdir)
         else:
-            print(self.tmpdir)
+            print(f"Using temporary folder: {self.tmpdir}")
 
 
 def _write_align(tgt_seq, templs, alin_file):

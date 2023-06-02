@@ -13,7 +13,7 @@
 Commands to manipulate structure composition.
 
 **sequences** [--output_fasta FASTA] - _Print canonical and structure sequences in FASTA format_
-  * **--output_fasta** Writes sequences found in an external FASTA file
+  * **--output_fasta** Write sequences found to an external FASTA file
 
 **models** [--select model_num(s)] [--superimpose] [--save_split]- _Detect/Select Models_
  * Accept List of Models (comma separated) or Model number range
@@ -24,8 +24,8 @@ Commands to manipulate structure composition.
 **chains** [--select chain_ids | molecule_type] [--rename (auto|new label)] [--renumber (auto | [A:]ini0[-fin0]=[B:]ini1)] [--rem_inscodes] - _Detect/Select/Reorganize Chains_
   * **--select** Select chains ids or chain types (PROTEIN|NA|DNA|RNA) to keep
   * **--rename** Allow to fix unlabelled chains
-  * **--renumber** Allow to reorganize residues and chains by moving or renunbering fragments
-  * **--rem_inscodes** removes insertion codes when renumbering chains
+  * **--renumber** Allow to reorganize residues and chains by moving or renumbering fragments
+  * **--rem_inscodes** remove insertion codes when renumbering chains
   * **--rebuild** rebuild chain and residue ids from backbone connectivity
 
 **inscodes** - _Detects residues with insertion codes.

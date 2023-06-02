@@ -118,13 +118,15 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--sequence',
     dest='fasta_seq_path',
-    help='Canonical sequence in FASTA format, pdb_chain[,chain] in header'
+    help='Canonical sequence in FASTA format. Accepted pdb:{pdbid} '
+         'for downloading. Note that when downloading PDB files, '
+         'sequences are also automatically downloaded'
 )
 
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(RCSB)|MMB|BSC)'
+    help='Server for retrieving structures (default(wwPDB)|MMB|BSC) (Ignored, used default)'
 )
 
 CMD_LINE.add_argument(
@@ -179,7 +181,7 @@ CMD_LINE.add_argument(
     dest='output_structure_path',
     help='Output structure. '
          'Formats available cif|pdb|pdbqt|pqr|cmip '
-         '(use file extension or --output_format to set format)'
+         '(use file extension or --output_format to set format). '
          'Note than cif output format includes atom records only'
 )
 
