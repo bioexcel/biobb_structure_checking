@@ -11,51 +11,50 @@ check_structure can be run interactively. It will prompt for any missing paramet
 
 
 ~~~
-usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--coords_only]
-                       [--file_format {mmCif,cif,pdb,xml}] [--sequence FASTA_SEQ_PATH]
-                       [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
-                       [--nocache] [--copy_input DIR]
-                       [--modeller_key MODELLER_KEY]
-                       [--res_lib RES_LIBRARY_PATH]
-                       [--data_lib DATA_LIBRARY_PATH]
-                       [-o OUTPUT_STRUCTURE_PATH {cif,pdb,pdbqt,pqr,cmip}]
-                       [--output_format {cif,mmCif,pdb,pdbqt,pqr,cmip}]
-                       [--rename_terms] [--keep_canonical_resnames]
-                       [--json JSON_OUTPUT_PATH] [-nv] [-v]
-                       [--limit ATOM_LIMIT] [--debug] [--force_save]
-                       [--check_only] [--non_interactive] [--version]
-                       command [command_options]
-
+usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,cif,xml}] [--coords_only]
+                       [--sequence FASTA_SEQ_PATH] [--pdb_server PDB_SERVER] [--cache_dir CACHE_DIR_PATH]
+                       [--nocache] [--overwrite_cache] [--copy_input COPY_INPUT] [--modeller_key MODELLER_KEY]
+                       [--res_lib RES_LIBRARY_PATH] [--data_lib DATA_LIBRARY_PATH] [-o OUTPUT_STRUCTURE_PATH]
+                       [--output_format {pdb,pdbqt,pqr,cmip,cif,mmCif}] [--keep_canonical_resnames] [--rename_terms]
+                       [--json JSON_OUTPUT_PATH] [-nv] [-v] [--limit ATOM_LIMIT] [--time_limit TIME_LIMIT] [--debug]
+                       [--build_warnings] [--force_save] [--check_only] [--non_interactive] [--version]
+                       command ...
 ~~~
 ### positional arguments:
   **command** - _Command to execute (required)_
 
   **command_options** - _Specific command options (optional)_
-* On a interactive session, parameters required for **command** execution will be prompt as necessary, but can be also introduced as command options in the command line. see [Commands Help](https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html).
+* On a interactive session, parameters required for **command** execution will be prompted as necessary, but can be also introduced as command options in the command line. see [Commands Help](https://biobb-structure-checking.readthedocs.io/en/latest/commands_help.html).
 ***
 ### Arguments for input:
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
-* Formats pdb(qt)|cif|pqr. Taken from file extension, pdbqt accepted, but read as pdb.
-* Remote **pdb:{pdbid}[.format]**. See alsp **--file_format** for selecting download format (default: cif)
-* Biounits **pdb:{pdbid}.{bn}**. Biounits require MMB or BSC servers (**--pdb_server MMB**). Format PDB.
-
-**--coords_only** - _Loads structure coordinates, discards chain labels and residue ids from input_
-
-**--sequence** FASTA_SEQ_PATH - _Canonical sequence in FASTA format_
-* Header should start >pdb_chain[,chain] for backbone rebuild. Required only for PDB/PQR structures.
+* Formats pdb(qt)|cif|pqr. Taken from file extension. pdbqt accepted, but read as pdb.
+* Remote **pdb:{pdbid}[.format] | {url}**. See also **--file_format** for selecting download format (default: cif). For remote downloads as **pdb:** in pdb format, sequences are also automatically downloaded.
+* Biounits/Assemblies **pdb:{pdbid}.{bn}**. Biounits/assemblies. Default format mmCIF.
 
 **--file_format** {mmCif,cif,pdb,xml} - _Format for retrieving structures (mmCif(default)|cif|pdb|xml)_
 
-**--pdb_server** PDB_SERVER - _Remote server for retrieving structures (rcsb(default)|MMB|BSC)_
+**--build_warnings** - _Show structure building warnings (may indicate PDB errors)_
+
+**--coords_only** - _Loads structure coordinates, discards chain labels and residue ids from input_
+
+**--sequence** FASTA_SEQ_PATH - _Input canonical sequence in FASTA format_
+* accepted **local files**, **URLs**, or **pdb:{pdbid}**. Required for PDB/PQR structures.
+
+**--pdb_server** PDB_SERVER - _DEPRECATED. pdb: defaultr to wwPDB, use direct urls ofor other servers_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
 
 **--nocache** - _Do not cache downloaded structures_
 
+**--overwrite_cache** - _Overwrite cached file if any_
+
 **--copy_input** DIR - _Copy the downloaded structure in the indicated folder_
 
 **--limit** ATOM_LIMIT - _Limit on number of atoms (0: no limit)_
+
+**--time_limit** TIME_LIMIT - _Set limit on the execution time (sec), 0: nolimit. Default: 3600_
 
 ***
 ### Additional data input
