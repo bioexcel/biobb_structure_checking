@@ -9,6 +9,9 @@ import shutil
 import sys
 import re
 
+from urllib.request import urlretrieve
+from urllib.request import urlcleanup
+
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 from Bio.PDB.Residue import Residue
@@ -62,7 +65,7 @@ class StructureManager:
             nowarn: bool = True,
             coords_only: bool = False,
             overwrite: bool = False,
-            atom_limit = 0
+            atom_limit: int = 0
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -106,16 +109,15 @@ class StructureManager:
             coords_only=coords_only,
             overwrite=overwrite
         )
-        # Check limit of atoms to avoid delays
+        # Check limit of atoms now to avoid delays
         num_ats = len(list(self.st.get_atoms()))
         if atom_limit and num_ats > atom_limit:
             sys.exit(
                 cts.MSGS['ATOM_LIMIT'].format(
                     num_ats,
                     atom_limit
-             )
+                )
             )
-
 
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)
@@ -143,7 +145,6 @@ class StructureManager:
         self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
-            fasta_sequence_path = input_pdb_path
             # MMBPDBList child defaults to Bio.PDB.PDBList
             # if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
@@ -153,7 +154,6 @@ class StructureManager:
 
                 # if pdb_server not in ALT_SERVERS:
                 #    raise WrongServerError
-
                 if not biounit:
                     real_pdb_path = pdbl.retrieve_pdb_file(
                         input_pdb_path,
@@ -176,7 +176,7 @@ class StructureManager:
                     input_pdb_path = pdbid.upper()
                     if file_format not in ACCEPTED_REMOTE_FORMATS:
                         print(
-                            f"WARNING: format {file_format} not available"
+                            f"WARNING: format {file_format} not available "
                             "for downloads, reverting to default"
                         )
                         file_format = 'cif'
@@ -204,6 +204,23 @@ class StructureManager:
                     real_pdb_path = new_path
                     # Adding sequence input
                     self.sequence_data.load_sequence_from_fasta(f"pdb:{pdbid}")
+
+        elif input_pdb_path.startswith('http'):
+            real_pdb_path = opj(cache_dir, os.path.basename(input_pdb_path))
+
+            if '.' in os.path.basename(input_pdb_path):
+                file_format = os.path.splitext(input_pdb_path)[1][1:]
+                if file_format not in ACCEPTED_FORMATS:
+                    print(f'Error: MMB/BSC Server: File format {file_format} not supported')
+                    sys.exit(1)
+            print(f"Downloading structure from {input_pdb_path} as {file_format} ...")
+            try:
+                urlcleanup()
+                urlretrieve(input_pdb_path, real_pdb_path)
+            except IOError:
+                print(f"Download failed")
+
+            nocache = True
 
         else:
             real_pdb_path = input_pdb_path
@@ -1154,7 +1171,7 @@ class StructureManager:
 
                 warnings.filterwarnings('ignore', 'BioPythonWarning')
 
-                parser = PDBParser(PERMISSIVE=1)
+                parser = PDBParser(PERMISSIVE=1, QUIET=True)
                 model_st = parser.get_structure(
                     'model_st',
                     opj(mod_mgr.tmpdir, model_pdb['name'])
@@ -1168,7 +1185,7 @@ class StructureManager:
                     brk_list,
                     sequence_data.data[mod.id][ch_id]['pdb']['frgs'][0].features[0].location.start,
                     extra_gap
-                )  #TODO consider use canonical numbering instead of defining offset
+                )  # TODO consider use canonical numbering instead of defining offset
                 modif_residues += modif_set_residues
 
         return modif_residues
@@ -1742,7 +1759,7 @@ def _guess_modeller_env():
     if info[1]:
         print(f"Modeller v{info[1]} detected")
         ver1, ver2 = info[1].split('.')
-        return f"KEY_MODELLER{ver1}v{ver2}", "MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
+        return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
 
     print("Modeller version not detected, using default")
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'

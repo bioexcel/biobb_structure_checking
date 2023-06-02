@@ -139,7 +139,6 @@ class MMBPDBList(PDBList):
             print(f"Desired structure doesn't exist at {self.pdb_server} server")
         return final_file
 
-
     def retrieve_assembly_file(
             self,
             pdb_code,

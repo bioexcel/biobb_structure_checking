@@ -80,6 +80,18 @@ class SequenceData():
                     os.remove(tmp_file)
                 except IOError:
                     sys.exit("Error retrieving FASTA")
+            elif fasta_sequence_path.startswith('http'):
+                tmp_file = f'/tmp/{os.path.basename(fasta_sequence_path)}'
+                print(f"Downloading sequence from {fasta_sequence_path} ...")
+                try:
+                    urlcleanup()
+                    urlretrieve(fasta_sequence_path, tmp_file)
+                    for record in SeqIO.parse(tmp_file, 'fasta'):
+                        self.fasta.append(record)
+                    os.remove(tmp_file)
+                except IOError as e:
+                    print(e)
+                    print(f"Error retrieving FASTA")
             else:
                 try:
                     for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
@@ -142,8 +154,8 @@ class SequenceData():
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
-                    print("Warning: sequence features only available in mmCIF",
-                            "format or with external fasta input")
+                    print("Warning: sequence features may not be available, use --sequence for ",
+                            "external fasta input")
                 return True
             if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
                 if not isinstance(strucm.st_data.headers['_entity_poly.pdbx_strand_id'], list):

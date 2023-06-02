@@ -1,25 +1,31 @@
 ## v3.13.X (2023.2)
 ### Extended functions
-- input
-  - Added assembly download from wwpdb
-  - Moved default download to https (instead of ftp) to avoid network restrictions
-  - Added --overwrite_cache to refresh cached structures
-- output
-  - Added optional logging of building errors (as --build-warnings)
-- general
-  - Atom limit check made after download to avoid useless work
-  - Added --time_limit to avoid too lengthy runs. Useful on massive analysis
-  - Improved some log errors
-- add_hydrogen
-  - Full list of residues now requires --verbose
-- models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities
-- improved recognition of CA-only structures
-
+  - input
+    - Added assembly download from wwpdb.
+    - Added --overwrite_cache to refresh cached structures.
+    - improved recognition of CA-only structures.
+    - Added automated sequence download for retrieved structure in PDB format
+    - --sequence accepts remote download as pdb:{pdb_id}
+    - Added remote downloads (structure and sequence) from plain URL's (http(s) only).
+  - output
+    - Added optional logging of building errors (as --build-warnings).
+    - Improved phrasing for some log errors.
+  - run_time
+    - Atom limit check made after download to avoid useless work.
+    - Added --time_limit to avoid too lengthy runs. Useful on massive analysis.
+  - add_hydrogen
+    - Full list of residues now requires --verbose.
+### Deprecated
+  - input
+    - Use of alternative pdb servers (--pdb_servers) for biounits/assemblies. Command-line parameter retained for back-compatibility.
 ### Bug Fixes
+  - input
+    - Default download moved to https (instead of ftp) to avoid detected network restrictions.
   - sequences.
-    - Fixed errors in sequence recognition when non-protein and non-na chain
-    - Fixed FASTA headers when no gaps
-
+    - Fixed errors in sequence recognition when non-protein and non-na chain.
+    - Fixed FASTA headers when no gaps.
+  - models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities.
+  - Added error message when --rebuild is applied to N term residue. Fix pending.
 ## v3.12.1 (2022.4)
 ### Extended functions
 - amide
