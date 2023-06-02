@@ -9,6 +9,9 @@ import shutil
 import sys
 import re
 
+from urllib.request import urlretrieve
+from urllib.request import urlcleanup
+
 from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
 
 from Bio.PDB.Residue import Residue
@@ -151,7 +154,6 @@ class StructureManager:
 
                 # if pdb_server not in ALT_SERVERS:
                 #    raise WrongServerError
-
                 if not biounit:
                     real_pdb_path = pdbl.retrieve_pdb_file(
                         input_pdb_path,
@@ -174,7 +176,7 @@ class StructureManager:
                     input_pdb_path = pdbid.upper()
                     if file_format not in ACCEPTED_REMOTE_FORMATS:
                         print(
-                            f"WARNING: format {file_format} not available"
+                            f"WARNING: format {file_format} not available "
                             "for downloads, reverting to default"
                         )
                         file_format = 'cif'
@@ -202,6 +204,23 @@ class StructureManager:
                     real_pdb_path = new_path
                     # Adding sequence input
                     self.sequence_data.load_sequence_from_fasta(f"pdb:{pdbid}")
+
+        elif input_pdb_path.startswith('http'):
+            real_pdb_path = opj(cache_dir, os.path.basename(input_pdb_path))
+
+            if '.' in os.path.basename(input_pdb_path):
+                file_format = os.path.splitext(input_pdb_path)[1][1:]
+                if file_format not in ACCEPTED_FORMATS:
+                    print(f'Error: MMB/BSC Server: File format {file_format} not supported')
+                    sys.exit(1)
+            print(f"Downloading structure from {input_pdb_path} as {file_format} ...")
+            try:
+                urlcleanup()
+                urlretrieve(input_pdb_path, real_pdb_path)
+            except IOError:
+                print(f"Download failed")
+
+            nocache = True
 
         else:
             real_pdb_path = input_pdb_path
