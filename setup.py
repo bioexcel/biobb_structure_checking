@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="biobb_structure_checking",
-    version="3.12.1",
+    version="3.13.0",
 
     author="Biobb developers",
     author_email="josep.gelpi@bsc.es",
@@ -23,7 +23,7 @@ setuptools.setup(
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
     include_package_data=True,
-    install_requires=['psutil', 'numpy', 'biopython==1.79'],
+    install_requires=['psutil', 'numpy', 'biopython'],
     python_requires='>=3.7',
     extras_require={},
     entry_points={
