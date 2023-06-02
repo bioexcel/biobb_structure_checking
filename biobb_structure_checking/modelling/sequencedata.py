@@ -154,8 +154,8 @@ class SequenceData():
         else:
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
-                    print("Warning: sequence features only available in mmCIF",
-                            "format or with external fasta input")
+                    print("Warning: sequence features may not be available, use --sequence for ",
+                            "external fasta input")
                 return True
             if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
                 if not isinstance(strucm.st_data.headers['_entity_poly.pdbx_strand_id'], list):
