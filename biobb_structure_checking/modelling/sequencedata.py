@@ -6,9 +6,14 @@ import os
 from urllib.request import urlretrieve, urlcleanup
 
 # pairwise2 to be deprecated, replaced by PairwiseAligner
-# from Bio import pairwise2, SeqIO
+# But Alignment structure has changed from v1.79
+import Bio
+OLD_ALIGN = Bio.__version__ >= '1.79'
 from Bio import SeqIO
-from Bio.Align import PairwiseAligner
+if OLD_ALIGN:
+    from Bio import pairwise2
+else:
+    from Bio.Align import PairwiseAligner
 from Bio.PDB.Polypeptide import PPBuilder
 from Bio.Seq import Seq, MutableSeq
 # Deprecated in Biopython 1.78
@@ -37,10 +42,12 @@ class SequenceData():
         self.has_canonical = {}
         self.fasta = []
         self.raw_pdb_seq = ''
-        self.aligner = PairwiseAligner()
-        self.aligner.mode = 'global'
-        self.aligner.open_gap_score = -5
-        self.aligner.extend_gap_score = -1
+        self.aligner = None # for compatibility biopython <= 1.80
+        if not OLD_ALIGN:
+            self.aligner = PairwiseAligner()
+            self.aligner.mode = 'global'
+            self.aligner.open_gap_score = -5
+            self.aligner.extend_gap_score = -1
 
     def add_empty_chain(self, mod, ch_id: str):
         """ SequenceData.add_empty_chain
@@ -441,8 +448,10 @@ class SequenceData():
                                 f"{frgs[i].features[0].location.start}-{frgs[i].features[0].location.end}"
                             )
                     # tuned to open gaps on missing loops
-#                    alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
-                    alin = self.aligner.align(tgt_seq, pdb_seq)
+                    if OLD_ALIGN:
+                        alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+                    else:
+                        alin = self.aligner.align(tgt_seq, pdb_seq)
                     if has_IUPAC:
                         pdb_seq = Seq(alin[0][1], IUPAC.protein)
                     else:
@@ -538,10 +547,13 @@ class SequenceData():
                 for seq in self.raw_pdb_seq[mod_id][ch_id]:
                     if not seq: # for not protein/NA chains
                         continue
-                    # score = pairwise2.align.globalxs(
-                    #     tgt, seq, -5, -1, score_only=True
-                    # )
-                    score = self.aligner.align(tgt, seq).score
+                    if OLD_ALIGN:
+                        score = pairwise2.align.globalxs(
+                            tgt, seq, -5, -1, score_only=True
+                        )
+                    else:
+                        score = self.aligner.align(tgt, seq).score
+
                     if score > 0:
                         matches.append((mod_id, ch_id, score))
         return matches
