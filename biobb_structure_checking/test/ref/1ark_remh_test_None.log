@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.0                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ar/1ark.cif' 
+Structure exists: 'tmpPDB/ar/1ark.cif'
 Structure pdb:1ark loaded
- PDB id: 1ARK 
+ PDB id: 1ARK
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE

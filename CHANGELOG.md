@@ -1,4 +1,4 @@
-## v3.13.X (2023.2)
+## v3.13.0 (2023.2)
 ### Extended functions
   - input
     - Added assembly download from wwpdb.

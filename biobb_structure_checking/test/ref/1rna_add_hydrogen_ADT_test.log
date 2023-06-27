@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.0                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/rn/1rna.cif' 
+Structure exists: 'tmpPDB/rn/1rna.cif'
 Structure pdb:1rna loaded
- PDB id: 1RNA 
+ PDB id: 1RNA
  Title: CRYSTALLOGRAPHIC STRUCTURE OF AN RNA HELIX: [U(U-A)6A]2
  Experimental method: X-RAY DIFFRACTION
  Keywords: RNA
