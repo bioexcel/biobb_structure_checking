@@ -8,7 +8,7 @@ from urllib.request import urlretrieve, urlcleanup
 # pairwise2 to be deprecated, replaced by PairwiseAligner
 # But Alignment structure has changed from v1.79
 import Bio
-OLD_ALIGN = Bio.__version__ >= '1.79'
+OLD_ALIGN = Bio.__version__ < '1.79'
 from Bio import SeqIO
 if OLD_ALIGN:
     from Bio import pairwise2
