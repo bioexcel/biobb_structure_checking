@@ -25,7 +25,38 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running clashes.
+Running mutateside. Options: --mut Leu49Ile,B:arg51Lys --rebuild
+Mutations to perform
+*:LEU49ILE
+B:ARG51LYS
+
+                         MODELLER 10.1, 2021/03/12, r12156
+
+     PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
+
+
+                     Copyright(c) 1989-2021 Andrej Sali
+                            All Rights Reserved
+
+                             Written by A. Sali
+                               with help from
+              B. Webb, M.S. Madhusudhan, M-Y. Shen, G.Q. Dong,
+          M.A. Marti-Renom, N. Eswar, F. Alber, M. Topf, B. Oliva,
+             A. Fiser, R. Sanchez, B. Yerkovich, A. Badretdinov,
+                     F. Melo, J.P. Overington, E. Feyfant
+                 University of California, San Francisco, USA
+                    Rockefeller University, New York, USA
+                      Harvard University, Cambridge, USA
+                   Imperial Cancer Research Fund, London, UK
+              Birkbeck College, University of London, London, UK
+
+
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150400.24.60-default x86_64
+Date and time of compilation         : 2021/03/12 00:04:35
+MODELLER executable type             : x86_64-intel8
+Job starting time (YY/MM/DD HH:MM:SS): 2023/05/23 13:01:38
+
+Checking for steric clashes
 No severe clashes detected
 13 Steric apolar clashes detected
  GLY A61.O    THR A65.CG2     2.799 A
@@ -54,4 +85,19 @@ No severe clashes detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
 No negative clashes detected
-Running  check_only. Nothing else to do.
+Final Num. models: 1
+Final Num. chains: 2 (A: Protein, B: Protein)
+Final Num. residues:  905
+Final Num. residues with ins. codes:  0
+Final Num. residues with H atoms: 0
+Final Num. HETATM residues:  296
+Final Num. ligands or modified residues:  4
+Final Num. water mol.:  292
+Final Num. atoms:  4934
+Small mol ligands found
+SO4 A4
+AC2 A1
+SO4 B3
+AC2 B2
+Structure saved on 2ki5_mutateside_test.pdb
+Summary data saved on 2ki5_mutateside_rb_test.json

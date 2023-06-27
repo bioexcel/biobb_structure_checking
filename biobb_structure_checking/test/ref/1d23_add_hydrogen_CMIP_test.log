@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
 Structure pdb:1d23 loaded
- PDB id: 1D23
+ PDB id: 1D23 
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
  Keywords: DNA
@@ -26,15 +26,15 @@ Metal/Ion residues found
 
 Step 1: water --remove yes
 Running water. Options: --remove yes
-154 Water molecules detected
-154 Water molecules removed
+Detected 154 Water molecules
+Removed 154 Water molecules
 
 Step 2:  add_hydrogen --add_mode auto --add_charges CMIP
 Running add_hydrogen. Options: --add_mode auto --add_charges CMIP
 No residues requiring selection on adding H atoms
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Updating partial charges and atom types
 Warning: MG not found in residue library atom, charges set to 0.

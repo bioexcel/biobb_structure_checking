@@ -6,7 +6,12 @@ import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotAValidResidueError
 
+
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     amide_check = strcheck.strucm.check_amide_contacts()
     if 'list' not in amide_check:
         if not strcheck.args['quiet']:
@@ -22,20 +27,22 @@ def check(strcheck):
     print(cts.MSGS['UNUSUAL_AMIDES'].format(len(amide_check['cont_list'])))
 
     strcheck.summary['amide']['detected'] = []
-    for at_pair in sorted(amide_check['cont_list'], key=mu.key_sort_atom_pairs):
+    for at_pair in sorted(
+        amide_check['cont_list'],
+        key=mu.key_sort_atom_pairs
+    ):
         print(
             f" {mu.atom_id(at_pair[0]):12}"
             f" {mu.atom_id(at_pair[1]):12}"
             f" {np.sqrt(at_pair[2]):8.3f} A"
         )
-        strcheck.summary['amide']['detected'].append(
-            {
-                'at1': mu.atom_id(at_pair[0]),
-                'at2': mu.atom_id(at_pair[1]),
-                'dist': round(float(np.sqrt(at_pair[2])), 4)
-            }
-        )
+        strcheck.summary['amide']['detected'].append({
+            'at1': mu.atom_id(at_pair[0]),
+            'at2': mu.atom_id(at_pair[1]),
+            'dist': round(float(np.sqrt(at_pair[2])), 4)
+        })
     return amide_check
+
 
 def fix(strcheck, opts, fix_data=None):
     if not fix_data:
@@ -46,7 +53,10 @@ def fix(strcheck, opts, fix_data=None):
         amide_fix = opts['fix']
     no_int_recheck = amide_fix is not None or strcheck.args['non_interactive']
     while fix_data:
-        input_line = ParamInput('Fix amide atoms', strcheck.args['non_interactive'])
+        input_line = ParamInput(
+            'Fix amide atoms',
+            strcheck.args['non_interactive']
+        )
         input_line.add_option_all()
         input_line.add_option_none()
         input_line.add_option_auto()
@@ -83,7 +93,7 @@ def fix(strcheck, opts, fix_data=None):
                     strcheck.strucm.invert_amide_atoms(res)
                 except NotAValidResidueError as err:
                     return [err.message]
-                done.add(res) # To avoid double change
+                done.add(res)  # To avoid double change
                 fix_num += 1
 
         print(cts.MSGS['AMIDES_FIXED'].format(amide_fix, fix_num))

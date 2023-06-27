@@ -5,7 +5,7 @@
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure backbone_test/1ubq_caps.pdb loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
  Resolution (A): N.A.
@@ -20,7 +20,7 @@ Structure backbone_test/1ubq_caps.pdb loaded
  Num. water mol.:  58
  Num. atoms:  564
 Running backbone. Options: --no_recheck --fix_chain none --add_caps all --fix_atoms all
-7 Residues with missing backbone atoms found
+Found 7 Residues with missing backbone atoms
  VAL A5     CA,C,O,OXT
  LEU A8     N,CA,O
  LYS A11    C,O,OXT
@@ -28,7 +28,7 @@ Running backbone. Options: --no_recheck --fix_chain none --add_caps all --fix_at
  GLU A16    OXT
  ILE A44    C,O,OXT
  ALA A46    N,CA
-4 Backbone breaks found
+Found 4 Backbone breaks
  VAL A5     - LEU A8    
  LYS A11    - THR A14   
  GLU A16    - SER A20   
@@ -37,7 +37,7 @@ No unexpected backbone links
 Main chain fixes
 Nothing to do
 Capping terminal ends
-True terminal residues:  A1,A76
+True terminal residues: A1,A76
 Terminal residues from backbone breaks:  A5-A8,A11-A14,A16-A20,A44-A46
 MET A1 Adding extra ACE residue
   Adding new atom C
@@ -67,8 +67,8 @@ GLY A76 Adding extra NME residue
   Adding new atom N
   Adding new atom CA
 Added caps: A1, A5, A8, A11, A14, A16, A20, A44, A46, A76
-No residues with missing backbone atoms found
-4 Backbone breaks found
+Found No residues with missing backbone atoms
+Found 4 Backbone breaks
  NME A5     - ACE A8    
  NME A11    - ACE A14   
  NME A17    - ACE A19   

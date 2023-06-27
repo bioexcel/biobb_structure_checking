@@ -1,9 +1,10 @@
 """ Command sequences """
 import biobb_structure_checking.constants as cts
 
+
 def check(strcheck):
     fasta = ''
-    if strcheck.strucm.sequence_data.has_canonical:
+    if strcheck.strucm.sequence_data.has_canonical[0]:
         print('Canonical sequence')
         can_seq = strcheck.strucm.sequence_data.get_canonical()
         print(can_seq)
@@ -22,6 +23,7 @@ def check(strcheck):
     }
     return fasta
 
+
 def fix(strcheck, opts, fix_data=None):
     if opts['output_fasta']:
         try:
@@ -29,4 +31,6 @@ def fix(strcheck, opts, fix_data=None):
                 fasta.write(fix_data)
             print(f"Sequences written on {opts['output_fasta']}")
         except Exception:
-            print(f"Error while writing FASTA on {strcheck.args['output_fasta']}")
+            print(
+                cts.MSGS['NO_WRITE_FASTA'].format(strcheck.args['output_fasta'])
+            )

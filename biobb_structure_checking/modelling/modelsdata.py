@@ -2,6 +2,7 @@
 from Bio.PDB.Superimposer import Superimposer
 import biobb_structure_checking.modelling.utils as mu
 
+
 class ModelsData():
     '''Class to manage models internal data'''
     def __init__(self, st):
@@ -17,8 +18,8 @@ class ModelsData():
         return f"{prefix} Num. models: {self.nmodels}"
 
     def select(self, keep_model: str) -> None:
-        """ Selects model(s) and delete the others from the structure. Model are
-            renumbered
+        """ Selects model(s) and delete the others from the structure.
+            Models are renumbered
 
             Args:
                 keep_model: Model number(s) to keep
@@ -50,11 +51,19 @@ class ModelsData():
         '''Superimpose models'''
         spimp = Superimposer()
         if self.nmodels > 1:
-            fix_atoms = [at for at in self.st[0].get_atoms() if at.id == 'CA']
+            fix_atoms = [
+                at
+                for at in self.st[0].get_atoms()
+                if at.id == 'CA'
+            ]
             for mod in self.st.get_models():
                 if mod.id == 0:
                     continue
-                mov_atoms = [at for at in self.st[mod.id].get_atoms() if at.id == 'CA']
+                mov_atoms = [
+                    at
+                    for at in self.st[mod.id].get_atoms()
+                    if at.id == 'CA'
+                ]
                 spimp.set_atoms(fix_atoms, mov_atoms)
                 spimp.apply(self.st[mod.id].get_atoms())
             self.models_type = mu.guess_models_type(self.st) if self.nmodels > 1 else 0
@@ -84,7 +93,8 @@ class ModelsData():
         return added_chains
 
     def has_models(self) -> bool:
-        """ Shotcut method to check whether the structure has more than one model
+        """ Shortcut method to check whether the structure
+            has more than one model
 
             Returns: Boolean
         """

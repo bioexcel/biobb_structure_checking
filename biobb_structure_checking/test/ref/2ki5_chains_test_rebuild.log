@@ -4,12 +4,12 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
-Loading structure coord_only: Chain and residue ids will be ignored
-Warning, no canonical sequence available for chain 0
-Warning, no canonical sequence available for chain h
-Warning, no canonical sequence available for chain w
+Loading structure coord_only: Chain and residue idswill be ignored
+Warning, no canonical sequence available for chain 0/0
+Warning, no canonical sequence available for chain h/0
+Warning, no canonical sequence available for chain w/0
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -30,7 +30,7 @@ AC2 h614
 SO4 h615
 AC2 h616
 Running chains. Options: --select all --rebuild
-3 Chain(s) detected
+Detected 3 Chain(s)
  0: Protein
  h: Unknown
  w: Water

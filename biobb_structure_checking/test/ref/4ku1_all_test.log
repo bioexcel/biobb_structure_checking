@@ -4,10 +4,10 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 Structure pdb:4ku1 loaded
- PDB id: 4KU1
+ PDB id: 4KU1 
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
  Experimental method: X-RAY DIFFRACTION
  Keywords: IMMUNE SYSTEM
@@ -47,13 +47,13 @@ FUL D9
 Step 1: models --select 1
 
 Running models. Options: --select 1
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-4 Chain(s) detected
+Detected 4 Chain(s)
  A: Protein
  B: Protein
  C: Unknown
@@ -63,7 +63,7 @@ Selecting all chains
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
@@ -121,7 +121,7 @@ No metal ions found
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-20 Ligands detected
+Detected 20 Ligands
  PG4 A511
  NAG C1
  NAG C2
@@ -147,10 +147,10 @@ Input not valid (SO4)
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-148 Water molecules detected
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
-148 Water molecules removed
+Detected 148 Water molecules
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
+Removed 148 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -160,33 +160,33 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-2 Residues with missing backbone atoms found
+Found 2 Residues with missing backbone atoms
  LEU A443   OXT
  SER B444   OXT
 No backbone breaks
 No unexpected backbone links
 Capping terminal ends
-True terminal residues:  A237,A443,B237,B444
+True terminal residues: A237,A443,B237,B444
 Nothing to do
 No caps added
 Fixing missing backbone atoms
@@ -207,7 +207,7 @@ No negative clashes detected
 Step 14: cistransbck
 
 Running cistransbck.
-2 cis peptide bonds
+Found 2 cis peptide bonds
 TYR B373   PRO B374   Dihedral:   -5.527
 TYR A373   PRO A374   Dihedral:   -4.211
 No trans peptide bonds with unusual omega dihedrals found
@@ -215,13 +215,13 @@ No trans peptide bonds with unusual omega dihedrals found
 Step 15: getss --mark All
 
 Running getss. Options: --mark All
-4 Possible SS Bonds detected
+Detected 4 Possible SS Bonds
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981
  CYS B261.SG  CYS B321.SG     4.126
  CYS B367.SG  CYS B425.SG     4.188
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 
 Step 16: clashes
 
@@ -245,7 +245,7 @@ No positive clashes detected
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
-20 Ligands detected
+Detected 20 Ligands
  PG4 A511
  NAG C1
  NAG C2
@@ -266,14 +266,14 @@ Running ligands. Options: --remove All
  MAN D7
  NAG D8
  FUL D9
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 Ligands removed All (20)
 
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-4 Chain(s) detected
+Detected 4 Chain(s)
  A: Protein
  B: Protein
  C: Water
@@ -283,7 +283,7 @@ Selecting chain(s) protein
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-126 Residues requiring selection on adding H atoms
+Found 126 Residues requiring selection on adding H atoms
  ASP A249,A265,A270,A280,A312,A356,A376,A399,A401,A413,B249,B265,B270,B280,B312,B356,B376,B399,B401,B413
  GLU A258,A269,A272,A283,A293,A294,A318,A333,A345,A357,A380,A382,A388,A430,B258,B269,B272,B283,B293,B294,B318,B333,B345,B357,B380,B382,B388,B430
  HIS A268,A285,A310,A429,A433,A435,B268,B285,B310,B429,B433,B435
@@ -292,7 +292,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A278,A296,A300,A319,A349,A373,A391,A407,A436,B278,B296,B300,B319,B349,B373,B391,B407,B436
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Replacing HIS A268 by HIE
 Replacing HIS A285 by HIE

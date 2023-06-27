@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: CHROMOSOMAL PROTEIN
@@ -21,11 +21,11 @@ Structure pdb:1ubq loaded
  Num. water mol.:  58
  Num. atoms:  660
 Running amide. Options: --fix All
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  ARG A42.NE   GLN A49.NE2     2.750 A
 Amide residues fixed All (1)
 Rechecking
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134

@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
- PDB id: 1BQO
+ PDB id: 1BQO 
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
  Keywords: METALLOPROTEASE
@@ -34,7 +34,7 @@ Metal/Ion residues found
 Small mol ligands found
 N25 B401
 Running metals. Options: --remove A305
-10 Metal ions found
+Found 10 Metal ions
   ZN A301.ZN 
   ZN A302.ZN 
   CA A303.CA 

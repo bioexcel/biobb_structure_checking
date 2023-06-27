@@ -5,7 +5,12 @@ import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotEnoughAtomsError
 
+
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     fix_data = {}
     # Residues with missing backbone
     miss_bck_at_list = strcheck.strucm.get_missing_atoms('backbone')
@@ -21,10 +26,14 @@ def check(strcheck):
         if not strcheck.args['quiet']:
             print(cts.MSGS['NO_BCK_MISSING'])
 
-    #Not bound consecutive residues
+    # Not bound consecutive residues
     bck_check = strcheck.strucm.get_backbone_breaks()
     if bck_check['bck_breaks_list']:
-        print(cts.MSGS['BACKBONE_BREAKS'].format(len(bck_check['bck_breaks_list'])))
+        print(
+            cts.MSGS['BACKBONE_BREAKS'].format(
+                len(bck_check['bck_breaks_list'])
+            )
+        )
         strcheck.summary['backbone']['breaks'] = {'detected': []}
         for brk in bck_check['bck_breaks_list']:
             print(f" {mu.residue_id(brk[0]):10} - {mu.residue_id(brk[1]):10}")
@@ -71,6 +80,7 @@ def check(strcheck):
                 round(float(brk[2]), 5)
             ])
         fix_data['not_link_seq_list'] = True
+
     # TODO move this section to ligands
     if strcheck.strucm.st_data.modified_residue_list:
         print(cts.MSGS['MODIF_RESIDUES'])
@@ -82,9 +92,11 @@ def check(strcheck):
         fix_data['modified_residue_list'] = True
     return fix_data
 
+
 def fix(strcheck, opts, fix_data=None):
 
-    no_int_recheck = opts['fix_atoms'] is not None or strcheck.args['non_interactive']
+    no_int_recheck = opts['fix_atoms'] is not None or\
+        strcheck.args['non_interactive']
 
     fix_done = not fix_data['bck_breaks_list']
 
@@ -104,7 +116,10 @@ def fix(strcheck, opts, fix_data=None):
             continue
         fixed_main_res += fixed_main
 
-        strcheck.summary['backbone']['main_chain_fix'] = [mu.residue_id(r) for r in fixed_main_res]
+        strcheck.summary['backbone']['main_chain_fix'] = [
+            mu.residue_id(r)
+            for r in fixed_main_res
+        ]
         if fixed_main:
             strcheck.strucm.modified = True
 
@@ -125,10 +140,13 @@ def fix(strcheck, opts, fix_data=None):
         fix_data['bck_breaks_list']
     )
 
-    strcheck.summary['backbone']['added_caps'] = [mu.residue_id(r) for r in fixed_caps]
+    strcheck.summary['backbone']['added_caps'] = [
+        mu.residue_id(r)
+        for r in fixed_caps
+    ]
 
     if fixed_caps:
-        print('Added caps:', ', '.join(map(mu.residue_num, fixed_caps)))
+        print(f"Added caps: {', '.join(map(mu.residue_num, fixed_caps))}")
         strcheck.strucm.modified = True
         fix_data = check(strcheck)
     else:
@@ -156,6 +174,7 @@ def fix(strcheck, opts, fix_data=None):
 
     return False
 
+
 def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, extra_gap):
     print("Main chain fixes")
 
@@ -163,7 +182,10 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
         f"({mu.residue_num(resp[0])}-{mu.residue_num(resp[1])})".replace(' ', '')
         for resp in breaks_list
     ]
-    input_line = ParamInput('Fix Main Breaks', strcheck.args['non_interactive'])
+    input_line = ParamInput(
+        'Fix Main Breaks',
+        strcheck.args['non_interactive']
+    )
     input_line.add_option_none()
     input_line.add_option_all()
     input_line.add_option_list(
@@ -190,7 +212,9 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
                 "Enter canonical sequence path (FASTA)",
                 strcheck.args['non_interactive']
             )
-            strcheck.args['fasta_seq_path'] = input_line.run(strcheck.args['fasta_seq_path'])
+            strcheck.args['fasta_seq_path'] = input_line.run(
+                strcheck.args['fasta_seq_path']
+            )
             if not strcheck.args['fasta_seq_path']:
                 print(cts.MSGS['FASTA_MISSING'])
 
@@ -202,7 +226,11 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             if strcheck.args['non_interactive'] and not read_ok:
                 print(cts.MSGS['FASTA_MISSING'])
                 return []
-        strcheck.strucm.sequence_data.read_canonical_seqs(strcheck.strucm, False)
+
+        strcheck.strucm.sequence_data.read_canonical_seqs(
+            strcheck.strucm,
+            False
+        )
         strcheck.strucm.sequence_data.match_sequence_numbering()
 
     to_fix = [
@@ -212,6 +240,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             in fix_main_bck.split(',') or input_option == 'all'
     ]
     return strcheck.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
+
 
 def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
     print("Capping terminal ends")
@@ -227,16 +256,17 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
         if res[1] not in brk_res:
             true_term.append(res)
 
-    print("True terminal residues: ", ','.join([mu.residue_num(r[1]) for r in true_term]))
+    print(
+        "True terminal residues: "
+        f"{','.join([mu.residue_num(r[1]) for r in true_term])}"
+    )
     if bck_breaks_list:
         print(
             "Terminal residues from backbone breaks: ",
-            ','.join(
-                [
-                    mu.residue_num(r0) + '-' + mu.residue_num(r1)
-                    for r0, r1 in bck_breaks_list
-                ]
-            )
+            ','.join([
+                f"{mu.residue_num(r0)}-{mu.residue_num(r1)}"
+                for r0, r1 in bck_breaks_list
+            ])
         )
 
     input_line = ParamInput('Cap residues', strcheck.args['non_interactive'])
@@ -264,20 +294,29 @@ def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
     if input_option == 'terms':
         to_fix = true_term
     elif input_option == 'brks':
-        to_fix = [pair for pair in term_res if pair[1] in brk_res]
+        to_fix = [
+            pair
+            for pair in term_res
+            if pair[1] in brk_res
+        ]
     else:
         to_fix = [
             pair
             for pair in term_res
-            if mu.residue_num(pair[1]) in add_caps.split(',') or input_option == 'all'
+            if mu.residue_num(pair[1]) in add_caps.split(',') or\
+            input_option == 'all'
         ]
 
     return strcheck.strucm.add_main_chain_caps(to_fix)
 
+
 def _backbone_fix_missing(strcheck, fix_back, fix_at_list):
     print("Fixing missing backbone atoms")
     fixbck_rnums = [mu.residue_num(r_at[0]) for r_at in fix_at_list]
-    input_line = ParamInput('Fix bck missing', strcheck.args['non_interactive'])
+    input_line = ParamInput(
+        'Fix bck missing',
+        strcheck.args['non_interactive']
+    )
     input_line.add_option_all()
     input_line.add_option_none()
     input_line.add_option_list(

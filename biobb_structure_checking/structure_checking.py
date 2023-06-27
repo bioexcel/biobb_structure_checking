@@ -39,11 +39,11 @@ class StructureChecking():
         self.args = cts.set_defaults(base_dir_path, args)
 
         self.summary = {}
+        if self.args['debug'] or args['time_limit']:
+            import psutil
+            self.start_time = time.time()
 
         if self.args['debug']:
-            import psutil
-
-            self.start_time = time.time()
             self.timings = []
             self.summary['elapsed_times'] = {}
             self.summary['memsize'] = []
@@ -54,9 +54,17 @@ class StructureChecking():
                 self.args['fasta_seq_path']
             )
         except IOError:
-            sys.exit(f"ERROR: fetching/parsing structure from {self.args['input_structure_path']}")
-        except (stm.WrongServerError, stm.UnknownFileTypeError, stm.ParseError) as err:
+            sys.exit(
+                "ERROR: fetching/parsing structure from "
+                f"{self.args['input_structure_path']}"
+            )
+        except (
+            stm.WrongServerError,
+            stm.UnknownFileTypeError,
+            stm.ParseError
+        ) as err:
             sys.exit(err.message)
+
 
         if self.args['debug']:
             self.timings.append(['load', time.time() - self.start_time])
@@ -65,8 +73,17 @@ class StructureChecking():
             self.summary['memsize'].append(['load', memsize])
             print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
 
-        if self.args['atom_limit'] and self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
-            sys.exit(cts.MSGS['ATOM_LIMIT'].format(self.strucm.st_data.stats['num_ats'], self.args['atom_limit']))
+        if self.args['time_limit'] and self._check_time_limit():
+            sys.exit(1)
+
+        # if self.args['atom_limit'] and \
+        #         self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
+        #     sys.exit(
+        #         cts.MSGS['ATOM_LIMIT'].format(
+        #             self.strucm.st_data.stats['num_ats'],
+        #             self.args['atom_limit']
+        #         )
+        #     )
 
     def launch(self):
         """ StructureChecking.launch
@@ -79,13 +96,16 @@ class StructureChecking():
         elif self.args['command'] == 'fixall':
             self.fixall(self.args['options'])
         elif self.args['command'] == 'load':
-            if self.args['nocache'] and not self.args['force_save'] and not self.args['copy_input']:
+            if self.args['nocache'] and \
+                    not self.args['force_save'] and \
+                    not self.args['copy_input']:
                 print(
                     "WARNING: load with --nocache will not "
                     "have any effect unless --copy_input is set"
                 )
         else:
             self._run_method(self.args['command'], self.args['options'])
+
         if not self.args['check_only'] or self.args['force_save']:
             if self.strucm.modified or self.args['force_save']:
                 if not self.strucm.modified:
@@ -122,7 +142,11 @@ class StructureChecking():
             for operation, timing in self.timings:
                 elapsed = timing - ant
                 self.summary['elapsed_times'][operation] = elapsed
-                print(f"#DEBUG {operation:15s}: {elapsed:10.4f} s ({elapsed / total * 100:6.2f}%)")
+                print(
+                    f"#DEBUG {operation:15s}: "
+                    f"{elapsed:10.4f} s "
+                    f"({elapsed / total * 100:6.2f}%)"
+                )
                 ant = timing
             print(f"#DEBUG TOTAL          : {total:10.4F} s")
             print()
@@ -136,16 +160,23 @@ class StructureChecking():
             json_writer.data = self.summary
             try:
                 json_writer.save(self.args['json_output_path'])
-                print(cts.MSGS['JSON_SAVED'], self.args['json_output_path'])
+                print(
+                    cts.MSGS['JSON_SAVED'],
+                    self.args['json_output_path']
+                )
             except IOError:
-                print(cts.MSGS['JSON_NOT_SAVED'], self.args['json_output_path'])
+                print(
+                    cts.MSGS['JSON_NOT_SAVED'],
+                    self.args['json_output_path']
+                )
 
     def print_stats(self, prefix=None):
         """ StructureChecking.print_stats
         Print statistics on the loaded structure
 
         Args:
-            prefix (str): (None) Prefix to add to the output lines for identification.
+            prefix (str): (None) Prefix to add to the output lines
+                for identification.
         """
         self.strucm.st_data.calc_stats()
         if prefix is None:
@@ -157,7 +188,8 @@ class StructureChecking():
         Manages command_list workflows
 
         Args:
-            opts (str | list(str)): Command options as str, file or str list (';' separated).
+            opts (str | list(str)): Command options as
+                str, file or str list (';' separated).
         """
         try:
             opts = cts.DIALOGS.get_parameter('command_list', opts)
@@ -191,7 +223,8 @@ class StructureChecking():
             data = line.split()
             command = data[0]
             opts = data[1:]
-            self._run_method(command, opts)
+            if self._run_method(command, opts):
+                break
             i += 1
 
         print(cts.MSGS['COMMAND_LIST_COMPLETED'])
@@ -200,12 +233,13 @@ class StructureChecking():
         """ StructureChecking.checkall
         Predefined workflow for complete checking
         """
-        #Required for interactive run in Notebooks
+        # Required to allow for interactive run in Notebooks
         old_check_only = self.args['check_only']
         self.args['check_only'] = True
 
         for meth in cts.AVAILABLE_METHODS:
-            self._run_method(meth, None)
+            if self._run_method(meth, None):
+                break
 
         self.args['check_only'] = old_check_only
 
@@ -218,7 +252,8 @@ class StructureChecking():
 
     def revert_changes(self):
         """ StructureChecking.revert_changes
-        Reload original structure. Used in Pipelines or Notebooks to revert changes.
+            Reload original structure. Used in Pipelines or Notebooks
+            to revert changes.
         """
         self.strucm = self._load_structure(
             self.args['input_structure_path'],
@@ -236,9 +271,11 @@ class StructureChecking():
             opts (str | list(str) | dict): Command options, passed from callers
         """
         try:
-            importlib.import_module('biobb_structure_checking.commands.' + command)
-            f_check = sys.modules['biobb_structure_checking.commands.' + command].check
-            f_fix = sys.modules['biobb_structure_checking.commands.' + command].fix
+            importlib.import_module(
+                f'biobb_structure_checking.commands.{command}'
+            )
+            f_check = sys.modules[f'biobb_structure_checking.commands.{command}'].check
+            f_fix = sys.modules[f'biobb_structure_checking.commands.{command}'].fix
         except ImportError as e:
             print(command, e)
             sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
@@ -254,7 +291,7 @@ class StructureChecking():
                 opts_str = str(opts)
             else:
                 opts_str = opts
-            msg += ' Options: ' + opts_str
+            msg += f' Options: {opts_str}'
             self.summary[command]['opts'] = opts_str
 
         if not self.args['quiet'] or self.args['verbose']:
@@ -273,7 +310,7 @@ class StructureChecking():
                 else:
                     opts = {}
             else:
-                #Adding default parameters
+                # Adding default parameters
                 if cts.DIALOGS.exists(command):
                     defaults = cts.DIALOGS.get_parameter(command, '')
                     for k in defaults:
@@ -297,14 +334,16 @@ class StructureChecking():
             self.summary['memsize'].append([command, memsize])
             print(f"#DEBUG Memory used after {command}: {memsize:f} MB ")
 
+        return self.args['time_limit'] and self._check_time_limit()
+
 # ==============================================================================
     def _load_structure(
-            self,
-            input_structure_path,
-            fasta_seq_path=None,
-            verbose=True,
-            print_stats=True
-        ):
+        self,
+        input_structure_path,
+        fasta_seq_path=None,
+        verbose=True,
+        print_stats=True
+    ):
         """ Private. StructureChecking._load_structure
         Prepares Structure Manager and load structure
 
@@ -331,8 +370,10 @@ class StructureChecking():
             nocache=self.args['nocache'],
             copy_dir=self.args['copy_input'],
             fasta_sequence_path=fasta_seq_path,
-            nowarn=not self.args['debug'], # TODO think on verbose
-            coords_only=self.args['coords_only']
+            nowarn=not self.args['build_warnings'],
+            coords_only=self.args['coords_only'],
+            overwrite=self.args['overwrite'],
+            atom_limit=self.args['atom_limit']
         )
 
         self.summary['loaded_structure'] = input_structure_path
@@ -351,7 +392,12 @@ class StructureChecking():
 
         return strucm
 
-    def save_structure(self, output_structure_path, rename_terms=False, split_models=False):
+    def save_structure(
+        self,
+        output_structure_path,
+        rename_terms=False,
+        split_models=False
+    ):
         """ StuctureChecking.save_structure
         Saving the current structure in a the output file
 
@@ -366,8 +412,13 @@ class StructureChecking():
             split_models=split_models
         )
 
-    #Kept for back compatibility
-    def _save_structure(self, output_structure_path, rename_terms=False, split_models=False):
+    # Kept for back compatibility
+    def _save_structure(
+        self,
+        output_structure_path,
+        rename_terms=False,
+        split_models=False
+    ):
         """ Private. StuctureChecking._save_structure
         Saving the current structure in a the output file
 
@@ -431,7 +482,12 @@ class StructureChecking():
         for cls in contact_types:
             summary[cls] = []
             if clash_list[cls]:
-                print(cts.MSGS['CLASHES_DETECTED'].format(len(clash_list[cls]), cls))
+                print(
+                    cts.MSGS['CLASHES_DETECTED'].format(
+                        len(clash_list[cls]),
+                        cls
+                    )
+                )
                 for rkey in sorted(
                         clash_list[cls],
                         key=lambda x: mu.key_sort_atom_pairs(clash_list[cls][x])
@@ -451,6 +507,11 @@ class StructureChecking():
                     print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
         return summary
 
+    def _check_time_limit(self):
+        if time.time() - self.start_time > self.args['time_limit']:
+            print(cts.MSGS['TIME_LIMIT'].format(self.args['time_limit']), file=sys.stderr)
+            return True
+        return False
 # ==============================================================================
 # Entry points for direct notebook calls and Docstrings for commands' help
 
@@ -704,4 +765,4 @@ class StructureChecking():
         Analyzes cis-trans dihedrals on backbone atoms
         """
         self._run_method('cistransbck', None)
-#=========================================================================
+# =======================================================================

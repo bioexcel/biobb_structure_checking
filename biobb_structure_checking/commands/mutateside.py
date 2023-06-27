@@ -4,9 +4,14 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
     # TODO Check _mutateside_check function?
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     return True
+
 
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
@@ -17,7 +22,11 @@ def fix(strcheck, opts, fix_data=None):
     if opts['na_seq']:
         mut_list = strcheck.strucm.prepare_mutations_from_na_seq(opts['na_seq'])
 
-    input_line = ParamInput('Mutation list', strcheck.args['non_interactive'], set_none='')
+    input_line = ParamInput(
+        'Mutation list',
+        strcheck.args['non_interactive'],
+        set_none=''
+    )
 
     mut_list = input_line.run(mut_list)
 
@@ -32,7 +41,7 @@ def fix(strcheck, opts, fix_data=None):
     for mut in mutations.mutation_list:
         print(mut)
     if opts['rebuild']:
-        if strcheck.strucm.has_NA:
+        if strcheck.strucm.chains_data.has_NA():
             print(cts.MSGS['WARN_NOBUILD_NA'])
         mutated_res = strcheck.strucm.rebuild_mutations(mutations)
     else:

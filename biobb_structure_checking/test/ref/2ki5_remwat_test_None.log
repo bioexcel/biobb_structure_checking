@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -26,5 +26,5 @@ AC2 A1
 SO4 B3
 AC2 B2
 Running water. Options: --remove No
-292 Water molecules detected
+Detected 292 Water molecules
 Structure not modified, not saving. Override with --force_save

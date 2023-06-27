@@ -3,7 +3,11 @@
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 
+
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
     check_lst = strcheck.strucm.get_chiral_bck_list()
     if 'list' not in check_lst:
         if not strcheck.args['quiet']:
@@ -25,6 +29,7 @@ def check(strcheck):
         strcheck.summary['chiral_bck']['detected'].append(mu.residue_id(res))
 
     return {}
+
 
 def fix(strcheck, opts, fix_data):
     pass

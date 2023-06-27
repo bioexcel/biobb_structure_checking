@@ -4,10 +4,10 @@
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
-Warning, no canonical sequence available for chain C
-Warning, no canonical sequence available for chain D
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
 Structure pdb:4ku1 loaded
- PDB id: 4KU1
+ PDB id: 4KU1 
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
  Experimental method: X-RAY DIFFRACTION
  Keywords: IMMUNE SYSTEM
@@ -44,7 +44,7 @@ MAN D7
 NAG D8
 FUL D9
 Running getss.
-4 Possible SS Bonds detected
+Detected 4 Possible SS Bonds
  CYS A261.SG  CYS A321.SG     4.141
  CYS A367.SG  CYS A425.SG     3.981
  CYS B261.SG  CYS B321.SG     4.126

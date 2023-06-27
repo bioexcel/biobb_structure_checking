@@ -3,7 +3,12 @@ import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.io.param_input import ParamInput
 
+
 def check(strcheck):
+    if strcheck.strucm.st_data.ca_only:
+        print(cts.MSGS['CA_ONLY_STRUCTURE'])
+        return None
+
     met_list = strcheck.strucm.get_metal_atoms()
 
     if not met_list:
@@ -29,6 +34,7 @@ def check(strcheck):
 
     return fix_data
 
+
 def fix(strcheck, opts, fix_data=None):
     if isinstance(opts, str):
         remove_metals = opts
@@ -44,7 +50,12 @@ def fix(strcheck, opts, fix_data=None):
         case='sensitive',
         multiple=True
     )
-    input_line.add_option_list('resids', fix_data['met_rids'], case='sensitive', multiple=True)
+    input_line.add_option_list(
+        'resids',
+        fix_data['met_rids'],
+        case='sensitive',
+        multiple=True
+    )
     input_line.set_default('All')
     input_option, remove_metals = input_line.run(remove_metals)
 

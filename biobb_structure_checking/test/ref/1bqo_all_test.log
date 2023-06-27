@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
- PDB id: 1BQO
+ PDB id: 1BQO 
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
  Keywords: METALLOPROTEASE
@@ -37,13 +37,13 @@ N25 B401
 Step 1: models --select 1
 
 Running models. Options: --select 1
-1 Model(s) detected
-Single model found
+Detected 1 Model(s)
+Found Single model
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Selecting all chains
@@ -51,17 +51,17 @@ Selecting all chains
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN
-10 Metal ions found
+Found 10 Metal ions
   ZN A301.ZN 
   ZN A302.ZN 
   CA A303.CA 
@@ -77,7 +77,7 @@ Metal Atoms removed ZN (4)
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
-7 Ligands detected
+Detected 7 Ligands
   CA A303
   CA A304
   CA A305
@@ -90,8 +90,8 @@ Input not valid (SO4)
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
-75 Water molecules detected
-75 Water molecules removed
+Detected 75 Water molecules
+Removed 75 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
 
@@ -101,37 +101,37 @@ No residues with Hydrogen atoms found
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  GLN B236.O   ASN B240.OD1    2.980 A
 Amide residues fixed All (1)
 Rechecking
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  GLN B236.NE2 ASN B240.ND2    3.022 A
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-1 Residues with missing backbone atoms found
+Found 1 Residues with missing backbone atoms
  ASP A251   OXT
 No backbone breaks
 No unexpected backbone links
 Capping terminal ends
-True terminal residues:  A83,A251,B83,B255
+True terminal residues: A83,A251,B83,B255
 Nothing to do
 No caps added
 Fixing missing backbone atoms
@@ -192,7 +192,7 @@ No positive clashes detected
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
-7 Ligands detected
+Detected 7 Ligands
   CA A303
   CA A304
   CA A305
@@ -205,7 +205,7 @@ Ligands removed All (7)
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Selecting chain(s) protein
@@ -213,7 +213,7 @@ Selecting chain(s) protein
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-107 Residues requiring selection on adding H atoms
+Found 107 Residues requiring selection on adding H atoms
  ASP A107,A111,A114,A141,A153,A158,A177,A181,A182,A183,A189,A228,A237,A238,A251,B107,B111,B114,B141,B153,B158,B177,B181,B182,B183,B189,B228,B237,B238,B251
  GLU A118,A125,A126,A137,A139,A150,A184,A202,A216,B118,B125,B126,B137,B139,B150,B184,B202,B216,B254
  HIS A96,A151,A166,A179,A201,A205,A211,A224,B96,B151,B166,B179,B201,B205,B211,B224
@@ -222,7 +222,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A99,A104,A136,A155,A168,A220,A223,A246,B99,B104,B136,B155,B168,B220,B223,B246
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Replacing HIS A96 by HIE
 Replacing HIS A151 by HIE
