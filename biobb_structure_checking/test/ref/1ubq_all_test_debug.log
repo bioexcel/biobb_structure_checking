@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ub/1ubq.cif' 
+Structure exists: 'tmpPDB/ub/1ubq.cif'
 Structure pdb:1ubq loaded
- PDB id: 1UBQ 
+ PDB id: 1UBQ
  Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: CHROMOSOMAL PROTEIN
@@ -20,58 +20,58 @@ Structure pdb:1ubq loaded
  Num. ligands or modified residues:  0
  Num. water mol.:  58
  Num. atoms:  660
-#DEBUG Memory used after structure load: 47.062500 MB 
+#DEBUG Memory used after structure load: 47.062500 MB
 
 Step 1: models --select 1
 
 Running models. Options: --select 1
 Detected 1 Model(s)
 Found Single model
-#DEBUG Memory used after models: 47.289062 MB 
+#DEBUG Memory used after models: 47.289062 MB
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
 Detected 1 Chain(s)
  A: Protein
-#DEBUG Memory used after chains: 47.289062 MB 
+#DEBUG Memory used after chains: 47.289062 MB
 
 Step 3: inscodes
 
 Running inscodes.
 Found no residues with insertion codes
-#DEBUG Memory used after inscodes: 47.289062 MB 
+#DEBUG Memory used after inscodes: 47.289062 MB
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
 Detected no residues with alternative location labels
-#DEBUG Memory used after altloc: 47.289062 MB 
+#DEBUG Memory used after altloc: 47.289062 MB
 
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN
 No metal ions found
-#DEBUG Memory used after metals: 47.289062 MB 
+#DEBUG Memory used after metals: 47.289062 MB
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
 No ligands found
-#DEBUG Memory used after ligands: 47.289062 MB 
+#DEBUG Memory used after ligands: 47.289062 MB
 
 Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
 Detected 58 Water molecules
 Removed 58 Water molecules
-#DEBUG Memory used after water: 47.289062 MB 
+#DEBUG Memory used after water: 47.289062 MB
 
 Step 8: rem_hydrogen --remove Yes
 
 Running rem_hydrogen. Options: --remove Yes
 No residues with Hydrogen atoms found
-#DEBUG Memory used after rem_hydrogen: 47.289062 MB 
+#DEBUG Memory used after rem_hydrogen: 47.289062 MB
 
 Step 9: amide --fix All
 
@@ -81,25 +81,25 @@ Found 1 unusual contact(s) involving amide atoms
 Amide residues fixed All (1)
 Rechecking
 Found no unusual contact(s) involving amide atoms
-#DEBUG Memory used after amide: 47.289062 MB 
+#DEBUG Memory used after amide: 47.289062 MB
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
 Found no residues with incorrect side-chain chirality
-#DEBUG Memory used after chiral: 47.289062 MB 
+#DEBUG Memory used after chiral: 47.289062 MB
 
 Step 11: chiral_bck
 
 Running chiral_bck.
 Found no residues with incorrect backbone chirality
-#DEBUG Memory used after chiral_bck: 47.289062 MB 
+#DEBUG Memory used after chiral_bck: 47.289062 MB
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
 Found no residues with missing or unknown side chain atoms
-#DEBUG Memory used after fixside: 47.289062 MB 
+#DEBUG Memory used after fixside: 47.289062 MB
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
@@ -111,20 +111,20 @@ Capping terminal ends
 True terminal residues: A1,A76
 Nothing to do
 No caps added
-#DEBUG Memory used after backbone: 47.289062 MB 
+#DEBUG Memory used after backbone: 47.289062 MB
 
 Step 14: cistransbck
 
 Running cistransbck.
 No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
-#DEBUG Memory used after cistransbck: 47.289062 MB 
+#DEBUG Memory used after cistransbck: 47.289062 MB
 
 Step 15: getss --mark All
 
 Running getss. Options: --mark All
 No SS bonds detected
-#DEBUG Memory used after getss: 47.289062 MB 
+#DEBUG Memory used after getss: 47.289062 MB
 
 Step 16: clashes
 
@@ -136,20 +136,20 @@ No apolar clashes detected
 No polar_donor clashes detected
 No positive clashes detected
 No negative clashes detected
-#DEBUG Memory used after clashes: 47.289062 MB 
+#DEBUG Memory used after clashes: 47.289062 MB
 
 Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
 No ligands found
-#DEBUG Memory used after ligands: 47.289062 MB 
+#DEBUG Memory used after ligands: 47.289062 MB
 
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
 Detected 1 Chain(s)
  A: Protein
-#DEBUG Memory used after chains: 47.289062 MB 
+#DEBUG Memory used after chains: 47.289062 MB
 
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
@@ -164,12 +164,12 @@ Found 24 Residues requiring selection on adding H atoms
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
 Found no residues with missing or unknown side chain atoms
-#DEBUG Memory used after fixside: 47.289062 MB 
+#DEBUG Memory used after fixside: 47.289062 MB
 Selection: auto
 Replacing HIS A68 by HIE
 Updating partial charges and atom types
 Total assigned charge:      -0.00
-#DEBUG Memory used after add_hydrogen: 48.144531 MB 
+#DEBUG Memory used after add_hydrogen: 48.144531 MB
 Command list completed
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)

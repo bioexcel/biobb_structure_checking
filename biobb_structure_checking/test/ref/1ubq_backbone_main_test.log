@@ -1,12 +1,12 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Getting canonical sequences from matching FASTA input
-A: "1ubq_A  protein 76  UBIQUITIN", score: 46.0 
+A: "1ubq_A  protein 76  UBIQUITIN", score: 46.0
 Structure backbone_test/1ubq_caps.pdb loaded
- PDB id: 1UBQ 
+ PDB id: 1UBQ
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
  Resolution (A): N.A.
@@ -30,10 +30,10 @@ Found 7 Residues with missing backbone atoms
  ILE A44    C,O,OXT
  ALA A46    N,CA
 Found 4 Backbone breaks
- VAL A5     - LEU A8    
- LYS A11    - THR A14   
- GLU A16    - SER A20   
- ILE A44    - ALA A46   
+ VAL A5     - LEU A8
+ LYS A11    - THR A14
+ GLU A16    - SER A20
+ ILE A44    - ALA A46
 No unexpected backbone links
 Main chain fixes
 
@@ -102,17 +102,17 @@ Fixing ILE A44 - ALA A46
   Adding ALA A46
 
 Getting canonical sequences from matching FASTA input
-A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0 
+A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0
 Found 2 Residues with missing backbone atoms
  LEU A8     OXT
  THR A14    OXT
 Found 2 Backbone breaks
- LEU A8     - THR A9    
- THR A14    - LEU A15   
+ LEU A8     - THR A9
+ THR A14    - LEU A15
 No unexpected backbone links
 Consecutive residues too far away to be covalently linked
- LEU A8     - THR A9    ,  bond distance    5.303 
- THR A14    - LEU A15   ,  bond distance    9.068 
+ LEU A8     - THR A9    ,  bond distance    5.303
+ THR A14    - LEU A15   ,  bond distance    9.068
 Capping terminal ends
 True terminal residues: A1,A76
 Terminal residues from backbone breaks:  A8-A9,A14-A15

@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/m0/6m0j.cif' 
+Structure exists: 'tmpPDB/m0/6m0j.cif'
 Structure pdb:6m0j loaded
- PDB id: 6M0J 
+ PDB id: 6M0J
  Title: Crystal structure of SARS-CoV-2 spike receptor-binding domain bound with ACE2
  Experimental method: X-RAY DIFFRACTION
  Keywords: VIRAL PROTEIN/HYDROLASE
