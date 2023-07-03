@@ -1,12 +1,12 @@
 ================================================================================
-=                   BioBB structure checking utility v3.12.1                   =
+=                   BioBB structure checking utility v3.13.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
 Warning: sequence features only available in mmCIF format or with external fasta input
 Structure dna_test/1d23_fixtest.pdb loaded
- PDB id:  
- Title: 
+ PDB id:
+ Title:
  Experimental method: unknown
  Resolution (A): N.A.
 
