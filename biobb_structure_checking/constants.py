@@ -9,7 +9,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.io.param_input import Dialog
 
-VERSION = '3.13.3'
+VERSION = '3.13.4'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -533,7 +533,7 @@ DIALOGS.add_option(
 DIALOGS.add_option(
     'mutateside',
     '--na_seq',
-    'na_seq',\
+    'na_seq',
     'Mutate DNA duplex to generate sequence'
 )
 
@@ -693,7 +693,7 @@ MSGS = {
     # chiral
     'WRONG_CHIRAL_SIDE': 'Found {} residues with incorrect side-chain chirality',
     'NO_WRONG_CHIRAL_SIDE': 'Found no residues with incorrect side-chain chirality',
-    'NO_CHIRALS' : 'No chiral side-chains found',
+    'NO_CHIRALS': 'No chiral side-chains found',
     'CHIRAL_SIDE_FIXED': 'Chiral side chains fixed {} ({})',
     # chiral Backbone
     'CHIRAL_BCK_RESIDUES': 'Found {} residues with incorrect backbone chirality',
@@ -706,7 +706,7 @@ MSGS = {
     'FIXING_SIDE_CHAINS': 'Fixing side chains',
     'SIDE_CHAIN_FIXED': 'Fixed {} side chain(s)',
     # add hydrogens
-    'NO_SELECT_ADDH' : 'No residues requiring selection on adding H atoms',
+    'NO_SELECT_ADDH': 'No residues requiring selection on adding H atoms',
     'SELECT_ADDH_RESIDUES': 'Found {} Residues requiring selection '
                             'on adding H atoms',
     # Mutations
@@ -732,7 +732,7 @@ MSGS = {
     'LOWTRANS_BONDS': 'Found {} trans peptide bonds with unusual omega dihedrals',
     'NO_LOWTRANS_BONDS': 'No trans peptide bonds with unusual omega dihedrals found',
     # clashes
-    'CHECKING_CLASHES' : 'Checking for steric clashes',
+    'CHECKING_CLASHES': 'Checking for steric clashes',
     'CLASHES_DETECTED': '{} Steric {} clashes detected',
     'NO_CLASHES_DETECTED': 'No {} clashes detected',
     # load

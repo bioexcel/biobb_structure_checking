@@ -1,3 +1,8 @@
+## v3.13.4 (2023.3)
+### Bug Fixes
+- sequences
+  - Fixed key error bug fix in sequencedata.match_sequence_numbering
+
 ## v3.13.3 (2023.2)
 ### Extended functions
   - input
