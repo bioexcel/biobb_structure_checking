@@ -41,7 +41,14 @@ DEFAULTS = {
     'verbose': False,
     'debug': False,
     'options': '',
-    'modeller_key': None
+    'modeller_key': None,
+    'time_limit': ATOM_LIMIT,
+    'nocache': False,
+    'copy_input': None,
+    'build_warnings': False,
+    'coords_only': False,
+    'overwrite_cache': False,
+    'overwrite': False
 }
 
 
