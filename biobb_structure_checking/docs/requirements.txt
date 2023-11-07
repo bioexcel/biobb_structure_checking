@@ -1,2 +1,2 @@
 docutils==0.17.1
-numpy==1.21.5
+numpy==1.22.0
