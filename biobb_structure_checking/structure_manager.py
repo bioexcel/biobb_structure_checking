@@ -335,7 +335,10 @@ class StructureManager:
                 oxt_ok = rcode[0] != 'C' or len(rcode) != 4
                 res_chr = 0.
                 for atm in res.get_atoms():
-                    atm.pqr_charge = self.res_library.get_atom_def(rcode, atm.id).chrg
+                    atm_def = self.res_library.get_atom_def(rcode, atm.id)
+                    if atm_def is None:
+                        raise UnknownAtomforResidueError(mu.residue_id(res), atm.id)
+                    atm.pqr_charge = atm_def.chrg
                     if atm.id in ff_data['residue_data'][can_rcode3]:
                         atm.xtra['atom_type'] = ff_data['residue_data'][can_rcode3][atm.id]
                     elif atm.id in ff_data['residue_data']['*'][ch_type_label]:
@@ -1760,18 +1763,23 @@ def _guess_modeller_env():
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 
+
 class WrongServerError(Exception):
     def __init__(self):
         self.message = 'ERROR: Biounits supported only on MMB server'
+
 class UnknownFileTypeError(Exception):
     def __init__(self, typ):
         self.message = f'ERROR: unknown filetype ({typ})'
+
 class OutputPathNotProvidedError(Exception):
     def __init__(self):
         self.message = 'ERROR: output PDB path not provided'
+
 class NotAValidResidueError(Exception):
     def __init__(self, res):
         self.message = f'Warning: {res} is not a valid residue in this context'
+
 class NotEnoughAtomsError(Exception):
     def __init__(self):
         self.message = 'Warning: not enough backbone to build missing atoms'
@@ -1779,9 +1787,15 @@ class NotEnoughAtomsError(Exception):
 class ParseError(Exception):
     def __init__(self, err_id, err_txt):
         self.message = f'{err_id} ({err_txt}) found when parsing input structure'
+
 class UnknownFFError(Exception):
     def __init__(self, ff):
-        self.message = f'{ff} is not a valid ff for assigning atom types'
+        self.message = f'{ff} is not a valid ff for assigning atom types and charges'
+
 class SequencesDoNotMatch(Exception):
     def __init__(self):
         self.message = "Sequence lengths do not match"
+
+class UnknownAtomforResidueError(Exception):
+    def __init__(self, res_id, atm_id):
+        self.message = f"Non valid atom {atm_id} for residue {res_id}"
