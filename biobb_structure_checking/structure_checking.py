@@ -316,7 +316,11 @@ class StructureChecking():
                     for k in defaults:
                         if k not in opts:
                             opts[k] = defaults[k]
-            error_status = f_fix(self, opts, data_to_fix)
+            try:
+                error_status = f_fix(self, opts, data_to_fix)
+            except Exception as e:
+                print(f"Error: {e.message}")
+                sys.exit(1)
 
             if error_status:
                 if isinstance(error_status, tuple):
