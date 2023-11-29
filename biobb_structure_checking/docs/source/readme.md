@@ -10,7 +10,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v3.13.3 June 2023
+v3.13.4 September 2024
 
 ### Requirements
 
@@ -27,7 +27,7 @@ Using PIP:
 
 * Installation:
 
-        pip install "biobb_structure_checking>=3.13.3"
+        pip install "biobb_structure_checking>=3.13.4"
 
 * Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
 
@@ -35,7 +35,7 @@ Using ANACONDA:
 
 * Installation:
 
-        conda install -c bioconda "biobb_structure_checking>=3.13.3"
+        conda install -c bioconda "biobb_structure_checking>=3.13.4"
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
 

@@ -50,6 +50,7 @@
         2.7.5 Accept multiple templates
         2.7.6 Fix modelled junctions
         2.7.8 Rebuild backbone in the context of the complete molecule (also for --rebuild options)
+	2.7.9 Detect and fix extra backbone atoms (like extra OXT)
 3. Structure Warnings
     3.1. Detect SS Bonds (getss) DONE
         3.1.1 Mark Cys in SS Bonds as CYX DONE

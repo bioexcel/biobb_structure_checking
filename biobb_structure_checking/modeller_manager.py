@@ -11,7 +11,7 @@ import uuid
 import shutil
 
 import Bio
-OLD_ALIGN = Bio.__version__ >= '1.79'
+OLD_ALIGN = Bio.__version__ < '1.79'
 from Bio import SeqIO
 if OLD_ALIGN:
     from Bio import pairwise2

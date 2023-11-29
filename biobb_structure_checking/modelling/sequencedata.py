@@ -1,5 +1,13 @@
 """ Module to manage sequence information for structures """
 
+from biobb_structure_checking.constants import FASTA_DOWNLOAD_PREFIX
+import biobb_structure_checking.modelling.utils as mu
+from Bio.SeqFeature import SeqFeature, FeatureLocation
+from Bio.SeqRecord import SeqRecord
+from Bio.SeqUtils import IUPACData
+from Bio.Seq import Seq, MutableSeq
+from Bio.PDB.Polypeptide import PPBuilder
+from Bio import SeqIO
 import sys
 import os
 # from typing import List, Dict
@@ -9,25 +17,17 @@ from urllib.request import urlretrieve, urlcleanup
 # But Alignment structure has changed from v1.79
 import Bio
 OLD_ALIGN = Bio.__version__ < '1.79'
-from Bio import SeqIO
 if OLD_ALIGN:
     from Bio import pairwise2
 else:
     from Bio.Align import PairwiseAligner
-from Bio.PDB.Polypeptide import PPBuilder
-from Bio.Seq import Seq, MutableSeq
 # Deprecated in Biopython 1.78
 # from Bio.Seq import IUPAC
-from Bio.SeqUtils import IUPACData
-from Bio.SeqRecord import SeqRecord
-from Bio.SeqFeature import SeqFeature, FeatureLocation
 try:
     from Bio.Seq import IUPAC
     has_IUPAC = True
 except ImportError:
     has_IUPAC = False
-import biobb_structure_checking.modelling.utils as mu
-from biobb_structure_checking.constants import FASTA_DOWNLOAD_PREFIX
 
 IDENT_THRES = 0.7
 
@@ -37,12 +37,13 @@ class SequenceData():
     | sequence_manager SequenceData
     | Class to manage sequence data
     """
+
     def __init__(self):
         self.data = {}
         self.has_canonical = {}
         self.fasta = []
         self.raw_pdb_seq = ''
-        self.aligner = None # for compatibility biopython <= 1.80
+        self.aligner = None  # for compatibility biopython <= 1.80
         if not OLD_ALIGN:
             self.aligner = PairwiseAligner()
             self.aligner.mode = 'global'
@@ -162,7 +163,7 @@ class SequenceData():
             if strucm.st_data.input_format != 'cif':
                 if cif_warn:
                     print("Warning: sequence features may not be available, use --sequence for ",
-                            "external fasta input")
+                          "external fasta input")
                 return True
             if '_entity_poly.pdbx_strand_id' in strucm.st_data.headers:
                 if not isinstance(strucm.st_data.headers['_entity_poly.pdbx_strand_id'], list):
@@ -218,6 +219,7 @@ class SequenceData():
                             if match[2] > IDENT_THRES * max_score:
                                 self.data[mod.id][ch_id]['chains'].append(match[1])
 
+            print(f"Canonical sequence for model {mod.id}:")
             self.has_canonical[mod.id] = {}
             for ch_id in strucm.chains_data.chain_ids[mod.id]:
                 self.has_canonical[mod.id][ch_id] = (ch_id in self.data[mod.id]) and\
@@ -325,8 +327,9 @@ class SequenceData():
             return False
         for mod in strucm.st:
             for ch_id, ch_data in self.data[mod.id].items():
-                if ch_id not in self.has_canonical[mod.id] or\
-                        not self.has_canonical[mod.id][ch_id]:
+                # print(f"{ch_id=} {ch_data=}")
+                # print(f"{self.has_canonical=} {mod.id=}")
+                if ch_id not in self.has_canonical.get(mod.id, []) or not self.has_canonical.get(mod.id, dict()).get(ch_id, []):
                     continue
                 frgs = ch_data['pdb']['frgs']
                 ch_data['pdb']['match_numbering'] = True
@@ -545,7 +548,7 @@ class SequenceData():
         for mod_id in self.raw_pdb_seq:
             for ch_id in self.raw_pdb_seq[mod_id]:
                 for seq in self.raw_pdb_seq[mod_id][ch_id]:
-                    if not seq: # for not protein/NA chains
+                    if not seq:  # for not protein/NA chains
                         continue
                     if OLD_ALIGN:
                         score = pairwise2.align.globalxs(
@@ -557,6 +560,7 @@ class SequenceData():
                     if score > 0:
                         matches.append((mod_id, ch_id, score))
         return matches
+
 
 def _get_pack_str_seqs(strucm):
     strucm.revert_can_resnames(canonical=True)
