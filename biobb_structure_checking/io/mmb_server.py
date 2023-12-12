@@ -81,8 +81,8 @@ class MMBPDBList(PDBList):
         #     url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
         # Where does the final PDB file get saved?
 
-        url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
-
+        url = f'{ALT_SERVERS[self.pdb_server.lower()]}/{code}.{file_format}'
+        print(f"Retrieving structure from {url}")
         if pdir is None:
             path = self.local_pdb if not obsolete else self.obsolete_pdb
             if not self.flat_tree:  # Put in PDB-style directory tree
@@ -166,6 +166,7 @@ class MMBPDBList(PDBList):
 #                )
 
         pdb_code = pdb_code.lower()
+
 
         assembly_num = int(assembly_num)
         archive = {

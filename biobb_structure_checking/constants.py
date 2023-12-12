@@ -17,13 +17,13 @@ RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
-PDB_DOWNLOAD_PREFIX = 'https://ftp.wwpdb.org'
+PDB_DOWNLOAD_PREFIX = 'ftp://ftp.wwpdb.org'
 FASTA_DOWNLOAD_PREFIX = 'https://www.rcsb.org/fasta/entry'
 ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
 
 ALT_SERVERS = {
-    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
+    'mmb': 'https://mmb.irbbarcelona.org/api/pdb',
     'bsc': 'http://mdb-login.bsc.es/api/pdb'
 }
 
@@ -133,7 +133,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(wwPDB)|MMB|BSC) (Ignored, used default)'
+    help='Server for retrieving structures (default(wwPDB)|MMB|BSC|wwPDB_http)'
 )
 
 CMD_LINE.add_argument(
