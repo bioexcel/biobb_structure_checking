@@ -103,8 +103,9 @@ CMD_LINE.add_argument(
     dest='input_structure_path',
     help='Input structure. '
          '1) Fetch from remote pdb:{pdbid}[.format] '
-         '2) Local file: Formats pdb(qt)|pqr|cif. '
-         'Format assumed from extension.'
+         '2) Direct fetch from custom URL '
+         '3) Local file: Formats pdb(qt)|pqr|cif. '
+         'For 2) and 3) Format assumed from extension.'
 )
 
 CMD_LINE.add_argument(
@@ -133,7 +134,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(wwPDB)|MMB|BSC) (Ignored, used default)'
+    help='Server for retrieving structures (default(ftp at wwPDB)|MMB|BSC), use alternate server for http(s) download'
 )
 
 CMD_LINE.add_argument(
@@ -146,7 +147,7 @@ CMD_LINE.add_argument(
     '--nocache',
     dest='nocache',
     action='store_true',
-    help='Do not cache remote downloaded structures'
+    help='Do not cache downloaded structures'
 )
 
 CMD_LINE.add_argument(
