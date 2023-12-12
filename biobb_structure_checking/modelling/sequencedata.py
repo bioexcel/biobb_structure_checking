@@ -219,7 +219,6 @@ class SequenceData():
                             if match[2] > IDENT_THRES * max_score:
                                 self.data[mod.id][ch_id]['chains'].append(match[1])
 
-            print(f"Canonical sequence for model {mod.id}:")
             self.has_canonical[mod.id] = {}
             for ch_id in strucm.chains_data.chain_ids[mod.id]:
                 self.has_canonical[mod.id][ch_id] = (ch_id in self.data[mod.id]) and\
