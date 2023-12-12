@@ -9,7 +9,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.io.param_input import Dialog
 
-VERSION = '3.13.4'
+VERSION = '3.13.5'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -17,13 +17,13 @@ RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
-PDB_DOWNLOAD_PREFIX = 'https://ftp.wwpdb.org'
+PDB_DOWNLOAD_PREFIX = 'ftp://ftp.wwpdb.org'
 FASTA_DOWNLOAD_PREFIX = 'https://www.rcsb.org/fasta/entry'
 ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
 
 ALT_SERVERS = {
-    'mmb': 'http://mmb.irbbarcelona.org/api/pdb',
+    'mmb': 'https://mmb.irbbarcelona.org/api/pdb',
     'bsc': 'http://mdb-login.bsc.es/api/pdb'
 }
 
