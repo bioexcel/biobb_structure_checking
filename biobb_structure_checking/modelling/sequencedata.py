@@ -176,8 +176,10 @@ class SequenceData():
                 if cif_warn:
                     print("Warning: sequence data unavailable on cif data")
                 return True
+        print(self.data)
+
         for mod in strucm.st:
-            if mod not in self.data:
+            if mod.id not in self.data:
                 self.data[mod.id] = {}
             for index, chid in enumerate(chids):
                 for ch_id in chid.split(','):
@@ -205,7 +207,6 @@ class SequenceData():
                     self.data[mod.id][ch_id]['can'].features.append(
                         SeqFeature(FeatureLocation(1, len(seqs[index])))
                     )
-
                     # for chn in chids[i].split(','):
                     #     if chn in strucm.chain_ids:
                     #         self.data[ch_id]['chains'].append(chn)
@@ -330,6 +331,7 @@ class SequenceData():
                 # print(f"{self.has_canonical=} {mod.id=}")
                 if ch_id not in self.has_canonical.get(mod.id, []) or not self.has_canonical.get(mod.id, dict()).get(ch_id, []):
                     continue
+                print(ch_data)
                 frgs = ch_data['pdb']['frgs']
                 ch_data['pdb']['match_numbering'] = True
                 for nfrag, frag in enumerate(frgs):

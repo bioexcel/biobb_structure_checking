@@ -205,7 +205,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
         return []
 
     # Checking for canonical sequence
-    if not strcheck.strucm.sequence_data.has_canonical:
+    if not strcheck.strucm.sequence_data.has_canonical[0]:
         read_ok = False
         while not read_ok:
             input_line = ParamInput(
@@ -231,7 +231,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             strcheck.strucm,
             False
         )
-        strcheck.strucm.sequence_data.match_sequence_numbering()
+        strcheck.strucm.sequence_data.match_sequence_numbering(strcheck.strucm)
 
     to_fix = [
         rpair
