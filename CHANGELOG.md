@@ -1,7 +1,9 @@
-## v3.13.4 (2023.3)
+## v3.13.5 (2024.2)
 ### Bug Fixes
-- sequences
-  - Fixed key error bug fix in sequencedata.match_sequence_numbering
+- backbone
+  - Fixed interactive behaviour when missing sequences
+- mutateside
+  - Fixed bug. Mutated residue was deleted when using --rebuild
 
 ## v3.13.3 (2023.2)
 ### Extended functions
