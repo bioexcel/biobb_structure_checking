@@ -39,16 +39,19 @@ class ModellerManager():
     | modeller_manager ModellerManager
     | Class to handle Modeller calculations """
     def __init__(self):
-        self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
-        # self.tmpdir = "/tmp/modtest"
-        # print("Using temporary working dir " + self.tmpdir)
         self.ch_id = ''
         self.sequences = None
         self.templ_file = 'templ.pdb'
-        try:
-            os.mkdir(self.tmpdir)
-        except IOError as err:
-            sys.exit(err)
+        if not DEBUG:
+            self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
+            try:
+                os.mkdir(self.tmpdir)
+            except IOError as err:
+                sys.exit(err)
+        else:
+            self.tmpdir = "/tmp/modtest"
+            print("Using temporary working dir " + self.tmpdir)
+
         self.env = Environ()
 
         self.env.io.atom_files_directory = [self.tmpdir]
@@ -75,6 +78,7 @@ class ModellerManager():
         pdb_seq = self.sequences.data[target_model][target_chain]['pdb']['frgs'][0].seq
         nt_pos = max(tgt_seq.find(pdb_seq) - extra_NTerm_res, 0)
         tgt_seq = tgt_seq[nt_pos:]
+
 
         # TODO trim trailing residues in tgt_seq
 
