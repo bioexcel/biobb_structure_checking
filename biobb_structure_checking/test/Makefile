@@ -117,7 +117,7 @@ chiral:
 mutateside:
 	@echo "Running mutateside on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_mutateside_test.pdb --json 2ki5_mutateside_test.json  mutateside --mut Leu49Ile,B:arg51Lys > 2ki5_mutateside_test.log
-	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_mutateside_test.pdb --json 2ki5_mutateside_rb_test.json  mutateside --mut Leu49Ile,B:arg51Lys --rebuild> 2ki5_mutateside_rb_test.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5  -o 2ki5_mutateside_rb_test.pdb --json 2ki5_mutateside_rb_test.json  mutateside --mut Leu49Ile --rebuild> 2ki5_mutateside_rb_test.log
 
 fixside:
 	@echo "Running fixside on 2ki5"
