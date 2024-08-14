@@ -1130,7 +1130,7 @@ class StructureManager:
                 *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used.
                 *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
                 *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
-                *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
+                *sequence_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
         if modeller_key:
@@ -1146,6 +1146,7 @@ class StructureManager:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
+
         if not sequence_data:
             sequence_data = self.sequence_data
 
@@ -1523,18 +1524,25 @@ class StructureManager:
         modeller_key: str = ''
     ) -> Residue:
         """ Perform mutations Rebuilding side chain"""
-        ch_to_fix = {}
-        brk_list = {}
-        num_fix = 0
+
+        mutated_sequence_data = SequenceData()
+        mutated_sequence_data.fake_canonical_sequence(self, mutations)
+        mutated_res = []
+
+
         for mod in self.st.get_models():
-            ch_to_fix[mod.id] = set()
-            brk_list[mod.id] = []
+            if mod.id > 0:
+                print("ERROR: Only one model per structure is supported for mutateside --rebuild")
+                break
+            num_fix = 0
+            ch_to_fix = set()
+            brk_list = []
             for mut_set in mutations.mutation_list:
                 for mut in mut_set.mutations:
                     # Checking if protein on model 0
                     if self.chains_data.chain_ids[mod.id][mut['chain']] > 1:
                         continue
-                    ch_to_fix[mod.id].add(mut['chain'])
+                    ch_to_fix.add(mut['chain'])
                     start_res = mut['resobj']
                     if start_res in self.st_data.prev_residue:
                         start_res = self.st_data.prev_residue[start_res]
@@ -1542,31 +1550,28 @@ class StructureManager:
                     if end_res in self.st_data.next_residue:
                         end_res = self.st_data.next_residue[end_res]
                     brk = [start_res, end_res]
-                    brk_list[mod.id].append(brk)
-            num_fix += len(ch_to_fix[mod.id])
+                    brk_list.append(brk)
+                    mu.remove_residue(mut['resobj'])
 
-        if not num_fix:
-            print("No protein chains left, exiting")
-            return []
+            mutated_sequence_data.read_structure_seqs(self)
+            mutated_sequence_data.match_sequence_numbering(self)
 
-        mutated_sequence_data = SequenceData()
-        mutated_sequence_data.fake_canonical_sequence(self, mutations)
-        for mut_set in mutations.mutation_list:
-            for mut in mut_set.mutations:
-                mu.remove_residue(mut['resobj'])
-        mutated_sequence_data.read_structure_seqs(self)
-        mutated_sequence_data.match_sequence_numbering(self)
+            num_fix += len(ch_to_fix)
 
-        # TODO Not tested, to be used on changes in the NTerm residue
-        extra_NTerm = 0
-        mutated_res = self.run_modeller(
-            ch_to_fix,
-            brk_list,
-            modeller_key,
-            0,
-            extra_NTerm,
-            mutated_sequence_data
-        )
+            if not num_fix:
+                print(f"No mutations left on model {mod.id}, skipping")
+                continue
+
+            # TODO Not tested, to be used on changes in the NTerm residue
+            extra_NTerm = 0
+            mutated_res = self.run_modeller(
+                ch_to_fix,
+                brk_list,
+                modeller_key,
+                0,
+                extra_NTerm,
+                mutated_sequence_data
+            )
 
         self.update_internals()
         return mutated_res
