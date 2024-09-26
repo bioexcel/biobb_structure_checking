@@ -10,7 +10,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v3.13.4 September 2024
+v3.13.5 September 2024
 
 ### Requirements
 

@@ -1,3 +1,10 @@
+## v3.13.5 (2024.4)
+### Bug Fixes
+- backbone
+  - Fixed interactive behaviour when missing sequences
+- mutateside
+  - Fixed bug. Mutated residue was deleted when using --rebuild
+
 ## v3.13.4 (2023.3)
 ### Bug Fixes
 - sequences
