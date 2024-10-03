@@ -22,6 +22,7 @@ setuptools.setup(
         "Bioexcel": "https://bioexcel.eu/"
     },
     packages=setuptools.find_packages(exclude=['docs', 'test']),
+    package_data={'biobb_structure_checking': ['py.typed']},
     include_package_data=True,
     install_requires=['psutil', 'numpy', 'biopython>=1.79'],
     python_requires='>=3.8',
