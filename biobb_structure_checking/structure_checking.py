@@ -12,8 +12,8 @@ from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.io.json_writer import JSONWriter
-from biobb_structure_checking.io.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.str_io.json_writer import JSONWriter
+from biobb_structure_checking.str_io.param_input import ParamInput, NoDialogAvailableError
 
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.modelling.utils as mu
@@ -164,9 +164,14 @@ class StructureChecking():
                     cts.MSGS['JSON_SAVED'],
                     self.args['json_output_path']
                 )
-            except IOError:
+            except TypeError as e:
                 print(
-                    cts.MSGS['JSON_NOT_SAVED'],
+                    cts.MSGS['JSON_NOT_SAVED'] + str(e),
+                    self.args['json_output_path']
+                )
+            except IOError as e:
+                print(
+                    cts.MSGS['JSON_NOT_SAVED'] + str(e),
                     self.args['json_output_path']
                 )
 

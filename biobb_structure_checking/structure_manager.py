@@ -27,9 +27,9 @@ from Bio.PDB.PDBExceptions import PDBConstructionException
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.io.mmb_server import MMBPDBList
-from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
-from biobb_structure_checking.io.bare_builder import BareStructureBuilder
+from biobb_structure_checking.str_io.mmb_server import MMBPDBList
+from biobb_structure_checking.str_io.PDBIO_extended import PDBIO_extended
+from biobb_structure_checking.str_io.bare_builder import BareStructureBuilder
 
 from biobb_structure_checking.libs.data_lib_manager import DataLibManager
 from biobb_structure_checking.libs.residue_lib_manager import ResidueLib
