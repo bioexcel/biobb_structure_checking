@@ -287,7 +287,8 @@ class SequenceData():
                             frag,
                             strucm.chains_data.chain_ids[mod.id][chn.id]
                         )
-
+                    if isinstance(seq, str):
+                        seq = Seq(seq)
                     sqr = SeqRecord(
                         seq,
                         'pdbsq_' + frid,
