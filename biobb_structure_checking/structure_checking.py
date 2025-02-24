@@ -12,8 +12,8 @@ from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.io.json_writer import JSONWriter
-from biobb_structure_checking.io.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.pdbio.json_writer import JSONWriter
+from biobb_structure_checking.pdbio.param_input import ParamInput, NoDialogAvailableError
 
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.modelling.utils as mu
