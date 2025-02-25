@@ -349,7 +349,7 @@ def calc_at_dist(at1, at2):
 def calc_at_sq_dist(at1, at2):
     """ Calculates distance between two atoms """
     vec = at1.coord - at2.coord
-    return np.dot(vec, vec)
+    return float(np.dot(vec, vec))
 
 
 def calc_bond_angle(at1, at2, at3):
