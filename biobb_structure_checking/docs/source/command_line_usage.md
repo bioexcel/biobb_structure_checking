@@ -30,10 +30,11 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
 * Formats pdb(qt)|cif|pqr. Taken from file extension. pdbqt accepted, but read as pdb.
-* Remote **pdb:{pdbid}[.format] | {url}**. See also **--file_format** for selecting download format (default: cif). For remote downloads as **pdb:** using pdb format, sequences are also automatically downloaded.
+* Remote **pdb:{pdbid}[.format] | {url}**. See also **--file_format** for selecting download format (default: cif). For remote downloads as **pdb:** using pdb format, sequences are also automatically downloaded.Format assumed from extension. .gz files are automatically decompressed
+
 * Biounits/Assemblies **pdb:{pdbid}.{bn}**. Biounits/assemblies. Default format mmCIF.
 
-**--file_format** {mmCif,cif,pdb,xml} - _Format for retrieving structures (mmCif(default)|cif|pdb|xml)_
+**--file_format** {mmCif,cif,pdb,xml} - _Format for retrieving structures (mmCif(default)|cif|pdb)_
 
 **--build_warnings** - _Show structure building warnings (may indicate PDB errors)_
 
@@ -41,9 +42,10 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,
 
 **--sequence** FASTA_SEQ_PATH - _Input canonical sequence in FASTA format_
 * accepted **local files**, **URLs**, or **pdb:{pdbid}**. Required for PDB/PQR structures.
-* Note that sequence is automatically obtained when downloading structures from wwPDB
+* Note that sequence is automatically obtained when downloading structures from wwPDB. .gz files are automatically decompressed
 
-**--pdb_server** PDB_SERVER - _DEPRECATED. pdb: defaults to wwPDB, use direct urls ofor other servers_
+
+**--pdb_server** PDB_SERVER - _DEPRECATED. pdb: defaults to wwPDB, use direct urls for other servers_
 
 **--cache_dir** CACHE_DIR_PATH - _Path for structure's cache directory (default: ./tmpPDB)_
 

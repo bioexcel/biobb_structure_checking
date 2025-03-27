@@ -9,7 +9,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.13.5'
+VERSION = '3.15.6'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -106,6 +106,7 @@ CMD_LINE.add_argument(
          '2) Direct fetch from custom URL '
          '3) Local file: Formats pdb(qt)|pqr|cif. '
          'For 2) and 3) Format assumed from extension.'
+         '.gz files are automatically decompressed'
 )
 
 CMD_LINE.add_argument(
@@ -129,12 +130,14 @@ CMD_LINE.add_argument(
     help='Canonical sequence in FASTA format. Accepted pdb:{pdbid} '
          'for downloading. Note that when downloading PDB files, '
          'sequences are also automatically downloaded'
+         '.gz files are automatically decompressed'
 )
 
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(ftp at wwPDB)|MMB|BSC), use alternate server for http(s) download'
+    help='Server for retrieving structures (default(ftp at wwPDB)|MMB|BSC), '
+        'use alternate server for http(s) download'
 )
 
 CMD_LINE.add_argument(
