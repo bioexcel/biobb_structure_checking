@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/md/4mdh.cif'
+Structure exists: 'tmpPDB/md/4mdh.cif' 
 Structure pdb:4mdh loaded
- PDB id: 4MDH
+ PDB id: 4MDH 
  Title: REFINED CRYSTAL STRUCTURE OF CYTOPLASMIC MALATE DEHYDROGENASE AT 2.5-ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: OXIDOREDUCTASE(NAD(A)-CHOH(D))

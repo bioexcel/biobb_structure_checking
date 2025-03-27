@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif'
+Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
 Structure pdb:1vtk.1 loaded
  PDB id: 1vtk (Assembly 1)
  Title: THYMIDINE KINASE FROM HERPES SIMPLEX VIRUS TYPE 1 IN COMPLEX WITH ADP AND DEOXYTHYMIDINE-MONOPHOSPHATE

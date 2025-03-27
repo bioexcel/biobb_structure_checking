@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.5                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
@@ -29,12 +29,12 @@ Running mutateside. Options: --mut Leu49Ile --rebuild
 Mutations to perform
 *:LEU49ILE
 
-                         MODELLER 10.4, 2022/10/28, r12463
+                         MODELLER 10.6, 2024/10/17, r12888
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2022 Andrej Sali
+                     Copyright(c) 1989-2024 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -50,10 +50,10 @@ Mutations to perform
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150500.55.68-default x86_64
-Date and time of compilation         : 2022/10/28 20:54:52
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.14.21-150500.55.88-default x86_64
+Date and time of compilation         : 2024/10/17 20:34:40
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2024/08/14 18:44:02
+Job starting time (YY/MM/DD HH:MM:SS): 2025/03/27 16:58:37
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

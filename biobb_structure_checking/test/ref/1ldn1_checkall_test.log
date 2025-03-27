@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif'
+Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif' 
 Structure pdb:1ldn.1 loaded
  PDB id: 1ldn (Assembly 1)
  Title: STRUCTURE OF A TERNARY COMPLEX OF AN ALLOSTERIC LACTATE DEHYDROGENASE FROM BACILLUS STEAROTHERMOPHILUS AT 2.5 ANGSTROMS RESOLUTION

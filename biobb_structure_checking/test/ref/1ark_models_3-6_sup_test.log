@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ar/1ark.cif'
+Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
- PDB id: 1ARK
+ PDB id: 1ARK 
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
@@ -21,7 +21,7 @@ Structure pdb:1ark loaded
  Num. atoms:  13575
 Running models. Options: --select 3-6 --superimpose --save_split
 Detected 15 Model(s)
-Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit
+Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 3-6
 Models superimposed: final RMSd    2.615 A
 Final Num. models: 4 (type: Ensembl/NMR,    2.615 A)

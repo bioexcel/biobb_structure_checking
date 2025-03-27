@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
+=                   BioBB structure checking utility v3.15.6                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
 ================================================================================
 
-Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif'
+Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
 Structure pdb:1vtk.1 loaded
  PDB id: 1vtk (Assembly 1)
  Title: THYMIDINE KINASE FROM HERPES SIMPLEX VIRUS TYPE 1 IN COMPLEX WITH ADP AND DEOXYTHYMIDINE-MONOPHOSPHATE
@@ -89,8 +89,8 @@ Found 4 Residues with missing backbone atoms
  SER A-2149 OXT
  GLY A-2264 OXT
 Found 4 Backbone breaks
- SER A149   - PRO A153
- GLY A264   - PRO A280
+ SER A149   - PRO A153  
+ GLY A264   - PRO A280  
  SER A-2149 - PRO A-2153
  GLY A-2264 - PRO A-2280
 No unexpected backbone links
