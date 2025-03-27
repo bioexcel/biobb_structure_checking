@@ -8,6 +8,7 @@ from os.path import join as opj
 import shutil
 import sys
 import re
+import gzip
 
 from urllib.request import urlretrieve
 from urllib.request import urlcleanup
@@ -145,15 +146,11 @@ class StructureManager:
         self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
-            # MMBPDBList child defaults to Bio.PDB.PDBList
-            # if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
 
-                # if pdb_server not in ALT_SERVERS:
-                #    raise WrongServerError
                 if not biounit:
                     real_pdb_path = pdbl.retrieve_pdb_file(
                         input_pdb_path,
@@ -218,7 +215,7 @@ class StructureManager:
                 urlcleanup()
                 urlretrieve(input_pdb_path, real_pdb_path)
             except IOError:
-                print(f"Download failed")
+                print(f"Download {input_pdb_path} failed")
 
             nocache = True
 
@@ -257,17 +254,23 @@ class StructureManager:
         else:
             raise UnknownFileTypeError(input_pdb_path)
 
+        if '.gz' in real_pdb_path:
+            pdb_file_handle = gzip.open(real_pdb_path, 'rt')
+        else:
+            pdb_file_handle = open(real_pdb_path, 'r')
+
         try:
-            new_st = parser.get_structure(self.pdb_id, real_pdb_path)
+            new_st = parser.get_structure(self.pdb_id, pdb_file_handle)
         except ValueError as err:
             raise ParseError('ValueError', err) from err
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err) from err
+        rewind = pdb_file_handle.seek(0)
 
         if input_format in ['pdb', 'pqr']:
-            headers = parse_pdb_header(real_pdb_path)
+            headers = parse_pdb_header(pdb_file_handle)
         else:
-            headers = MMCIF2Dict(real_pdb_path)
+            headers = MMCIF2Dict(pdb_file_handle)
 
         if copy_dir:
             try:

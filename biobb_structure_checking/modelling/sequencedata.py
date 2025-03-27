@@ -10,6 +10,7 @@ from Bio.PDB.Polypeptide import PPBuilder
 from Bio import SeqIO
 import sys
 import os
+import gzip
 # from typing import List, Dict
 from urllib.request import urlretrieve, urlcleanup
 
@@ -74,38 +75,46 @@ class SequenceData():
         """
         read_ok = True
         self.fasta = []
+        remove_fasta = False
         if fasta_sequence_path:
             if fasta_sequence_path.startswith('pdb:'):
                 fasta_sequence_path = fasta_sequence_path[4:]
                 try:
-                    tmp_file = f"/tmp/{fasta_sequence_path}.fasta"
+                    fasta_real_path = f"/tmp/{fasta_sequence_path}.fasta"
                     url = f"{FASTA_DOWNLOAD_PREFIX}/{fasta_sequence_path}"
                     print(f"Retrieving sequence from {url}")
                     urlcleanup()
-                    urlretrieve(url, tmp_file)
-                    for record in SeqIO.parse(tmp_file, 'fasta'):
-                        self.fasta.append(record)
-                    os.remove(tmp_file)
+                    urlretrieve(url, fasta_real_path)
+                    remove_fasta = True
                 except IOError:
                     sys.exit("Error retrieving FASTA")
+
             elif fasta_sequence_path.startswith('http'):
-                tmp_file = f'/tmp/{os.path.basename(fasta_sequence_path)}'
+                fasta_real_path = f'/tmp/{os.path.basename(fasta_sequence_path)}'
                 print(f"Downloading sequence from {fasta_sequence_path} ...")
                 try:
                     urlcleanup()
-                    urlretrieve(fasta_sequence_path, tmp_file)
-                    for record in SeqIO.parse(tmp_file, 'fasta'):
-                        self.fasta.append(record)
-                    os.remove(tmp_file)
+                    urlretrieve(fasta_sequence_path, fasta_real_path)
+                    remove_fasta = True
                 except IOError as e:
                     print(e)
-                    print(f"Error retrieving FASTA")
+                    print("Error retrieving FASTA")
             else:
-                try:
-                    for record in SeqIO.parse(fasta_sequence_path, 'fasta'):
-                        self.fasta.append(record)
-                except IOError:
-                    sys.exit("Error loading FASTA")
+                fasta_real_path = fasta_sequence_path
+
+            try:
+                if ".gz" in fasta_real_path:
+                    fasta_fh = gzip.open(fasta_real_path, 'rt')
+                else:
+                    fasta_fh = open(fasta_real_path, 'r')
+                for record in SeqIO.parse(fasta_fh, 'fasta'):
+                    self.fasta.append(record)
+            except IOError:
+                sys.exit(f"Error loading FASTA at {fasta_real_path}")
+
+            if remove_fasta:
+                os.remove(fasta_real_path)
+
         if not self.fasta:
             print(
                 f"WARNING: No valid FASTA formatted sequences found in"
