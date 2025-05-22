@@ -488,8 +488,7 @@ class StructureChecking():
                 print(
                     cts.MSGS['CLASHES_DETECTED'].format(
                         len(clash_list[cls]),
-                        cls
-                    )
+                        mu.ALL_CONTACT_TYPES_TEXT[cls]                    )
                 )
                 for rkey in sorted(
                         clash_list[cls],
@@ -501,13 +500,13 @@ class StructureChecking():
                         f" {sqrt(clash_list[cls][rkey][2]):8.3f} A"
                     )
                     summary[cls].append({
-                        'at1':mu.atom_id(clash_list[cls][rkey][0]),
-                        'at2':mu.atom_id(clash_list[cls][rkey][1]),
+                        'at1': mu.atom_id(clash_list[cls][rkey][0]),
+                        'at2': mu.atom_id(clash_list[cls][rkey][1]),
                         'dist': round(float(sqrt(clash_list[cls][rkey][2])), 4)
                     })
             else:
                 if not self.args['quiet']:
-                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
+                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(mu.ALL_CONTACT_TYPES_TEXT[cls]))
         return summary
 
     def _check_time_limit(self):

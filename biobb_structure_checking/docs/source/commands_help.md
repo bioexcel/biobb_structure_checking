@@ -87,7 +87,7 @@ Commands to detect and fix possible structure errors.
 ### Structure Warnings
 Additional checks on structure quality. No fix available.
 
-**cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms_
+**cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms (protein only)_
 
 **clashes** - _Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative_
 * Severe: any atom pair with at bond distance or below. Note that can correspond to and actual covalent bond.

@@ -89,8 +89,8 @@ No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
-No severe clashes detected
-26 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+26 Apolar steric clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A
  GLU P63.O    HIS P67.CD2     2.853 A
  SER P74.OG   SER P81.CB      2.821 A
@@ -117,7 +117,7 @@ No severe clashes detected
  LEU P-2251.O SER P-2343.CB    2.870 A
  TYR P-2286.CA TRP P-2295.O    2.821 A
  ARG P-2336.O LEU P-2340.CA    2.840 A
-18 Steric polar_acceptor clashes detected
+18 Polar contacts (acceptors) detected
   DT D4.OP2   ASN P-2139.OD1    2.805 A
   DA D10.N1    DA D-210.N1    2.748 A
  TYR P44.O    CYS P88.O       2.939 A
@@ -136,21 +136,21 @@ No severe clashes detected
  CYS P-2162.O GLU P-2182.O    3.056 A
  TYR P-2178.O GLU P-2182.OE1    3.086 A
  LEU P-2179.O GLU P-2182.O    2.852 A
-6 Steric polar_donor clashes detected
+6 Polar contacts (donors) detected
   DA D1.N6     DG D-218.N1    3.010 A
   DG D18.N1    DA D-21.N6     3.010 A
  ARG P54.NH1  ARG P336.NH1    3.056 A
  GLN P180.NE2 ARG P231.NH1    2.845 A
  ARG P-254.NH1 ARG P-2336.NH1    3.056 A
  GLN P-2180.NE2 ARG P-2231.NH1    2.845 A
-6 Steric positive clashes detected
+6 Positively charged contacts detected
  ARG P54.NH1  ARG P336.NH1    3.056 A
  ARG P57.NH2  ARG P59.NH1     3.356 A
  ARG P284.NE  ARG P335.NH1    3.476 A
  ARG P-254.NH1 ARG P-2336.NH1    3.056 A
  ARG P-257.NH2 ARG P-259.NH1    3.356 A
  ARG P-2284.NE ARG P-2335.NH1    3.476 A
-5 Steric negative clashes detected
+5 Negatively charged contacts detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  ASP P257.OD1 ASP P-2257.OD2    2.504 A
  GLU P287.OE1 GLU P289.OE2    3.216 A

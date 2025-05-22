@@ -61,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.14.21-150500.55.88-default x86_64
 Date and time of compilation         : 2024/10/17 20:34:40
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2025/05/22 15:20:18
+Job starting time (YY/MM/DD HH:MM:SS): 2025/05/22 15:57:07
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -121,10 +121,18 @@ No caps added
 Fixing missing backbone atoms
 Nothing to do
 Checking for steric clashes
-2 Steric severe clashes detected
+10 Severe Steric clashes/covalent bonds detected
+ ILE A3.O     GLU A16.O       1.747 A
+ LYS A6.CA    THR A14.N       1.717 A
+ LYS A6.CB    ILE A13.CA      1.689 A
+ THR A7.OG1   THR A14.CG2     1.759 A
+ LEU A8.O     GLY A10.C       1.916 A
+ GLY A10.O    THR A12.N       1.539 A
+ THR A14.CB   GLU A16.CG      1.735 A
  LEU A15.C    VAL A17.C       0.491 A
  LEU A15.CG   GLU A18.CD      0.428 A
-12 Steric apolar clashes detected
+ PRO A19.C    ASP A21.OD2     1.801 A
+12 Apolar steric clashes detected
  GLN A2.CG    VAL A17.CG2     2.070 A
  ILE A3.O     GLU A16.C       2.749 A
  VAL A5.CB    THR A14.O       2.113 A
@@ -137,7 +145,7 @@ Checking for steric clashes
  THR A7.OG1   THR A14.CG2     1.759 A
  LEU A15.CG   GLU A18.CD      0.428 A
  PRO A19.CD   LYS A29.NZ      2.357 A
-10 Steric polar_acceptor clashes detected
+10 Polar contacts (acceptors) detected
  MET A1.O     GLU A18.O       2.577 A
  ILE A3.O     GLU A16.O       1.747 A
  VAL A5.O     ILE A13.O       2.633 A
@@ -148,14 +156,14 @@ Checking for steric clashes
  LEU A15.O    VAL A17.O       2.772 A
  PRO A19.O    ASP A21.OD2     2.486 A
  PHE A45.O    LYS A48.O       2.716 A
-5 Steric polar_donor clashes detected
+5 Polar contacts (donors) detected
  LYS A6.N     THR A14.N       2.226 A
  LYS A6.NZ    GLY A10.N       3.058 A
  THR A7.N     ILE A13.N       3.092 A
  THR A7.N     THR A14.N       2.527 A
  LEU A15.N    VAL A17.N       0.922 A
-No positive clashes detected
-No negative clashes detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134

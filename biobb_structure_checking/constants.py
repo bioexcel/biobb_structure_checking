@@ -744,8 +744,8 @@ MSGS = {
     'NO_LOWTRANS_BONDS': 'No trans peptide bonds with unusual omega dihedrals found',
     # clashes
     'CHECKING_CLASHES': 'Checking for steric clashes',
-    'CLASHES_DETECTED': '{} Steric {} clashes detected',
-    'NO_CLASHES_DETECTED': 'No {} clashes detected',
+    'CLASHES_DETECTED': '{} {} detected',
+    'NO_CLASHES_DETECTED': 'No {} detected',
     # load
     'STRUCTURE_LOADED': 'Structure {} loaded',
     # NA related

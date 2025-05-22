@@ -2530,7 +2530,7 @@
             "CA_DIST": 3.8,
             "CA_DIST_ERR": 1.0,
             "CLASH_DIST": {
-                "severe": 1.5,
+                "severe": 2.0,
                 "apolar": 2.9,
                 "polar": 3.1,
                 "polar_donor": 3.1,

@@ -140,12 +140,12 @@ ASP A251
   Adding new atom OXT
 Fixed 1 backbone atom(s)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 14: cistransbck
 
@@ -161,12 +161,12 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-3 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+3 Apolar steric clashes detected
  THR A95.CG2  PRO A129.O      2.770 A
  HIS B211.CE1 N25 B401.O24    2.841 A
  ASP B228.OD2 ARG B231.CZ     2.665 A
-14 Steric polar_acceptor clashes detected
+14 Polar contacts (acceptors) detected
  ASP A107.OD2 GLU A184.O      3.088 A
  GLU A125.O   THR A128.O      2.751 A
  ASP A141.O   ASP A177.OD1    3.087 A
@@ -181,10 +181,10 @@ No severe clashes detected
  GLY B173.O   ASN B175.O      3.018 A
  ASP B181.OD2 GLU B184.OE2    3.080 A
  ASP B182.O   GLU B184.O      2.931 A
-1 Steric polar_donor clashes detected
+1 Polar contacts (donors) detected
  GLN B236.NE2 ASN B240.ND2    3.022 A
-No positive clashes detected
-3 Steric negative clashes detected
+No Positively charged contacts detected
+3 Negatively charged contacts detected
  ASP A181.OD2 GLU A184.OE2    3.463 A
  ASP B107.OD2 ASP B182.OD1    3.482 A
  ASP B181.OD2 GLU B184.OE2    3.080 A

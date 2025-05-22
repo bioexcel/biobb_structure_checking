@@ -47,16 +47,16 @@ Replacing ARG B51 into LYS
   Adding new atom NZ
 
 Checking for steric clashes
-No severe clashes detected
-4 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+4 Apolar steric clashes detected
  ILE A49.CG2  THR A350.OG1    2.815 A
  ILE B49.CG2  THR B350.OG1    2.611 A
  LYS B51.NZ   LEU B139.CG     2.403 A
  LYS B51.NZ   ILE B143.CD1    2.319 A
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908

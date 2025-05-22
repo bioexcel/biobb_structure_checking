@@ -113,13 +113,13 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-No apolar clashes detected
-1 Steric polar_acceptor clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+1 Polar contacts (acceptors) detected
  MET A1.O     VAL A17.O       3.035 A
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 17: ligands --remove All
 

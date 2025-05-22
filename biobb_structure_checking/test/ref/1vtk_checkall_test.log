@@ -100,13 +100,13 @@ No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
-No severe clashes detected
-4 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+4 Apolar steric clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A
  ALA A118.CA  SER A181.O      2.890 A
  GLY A-259.O  HIS A-2213.CD2    2.824 A
  ALA A-2118.CA SER A-2181.O    2.890 A
-10 Steric polar_acceptor clashes detected
+10 Polar contacts (acceptors) detected
  SER A74.O    ASP A77.OD2     2.685 A
  GLN A104.O   ASP A108.OD2    3.061 A
  PRO A153.O   GLN A349.OE1    3.093 A
@@ -117,19 +117,19 @@ No severe clashes detected
  PRO A-2153.O GLN A-2349.OE1    3.093 A
  LEU A-2217.O ARG A-2220.O    2.862 A
  GLU A-2225.OE1 TMP A-2500.O3'    2.895 A
-4 Steric polar_donor clashes detected
+4 Polar contacts (donors) detected
  ARG A220.NH1 ARG A222.NH1    2.991 A
  TRP A259.NE1 ARG A293.NH1    3.094 A
  ARG A-2220.NH1 ARG A-2222.NH1    2.991 A
  TRP A-2259.NE1 ARG A-2293.NH1    3.094 A
-6 Steric positive clashes detected
+6 Positively charged contacts detected
  LYS A62.NZ   ARG A163.NH1    3.439 A
  ARG A212.NH2 ARG A216.NH2    3.171 A
  ARG A220.NH1 ARG A222.NH1    2.991 A
  LYS A-262.NZ ARG A-2163.NH1    3.439 A
  ARG A-2212.NH2 ARG A-2216.NH2    3.171 A
  ARG A-2220.NH1 ARG A-2222.NH1    2.991 A
-No negative clashes detected
+No Negatively charged contacts detected
 Running  check_only. Nothing else to do.
 Running sequences.
 Canonical sequence

@@ -113,19 +113,19 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-4 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+4 Apolar steric clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A
  GLU A19.OE2  TRP A38.CZ3     2.645 A
  TYR A40.CD1  GLY A50.O       2.794 A
  THR A42.OG1  THR A49.CG2     2.788 A
-3 Steric polar_acceptor clashes detected
+3 Polar contacts (acceptors) detected
  MET A9.O     ASP A24.OD2     2.851 A
  TYR A10.O    PHE A22.O       3.006 A
  MET A39.O    MET A51.SD      2.999 A
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 17: ligands --remove All
 

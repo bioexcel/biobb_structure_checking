@@ -82,6 +82,14 @@ ALL_CONTACT_TYPES = [
     'positive',
     'negative'
 ]
+ALL_CONTACT_TYPES_TEXT = {
+    'severe': 'Severe Steric clashes/covalent bonds',
+    'apolar': 'Apolar steric clashes',
+    'polar_acceptor': 'Polar contacts (acceptors)',
+    'polar_donor': 'Polar contacts (donors)',
+    'positive': 'Positively charged contacts',
+    'negative': 'Negatively charged contacts'
+}
 
 AMIDE_CONTACT_TYPES = [
     'polar_acceptor',
