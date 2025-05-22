@@ -61,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.14.21-150500.55.88-default x86_64
 Date and time of compilation         : 2024/10/17 20:34:40
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2025/03/27 16:58:41
+Job starting time (YY/MM/DD HH:MM:SS): 2025/05/22 15:20:18
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

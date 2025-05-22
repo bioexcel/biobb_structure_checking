@@ -226,7 +226,11 @@ Warning, no canonical sequence available for chain D/0
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
+4 Steric severe clashes detected
+ ASN B297.ND2 NAG D1.C1       1.468 A
+ NAG C1.O6    FUL C10.C1      1.347 A
+ NAG D1.O6    FUL D9.C1       1.334 A
+ BMA D3.O3    MAN D7.C1       1.440 A
 6 Steric apolar clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
  ASN A297.CG  NAG C1.C1       2.759 A

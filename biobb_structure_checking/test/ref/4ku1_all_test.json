@@ -625,7 +625,28 @@
    ],
    "polar_donor": [],
    "positive": [],
-   "severe": []
+   "severe": [
+    {
+     "at1": "ASN B297.ND2",
+     "at2": "NAG D1.C1",
+     "dist": 1.4676
+    },
+    {
+     "at1": "NAG C1.O6",
+     "at2": "FUL C10.C1",
+     "dist": 1.347
+    },
+    {
+     "at1": "NAG D1.O6",
+     "at2": "FUL D9.C1",
+     "dist": 1.3339
+    },
+    {
+     "at1": "BMA D3.O3",
+     "at2": "MAN D7.C1",
+     "dist": 1.4401
+    }
+   ]
   }
  },
  "final_stats": {
