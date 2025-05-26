@@ -12,7 +12,10 @@ build:
 
 # Build documentation in the docs/ directory with Sphinx
 sphinx:
-   configuration: biobb_structure_checking/docs/source/conf.py
-
+  configuration: biobb_structure_checking/docs/source/conf.py
 
 # Optionally set the version of Python and requirements required to build your docs
+python:
+  install:
+    - requirements: biobb_structure_checking/docs/requirements.txt
+
