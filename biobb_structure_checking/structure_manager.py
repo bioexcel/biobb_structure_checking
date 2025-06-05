@@ -277,7 +277,7 @@ class StructureManager:
                 shutil.copy(real_pdb_path, copy_dir)
                 print(
                     f"Storing a copy of the input structure as "
-                    f"{opj(copy_dir, os.path.basename(real_pdb_path))}"
+                    f"{copy_dir}"
                 )
             except Exception:
                 print(
