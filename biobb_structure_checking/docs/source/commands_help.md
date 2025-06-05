@@ -90,7 +90,7 @@ Additional checks on structure quality. No fix available.
 **cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms (protein only)_
 
 **clashes** - _Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative_
-* Severe: any atom pair with at bond distance or below. Note that can correspond to and actual covalent bond.
+* Severe: any atom pair with at bond distance or below. Note that it can correspond to an actual covalent bond.
 * Apolar: two non interacting atoms too close
 * Polar Donors: Two hydrogen bond donors too close
 * Polar Acceptors: Two hydrogen bond acceptors too close
