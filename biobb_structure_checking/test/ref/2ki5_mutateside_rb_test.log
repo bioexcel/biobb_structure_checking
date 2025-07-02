@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ki/2ki5.cif'
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -25,17 +25,16 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Running mutateside. Options: --mut Leu49Ile,B:arg51Lys --rebuild
+Running mutateside. Options: --mut Leu49Ile --rebuild
 Mutations to perform
 *:LEU49ILE
-B:ARG51LYS
 
-                         MODELLER 10.1, 2021/03/12, r12156
+                         MODELLER 10.7, 2025/05/28, r13093
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2021 Andrej Sali
+                     Copyright(c) 1989-2025 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -51,53 +50,70 @@ B:ARG51LYS
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150400.24.60-default x86_64
-Date and time of compilation         : 2021/03/12 00:04:35
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2023/05/23 13:01:38
+Job starting time (YY/MM/DD HH:MM:SS): 2025/07/02 09:04:10
+
+Fixing chain/model A/0
+0 atoms in HETATM/BLK residues constrained
+to protein atoms within 2.30 angstroms
+and protein CA atoms within 10.00 angstroms
+0 atoms in residues without defined topology
+constrained to be rigid bodies
+>> Model assessment by DOPE potential
+DOPE score               : -37238.417969
+
+>> Summary of successfully produced models:
+Filename                          molpdf     DOPE score    GA341 score
+----------------------------------------------------------------------
+target.B99990001.pdb          1307.28101   -37238.41797        1.00000
+
+Fixing THR A48 - LEU A50
+  Adding THR A48
+  Adding ILE A49
+  Adding LEU A50
+
+Fixing chain/model B/0
+0 atoms in HETATM/BLK residues constrained
+to protein atoms within 2.30 angstroms
+and protein CA atoms within 10.00 angstroms
+0 atoms in residues without defined topology
+constrained to be rigid bodies
+>> Model assessment by DOPE potential
+DOPE score               : -38093.339844
+
+>> Summary of successfully produced models:
+Filename                          molpdf     DOPE score    GA341 score
+----------------------------------------------------------------------
+target.B99990001.pdb          1530.76526   -38093.33984        1.00000
+
+Fixing THR B48 - LEU B50
+  Adding THR B48
+  Adding ILE B49
+  Adding LEU B50
 
 Checking for steric clashes
-No severe clashes detected
-13 Steric apolar clashes detected
- GLY A61.O    THR A65.CG2     2.799 A
- MET A85.CG   GLU A374.OE1    2.857 A
- ARG A89.CD   GLU A95.OE1     2.776 A
- LEU A232.O   ARG A236.CG     2.741 A
- MET A372.SD  VAL B307.CG1    2.777 A
- HIS B58.CD2  TYR B172.OH     2.675 A
- LYS B62.O    THR B66.CG2     2.878 A
- THR B66.OG1  TYR B80.CE1     2.890 A
- THR B86.OG1  GLU B374.CB     2.892 A
- HIS B105.CE1 GLN B109.OE1    2.773 A
- GLU B210.O   ILE B214.CG1    2.842 A
- ARG B212.CZ  ASP B330.OD1    2.875 A
- SER B357.O   ILE B361.CG1    2.861 A
-5 Steric polar_acceptor clashes detected
- ASP A55.O    VAL A204.O      3.035 A
- ARG B89.O    GLU B95.OE1     2.792 A
- ASP B211.O   ASP B215.OD2    2.914 A
- ALA B334.O   ASP B338.OD2    3.100 A
- PRO B359.O   ASP B363.OD2    3.073 A
-2 Steric polar_donor clashes detected
- LYS A62.NZ   ARG A163.NH1    2.578 A
- ARG A212.NH2 ARG A216.NH2    3.075 A
-2 Steric positive clashes detected
- LYS A62.NZ   ARG A163.NH1    2.578 A
- ARG A212.NH2 ARG A216.NH2    3.075 A
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+1 Apolar steric clashes detected
+ ILE A49.CD1  ILE A143.CD1    2.815 A
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
-Final Num. residues:  905
+Final Num. residues:  908
 Final Num. residues with ins. codes:  0
 Final Num. residues with H atoms: 0
 Final Num. HETATM residues:  296
 Final Num. ligands or modified residues:  4
 Final Num. water mol.:  292
-Final Num. atoms:  4934
+Final Num. atoms:  4961
 Small mol ligands found
 SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-Structure saved on 2ki5_mutateside_test.pdb
+Structure saved on 2ki5_mutateside_rb_test.pdb
 Summary data saved on 2ki5_mutateside_rb_test.json

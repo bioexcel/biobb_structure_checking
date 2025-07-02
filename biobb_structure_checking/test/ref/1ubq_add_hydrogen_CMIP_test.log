@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ub/1ubq.cif'
+Structure exists: 'tmpPDB/ub/1ubq.cif' 
 Structure pdb:1ubq loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: CHROMOSOMAL PROTEIN

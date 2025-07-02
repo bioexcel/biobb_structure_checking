@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ki/2ki5.cif'
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -35,12 +35,12 @@ Found 6 Residues with missing side chain atoms
  ARG B220   CG,CD,NE,CZ,NH1,NH2
 Fixing side chains
 
-                         MODELLER 10.1, 2021/03/12, r12156
+                         MODELLER 10.7, 2025/05/28, r13093
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2021 Andrej Sali
+                     Copyright(c) 1989-2025 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -56,28 +56,102 @@ Fixing side chains
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgclnx 5.14.21-150400.24.60-default x86_64
-Date and time of compilation         : 2021/03/12 00:04:35
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2023/05/23 13:01:40
+Job starting time (YY/MM/DD HH:MM:SS): 2025/07/02 09:04:11
+
+Fixing chain/model A/0
+0 atoms in HETATM/BLK residues constrained
+to protein atoms within 2.30 angstroms
+and protein CA atoms within 10.00 angstroms
+0 atoms in residues without defined topology
+constrained to be rigid bodies
+>> Model assessment by DOPE potential
+DOPE score               : -37334.875000
+
+>> Summary of successfully produced models:
+Filename                          molpdf     DOPE score    GA341 score
+----------------------------------------------------------------------
+target.B99990001.pdb          1382.67139   -37334.87500        1.00000
+
+Fixing PRO A155 - PRO A155
+  Adding PRO A155
+  Replacing ALA A156
+  Replacing LEU A157
+  Replacing THR A158
+  Replacing LEU A159
+  Replacing ILE A160
+  Replacing PHE A161
+  Adding PRO A155
+
+Fixing ARG A281 - ARG A281
+  Adding ARG A281
+  Replacing PRO A282
+  Replacing HIS A283
+  Replacing ILE A284
+  Replacing GLY A285
+  Replacing ASP A286
+  Replacing THR A287
+  Replacing LEU A288
+  Replacing PHE A289
+  Replacing THR A290
+  Replacing LEU A291
+  Replacing PHE A292
+  Replacing ARG A293
+  Replacing ALA A294
+  Replacing PRO A295
+  Replacing GLU A296
+  Replacing LEU A297
+  Adding ARG A281
+
+Fixing chain/model B/0
+0 atoms in HETATM/BLK residues constrained
+to protein atoms within 2.30 angstroms
+and protein CA atoms within 10.00 angstroms
+0 atoms in residues without defined topology
+constrained to be rigid bodies
+>> Model assessment by DOPE potential
+DOPE score               : -38032.582031
+
+>> Summary of successfully produced models:
+Filename                          molpdf     DOPE score    GA341 score
+----------------------------------------------------------------------
+target.B99990001.pdb          1517.68835   -38032.58203        1.00000
+
+Fixing PRO B155 - PRO B155
+  Adding PRO B155
+  Replacing ALA B156
+  Replacing LEU B157
+  Replacing THR B158
+  Replacing LEU B159
+  Replacing ILE B160
+  Replacing PHE B161
+  Adding PRO B155
+
+Fixing LYS B219 - GLN B221
+  Adding LYS B219
+  Adding ARG B220
+  Adding GLN B221
 
 Fixed 0 side chain(s)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+1 Polar contacts (acceptors) detected
+ LEU B217.O   ARG B220.O      2.843 A
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
-Final Num. residues:  902
+Final Num. residues:  903
 Final Num. residues with ins. codes:  0
 Final Num. residues with H atoms: 0
 Final Num. HETATM residues:  296
 Final Num. ligands or modified residues:  4
 Final Num. water mol.:  292
-Final Num. atoms:  4931
+Final Num. atoms:  4942
 Small mol ligands found
 SO4 A4
 AC2 A1

@@ -1,3 +1,21 @@
+## v3.13.6 (2025.1)
+### Extended functions
+  - input
+    - Added transparent support for .gzipped sequence and structure files
+### Bug fixes
+  - input
+    - Updated default PDB server
+    - Fixed non json serializable np.floats
+    - Fixed Str to Seq conversion, forced by Bio.seqrecord
+    - Fixed io folder to a safer name
+    - Fixed clash distance for severe clashes too short
+## v3.13.5 (2024.4)
+### Bug Fixes
+- backbone
+  - Fixed interactive behaviour when missing sequences
+- mutateside
+  - Fixed bug. Mutated residue was deleted when using --rebuild
+
 ## v3.13.4 (2023.3)
 ### Bug Fixes
 - sequences

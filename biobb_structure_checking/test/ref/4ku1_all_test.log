@@ -1,13 +1,13 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ku/4ku1.cif'
+Structure exists: 'tmpPDB/ku/4ku1.cif' 
 Warning, no canonical sequence available for chain C/0
 Warning, no canonical sequence available for chain D/0
 Structure pdb:4ku1 loaded
- PDB id: 4KU1
+ PDB id: 4KU1 
  Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
  Experimental method: X-RAY DIFFRACTION
  Keywords: IMMUNE SYSTEM
@@ -197,12 +197,12 @@ SER B444
   Adding new atom OXT
 Fixed 2 backbone atom(s)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 14: cistransbck
 
@@ -226,20 +226,27 @@ Warning, no canonical sequence available for chain D/0
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-6 Steric apolar clashes detected
+7 Severe Steric clashes/covalent bonds detected
+ ASN A297.ND2 NAG C1.C1       1.903 A
+ CYX A367.SG  CYX A425.SG     1.995 A
+ ASN B297.ND2 NAG D1.C1       1.468 A
+ NAG C1.O6    FUL C10.C1      1.347 A
+ BMA C3.O6    MAN C7.C1       1.619 A
+ NAG D1.O6    FUL D9.C1       1.334 A
+ BMA D3.O3    MAN D7.C1       1.440 A
+6 Apolar steric clashes detected
  GLU A294.OE2 TYR A300.CE1    2.083 A
  ASN A297.CG  NAG C1.C1       2.759 A
  CYX A367.SG  CYX A425.CB     2.881 A
  GLU A382.CB  GLN A386.O      2.894 A
  HIS B268.CE1 GLU B294.OE2    2.857 A
  ASN B297.CG  NAG D1.C1       2.433 A
-2 Steric polar_acceptor clashes detected
+2 Polar contacts (acceptors) detected
  HIS A433.O   TYR A436.O      3.090 A
  SER B383.O   GLN B386.O      2.911 A
-No polar_donor clashes detected
-No positive clashes detected
-1 Steric negative clashes detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+1 Negatively charged contacts detected
  GLU B380.OE2 GLU B382.OE2    3.464 A
 
 Step 17: ligands --remove All

@@ -6,14 +6,14 @@
    {
     "A": {
      "DNA": 0.0,
-     "Other": 0.006557377049180357,
-     "Protein": 0.9934426229508196,
+     "Other": 0.006535947712418277,
+     "Protein": 0.9934640522875817,
      "RNA": 0.0
     },
     "B": {
      "DNA": 0.0,
-     "Other": 0.00649350649350644,
-     "Protein": 0.9935064935064936,
+     "Other": 0.006451612903225823,
+     "Protein": 0.9935483870967742,
      "RNA": 0.0
     }
    }
@@ -30,9 +30,9 @@
   ],
   "nmodels": 1,
   "stats": {
-   "num_ats": 4934,
+   "num_ats": 4961,
    "num_h": 0,
-   "num_res": 905,
+   "num_res": 908,
    "num_wat": 292,
    "res_h": 0,
    "res_hetats": 296,
@@ -51,131 +51,23 @@
  "loaded_structure": "pdb:2ki5",
  "modified_structure": true,
  "mutateside": {
-  "opts": "--mut Leu49Ile,B:arg51Lys --rebuild"
+  "opts": "--mut Leu49Ile --rebuild"
  },
  "mutateside_clashes": {
   "apolar": [
    {
-    "at1": "GLY A61.O",
-    "at2": "THR A65.CG2",
-    "dist": 2.799
-   },
-   {
-    "at1": "MET A85.CG",
-    "at2": "GLU A374.OE1",
-    "dist": 2.8571
-   },
-   {
-    "at1": "ARG A89.CD",
-    "at2": "GLU A95.OE1",
-    "dist": 2.7757
-   },
-   {
-    "at1": "LEU A232.O",
-    "at2": "ARG A236.CG",
-    "dist": 2.7414
-   },
-   {
-    "at1": "MET A372.SD",
-    "at2": "VAL B307.CG1",
-    "dist": 2.7769
-   },
-   {
-    "at1": "HIS B58.CD2",
-    "at2": "TYR B172.OH",
-    "dist": 2.6749
-   },
-   {
-    "at1": "LYS B62.O",
-    "at2": "THR B66.CG2",
-    "dist": 2.8778
-   },
-   {
-    "at1": "THR B66.OG1",
-    "at2": "TYR B80.CE1",
-    "dist": 2.8901
-   },
-   {
-    "at1": "THR B86.OG1",
-    "at2": "GLU B374.CB",
-    "dist": 2.8918
-   },
-   {
-    "at1": "HIS B105.CE1",
-    "at2": "GLN B109.OE1",
-    "dist": 2.773
-   },
-   {
-    "at1": "GLU B210.O",
-    "at2": "ILE B214.CG1",
-    "dist": 2.8417
-   },
-   {
-    "at1": "ARG B212.CZ",
-    "at2": "ASP B330.OD1",
-    "dist": 2.8754
-   },
-   {
-    "at1": "SER B357.O",
-    "at2": "ILE B361.CG1",
-    "dist": 2.8614
+    "at1": "ILE A49.CD1",
+    "at2": "ILE A143.CD1",
+    "dist": 2.8151
    }
   ],
   "negative": [],
-  "polar_acceptor": [
-   {
-    "at1": "ASP A55.O",
-    "at2": "VAL A204.O",
-    "dist": 3.0347
-   },
-   {
-    "at1": "ARG B89.O",
-    "at2": "GLU B95.OE1",
-    "dist": 2.7924
-   },
-   {
-    "at1": "ASP B211.O",
-    "at2": "ASP B215.OD2",
-    "dist": 2.9139
-   },
-   {
-    "at1": "ALA B334.O",
-    "at2": "ASP B338.OD2",
-    "dist": 3.0997
-   },
-   {
-    "at1": "PRO B359.O",
-    "at2": "ASP B363.OD2",
-    "dist": 3.0725
-   }
-  ],
-  "polar_donor": [
-   {
-    "at1": "LYS A62.NZ",
-    "at2": "ARG A163.NH1",
-    "dist": 2.5779
-   },
-   {
-    "at1": "ARG A212.NH2",
-    "at2": "ARG A216.NH2",
-    "dist": 3.075
-   }
-  ],
-  "positive": [
-   {
-    "at1": "LYS A62.NZ",
-    "at2": "ARG A163.NH1",
-    "dist": 2.5779
-   },
-   {
-    "at1": "ARG A212.NH2",
-    "at2": "ARG A216.NH2",
-    "dist": 3.075
-   }
-  ],
+  "polar_acceptor": [],
+  "polar_donor": [],
+  "positive": [],
   "severe": []
  },
- "saved_structure": "2ki5_mutateside_test.pdb",
+ "saved_structure": "2ki5_mutateside_rb_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
@@ -207,9 +99,9 @@
   ],
   "nmodels": 1,
   "stats": {
-   "num_ats": 4934,
+   "num_ats": 4961,
    "num_h": 0,
-   "num_res": 905,
+   "num_res": 908,
    "num_wat": 292,
    "res_h": 0,
    "res_hetats": 296,

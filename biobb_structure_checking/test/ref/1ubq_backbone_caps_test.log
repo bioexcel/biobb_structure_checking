@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Warning: sequence features only available in mmCIF format or with external fasta input
+Warning: sequence features may not be available, use --sequence for  external fasta input
 Structure backbone_test/1ubq_caps.pdb loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: structure of ubiquitin refined at 1.8 angstroms resolution test estructure for backbone fix
  Experimental method: unknown
  Resolution (A): N.A.
@@ -29,10 +29,10 @@ Found 7 Residues with missing backbone atoms
  ILE A44    C,O,OXT
  ALA A46    N,CA
 Found 4 Backbone breaks
- VAL A5     - LEU A8
- LYS A11    - THR A14
- GLU A16    - SER A20
- ILE A44    - ALA A46
+ VAL A5     - LEU A8    
+ LYS A11    - THR A14   
+ GLU A16    - SER A20   
+ ILE A44    - ALA A46   
 No unexpected backbone links
 Main chain fixes
 Nothing to do
@@ -69,18 +69,18 @@ GLY A76 Adding extra NME residue
 Added caps: A1, A5, A8, A11, A14, A16, A20, A44, A46, A76
 Found No residues with missing backbone atoms
 Found 4 Backbone breaks
- NME A5     - ACE A8
- NME A11    - ACE A14
- NME A17    - ACE A19
- NME A44    - ACE A46
+ NME A5     - ACE A8    
+ NME A11    - ACE A14   
+ NME A17    - ACE A19   
+ NME A44    - ACE A46   
 No unexpected backbone links
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  130

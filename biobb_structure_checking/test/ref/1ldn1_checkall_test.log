@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif'
+Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif' 
 Structure pdb:1ldn.1 loaded
  PDB id: 1ldn (Assembly 1)
  Title: STRUCTURE OF A TERNARY COMPLEX OF AN ALLOSTERIC LACTATE DEHYDROGENASE FROM BACILLUS STEAROTHERMOPHILUS AT 2.5 ANGSTROMS RESOLUTION
@@ -167,8 +167,9 @@ ASN B138   PRO B139   Dihedral:   -1.398
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
-No severe clashes detected
-162 Steric apolar clashes detected
+1 Severe Steric clashes/covalent bonds detected
+ LYS C16.NZ   HIS D264.O      1.995 A
+162 Apolar steric clashes detected
  MET A15.CB   GLY A19.CA      2.625 A
  MET A15.CE   ASN B296.OD1    2.684 A
  LYS A16.O    ASP A77.CG      2.880 A
@@ -331,7 +332,7 @@ No severe clashes detected
  ALA D319.O   LYS D322.CB     2.776 A
  SER D323.O   ALA D326.CB     2.882 A
  VAL D324.O   ALA D328.CB     2.574 A
-48 Steric polar_acceptor clashes detected
+48 Polar contacts (acceptors) detected
  MET A15.O    GLU A47.OE2     2.608 A
  MET A15.SD   ASN A17.O       2.699 A
  MET A15.SD   ASN A18.O       2.938 A
@@ -380,7 +381,7 @@ No severe clashes detected
  VAL D272.O   VAL D289.O      2.991 A
  ALA D274.O   ILE D287.O      2.994 A
  LEU D279.O   GLU D303.OE2    2.707 A
-15 Steric polar_donor clashes detected
+15 Polar contacts (donors) detected
  MET A15.N    GLY A20.N       3.086 A
  ASN A54.ND2  SER A56.N       2.851 A
  ASN A54.ND2  LYS A57.N       2.631 A
@@ -396,10 +397,10 @@ No severe clashes detected
  MET D15.N    GLY D20.N       2.716 A
  ASN D138.ND2 VAL D140.N      3.043 A
  ASN D294.ND2 ASN D296.N      2.757 A
-2 Steric positive clashes detected
+2 Positively charged contacts detected
  ARG A257.NH1 ARG A260.NH1    3.494 A
  LYS B16.NZ   LYS B74.NZ      3.147 A
-5 Steric negative clashes detected
+5 Negatively charged contacts detected
  ASP A166.OD2 GLU A197.OE1    2.441 A
  ASP B82.OD1  ASP B85.OD2     3.260 A
  ASP B166.OD2 GLU B197.OE1    2.318 A

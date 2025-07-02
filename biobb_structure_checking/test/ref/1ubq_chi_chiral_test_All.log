@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Warning: sequence features only available in mmCIF format or with external fasta input
+Warning: sequence features may not be available, use --sequence for  external fasta input
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
- PDB id: 1UBQ
+ PDB id: 1UBQ 
  Title: structure of ubiquitin refined at 1.8 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: chromosomal protein
@@ -22,16 +22,16 @@ Structure chiral_pdb_test/1ubq_chi.pdb loaded
  Num. atoms:  658
 Running chiral. Options: --fix All
 Found 2 residues with incorrect side-chain chirality
- ILE A3
- THR A7
+ ILE A3    
+ THR A7    
 Chiral side chains fixed All (2)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 1 (A: Protein)
 Final Num. residues:  134

@@ -10,7 +10,7 @@ The latest documentation of this package can be found in our readthedocs site:
 [latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
 
 ### Version
-v3.13.4 September 2024
+v3.13.6 May 2025
 
 ### Requirements
 
@@ -27,7 +27,7 @@ Using PIP:
 
 * Installation:
 
-        pip install "biobb_structure_checking>=3.13.4"
+        pip install "biobb_structure_checking>=3.13.6"
 
 * Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
 
@@ -35,7 +35,7 @@ Using ANACONDA:
 
 * Installation:
 
-        conda install -c bioconda "biobb_structure_checking>=3.13.4"
+        conda install -c bioconda "biobb_structure_checking>=3.13.6"
 
 * Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
 
@@ -44,9 +44,9 @@ This software has been developed in the MMB group (http://mmb.irbbarcelona.org) 
 BSC (https://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European BioExcel (https://bioexcel.eu/), funded by the European Commission
 (EU H2020 [675728](https://cordis.europa.eu/projects/675728)).
 
-* (c) 2015-2022 [Barcelona Supercomputing Center](https://www.bsc.es/)
-* (c) 2015-2022 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
-
+* (c) 2015-2025 [Barcelona Supercomputing Center](https://www.bsc.es/)
+* (c) 2015-2025 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
+* (c) 2015-2025 [University of Barcelona](https://www.ub.edu/)
 Licensed under the
 [GNU Lesser General Public License v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
 

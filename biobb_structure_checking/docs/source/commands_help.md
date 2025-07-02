@@ -69,7 +69,6 @@ Commands to detect and fix possible structure errors.
 * Auto option searches for the combinations of fixes that offer less contacts.
 * * Amide contacts are rechecked unless **--no_recheck** That can lead to infinite loops if done non-interactively.
 
-
 **chiral** [--fix All|None|Residue List] [--no_check_clashes] - _Detect/Fix Improper side chain chirality_
 * Checks for generated clashes unless **--no_check_clashes** set
 
@@ -88,8 +87,13 @@ Commands to detect and fix possible structure errors.
 ### Structure Warnings
 Additional checks on structure quality. No fix available.
 
-**cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms_
+**cistransbck** - _Analyzes cis-trans dihedrals on backbone atoms (protein only)_
 
 **clashes** - _Detect steric clashes in groups: Severe, Apolar, Polar Donors, Polar Acceptors, Ionic Positive, Ionic Negative_
+* Severe: any atom pair with at bond distance or below. Note that it can correspond to an actual covalent bond.
+* Apolar: two non interacting atoms too close
+* Polar Donors: Two hydrogen bond donors too close
+* Polar Acceptors: Two hydrogen bond acceptors too close
+* Ionic: Two charged atoms of the same charge too close
 
 ***

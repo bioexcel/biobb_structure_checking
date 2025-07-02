@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/d2/1d23.cif'
+Structure exists: 'tmpPDB/d2/1d23.cif' 
 Structure pdb:1d23 loaded
- PDB id: 1D23
+ PDB id: 1D23 
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
  Keywords: DNA
@@ -32,14 +32,14 @@ Replacing  DA A3 into DG
   Adding new atom N2
 
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-1 Steric polar_acceptor clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+1 Polar contacts (acceptors) detected
   DG A3.O6     DT B18.O4      2.996 A
-1 Steric polar_donor clashes detected
+1 Polar contacts (donors) detected
   DG A3.N1     DT B18.N3      2.859 A
-No positive clashes detected
-No negative clashes detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: DNA, B: DNA)
 Final Num. residues:  176

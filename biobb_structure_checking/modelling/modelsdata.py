@@ -54,15 +54,18 @@ class ModelsData():
             fix_atoms = [
                 at
                 for at in self.st[0].get_atoms()
-                if at.id == 'CA'
+                if at.id == 'CA' or at.id == 'P'
             ]
+            if not fix_atoms:
+                print("No CA atoms found, skipping superimposition")
+                return False
             for mod in self.st.get_models():
                 if mod.id == 0:
                     continue
                 mov_atoms = [
                     at
                     for at in self.st[mod.id].get_atoms()
-                    if at.id == 'CA'
+                    if at.id == 'CA' or at.id == 'P'
                 ]
                 spimp.set_atoms(fix_atoms, mov_atoms)
                 spimp.apply(self.st[mod.id].get_atoms())

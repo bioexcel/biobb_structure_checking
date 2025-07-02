@@ -82,6 +82,14 @@ ALL_CONTACT_TYPES = [
     'positive',
     'negative'
 ]
+ALL_CONTACT_TYPES_TEXT = {
+    'severe': 'Severe Steric clashes/covalent bonds',
+    'apolar': 'Apolar steric clashes',
+    'polar_acceptor': 'Polar contacts (acceptors)',
+    'polar_donor': 'Polar contacts (donors)',
+    'positive': 'Positively charged contacts',
+    'negative': 'Negatively charged contacts'
+}
 
 AMIDE_CONTACT_TYPES = [
     'polar_acceptor',
@@ -349,7 +357,7 @@ def calc_at_dist(at1, at2):
 def calc_at_sq_dist(at1, at2):
     """ Calculates distance between two atoms """
     vec = at1.coord - at2.coord
-    return np.dot(vec, vec)
+    return float(np.dot(vec, vec))
 
 
 def calc_bond_angle(at1, at2, at3):

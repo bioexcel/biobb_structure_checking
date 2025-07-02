@@ -8,6 +8,7 @@ from os.path import join as opj
 import shutil
 import sys
 import re
+import gzip
 
 from urllib.request import urlretrieve
 from urllib.request import urlcleanup
@@ -27,9 +28,9 @@ from Bio.PDB.PDBExceptions import PDBConstructionException
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.io.mmb_server import MMBPDBList
-from biobb_structure_checking.io.PDBIO_extended import PDBIO_extended
-from biobb_structure_checking.io.bare_builder import BareStructureBuilder
+from biobb_structure_checking.pdbio.mmb_server import MMBPDBList
+from biobb_structure_checking.pdbio.PDBIO_extended import PDBIO_extended
+from biobb_structure_checking.pdbio.bare_builder import BareStructureBuilder
 
 from biobb_structure_checking.libs.data_lib_manager import DataLibManager
 from biobb_structure_checking.libs.residue_lib_manager import ResidueLib
@@ -145,15 +146,11 @@ class StructureManager:
         self.pdb_id = 'User'
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
-            # MMBPDBList child defaults to Bio.PDB.PDBList
-            # if MMB/BSC server is not selected
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
                 input_pdb_path = pdbid.upper()
 
-                # if pdb_server not in ALT_SERVERS:
-                #    raise WrongServerError
                 if not biounit:
                     real_pdb_path = pdbl.retrieve_pdb_file(
                         input_pdb_path,
@@ -218,7 +215,7 @@ class StructureManager:
                 urlcleanup()
                 urlretrieve(input_pdb_path, real_pdb_path)
             except IOError:
-                print(f"Download failed")
+                print(f"Download {input_pdb_path} failed")
 
             nocache = True
 
@@ -257,24 +254,30 @@ class StructureManager:
         else:
             raise UnknownFileTypeError(input_pdb_path)
 
+        if '.gz' in real_pdb_path:
+            pdb_file_handle = gzip.open(real_pdb_path, 'rt')
+        else:
+            pdb_file_handle = open(real_pdb_path, 'r')
+
         try:
-            new_st = parser.get_structure(self.pdb_id, real_pdb_path)
+            new_st = parser.get_structure(self.pdb_id, pdb_file_handle)
         except ValueError as err:
             raise ParseError('ValueError', err) from err
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err) from err
+        rewind = pdb_file_handle.seek(0)
 
         if input_format in ['pdb', 'pqr']:
-            headers = parse_pdb_header(real_pdb_path)
+            headers = parse_pdb_header(pdb_file_handle)
         else:
-            headers = MMCIF2Dict(real_pdb_path)
+            headers = MMCIF2Dict(pdb_file_handle)
 
         if copy_dir:
             try:
                 shutil.copy(real_pdb_path, copy_dir)
                 print(
                     f"Storing a copy of the input structure as "
-                    f"{opj(copy_dir, os.path.basename(real_pdb_path))}"
+                    f"{copy_dir}"
                 )
             except Exception:
                 print(
@@ -1130,7 +1133,7 @@ class StructureManager:
                 *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used.
                 *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
                 *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
-                *sequende_Data* (SequenceData): SequenceData object containing canonical and structure sequences
+                *sequence_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
         if modeller_key:
@@ -1146,6 +1149,7 @@ class StructureManager:
             sys.exit("Error importing modeller")
 
         mod_mgr = ModellerManager()
+
         if not sequence_data:
             sequence_data = self.sequence_data
 
@@ -1523,18 +1527,25 @@ class StructureManager:
         modeller_key: str = ''
     ) -> Residue:
         """ Perform mutations Rebuilding side chain"""
-        ch_to_fix = {}
-        brk_list = {}
-        num_fix = 0
+
+        mutated_sequence_data = SequenceData()
+        mutated_sequence_data.fake_canonical_sequence(self, mutations)
+        mutated_res = []
+
+
         for mod in self.st.get_models():
-            ch_to_fix[mod.id] = set()
-            brk_list[mod.id] = []
+            if mod.id > 0:
+                print("ERROR: Only one model per structure is supported for mutateside --rebuild")
+                break
+            num_fix = 0
+            ch_to_fix = set()
+            brk_list = []
             for mut_set in mutations.mutation_list:
                 for mut in mut_set.mutations:
                     # Checking if protein on model 0
                     if self.chains_data.chain_ids[mod.id][mut['chain']] > 1:
                         continue
-                    ch_to_fix[mod.id].add(mut['chain'])
+                    ch_to_fix.add(mut['chain'])
                     start_res = mut['resobj']
                     if start_res in self.st_data.prev_residue:
                         start_res = self.st_data.prev_residue[start_res]
@@ -1542,31 +1553,28 @@ class StructureManager:
                     if end_res in self.st_data.next_residue:
                         end_res = self.st_data.next_residue[end_res]
                     brk = [start_res, end_res]
-                    brk_list[mod.id].append(brk)
-            num_fix += len(ch_to_fix[mod.id])
+                    brk_list.append(brk)
+                    mu.remove_residue(mut['resobj'])
 
-        if not num_fix:
-            print("No protein chains left, exiting")
-            return []
+            mutated_sequence_data.read_structure_seqs(self)
+            mutated_sequence_data.match_sequence_numbering(self)
 
-        mutated_sequence_data = SequenceData()
-        mutated_sequence_data.fake_canonical_sequence(self, mutations)
-        for mut_set in mutations.mutation_list:
-            for mut in mut_set.mutations:
-                mu.remove_residue(mut['resobj'])
-        mutated_sequence_data.read_structure_seqs(self)
-        mutated_sequence_data.match_sequence_numbering(self)
+            num_fix += len(ch_to_fix)
 
-        # TODO Not tested, to be used on changes in the NTerm residue
-        extra_NTerm = 0
-        mutated_res = self.run_modeller(
-            ch_to_fix,
-            brk_list,
-            modeller_key,
-            0,
-            extra_NTerm,
-            mutated_sequence_data
-        )
+            if not num_fix:
+                print(f"No mutations left on model {mod.id}, skipping")
+                continue
+
+            # TODO Not tested, to be used on changes in the NTerm residue
+            extra_NTerm = 0
+            mutated_res = self.run_modeller(
+                ch_to_fix,
+                brk_list,
+                modeller_key,
+                0,
+                extra_NTerm,
+                mutated_sequence_data
+            )
 
         self.update_internals()
         return mutated_res

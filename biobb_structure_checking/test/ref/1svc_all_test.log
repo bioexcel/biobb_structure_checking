@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/sv/1svc.cif'
+Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
- PDB id: 1SVC
+ PDB id: 1SVC 
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA
@@ -107,12 +107,12 @@ GLU P353
   Adding new atom OXT
 Fixed 1 backbone atom(s)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 14: cistransbck
 
@@ -128,8 +128,8 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-13 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+13 Apolar steric clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A
  GLU P63.O    HIS P67.CD2     2.853 A
  SER P74.OG   SER P81.CB      2.821 A
@@ -143,7 +143,7 @@ No severe clashes detected
  LEU P251.O   SER P343.CB     2.870 A
  TYR P286.CA  TRP P295.O      2.821 A
  ARG P336.O   LEU P340.CA     2.840 A
-7 Steric polar_acceptor clashes detected
+7 Polar contacts (acceptors) detected
  TYR P44.O    CYS P88.O       2.939 A
  GLU P49.OE1  TYR P82.O       2.951 A
  VAL P96.O    VAL P126.O      3.060 A
@@ -151,13 +151,13 @@ No severe clashes detected
  CYS P162.O   GLU P182.O      3.056 A
  TYR P178.O   GLU P182.OE1    3.086 A
  LEU P179.O   GLU P182.O      2.852 A
-1 Steric polar_donor clashes detected
+1 Polar contacts (donors) detected
  ARG P54.NH1  ARG P336.NH1    3.056 A
-3 Steric positive clashes detected
+3 Positively charged contacts detected
  ARG P54.NH1  ARG P336.NH1    3.056 A
  ARG P57.NH2  ARG P59.NH1     3.356 A
  ARG P284.NE  ARG P335.NH1    3.476 A
-2 Steric negative clashes detected
+2 Negatively charged contacts detected
  ASP P121.OD2 GLU P160.OE2    3.177 A
  GLU P287.OE1 GLU P289.OE2    3.216 A
 

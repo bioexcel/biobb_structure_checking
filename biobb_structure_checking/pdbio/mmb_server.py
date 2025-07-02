@@ -131,7 +131,7 @@ class MMBPDBList(PDBList):
             #     )
             # else:
             #     print(f"Downloading PDB structure '{pdb_code}' from {self.pdb_server} ...")
-            print(f"Downloading structure '{pdb_code}' from {self.pdb_server} as {file_format} ...")
+            print(f"Downloading structure '{pdb_code}' from {url} ...")
         try:
             urlcleanup()
             urlretrieve(url, final_file)

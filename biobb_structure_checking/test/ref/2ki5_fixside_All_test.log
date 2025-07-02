@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ki/2ki5.cif'
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -60,24 +60,27 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
-1 Steric severe clashes detected
+4 Severe Steric clashes/covalent bonds detected
+ MET A46.CE   VAL A352.CG2    1.843 A
+ MET A46.CE   THR A354.O      1.869 A
  MET B46.CE   VAL B352.O      0.921 A
-5 Steric apolar clashes detected
+ ARG B220.CZ  SO4 B3.O3       1.597 A
+5 Apolar steric clashes detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A
  MET B46.CE   VAL B352.O      0.921 A
  GLY B61.CA   ARG B220.NH1    2.301 A
  ARG B220.CZ  SO4 B3.O3       1.597 A
-3 Steric polar_acceptor clashes detected
+3 Polar contacts (acceptors) detected
  MET A46.SD   VAL A352.O      2.171 A
  MET A46.SD   THR A354.O      2.569 A
  MET B46.SD   VAL B352.O      2.291 A
-2 Steric polar_donor clashes detected
+2 Polar contacts (donors) detected
  GLY B61.N    ARG B220.NH1    2.443 A
  ARG B216.NH2 ARG B220.NH1    2.977 A
-1 Steric positive clashes detected
+1 Positively charged contacts detected
  ARG B216.NH2 ARG B220.NH1    2.977 A
-No negative clashes detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
 Final Num. residues:  908

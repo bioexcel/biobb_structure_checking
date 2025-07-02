@@ -12,8 +12,8 @@ from numpy import sqrt
 
 import biobb_structure_checking.constants as cts
 
-from biobb_structure_checking.io.json_writer import JSONWriter
-from biobb_structure_checking.io.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.pdbio.json_writer import JSONWriter
+from biobb_structure_checking.pdbio.param_input import ParamInput, NoDialogAvailableError
 
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.modelling.utils as mu
@@ -488,8 +488,7 @@ class StructureChecking():
                 print(
                     cts.MSGS['CLASHES_DETECTED'].format(
                         len(clash_list[cls]),
-                        cls
-                    )
+                        mu.ALL_CONTACT_TYPES_TEXT[cls]                    )
                 )
                 for rkey in sorted(
                         clash_list[cls],
@@ -501,13 +500,13 @@ class StructureChecking():
                         f" {sqrt(clash_list[cls][rkey][2]):8.3f} A"
                     )
                     summary[cls].append({
-                        'at1':mu.atom_id(clash_list[cls][rkey][0]),
-                        'at2':mu.atom_id(clash_list[cls][rkey][1]),
+                        'at1': mu.atom_id(clash_list[cls][rkey][0]),
+                        'at2': mu.atom_id(clash_list[cls][rkey][1]),
                         'dist': round(float(sqrt(clash_list[cls][rkey][2])), 4)
                     })
             else:
                 if not self.args['quiet']:
-                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(cls))
+                    print(cts.MSGS['NO_CLASHES_DETECTED'].format(mu.ALL_CONTACT_TYPES_TEXT[cls]))
         return summary
 
     def _check_time_limit(self):

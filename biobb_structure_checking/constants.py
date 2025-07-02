@@ -7,9 +7,9 @@ from os.path import dirname
 from os.path import join as opj
 
 
-from biobb_structure_checking.io.param_input import Dialog
+from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.13.4'
+VERSION = '3.15.6'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -17,7 +17,7 @@ RES_LIBRARY_DEFAULT_PATH = 'all_residues.in'
 DATA_LIBRARY_DEFAULT_PATH = 'data_lib.json'
 CACHE_DIR_DEFAULT_PATH = 'tmpPDB'
 COMMANDS_HELP_PATH = 'commands.hlp'
-PDB_DOWNLOAD_PREFIX = 'ftp://ftp.wwpdb.org'
+PDB_DOWNLOAD_PREFIX = 'https://files.wwpdb.org'
 FASTA_DOWNLOAD_PREFIX = 'https://www.rcsb.org/fasta/entry'
 ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
@@ -103,8 +103,10 @@ CMD_LINE.add_argument(
     dest='input_structure_path',
     help='Input structure. '
          '1) Fetch from remote pdb:{pdbid}[.format] '
-         '2) Local file: Formats pdb(qt)|pqr|cif. '
-         'Format assumed from extension.'
+         '2) Direct fetch from custom URL '
+         '3) Local file: Formats pdb(qt)|pqr|cif. '
+         'For 2) and 3) Format assumed from extension.'
+         '.gz files are automatically decompressed'
 )
 
 CMD_LINE.add_argument(
@@ -128,12 +130,13 @@ CMD_LINE.add_argument(
     help='Canonical sequence in FASTA format. Accepted pdb:{pdbid} '
          'for downloading. Note that when downloading PDB files, '
          'sequences are also automatically downloaded'
+         '.gz files are automatically decompressed'
 )
 
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(wwPDB)|MMB|BSC|wwPDB_http)'
+    help='Server for retrieving structures (default(wwPDB)| BSC)'
 )
 
 CMD_LINE.add_argument(
@@ -146,7 +149,7 @@ CMD_LINE.add_argument(
     '--nocache',
     dest='nocache',
     action='store_true',
-    help='Do not cache remote downloaded structures'
+    help='Do not cache downloaded structures'
 )
 
 CMD_LINE.add_argument(
@@ -740,8 +743,8 @@ MSGS = {
     'NO_LOWTRANS_BONDS': 'No trans peptide bonds with unusual omega dihedrals found',
     # clashes
     'CHECKING_CLASHES': 'Checking for steric clashes',
-    'CLASHES_DETECTED': '{} Steric {} clashes detected',
-    'NO_CLASHES_DETECTED': 'No {} clashes detected',
+    'CLASHES_DETECTED': '{} {} detected',
+    'NO_CLASHES_DETECTED': 'No {} detected',
     # load
     'STRUCTURE_LOADED': 'Structure {} loaded',
     # NA related

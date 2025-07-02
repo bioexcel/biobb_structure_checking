@@ -515,6 +515,16 @@
    ],
    "severe": [
     {
+     "at1": "MET A46.CE",
+     "at2": "VAL A352.CG2",
+     "dist": 1.8427
+    },
+    {
+     "at1": "MET A46.CE",
+     "at2": "THR A354.O",
+     "dist": 1.8692
+    },
+    {
      "at1": "MET B46.CE",
      "at2": "VAL B352.O",
      "dist": 0.9206
@@ -670,6 +680,16 @@
    }
   ],
   "severe": [
+   {
+    "at1": "MET A46.CE",
+    "at2": "VAL A352.CG2",
+    "dist": 1.8427
+   },
+   {
+    "at1": "MET A46.CE",
+    "at2": "THR A354.O",
+    "dist": 1.8692
+   },
    {
     "at1": "MET B46.CE",
     "at2": "VAL B352.O",

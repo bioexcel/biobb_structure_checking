@@ -1,9 +1,9 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Structure exists: 'tmpPDB/ki/2ki5-assembly1.cif'
+Structure exists: 'tmpPDB/ki/2ki5-assembly1.cif' 
 Structure pdb:2ki5.1 loaded
  PDB id: 2ki5 (Assembly 1)
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
@@ -117,12 +117,12 @@ Found 8 Residues with missing backbone atoms
  SER B263   CA,C,O,OXT
  ALA B375   CA,C,O,OXT
 Found 6 Backbone breaks
- VAL A70    - ASP A77
- GLY A148   - PRO A154
- GLY A264   - PRO A280
- GLY B73    - ASP B77
- GLY B148   - PRO B154
- SER B263   - ALA B278
+ VAL A70    - ASP A77   
+ GLY A148   - PRO A154  
+ GLY A264   - PRO A280  
+ GLY B73    - ASP B77   
+ GLY B148   - PRO B154  
+ SER B263   - ALA B278  
 No unexpected backbone links
 Running  check_only. Nothing else to do.
 Running cistransbck.
@@ -130,8 +130,8 @@ No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
-No severe clashes detected
-13 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+13 Apolar steric clashes detected
  GLY A61.O    THR A65.CG2     2.799 A
  MET A85.CG   GLU A374.OE1    2.857 A
  ARG A89.CD   GLU A95.OE1     2.776 A
@@ -145,19 +145,19 @@ No severe clashes detected
  GLU B210.O   ILE B214.CG1    2.842 A
  ARG B212.CZ  ASP B330.OD1    2.875 A
  SER B357.O   ILE B361.CG1    2.861 A
-5 Steric polar_acceptor clashes detected
+5 Polar contacts (acceptors) detected
  ASP A55.O    VAL A204.O      3.035 A
  ARG B89.O    GLU B95.OE1     2.792 A
  ASP B211.O   ASP B215.OD2    2.914 A
  ALA B334.O   ASP B338.OD2    3.100 A
  PRO B359.O   ASP B363.OD2    3.073 A
-2 Steric polar_donor clashes detected
+2 Polar contacts (donors) detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
-2 Steric positive clashes detected
+2 Positively charged contacts detected
  LYS A62.NZ   ARG A163.NH1    2.578 A
  ARG A212.NH2 ARG A216.NH2    3.075 A
-No negative clashes detected
+No Negatively charged contacts detected
 Running  check_only. Nothing else to do.
 Running sequences.
 Canonical sequence

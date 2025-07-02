@@ -1,7 +1,7 @@
 """ Module supporting ligands command"""
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
-from biobb_structure_checking.io.param_input import ParamInput
+from biobb_structure_checking.pdbio.param_input import ParamInput
 
 
 def check(strcheck):

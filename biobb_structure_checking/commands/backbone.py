@@ -2,7 +2,7 @@
 
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
-from biobb_structure_checking.io.param_input import ParamInput
+from biobb_structure_checking.pdbio.param_input import ParamInput
 from biobb_structure_checking.structure_manager import NotEnoughAtomsError
 
 
@@ -205,7 +205,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
         return []
 
     # Checking for canonical sequence
-    if not strcheck.strucm.sequence_data.has_canonical:
+    if not strcheck.strucm.sequence_data.has_canonical[0]:
         read_ok = False
         while not read_ok:
             input_line = ParamInput(
@@ -231,7 +231,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
             strcheck.strucm,
             False
         )
-        strcheck.strucm.sequence_data.match_sequence_numbering()
+        strcheck.strucm.sequence_data.match_sequence_numbering(strcheck.strucm)
 
     to_fix = [
         rpair

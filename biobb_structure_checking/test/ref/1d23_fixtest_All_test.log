@@ -1,12 +1,12 @@
 ================================================================================
-=                   BioBB structure checking utility v3.13.3                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
-Warning: sequence features only available in mmCIF format or with external fasta input
+Warning: sequence features may not be available, use --sequence for  external fasta input
 Structure dna_test/1d23_fixtest.pdb loaded
- PDB id:
- Title:
+ PDB id:  
+ Title: 
  Experimental method: unknown
  Resolution (A): N.A.
 
@@ -35,12 +35,12 @@ Fixing side chains
 Not enough atoms left on  DC A5 to recover base orientation, skipping
 Fixed 2 side chain(s)
 Checking for steric clashes
-No severe clashes detected
-No apolar clashes detected
-No polar_acceptor clashes detected
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Severe Steric clashes/covalent bonds detected
+No Apolar steric clashes detected
+No Polar contacts (acceptors) detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 Final Num. models: 1
 Final Num. chains: 2 (A: DNA, B: DNA)
 Final Num. residues:  20

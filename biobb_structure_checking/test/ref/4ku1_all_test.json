@@ -625,7 +625,43 @@
    ],
    "polar_donor": [],
    "positive": [],
-   "severe": []
+   "severe": [
+    {
+     "at1": "ASN A297.ND2",
+     "at2": "NAG C1.C1",
+     "dist": 1.9025
+    },
+    {
+     "at1": "CYX A367.SG",
+     "at2": "CYX A425.SG",
+     "dist": 1.9952
+    },
+    {
+     "at1": "ASN B297.ND2",
+     "at2": "NAG D1.C1",
+     "dist": 1.4676
+    },
+    {
+     "at1": "NAG C1.O6",
+     "at2": "FUL C10.C1",
+     "dist": 1.347
+    },
+    {
+     "at1": "BMA C3.O6",
+     "at2": "MAN C7.C1",
+     "dist": 1.6187
+    },
+    {
+     "at1": "NAG D1.O6",
+     "at2": "FUL D9.C1",
+     "dist": 1.3339
+    },
+    {
+     "at1": "BMA D3.O3",
+     "at2": "MAN D7.C1",
+     "dist": 1.4401
+    }
+   ]
   }
  },
  "final_stats": {
