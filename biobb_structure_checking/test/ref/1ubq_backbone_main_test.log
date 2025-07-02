@@ -1,6 +1,6 @@
 ================================================================================
 =                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-23            =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
 Getting canonical sequences from matching FASTA input
@@ -37,12 +37,12 @@ Found 4 Backbone breaks
 No unexpected backbone links
 Main chain fixes
 
-                         MODELLER 10.6, 2024/10/17, r12888
+                         MODELLER 10.7, 2025/05/28, r13093
 
      PROTEIN STRUCTURE MODELLING BY SATISFACTION OF SPATIAL RESTRAINTS
 
 
-                     Copyright(c) 1989-2024 Andrej Sali
+                     Copyright(c) 1989-2025 Andrej Sali
                             All Rights Reserved
 
                              Written by A. Sali
@@ -58,10 +58,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 5.14.21-150500.55.88-default x86_64
-Date and time of compilation         : 2024/10/17 20:34:40
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2025/05/22 15:57:07
+Job starting time (YY/MM/DD HH:MM:SS): 2025/07/02 09:04:13
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
