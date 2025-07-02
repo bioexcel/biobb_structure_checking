@@ -16,10 +16,12 @@
     1.6. Detect DNA/RNA /Remove (na) DONE in chains
         1.6.1 Include NA Topology WITHDRAWN Too much adaptation needed, use BNSTopology instead
     1.7. Remove Water (remwat) DONE
+        1.7.1 Remove Water molecules following interactions
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
         1.9.2 Output FASTA file DONE
+    
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
         2.1.1 Amides Automatic fix DONE
@@ -51,6 +53,18 @@
         2.7.6 Fix modelled junctions
         2.7.8 Rebuild backbone in the context of the complete molecule (also for --rebuild options)
 	2.7.9 Detect and fix extra backbone atoms (like extra OXT)
+    2.8 FixALL module
+        - Model and Chain selected on demand
+        - AltLoc to occupancy
+        - Inscodes renumber chain
+        - Remove ligands on demand
+        - Select and Remove water molecules
+        - Add hydrogens
+        - Fix Amides auto
+        - Fix Side Chains
+        - Rebuild Side Chains (Chirality/clashes)
+        - Fix Backbone (chain / missing atoms / Caps)
+        - Mark SS
 3. Structure Warnings
     3.1. Detect SS Bonds (getss) DONE
         3.1.1 Mark Cys in SS Bonds as CYX DONE
@@ -60,7 +74,7 @@
     3.4. Possible Sequence Gaps (bckbone) DONE
         3.4.1 Fix only-CA structures (Modeller)
     3.5. Steric clashes (clashes) DONE
-        3.5.1. Severe Steric clashes DONE
+        3.5.1. Severe Steric clashes DONE Revise new severe clashes
         3.5.2. CA Steric Clashes NO
         3.5.3. Polar Donor Clashes DONE
         3.5.4. Polar Acceptor Clashes DONE
@@ -71,8 +85,15 @@
     4.1 Check only
     4.2 Prepare autodock input
     4.3 Prepare CMIP input WITHDRAWN (DONE in 2.6.3)
-    4.4 Convert from MD formats
+    4.4 Convert from MD formats DONE using --output_format 
+    4.5 Advanced stats including globularity, assymetric vs assembly
 5. General
     5.1. Generate PDB Metadata
     5.2. Generate CIF output files DONE
     5.3. Study the use on command line pipelines
+    5.4. Accept GZIP files transparently DONE
+
+Bugs & Needed fixes
+- Remove Warning about default download
+- Reorganize --time_limit as it is checked after the work is done. 
+- 
