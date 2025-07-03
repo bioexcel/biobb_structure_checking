@@ -450,7 +450,26 @@ class StructureManager:
                 if not mu.check_chiral_ca(res)
             ]
         }
-
+    def get_boxfill(self):
+        """ Returns a boxfill object for the structure """
+        # TODO
+        # Orient molecule to major inertial axis
+        eigvecs, orient_matrix, eigvals = mu.get_inertial_axes(self.st)
+        print(eigvecs, eigvals)
+        oriented_st = mu.orient_structure(self.st, orient_matrix)
+        eigvecs1, orient_matrix1, eigvals1 = mu.get_inertial_axes(oriented_st)
+        print(eigvecs1, eigvals1)
+        # Calculate box
+        min_coords, box_size = mu.get_box_from_structure(oriented_st)
+        print(f"Box min coords: {min_coords}")
+        print(f"Box size: {box_size}")
+        
+        box_min = min(box_size)
+        self.globularity = box_size[0] * box_size[1] * box_size[2] / box_min**3
+        print(f"Globularity: {self.globularity:.3f}")
+        # inner, outer = mu.fill_box(box, oriented_st)
+        # Build inner/outer grid
+        pass
     def check_r_list_clashes(
             self,
             residue_list: Iterable[Residue],

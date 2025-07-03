@@ -1450,3 +1450,44 @@ def build_atom(res, at_id, res_lib, new_res_id):
     else:
         coords = build_coords_from_lib(res, res_lib, new_res_id, at_id)
     add_new_atom_to_residue(res, at_id, coords)
+# ======================================================================
+# Box Fill
+def get_inertial_axes(st, at_list=None):
+    """ Get inertial axes of a structure or a list of atoms """
+    if at_list is None:
+        at_list = st.get_atoms()
+    coords = np.array([at.coord for at in at_list if at.element not in ('H')])
+    if len(coords) < 3:
+        return None
+    # Calculate covariance matrix
+    cov_mat = np.cov(coords.T)
+    # Get eigenvalues and eigenvectors
+    eigvals, eigvecs = np.linalg.eig(cov_mat)
+    # Sort by eigenvalues
+    idx = eigvals.argsort()[::-1]
+    eigvals = eigvals[idx]
+    eigvecs = eigvecs[:, idx]
+    rot_matrix = np.linalg.inv(eigvecs)
+    return eigvecs, rot_matrix, eigvals
+
+def orient_structure(st, orient_matrix):
+    """ Orient structure using rotation matrix """
+    new_st = st.copy()
+    for model in new_st:
+        for chain in model:
+            for res in chain:
+                for atm in res.get_atoms():
+                    atm.coord = np.dot(orient_matrix, atm.coord)
+    return new_st
+
+def get_box_from_structure(st, at_list=None):
+    """ Get box dimensions from structure or atom list """
+    if at_list is None:
+        at_list = st.get_atoms()
+    coords = np.array([at.coord for at in at_list if at.element not in ('H')])
+    if len(coords) < 3:
+        return None
+    min_coords = coords.min(axis=0)
+    max_coords = coords.max(axis=0)
+    box_size = max_coords - min_coords
+    return min_coords, box_size
