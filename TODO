@@ -21,6 +21,9 @@
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
         1.9.2 Output FASTA file DONE
+    1.10. Evaluate globularity and efficiency filling box
+        1.10.1 Evaluate globularity
+        1.10.2 Evaluate percent of filling of a rectangular box
     
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
