@@ -114,7 +114,7 @@ class StructureManager:
             pre_check_atom_limit=pre_check_atom_limit
         )
         if self.st is None:
-            sys.exit("Pre-checked atom limit failed. Structure not loaded, exiting")
+            sys.exit(f"Pre-checked atom limit failed ({headers}/{atom_limit}). Structure not loaded, exiting")
         # Check limit of atoms now to avoid delays
         num_ats = len(list(self.st.get_atoms()))
         if atom_limit and num_ats > atom_limit:
@@ -271,7 +271,8 @@ class StructureManager:
             if num_ats > atom_limit:
                 pdb_file_handle.close()
                 print(cts.MSGS['ATOM_LIMIT'].format(num_ats, atom_limit))
-                return None, None, None, None
+                return None, num_ats, None, None
+            pdb_file_handle.seek(0)  # rewind file handle
 
         try:
             new_st = parser.get_structure(self.pdb_id, pdb_file_handle)

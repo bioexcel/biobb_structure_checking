@@ -21,7 +21,7 @@
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
         1.9.2 Output FASTA file DONE
-    
+
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
         2.1.1 Amides Automatic fix DONE
@@ -85,7 +85,7 @@
     4.1 Check only
     4.2 Prepare autodock input
     4.3 Prepare CMIP input WITHDRAWN (DONE in 2.6.3)
-    4.4 Convert from MD formats DONE using --output_format 
+    4.4 Convert from MD formats DONE using --output_format
     4.5 Advanced stats including globularity, assymetric vs assembly
 5. General
     5.1. Generate PDB Metadata
@@ -95,5 +95,5 @@
 
 Bugs & Needed fixes
 - Remove Warning about default download
-- Reorganize --time_limit as it is checked after the work is done. 
-- 
+- Reorganize --time_limit as it is checked after the work is done
+- Reorganize --limit to avoid Biopython loading
