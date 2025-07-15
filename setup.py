@@ -11,7 +11,7 @@ setuptools.setup(
     version="3.15.6",
 
     author="Biobb developers",
-    author_email="josep.gelpi@bsc.es",
+    author_email="gelpi@ub.edu",
     description="BioBB_structure_checking performs MDWeb structure checking tool set as a command line utility.",
     long_description=long_description,
     long_description_content_type="text/markdown",
