@@ -246,6 +246,13 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--pre_check_limit',
+    dest='pre_check_atom_limit',
+    action='store_true',
+    help=f'Pre-check atom limit on input file no avoid loading the structure'
+)
+
+CMD_LINE.add_argument(
     '--time_limit',
     dest='time_limit',
     type=int,

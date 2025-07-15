@@ -66,7 +66,8 @@ class StructureManager:
             nowarn: bool = True,
             coords_only: bool = False,
             overwrite: bool = False,
-            atom_limit: int = 0
+            atom_limit: int = 0,
+            pre_check_atom_limit: bool = False
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -108,8 +109,12 @@ class StructureManager:
             file_format,
             QUIET=nowarn,
             coords_only=coords_only,
-            overwrite=overwrite
+            overwrite=overwrite,
+            atom_limit=atom_limit,
+            pre_check_atom_limit=pre_check_atom_limit
         )
+        if self.st is None:
+            sys.exit("Pre-checked atom limit failed. Structure not loaded, exiting")
         # Check limit of atoms now to avoid delays
         num_ats = len(list(self.st.get_atoms()))
         if atom_limit and num_ats > atom_limit:
@@ -138,8 +143,9 @@ class StructureManager:
             file_format,
             QUIET=False,
             coords_only=False,
-            overwrite=False
-
+            overwrite=False,
+            atom_limit=0,
+            pre_check_atom_limit=False
     ):
         """ Load structure file """
         biounit = False
@@ -259,6 +265,14 @@ class StructureManager:
         else:
             pdb_file_handle = open(real_pdb_path, 'r')
 
+        if pre_check_atom_limit and atom_limit > 0:
+            # Pre-check number of atoms in file
+            num_ats = sum(1 for _ in pdb_file_handle if _.startswith('ATOM') or _.startswith('HETATM'))
+            if num_ats > atom_limit:
+                pdb_file_handle.close()
+                print(cts.MSGS['ATOM_LIMIT'].format(num_ats, atom_limit))
+                return None, None, None, None
+
         try:
             new_st = parser.get_structure(self.pdb_id, pdb_file_handle)
         except ValueError as err:
@@ -277,7 +291,7 @@ class StructureManager:
                 shutil.copy(real_pdb_path, copy_dir)
                 print(
                     f"Storing a copy of the input structure as "
-                    f"{copy_dir}"
+                    f"{copy_dir, os.path.basename(real_pdb_path)}"
                 )
             except Exception:
                 print(
