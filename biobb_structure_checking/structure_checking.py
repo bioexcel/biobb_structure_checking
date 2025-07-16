@@ -376,8 +376,7 @@ class StructureChecking():
             nowarn=not self.args['build_warnings'],
             coords_only=self.args['coords_only'],
             overwrite=self.args['overwrite'],
-            atom_limit=self.args['atom_limit'],
-            pre_check_atom_limit=self.args['pre_check_atom_limit']
+            atom_limit=self.args['atom_limit']
         )
 
         self.summary['loaded_structure'] = input_structure_path

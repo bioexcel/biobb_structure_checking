@@ -96,4 +96,4 @@
 Bugs & Needed fixes
 - Remove Warning about default download
 - Reorganize --time_limit as it is checked after the work is done
-- Reorganize --limit to avoid Biopython loading
+- Reorganize --limit to avoid Biopython loading DONE

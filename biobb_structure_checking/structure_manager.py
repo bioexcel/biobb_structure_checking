@@ -66,8 +66,7 @@ class StructureManager:
             nowarn: bool = True,
             coords_only: bool = False,
             overwrite: bool = False,
-            atom_limit: int = 0,
-            pre_check_atom_limit: bool = False
+            atom_limit: int = 0
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -110,17 +109,13 @@ class StructureManager:
             QUIET=nowarn,
             coords_only=coords_only,
             overwrite=overwrite,
-            atom_limit=atom_limit,
-            pre_check_atom_limit=pre_check_atom_limit
+            atom_limit=atom_limit
         )
-        if self.st is None:
-            sys.exit(f"Pre-checked atom limit failed ({headers}/{atom_limit}). Structure not loaded, exiting")
-        # Check limit of atoms now to avoid delays
-        num_ats = len(list(self.st.get_atoms()))
-        if atom_limit and num_ats > atom_limit:
+
+        if self.st == 'atom_limit_error':
             sys.exit(
                 cts.MSGS['ATOM_LIMIT'].format(
-                    num_ats,
+                    headers,
                     atom_limit
                 )
             )
@@ -144,8 +139,7 @@ class StructureManager:
             QUIET=False,
             coords_only=False,
             overwrite=False,
-            atom_limit=0,
-            pre_check_atom_limit=False
+            atom_limit=0
     ):
         """ Load structure file """
         biounit = False
@@ -265,13 +259,11 @@ class StructureManager:
         else:
             pdb_file_handle = open(real_pdb_path, 'r')
 
-        if pre_check_atom_limit and atom_limit > 0:
-            # Pre-check number of atoms in file
+        if atom_limit > 0:
             num_ats = sum(1 for _ in pdb_file_handle if _.startswith('ATOM') or _.startswith('HETATM'))
             if num_ats > atom_limit:
                 pdb_file_handle.close()
-                print(cts.MSGS['ATOM_LIMIT'].format(num_ats, atom_limit))
-                return None, num_ats, None, None
+                return 'atom_limit_error', num_ats, None, None
             pdb_file_handle.seek(0)  # rewind file handle
 
         try:
@@ -280,7 +272,7 @@ class StructureManager:
             raise ParseError('ValueError', err) from err
         except PDBConstructionException as err:
             raise ParseError('PDBBuildError', err) from err
-        rewind = pdb_file_handle.seek(0)
+        pdb_file_handle.seek(0)
 
         if input_format in ['pdb', 'pqr']:
             headers = parse_pdb_header(pdb_file_handle)
