@@ -35,8 +35,10 @@ ligands [--remove All | None | Res_type_list | Residue_list]
     Detect/Remove Ligands
 getss      Detect SS Bonds
     --mark Replace relevant CYS by CYX to mark SS Bond (HG atom removed if present)
-water [--remove Yes|No]
-    Remove Water molecules
+water [--remove Yes|No] [--keep_min_contacts KEEP]
+    --remove Remove Water molecules
+    --keep_min_contacts KEEP - Remove All Water molecules with less then KEEP contacts (0-4)
+
 rem_hydrogen [--remove Yes|No]
     Remove Hydrogen atoms from structure
 mutateside [--mut mutation_list|file:mutations_file] [--no_check_clashes]

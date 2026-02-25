@@ -1,5 +1,7 @@
 ## v3.13.7 (2026.1)
 ### Extended functions
+- water
+  - Added support for selective removal of water molecules according to contacts
 ### Bug fixes
 - sequences
   - Fixed missing initial fragment, structure sequence header

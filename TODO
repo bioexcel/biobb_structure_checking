@@ -17,7 +17,7 @@
     1.6. Detect DNA/RNA /Remove (na) DONE in chains
         1.6.1 Include NA Topology WITHDRAWN Too much adaptation needed, use BNSTopology instead
     1.7. Remove Water (remwat) DONE
-        1.7.1 Remove Water molecules following interactions
+        1.7.1 Remove Water molecules following interactions DONE
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
