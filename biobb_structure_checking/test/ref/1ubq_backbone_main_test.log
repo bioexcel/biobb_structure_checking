@@ -58,10 +58,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 6.4.0-150600.23.87-default x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2025/07/02 09:04:13
+Job starting time (YY/MM/DD HH:MM:SS): 2026/02/25 15:49:14
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -103,6 +103,38 @@ Fixing ILE A44 - ALA A46
 
 Getting canonical sequences from matching FASTA input
 A: "1ubq_A  protein 76  UBIQUITIN", score: 76.0 
+<Residue VAL het=  resseq=5 icode= >
+VAL A5
+<Residue LYS het=  resseq=6 icode= >
+LYS A6
+<Residue THR het=  resseq=7 icode= >
+THR A7
+<Residue LEU het=  resseq=8 icode= >
+LEU A8
+<Residue LYS het=  resseq=11 icode= >
+LYS A11
+<Residue THR het=  resseq=12 icode= >
+THR A12
+<Residue ILE het=  resseq=13 icode= >
+ILE A13
+<Residue THR het=  resseq=14 icode= >
+THR A14
+<Residue GLU het=  resseq=16 icode= >
+GLU A16
+<Residue VAL het=  resseq=17 icode= >
+VAL A17
+<Residue GLU het=  resseq=18 icode= >
+GLU A18
+<Residue PRO het=  resseq=19 icode= >
+PRO A19
+<Residue SER het=  resseq=20 icode= >
+SER A20
+<Residue ILE het=  resseq=44 icode= >
+ILE A44
+<Residue PHE het=  resseq=45 icode= >
+PHE A45
+<Residue ALA het=  resseq=46 icode= >
+ALA A46
 Found 2 Residues with missing backbone atoms
  LEU A8     OXT
  THR A14    OXT

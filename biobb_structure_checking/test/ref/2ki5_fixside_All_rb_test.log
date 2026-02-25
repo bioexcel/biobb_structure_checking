@@ -56,10 +56,10 @@ Fixing side chains
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux jlgbio2 6.4.0-150600.23.87-default x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2025/07/02 09:04:11
+Job starting time (YY/MM/DD HH:MM:SS): 2026/02/25 15:47:18
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
