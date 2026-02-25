@@ -462,9 +462,11 @@ class StructureManager:
             self,
             residue_list: Iterable[Residue],
             contact_types: Iterable[str],
-            get_all_contacts=False
+            get_all_contacts=False,
+            use_wat=False
     ) -> Dict[str, Dict[str, Tuple[Residue, Residue, float]]]:
         """ Checks clashes originated by a list of residues"""
+
         return mu.check_r_list_clashes(
             residue_list,
             self.rr_dist,
@@ -472,6 +474,7 @@ class StructureManager:
             self.data_library.get_atom_lists(contact_types),
             not self.models_data.has_superimp_models(),
             severe='severe' in contact_types,
+            use_wat=use_wat,
             get_all_contacts=get_all_contacts
         )
 

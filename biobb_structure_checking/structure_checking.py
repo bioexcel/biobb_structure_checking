@@ -463,7 +463,7 @@ class StructureChecking():
 
         return output_structure_path
 
-    def check_report_clashes(self, residue_list=None, contact_types=None):
+    def check_report_clashes(self, residue_list=None, contact_types=None, use_wat=False):
         """ StructureChecking.check_report_clashes
             Check and reports clashes
 
@@ -475,9 +475,10 @@ class StructureChecking():
             contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list:
             residue_list = self.strucm.st_data.all_residues
+        print(use_wat)
         return self._clash_report(
             contact_types,
-            self.strucm.check_r_list_clashes(residue_list, contact_types)
+            self.strucm.check_r_list_clashes(residue_list, contact_types, use_wat=use_wat)
         )
 
     def _clash_report(self, contact_types, clash_list):
