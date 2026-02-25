@@ -100,10 +100,11 @@ def fix(strcheck, opts, fix_data=None):
 
     fix_done = not fix_data['bck_breaks_list']
 
+    fixed_main_res = []
+
     while not fix_done:
         if opts['extra_gap'] is None:
             opts['extra_gap'] = 0
-        fixed_main_res = []
         fixed_main = _backbone_fix_main_chain(
             strcheck,
             opts['fix_chain'],
