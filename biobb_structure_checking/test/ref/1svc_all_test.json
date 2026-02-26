@@ -418,6 +418,151 @@
   "total_charge": null
  },
  "water": {
+  "contacts": {
+   "HOH D406": [
+    " DA D9"
+   ],
+   "HOH D409": [
+    " DG D6"
+   ],
+   "HOH D412": [],
+   "HOH D419": [
+    " DC D14"
+   ],
+   "HOH D421": [],
+   "HOH D422": [],
+   "HOH D425": [
+    " DA D10"
+   ],
+   "HOH D427": [],
+   "HOH D430": [
+    " DC D12"
+   ],
+   "HOH D434": [],
+   "HOH D437": [
+    " DC D14",
+    "GLU P63"
+   ],
+   "HOH D454": [],
+   "HOH D455": [],
+   "HOH D457": [
+    " DA D19"
+   ],
+   "HOH D463": [],
+   "HOH P401": [],
+   "HOH P402": [],
+   "HOH P403": [
+    "ARG P308",
+    "GLN P309"
+   ],
+   "HOH P404": [],
+   "HOH P405": [
+    "GLU P344",
+    "ILE P253"
+   ],
+   "HOH P407": [],
+   "HOH P408": [
+    "ARG P57",
+    "GLY P55"
+   ],
+   "HOH P410": [
+    "ARG P57"
+   ],
+   "HOH P411": [
+    "GLN P204",
+    "LEU P109"
+   ],
+   "HOH P413": [
+    "ALA P239"
+   ],
+   "HOH P414": [],
+   "HOH P415": [],
+   "HOH P416": [
+    "GLN P277"
+   ],
+   "HOH P417": [],
+   "HOH P418": [],
+   "HOH P420": [
+    "ALA P62"
+   ],
+   "HOH P423": [
+    "ASN P250"
+   ],
+   "HOH P424": [
+    "ASP P274",
+    "LYS P252"
+   ],
+   "HOH P426": [],
+   "HOH P428": [
+    " DT D11",
+    "LYS P148"
+   ],
+   "HOH P429": [
+    "HIS P144",
+    "VAL P61"
+   ],
+   "HOH P431": [
+    "ALA P138"
+   ],
+   "HOH P432": [
+    "ALA P111",
+    "ARG P157"
+   ],
+   "HOH P433": [
+    "HIS P110",
+    "LEU P100"
+   ],
+   "HOH P435": [
+    "ASP P209"
+   ],
+   "HOH P436": [
+    "ARG P57",
+    "GLU P63"
+   ],
+   "HOH P438": [
+    "ASP P242"
+   ],
+   "HOH P439": [],
+   "HOH P440": [
+    "ARG P192"
+   ],
+   "HOH P441": [],
+   "HOH P442": [
+    "LEU P210"
+   ],
+   "HOH P443": [],
+   "HOH P444": [],
+   "HOH P445": [
+    "ARG P255"
+   ],
+   "HOH P446": [],
+   "HOH P447": [
+    "GLU P268"
+   ],
+   "HOH P448": [],
+   "HOH P449": [
+    "LYS P244"
+   ],
+   "HOH P450": [],
+   "HOH P451": [
+    "ARG P308"
+   ],
+   "HOH P452": [
+    "ARG P336",
+    "SER P249"
+   ],
+   "HOH P453": [],
+   "HOH P456": [],
+   "HOH P458": [
+    "GLU P289"
+   ],
+   "HOH P459": [
+    "LYS P148"
+   ],
+   "HOH P460": [],
+   "HOH P461": [],
+   "HOH P462": []
+  },
   "n_detected": 63,
   "n_removed": 63,
   "opts": "--remove Yes"

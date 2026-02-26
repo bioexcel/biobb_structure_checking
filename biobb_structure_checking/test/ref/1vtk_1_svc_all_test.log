@@ -68,6 +68,11 @@ Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
 Detected 104 Water molecules
+Water molecules in contact with 0 residues: HOH A601, HOH A613, HOH A614, HOH A615, HOH A616, HOH A617, HOH A621, HOH A622, HOH A624, HOH A625, HOH A628, HOH A634, HOH A637, HOH A638, HOH A639, HOH A643, HOH A647, HOH A652, HOH A-2601, HOH A-2613, HOH A-2614, HOH A-2615, HOH A-2616, HOH A-2617, HOH A-2621, HOH A-2622, HOH A-2624, HOH A-2625, HOH A-2628, HOH A-2634, HOH A-2637, HOH A-2638, HOH A-2639, HOH A-2643, HOH A-2647, HOH A-2652
+Water molecules in contact with 1 residues: HOH A602, HOH A603, HOH A605, HOH A607, HOH A608, HOH A609, HOH A610, HOH A612, HOH A623, HOH A626, HOH A629, HOH A631, HOH A632, HOH A633, HOH A636, HOH A640, HOH A641, HOH A642, HOH A648, HOH A649, HOH A650, HOH A651, HOH A-2602, HOH A-2603, HOH A-2605, HOH A-2607, HOH A-2608, HOH A-2609, HOH A-2610, HOH A-2612, HOH A-2623, HOH A-2626, HOH A-2629, HOH A-2631, HOH A-2632, HOH A-2633, HOH A-2636, HOH A-2640, HOH A-2641, HOH A-2642, HOH A-2648, HOH A-2649, HOH A-2650, HOH A-2651
+Water molecules in contact with 2 residues: HOH A606, HOH A618, HOH A619, HOH A620, HOH A627, HOH A630, HOH A644, HOH A645, HOH A646, HOH A-2606, HOH A-2618, HOH A-2619, HOH A-2620, HOH A-2627, HOH A-2630, HOH A-2644, HOH A-2645, HOH A-2646
+Water molecules in contact with 3 residues: HOH A604, HOH A-2604
+Water molecules in contact with 4 residues: HOH A611, HOH A635, HOH A-2611, HOH A-2635
 Removed 104 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
@@ -135,6 +140,7 @@ GLY A-2264
   Adding new atom OXT
 Fixed 4 backbone atom(s)
 Checking for steric clashes
+False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 2 Polar contacts (acceptors) detected
@@ -158,6 +164,7 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
+False
 No Severe Steric clashes/covalent bonds detected
 4 Apolar steric clashes detected
  GLY A59.O    HIS A213.CD2    2.824 A

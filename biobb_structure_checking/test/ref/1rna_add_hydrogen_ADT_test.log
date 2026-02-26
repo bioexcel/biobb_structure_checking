@@ -24,6 +24,9 @@ Structure pdb:1rna loaded
 Step 1: water --remove yes
 Running water. Options: --remove yes
 Detected 91 Water molecules
+Water molecules in contact with 0 residues: HOH A29, HOH A31, HOH A35, HOH A36, HOH A40, HOH A42, HOH A43, HOH A45, HOH A47, HOH A56, HOH A61, HOH A62, HOH A63, HOH A64, HOH A65, HOH A66, HOH A69, HOH A70, HOH A71, HOH A74, HOH A78, HOH A80, HOH A86, HOH A90, HOH A95, HOH A96, HOH A101, HOH A104, HOH A110, HOH A112, HOH A114, HOH A118, HOH A119, HOH B32, HOH B39, HOH B55, HOH B58, HOH B59, HOH B60, HOH B67, HOH B68, HOH B73, HOH B76, HOH B79, HOH B81, HOH B84, HOH B88, HOH B89, HOH B91, HOH B92, HOH B97, HOH B100, HOH B103, HOH B106, HOH B107, HOH B111, HOH B113, HOH B116, HOH B117
+Water molecules in contact with 1 residues: HOH A30, HOH A33, HOH A34, HOH A38, HOH A41, HOH A54, HOH A72, HOH A93, HOH A102, HOH A105, HOH A109, HOH A115, HOH B37, HOH B44, HOH B48, HOH B49, HOH B50, HOH B51, HOH B52, HOH B53, HOH B57, HOH B77, HOH B82, HOH B83, HOH B85, HOH B87, HOH B94, HOH B99, HOH B108
+Water molecules in contact with 2 residues: HOH A46, HOH A98, HOH B75
 Removed 91 Water molecules
 
 Step 2:  add_hydrogen --add_mode auto --add_charges adt

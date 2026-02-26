@@ -51,6 +51,9 @@ Found 212 Residues requiring selection on adding H atoms
 Running  check_only. Nothing else to do.
 Running water.
 Detected 126 Water molecules
+Water molecules in contact with 0 residues: HOH D412, HOH D427, HOH D434, HOH D454, HOH D455, HOH D463, HOH D-2412, HOH D-2427, HOH D-2434, HOH D-2454, HOH D-2455, HOH D-2463, HOH P401, HOH P402, HOH P404, HOH P407, HOH P414, HOH P415, HOH P417, HOH P418, HOH P426, HOH P439, HOH P441, HOH P443, HOH P444, HOH P446, HOH P448, HOH P453, HOH P456, HOH P460, HOH P461, HOH P462, HOH P-2401, HOH P-2402, HOH P-2404, HOH P-2407, HOH P-2414, HOH P-2415, HOH P-2417, HOH P-2418, HOH P-2426, HOH P-2439, HOH P-2441, HOH P-2443, HOH P-2444, HOH P-2446, HOH P-2448, HOH P-2453, HOH P-2456, HOH P-2460, HOH P-2461, HOH P-2462
+Water molecules in contact with 1 residues: HOH D406, HOH D409, HOH D419, HOH D421, HOH D422, HOH D425, HOH D430, HOH D457, HOH D-2406, HOH D-2409, HOH D-2419, HOH D-2421, HOH D-2422, HOH D-2425, HOH D-2430, HOH D-2457, HOH P410, HOH P413, HOH P416, HOH P420, HOH P423, HOH P431, HOH P435, HOH P438, HOH P440, HOH P442, HOH P447, HOH P450, HOH P458, HOH P459, HOH P-2410, HOH P-2413, HOH P-2416, HOH P-2420, HOH P-2423, HOH P-2431, HOH P-2435, HOH P-2438, HOH P-2440, HOH P-2442, HOH P-2447, HOH P-2450, HOH P-2458, HOH P-2459
+Water molecules in contact with 2 residues: HOH D437, HOH D-2437, HOH P403, HOH P405, HOH P408, HOH P411, HOH P424, HOH P428, HOH P429, HOH P432, HOH P433, HOH P436, HOH P445, HOH P449, HOH P451, HOH P452, HOH P-2403, HOH P-2405, HOH P-2408, HOH P-2411, HOH P-2424, HOH P-2428, HOH P-2429, HOH P-2432, HOH P-2433, HOH P-2436, HOH P-2445, HOH P-2449, HOH P-2451, HOH P-2452
 Running  check_only. Nothing else to do.
 Running metals.
 No metal ions found
@@ -89,6 +92,7 @@ No cis peptide bonds found
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
+False
 No Severe Steric clashes/covalent bonds detected
 26 Apolar steric clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A

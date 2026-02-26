@@ -57,6 +57,10 @@ Step 7: water --remove Yes
 
 Running water. Options: --remove Yes
 Detected 58 Water molecules
+Water molecules in contact with 0 residues: HOH A77, HOH A82, HOH A83, HOH A87, HOH A89, HOH A91, HOH A93, HOH A95, HOH A97, HOH A101, HOH A106, HOH A109, HOH A112, HOH A113, HOH A114, HOH A115, HOH A116, HOH A119, HOH A121, HOH A122, HOH A123, HOH A124, HOH A126, HOH A128, HOH A129, HOH A130, HOH A132, HOH A133, HOH A134
+Water molecules in contact with 1 residues: HOH A78, HOH A80, HOH A81, HOH A84, HOH A85, HOH A88, HOH A90, HOH A92, HOH A94, HOH A99, HOH A100, HOH A102, HOH A103, HOH A105, HOH A108, HOH A110, HOH A111, HOH A117, HOH A118, HOH A120, HOH A125, HOH A127
+Water molecules in contact with 2 residues: HOH A79, HOH A86, HOH A98, HOH A104, HOH A107, HOH A131
+Water molecules in contact with 3 residues: HOH A96
 Removed 58 Water molecules
 
 Step 8: rem_hydrogen --remove Yes
@@ -113,6 +117,7 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
+False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 1 Polar contacts (acceptors) detected

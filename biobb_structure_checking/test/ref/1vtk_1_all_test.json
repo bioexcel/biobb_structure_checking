@@ -535,6 +535,282 @@
   "total_charge": null
  },
  "water": {
+  "contacts": {
+   "HOH A-2601": [],
+   "HOH A-2602": [
+    "ASN A-299"
+   ],
+   "HOH A-2603": [
+    "ARG A-2176"
+   ],
+   "HOH A-2604": [
+    "ASP A-2258",
+    "GLU A-2257",
+    "SER A-2254"
+   ],
+   "HOH A-2605": [
+    "PRO A-2195"
+   ],
+   "HOH A-2606": [
+    "ASP A-2162",
+    "PRO A-282"
+   ],
+   "HOH A-2607": [
+    "GLY A-2180"
+   ],
+   "HOH A-2608": [
+    "TYR A-2101"
+   ],
+   "HOH A-2609": [
+    "GLN A185"
+   ],
+   "HOH A-2610": [
+    "GLU A-295"
+   ],
+   "HOH A-2611": [
+    "GLY A-2200",
+    "LEU A-2198",
+    "SER A-2321",
+    "THR A-2201"
+   ],
+   "HOH A-2612": [
+    "TYR A-2132"
+   ],
+   "HOH A-2613": [],
+   "HOH A-2614": [],
+   "HOH A-2615": [],
+   "HOH A-2616": [],
+   "HOH A-2617": [],
+   "HOH A-2618": [
+    "ARG A-2226",
+    "GLY A-2224"
+   ],
+   "HOH A-2619": [
+    "ARG A-2256",
+    "ASN A-2306"
+   ],
+   "HOH A-2620": [
+    "ASP A-2108",
+    "ASP A-2228"
+   ],
+   "HOH A-2621": [],
+   "HOH A-2622": [],
+   "HOH A-2623": [
+    "GLY A-2206"
+   ],
+   "HOH A-2624": [],
+   "HOH A-2625": [],
+   "HOH A-2626": [
+    "ASP A-2136"
+   ],
+   "HOH A-2627": [
+    "GLN A-2261",
+    "ILE A-2284"
+   ],
+   "HOH A-2628": [],
+   "HOH A-2629": [
+    "ASP A-2162"
+   ],
+   "HOH A-2630": [
+    "ARG A-2176",
+    "GLN A-2125"
+   ],
+   "HOH A-2631": [
+    "ASP A-2228"
+   ],
+   "HOH A-2632": [
+    "GLY A92"
+   ],
+   "HOH A-2633": [
+    "ALA A-2189"
+   ],
+   "HOH A-2634": [],
+   "HOH A-2635": [
+    "ARG A-251",
+    "ASN A-2202",
+    "GLY A-2200",
+    "VAL A-2348"
+   ],
+   "HOH A-2636": [
+    "TRP A-2255"
+   ],
+   "HOH A-2637": [],
+   "HOH A-2638": [],
+   "HOH A-2639": [],
+   "HOH A-2640": [
+    "GLN A-2109"
+   ],
+   "HOH A-2641": [
+    "GLU A-2296"
+   ],
+   "HOH A-2642": [
+    "ARG A-251"
+   ],
+   "HOH A-2643": [],
+   "HOH A-2644": [
+    "GLU A-2374",
+    "GLU A-283"
+   ],
+   "HOH A-2645": [
+    "ARG A-2318",
+    "ILE A-2194"
+   ],
+   "HOH A-2646": [
+    "GLU A-2296",
+    "LEU A91"
+   ],
+   "HOH A-2647": [],
+   "HOH A-2648": [
+    "ALA A-2137"
+   ],
+   "HOH A-2649": [
+    "ASP A-2136"
+   ],
+   "HOH A-2650": [
+    "GLU A-2296"
+   ],
+   "HOH A-2651": [
+    "ARG A-2226"
+   ],
+   "HOH A-2652": [],
+   "HOH A601": [],
+   "HOH A602": [
+    "ASN A99"
+   ],
+   "HOH A603": [
+    "ARG A176"
+   ],
+   "HOH A604": [
+    "ASP A258",
+    "GLU A257",
+    "SER A254"
+   ],
+   "HOH A605": [
+    "PRO A195"
+   ],
+   "HOH A606": [
+    "ASP A162",
+    "PRO A82"
+   ],
+   "HOH A607": [
+    "GLY A180"
+   ],
+   "HOH A608": [
+    "TYR A101"
+   ],
+   "HOH A609": [
+    "GLN A-2185"
+   ],
+   "HOH A610": [
+    "GLU A95"
+   ],
+   "HOH A611": [
+    "GLY A200",
+    "LEU A198",
+    "SER A321",
+    "THR A201"
+   ],
+   "HOH A612": [
+    "TYR A132"
+   ],
+   "HOH A613": [],
+   "HOH A614": [],
+   "HOH A615": [],
+   "HOH A616": [],
+   "HOH A617": [],
+   "HOH A618": [
+    "ARG A226",
+    "GLY A224"
+   ],
+   "HOH A619": [
+    "ARG A256",
+    "ASN A306"
+   ],
+   "HOH A620": [
+    "ASP A108",
+    "ASP A228"
+   ],
+   "HOH A621": [],
+   "HOH A622": [],
+   "HOH A623": [
+    "GLY A206"
+   ],
+   "HOH A624": [],
+   "HOH A625": [],
+   "HOH A626": [
+    "ASP A136"
+   ],
+   "HOH A627": [
+    "GLN A261",
+    "ILE A284"
+   ],
+   "HOH A628": [],
+   "HOH A629": [
+    "ASP A162"
+   ],
+   "HOH A630": [
+    "ARG A176",
+    "GLN A125"
+   ],
+   "HOH A631": [
+    "ASP A228"
+   ],
+   "HOH A632": [
+    "GLY A-292"
+   ],
+   "HOH A633": [
+    "ALA A189"
+   ],
+   "HOH A634": [],
+   "HOH A635": [
+    "ARG A51",
+    "ASN A202",
+    "GLY A200",
+    "VAL A348"
+   ],
+   "HOH A636": [
+    "TRP A255"
+   ],
+   "HOH A637": [],
+   "HOH A638": [],
+   "HOH A639": [],
+   "HOH A640": [
+    "GLN A109"
+   ],
+   "HOH A641": [
+    "GLU A296"
+   ],
+   "HOH A642": [
+    "ARG A51"
+   ],
+   "HOH A643": [],
+   "HOH A644": [
+    "GLU A374",
+    "GLU A83"
+   ],
+   "HOH A645": [
+    "ARG A318",
+    "ILE A194"
+   ],
+   "HOH A646": [
+    "GLU A296",
+    "LEU A-291"
+   ],
+   "HOH A647": [],
+   "HOH A648": [
+    "ALA A137"
+   ],
+   "HOH A649": [
+    "ASP A136"
+   ],
+   "HOH A650": [
+    "GLU A296"
+   ],
+   "HOH A651": [
+    "ARG A226"
+   ],
+   "HOH A652": []
+  },
   "n_detected": 104,
   "n_removed": 104,
   "opts": "--remove Yes"
