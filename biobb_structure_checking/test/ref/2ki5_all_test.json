@@ -777,6 +777,683 @@
   "total_charge": null
  },
  "water": {
+  "contacts": {
+   "HOH A501": [],
+   "HOH A502": [],
+   "HOH A503": [
+    "GLU A296",
+    "LEU B91"
+   ],
+   "HOH A506": [],
+   "HOH A507": [],
+   "HOH A510": [],
+   "HOH A512": [],
+   "HOH A513": [
+    "GLU A210",
+    "LEU A229"
+   ],
+   "HOH A514": [],
+   "HOH A516": [
+    "PRO A195"
+   ],
+   "HOH A517": [],
+   "HOH A518": [
+    "ALA A243"
+   ],
+   "HOH A521": [
+    "ASP A136"
+   ],
+   "HOH A523": [
+    "ARG A318"
+   ],
+   "HOH A525": [
+    "SER A321"
+   ],
+   "HOH A527": [
+    "ARG A51"
+   ],
+   "HOH A529": [],
+   "HOH A531": [],
+   "HOH A533": [
+    "TYR A132"
+   ],
+   "HOH A536": [
+    "ALA A192",
+    "ARG A318",
+    "ILE A194"
+   ],
+   "HOH A538": [
+    "ALA B137",
+    "ARG A318"
+   ],
+   "HOH A540": [
+    "GLY A253",
+    "TRP A255"
+   ],
+   "HOH A542": [
+    "ALA A189"
+   ],
+   "HOH A544": [
+    "GLY B92"
+   ],
+   "HOH A545": [
+    "GLN A125"
+   ],
+   "HOH A547": [
+    "GLU A371"
+   ],
+   "HOH A549": [
+    "GLU A95",
+    "PRO A223"
+   ],
+   "HOH A551": [
+    "TYR A101"
+   ],
+   "HOH A553": [],
+   "HOH A555": [
+    "SER A123"
+   ],
+   "HOH A557": [
+    "GLN B185"
+   ],
+   "HOH A559": [
+    "ILE A97"
+   ],
+   "HOH A562": [
+    "ARG A51",
+    "GLY A200",
+    "VAL A348"
+   ],
+   "HOH A565": [
+    "ASP A162",
+    "PRO A82"
+   ],
+   "HOH A567": [
+    "ARG A163"
+   ],
+   "HOH A569": [
+    "GLY A206"
+   ],
+   "HOH A571": [
+    "ASP A136"
+   ],
+   "HOH A573": [],
+   "HOH A575": [
+    "ASP A286",
+    "HIS A283"
+   ],
+   "HOH A577": [],
+   "HOH A579": [
+    "GLU A371"
+   ],
+   "HOH A581": [
+    "ARG A176",
+    "ASP A228"
+   ],
+   "HOH A582": [
+    "THR A183"
+   ],
+   "HOH A585": [],
+   "HOH A586": [
+    "ALA A168",
+    "GLN A125"
+   ],
+   "HOH A587": [
+    "ASP A162",
+    "GLU A83"
+   ],
+   "HOH A589": [],
+   "HOH A592": [
+    "ARG A222",
+    "GLU A225"
+   ],
+   "HOH A593": [
+    "GLU A374"
+   ],
+   "HOH A595": [
+    "ILE A126"
+   ],
+   "HOH A598": [],
+   "HOH A600": [
+    "LEU A291"
+   ],
+   "HOH A601": [
+    "ARG A226",
+    "GLU A225"
+   ],
+   "HOH A603": [
+    "ASN A99",
+    "VAL A120"
+   ],
+   "HOH A606": [
+    "TYR A239"
+   ],
+   "HOH A607": [
+    "ASP A328"
+   ],
+   "HOH A610": [],
+   "HOH A614": [],
+   "HOH A615": [],
+   "HOH A618": [
+    "ARG A256",
+    "ASN A306",
+    "TRP A310"
+   ],
+   "HOH A619": [],
+   "HOH A622": [
+    "ALA A98",
+    "ARG A226",
+    "GLY A224"
+   ],
+   "HOH A624": [],
+   "HOH A626": [],
+   "HOH A628": [],
+   "HOH A629": [],
+   "HOH A630": [],
+   "HOH A632": [
+    "LEU A304"
+   ],
+   "HOH A633": [],
+   "HOH A635": [
+    "ASP A328"
+   ],
+   "HOH A640": [],
+   "HOH A641": [],
+   "HOH A642": [
+    "GLU A296"
+   ],
+   "HOH A647": [],
+   "HOH A648": [],
+   "HOH A651": [],
+   "HOH A652": [
+    "ASP A55"
+   ],
+   "HOH A653": [
+    "GLU A374",
+    "GLU A83"
+   ],
+   "HOH A654": [],
+   "HOH A660": [
+    "LEU A229"
+   ],
+   "HOH A661": [],
+   "HOH A662": [
+    "ASP A162"
+   ],
+   "HOH A664": [
+    "ARG A320",
+    "GLN A250",
+    "GLY A252",
+    "LEU A249"
+   ],
+   "HOH A665": [],
+   "HOH A666": [],
+   "HOH A671": [
+    "ASP A136"
+   ],
+   "HOH A673": [
+    "ALA A114",
+    "GLY A180"
+   ],
+   "HOH A676": [
+    "GLY A253",
+    "LEU A249"
+   ],
+   "HOH A679": [],
+   "HOH A680": [],
+   "HOH A681": [
+    "LEU A227"
+   ],
+   "HOH A682": [],
+   "HOH A683": [],
+   "HOH A685": [],
+   "HOH A686": [],
+   "HOH A690": [
+    "ILE A326"
+   ],
+   "HOH A692": [
+    "GLN A250"
+   ],
+   "HOH A696": [],
+   "HOH A697": [
+    "GLU A296"
+   ],
+   "HOH A698": [
+    "ASP A77",
+    "PRO A155"
+   ],
+   "HOH A699": [],
+   "HOH A700": [
+    "ASP A162"
+   ],
+   "HOH A701": [],
+   "HOH A702": [
+    "GLU A146"
+   ],
+   "HOH A708": [
+    "PRO A300"
+   ],
+   "HOH A711": [
+    "VAL A90"
+   ],
+   "HOH A712": [
+    "TRP A259"
+   ],
+   "HOH A715": [
+    "ASP A108",
+    "ASP A228"
+   ],
+   "HOH A719": [],
+   "HOH A720": [],
+   "HOH A721": [],
+   "HOH A723": [],
+   "HOH A725": [
+    "ILE A326"
+   ],
+   "HOH A728": [
+    "MET A179"
+   ],
+   "HOH A729": [],
+   "HOH A730": [],
+   "HOH A733": [
+    "GLN A221",
+    "LYS A219"
+   ],
+   "HOH A734": [
+    "GLY A373"
+   ],
+   "HOH A736": [],
+   "HOH A737": [
+    "ASP A258",
+    "GLN A261",
+    "ILE A284"
+   ],
+   "HOH A738": [],
+   "HOH A741": [
+    "ASP A136",
+    "PRO A196"
+   ],
+   "HOH A742": [],
+   "HOH A744": [],
+   "HOH A745": [
+    "ARG A236"
+   ],
+   "HOH A747": [],
+   "HOH A757": [],
+   "HOH A758": [],
+   "HOH A759": [],
+   "HOH A760": [],
+   "HOH A762": [
+    "ASP A258",
+    "GLU A257",
+    "SER A254"
+   ],
+   "HOH A765": [
+    "PRO A295"
+   ],
+   "HOH A766": [
+    "ARG A89"
+   ],
+   "HOH A771": [
+    "ILE A112"
+   ],
+   "HOH A775": [],
+   "HOH A776": [
+    "ARG A163",
+    "LYS A62"
+   ],
+   "HOH A777": [
+    "GLY A302"
+   ],
+   "HOH A779": [],
+   "HOH A781": [
+    "ARG A220"
+   ],
+   "HOH A782": [
+    "GLY A115"
+   ],
+   "HOH A783": [
+    "ASP A162",
+    "LYS A62"
+   ],
+   "HOH A788": [
+    "GLU A210"
+   ],
+   "HOH A789": [
+    "GLU A374"
+   ],
+   "HOH A791": [],
+   "HOH B504": [],
+   "HOH B505": [
+    "MET B60"
+   ],
+   "HOH B508": [
+    "GLY B206"
+   ],
+   "HOH B509": [
+    "ASP B55"
+   ],
+   "HOH B511": [],
+   "HOH B515": [
+    "SER B94"
+   ],
+   "HOH B519": [
+    "ARG B222"
+   ],
+   "HOH B520": [
+    "ASP B162"
+   ],
+   "HOH B522": [],
+   "HOH B524": [],
+   "HOH B526": [
+    "LEU B198",
+    "SER B321",
+    "THR B201"
+   ],
+   "HOH B528": [],
+   "HOH B530": [
+    "PRO B195"
+   ],
+   "HOH B532": [],
+   "HOH B534": [
+    "TYR B132"
+   ],
+   "HOH B535": [
+    "ALA B192",
+    "ARG B318",
+    "ILE B194"
+   ],
+   "HOH B537": [],
+   "HOH B539": [],
+   "HOH B541": [
+    "ALA B189"
+   ],
+   "HOH B543": [
+    "GLY A92"
+   ],
+   "HOH B546": [
+    "GLN B125"
+   ],
+   "HOH B548": [
+    "GLU B371"
+   ],
+   "HOH B550": [
+    "PRO B223"
+   ],
+   "HOH B552": [
+    "TYR B101"
+   ],
+   "HOH B554": [],
+   "HOH B556": [
+    "SER B123"
+   ],
+   "HOH B558": [
+    "GLN A185"
+   ],
+   "HOH B560": [
+    "ILE B97"
+   ],
+   "HOH B561": [
+    "ARG B51",
+    "GLY B200",
+    "VAL B348"
+   ],
+   "HOH B563": [
+    "LEU A193",
+    "LEU B193"
+   ],
+   "HOH B564": [
+    "ASP B162",
+    "PRO B82"
+   ],
+   "HOH B566": [
+    "ARG B163"
+   ],
+   "HOH B568": [
+    "GLY B206"
+   ],
+   "HOH B570": [
+    "ASP B136",
+    "PRO B196"
+   ],
+   "HOH B572": [],
+   "HOH B574": [],
+   "HOH B576": [
+    "GLN B250",
+    "VAL B324"
+   ],
+   "HOH B578": [
+    "GLU B371"
+   ],
+   "HOH B580": [
+    "ARG B176",
+    "ASP B228"
+   ],
+   "HOH B583": [
+    "THR B183"
+   ],
+   "HOH B584": [],
+   "HOH B588": [
+    "ALA B168",
+    "GLN B125"
+   ],
+   "HOH B590": [
+    "ARG B176"
+   ],
+   "HOH B591": [
+    "ALA B233"
+   ],
+   "HOH B594": [
+    "ARG B163"
+   ],
+   "HOH B596": [
+    "ILE B126"
+   ],
+   "HOH B597": [],
+   "HOH B599": [],
+   "HOH B602": [
+    "ARG B226",
+    "GLU B225"
+   ],
+   "HOH B604": [],
+   "HOH B605": [],
+   "HOH B608": [
+    "ASP B328"
+   ],
+   "HOH B609": [],
+   "HOH B611": [],
+   "HOH B612": [],
+   "HOH B613": [],
+   "HOH B616": [
+    "VAL B138"
+   ],
+   "HOH B617": [],
+   "HOH B620": [
+    "ASN B99"
+   ],
+   "HOH B621": [
+    "ARG B226",
+    "GLY B224"
+   ],
+   "HOH B623": [],
+   "HOH B625": [],
+   "HOH B627": [],
+   "HOH B631": [
+    "LEU B304"
+   ],
+   "HOH B634": [],
+   "HOH B636": [
+    "ASP B328"
+   ],
+   "HOH B637": [],
+   "HOH B638": [],
+   "HOH B639": [],
+   "HOH B643": [],
+   "HOH B644": [],
+   "HOH B645": [],
+   "HOH B646": [
+    "ARG B220",
+    "ARG B222"
+   ],
+   "HOH B649": [],
+   "HOH B650": [],
+   "HOH B655": [],
+   "HOH B656": [],
+   "HOH B657": [
+    "GLN B261",
+    "ILE B284"
+   ],
+   "HOH B658": [],
+   "HOH B659": [],
+   "HOH B663": [],
+   "HOH B667": [
+    "LYS B317"
+   ],
+   "HOH B668": [],
+   "HOH B669": [
+    "ASP B136",
+    "PRO B196"
+   ],
+   "HOH B670": [],
+   "HOH B672": [],
+   "HOH B674": [
+    "ARG B216"
+   ],
+   "HOH B675": [
+    "GLN B67"
+   ],
+   "HOH B677": [
+    "ARG B236",
+    "GLU B210"
+   ],
+   "HOH B678": [
+    "ARG B370"
+   ],
+   "HOH B684": [
+    "ARG B216",
+    "TYR B329"
+   ],
+   "HOH B687": [],
+   "HOH B688": [],
+   "HOH B689": [],
+   "HOH B691": [],
+   "HOH B693": [
+    "PRO B155"
+   ],
+   "HOH B694": [],
+   "HOH B695": [
+    "ASP B77"
+   ],
+   "HOH B703": [
+    "ARG B366"
+   ],
+   "HOH B704": [
+    "LYS B219"
+   ],
+   "HOH B705": [],
+   "HOH B706": [
+    "ALA B339",
+    "GLN B342"
+   ],
+   "HOH B707": [],
+   "HOH B709": [],
+   "HOH B710": [],
+   "HOH B713": [],
+   "HOH B714": [],
+   "HOH B716": [
+    "ARG B237"
+   ],
+   "HOH B717": [
+    "ASP B258",
+    "GLU B257"
+   ],
+   "HOH B718": [],
+   "HOH B722": [],
+   "HOH B724": [],
+   "HOH B726": [],
+   "HOH B727": [],
+   "HOH B731": [
+    "LEU B69"
+   ],
+   "HOH B732": [
+    "ALA B375",
+    "GLU B374",
+    "GLU B83"
+   ],
+   "HOH B735": [
+    "LEU B343"
+   ],
+   "HOH B739": [
+    "LEU B229"
+   ],
+   "HOH B740": [
+    "GLU B374"
+   ],
+   "HOH B743": [
+    "ALA B114",
+    "GLY B180"
+   ],
+   "HOH B746": [],
+   "HOH B748": [],
+   "HOH B749": [],
+   "HOH B750": [],
+   "HOH B751": [],
+   "HOH B752": [],
+   "HOH B753": [
+    "GLU B296",
+    "LEU A91"
+   ],
+   "HOH B754": [
+    "ASP B77"
+   ],
+   "HOH B755": [
+    "ILE B54",
+    "LYS B62"
+   ],
+   "HOH B756": [
+    "ASP B328"
+   ],
+   "HOH B761": [
+    "ASP B162"
+   ],
+   "HOH B763": [
+    "ALA B230"
+   ],
+   "HOH B764": [],
+   "HOH B767": [
+    "ILE B326"
+   ],
+   "HOH B768": [],
+   "HOH B769": [],
+   "HOH B770": [
+    "ASP B108"
+   ],
+   "HOH B772": [],
+   "HOH B773": [
+    "ALA B133"
+   ],
+   "HOH B774": [],
+   "HOH B778": [
+    "ARG B163"
+   ],
+   "HOH B780": [
+    "ARG B106"
+   ],
+   "HOH B784": [],
+   "HOH B785": [
+    "GLN B331"
+   ],
+   "HOH B786": [],
+   "HOH B787": [
+    "LEU B298",
+    "PRO B295"
+   ],
+   "HOH B790": [
+    "ASP B162",
+    "GLU B83"
+   ],
+   "HOH B792": []
+  },
   "n_detected": 292,
   "n_removed": 292,
   "opts": "--remove Yes"

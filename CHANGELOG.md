@@ -1,3 +1,15 @@
+## v3.13.7 (2026.1)
+### Extended functions
+- water
+  - Added support for selective removal of water molecules according to contacts
+### Bug fixes
+- sequences
+  - Fixed missing initial fragment, structure sequence header
+- backbone
+  - Fixed accumulated display of modified residues after consecutive reconstructions
+- input
+  - Fixed --limit management to avoid useless structure loading
+
 ## v3.13.6 (2025.1)
 ### Extended functions
   - input

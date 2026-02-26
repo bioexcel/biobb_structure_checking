@@ -1,4 +1,17 @@
 # biobb_structure_checking
+[![](https://img.shields.io/github/v/tag/bioexcel/biobb_structure_checking?label=Version)](https://GitHub.com/bioexcel/biobb_sructure_checking/tags/)
+[![](https://img.shields.io/pypi/v/biobb-structure-checking.svg?label=Pypi)](https://pypi.org/project/biobb-structure-checking/)
+[![](https://img.shields.io/conda/vn/bioconda/biobb_structure_checking?label=Conda)](https://anaconda.org/bioconda/biobb_structure_checking)
+[![](https://img.shields.io/conda/dn/bioconda/biobb_structure_checking?label=Conda%20Downloads)](https://anaconda.org/bioconda/biobb_structure_checking)
+[![](https://img.shields.io/badge/Docker-Quay.io-blue)](https://quay.io/repository/biocontainers/biobb_structure_checking?tab=tags)
+
+[![](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![](https://img.shields.io/badge/Open%20Source%3f-Yes!-blue)](https://github.com/bioexcel/biobb_structure_checking)
+
+[![](https://readthedocs.org/projects/biobb-structure-checking/badge/?version=latest&label=Docs)](https://biobb-structure-checking.readthedocs.io/en/latest/?badge=latest)
+
+[![](https://img.shields.io/github/last-commit/bioexcel/biobb_structure_checking?label=Last%20Commit)](https://github.com/bioexcel/biobb_structure_checking/commits/master)
+
 ### Introduction
 Biobb_structure_checking provides a series of functions to check the quality of a 3D structure intended to facilitate the setup of a molecular dynamics simulation of protein or nucleic acids systems.
 

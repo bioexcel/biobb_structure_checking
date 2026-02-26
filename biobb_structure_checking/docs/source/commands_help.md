@@ -40,7 +40,9 @@ Commands to manipulate structure composition.
 **getss** [--mark All | None | Residue_list] - _Detect SS Bonds_
  * **--mark** - Replace relevant CYS by CYX to mark SS Bond (HG atom removed if present)
 
-**water** [--remove Yes|No] - _Remove Water molecules_
+**water** [--remove Yes|No] [--keep_min_contacts KEEP]
+ * **--remove** - _Remove Water molecules_
+ * **--keep_min_contacts KEEP** - _Remove All Water molecules with less then KEEP contacts
 
 **rem_hydrogen** [--remove Yes|No] - _Remove Hydrogen atoms from structure_
 

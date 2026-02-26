@@ -66,7 +66,8 @@ class ParamInput():
         opt_type,
         min_val,
         max_val,
-        multiple=False
+        multiple=False,
+        label_text=None
     ):
         """ Add a numeric option to dialog """
         self.options.append({
@@ -75,7 +76,8 @@ class ParamInput():
             'type':opt_type,
             'min':min_val,
             'max':max_val,
-            'multiple':multiple
+            'multiple':multiple,
+            'label_text': label_text
         })
 
     def add_option_free_text(self, label):
@@ -98,7 +100,7 @@ class ParamInput():
                 opt_strs.append(','.join(opt['opt_list']))
             elif opt['type'] in ('int', 'float'):
                 if opt['min'] != 0 or opt['max'] != 0:
-                    opt_strs.append(f"{opt['min']} - {opt['max']}")
+                    opt_strs.append(f"{opt['label_text']} {opt['min']} - {opt['max']}")
             elif opt['type'] == 'input':
                 opt_strs.append('Enter text')
             elif opt['type'] == 'pair_list':

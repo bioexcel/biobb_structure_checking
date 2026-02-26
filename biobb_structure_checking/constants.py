@@ -405,6 +405,7 @@ DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove', 'Remove All Water molecules')
+DIALOGS.add_option('water', '--keep_min_contacts', 'keep', 'Remove All Water molecules with less contacts')
 
 DIALOGS.add_entry(
     'ligands',
@@ -682,6 +683,7 @@ MSGS = {
     # Waters
     'WATERS_FOUND': 'Detected {} Water molecules',
     'WATER_REMOVED': 'Removed {} Water molecules',
+    'WATER_KEEP': 'Removed {} Water molecules with less than {} contacts',
     'NO_WATERS': 'No water molecules found',
     # ligands
     'LIGANDS_DETECTED': 'Detected {} Ligands',

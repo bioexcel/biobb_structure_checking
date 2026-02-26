@@ -47,6 +47,7 @@ Replacing ARG B51 into LYS
   Adding new atom NZ
 
 Checking for steric clashes
+False
 No Severe Steric clashes/covalent bonds detected
 4 Apolar steric clashes detected
  ILE A49.CG2  THR A350.OG1    2.815 A

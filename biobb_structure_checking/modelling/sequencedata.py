@@ -448,12 +448,10 @@ class SequenceData():
                     tgt_seq = data[ch_id]['can'].seq
                     frgs = data[ch_id]['pdb']['frgs']
                     pdb_seq = frgs[0].seq
-                    if len(frgs) == 1:
-                        frags_num = [
-                            f"{frgs[0].features[0].location.start}-{frgs[0].features[0].location.end}"
-                        ]
-                    else:
-                        frags_num = []
+                    frags_num = [
+                        f"{frgs[0].features[0].location.start}-{frgs[0].features[0].location.end}"
+                    ]
+                    if len(frgs) > 1:
                         for i in range(1, len(frgs)):
                             frag_seq = frgs[i].seq
                             pdb_seq += frag_seq
@@ -479,6 +477,7 @@ class SequenceData():
                         f"Frags: {','.join(frags_num)}"
                     )
                     outseq += SeqIO.FastaIO.as_fasta(seq)
+
                 elif data[ch_id]['pdb']:
                     last_pos = 0
                     start_pos = 0

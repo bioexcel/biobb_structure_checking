@@ -87,6 +87,7 @@ water:
 	@echo "Running water on 2ki5"
 	${COMMON};${APPBIN} -v -i pdb:2ki5 --non_interactive water --remove No > 2ki5_remwat_test_None.log
 	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_remwat_test_Yes.pdb --non_interactive water --remove Yes > 2ki5_remwat_test_Yes.log
+	${COMMON};${APPBIN} -v -i pdb:2ki5 -o 2ki5_keepwat_test_3.pdb --non_interactive water --remove Yes --keep_min_contacts 3 > 2ki5_keepwat_test_3.log
 
 rem_hydrogen:
 	@echo "Running rem_hydrogen on 1ark"

@@ -60,6 +60,7 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
+False
 4 Severe Steric clashes/covalent bonds detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A

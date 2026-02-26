@@ -2523,7 +2523,21 @@
                     },
                     "DT": {}
                 }
+            },
+            "HOH": {
+                "polar_acceptor_atoms": ["O"],
+                "polar_donor_atoms": ["O"],
+                "side_atoms": [],
+                "hydrogen_atoms": ["HO1", "HO2"],
+                "addH_rules": {
+                    "*": {
+                        "mode": "L",
+                        "ats": ["HO1", "HO2"]
+                    }
+                },
+                "mutation_rules": {}
             }
+
         },
         "distances": {
             "SS_DIST": 2.5,

@@ -13,10 +13,11 @@
     1.4. Detect Heavy Metals /Remove (metals) DONE
     1.5. Detect Ligands /Remove (ligands) DONE
         1.5.1 Process All Hetatms in a integrated way
+        1.5.2 Detect modified amino acids (identidy and guess original residue)
     1.6. Detect DNA/RNA /Remove (na) DONE in chains
         1.6.1 Include NA Topology WITHDRAWN Too much adaptation needed, use BNSTopology instead
     1.7. Remove Water (remwat) DONE
-        1.7.1 Remove Water molecules following interactions
+        1.7.1 Remove Water molecules following interactions DONE
     1.8. Remove Hydrogen atoms (remh) DONE
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
@@ -32,7 +33,7 @@
     2.4. Complete side chains (fixside) DONE
         2.4.1 Rebuild side chains (using modeller) DONE for protein
     2.5. Mutate residues (mutate) DONE
-        2.5.1 Add/remove modified residues
+        2.5.1 Add/remove/revert modified residues
         2.5.2 Mutate DNA residues DONE
             2.5.2.1 Mutate DNA following sequence DONE
             2.5.2.2 Extend to RNA DONE
