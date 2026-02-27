@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Getting canonical sequences from matching FASTA input
@@ -61,7 +61,7 @@ Main chain fixes
 Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2026/02/26 12:38:02
+Job starting time (YY/MM/DD HH:MM:SS): 2026/02/27 18:48:09
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained

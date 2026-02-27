@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
@@ -21,30 +21,40 @@ Structure pdb:1bqo loaded
  Num. water mol.:  75
  Num. atoms:  2841
 Metal/Ion residues found
- ZN A301
- ZN A302
- CA A303
- CA A304
- CA A305
- ZN B301
- ZN B302
- CA B303
- CA B304
- CA B305
+ ZN A301 (ZINC ION)
+ ZN A302 (ZINC ION)
+ CA A303 (CALCIUM ION)
+ CA A304 (CALCIUM ION)
+ CA A305 (CALCIUM ION)
+ ZN B301 (ZINC ION)
+ ZN B302 (ZINC ION)
+ CA B303 (CALCIUM ION)
+ CA B304 (CALCIUM ION)
+ CA B305 (CALCIUM ION)
 Small mol ligands found
-N25 B401
+N25 B401 (1,3-BIS-(4-METHOXY-BENZENESULFONYL)-5,5-DIMETHYL-HEXAHY2 N25 DRO-PYRIMIDINE-2-CARBOXYLIC ACID HYDROXYAMIDE)
 Running metals. Options: --remove A305
 Found 10 Metal ions
-  ZN A301.ZN 
-  ZN A302.ZN 
-  CA A303.CA 
-  CA A304.CA 
-  CA A305.CA 
-  ZN B301.ZN 
-  ZN B302.ZN 
-  CA B303.CA 
-  CA B304.CA 
-  CA B305.CA 
+  ZN A301.ZN  (ZINC ION)
+  ZN A302.ZN  (ZINC ION)
+  CA A303.CA  (CALCIUM ION)
+  CA A304.CA  (CALCIUM ION)
+  CA A305.CA  (CALCIUM ION)
+  ZN B301.ZN  (ZINC ION)
+  ZN B302.ZN  (ZINC ION)
+  CA B303.CA  (CALCIUM ION)
+  CA B304.CA  (CALCIUM ION)
+  CA B305.CA  (CALCIUM ION)
+Contacts for  ZN A301: HIS A201.NE2, HIS A205.NE2, HIS A211.NE2
+Contacts for  ZN A302: HIS A151.NE2, ASP A153.OD2, HIS A166.NE2, HIS A179.ND1
+Contacts for  CA A303: ASP A158.OD1, GLY A159.O, GLY A161.O, VAL A163.O, ASP A181.OD2, GLU A184.OE2
+Contacts for  CA A304: ASP A107.OD2, ASP A182.O, GLU A184.O, HOH A342.O
+Contacts for  CA A305: ASP A141.O, GLY A173.O, ASN A175.O, ASP A177.OD1, HOH A314.O
+Contacts for  ZN B301: HIS B201.NE2, HIS B205.NE2, HIS B211.NE2, N25 B401.O26
+Contacts for  ZN B302: HIS B151.NE2, ASP B153.OD2, HIS B166.NE2, HIS B179.ND1
+Contacts for  CA B303: ASP B158.OD1, GLY B159.O, GLY B161.O, VAL B163.O, ASP B181.OD2, GLU B184.OE2
+Contacts for  CA B304: ASP B107.OD1, ASP B182.O, GLU B184.O, HOH B409.O
+Contacts for  CA B305: ASP B141.O, GLY B173.O, ASN B175.O, ASP B177.OD1, HOH B402.O
 Metal Atoms removed A305 (1)
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, B: Protein)
@@ -56,15 +66,15 @@ Final Num. ligands or modified residues:  10
 Final Num. water mol.:  75
 Final Num. atoms:  2840
 Metal/Ion residues found
- ZN A301
- ZN A302
- CA A303
- CA A304
- ZN B301
- ZN B302
- CA B303
- CA B304
- CA B305
+ ZN A301 (ZINC ION)
+ ZN A302 (ZINC ION)
+ CA A303 (CALCIUM ION)
+ CA A304 (CALCIUM ION)
+ ZN B301 (ZINC ION)
+ ZN B302 (ZINC ION)
+ CA B303 (CALCIUM ION)
+ CA B304 (CALCIUM ION)
+ CA B305 (CALCIUM ION)
 Small mol ligands found
-N25 B401
+N25 B401 (1,3-BIS-(4-METHOXY-BENZENESULFONYL)-5,5-DIMETHYL-HEXAHY2 N25 DRO-PYRIMIDINE-2-CARBOXYLIC ACID HYDROXYAMIDE)
 Structure saved on 1bqo_metals_test_A305.pdb

@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/m0/6m0j.cif' 
@@ -21,14 +21,14 @@ Structure pdb:6m0j loaded
  Num. water mol.:  80
  Num. atoms:  6558
 Metal/Ion residues found
- ZN A901
- CL A902
+ ZN A901 (ZINC ION)
+ CL A902 (CHLORIDE ION)
 Small mol ligands found
-NAG A903
-NAG A904
-NAG A905
-NAG A906
-NAG E601
+NAG A903 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A904 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A905 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A906 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG E601 (2-acetamido-2-deoxy-beta-D-glucopyranose)
 Running amide. Options: --fix auto
 Found 7 unusual contact(s) involving amide atoms
  LYS A31.NZ   GLN E493.NE2    2.926 A
@@ -39,25 +39,26 @@ Found 7 unusual contact(s) involving amide atoms
  GLU A150.O   ASN A154.OD1    2.895 A
  ARG E357.NH1 ASN E394.ND2    2.963 A
 Fixing automatically
-Initial contact score: 1.177
+Initial contact score: 1.306
 Clustering amide residues
 6 cluster(s) found, exploring...
 Cluster 1:ASN A134
-New score: 0.837, fixed residue(s): ASN A134
+New score: 0.967, fixed residue(s): ASN A134
 Cluster 2:ASN A154
-New score: 0.718, fixed residue(s): ASN A154
+New score: 0.848, fixed residue(s): ASN A154
 Cluster 3:ASN A103, ASN A194
-New score: 0.464, fixed residue(s): ASN A194
+New score: 0.594, fixed residue(s): ASN A194
 Cluster 4:GLN A42, GLN E498
-New score: 0.231, fixed residue(s): GLN E498
+New score: 0.360, fixed residue(s): GLN E498
 Cluster 5:ASN E394
-Score not improved, skipping
+New score: 0.349, fixed residue(s): ASN E394
 Cluster 6:GLN E493
-New score: 0.114, fixed residue(s): GLN E493
-Amide residues fixed auto (5)
+New score: 0.233, fixed residue(s): GLN E493
+Amide residues fixed auto (6)
 Rechecking
-Found 1 unusual contact(s) involving amide atoms
- ARG E357.NH1 ASN E394.ND2    2.963 A
+Found 2 unusual contact(s) involving amide atoms
+ ARG E357.NH1 ASN E394.ND2    3.022 A
+ ASN E394.OD1 GLU E516.OE2    2.850 A
 Final Num. models: 1
 Final Num. chains: 2 (A: Protein, E: Protein)
 Final Num. residues:  878
@@ -68,12 +69,12 @@ Final Num. ligands or modified residues:  7
 Final Num. water mol.:  80
 Final Num. atoms:  6558
 Metal/Ion residues found
- ZN A901
- CL A902
+ ZN A901 (ZINC ION)
+ CL A902 (CHLORIDE ION)
 Small mol ligands found
-NAG A903
-NAG A904
-NAG A905
-NAG A906
-NAG E601
+NAG A903 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A904 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A905 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A906 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG E601 (2-acetamido-2-deoxy-beta-D-glucopyranose)
 Structure saved on 6m0j_amide_test_auto.pdb

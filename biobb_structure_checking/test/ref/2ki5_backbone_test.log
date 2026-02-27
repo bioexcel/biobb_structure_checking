@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
@@ -21,10 +21,10 @@ Structure pdb:2ki5 loaded
  Num. water mol.:  292
  Num. atoms:  4961
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Running backbone.
 Found 8 Residues with missing backbone atoms
  VAL A70    CA,C,O,OXT

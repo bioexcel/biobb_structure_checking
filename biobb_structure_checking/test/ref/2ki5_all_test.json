@@ -709,6 +709,15 @@
  },
  "inscodes": {},
  "ligands": {
+  "contacts": {
+   "AC2 A1": [
+    "TYR A101.OH",
+    "GLN A125.OE1"
+   ],
+   "AC2 B2": [
+    "GLN B125.NE2"
+   ]
+  },
   "detected": [
    "AC2 A1",
    "AC2 B2"

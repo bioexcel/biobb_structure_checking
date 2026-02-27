@@ -752,6 +752,70 @@
  },
  "inscodes": {},
  "ligands": {
+  "contacts": {
+   "BMA C3": [
+    "MAN C7.C1"
+   ],
+   "BMA D3": [
+    "MAN D7.C1"
+   ],
+   "FUL C10": [
+    "NAG C1.O6"
+   ],
+   "FUL D9": [
+    "GLN B295.NE2",
+    "NAG D1.O6"
+   ],
+   "GAL C6": [],
+   "GAL C9": [
+    "PRO A244.O",
+    "LYS A246.NZ",
+    "GLU A258.O",
+    "THR A260.OG1"
+   ],
+   "GAL D6": [
+    "PRO B244.O",
+    "LYS B246.NZ",
+    "GLU B258.O",
+    "THR B260.OG1"
+   ],
+   "MAN C4": [
+    "MAN D7.O4"
+   ],
+   "MAN C7": [
+    "BMA C3.O6"
+   ],
+   "MAN D4": [],
+   "MAN D7": [
+    "MAN C4.O4",
+    "BMA D3.O3"
+   ],
+   "NAG C1": [
+    "ASP A265.OD1",
+    "ASN A297.ND2",
+    "FUL C10.C1"
+   ],
+   "NAG C2": [],
+   "NAG C5": [],
+   "NAG C8": [
+    "LYS A246.NZ"
+   ],
+   "NAG D1": [
+    "ASP B265.OD1",
+    "ASN B297.ND2",
+    "FUL D9.C1"
+   ],
+   "NAG D2": [
+    "ARG B301.NE"
+   ],
+   "NAG D5": [
+    "LYS B246.NZ"
+   ],
+   "NAG D8": [
+    "LYS B334.NZ"
+   ],
+   "PG4 A511": []
+  },
   "detected": [
    "PG4 A511",
    "NAG C1",

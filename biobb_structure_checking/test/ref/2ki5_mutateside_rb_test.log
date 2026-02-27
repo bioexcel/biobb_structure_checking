@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
@@ -21,10 +21,10 @@ Structure pdb:2ki5 loaded
  Num. water mol.:  292
  Num. atoms:  4961
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Running mutateside. Options: --mut Leu49Ile --rebuild
 Mutations to perform
 *:LEU49ILE
@@ -53,7 +53,7 @@ Mutations to perform
 Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2026/02/26 12:37:56
+Job starting time (YY/MM/DD HH:MM:SS): 2026/02/27 18:48:07
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -112,9 +112,9 @@ Final Num. ligands or modified residues:  4
 Final Num. water mol.:  292
 Final Num. atoms:  4961
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Structure saved on 2ki5_mutateside_rb_test.pdb
 Summary data saved on 2ki5_mutateside_rb_test.json

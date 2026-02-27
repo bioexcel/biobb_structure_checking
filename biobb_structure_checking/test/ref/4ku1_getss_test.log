@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
@@ -23,26 +23,26 @@ Structure pdb:4ku1 loaded
  Num. water mol.:  148
  Num. atoms:  3714
 Small mol ligands found
-PG4 A511
-NAG C1
-NAG C2
-BMA C3
-MAN C4
-NAG C5
-GAL C6
-MAN C7
-NAG C8
-GAL C9
-FUL C10
-NAG D1
-NAG D2
-BMA D3
-MAN D4
-NAG D5
-GAL D6
-MAN D7
-NAG D8
-FUL D9
+PG4 A511 (TETRAETHYLENE GLYCOL)
+NAG C1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG C2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA C3 (beta-D-mannopyranose)
+MAN C4 (alpha-D-mannopyranose)
+NAG C5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C6 (beta-D-galactopyranose)
+MAN C7 (alpha-D-mannopyranose)
+NAG C8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C9 (beta-D-galactopyranose)
+FUL C10 (beta-L-fucopyranose)
+NAG D1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG D2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA D3 (beta-D-mannopyranose)
+MAN D4 (alpha-D-mannopyranose)
+NAG D5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL D6 (beta-D-galactopyranose)
+MAN D7 (alpha-D-mannopyranose)
+NAG D8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+FUL D9 (beta-L-fucopyranose)
 Running getss.
 Detected 4 Possible SS Bonds
  CYS A261.SG  CYS A321.SG     4.141

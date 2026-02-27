@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
@@ -20,10 +20,10 @@ Structure pdb:1vtk.1 loaded
  Num. water mol.:  104
  Num. atoms:  4982
 Small mol ligands found
-ADP A400
-TMP A500
-ADP A-2400
-TMP A-2500
+ADP A400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A500 (THYMIDINE-5'-PHOSPHATE)
+ADP A-2400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A-2500 (THYMIDINE-5'-PHOSPHATE)
 
 Step 1: models --select 1
 
@@ -52,16 +52,25 @@ Detected no residues with alternative location labels
 Step 5: metals --remove ZN
 
 Running metals. Options: --remove ZN
-No metal ions found
+Found 2 Metal ions
+ ADP A400.PB  (ADENOSINE-5'-DIPHOSPHATE)
+ ADP A-2400.PB (ADENOSINE-5'-DIPHOSPHATE)
+Contacts for ADP A400: ARG A216.NH2, GLN A331.O, PRO A333.N, TMP A500.O2P, GLY A59.N, MET A60.N, GLY A61.N, LYS A62.N, THR A63.N, THR A64.N
+Contacts for ADP A-2400: ARG A-2216.NH2, GLN A-2331.O, PRO A-2333.N, TMP A-2500.O2P, GLY A-259.N, MET A-260.N, GLY A-261.N, LYS A-262.N, THR A-263.N, THR A-264.N
+Input not valid (ZN)
 
 Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
 Detected 4 Ligands
- ADP A400
- TMP A500
- ADP A-2400
- TMP A-2500
+ ADP A400 ADENOSINE-5'-DIPHOSPHATE
+ TMP A500 THYMIDINE-5'-PHOSPHATE
+ ADP A-2400 ADENOSINE-5'-DIPHOSPHATE
+ TMP A-2500 THYMIDINE-5'-PHOSPHATE
+Contacts for ADP A400: ARG A216.NH2, GLN A331.O, PRO A333.N, TMP A500.O2P, GLY A59.N, MET A60.N, GLY A61.N, LYS A62.N, THR A63.N, THR A64.N
+Contacts for TMP A500: TYR A101.OH, GLN A125.NE2, ARG A163.NH1, GLU A225.OE1, ADP A400.O3B, HIS A58.CB, HOH A603.O, HOH A630.O, GLU A83.OE1
+Contacts for ADP A-2400: ARG A-2216.NH2, GLN A-2331.O, PRO A-2333.N, TMP A-2500.O2P, GLY A-259.N, MET A-260.N, GLY A-261.N, LYS A-262.N, THR A-263.N, THR A-264.N
+Contacts for TMP A-2500: TYR A-2101.OH, GLN A-2125.NE2, ARG A-2163.NH1, GLU A-2225.OE1, ADP A-2400.O3B, HIS A-258.CB, HOH A-2603.O, HOH A-2630.O, GLU A-283.OE1
 Input not valid (SO4)
 
 Step 7: water --remove Yes
@@ -202,10 +211,14 @@ Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
 Detected 4 Ligands
- ADP A400
- TMP A500
- ADP A-2400
- TMP A-2500
+ ADP A400 ADENOSINE-5'-DIPHOSPHATE
+ TMP A500 THYMIDINE-5'-PHOSPHATE
+ ADP A-2400 ADENOSINE-5'-DIPHOSPHATE
+ TMP A-2500 THYMIDINE-5'-PHOSPHATE
+Contacts for ADP A400: ARG A216.NH2, GLN A331.O, PRO A333.N, TMP A500.O2P, GLY A59.N, MET A60.N, GLY A61.N, LYS A62.N, THR A63.N, THR A64.N
+Contacts for TMP A500: TYR A101.OH, GLN A125.NE2, ARG A163.NH1, GLU A225.OE1, ADP A400.O3B, HIS A58.CB, GLU A83.OE1
+Contacts for ADP A-2400: ARG A-2216.NH2, GLN A-2331.O, PRO A-2333.N, TMP A-2500.O2P, GLY A-259.N, MET A-260.N, GLY A-261.N, LYS A-262.N, THR A-263.N, THR A-264.N
+Contacts for TMP A-2500: TYR A-2101.OH, GLN A-2125.NE2, ARG A-2163.NH1, GLU A-2225.OE1, ADP A-2400.O3B, HIS A-258.CB, GLU A-283.OE1
 Ligands removed All (4)
 
 Step 18: chains --select protein

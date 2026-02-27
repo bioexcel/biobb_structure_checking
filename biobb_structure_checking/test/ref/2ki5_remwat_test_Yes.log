@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
@@ -21,10 +21,10 @@ Structure pdb:2ki5 loaded
  Num. water mol.:  292
  Num. atoms:  4961
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Running water. Options: --remove Yes
 Detected 292 Water molecules
 Water molecules in contact with 0 residues: HOH A501, HOH A502, HOH A506, HOH A507, HOH A510, HOH A512, HOH A514, HOH A517, HOH A529, HOH A531, HOH A553, HOH A573, HOH A577, HOH A585, HOH A589, HOH A598, HOH A610, HOH A614, HOH A615, HOH A619, HOH A624, HOH A626, HOH A628, HOH A629, HOH A630, HOH A633, HOH A640, HOH A641, HOH A647, HOH A648, HOH A651, HOH A654, HOH A661, HOH A665, HOH A666, HOH A679, HOH A680, HOH A682, HOH A683, HOH A685, HOH A686, HOH A696, HOH A699, HOH A701, HOH A719, HOH A720, HOH A721, HOH A723, HOH A729, HOH A730, HOH A736, HOH A738, HOH A742, HOH A744, HOH A747, HOH A757, HOH A758, HOH A759, HOH A760, HOH A775, HOH A779, HOH A791, HOH B504, HOH B511, HOH B522, HOH B524, HOH B528, HOH B532, HOH B537, HOH B539, HOH B554, HOH B572, HOH B574, HOH B584, HOH B597, HOH B599, HOH B604, HOH B605, HOH B609, HOH B611, HOH B612, HOH B613, HOH B617, HOH B623, HOH B625, HOH B627, HOH B634, HOH B637, HOH B638, HOH B639, HOH B643, HOH B644, HOH B645, HOH B649, HOH B650, HOH B655, HOH B656, HOH B658, HOH B659, HOH B663, HOH B668, HOH B670, HOH B672, HOH B687, HOH B688, HOH B689, HOH B691, HOH B694, HOH B705, HOH B707, HOH B709, HOH B710, HOH B713, HOH B714, HOH B718, HOH B722, HOH B724, HOH B726, HOH B727, HOH B746, HOH B748, HOH B749, HOH B750, HOH B751, HOH B752, HOH B764, HOH B768, HOH B769, HOH B772, HOH B774, HOH B784, HOH B786, HOH B792
@@ -43,8 +43,8 @@ Final Num. ligands or modified residues:  4
 Final Num. water mol.:  0
 Final Num. atoms:  4669
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Structure saved on 2ki5_remwat_test_Yes.pdb

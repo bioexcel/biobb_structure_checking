@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif' 
@@ -20,16 +20,16 @@ Structure pdb:1ldn.1 loaded
  Num. water mol.:  287
  Num. atoms:  10319
 Small mol ligands found
-FBP A353
-OXM A351
-NAD A352
-FBP B353
-OXM B351
-NAD B352
-OXM C351
-NAD C352
-OXM D351
-NAD D352
+FBP A353 (1,6-di-O-phosphono-beta-D-fructofuranose)
+OXM A351 (OXAMIC ACID)
+NAD A352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+FBP B353 (1,6-di-O-phosphono-beta-D-fructofuranose)
+OXM B351 (OXAMIC ACID)
+NAD B352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+OXM C351 (OXAMIC ACID)
+NAD C352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+OXM D351 (OXAMIC ACID)
+NAD D352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
 Running models.
 Detected 1 Model(s)
 Found Single model
@@ -115,16 +115,26 @@ No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
 Detected 10 Ligands
- FBP A353
- OXM A351
- NAD A352
- FBP B353
- OXM B351
- NAD B352
- OXM C351
- NAD C352
- OXM D351
- NAD D352
+ FBP A353 1,6-di-O-phosphono-beta-D-fructofuranose
+ OXM A351 OXAMIC ACID
+ NAD A352 NICOTINAMIDE-ADENINE-DINUCLEOTIDE
+ FBP B353 1,6-di-O-phosphono-beta-D-fructofuranose
+ OXM B351 OXAMIC ACID
+ NAD B352 NICOTINAMIDE-ADENINE-DINUCLEOTIDE
+ OXM C351 OXAMIC ACID
+ NAD C352 NICOTINAMIDE-ADENINE-DINUCLEOTIDE
+ OXM D351 OXAMIC ACID
+ NAD D352 NICOTINAMIDE-ADENINE-DINUCLEOTIDE
+Contacts for OXM A351: THR A247.OG1, HOH A369.O
+Contacts for NAD A352: ALA A136.O, THR A137.CG2, ASN A138.OD1, THR A247.OG1, PHE A30.N, VAL A31.N, HOH A364.O, HOH A368.O, HOH A370.O, HOH A382.O, HOH A408.O, HOH A409.O, ASP A52.OD2, ALA A53.N, ALA A98.O, ASN A99.ND2
+Contacts for FBP A353: HIS A186.NE2, GLN C183.O, HIS C186.NE2
+Contacts for OXM B351: GLN B100.NE2, ARG B106.NH2, HIS B193.NE2, THR B247.OG1
+Contacts for NAD B352: ALA B136.O, ASN B138.OD1, GLY B29.CA, PHE B30.N, VAL B31.N, HOH B358.O, HOH B367.O, HOH B371.O, ASP B52.OD2, ALA B96.CA, ALA B98.O, ASN B99.ND2
+Contacts for FBP B353: ASN B184.ND2, HIS B186.ND1, ARG D171.NH1, GLN D183.O, HIS D186.NE2
+Contacts for OXM C351: HIS C193.NE2, THR C247.CG2
+Contacts for NAD C352: ALA C136.O, ASN C138.OD1, PHE C30.N, VAL C31.N, HOH C361.O, HOH C367.O, HOH C371.O, HOH C373.O, HOH C410.O, ASP C52.OD1, ALA C53.N, ALA C98.O
+Contacts for OXM D351: ARG D106.NH2, ARG D169.NH2, THR D247.OG1
+Contacts for NAD D352: ALA D136.O, THR D137.CG2, ASN D138.CB, GLY D29.CA, PHE D30.N, VAL D31.N, HOH D372.O, HOH D376.O, HOH D416.O, HOH D417.O, ASP D52.OD1, ALA D96.CA, ALA D98.O, ASN D99.ND2
 Running  check_only. Nothing else to do.
 Running getss.
 No SS bonds detected

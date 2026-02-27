@@ -102,7 +102,6 @@
                 "TE", "TH", "TI", "TL", "U",  "V",  "W",
                 "XE", "YB", "ZN", "ZR"              
             ]
-
         },
         "atom_type_ff": ["ADT", "CMIP"],
         "residue_data": {
@@ -2558,7 +2557,8 @@
                 "polar_donor": 3.1,
                 "polar_acceptor": 3.1,
                 "positive": 3.5,
-                "negative": 3.5
+                "negative": 3.5,
+                "ligand": 3.1
             },
             "MAX_DIST": 4.5,
             "R_R_CUTOFF": { "PROT": 15.0, "NA": 21.0 },

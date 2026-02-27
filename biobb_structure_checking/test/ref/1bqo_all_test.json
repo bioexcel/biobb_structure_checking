@@ -344,6 +344,52 @@
  },
  "inscodes": {},
  "ligands": {
+  "contacts": {
+   " CA A303": [
+    "ASP A158.OD1",
+    "GLY A159.O",
+    "GLY A161.O",
+    "VAL A163.O",
+    "ASP A181.OD2",
+    "GLU A184.OE2"
+   ],
+   " CA A304": [
+    "ASP A107.OD2",
+    "ASP A182.O",
+    "GLU A184.O"
+   ],
+   " CA A305": [
+    "ASP A141.O",
+    "GLY A173.O",
+    "ASN A175.O",
+    "ASP A177.OD1"
+   ],
+   " CA B303": [
+    "ASP B158.OD1",
+    "GLY B159.O",
+    "GLY B161.O",
+    "VAL B163.O",
+    "ASP B181.OD2",
+    "GLU B184.OE2"
+   ],
+   " CA B304": [
+    "ASP B107.OD1",
+    "ASP B182.O",
+    "GLU B184.O"
+   ],
+   " CA B305": [
+    "ASP B141.O",
+    "GLY B173.O",
+    "ASN B175.O",
+    "ASP B177.OD1"
+   ],
+   "N25 B401": [
+    "LEU B164.N",
+    "ALA B165.O",
+    "GLU B202.OE2",
+    "HIS B211.NE2"
+   ]
+  },
   "detected": [
    " CA A303",
    " CA A304",
@@ -369,6 +415,73 @@
  },
  "loaded_structure": "pdb:1bqo",
  "metals": {
+  "contacts": {
+   " CA A303": [
+    "ASP A158.OD1",
+    "GLY A159.O",
+    "GLY A161.O",
+    "VAL A163.O",
+    "ASP A181.OD2",
+    "GLU A184.OE2"
+   ],
+   " CA A304": [
+    "ASP A107.OD2",
+    "ASP A182.O",
+    "GLU A184.O",
+    "HOH A342.O"
+   ],
+   " CA A305": [
+    "ASP A141.O",
+    "GLY A173.O",
+    "ASN A175.O",
+    "ASP A177.OD1",
+    "HOH A314.O"
+   ],
+   " CA B303": [
+    "ASP B158.OD1",
+    "GLY B159.O",
+    "GLY B161.O",
+    "VAL B163.O",
+    "ASP B181.OD2",
+    "GLU B184.OE2"
+   ],
+   " CA B304": [
+    "ASP B107.OD1",
+    "ASP B182.O",
+    "GLU B184.O",
+    "HOH B409.O"
+   ],
+   " CA B305": [
+    "ASP B141.O",
+    "GLY B173.O",
+    "ASN B175.O",
+    "ASP B177.OD1",
+    "HOH B402.O"
+   ],
+   " ZN A301": [
+    "HIS A201.NE2",
+    "HIS A205.NE2",
+    "HIS A211.NE2"
+   ],
+   " ZN A302": [
+    "HIS A151.NE2",
+    "ASP A153.OD2",
+    "HIS A166.NE2",
+    "HIS A179.ND1"
+   ],
+   " ZN B301": [
+    "HIS B201.NE2",
+    "HIS B205.NE2",
+    "HIS B211.NE2",
+    "N25 B401.O26"
+   ],
+   " ZN B302": [
+    "HIS B151.NE2",
+    "ASP B153.OD2",
+    "HIS B166.NE2",
+    "HIS B179.ND1"
+   ]
+  },
   "detected": [
    " ZN A301",
    " ZN A302",

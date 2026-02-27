@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ku/4ku1.cif' 
@@ -23,26 +23,26 @@ Structure pdb:4ku1 loaded
  Num. water mol.:  148
  Num. atoms:  3714
 Small mol ligands found
-PG4 A511
-NAG C1
-NAG C2
-BMA C3
-MAN C4
-NAG C5
-GAL C6
-MAN C7
-NAG C8
-GAL C9
-FUL C10
-NAG D1
-NAG D2
-BMA D3
-MAN D4
-NAG D5
-GAL D6
-MAN D7
-NAG D8
-FUL D9
+PG4 A511 (TETRAETHYLENE GLYCOL)
+NAG C1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG C2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA C3 (beta-D-mannopyranose)
+MAN C4 (alpha-D-mannopyranose)
+NAG C5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C6 (beta-D-galactopyranose)
+MAN C7 (alpha-D-mannopyranose)
+NAG C8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C9 (beta-D-galactopyranose)
+FUL C10 (beta-L-fucopyranose)
+NAG D1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG D2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA D3 (beta-D-mannopyranose)
+MAN D4 (alpha-D-mannopyranose)
+NAG D5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL D6 (beta-D-galactopyranose)
+MAN D7 (alpha-D-mannopyranose)
+NAG D8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+FUL D9 (beta-L-fucopyranose)
 
 Step 1: models --select 1
 
@@ -122,26 +122,46 @@ Step 6: ligands --remove SO4
 
 Running ligands. Options: --remove SO4
 Detected 20 Ligands
- PG4 A511
- NAG C1
- NAG C2
- BMA C3
- MAN C4
- NAG C5
- GAL C6
- MAN C7
- NAG C8
- GAL C9
- FUL C10
- NAG D1
- NAG D2
- BMA D3
- MAN D4
- NAG D5
- GAL D6
- MAN D7
- NAG D8
- FUL D9
+ PG4 A511 TETRAETHYLENE GLYCOL
+ NAG C1 2-acetamido-2-deoxy-beta-D-glucopyranose
+ NAG C2 2-acetamido-2-deoxy-beta-D-glucopyranose
+ BMA C3 beta-D-mannopyranose
+ MAN C4 alpha-D-mannopyranose
+ NAG C5 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL C6 beta-D-galactopyranose
+ MAN C7 alpha-D-mannopyranose
+ NAG C8 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL C9 beta-D-galactopyranose
+ FUL C10 beta-L-fucopyranose
+ NAG D1 2-acetamido-2-deoxy-beta-D-glucopyranose
+ NAG D2 2-acetamido-2-deoxy-beta-D-glucopyranose
+ BMA D3 beta-D-mannopyranose
+ MAN D4 alpha-D-mannopyranose
+ NAG D5 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL D6 beta-D-galactopyranose
+ MAN D7 alpha-D-mannopyranose
+ NAG D8 2-acetamido-2-deoxy-beta-D-glucopyranose
+ FUL D9 beta-L-fucopyranose
+Contacts for PG4 A511: HOH A637.O, HOH A649.O
+Contacts for NAG C1: ASP A265.OD1, ASN A297.ND2, FUL C10.C1
+Contacts for FUL C10: NAG C1.O6
+Contacts for NAG C2: 
+Contacts for BMA C3: MAN C7.C1
+Contacts for MAN C4: MAN D7.O4
+Contacts for NAG C5: 
+Contacts for GAL C6: 
+Contacts for MAN C7: BMA C3.O6
+Contacts for NAG C8: LYS A246.NZ, HOH A659.O
+Contacts for GAL C9: PRO A244.O, LYS A246.NZ, GLU A258.O, THR A260.OG1, HOH A633.O
+Contacts for NAG D1: ASP B265.OD1, ASN B297.ND2, HOH B669.O, FUL D9.C1
+Contacts for NAG D2: ARG B301.NE, HOH B669.O
+Contacts for BMA D3: MAN D7.C1
+Contacts for MAN D4: 
+Contacts for NAG D5: LYS B246.NZ, HOH B636.O, HOH B670.O, HOH B679.O
+Contacts for GAL D6: PRO B244.O, LYS B246.NZ, GLU B258.O, THR B260.OG1, HOH B603.O, HOH B636.O, HOH B639.O
+Contacts for MAN D7: MAN C4.O4, BMA D3.O3
+Contacts for NAG D8: LYS B334.NZ
+Contacts for FUL D9: GLN B295.NE2, HOH B659.O, NAG D1.O6
 Input not valid (SO4)
 
 Step 7: water --remove Yes
@@ -259,26 +279,46 @@ Step 17: ligands --remove All
 
 Running ligands. Options: --remove All
 Detected 20 Ligands
- PG4 A511
- NAG C1
- NAG C2
- BMA C3
- MAN C4
- NAG C5
- GAL C6
- MAN C7
- NAG C8
- GAL C9
- FUL C10
- NAG D1
- NAG D2
- BMA D3
- MAN D4
- NAG D5
- GAL D6
- MAN D7
- NAG D8
- FUL D9
+ PG4 A511 TETRAETHYLENE GLYCOL
+ NAG C1 2-acetamido-2-deoxy-beta-D-glucopyranose
+ NAG C2 2-acetamido-2-deoxy-beta-D-glucopyranose
+ BMA C3 beta-D-mannopyranose
+ MAN C4 alpha-D-mannopyranose
+ NAG C5 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL C6 beta-D-galactopyranose
+ MAN C7 alpha-D-mannopyranose
+ NAG C8 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL C9 beta-D-galactopyranose
+ FUL C10 beta-L-fucopyranose
+ NAG D1 2-acetamido-2-deoxy-beta-D-glucopyranose
+ NAG D2 2-acetamido-2-deoxy-beta-D-glucopyranose
+ BMA D3 beta-D-mannopyranose
+ MAN D4 alpha-D-mannopyranose
+ NAG D5 2-acetamido-2-deoxy-beta-D-glucopyranose
+ GAL D6 beta-D-galactopyranose
+ MAN D7 alpha-D-mannopyranose
+ NAG D8 2-acetamido-2-deoxy-beta-D-glucopyranose
+ FUL D9 beta-L-fucopyranose
+Contacts for PG4 A511: 
+Contacts for NAG C1: ASP A265.OD1, ASN A297.ND2, FUL C10.C1
+Contacts for FUL C10: NAG C1.O6
+Contacts for NAG C2: 
+Contacts for BMA C3: MAN C7.C1
+Contacts for MAN C4: MAN D7.O4
+Contacts for NAG C5: 
+Contacts for GAL C6: 
+Contacts for MAN C7: BMA C3.O6
+Contacts for NAG C8: LYS A246.NZ
+Contacts for GAL C9: PRO A244.O, LYS A246.NZ, GLU A258.O, THR A260.OG1
+Contacts for NAG D1: ASP B265.OD1, ASN B297.ND2, FUL D9.C1
+Contacts for NAG D2: ARG B301.NE
+Contacts for BMA D3: MAN D7.C1
+Contacts for MAN D4: 
+Contacts for NAG D5: LYS B246.NZ
+Contacts for GAL D6: PRO B244.O, LYS B246.NZ, GLU B258.O, THR B260.OG1
+Contacts for MAN D7: MAN C4.O4, BMA D3.O3
+Contacts for NAG D8: LYS B334.NZ
+Contacts for FUL D9: GLN B295.NE2, NAG D1.O6
 Warning, no canonical sequence available for chain C/0
 Warning, no canonical sequence available for chain D/0
 Ligands removed All (20)

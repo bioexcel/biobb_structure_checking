@@ -24,8 +24,10 @@ def check(strcheck):
         'at_groups': {}
     }
     met_names = {}
+    met_res_list = []
     for atom in met_list:
         res = atom.get_parent()
+        met_res_list.append(res)
         if res.get_resname() not in met_names:
             met_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
     
@@ -37,6 +39,36 @@ def check(strcheck):
             fix_data['at_groups'][atm.id] = []
         fix_data['at_groups'][atm.id].append(atm)
         strcheck.summary['metals']['detected'].append(mu.residue_id(res))
+    
+    met_contacts = {met: set() for met in met_res_list}
+
+    for contact_type, contacts in strcheck.strucm.check_r_list_clashes(
+        met_res_list,
+        contact_types= ['ligand'],
+        use_wat=True
+    ).items():
+        if contacts:
+            for atom1, atom2, dist in contacts.values():
+                if atom1.serial_number > atom2.serial_number:
+                    atom2, atom1 = atom1, atom2
+                res1 = atom1.get_parent()
+                res2 = atom2.get_parent()
+                if mu.is_hetatm(res1) and res1 in met_contacts:
+                    met_contacts[res1].add(atom2)
+                if mu.is_hetatm(res2) and res2 in met_contacts:
+                    met_contacts[res2].add(atom1)
+    
+    strcheck.summary['metals']['contacts'] = {}
+    for lig in sorted(met_contacts, key=lambda x:(x.get_parent().id, mu.residue_num(x))):
+        contacts = sorted(
+            met_contacts[lig],
+            key=lambda x: (
+                x.get_parent().get_parent().id, 
+                mu.residue_num(x.get_parent())
+            )
+        )
+        strcheck.summary['metals']['contacts'][mu.residue_id(lig)] = [mu.atom_id(c) for c in contacts]
+        print(f"Contacts for {mu.residue_id(lig)}: {', '.join([mu.atom_id(c) for c in contacts])}")
 
     return fix_data
 

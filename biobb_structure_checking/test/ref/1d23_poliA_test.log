@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
@@ -21,8 +21,8 @@ Structure pdb:1d23 loaded
  Num. water mol.:  154
  Num. atoms:  560
 Metal/Ion residues found
- MG A22
- MG B21
+ MG A22 (MAGNESIUM ION)
+ MG B21 (MAGNESIUM ION)
 Running mutateside. Options: --na_seq AAAAAAAAAA
 Mutations to perform
 A:DC1DA
@@ -288,6 +288,6 @@ Final Num. ligands or modified residues:  2
 Final Num. water mol.:  154
 Final Num. atoms:  560
 Metal/Ion residues found
- MG A22
- MG B21
+ MG A22 (MAGNESIUM ION)
+ MG B21 (MAGNESIUM ION)
 Structure saved on 1d23_poliA_test.pdb

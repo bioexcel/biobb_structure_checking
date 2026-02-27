@@ -44,6 +44,35 @@ def check(strcheck):
         fix_data['ligand_rids'].add(res.get_resname())
         fix_data['ligand_rnums'].append(mu.residue_num(res))
 
+    lig_contacts = {lig: set() for lig in lig_list}
+
+    for _, contacts in strcheck.strucm.check_r_list_clashes(
+        lig_list,
+        contact_types= ['ligand'],
+        use_wat=True
+    ).items():
+        if contacts:         
+            for atom1, atom2, dist in contacts.values(): 
+                if atom1.serial_number > atom2.serial_number:
+                    atom2, atom1 = atom1, atom2
+                res1 = atom1.get_parent()
+                res2 = atom2.get_parent()
+                if mu.is_hetatm(res1) and res1 in lig_contacts:
+                    lig_contacts[res1].add(atom2)
+                if mu.is_hetatm(res2) and res2 in lig_contacts:
+                    lig_contacts[res2].add(atom1)
+
+    strcheck.summary['ligands']['contacts'] = {}
+    for lig in sorted(lig_contacts, key=lambda x:(x.get_parent().id, mu.residue_num(x))):
+        contacts = sorted(
+            lig_contacts[lig],
+            key=lambda x: (
+                x.get_parent().get_parent().id, 
+                mu.residue_num(x.get_parent())
+                )
+        )
+        strcheck.summary['ligands']['contacts'][mu.residue_id(lig)] = [mu.atom_id(c) for c in contacts]
+        print(f"Contacts for {mu.residue_id(lig)}: {', '.join([mu.atom_id(c) for c in contacts])}")
     return fix_data
 
 

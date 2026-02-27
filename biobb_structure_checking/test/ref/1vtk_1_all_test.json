@@ -463,6 +463,50 @@
  },
  "inscodes": {},
  "ligands": {
+  "contacts": {
+   "ADP A-2400": [
+    "ARG A-2216.NH2",
+    "GLN A-2331.O",
+    "PRO A-2333.N",
+    "TMP A-2500.O2P",
+    "GLY A-259.N",
+    "MET A-260.N",
+    "GLY A-261.N",
+    "LYS A-262.N",
+    "THR A-263.N",
+    "THR A-264.N"
+   ],
+   "ADP A400": [
+    "ARG A216.NH2",
+    "GLN A331.O",
+    "PRO A333.N",
+    "TMP A500.O2P",
+    "GLY A59.N",
+    "MET A60.N",
+    "GLY A61.N",
+    "LYS A62.N",
+    "THR A63.N",
+    "THR A64.N"
+   ],
+   "TMP A-2500": [
+    "TYR A-2101.OH",
+    "GLN A-2125.NE2",
+    "ARG A-2163.NH1",
+    "GLU A-2225.OE1",
+    "ADP A-2400.O3B",
+    "HIS A-258.CB",
+    "GLU A-283.OE1"
+   ],
+   "TMP A500": [
+    "TYR A101.OH",
+    "GLN A125.NE2",
+    "ARG A163.NH1",
+    "GLU A225.OE1",
+    "ADP A400.O3B",
+    "HIS A58.CB",
+    "GLU A83.OE1"
+   ]
+  },
   "detected": [
    "ADP A400",
    "TMP A500",
@@ -482,7 +526,37 @@
  },
  "loaded_structure": "pdb:1vtk.1",
  "metals": {
-  "opts": "--remove ZN"
+  "contacts": {
+   "ADP A-2400": [
+    "ARG A-2216.NH2",
+    "GLN A-2331.O",
+    "PRO A-2333.N",
+    "TMP A-2500.O2P",
+    "GLY A-259.N",
+    "MET A-260.N",
+    "GLY A-261.N",
+    "LYS A-262.N",
+    "THR A-263.N",
+    "THR A-264.N"
+   ],
+   "ADP A400": [
+    "ARG A216.NH2",
+    "GLN A331.O",
+    "PRO A333.N",
+    "TMP A500.O2P",
+    "GLY A59.N",
+    "MET A60.N",
+    "GLY A61.N",
+    "LYS A62.N",
+    "THR A63.N",
+    "THR A64.N"
+   ]
+  },
+  "detected": [
+   "ADP A400",
+   "ADP A-2400"
+  ],
+  "error": "Unknown selection ZN"
  },
  "models": {
   "nmodels": 1

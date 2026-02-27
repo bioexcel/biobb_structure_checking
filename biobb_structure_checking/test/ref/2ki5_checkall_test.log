@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5-assembly1.cif' 
@@ -20,10 +20,10 @@ Structure pdb:2ki5.1 loaded
  Num. water mol.:  292
  Num. atoms:  4961
 Small mol ligands found
-SO4 A4
-AC2 A1
-SO4 B3
-AC2 B2
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
 Running models.
 Detected 1 Model(s)
 Found Single model
@@ -73,10 +73,14 @@ No metal ions found
 Running  check_only. Nothing else to do.
 Running ligands.
 Detected 4 Ligands
- SO4 A4
- AC2 A1
- SO4 B3
- AC2 B2
+ SO4 A4 SULFATE ION
+ AC2 A1 9-HYROXYETHOXYMETHYLGUANINE
+ SO4 B3 SULFATE ION
+ AC2 B2 9-HYROXYETHOXYMETHYLGUANINE
+Contacts for AC2 A1: TYR A101.OH, GLN A125.OE1, HOH A586.O, HOH A589.O, HOH A779.O
+Contacts for SO4 A4: GLY A59.N, MET A60.N, GLY A61.N, LYS A62.N, THR A63.N, HOH A696.O, HOH A783.O
+Contacts for AC2 B2: GLN B125.NE2, HOH B588.O, HOH B590.O, HOH B778.O, HOH B784.O
+Contacts for SO4 B3: ARG B222.NH2, GLY B59.N, HOH B594.O, MET B60.N, GLY B61.N, LYS B62.N, THR B63.N
 Running  check_only. Nothing else to do.
 Running getss.
 No SS bonds detected
