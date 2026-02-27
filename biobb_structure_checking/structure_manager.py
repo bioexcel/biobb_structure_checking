@@ -66,7 +66,8 @@ class StructureManager:
             nowarn: bool = True,
             coords_only: bool = False,
             overwrite: bool = False,
-            atom_limit: int = 0
+            atom_limit: int = 0,
+            no_network: bool = False
     ) -> None:
         """
             Class constructor. Sets an empty object and loads a structure
@@ -84,6 +85,7 @@ class StructureManager:
             **file_format** (str): structure file format to use
             **fasta_sequence_path** (str): path to canonical sequence file (needed for PDB input)
             **nowarn** (bool): No warnings on Structure Building
+            **no_network** (bool): Do not use network to fetch data
 
         """
         self.data_library = DataLibManager(data_library_path)
@@ -122,7 +124,7 @@ class StructureManager:
 
         self.models_data = ModelsData(self.st)
         self.chains_data = ChainsData(self.st)
-        self.st_data = StructureData(self.st, input_format, headers, biounit)
+        self.st_data = StructureData(self.st, input_format, headers, biounit, no_network=no_network)
         self.modified = False
 
         # Calc internal data

@@ -22,7 +22,10 @@ def check(strcheck):
     lig_names = {}
     for res in lig_list:
         if res.get_resname() not in lig_names:
-            lig_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
+            if not strcheck.args['no_network']:
+                lig_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
+            else:
+                lig_names[res.get_resname()] = ''
     
     fix_data = {
         'lig_list': lig_list,

@@ -29,10 +29,13 @@ def check(strcheck):
         res = atom.get_parent()
         met_res_list.append(res)
         if res.get_resname() not in met_names:
-            met_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
+            if strcheck.args['no_network']:
+                met_names[res.get_resname()] = ''
+            else:
+                met_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
     
     for atm in sorted(met_list, key=lambda x: x.serial_number):
-        print(f" {mu.atom_id(atm):12} ({met_names[atm.get_parent().get_resname()]})")
+        print(f" {mu.atom_id(atm):12} {met_names[atm.get_parent().get_resname()]}")
         res = atm.get_parent()
         fix_data['met_rids'].append(mu.residue_num(res))
         if atm.id not in fix_data['at_groups']:
@@ -42,7 +45,7 @@ def check(strcheck):
     
     met_contacts = {met: set() for met in met_res_list}
 
-    for contact_type, contacts in strcheck.strucm.check_r_list_clashes(
+    for _, contacts in strcheck.strucm.check_r_list_clashes(
         met_res_list,
         contact_types= ['ligand'],
         use_wat=True

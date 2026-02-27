@@ -289,6 +289,13 @@ CMD_LINE.add_argument(
 )
 
 CMD_LINE.add_argument(
+    '--no_network',
+    action='store_true',
+    dest='no_network',
+    help='Network disabled, do not try to download missing parameters'
+)
+
+CMD_LINE.add_argument(
     'command',
     help="Command to execute (help: check_structure commands) ",
 )
