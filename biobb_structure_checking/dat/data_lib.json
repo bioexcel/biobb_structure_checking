@@ -91,10 +91,18 @@
         },
         "atom_data": {
             "metal_atoms": [
-                "MG", "MN", "MO", "Mg2", "Mn2", "Ca2", "ZN", "NI", "FE",
-                "Zn2", "Ni2", "Fe2", "CO", "CU", "HG", "Co2", "Cu2",
-                "CD", "AG", "AU", "Cd2", "CA", "Ca"
+                "AG", "AL", "AM", "AR", "AS", "AU", "BA", "BE",
+                "BI", "CA", "CD", "CE", "CF", "CM",
+                "CO", "CR", "CS", "CU", "DY",  "ER", "EU",
+                "FE", "GA", "GD", "HG", "HO", 
+                "IN", "IR", "K",  "KR", "LA", "LI", "LU", "MG",
+                "MN", "MO", "NA", "NI", "OS", "PB",
+                "PD", "PR", "PT", "PU", "RB", "RE", 
+                "RU", "SB", "SM", "SR", "TA", "TB",
+                "TE", "TH", "TI", "TL", "U",  "V",  "W",
+                "XE", "YB", "ZN", "ZR"              
             ]
+
         },
         "atom_type_ff": ["ADT", "CMIP"],
         "residue_data": {
