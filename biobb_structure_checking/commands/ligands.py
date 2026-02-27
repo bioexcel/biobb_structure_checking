@@ -18,20 +18,27 @@ def check(strcheck):
         return {}
 
     print(cts.MSGS['LIGANDS_DETECTED'].format(len(lig_list)))
+
+    lig_names = {}
+    for res in lig_list:
+        if res.get_resname() not in lig_names:
+            lig_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
+    
     fix_data = {
         'lig_list': lig_list,
         'ligand_rids': set(),
         'ligand_rnums': []
     }
+
     strcheck.summary['ligands'] = {'detected': []}
 
     for res in sorted(lig_list, key=lambda x: x.index):
         if strcheck.strucm.models_data.has_models():
             if res.get_parent().get_parent().id > 0:
                 continue
-            print(f" {mu.residue_id(res, False)}/*")
+            print(f" {mu.residue_id(res, False)}/* {lig_names[res.get_resname()]} ")
         else:
-            print(f" {mu.residue_id(res, False)}")
+            print(f" {mu.residue_id(res, False)} {lig_names[res.get_resname()]}" )
 
         strcheck.summary['ligands']['detected'].append(mu.residue_id(res))
         fix_data['ligand_rids'].add(res.get_resname())

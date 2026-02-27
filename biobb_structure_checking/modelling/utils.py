@@ -6,6 +6,7 @@
 import re
 import sys
 # from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
+import requests
 
 import numpy as np
 from numpy import arccos, clip, cos, dot, pi, sin, sqrt
@@ -18,6 +19,8 @@ from Bio.PDB.vectors import Vector, rotaxis
 
 from biobb_structure_checking.constants import MSGS
 
+
+MONOMERS_API_PREFIX = 'https://mdb-login.bsc.es/api/pdbmonomer/'
 # chain types
 PROTEIN = 1
 DNA = 2
@@ -125,6 +128,9 @@ DNA_RESIDUE_CODE = {'DA', 'DC', 'DG', 'DT'}
 RNA_RESIDUE_CODE = {'A', 'C', 'G', 'U'}
 NA_RESIDUE_CODE = DNA_RESIDUE_CODE.union(RNA_RESIDUE_CODE)
 COMPLEMENT_TAB = str.maketrans('ACGTU', 'TGCAA')
+
+MONOMER_NAME_CACHE = {}
+
 # Residue & Atom friendly ids
 
 
@@ -147,6 +153,15 @@ def residue_num(res, models='auto'):
     if models:
         rnum += "/" + str(res.get_parent().get_parent().id + 1)
     return rnum
+
+def fetch_residue_name_by_id(res_id):
+    ''' Fetch residue name from monomers API, with caching '''
+    if res_id in MONOMER_NAME_CACHE:
+        return MONOMER_NAME_CACHE[res_id]
+    residue_data = requests.get(f"{MONOMERS_API_PREFIX}{res_id}/entry",timeout=10).json()
+    name = residue_data.get('name', '').replace(res_id, '', 1).strip()
+    MONOMER_NAME_CACHE[res_id] = name
+    return name
 
 
 def atom_id(atm, models='auto'):

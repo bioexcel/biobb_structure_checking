@@ -220,11 +220,11 @@ class StructureData():
         if self.hetatm[mu.METAL]:
             print('Metal/Ion residues found')
             for res in self.hetatm[mu.METAL]:
-                print(mu.residue_id(res))
+                print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
         if self.hetatm[mu.ORGANIC]:
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
-                print(mu.residue_id(res))
+                print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
 
     def _check_ca_only(self):
         ca_only = True

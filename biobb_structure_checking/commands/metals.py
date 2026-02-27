@@ -23,8 +23,14 @@ def check(strcheck):
         'met_rids': [],
         'at_groups': {}
     }
+    met_names = {}
+    for atom in met_list:
+        res = atom.get_parent()
+        if res.get_resname() not in met_names:
+            met_names[res.get_resname()] = mu.fetch_residue_name_by_id(res.get_resname())
+    
     for atm in sorted(met_list, key=lambda x: x.serial_number):
-        print(f" {mu.atom_id(atm):12}")
+        print(f" {mu.atom_id(atm):12} ({met_names[atm.get_parent().get_resname()]})")
         res = atm.get_parent()
         fix_data['met_rids'].append(mu.residue_num(res))
         if atm.id not in fix_data['at_groups']:
