@@ -1,4 +1,4 @@
-## v3.13.7 (2026.1)
+## v3.16.1 (2026.1)
 ### Extended functions
 - water
   - Added support for selective removal of water molecules according to contacts
@@ -10,7 +10,7 @@
 - input
   - Fixed --limit management to avoid useless structure loading
 
-## v3.13.6 (2025.1)
+## v3.15.6 (2025.1)
 ### Extended functions
   - input
     - Added transparent support for .gzipped sequence and structure files

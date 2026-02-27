@@ -9,7 +9,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.15.6'
+VERSION = '3.16.1'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
