@@ -58,10 +58,10 @@ Main chain fixes
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.6.87.2-microsoft-standard-WSL2 x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.18.33.1-microsoft-standard-WSL2 x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2026/02/27 18:48:09
+Job starting time (YY/MM/DD HH:MM:SS): 2026/06/16 17:40:17
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
