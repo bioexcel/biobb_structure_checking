@@ -66,7 +66,7 @@ class SequenceData():
             'pdb': {}
         }
 
-    def load_sequence_from_fasta(self, fasta_sequence_path):
+    def load_sequence_from_fasta(self, fasta_sequence_path, no_network=False):
         """ SequenceData.load_sequence_from_fasta
         Load canonical sequence from external FASTA file
 
@@ -77,6 +77,9 @@ class SequenceData():
         self.fasta = []
         remove_fasta = False
         if fasta_sequence_path:
+            if no_network and (fasta_sequence_path.startswith(('pdb:', 'http'))):
+                print("Error: no network access to retrieve FASTA sequence, but path requires it")
+                return False
             if fasta_sequence_path.startswith('pdb:'):
                 fasta_sequence_path = fasta_sequence_path[4:]
                 try:

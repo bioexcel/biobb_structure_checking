@@ -15,7 +15,6 @@ class StructureData():
         self.biounit = biounit
         self.fixed_side = False
         self.no_network = no_network
-        print(f"no_network: {self.no_network}")
         self.hetatm = {}
         self.stats = {
             'num_res': 0,
@@ -214,7 +213,6 @@ class StructureData():
                 self.hetatm[mu.ORGANIC].append(res)
 
     def print_hetatm_stats(self):
-        print(f"no_network: {self.no_network}")
         '''Print statistics on HETATM'''
         if self.hetatm[mu.MODRES]:
             print('Modified residues found')

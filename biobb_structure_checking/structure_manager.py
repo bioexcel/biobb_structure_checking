@@ -99,7 +99,7 @@ class StructureManager:
         self.sequence_data = SequenceData()
 
         if fasta_sequence_path:
-            self.sequence_data.load_sequence_from_fasta(fasta_sequence_path)
+            self.sequence_data.load_sequence_from_fasta(fasta_sequence_path, no_network=no_network)
 
         self.st, headers, input_format, biounit = self._load_structure_file(
             input_pdb_path,
@@ -111,7 +111,8 @@ class StructureManager:
             QUIET=nowarn,
             coords_only=coords_only,
             overwrite=overwrite,
-            atom_limit=atom_limit
+            atom_limit=atom_limit,
+            no_network=no_network
         )
 
         if self.st == 'atom_limit_error':
@@ -141,11 +142,15 @@ class StructureManager:
             QUIET=False,
             coords_only=False,
             overwrite=False,
-            atom_limit=0
+            atom_limit=0,
+            no_network=False
     ):
         """ Load structure file """
         biounit = False
         self.pdb_id = 'User'
+        if no_network and (input_pdb_path.startswith(('pdb:', 'http'))):
+            print("Error: no network access to retrieve structure, but path requires it")
+            return None, None, None, None
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
