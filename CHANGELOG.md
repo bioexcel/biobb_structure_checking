@@ -1,4 +1,7 @@
-## v3.16.1 (2026.1)
+## v3.16.1 (2026.2)
+### New functions
+ - Added description of ligands/HETatms when available
+ - Added --no_network to prevent network usage when not available
 ### Extended functions
 - water
   - Added support for selective removal of water molecules according to contacts

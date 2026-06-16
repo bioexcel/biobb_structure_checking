@@ -82,6 +82,8 @@
         3.5.5. Apolar Clashes DONE
         3.5.6. Ionic Positive Clashes DONE
         3.5.7. Ionic Negative Clashes DONE
+	3.5.8. Do Analysis considering H atoms if available (add --use_h flag)
+    3.6. Detect planary deviations
 4. Prepare alternative main scripts for specific functions
     4.1 Check only
     4.2 Prepare autodock input
