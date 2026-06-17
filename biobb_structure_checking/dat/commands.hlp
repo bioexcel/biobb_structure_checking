@@ -24,6 +24,7 @@ chains [--select chain_ids | molecule_type] [--rename (auto|new label)]
     --rename allow to fix unlabelled chains
     --renumber allow to reorganize residues and chains by moving or renunbering fragments. Auto generate consecutive residue numbers.
     --rem_inscodes removes insertion codes when renumbering chains
+    --rebuild rebuild chains from coordinates
 inscodes
     Detects residues with insertion codes.
     --renumber fix insertion codes by renumbering chain residues
@@ -38,7 +39,6 @@ getss      Detect SS Bonds
 water [--remove Yes|No] [--keep_min_contacts KEEP]
     --remove Remove Water molecules
     --keep_min_contacts KEEP - Remove All Water molecules with less then KEEP contacts (0-4)
-
 rem_hydrogen [--remove Yes|No]
     Remove Hydrogen atoms from structure
 mutateside [--mut mutation_list|file:mutations_file] [--no_check_clashes]
@@ -83,5 +83,5 @@ backbone [--fix_atoms All|None|Residue List]
 3. Structure Warnings (no fix)
 
 cistransbck Analyzes cis-trans dihedrals on backbone atoms
-clashes    Steric clashes (Severe, Apolar, Polar Donors, Polar Acceptors,
+clashes    Steric clashes (Severe/Covalent, Apolar, Polar Donors, Polar Acceptors,
            Ionic Positive, Ionic Negative)

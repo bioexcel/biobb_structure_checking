@@ -17,7 +17,8 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,
                        [--res_lib RES_LIBRARY_PATH] [--data_lib DATA_LIBRARY_PATH] [-o OUTPUT_STRUCTURE_PATH]
                        [--output_format {pdb,pdbqt,pqr,cmip,cif,mmCif}] [--keep_canonical_resnames] [--rename_terms]
                        [--json JSON_OUTPUT_PATH] [-nv] [-v] [--limit ATOM_LIMIT] [--time_limit TIME_LIMIT] [--debug]
-                       [--build_warnings] [--force_save] [--check_only] [--non_interactive] [--version]
+                       [--build_warnings] [--force_save] [--check_only] [--non_interactive] 
+                       [--no_network] [--version]
                        command ...
 ~~~
 ### positional arguments:
@@ -96,6 +97,8 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,
 **--check_only** - _Perform checks only, structure is not modified_
 
 **--non_interactive** - _Do not prompt for missing parameters_
+
+**--no_network** - _Network disabled, do not download missing parameters
 
 ***
 ### Miscelanea
