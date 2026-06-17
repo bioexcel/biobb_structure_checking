@@ -5,6 +5,7 @@
 import json
 import sys
 
+
 class DataLibManager:
     """
     | data_lib_manager DataLibManager
@@ -30,7 +31,10 @@ class DataLibManager:
                 self.ff_data[charge_set] = {}
 
         except IOError:
-            print("ERROR: unable to open data library " + file_path, file=sys.stderr)
+            print(
+                f"ERROR: unable to open data library {file_path}",
+                file=sys.stderr
+            )
             sys.exit(2)
 
     def get_valid_codes(self, mol_type):
@@ -61,12 +65,13 @@ class DataLibManager:
                 'side': self.residue_data[rcode]['side_atoms']
             }
             for rcode in self.residue_codes[chain_type]
+            if rcode not in self.canonical_codes
         }
         if chain_type == 'protein':
             for rcode in self.residue_codes['cap_residues']:
                 atom_lists[rcode] = {
                     'backbone': self.residue_data[rcode]['bck_atoms'],
-                    'side' : []
+                    'side': []
                 }
         return atom_lists
 
@@ -129,16 +134,25 @@ class DataLibManager:
                 * **apolar** - Involving any apolar atom
                 * **polar_donor** - Involving two Hbond donors
                 * **polar_acceptor** - Involving two HBond acceptors
+                * **polar** - Involving two HBond acceptors or donors
                 * **positive** - Involving two positive atoms
                 * **negative** - Involving two negative atoms
         """
+        if 'polar' in contact_types:
+            contact_types += ['polar_donor', 'polar_acceptor']
 
         atom_lists = {
             cls_type: self.get_atom_feature_list(cls_type + '_atoms')
             for cls_type in contact_types
             if cls_type != 'severe'
         }
-
+        if 'polar' in contact_types:
+            for c_type in ('polar_donor', 'polar_acceptor'):
+                for at_list in atom_lists[c_type]:
+                    if not at_list in atom_lists['polar']:
+                        atom_lists['polar'][at_list] = atom_lists[c_type][at_list].copy()
+                    else:
+                        atom_lists['polar'][at_list] += atom_lists[c_type][at_list]
         return atom_lists
 
     def get_amide_data(self):
@@ -187,5 +201,8 @@ class DataLibManager:
             json_map = json.load(data_file_h)
             self.ff_data[json_map['id']] = json_map
         except IOError:
-            print("ERROR: unable to open forcefield library " + file_path, file=sys.stderr)
+            print(
+                f"ERROR: unable to open forcefield library {file_path}",
+                file=sys.stderr
+            )
             sys.exit(2)

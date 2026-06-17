@@ -1,3 +1,96 @@
+## v3.13.7 (2026.1)
+### Extended functions
+- water
+  - Added support for selective removal of water molecules according to contacts
+### Bug fixes
+- sequences
+  - Fixed missing initial fragment, structure sequence header
+- backbone
+  - Fixed accumulated display of modified residues after consecutive reconstructions
+- input
+  - Fixed --limit management to avoid useless structure loading
+
+## v3.13.6 (2025.1)
+### Extended functions
+  - input
+    - Added transparent support for .gzipped sequence and structure files
+### Bug fixes
+  - input
+    - Updated default PDB server
+    - Fixed non json serializable np.floats
+    - Fixed Str to Seq conversion, forced by Bio.seqrecord
+    - Fixed io folder to a safer name
+    - Fixed clash distance for severe clashes too short
+## v3.13.5 (2024.4)
+### Bug Fixes
+- backbone
+  - Fixed interactive behaviour when missing sequences
+- mutateside
+  - Fixed bug. Mutated residue was deleted when using --rebuild
+
+## v3.13.4 (2023.3)
+### Bug Fixes
+- sequences
+  - Fixed key error bug fix in sequencedata.match_sequence_numbering
+
+## v3.13.3 (2023.2)
+### Extended functions
+  - input
+    - Added assembly download from wwpdb.
+    - Added --overwrite_cache to refresh cached structures.
+    - improved recognition of CA-only structures.
+    - Added automated sequence download for retrieved structure in PDB format
+    - --sequence accepts remote download as pdb:{pdb_id}
+    - Added remote downloads (structure and sequence) from plain URL's (http(s) only).
+  - output
+    - Added optional logging of building errors (as --build-warnings).
+    - Improved phrasing for some log errors.
+  - run_time
+    - Atom limit check made after download to avoid useless work.
+    - Added --time_limit to avoid too lengthy runs. Useful on massive analysis.
+  - add_hydrogen
+    - Full list of residues now requires --verbose.
+### Deprecated
+  - input
+    - Use of alternative pdb servers (--pdb_servers) for biounits/assemblies. Command-line parameter retained for back-compatibility.
+### Bug Fixes
+  - input
+    - Default download moved to https (instead of ftp) to avoid detected network restrictions.
+  - sequences.
+    - Fixed errors in sequence recognition when non-protein and non-na chain.
+    - Fixed FASTA headers when no gaps.
+  - models/chains/sequences. Fixed errors when differences in chain composition among models. All models are now analyzed as independent entities.
+  - Added error message when --rebuild is applied to N term residue. Fix pending.
+## v3.12.1 (2022.4)
+### Extended functions
+- amide
+  - Added --fix auto option to automatically find best fix combination
+- chains
+  - Added --rename. fixes empty chain labels
+  - Added --renumber. allow to renumber/reorganize chains and residues
+  - Added --rem_inscodes. removes insertion codes on renumbering
+  - Added --rebuild. rebuild chains labels and residue ids from backbone connectivity
+- inscodes
+  - Added --renumber. Rebuild residue numbering to remove insertion codes
+- models
+  - Added --build_complex. Converts biounit's selected models into actual complexes
+- sequences
+  - Added --output_fasta. Writes sequences found in an external FASTA file
+- json
+  - Extended information on json summary output
+- input format
+  - File format for remote download can be defined using extension as in pdb:2ki5.pdb
+- output format
+  - Added mmCif output (only atom records)
+- input management
+  - Added --nocache to avoid caching downloaded structures
+  - Added --copy_input to recover a copy of the input structure
+  - Added --coords_only to discard chain labels and residue ids from input. Used to revover faulty structure files
+### Bug Fixes
+- Added missing defaults for Notebook execution
+- Ionized/tautomeric residue names recognized
+- Fixed behaviour of structure headers output with missing entries
+
 ## v3.10.1 (2022.3)
 ### Extended functions
 - Structure details
@@ -11,8 +104,7 @@
 - sequences
   - Structure sequence is always reported even in the absence of canonical one
 - chains
-  - Unlabelled chains can be fixed.   
-
+  - Unlabelled chains can be fixed.
 ### Bug Fixes
 - Fixed banner format
 - Fixed residue id on metals output
@@ -39,13 +131,16 @@
 
 ### Bug Fixes
 
+- add_hydrogen
+  - Extended to Nucleic Acids
+  - added option to keep canonical residue names
+### Bug Fixes
+- add_hydrogen
+  - Forced upper case for FF names
 ## v3.9.9 (2021.4)
 
 ### Bug Fixes
 - Remove pinned numpy dependency
-
-
-***
 
 ***
 ## v3.9.7 (2021.4)
@@ -90,7 +185,7 @@
 
 ### Extended functions
 - mutateside
-    - added support for mutation of DNA residues
+    - added support for mutation of DNA/RNA residues
     - --na_seq allows to set a desired final sequence in a single operation (for DNA duplexes)
 - chains
     - allows to select chains according to molecular type (protein | dna | rna | na).

@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "ARG A51",
    "TYR A53",
@@ -151,7 +150,8 @@
    "GLU B371",
    "GLU B374"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "AC2 A1": {
@@ -324,12 +324,15 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "A": "Protein",
-  "B": "Protein",
+  "A": "Protein/0",
+  "B": "Protein/0",
   "selected": {
-   "A": 1,
-   "B": 1
-  }
+   "0": {
+    "A": 1,
+    "B": 1
+   }
+  },
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 84,
@@ -512,6 +515,16 @@
    ],
    "severe": [
     {
+     "at1": "MET A46.CE",
+     "at2": "VAL A352.CG2",
+     "dist": 1.8427
+    },
+    {
+     "at1": "MET A46.CE",
+     "at2": "THR A354.O",
+     "dist": 1.8692
+    },
+    {
      "at1": "MET B46.CE",
      "at2": "VAL B352.O",
      "dist": 0.9206
@@ -522,35 +535,43 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
-   },
-   "B": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    },
+    "B": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein",
-   "B": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "B": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 2,
+  "nchains": [
+   2
+  ],
   "nmodels": 1,
-  "num_ats": 9351,
-  "num_h": 4706,
-  "num_res": 612,
-  "num_wat": 0,
-  "res_h": 604,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 9351,
+   "num_h": 4706,
+   "num_res": 612,
+   "num_wat": 0,
+   "res_h": 604,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": -2.531111999999998
  },
  "fixside": {
@@ -660,6 +681,16 @@
   ],
   "severe": [
    {
+    "at1": "MET A46.CE",
+    "at2": "VAL A352.CG2",
+    "dist": 1.8427
+   },
+   {
+    "at1": "MET A46.CE",
+    "at2": "THR A354.O",
+    "dist": 1.8692
+   },
+   {
     "at1": "MET B46.CE",
     "at2": "VAL B352.O",
     "dist": 0.9206
@@ -691,47 +722,58 @@
    "opt": "All"
   }
  },
+ "loaded_structure": "pdb:2ki5",
  "metals": {
   "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "opts": "--remove Yes"
  },
+ "saved_structure": "2ki5_all_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "A": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
-   },
-   "B": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "A": {
+     "DNA": 0.0,
+     "Other": 0.006535947712418277,
+     "Protein": 0.9934640522875817,
+     "RNA": 0.0
+    },
+    "B": {
+     "DNA": 0.0,
+     "Other": 0.006451612903225823,
+     "Protein": 0.9935483870967742,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "A": "Protein",
-   "B": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "A": "Protein",
+    "B": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 2,
+  "nchains": [
+   2
+  ],
   "nmodels": 1,
-  "num_ats": 4961,
-  "num_h": 0,
-  "num_res": 908,
-  "num_wat": 292,
-  "res_h": 0,
-  "res_hetats": 296,
-  "res_insc": 0,
-  "res_ligands": 4,
+  "stats": {
+   "num_ats": 9351,
+   "num_h": 4706,
+   "num_res": 612,
+   "num_wat": 0,
+   "res_h": 604,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {

@@ -1,17 +1,17 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
- PDB id: 1ARK
+ PDB id: 1ARK 
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
 
  Num. models: 15 (type: BioUnit,   35.032 A)
- Num. chains: 1 (A: Protein)
+ Num. chains: 15 (A/0: Protein|A/1: Protein|A/2: Protein|A/3: Protein|A/4: Protein|A/5: Protein|A/6: Protein|A/7: Protein|A/8: Protein|A/9: Protein|A/10: Protein|A/11: Protein|A/12: Protein|A/13: Protein|A/14: Protein)
  Num. residues:  900
  Num. residues with ins. codes:  0
  Num. residues with H atoms: 900 (total 6630 H atoms)
@@ -20,29 +20,28 @@ Structure pdb:1ark loaded
  Num. water mol.:  0
  Num. atoms:  13575
 
-
 Step 1: models --select 1
 
 Running models. Options: --select 1
-15 Model(s) detected
+Detected 15 Model(s)
 Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
 Selecting model num. 1
 
 Step 2: chains --select All
 
 Running chains. Options: --select All
-1 Chain(s) detected
+Detected 1 Chain(s)
  A: Protein
 
 Step 3: inscodes
 
 Running inscodes.
-No residues with insertion codes found
+Found no residues with insertion codes
 
 Step 4: altloc --select occupancy
 
 Running altloc. Options: --select occupancy
-No residues with alternative location labels detected
+Detected no residues with alternative location labels
 
 Step 5: metals --remove ZN
 
@@ -62,41 +61,41 @@ No water molecules found
 Step 8: rem_hydrogen --remove Yes
 
 Running rem_hydrogen. Options: --remove Yes
-60 Residues containing H atoms detected
+Detected 60 Residues containing H atoms
 Hydrogen atoms removed from 60 residues
 
 Step 9: amide --fix All
 
 Running amide. Options: --fix All
-1 unusual contact(s) involving amide atoms found
+Found 1 unusual contact(s) involving amide atoms
  ASN A30.OD1  GLN A32.O       2.598 A
 Amide residues fixed All (1)
 Rechecking
-No unusual contact(s) involving amide atoms found
+Found no unusual contact(s) involving amide atoms
 
 Step 10: chiral --fix All
 
 Running chiral. Options: --fix All
-No residues with incorrect side-chain chirality found
+Found no residues with incorrect side-chain chirality
 
 Step 11: chiral_bck
 
 Running chiral_bck.
-No residues with incorrect backbone chirality found
+Found no residues with incorrect backbone chirality
 
 Step 12: fixside --fix All
 
 Running fixside. Options: --fix All
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 
 Step 13: backbone --fix_atoms All --fix_chain none --add_caps none --no_recheck
 
 Running backbone. Options: --fix_atoms All --fix_chain none --add_caps none --no_recheck
-No residues with missing backbone atoms found
+Found No residues with missing backbone atoms
 No backbone breaks
 No unexpected backbone links
 Capping terminal ends
-True terminal residues:  A1,A60
+True terminal residues: A1,A60
 Nothing to do
 No caps added
 
@@ -114,19 +113,19 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-No severe clashes detected
-4 Steric apolar clashes detected
+No Severe Steric clashes/covalent bonds detected
+4 Apolar steric clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A
  GLU A19.OE2  TRP A38.CZ3     2.645 A
  TYR A40.CD1  GLY A50.O       2.794 A
  THR A42.OG1  THR A49.CG2     2.788 A
-3 Steric polar_acceptor clashes detected
+3 Polar contacts (acceptors) detected
  MET A9.O     ASP A24.OD2     2.851 A
  TYR A10.O    PHE A22.O       3.006 A
  MET A39.O    MET A51.SD      2.999 A
-No polar_donor clashes detected
-No positive clashes detected
-No negative clashes detected
+No Polar contacts (donors) detected
+No Positively charged contacts detected
+No Negatively charged contacts detected
 
 Step 17: ligands --remove All
 
@@ -136,13 +135,13 @@ No ligands found
 Step 18: chains --select protein
 
 Running chains. Options: --select protein
-1 Chain(s) detected
+Detected 1 Chain(s)
  A: Protein
 
 Step 19: add_hydrogen --add_mode auto --add_charges ADT
 
 Running add_hydrogen. Options: --add_mode auto --add_charges ADT
-18 Residues requiring selection on adding H atoms
+Found 18 Residues requiring selection on adding H atoms
  ASP A11,A16,A18,A24,A26,A35
  GLU A19,A36,A58
  LYS A4,A23
@@ -150,7 +149,7 @@ Running add_hydrogen. Options: --add_mode auto --add_charges ADT
  TYR A10,A12,A40,A56
 WARNING: fixing side chains, override with --no_fix_side
 Running fixside. Options: --fix all
-No residues with missing or unknown side chain atoms found
+Found no residues with missing or unknown side chain atoms
 Selection: auto
 Updating partial charges and atom types
 Total assigned charge:      -4.00
@@ -164,6 +163,5 @@ Final Num. HETATM residues:  0
 Final Num. ligands or modified residues:  0
 Final Num. water mol.:  0
 Final Num. atoms:  905
-Total charge -4.000
 Structure saved on 1ark_all_test.pdb
 Summary data saved on 1ark_all_test.json

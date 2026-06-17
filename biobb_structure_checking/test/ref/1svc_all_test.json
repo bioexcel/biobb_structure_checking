@@ -1,6 +1,5 @@
 {
  "add_hydrogen": {
-  "detected": {},
   "ionic_detected": [
    "TYR P44",
    "GLU P49",
@@ -109,7 +108,8 @@
    "TYR P351",
    "GLU P353"
   ],
-  "opts": "--add_mode auto --add_charges ADT"
+  "opts": "--add_mode auto --add_charges ADT",
+  "selection": "auto"
  },
  "altloc": {
   "opts": "--select occupancy"
@@ -122,6 +122,7 @@
     "dist": 2.8446
    }
   ],
+  "fixed": "All",
   "n_amides": 24,
   "opts": "--fix All"
  },
@@ -148,11 +149,14 @@
   "opts": "--fix_atoms All --fix_chain none --add_caps none --no_recheck"
  },
  "chains": {
-  "D": "DNA",
-  "P": "Protein",
+  "D": "DNA/0",
+  "P": "Protein/0",
   "selected": {
-   "P": 1
-  }
+   "0": {
+    "P": 1
+   }
+  },
+  "unlabelled": false
  },
  "chiral": {
   "n_chirals": 32,
@@ -310,34 +314,36 @@
  "final_stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "D": {
-    "DNA": 1.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
-   },
-   "P": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "P": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "P": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "P": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 1,
+  "nchains": [
+   1
+  ],
   "nmodels": 1,
-  "num_ats": 4905,
-  "num_h": 2455,
-  "num_res": 311,
-  "num_wat": 0,
-  "res_h": 311,
-  "res_hetats": 0,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 4905,
+   "num_h": 2455,
+   "num_res": 311,
+   "num_wat": 0,
+   "res_h": 311,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": 1.9000280000000735
  },
  "fixside": {
@@ -357,47 +363,58 @@
  "ligands": {
   "opts": "--remove All"
  },
+ "loaded_structure": "pdb:1svc",
  "metals": {
   "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1
  },
+ "modified_structure": true,
  "rem_hydrogen": {
   "opts": "--remove Yes"
  },
+ "saved_structure": "1svc_all_test.pdb",
  "stats": {
   "biounit": false,
   "ca_only": false,
-  "chain_guess_details": {
-   "D": {
-    "DNA": 1.0,
-    "Other": 0.0,
-    "Protein": 0.0,
-    "RNA": 0.0
-   },
-   "P": {
-    "DNA": 0.0,
-    "Other": 0.0,
-    "Protein": 1.0,
-    "RNA": 0.0
+  "chain_guess_details": [
+   {
+    "D": {
+     "DNA": 1.0,
+     "Other": 0.0,
+     "Protein": 0.0,
+     "RNA": 0.0
+    },
+    "P": {
+     "DNA": 0.0,
+     "Other": 0.0,
+     "Protein": 1.0,
+     "RNA": 0.0
+    }
    }
-  },
-  "chain_ids": {
-   "D": "DNA",
-   "P": "Protein"
-  },
+  ],
+  "chain_ids": [
+   {
+    "D": "DNA",
+    "P": "Protein"
+   }
+  ],
   "models_type": 0,
-  "nchains": 2,
+  "nchains": [
+   2
+  ],
   "nmodels": 1,
-  "num_ats": 2903,
-  "num_h": 0,
-  "num_res": 393,
-  "num_wat": 63,
-  "res_h": 0,
-  "res_hetats": 63,
-  "res_insc": 0,
-  "res_ligands": 0,
+  "stats": {
+   "num_ats": 4905,
+   "num_h": 2455,
+   "num_res": 311,
+   "num_wat": 0,
+   "res_h": 311,
+   "res_hetats": 0,
+   "res_insc": 0,
+   "res_ligands": 0
+  },
   "total_charge": null
  },
  "water": {

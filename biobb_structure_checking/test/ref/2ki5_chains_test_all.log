@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -25,9 +25,8 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-
 Running chains. Options: --select All
-2 Chain(s) detected
+Detected 2 Chain(s)
  A: Protein
  B: Protein
 Selecting all chains

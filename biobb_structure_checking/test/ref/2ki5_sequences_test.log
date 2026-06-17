@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.9.12                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-22            =
+=                   BioBB structure checking utility v3.15.6                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5
+ PDB id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -25,8 +25,7 @@ SO4 A4
 AC2 A1
 SO4 B3
 AC2 B2
-
-Running sequences.
+Running sequences. Options: --output_fasta 2ki5_sequences.fasta
 Canonical sequence
 >can_sq_A canonical sequence chain A
 SAFDQAARSRGHSNRRTALRPRRQQEATEVRPEQKMPTLLRVYIDGPHGMGKTTTTQLLV
@@ -46,7 +45,7 @@ ALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAR
 EMGEAN
 
 Structure sequence
->pdb_sq_A Frags: 77-148,154-264,280-375
+>pdb_sq_A Frags: 46-70,77-148,154-264,280-375
 -----------------------------------MPTLLRVYIDGPHGMGKTTTTQLLV
 ------DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGM
 PYAVTDAVLAPHIGGEAG-----PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAF
@@ -54,7 +53,7 @@ VALIPPTLPGTNIVLGALPEDRHIDRLAKRQRPGERLDLAMLAAIRRVYGLLANTVRYLQ
 CGGSWREDWGQLS---------------GPRPHIGDTLFTLFRAPELLAPNGDLYNVFAW
 ALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAR
 EMGEA-
->pdb_sq_B Frags: 77-148,154-263,278-375
+>pdb_sq_B Frags: 46-73,77-148,154-263,278-375
 -----------------------------------MPTLLRVYIDGPHGMGKTTTTQLLV
 ALG---DIVYVPEPMTYWRVLGASETIANIYTTQHRLDQGEISAGDAAVVMTSAQITMGM
 PYAVTDAVLAPHIGGEAG-----PPALTLIFDRHPIAALLCYPAARYLMGSMTPQAVLAF
@@ -63,4 +62,5 @@ CGGSWREDWGQLS--------------AGPRPHIGDTLFTLFRAPELLAPNGDLYNVFAW
 ALDVLAKRLRSMHVFILDYDQSPAGCRDALLQLTSGMVQTHVTTPGSIPTICDLARTFAR
 EMGEA-
 
+Sequences written on 2ki5_sequences.fasta
 Structure not modified, not saving. Override with --force_save

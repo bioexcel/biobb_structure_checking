@@ -1,7 +1,8 @@
 """
-Module to support json-formatted summary of structure checking, and fixes
+    Module to support json-formatted summary of structure checking, and fixes
 """
 import json
+
 
 class JSONWriter:
     """
@@ -46,4 +47,4 @@ class JSONWriter:
             file (str) : Path to output file
         """
         with open(file, "w+") as jsout:
-            jsout.write(self.__str__())
+            jsout.write(str(self))
