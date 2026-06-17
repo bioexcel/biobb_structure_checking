@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
@@ -20,10 +20,10 @@ Structure pdb:1vtk.1 loaded
  Num. water mol.:  104
  Num. atoms:  4982
 Small mol ligands found
-ADP A400
-TMP A500
-ADP A-2400
-TMP A-2500
+ADP A400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A500 (THYMIDINE-5'-PHOSPHATE)
+ADP A-2400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A-2500 (THYMIDINE-5'-PHOSPHATE)
 Running models. Options: --select all --build_complex
 Detected 1 Model(s)
 Found Single model

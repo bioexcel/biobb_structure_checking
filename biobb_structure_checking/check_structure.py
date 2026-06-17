@@ -18,7 +18,7 @@ from biobb_structure_checking.structure_checking import StructureChecking
 
 BANNER = "================================================================================\n"\
          "=                   BioBB structure checking utility v{:10}               =\n"\
-         "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =\n"\
+         "=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =\n"\
          "================================================================================\n"
 
 

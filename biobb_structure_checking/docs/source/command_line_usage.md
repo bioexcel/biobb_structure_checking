@@ -30,7 +30,8 @@ usage: check_structure [-h] [-i INPUT_STRUCTURE_PATH] [--file_format {mmCif,pdb,
 
 **-i --input** INPUT_STRUCTURE_PATH - _Input structure._
 * Formats pdb(qt)|cif|pqr. Taken from file extension. pdbqt accepted, but read as pdb.
-* Remote **pdb:{pdbid}[.format] | {url}**. See also **--file_format** for selecting download format (default: cif). For remote downloads as **pdb:** using pdb format, sequences are also automatically downloaded.Format assumed from extension. .gz files are automatically decompressed
+* Remote **pdb:{pdbid}[.format] | {url}**. See also **--file_format** for selecting download format (default: cif). For remote downloads as **pdb:** using pdb format, sequences are also automatically downloaded.Format assumed from extension. 
+* .gz files are automatically decompressed
 
 * Biounits/Assemblies **pdb:{pdbid}.{bn}**. Biounits/assemblies. Default format mmCIF.
 

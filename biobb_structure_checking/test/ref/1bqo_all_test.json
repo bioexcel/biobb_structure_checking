@@ -344,6 +344,52 @@
  },
  "inscodes": {},
  "ligands": {
+  "contacts": {
+   " CA A303": [
+    "ASP A158.OD1",
+    "GLY A159.O",
+    "GLY A161.O",
+    "VAL A163.O",
+    "ASP A181.OD2",
+    "GLU A184.OE2"
+   ],
+   " CA A304": [
+    "ASP A107.OD2",
+    "ASP A182.O",
+    "GLU A184.O"
+   ],
+   " CA A305": [
+    "ASP A141.O",
+    "GLY A173.O",
+    "ASN A175.O",
+    "ASP A177.OD1"
+   ],
+   " CA B303": [
+    "ASP B158.OD1",
+    "GLY B159.O",
+    "GLY B161.O",
+    "VAL B163.O",
+    "ASP B181.OD2",
+    "GLU B184.OE2"
+   ],
+   " CA B304": [
+    "ASP B107.OD1",
+    "ASP B182.O",
+    "GLU B184.O"
+   ],
+   " CA B305": [
+    "ASP B141.O",
+    "GLY B173.O",
+    "ASN B175.O",
+    "ASP B177.OD1"
+   ],
+   "N25 B401": [
+    "LEU B164.N",
+    "ALA B165.O",
+    "GLU B202.OE2",
+    "HIS B211.NE2"
+   ]
+  },
   "detected": [
    " CA A303",
    " CA A304",
@@ -369,6 +415,73 @@
  },
  "loaded_structure": "pdb:1bqo",
  "metals": {
+  "contacts": {
+   " CA A303": [
+    "ASP A158.OD1",
+    "GLY A159.O",
+    "GLY A161.O",
+    "VAL A163.O",
+    "ASP A181.OD2",
+    "GLU A184.OE2"
+   ],
+   " CA A304": [
+    "ASP A107.OD2",
+    "ASP A182.O",
+    "GLU A184.O",
+    "HOH A342.O"
+   ],
+   " CA A305": [
+    "ASP A141.O",
+    "GLY A173.O",
+    "ASN A175.O",
+    "ASP A177.OD1",
+    "HOH A314.O"
+   ],
+   " CA B303": [
+    "ASP B158.OD1",
+    "GLY B159.O",
+    "GLY B161.O",
+    "VAL B163.O",
+    "ASP B181.OD2",
+    "GLU B184.OE2"
+   ],
+   " CA B304": [
+    "ASP B107.OD1",
+    "ASP B182.O",
+    "GLU B184.O",
+    "HOH B409.O"
+   ],
+   " CA B305": [
+    "ASP B141.O",
+    "GLY B173.O",
+    "ASN B175.O",
+    "ASP B177.OD1",
+    "HOH B402.O"
+   ],
+   " ZN A301": [
+    "HIS A201.NE2",
+    "HIS A205.NE2",
+    "HIS A211.NE2"
+   ],
+   " ZN A302": [
+    "HIS A151.NE2",
+    "ASP A153.OD2",
+    "HIS A166.NE2",
+    "HIS A179.ND1"
+   ],
+   " ZN B301": [
+    "HIS B201.NE2",
+    "HIS B205.NE2",
+    "HIS B211.NE2",
+    "N25 B401.O26"
+   ],
+   " ZN B302": [
+    "HIS B151.NE2",
+    "ASP B153.OD2",
+    "HIS B166.NE2",
+    "HIS B179.ND1"
+   ]
+  },
   "detected": [
    " ZN A301",
    " ZN A302",
@@ -440,6 +553,168 @@
   "total_charge": null
  },
  "water": {
+  "contacts": {
+   "HOH A306": [
+    "ASP A181",
+    "ASP A183",
+    "GLY A159"
+   ],
+   "HOH A307": [],
+   "HOH A308": [
+    "LYS A110"
+   ],
+   "HOH A309": [
+    "ASP A153",
+    "GLU A150",
+    "HIS A151"
+   ],
+   "HOH A310": [],
+   "HOH A311": [
+    "LEU A108",
+    "THR A105"
+   ],
+   "HOH A312": [],
+   "HOH A313": [],
+   "HOH A314": [
+    "GLY A171"
+   ],
+   "HOH A315": [],
+   "HOH A316": [
+    "ARG A93"
+   ],
+   "HOH A317": [],
+   "HOH A318": [
+    "LYS A188"
+   ],
+   "HOH A319": [
+    "VAL A148"
+   ],
+   "HOH A320": [
+    "LYS A110"
+   ],
+   "HOH A321": [
+    "THR A85"
+   ],
+   "HOH A322": [],
+   "HOH A323": [],
+   "HOH A324": [
+    "MET A143"
+   ],
+   "HOH A325": [],
+   "HOH A326": [],
+   "HOH A327": [],
+   "HOH A328": [
+    "ASN A162",
+    "ASP A158",
+    "PRO A160"
+   ],
+   "HOH A329": [
+    "ASN A162"
+   ],
+   "HOH A330": [],
+   "HOH A331": [
+    "GLY A192"
+   ],
+   "HOH A332": [
+    "PRO A156"
+   ],
+   "HOH A333": [],
+   "HOH A334": [],
+   "HOH A335": [
+    "ASN A103"
+   ],
+   "HOH A336": [
+    "GLU A126"
+   ],
+   "HOH A337": [],
+   "HOH A338": [
+    "ARG A100",
+    "ASP B183"
+   ],
+   "HOH A339": [],
+   "HOH A340": [
+    "PRO A248"
+   ],
+   "HOH A341": [
+    "ASP A141"
+   ],
+   "HOH A342": [],
+   "HOH A343": [],
+   "HOH A344": [],
+   "HOH A345": [
+    "GLY A88"
+   ],
+   "HOH A346": [],
+   "HOH A347": [],
+   "HOH A348": [],
+   "HOH A349": [
+    "ASP A114"
+   ],
+   "HOH B402": [
+    "ALA B140",
+    "GLY B173"
+   ],
+   "HOH B403": [
+    "ARG B134",
+    "ILE B101"
+   ],
+   "HOH B404": [
+    "MET B143"
+   ],
+   "HOH B405": [
+    "ASP B107",
+    "GLN B185",
+    "TRP B186"
+   ],
+   "HOH B406": [],
+   "HOH B407": [],
+   "HOH B408": [
+    "ASP B111"
+   ],
+   "HOH B409": [],
+   "HOH B410": [
+    "ALA B217"
+   ],
+   "HOH B411": [],
+   "HOH B412": [
+    "GLY B208",
+    "PRO B90"
+   ],
+   "HOH B413": [
+    "GLU B126"
+   ],
+   "HOH B414": [
+    "GLN B185"
+   ],
+   "HOH B415": [],
+   "HOH B416": [
+    "PRO B250"
+   ],
+   "HOH B417": [],
+   "HOH B418": [
+    "GLU B254"
+   ],
+   "HOH B419": [],
+   "HOH B420": [
+    "ALA B169"
+   ],
+   "HOH B421": [
+    "GLN B243"
+   ],
+   "HOH B422": [],
+   "HOH B423": [],
+   "HOH B424": [],
+   "HOH B425": [],
+   "HOH B426": [],
+   "HOH B427": [],
+   "HOH B428": [],
+   "HOH B429": [],
+   "HOH B430": [],
+   "HOH B431": [
+    "THR B191"
+   ],
+   "HOH B432": []
+  },
   "n_detected": 75,
   "n_removed": 75,
   "opts": "--remove Yes"

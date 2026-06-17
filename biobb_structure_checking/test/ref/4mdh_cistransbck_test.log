@@ -1,6 +1,6 @@
 ================================================================================
-=                   BioBB structure checking utility v3.15.6                   =
-=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-25            =
+=                   BioBB structure checking utility v3.16.1                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/md/4mdh.cif' 
@@ -24,10 +24,10 @@ Modified residues found
 ACE A0
 ACE B0
 Small mol ligands found
-SO4 A334
-NAD A335
-SO4 B334
-NAD B335
+SO4 A334 (SULFATE ION)
+NAD A335 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+SO4 B334 (SULFATE ION)
+NAD B335 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
 Running cistransbck.
 Found 2 cis peptide bonds
 ASN A130   PRO A131   Dihedral:   -0.784

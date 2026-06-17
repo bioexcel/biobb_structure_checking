@@ -376,7 +376,8 @@ class StructureChecking():
             nowarn=not self.args['build_warnings'],
             coords_only=self.args['coords_only'],
             overwrite=self.args['overwrite'],
-            atom_limit=self.args['atom_limit']
+            atom_limit=self.args['atom_limit'],
+            no_network=self.args['no_network']
         )
 
         self.summary['loaded_structure'] = input_structure_path
@@ -609,11 +610,13 @@ class StructureChecking():
 
     def water(self, opts=None):
         """ StructureChecking.water
-        Detect/Select Remove Water molecules. Check only with no options. Options accepted as command-line string, or python dictionary.
+        Detect/Select Remove Water molecules. Check only with no options. 
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
                 * remove: Yes - Remove All Water molecules
+                * keep_min_contacts: (int) Keep water molecules with at least indicated number of contacts with other residues
         """
         self._run_method('water', opts)
 

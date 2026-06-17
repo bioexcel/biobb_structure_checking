@@ -4,7 +4,7 @@ import biobb_structure_checking.modelling.utils as mu
 
 class StructureData():
     '''Class to manage internal Structure data'''
-    def __init__(self, st, input_format, headers, biounit=False):
+    def __init__(self, st, input_format, headers, biounit=False, no_network=False):
         self.st = st
         self.input_format = input_format
         self.backbone_links = []
@@ -14,7 +14,7 @@ class StructureData():
         self.headers = headers
         self.biounit = biounit
         self.fixed_side = False
-
+        self.no_network = no_network
         self.hetatm = {}
         self.stats = {
             'num_res': 0,
@@ -34,6 +34,7 @@ class StructureData():
         self.non_canonical_residue_list = []
         self.next_residue = {}
         self.prev_residue = {}
+        
 
     def residue_renumbering(self, data_library):
         """ Sets the Bio.PDB.Residue.index attribute to residues for a unique,
@@ -220,11 +221,17 @@ class StructureData():
         if self.hetatm[mu.METAL]:
             print('Metal/Ion residues found')
             for res in self.hetatm[mu.METAL]:
-                print(mu.residue_id(res))
+                if self.no_network:
+                    print(mu.residue_id(res))
+                else:
+                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
         if self.hetatm[mu.ORGANIC]:
             print('Small mol ligands found')
             for res in self.hetatm[mu.ORGANIC]:
-                print(mu.residue_id(res))
+                if self.no_network:
+                    print(mu.residue_id(res))
+                else:
+                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
 
     def _check_ca_only(self):
         ca_only = True

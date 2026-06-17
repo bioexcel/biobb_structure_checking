@@ -9,7 +9,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.15.6'
+VERSION = '3.16.1'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -136,8 +136,7 @@ CMD_LINE.add_argument(
 CMD_LINE.add_argument(
     '--pdb_server',
     dest='pdb_server',
-    help='Server for retrieving structures (default(ftp at wwPDB)|MMB|BSC), '
-        'use alternate server for http(s) download'
+    help='Server for retrieving structures (default(wwPDB)| BSC)'
 )
 
 CMD_LINE.add_argument(
@@ -287,6 +286,13 @@ CMD_LINE.add_argument(
     action='store_true',
     dest='non_interactive',
     help='Do not prompt for missing parameters'
+)
+
+CMD_LINE.add_argument(
+    '--no_network',
+    action='store_true',
+    dest='no_network',
+    help='Network disabled, do not try to download missing parameters'
 )
 
 CMD_LINE.add_argument(
