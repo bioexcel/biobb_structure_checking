@@ -1,2 +1,2 @@
-docutils==0.21.2
-numpy==1.22.0
+#docutils==0.21.2
+#numpy==1.22.0
