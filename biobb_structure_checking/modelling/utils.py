@@ -5,8 +5,9 @@
 
 import re
 import sys
+import json
+import urllib.request
 # from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
-import requests
 
 import numpy as np
 from numpy import arccos, clip, cos, dot, pi, sin, sqrt
@@ -158,7 +159,8 @@ def fetch_residue_name_by_id(res_id):
     ''' Fetch residue name from monomers API, with caching '''
     if res_id in MONOMER_NAME_CACHE:
         return MONOMER_NAME_CACHE[res_id]
-    residue_data = requests.get(f"{MONOMERS_API_PREFIX}{res_id}/entry",timeout=10).json()
+    with urllib.request.urlopen(f"{MONOMERS_API_PREFIX}{res_id}/entry", timeout=10) as response:
+        residue_data = json.load(response)
     name = residue_data.get('name', '').replace(res_id, '', 1).strip()
     MONOMER_NAME_CACHE[res_id] = name
     return name
