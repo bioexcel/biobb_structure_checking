@@ -1,4 +1,4 @@
-## v3.16.1 (2026.2)
+## v3.16.2 (2026.2)
 ### New functions
  - Added description of ligands/HETatms when available
  - Added --no_network to prevent network usage when not available
