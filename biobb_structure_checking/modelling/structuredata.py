@@ -148,6 +148,8 @@ class StructureData():
             for org, fin in map_fields.items():
                 if org in self.headers:
                     self.meta[fin] = ', '.join(self.headers[org])
+                else:
+                    self.meta[fin] = 'N.A.'
 
         else:
             map_fields = {
@@ -159,6 +161,8 @@ class StructureData():
             for org, fin in map_fields.items():
                 if org in self.headers:
                     self.meta[fin] = self.headers[org]
+                else:
+                    self.meta[fin] = 'N.A.'
             if 'resolution' not in self.headers or\
                     not self.headers['resolution']:
                 self.meta['resolution'] = 'N.A.'
