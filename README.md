@@ -58,6 +58,7 @@ BSC (https://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European
 
 * (c) 2015-2026 [Barcelona Supercomputing Center](https://www.bsc.es/)
 * (c) 2015-2026 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
+* (c) 2015-2026 [University of Barcelona](https://www.ub.edu/)
 
 Licensed under the
 [GNU Lesser General Public License v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
