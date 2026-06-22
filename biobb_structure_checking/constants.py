@@ -652,6 +652,7 @@ MSGS = {
                   'use --limit to adjust',
     'TIME_LIMIT': 'Execution time limit ({}s) exceeded, aborting, use --time_limit to adjust',
     'CA_ONLY_STRUCTURE': 'CA-Only structure, skipping',
+    'NO_NETWORK': 'Network disabled, unable to download {}',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',

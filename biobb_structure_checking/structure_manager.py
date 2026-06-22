@@ -115,6 +115,13 @@ class StructureManager:
             no_network=no_network
         )
 
+        if self.st is None:
+            sys.exit(
+                cts.MSGS['NO_NETWORK'].format(
+                    input_pdb_path
+                )
+            )
+
         if self.st == 'atom_limit_error':
             sys.exit(
                 cts.MSGS['ATOM_LIMIT'].format(
@@ -149,7 +156,7 @@ class StructureManager:
         biounit = False
         self.pdb_id = 'User'
         if no_network and (input_pdb_path.startswith(('pdb:', 'http'))):
-            print("Error: no network access to retrieve structure, but path requires it")
+            print("Error: no network access to retrieve structure")
             return None, None, None, None
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
@@ -1774,18 +1781,19 @@ class StructureManager:
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
-    conda_info = subprocess.run(['conda', 'list', 'modeller'], stdout=subprocess.PIPE)
-    info = []
-    for line in conda_info.stdout.decode('ASCII').split('\n'):
-        if 'modeller' in line:
-            info = line.split()
-    if len(info) >= 2 and info[1]:
-        print(f"Modeller v{info[1]} detected")
-        ver1, ver2 = info[1].split('.')
-        return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
-
-    print("Modeller version not detected, using default")
-    return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
+    try:
+        conda_info = subprocess.run(['conda', 'list', 'modeller'], stdout=subprocess.PIPE)
+        info = []
+        for line in conda_info.stdout.decode('ASCII').split('\n'):
+            if 'modeller' in line:
+                info = line.split()
+        if len(info) >= 2 and info[1]:
+            print(f"Modeller v{info[1]} detected")
+            ver1, ver2 = info[1].split('.')
+            return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
+    except subprocess.CalledProcessError:
+        print("Modeller version not detected or Conda not installed, using default")
+        return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 
 
