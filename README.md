@@ -50,14 +50,14 @@ Using ANACONDA:
 
         conda install -c bioconda "biobb_structure_checking>=3.16.0"
 
-* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-structure-checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb-structure-checking.readthedocs.io/en/latest/command_line.html)
 
 ### Copyright & Licensing
 This software has been developed in the MMB group (http://mmb.irbbarcelona.org) at the
 BSC (https://www.bsc.es/) & IRB (https://www.irbbarcelona.org/) for the European BioExcel (https://bioexcel.eu/). BioExcel is funded by the European Union Horizon 2020 program under grant agreements 823830, 675728 and by the EuroHPC Joint Undertaking and Sweden, Netherlands, Germany, Spain, Finland and Norway under grant agreement 101093290 funded by the European Commission.
 
-* (c) 2015-2025 [Barcelona Supercomputing Center](https://www.bsc.es/)
-* (c) 2015-2025 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
+* (c) 2015-2026 [Barcelona Supercomputing Center](https://www.bsc.es/)
+* (c) 2015-2026 [Institute for Research in Biomedicine](https://www.irbbarcelona.org/)
 
 Licensed under the
 [GNU Lesser General Public License v2.1](https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
