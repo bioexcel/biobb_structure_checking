@@ -7,7 +7,7 @@ Biobb_structure_checking package allows to configure the system (selection of mo
 The Biobb_structure_checking package provides a command line utility ([check_structure](https://biobb-structure-checking.readthedocs.io/en/latest/command_line_usage.html)) and a python [API](https://biobb-structure-checking.readthedocs.io/en/latest/biobb_structure_checking.html).
 
 The latest documentation of this package can be found in our readthedocs site:
-[latest package documentation](http://biobb_structure_checking.readthedocs.io/en/latest/).
+[latest package documentation](http://biobb-structure-checking.readthedocs.io/en/latest/).
 
 ### Version
 v3.16.2 June 2026
@@ -29,7 +29,7 @@ Using PIP:
 
         pip install "biobb_structure_checking>=3.16.0"
 
-* Usage: [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html).
+* Usage: [Python API documentation](https://biobb-structure-checking.readthedocs.io/en/latest/modules.html).
 
 Using ANACONDA:
 
@@ -37,7 +37,7 @@ Using ANACONDA:
 
         conda install -c bioconda "biobb_structure_checking>=3.16.0"
 
-* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb_structure_checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb_structure_checking.readthedocs.io/en/latest/command_line.html)
+* Usage: With conda installation BioBBs can be used with the [Python API documentation](https://biobb-structure-checking.readthedocs.io/en/latest/modules.html) and the  [Command Line documentation](https://biobb-structure-checking.readthedocs.io/en/latest/command_line.html)
 
 ### Copyright & Licensing
 This software has been developed in the MMB group (http://mmb.irbbarcelona.org) at the
