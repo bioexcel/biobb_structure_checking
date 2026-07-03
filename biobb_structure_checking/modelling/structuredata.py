@@ -220,7 +220,10 @@ class StructureData():
         if self.hetatm[mu.MODRES]:
             print('Modified residues found')
             for res in self.hetatm[mu.MODRES]:
-                print(mu.residue_id(res))
+                if self.no_network:
+                    print(mu.residue_id(res))
+                else:
+                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
         if self.hetatm[mu.METAL]:
             print('Metal/Ion residues found')
             for res in self.hetatm[mu.METAL]:
