@@ -1,10 +1,17 @@
-## v3.16.2 (2026.2)
+## v3.16.3 (2026.XX)
+### Bug fixes
+- metals
+  - Fixed detection from element instead name to avoid confusion from CX atom names
+  - Detected metals as part of other residues  
+## v3.16.2 (2026.6)
 ### New functions
  - Added description of ligands/HETatms when available
  - Added --no_network to prevent network usage when not available
 ### Extended functions
 - water
   - Added support for selective removal of water molecules according to contacts
+- ligand, metals
+  - Added residue identification from PDB annotation (not available with --no_network)
 ### Bug fixes
 - sequences
   - Fixed missing initial fragment, structure sequence header

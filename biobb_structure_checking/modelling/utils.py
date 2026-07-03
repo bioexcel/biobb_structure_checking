@@ -788,8 +788,12 @@ def get_metal_atoms(struc, metal_ats):
         # Check for CA in modified amino acids
         if 'N' in atm.get_parent() or 'C' in atm.get_parent():
             continue
-        if atm.id in metal_ats:
-            met_list.append(atm)
+        if 'element' in dir(atm):
+            if atm.element in metal_ats:
+                met_list.append(atm)
+        else:
+            if atm.id in metal_ats:
+                met_list.append(atm)
     return met_list
 
 
