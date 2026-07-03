@@ -88,6 +88,7 @@ FBP B353
   O4P  B (0.50) D (0.50)
   O5P  B (0.50) D (0.50)
   O6P  B (0.50) D (0.50)
+Possible microheterogeneity: No A altloc found
 Running  check_only. Nothing else to do.
 Running rem_hydrogen.
 No residues with Hydrogen atoms found

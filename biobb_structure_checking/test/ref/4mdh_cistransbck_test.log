@@ -21,8 +21,8 @@ Structure pdb:4mdh loaded
  Num. water mol.:  471
  Num. atoms:  5675
 Modified residues found
-ACE A0
-ACE B0
+ACE A0 (ACETYL GROUP)
+ACE B0 (ACETYL GROUP)
 Small mol ligands found
 SO4 A334 (SULFATE ION)
 NAD A335 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
