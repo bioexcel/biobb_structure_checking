@@ -294,14 +294,17 @@ def same_chain(res1, res2):
     return (res1.get_parent() == res2.get_parent()) and same_model(res1, res2)
 
 
-def seq_consecutive(res1, res2):
+def seq_consecutive(res1, res2, next_res_list):
     """
     Checks whether residues belong to the same chain and
-    are consecutive in sequences, taken from residue number
+    are consecutive in sequences, taken from residue number or next_res_list if provided
     """
-    rnum1 = res1.id[1]
-    rnum2 = res2.id[1]
-    return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
+    if res1 in next_res_list:
+        return next_res_list[res1] == res2
+    else:
+        rnum1 = res1.id[1]
+        rnum2 = res2.id[1]
+        return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
 
 def seq_consecutive_index(res1, res2):
@@ -664,6 +667,7 @@ def check_r_list_clashes(
     rr_list,
     clash_dist,
     atom_lists,
+    next_res_list,
     join_models=True,
     severe=True,
     get_all_contacts=False,
@@ -686,6 +690,7 @@ def check_r_list_clashes(
                 res2,
                 clash_dist,
                 atom_lists,
+                next_res_list,
                 join_models,
                 severe,
                 get_all_contacts=get_all_contacts
@@ -702,9 +707,10 @@ def check_rr_clashes(
     res2,
     clash_dist,
     atom_lists,
+    next_res_list,
     join_models=True,
     severe=True,
-    get_all_contacts=False
+    get_all_contacts=False,
 ):
     """ Check all clashes between two residues """
     clash_list = {}
@@ -733,7 +739,7 @@ def check_rr_clashes(
         for cls in atom_lists:
             if is_at_in_list(atm, atom_lists[cls], res2.get_resname()):
                 ats_list2[cls].add(atm.id)
-    if res1 != res2 and not seq_consecutive(res1, res2)\
+    if res1 != res2 and not seq_consecutive(res1, res2, next_res_list)\
             and (join_models or same_model(res1, res2)):
         for at_pair in get_all_rr_distances(res1, res2):
             at1, at2, dist2 = at_pair

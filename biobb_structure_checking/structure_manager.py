@@ -486,6 +486,7 @@ class StructureManager:
             self.rr_dist,
             self.data_library.distances['CLASH_DIST'],
             self.data_library.get_atom_lists(contact_types),
+            self.st_data.next_residue,
             not self.models_data.has_superimp_models(),
             severe='severe' in contact_types,
             use_wat=use_wat,
@@ -677,7 +678,7 @@ class StructureManager:
 
             if res1 not in self.st_data.next_residue:
                 bck_breaks_list.append([res1, res2])
-                if mu.seq_consecutive(res1, res2):
+                if mu.seq_consecutive(res1, res2, self.st_data.next_residue):
                     dist = 0.
                     if 'N' in res1 and 'C' in res2:
                         dist = res1['N'] - res2['C']
