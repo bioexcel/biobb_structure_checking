@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
- PDB id: 1ARK 
+ Entry id: 1ARK 
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
@@ -113,7 +113,6 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-False
 No Severe Steric clashes/covalent bonds detected
 4 Apolar steric clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A

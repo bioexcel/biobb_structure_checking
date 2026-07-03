@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5 
+ Entry id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -60,7 +60,6 @@ ARG B220
   Adding new atom NH2
 Fixed 6 side chain(s)
 Checking for steric clashes
-False
 4 Severe Steric clashes/covalent bonds detected
  MET A46.CE   VAL A352.CG2    1.843 A
  MET A46.CE   THR A354.O      1.869 A

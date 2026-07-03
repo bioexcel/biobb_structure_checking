@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/bq/1bqo.cif' 
 Structure pdb:1bqo loaded
- PDB id: 1BQO 
+ Entry id: 1BQO 
  Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
  Experimental method: X-RAY DIFFRACTION
  Keywords: METALLOPROTEASE
@@ -161,7 +161,6 @@ ASP A251
   Adding new atom OXT
 Fixed 1 backbone atom(s)
 Checking for steric clashes
-False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 No Polar contacts (acceptors) detected
@@ -183,7 +182,6 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-False
 No Severe Steric clashes/covalent bonds detected
 3 Apolar steric clashes detected
  THR A95.CG2  PRO A129.O      2.770 A

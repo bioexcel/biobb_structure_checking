@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/ki/2ki5.cif' 
 Structure pdb:2ki5 loaded
- PDB id: 2KI5 
+ Entry id: 2KI5 
  Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSFERASE
@@ -56,10 +56,10 @@ Fixing side chains
               Birkbeck College, University of London, London, UK
 
 
-Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.18.33.1-microsoft-standard-WSL2 x86_64
+Kind, OS, HostName, Kernel, Processor: 4, Linux portjlg7 6.18.33.2-microsoft-standard-WSL2 x86_64
 Date and time of compilation         : 2025/05/28 18:48:33
 MODELLER executable type             : x86_64-intel8
-Job starting time (YY/MM/DD HH:MM:SS): 2026/06/19 16:33:07
+Job starting time (YY/MM/DD HH:MM:SS): 2026/07/03 17:30:54
 
 Fixing chain/model A/0
 0 atoms in HETATM/BLK residues constrained
@@ -136,7 +136,6 @@ Fixing LYS B219 - GLN B221
 
 Fixed 0 side chain(s)
 Checking for steric clashes
-False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 1 Polar contacts (acceptors) detected

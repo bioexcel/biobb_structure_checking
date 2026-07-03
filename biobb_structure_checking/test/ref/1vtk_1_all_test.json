@@ -526,37 +526,7 @@
  },
  "loaded_structure": "pdb:1vtk.1",
  "metals": {
-  "contacts": {
-   "ADP A-2400": [
-    "ARG A-2216.NH2",
-    "GLN A-2331.O",
-    "PRO A-2333.N",
-    "TMP A-2500.O2P",
-    "GLY A-259.N",
-    "MET A-260.N",
-    "GLY A-261.N",
-    "LYS A-262.N",
-    "THR A-263.N",
-    "THR A-264.N"
-   ],
-   "ADP A400": [
-    "ARG A216.NH2",
-    "GLN A331.O",
-    "PRO A333.N",
-    "TMP A500.O2P",
-    "GLY A59.N",
-    "MET A60.N",
-    "GLY A61.N",
-    "LYS A62.N",
-    "THR A63.N",
-    "THR A64.N"
-   ]
-  },
-  "detected": [
-   "ADP A400",
-   "ADP A-2400"
-  ],
-  "error": "Unknown selection ZN"
+  "opts": "--remove ZN"
  },
  "models": {
   "nmodels": 1

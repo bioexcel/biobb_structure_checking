@@ -5,7 +5,7 @@
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
- PDB id: 1SVC 
+ Entry id: 1SVC 
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA
@@ -110,7 +110,6 @@ GLU P353
   Adding new atom OXT
 Fixed 1 backbone atom(s)
 Checking for steric clashes
-False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 No Polar contacts (acceptors) detected
@@ -132,7 +131,6 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-False
 No Severe Steric clashes/covalent bonds detected
 13 Apolar steric clashes detected
  PRO P43.O    LEU P232.CD2    2.898 A

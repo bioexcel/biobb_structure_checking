@@ -5,11 +5,10 @@
 
 Warning: sequence features may not be available, use --sequence for  external fasta input
 Structure chiral_pdb_test/1ubq_chi.pdb loaded
- PDB id: 1UBQ 
+ Entry id: 1UBQ 
  Title: structure of ubiquitin refined at 1.8 angstroms resolution
  Experimental method: x-ray diffraction
  Keywords: chromosomal protein
- Resolution (A): 1.8
 
  Num. models: 1
  Num. chains: 1 (A: Protein)
