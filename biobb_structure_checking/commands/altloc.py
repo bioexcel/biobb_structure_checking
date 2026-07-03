@@ -26,17 +26,21 @@ def check(strcheck):
         print(rid)
         strcheck.summary['altloc'][rid] = {}
         fix_data['altlocs'][res] = sorted(alt_loc_res[res][0].child_dict)
+        alts = set()
         for atm in alt_loc_res[res]:
             strcheck.summary['altloc'][rid][atm.id] = []
             alt_str = f"  {atm.id:4}"
             for alt in sorted(atm.child_dict):
+                alts.add(alt)
                 alt_str += f" {alt} ({atm.child_dict[alt].occupancy:4.2f})"
                 strcheck.summary['altloc'][rid][atm.id].append({
                     'loc_label': alt,
                     'occupancy': atm.child_dict[alt].occupancy
                 })
             print(alt_str)
-
+        if 'A' not in alts:
+            print(cts.MSGS['ALTLOC_NO_A'])
+            strcheck.summary['altloc'][rid]['no_altA'] = True
     return fix_data
 
 

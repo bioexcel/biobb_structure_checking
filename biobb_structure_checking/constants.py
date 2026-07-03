@@ -684,6 +684,7 @@ MSGS = {
     # altloc
     'ALTLOC_FOUND': 'Detected {} residues with alternative location labels',
     'NO_ALTLOC_FOUND': 'Detected no residues with alternative location labels',
+    'ALTLOC_NO_A': 'Possible microheterogeneity: No A altloc found',
     # metals
     'METALS_FOUND': 'Found {} Metal ions',
     'NO_METALS_FOUND': 'No metal ions found',
