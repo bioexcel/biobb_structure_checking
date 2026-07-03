@@ -215,29 +215,31 @@ class StructureData():
             else:
                 self.hetatm[mu.ORGANIC].append(res)
 
+    def _print_het_group_stats(self, res_list):
+        for res in res_list:
+            if res.get_parent().get_parent().id > 0:
+                continue
+            res_label = ''
+            if not self.no_network:
+                res_label = mu.fetch_residue_name_by_id(res.get_resname())
+                if len(self.st) > 1:
+                    res_id = f"{mu.residue_id(res, False)}/*"
+                else:
+                    res_id = mu.residue_id(res)
+                print(f"{res_id} ({res_label})")
+
     def print_hetatm_stats(self):
         '''Print statistics on HETATM'''
+
         if self.hetatm[mu.MODRES]:
             print('Modified residues found')
-            for res in self.hetatm[mu.MODRES]:
-                if self.no_network:
-                    print(mu.residue_id(res))
-                else:
-                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
+            self._print_het_group_stats(self.hetatm[mu.MODRES])
         if self.hetatm[mu.METAL]:
             print('Metal/Ion residues found')
-            for res in self.hetatm[mu.METAL]:
-                if self.no_network:
-                    print(mu.residue_id(res))
-                else:
-                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
+            self._print_het_group_stats(self.hetatm[mu.METAL])
         if self.hetatm[mu.ORGANIC]:
             print('Small mol ligands found')
-            for res in self.hetatm[mu.ORGANIC]:
-                if self.no_network:
-                    print(mu.residue_id(res))
-                else:
-                    print(f"{mu.residue_id(res)} ({mu.fetch_residue_name_by_id(res.get_resname())})")
+            self._print_het_group_stats(self.hetatm[mu.ORGANIC])
 
     def _check_ca_only(self):
         ca_only = True
