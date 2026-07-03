@@ -476,7 +476,6 @@ class StructureChecking():
             contact_types = mu.ALL_CONTACT_TYPES
         if not residue_list:
             residue_list = self.strucm.st_data.all_residues
-        print(use_wat)
         return self._clash_report(
             contact_types,
             self.strucm.check_r_list_clashes(residue_list, contact_types, use_wat=use_wat)
