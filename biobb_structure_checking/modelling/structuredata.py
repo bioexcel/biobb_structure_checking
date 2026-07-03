@@ -1,4 +1,5 @@
 ''' Class to manage internal Structure data'''
+import sys
 import biobb_structure_checking.modelling.utils as mu
 
 
@@ -148,8 +149,6 @@ class StructureData():
             for org, fin in map_fields.items():
                 if org in self.headers:
                     self.meta[fin] = ', '.join(self.headers[org])
-                else:
-                    self.meta[fin] = 'N.A.'
 
         else:
             map_fields = {
@@ -161,17 +160,17 @@ class StructureData():
             for org, fin in map_fields.items():
                 if org in self.headers:
                     self.meta[fin] = self.headers[org]
-                else:
-                    self.meta[fin] = 'N.A.'
-            if 'resolution' not in self.headers or\
-                    not self.headers['resolution']:
-                self.meta['resolution'] = 'N.A.'
-            else:
-                self.meta['resolution'] = self.headers['resolution']
         if self.biounit:
             self.meta['biounit'] = self.biounit
         if self.meta['entry_id'] == 'XXXX':  # Recovering PDB id for Assemblies
             self.meta['entry_id'] = self.st.id
+        # Missing fields from AF entries
+        if 'title' not in self.meta:
+            self.meta['title'] = 'N.A.'
+        if 'method' not in self.meta:
+            self.meta['method'] = 'N.A.'
+        
+        
 
     def print_headers(self) -> None:
         """
@@ -184,7 +183,7 @@ class StructureData():
             else:
                 asstxt = ""
             print(
-                f" PDB id: {self.meta['entry_id']} {asstxt}\n"
+                f" Entry id: {self.meta['entry_id']} {asstxt}\n"
                 f" Title: {self.meta['title']}\n"
                 f" Experimental method: {self.meta['method']}"
             )
