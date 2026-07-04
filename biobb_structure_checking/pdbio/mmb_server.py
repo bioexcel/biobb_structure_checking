@@ -67,19 +67,12 @@ class MMBPDBList(PDBList):
 
         code = pdb_code.lower()
 
-        if file_format not in ('pdb', 'cif', 'mmCif', 'xml'):
-            print(f'Error: MMB/BSC Server: File format {file_format} not supported')
+        if file_format not in ('pdb', 'cif', 'mmCif'):
+            print(f'Error: File format {file_format} not supported')
             sys.exit(1)
 
         if file_format == 'mmCif':
             file_format = 'cif'
-
-        # if not biounit:
-        #     url = f'{ALT_SERVERS[self.pdb_server]}/{code}.{file_format}'
-        # else:
-        #     file_format = 'pdb'
-        #     url = f'{ALT_SERVERS[self.pdb_server]}/{code}_bn{biounit}.pdb'
-        # Where does the final PDB file get saved?
 
         url = f'{ALT_SERVERS[self.pdb_server.lower()]}/{code}.{file_format}'
         print(f"Retrieving structure from {url}")
@@ -91,28 +84,13 @@ class MMBPDBList(PDBList):
             path = pdir
         if not os.access(path, os.F_OK):
             os.makedirs(path)
-        # if biounit:
-        #     final = {
-        #         'pdb': '%s_%s.pdb',
-        #         'mmCif': '%s_%s.cif',
-        #         'cif': '%s_%s.cif',
-        #         'xml': '%s_%s.xml'
-        #     }
-        #     final_file = os.path.join(path, final[file_format] % (code, biounit))
-        # else:
-        #     final = {
-        #         'pdb': '%s.pdb',
-        #         'mmCif': '%s.cif',
-        #         'cif': '%s.cif',
-        #         'xml': '%s.xml'
-        #     }
-        #     final_file = os.path.join(path, final[file_format] % code)
         final = {
             'pdb': '%s.pdb',
             'mmCif': '%s.cif',
             'cif': '%s.cif',
             'xml': '%s.xml'
         }
+
         final_file = os.path.join(path, final[file_format] % code)
 
         # Skip download if the file already exists
@@ -124,13 +102,6 @@ class MMBPDBList(PDBList):
 
         # Retrieve the file
         if self._verbose:
-            # if biounit:
-            #     print(
-            #         f"Downloading structure '{pdb_code}.{biounit}' "
-            #         f"from {self.pdb_server} ..."
-            #     )
-            # else:
-            #     print(f"Downloading structure '{pdb_code}' from {self.pdb_server} ...")
             print(f"Downloading structure '{pdb_code}' from {url} ...")
         try:
             urlcleanup()
@@ -159,14 +130,7 @@ class MMBPDBList(PDBList):
             pdir = '/tmp'
             self.flat_tree = False
 
-#       retrieve_assembly_file only available on biopython >= 1.80, added here to ensure
-#           if self.pdb_server.lower() not in ALT_SERVERS:
-#                return super().retrieve_assembly_file(
-#                    pdb_code, assembly_num, pdir, file_format, overwrite
-#                )
-
         pdb_code = pdb_code.lower()
-
 
         assembly_num = int(assembly_num)
         archive = {
