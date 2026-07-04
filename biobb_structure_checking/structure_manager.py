@@ -138,6 +138,24 @@ class StructureManager:
         # Calc internal data
         self.update_internals(cif_warn=True)
 
+    def _get_cache_path(self, pdb_id, cache_dir, file_format):
+        """ Get cache path for input structure """
+        if '.' in pdb_id:
+            pdb_id, assembly = pdb_id.split('.')
+            cache_path = opj(
+                cache_dir, 
+                pdb_id[1:3].lower(), 
+                f"{pdb_id.lower()}-assembly{assembly}.{file_format}"
+            )
+        else:
+            cache_path = opj(
+                cache_dir, 
+                pdb_id[1:3].lower(), 
+                pdb_id.lower() + f".{file_format}"
+            )
+        cache_path = cache_path.replace('mmCif','cif')
+        return cache_path
+    
     def _load_structure_file(
             self,
             input_pdb_path,
@@ -155,11 +173,14 @@ class StructureManager:
         """ Load structure file """
         biounit = False
         self.pdb_id = 'User'
-        if no_network and (input_pdb_path.startswith(('pdb:', 'http'))):
-            print("Error: no network access to retrieve structure")
-            return None, None, None, None
+            
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
+            if no_network:
+                cache_path = self._get_cache_path(input_pdb_path, cache_dir, file_format)
+                print (f"WARNING: no network access, using cached structure {cache_path} if available")
+                if not os.path.exists(cache_path):
+                    return None, None, None, None
             pdbl = MMBPDBList(pdb=cache_dir, server=pdb_server)
             if re.search(r'\.[1-9]+$', input_pdb_path):
                 pdbid, biounit = input_pdb_path.split('.')
@@ -217,6 +238,8 @@ class StructureManager:
                     self.sequence_data.load_sequence_from_fasta(f"pdb:{pdbid}")
 
         elif input_pdb_path.startswith('http'):
+            if no_network and input_pdb_path.startswith('http'):
+                return None, None, None, None
             real_pdb_path = opj(cache_dir, os.path.basename(input_pdb_path))
 
             if '.' in os.path.basename(input_pdb_path):

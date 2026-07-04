@@ -23,7 +23,6 @@ ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
 
 ALT_SERVERS = {
-    'mmb': 'https://mmb.irbbarcelona.org/api/pdb',
     'bsc': 'http://mdb-login.bsc.es/api/pdb'
 }
 
@@ -652,7 +651,7 @@ MSGS = {
                   'use --limit to adjust',
     'TIME_LIMIT': 'Execution time limit ({}s) exceeded, aborting, use --time_limit to adjust',
     'CA_ONLY_STRUCTURE': 'CA-Only structure, skipping',
-    'NO_NETWORK': 'Network disabled, unable to download {}',
+    'NO_NETWORK': 'Network disabled, unable to download {}, and no cached file available',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
