@@ -1,8 +1,20 @@
 ## v3.16.3 (2026.XX)
+### Extended functions
+- altloc
+  - Added warning for possible microheterogeneity (from alternative residue names)
+- sequences
+  - Added analysis for possible sequence mismatches between canonincal and structure sequences.
+- output
+  - Added version tag to summary json output
 ### Bug fixes
 - metals
-  - Fixed detection from element instead name to avoid confusion from CX atom names
+  - Fixed confusion from CX or PB atom names
   - Detected metals as part of other residues  
+- Load
+  - Fixed errors when required fields where missing from cif files 
+  - Fixed use of cached copy when available when --no_network in use
+  - Fixed display of repeated ligand statistics from multiple models
+
 ## v3.16.2 (2026.6)
 ### New functions
  - Added description of ligands/HETatms when available

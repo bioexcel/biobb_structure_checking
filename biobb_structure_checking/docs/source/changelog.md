@@ -2,6 +2,8 @@
 ### Extended functions
 - altloc
   - Added warning for possible microheterogeneity (from alternative residue names)
+- sequences
+  - Added analysis for possible sequence mismatches between canonincal and structure sequences.
 - output
   - Added version tag to summary json output
 ### Bug fixes
