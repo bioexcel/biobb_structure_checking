@@ -38,7 +38,7 @@ class StructureChecking():
 
         self.args = cts.set_defaults(base_dir_path, args)
 
-        self.summary = {}
+        self.summary = {"version": cts.VERSION}
         if self.args['debug'] or args['time_limit']:
             import psutil
             self.start_time = time.time()
