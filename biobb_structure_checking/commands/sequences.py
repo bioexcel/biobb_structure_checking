@@ -21,6 +21,16 @@ def check(strcheck):
         'canonical': can_seq,
         'structure': pdb_seq
     }
+    mismatches = strcheck.strucm.sequence_data.compare_sequences(strcheck.strucm)
+    if mismatches:
+        print(f"Found {len(mismatches)} mismatch(es)")
+        for chain_id, mismatch in mismatches.items():
+            print(
+                f"Chain {chain_id}\n"
+                f"{mismatch['canonical']}\n"
+                f"{mismatch['structure']}"
+            )
+    strcheck.summary['sequence_mismatches'] = mismatches
     return fasta
 
 

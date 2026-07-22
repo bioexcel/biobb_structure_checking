@@ -573,7 +573,44 @@ class SequenceData():
                         matches.append((mod_id, ch_id, score))
         return matches
 
+    def compare_sequences(self, strucm):
+        """ SequenceData.compare_sequences
+        Compares canonical and structure sequences
 
+        Args:
+            strucm (StructureManager) : Object containing the loaded structure
+        """
+        summary = {}
+        for mod in strucm.st:
+            for ch_id in self.data[mod.id]:
+                mismatches = []
+                can_seq_mis = ''
+                pdb_seq_mis = ''
+
+                if not self.has_canonical[mod.id][ch_id]:
+                    continue
+
+                can_seq = self.get_canonical().split("\n")[1]
+                pdb_seq = self.get_pdbseq().split("\n")[1]
+
+
+                for i in range(len(can_seq)):
+                    if can_seq[i] != pdb_seq[i] and pdb_seq[i] != '-':
+                        mismatches.append(i)
+                        can_seq_mis += can_seq[i]
+                        pdb_seq_mis += pdb_seq[i]
+                        continue
+                    else:
+                        can_seq_mis += '-'
+                        pdb_seq_mis += '-'
+                if mismatches:
+                    summary[f"{ch_id}/{mod.id}"] = {
+                        'mismatches': mismatches,
+                        'canonical': can_seq_mis,
+                        'structure': pdb_seq_mis
+                    }
+        return summary
+    
 def _get_pack_str_seqs(strucm):
     strucm.revert_can_resnames(canonical=True)
     seqs = {}
@@ -589,3 +626,4 @@ def _get_pack_str_seqs(strucm):
             )
     strucm.revert_can_resnames(canonical=False)
     return seqs
+
