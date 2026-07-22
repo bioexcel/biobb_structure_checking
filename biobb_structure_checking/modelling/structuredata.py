@@ -162,7 +162,7 @@ class StructureData():
                     self.meta[fin] = self.headers[org]
         if self.biounit:
             self.meta['biounit'] = self.biounit
-        if self.meta['entry_id'] == 'XXXX':  # Recovering PDB id for Assemblies
+        if self.meta['entry_id'] == 'XXXX' or self.meta['entry_id'] == 'User':  # Recovering PDB id for Assemblies
             self.meta['entry_id'] = self.st.id
         # Missing fields from AF entries
         if 'title' not in self.meta:
