@@ -24,7 +24,8 @@
     1.9. Get Sequences DONE
         1.9.1 Get sequence from PDB without canonical DONE
         1.9.2 Output FASTA file DONE
-        1.9.3 Detect sequences mismatches canonical/structure to detect microehterogeneity or alignment errors
+        1.9.3 Detect sequences mismatches canonical/structure to detect microheterogeneity or alignment errors DONE
+        1.9.4 Check Internal alignment for some corner cases 1a7c 136d
 
 2. Fix Structure Errors/Modification
     2.1. Detect/Fix Amides Assignment (amide) DONE
