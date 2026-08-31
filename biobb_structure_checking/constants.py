@@ -2,7 +2,6 @@
     Global constants for structure_checking module
 """
 import argparse
-import os
 from os.path import dirname
 from os.path import join as opj
 
@@ -411,7 +410,8 @@ DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove', 'Remove All Water molecules')
-DIALOGS.add_option('water', '--keep_min_contacts', 'keep', 'Remove All Water molecules with less contacts')
+DIALOGS.add_option('water', '--keep_min_contacts', 'keep',
+                   'Remove All Water molecules with less contacts')
 
 DIALOGS.add_entry(
     'ligands',
@@ -684,6 +684,7 @@ MSGS = {
     'ALTLOC_FOUND': 'Detected {} residues with alternative location labels',
     'NO_ALTLOC_FOUND': 'Detected no residues with alternative location labels',
     'ALTLOC_NO_A': 'Possible microheterogeneity: No A altloc found',
+    'ALTLOC_NO_SELECTION': 'No selection made, keeping all alternative locations',
     # metals
     'METALS_FOUND': 'Found {} Metal ions',
     'NO_METALS_FOUND': 'No metal ions found',
@@ -784,7 +785,7 @@ def help(command=None):
             DATA_DIR_DEFAULT_PATH,
             COMMANDS_HELP_PATH
         )
-        with open(help_path) as help_file:
+        with open(help_path, 'r', encoding='utf-8') as help_file:
             print(help_file.read())
     else:
         DIALOGS.get_parameter(command, '', print_help=True)
