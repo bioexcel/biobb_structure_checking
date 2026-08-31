@@ -49,21 +49,19 @@ def check(strcheck):
 
 
 def fix(strcheck, opts, fix_data=None):
+    rename_chains = ''
+    rebuild_chains = False
+    renumber_chains = False
     if isinstance(opts, str):
         select_chains = opts
-        rename_chains = ''
     else:
         select_chains = opts['select']
         if 'rename' in opts:
             rename_chains = opts['rename']
-        else:
-            rename_chains = ''
         if 'renumber' in opts:
             renumber_chains = opts['renumber']
         if 'rebuild' in opts:
             rebuild_chains = opts['rebuild']
-        else:
-            rebuild_chains = False
 
     if strcheck.strucm.chains_data.has_chains_to_rename:
         input_line = ParamInput(
