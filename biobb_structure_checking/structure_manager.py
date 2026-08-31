@@ -48,7 +48,6 @@ MODELLER_ENV_VAR = 'KEY_MODELLER10v4'
 ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
 ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
 
-
 class StructureManager:
     """ Main Class wrapping Bio.PDB structure object
     """
@@ -143,19 +142,19 @@ class StructureManager:
         if '.' in pdb_id:
             pdb_id, assembly = pdb_id.split('.')
             cache_path = opj(
-                cache_dir, 
-                pdb_id[1:3].lower(), 
+                cache_dir,
+                pdb_id[1:3].lower(),
                 f"{pdb_id.lower()}-assembly{assembly}.{file_format}"
             )
         else:
             cache_path = opj(
-                cache_dir, 
-                pdb_id[1:3].lower(), 
+                cache_dir,
+                pdb_id[1:3].lower(),
                 pdb_id.lower() + f".{file_format}"
             )
         cache_path = cache_path.replace('mmCif','cif')
         return cache_path
-    
+
     def _load_structure_file(
             self,
             input_pdb_path,
@@ -173,7 +172,7 @@ class StructureManager:
         """ Load structure file """
         biounit = False
         self.pdb_id = 'User'
-            
+
         if input_pdb_path.startswith('pdb:'):
             input_pdb_path = input_pdb_path[4:]
             if no_network:
@@ -292,9 +291,9 @@ class StructureManager:
             raise UnknownFileTypeError(input_pdb_path)
 
         if '.gz' in real_pdb_path:
-            pdb_file_handle = gzip.open(real_pdb_path, 'rt')
+            pdb_file_handle = gzip.open(real_pdb_path, 'rt', encoding='utf-8')
         else:
-            pdb_file_handle = open(real_pdb_path, 'r')
+            pdb_file_handle = open(real_pdb_path, 'r', encoding='utf-8')
 
         if atom_limit > 0:
             num_ats = sum(1 for _ in pdb_file_handle if _.startswith('ATOM') or _.startswith('HETATM'))
@@ -1800,8 +1799,6 @@ class StructureManager:
 
 
 # ===============================================================================
-
-
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
@@ -1814,45 +1811,54 @@ def _guess_modeller_env():
         if len(info) >= 2 and info[1]:
             print(f"Modeller v{info[1]} detected")
             ver1, ver2 = info[1].split('.')
-            return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
+            return f"KEY_MODELLER{ver1}v{ver2}", f"MODINSTALL{ver1}v{ver2}", \
+                f"{os.environ.get('CONDA_PREFIX','')}/lib/modeller-{ver1}.{ver2}"
     except subprocess.CalledProcessError:
         print("Modeller version not detected or Conda not installed, using default")
-        return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
+    return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 
-
 class WrongServerError(Exception):
+    ''' Raised when biounits are requested on a non-MMB server'''
     def __init__(self):
         self.message = 'ERROR: Biounits supported only on MMB server'
 
 class UnknownFileTypeError(Exception):
+    ''' Raised when an unknown file type is provided'''
     def __init__(self, typ):
         self.message = f'ERROR: unknown filetype ({typ})'
 
 class OutputPathNotProvidedError(Exception):
+    ''' Raised when the output PDB path is not provided'''
     def __init__(self):
         self.message = 'ERROR: output PDB path not provided'
 
 class NotAValidResidueError(Exception):
+    ''' Raised when a residue is not valid in the current context'''
     def __init__(self, res):
         self.message = f'Warning: {res} is not a valid residue in this context'
 
 class NotEnoughAtomsError(Exception):
+    ''' Raised when there are not enough atoms to build missing atoms'''
     def __init__(self):
         self.message = 'Warning: not enough backbone to build missing atoms'
 
 class ParseError(Exception):
+    ''' Raised when there is a parsing error in the input structure'''
     def __init__(self, err_id, err_txt):
         self.message = f'{err_id} ({err_txt}) found when parsing input structure'
 
 class UnknownFFError(Exception):
+    ''' Raised when an unknown force field is provided'''
     def __init__(self, ff):
         self.message = f'{ff} is not a valid ff for assigning atom types and charges'
 
 class SequencesDoNotMatch(Exception):
+    ''' Raised when the sequence lengths do not match'''
     def __init__(self):
         self.message = "Sequence lengths do not match"
 
 class UnknownAtomforResidueError(Exception):
+    ''' Raised when an atom is not valid for a given residue'''
     def __init__(self, res_id, atm_id):
         self.message = f"Non valid atom {atm_id} for residue {res_id}"

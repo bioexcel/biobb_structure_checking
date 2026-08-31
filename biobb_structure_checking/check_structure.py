@@ -37,7 +37,7 @@ def main():
 
     if args.command == 'commands':
         help_str = header()
-        with open(opj(data_dir_path, cts.COMMANDS_HELP_PATH)) as help_file:
+        with open(opj(data_dir_path, cts.COMMANDS_HELP_PATH), 'r', encoding='utf-8') as help_file:
             help_str += help_file.read()
         pydoc.pager(help_str)
         sys.exit(0)

@@ -208,6 +208,5 @@ class MutationSet():
     def __str__(self):
         if len(self.chain_ids) > 1:
             return self.id
-        else:
-            chn, mut = self.id.split(':')
-            return f"{chn.split('/')[0]}:{mut}"
+        chn, mut = self.id.split(':')
+        return f"{chn.split('/')[0]}:{mut}"

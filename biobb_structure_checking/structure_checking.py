@@ -76,15 +76,6 @@ class StructureChecking():
         if self.args['time_limit'] and self._check_time_limit():
             sys.exit(1)
 
-        # if self.args['atom_limit'] and \
-        #         self.strucm.st_data.stats['num_ats'] > self.args['atom_limit']:
-        #     sys.exit(
-        #         cts.MSGS['ATOM_LIMIT'].format(
-        #             self.strucm.st_data.stats['num_ats'],
-        #             self.args['atom_limit']
-        #         )
-        #     )
-
     def launch(self):
         """ StructureChecking.launch
         Method run from the command line invocation
@@ -206,7 +197,7 @@ class StructureChecking():
         if os.path.isfile(op_list):
             command_list = []
             try:
-                with open(op_list, "r") as list_file_h:
+                with open(op_list, "r", encoding='utf-8') as list_file_h:
                     for line in list_file_h:
                         if line == "\n" or line[0:1] == '#':
                             continue
@@ -319,7 +310,7 @@ class StructureChecking():
             try:
                 error_status = f_fix(self, opts, data_to_fix)
             except Exception as e:
-                error_status = [e.message]
+                error_status = [getattr(e, 'message', str(e))]
 
             if error_status:
                 if isinstance(error_status, tuple):
@@ -583,7 +574,8 @@ class StructureChecking():
 
     def altloc(self, opts=None):
         """ StructureChecking.altloc
-        Detect/Select Alternative Locations. Check only with no options. Options accepted as command-line string, or python dictionary.
+        Detect/Select Alternative Locations. Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
@@ -596,7 +588,8 @@ class StructureChecking():
 
     def metals(self, opts=None):
         """ StructureChecking.metals
-        Detect/Remove Metals. Check only with no options. Options accepted as command-line string, or python dictionary.
+        Detect/Remove Metals. Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
@@ -609,7 +602,7 @@ class StructureChecking():
 
     def water(self, opts=None):
         """ StructureChecking.water
-        Detect/Select Remove Water molecules. Check only with no options. 
+        Detect/Select Remove Water molecules. Check only with no options.
         Options accepted as command-line string, or python dictionary.
 
         Args:
@@ -641,7 +634,8 @@ class StructureChecking():
 
     def rem_hydrogen(self, opts=None):
         """ StructureChecking.add_hydrogen
-        Remove Hydrogen atoms from structure. Check only with no options. Options accepted as command-line string, or python dictionary.
+        Remove Hydrogen atoms from structure. Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
@@ -663,7 +657,8 @@ class StructureChecking():
 
     def amide(self, opts=None):
         """  StructureChecking.amide
-        Detect/Fix Amide atoms Assignment. Check only with no options. Options accepted as command-line string, or python dictionary.
+        Detect/Fix Amide atoms Assignment. Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
@@ -677,7 +672,8 @@ class StructureChecking():
 
     def chiral(self, opts=None):
         """ StructureChecking.chiral
-        Detect/Fix Improper side chain chirality. Check only with no options.  Options accepted as command-line string, or python dictionary.
+        Detect/Fix Improper side chain chirality. Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
@@ -702,7 +698,8 @@ class StructureChecking():
 
     def fixside(self, opts=None):
         """  StructureChecking.fixside
-        Complete side chains (heavy atoms, protein only). Check only with no options.  Options accepted as command-line string, or python dictionary.
+        Complete side chains (heavy atoms, protein only). Check only with no options.
+        Options accepted as command-line string, or python dictionary.
 
         Args:
             opts (str | dict - Options dictionary):
