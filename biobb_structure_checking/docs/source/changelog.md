@@ -1,4 +1,4 @@
-## v3.16.3 (2026.XX)
+## v3.16.3 (2026.3)
 ### Extended functions
 - altloc
   - Added warning for possible microheterogeneity (from alternative residue names)
