@@ -214,7 +214,7 @@
     }
    ]
   },
-  "selected": "OCCUPANCY"
+  "selected": "occupancy"
  },
  "amide": {
   "n_amides": 32,
@@ -785,6 +785,7 @@
   },
   "total_charge": null
  },
+ "version": "3.16.3",
  "water": {
   "contacts": {
    "HOH A501": [],

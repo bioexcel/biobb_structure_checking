@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.16.2                   =
+=                   BioBB structure checking utility v3.16.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/sv/1svc.cif' 
 Structure pdb:1svc loaded
- PDB id: 1SVC 
+ Entry id: 1SVC 
  Title: NFKB P50 HOMODIMER BOUND TO DNA
  Experimental method: X-RAY DIFFRACTION
  Keywords: TRANSCRIPTION/DNA

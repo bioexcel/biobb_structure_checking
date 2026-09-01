@@ -1,0 +1,399 @@
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ar/1ark.cif' 
+Structure pdb:1ark loaded
+ Entry id: 1ARK 
+ Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
+ Experimental method: SOLUTION NMR
+ Keywords: TRANSFERASE
+
+ Num. models: 15 (type: BioUnit,   35.032 A)
+ Num. chains: 15 (A/0: Protein|A/1: Protein|A/2: Protein|A/3: Protein|A/4: Protein|A/5: Protein|A/6: Protein|A/7: Protein|A/8: Protein|A/9: Protein|A/10: Protein|A/11: Protein|A/12: Protein|A/13: Protein|A/14: Protein)
+ Num. residues:  900
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 900 (total 6630 H atoms)
+ Num. HETATM residues:  0
+ Num. ligands or modified residues:  0
+ Num. water mol.:  0
+ Num. atoms:  13575
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ki/2ki5.cif' 
+Structure pdb:2ki5 loaded
+ Entry id: 2KI5 
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+ Resolution (A): 1.90
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  296
+ Num. ligands or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+Small mol ligands found
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/sv/1svc.cif' 
+Structure pdb:1svc loaded
+ Entry id: 1SVC 
+ Title: NFKB P50 HOMODIMER BOUND TO DNA
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSCRIPTION/DNA
+ Resolution (A): 2.600
+
+ Num. models: 1
+ Num. chains: 2 (D: DNA, P: Protein)
+ Num. residues:  393
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  63
+ Num. ligands or modified residues:  0
+ Num. water mol.:  63
+ Num. atoms:  2903
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/04/104l.cif' 
+Structure pdb:104l loaded
+ Entry id: 104L 
+ Title: HOW AMINO-ACID INSERTIONS ARE ALLOWED IN AN ALPHA-HELIX OF T4 LYSOZYME
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: HYDROLASE(O-GLYCOSYL)
+ Resolution (A): 2.8
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  360
+ Num. residues with ins. codes:  4
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  32
+ Num. ligands or modified residues:  0
+ Num. water mol.:  32
+ Num. atoms:  2636
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/bq/1bqo.cif' 
+Structure pdb:1bqo loaded
+ Entry id: 1BQO 
+ Title: DISCOVERY OF POTENT, ACHIRAL MATRIX METALLOPROTEINASE INHIBITORS
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: METALLOPROTEASE
+ Resolution (A): 2.3
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  428
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  86
+ Num. ligands or modified residues:  11
+ Num. water mol.:  75
+ Num. atoms:  2841
+Metal/Ion residues found
+ ZN A301 (ZINC ION)
+ ZN A302 (ZINC ION)
+ CA A303 (CALCIUM ION)
+ CA A304 (CALCIUM ION)
+ CA A305 (CALCIUM ION)
+ ZN B301 (ZINC ION)
+ ZN B302 (ZINC ION)
+ CA B303 (CALCIUM ION)
+ CA B304 (CALCIUM ION)
+ CA B305 (CALCIUM ION)
+Small mol ligands found
+N25 B401 (1,3-BIS-(4-METHOXY-BENZENESULFONYL)-5,5-DIMETHYL-HEXAHY)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ku/4ku1.cif' 
+Warning, no canonical sequence available for chain C/0
+Warning, no canonical sequence available for chain D/0
+Structure pdb:4ku1 loaded
+ Entry id: 4KU1 
+ Title: Role of the hinge and C-gamma-2/C-gamma-3 interface in immunoglobin G1 Fc domain motions: implications for Fc engineering
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: IMMUNE SYSTEM
+ Resolution (A): 1.90
+
+ Num. models: 1
+ Num. chains: 4 (A: Protein, B: Protein, C: Unknown, D: Unknown)
+ Num. residues:  583
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  168
+ Num. ligands or modified residues:  20
+ Num. water mol.:  148
+ Num. atoms:  3714
+Small mol ligands found
+PG4 A511 (TETRAETHYLENE GLYCOL)
+NAG C1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG C2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA C3 (beta-D-mannopyranose)
+MAN C4 (alpha-D-mannopyranose)
+NAG C5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C6 (beta-D-galactopyranose)
+MAN C7 (alpha-D-mannopyranose)
+NAG C8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL C9 (beta-D-galactopyranose)
+FUL C10 (beta-L-fucopyranose)
+NAG D1 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG D2 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+BMA D3 (beta-D-mannopyranose)
+MAN D4 (alpha-D-mannopyranose)
+NAG D5 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+GAL D6 (beta-D-galactopyranose)
+MAN D7 (alpha-D-mannopyranose)
+NAG D8 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+FUL D9 (beta-L-fucopyranose)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ub/1ubq.cif' 
+Structure pdb:1ubq loaded
+ Entry id: 1UBQ 
+ Title: STRUCTURE OF UBIQUITIN REFINED AT 1.8 ANGSTROMS RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: CHROMOSOMAL PROTEIN
+ Resolution (A): 1.8
+
+ Num. models: 1
+ Num. chains: 1 (A: Protein)
+ Num. residues:  134
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  58
+ Num. ligands or modified residues:  0
+ Num. water mol.:  58
+ Num. atoms:  660
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/md/4mdh.cif' 
+Structure pdb:4mdh loaded
+ Entry id: 4MDH 
+ Title: REFINED CRYSTAL STRUCTURE OF CYTOPLASMIC MALATE DEHYDROGENASE AT 2.5-ANGSTROMS RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: OXIDOREDUCTASE(NAD(A)-CHOH(D))
+ Resolution (A): 2.5
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  1143
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  477
+ Num. ligands or modified residues:  6
+ Num. water mol.:  471
+ Num. atoms:  5675
+Modified residues found
+ACE A0 (ACETYL GROUP)
+ACE B0 (ACETYL GROUP)
+Small mol ligands found
+SO4 A334 (SULFATE ION)
+NAD A335 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+SO4 B334 (SULFATE ION)
+NAD B335 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/d2/1d23.cif' 
+Structure pdb:1d23 loaded
+ Entry id: 1D23 
+ Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: DNA
+ Resolution (A): 1.500
+
+ Num. models: 1
+ Num. chains: 2 (A: DNA, B: DNA)
+ Num. residues:  176
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  156
+ Num. ligands or modified residues:  2
+ Num. water mol.:  154
+ Num. atoms:  560
+Metal/Ion residues found
+ MG A22 (MAGNESIUM ION)
+ MG B21 (MAGNESIUM ION)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/m0/6m0j.cif' 
+Structure pdb:6m0j loaded
+ Entry id: 6M0J 
+ Title: Crystal structure of SARS-CoV-2 spike receptor-binding domain bound with ACE2
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: VIRAL PROTEIN/HYDROLASE
+ Resolution (A): 2.4500
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, E: Protein)
+ Num. residues:  878
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  87
+ Num. ligands or modified residues:  7
+ Num. water mol.:  80
+ Num. atoms:  6558
+Metal/Ion residues found
+ ZN A901 (ZINC ION)
+ CL A902 (CHLORIDE ION)
+Small mol ligands found
+NAG A903 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A904 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A905 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG A906 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+NAG E601 (2-acetamido-2-deoxy-beta-D-glucopyranose)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif' 
+Structure pdb:1ldn.1 loaded
+ Entry id: 1ldn (Assembly 1)
+ Title: STRUCTURE OF A TERNARY COMPLEX OF AN ALLOSTERIC LACTATE DEHYDROGENASE FROM BACILLUS STEAROTHERMOPHILUS AT 2.5 ANGSTROMS RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: OXIDOREDUCTASE(CHOH(D)-NAD(A))
+
+ Num. models: 1
+ Num. chains: 4 (A: Protein, B: Protein, C: Protein, D: Protein)
+ Num. residues:  1561
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  297
+ Num. ligands or modified residues:  10
+ Num. water mol.:  287
+ Num. atoms:  10319
+Small mol ligands found
+FBP A353 (1,6-di-O-phosphono-beta-D-fructofuranose)
+OXM A351 (OXAMIC ACID)
+NAD A352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+FBP B353 (1,6-di-O-phosphono-beta-D-fructofuranose)
+OXM B351 (OXAMIC ACID)
+NAD B352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+OXM C351 (OXAMIC ACID)
+NAD C352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+OXM D351 (OXAMIC ACID)
+NAD D352 (NICOTINAMIDE-ADENINE-DINUCLEOTIDE)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/vt/1vtk-assembly1.cif' 
+Structure pdb:1vtk.1 loaded
+ Entry id: 1vtk (Assembly 1)
+ Title: THYMIDINE KINASE FROM HERPES SIMPLEX VIRUS TYPE 1 IN COMPLEX WITH ADP AND DEOXYTHYMIDINE-MONOPHOSPHATE
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, A-2: Protein)
+ Num. residues:  734
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  108
+ Num. ligands or modified residues:  4
+ Num. water mol.:  104
+ Num. atoms:  4982
+Small mol ligands found
+ADP A400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A500 (THYMIDINE-5'-PHOSPHATE)
+ADP A-2400 (ADENOSINE-5'-DIPHOSPHATE)
+TMP A-2500 (THYMIDINE-5'-PHOSPHATE)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ki/2ki5-assembly1.cif' 
+Structure pdb:2ki5.1 loaded
+ Entry id: 2ki5 (Assembly 1)
+ Title: HERPES SIMPLEX TYPE-1 THYMIDINE KINASE IN COMPLEX WITH THE DRUG ACICLOVIR AT 1.9A RESOLUTION
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSFERASE
+
+ Num. models: 1
+ Num. chains: 2 (A: Protein, B: Protein)
+ Num. residues:  908
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  296
+ Num. ligands or modified residues:  4
+ Num. water mol.:  292
+ Num. atoms:  4961
+Small mol ligands found
+SO4 A4 (SULFATE ION)
+AC2 A1 (9-HYROXYETHOXYMETHYLGUANINE)
+SO4 B3 (SULFATE ION)
+AC2 B2 (9-HYROXYETHOXYMETHYLGUANINE)
+Structure not modified, not saving. Override with --force_save
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/sv/1svc-assembly1.cif' 
+Structure pdb:1svc.1 loaded
+ Entry id: 1svc (Assembly 1)
+ Title: NFKB P50 HOMODIMER BOUND TO DNA
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: TRANSCRIPTION/DNA
+
+ Num. models: 1
+ Num. chains: 4 (D: DNA, D-2: DNA, P: Protein, P-2: Protein)
+ Num. residues:  786
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 0
+ Num. HETATM residues:  126
+ Num. ligands or modified residues:  0
+ Num. water mol.:  126
+ Num. atoms:  5806
+Structure not modified, not saving. Override with --force_save

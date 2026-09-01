@@ -86,7 +86,12 @@ def check(strcheck):
         print(cts.MSGS['MODIF_RESIDUES'])
         strcheck.summary['backbone']['mod_residues'] = []
         for brk in strcheck.strucm.st_data.modified_residue_list:
-            print(f" {mu.residue_id(brk):10}")
+            if strcheck.strucm.st_data.no_network:
+                print(f" {mu.residue_id(brk):10}")
+            else:
+                print(
+                    f" {mu.residue_id(brk):10} ({mu.fetch_residue_name_by_id(brk.get_resname())})"
+                )
             strcheck.summary['backbone']['mod_residues'].append(mu.residue_id(brk))
     # Provisional only missing atoms can be fixed
         fix_data['modified_residue_list'] = True

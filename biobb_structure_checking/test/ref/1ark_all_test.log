@@ -1,16 +1,16 @@
 ================================================================================
-=                   BioBB structure checking utility v3.16.2                   =
+=                   BioBB structure checking utility v3.16.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ar/1ark.cif' 
 Structure pdb:1ark loaded
- PDB id: 1ARK 
+ Entry id: 1ARK 
  Title: SH3 DOMAIN FROM HUMAN NEBULIN, NMR, 15 STRUCTURES
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
 
- Num. models: 15 (type: BioUnit,   35.032 A)
+ Num. models: 15 (type: Assembly/Biological unit,   35.032 A)
  Num. chains: 15 (A/0: Protein|A/1: Protein|A/2: Protein|A/3: Protein|A/4: Protein|A/5: Protein|A/6: Protein|A/7: Protein|A/8: Protein|A/9: Protein|A/10: Protein|A/11: Protein|A/12: Protein|A/13: Protein|A/14: Protein)
  Num. residues:  900
  Num. residues with ins. codes:  0
@@ -24,7 +24,7 @@ Step 1: models --select 1
 
 Running models. Options: --select 1
 Detected 15 Model(s)
-Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
+Models do not superimpose, RMSd:   35.032 A, guessed as Assembly/Biological unit 
 Selecting model num. 1
 
 Step 2: chains --select All
@@ -113,7 +113,6 @@ No SS bonds detected
 Step 16: clashes
 
 Running clashes.
-False
 No Severe Steric clashes/covalent bonds detected
 4 Apolar steric clashes detected
  MET A9.CE    GLU A58.OE2     2.695 A

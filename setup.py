@@ -3,12 +3,12 @@ Setup module for standard Pypi installation.
 """
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="biobb_structure_checking",
-    version="3.16.2",
+    version="3.16.3",
 
     author="Biobb developers",
     author_email="gelpi@ub.edu",

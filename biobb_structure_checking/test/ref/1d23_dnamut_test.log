@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.16.2                   =
+=                   BioBB structure checking utility v3.16.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/d2/1d23.cif' 
 Structure pdb:1d23 loaded
- PDB id: 1D23 
+ Entry id: 1D23 
  Title: THE STRUCTURE OF B-HELICAL C-G-A-T-C-G-A-T-C-G AND COMPARISON WITH C-C-A-A-C-G-T-T-G-G. THE EFFECT OF BASE PAIR REVERSALS
  Experimental method: X-RAY DIFFRACTION
  Keywords: DNA
@@ -32,7 +32,6 @@ Replacing  DA A3 into DG
   Adding new atom N2
 
 Checking for steric clashes
-False
 No Severe Steric clashes/covalent bonds detected
 No Apolar steric clashes detected
 1 Polar contacts (acceptors) detected

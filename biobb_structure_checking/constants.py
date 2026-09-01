@@ -2,14 +2,13 @@
     Global constants for structure_checking module
 """
 import argparse
-import os
 from os.path import dirname
 from os.path import join as opj
 
 
 from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.16.2'
+VERSION = '3.16.3'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -23,7 +22,6 @@ ATOM_LIMIT = 1000000
 TIME_LIMIT = 3600
 
 ALT_SERVERS = {
-    'mmb': 'https://mmb.irbbarcelona.org/api/pdb',
     'bsc': 'http://mdb-login.bsc.es/api/pdb'
 }
 
@@ -412,7 +410,8 @@ DIALOGS.add_option('metals', '--remove', 'remove', 'Remove Metal ions')
 
 DIALOGS.add_entry('water', 'Checks and optionally removes water molecules')
 DIALOGS.add_option('water', '--remove', 'remove', 'Remove All Water molecules')
-DIALOGS.add_option('water', '--keep_min_contacts', 'keep', 'Remove All Water molecules with less contacts')
+DIALOGS.add_option('water', '--keep_min_contacts', 'keep',
+                   'Remove All Water molecules with less contacts')
 
 DIALOGS.add_entry(
     'ligands',
@@ -652,7 +651,7 @@ MSGS = {
                   'use --limit to adjust',
     'TIME_LIMIT': 'Execution time limit ({}s) exceeded, aborting, use --time_limit to adjust',
     'CA_ONLY_STRUCTURE': 'CA-Only structure, skipping',
-    'NO_NETWORK': 'Network disabled, unable to download {}',
+    'NO_NETWORK': 'Network disabled, unable to download {}, and no cached file available',
     # command line
     'ERROR_OPEN_FILE': 'Error when opening file',
     'COMMAND_LIST_COMPLETED': 'Command list completed',
@@ -684,6 +683,8 @@ MSGS = {
     # altloc
     'ALTLOC_FOUND': 'Detected {} residues with alternative location labels',
     'NO_ALTLOC_FOUND': 'Detected no residues with alternative location labels',
+    'ALTLOC_NO_A': 'Possible microheterogeneity: No A altloc found',
+    'ALTLOC_NO_SELECTION': 'No selection made, keeping all alternative locations',
     # metals
     'METALS_FOUND': 'Found {} Metal ions',
     'NO_METALS_FOUND': 'No metal ions found',
@@ -784,7 +785,7 @@ def help(command=None):
             DATA_DIR_DEFAULT_PATH,
             COMMANDS_HELP_PATH
         )
-        with open(help_path) as help_file:
+        with open(help_path, 'r', encoding='utf-8') as help_file:
             print(help_file.read())
     else:
         DIALOGS.get_parameter(command, '', print_help=True)

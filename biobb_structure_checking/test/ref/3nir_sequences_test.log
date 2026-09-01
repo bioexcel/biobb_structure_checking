@@ -1,0 +1,42 @@
+================================================================================
+=                   BioBB structure checking utility v3.16.3                   =
+=            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
+================================================================================
+
+Structure exists: 'tmpPDB/ni/3nir.cif' 
+Structure pdb:3nir loaded
+ Entry id: 3NIR 
+ Title: Crystal structure of small protein crambin at 0.48 A resolution
+ Experimental method: X-RAY DIFFRACTION
+ Keywords: PLANT PROTEIN
+ Resolution (A): 0.48
+
+ Num. models: 1
+ Num. chains: 1 (A: Protein)
+ Num. residues:  148
+ Num. residues with ins. codes:  0
+ Num. residues with H atoms: 46 (total 315 H atoms)
+ Num. HETATM residues:  102
+ Num. ligands or modified residues:  4
+ Num. water mol.:  98
+ Num. atoms:  751
+Small mol ligands found
+EOH A2001 (ETHANOL)
+EOH A2002 (ETHANOL)
+EOH A2003 (ETHANOL)
+EOH A2004 (ETHANOL)
+Running sequences. Options: --output_fasta 3nir_sequences.fasta
+Canonical sequence
+>can_sq_A canonical sequence chain A
+TTCCPSIVARSNFNVCRLPGTPEALCATYTGCIIIPGATCPGDYAN
+
+Structure sequence
+>pdb_sq_A Frags: 1-46
+TTCCPSIVARSNFNVCRLPGTSEAICATYTGCIIIPGATCPGDYAN
+
+Found 1 mismatch(es)
+Chain A/0
+---------------------P--L---------------------
+---------------------S--I---------------------
+Sequences written on 3nir_sequences.fasta
+Structure not modified, not saving. Override with --force_save

@@ -14,7 +14,10 @@ class ModelsData():
     def stats(self, prefix='') -> None:
         """ Print stats """
         if self.nmodels > 1:
-            return f"{prefix} Num. models: {self.nmodels} (type: {mu.MODEL_TYPE_LABELS[self.models_type['type']]}, {self.models_type['rmsd']:8.3f} A)"
+            return \
+                f"{prefix} Num. models: {self.nmodels} " \
+                f"(type: {mu.MODEL_TYPE_LABELS[self.models_type['type']]}, " \
+                f"{self.models_type['rmsd']:8.3f} A)"
         return f"{prefix} Num. models: {self.nmodels}"
 
     def select(self, keep_model: str) -> None:
@@ -54,10 +57,10 @@ class ModelsData():
             fix_atoms = [
                 at
                 for at in self.st[0].get_atoms()
-                if at.id == 'CA' or at.id == 'P'
+                if at.id in ('CA', 'P')
             ]
             if not fix_atoms:
-                print("No CA atoms found, skipping superimposition")
+                print("No CA or P atoms found, skipping superimposition")
                 return False
             for mod in self.st.get_models():
                 if mod.id == 0:
@@ -65,7 +68,7 @@ class ModelsData():
                 mov_atoms = [
                     at
                     for at in self.st[mod.id].get_atoms()
-                    if at.id == 'CA' or at.id == 'P'
+                    if at.id in ('CA', 'P')
                 ]
                 spimp.set_atoms(fix_atoms, mov_atoms)
                 spimp.apply(self.st[mod.id].get_atoms())

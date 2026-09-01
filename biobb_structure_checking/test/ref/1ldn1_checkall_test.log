@@ -1,11 +1,11 @@
 ================================================================================
-=                   BioBB structure checking utility v3.16.2                   =
+=                   BioBB structure checking utility v3.16.3                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
 Structure exists: 'tmpPDB/ld/1ldn-assembly1.cif' 
 Structure pdb:1ldn.1 loaded
- PDB id: 1ldn (Assembly 1)
+ Entry id: 1ldn (Assembly 1)
  Title: STRUCTURE OF A TERNARY COMPLEX OF AN ALLOSTERIC LACTATE DEHYDROGENASE FROM BACILLUS STEAROTHERMOPHILUS AT 2.5 ANGSTROMS RESOLUTION
  Experimental method: X-RAY DIFFRACTION
  Keywords: OXIDOREDUCTASE(CHOH(D)-NAD(A))
@@ -88,6 +88,7 @@ FBP B353
   O4P  B (0.50) D (0.50)
   O5P  B (0.50) D (0.50)
   O6P  B (0.50) D (0.50)
+Possible microheterogeneity: No A altloc found
 Running  check_only. Nothing else to do.
 Running rem_hydrogen.
 No residues with Hydrogen atoms found
@@ -182,7 +183,6 @@ ASN B138   PRO B139   Dihedral:   -1.398
 No trans peptide bonds with unusual omega dihedrals found
 Running  check_only. Nothing else to do.
 Running clashes.
-False
 1 Severe Steric clashes/covalent bonds detected
  LYS C16.NZ   HIS D264.O      1.995 A
 162 Apolar steric clashes detected

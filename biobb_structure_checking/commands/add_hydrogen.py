@@ -109,7 +109,8 @@ def fix(strcheck, opts, fix_data=None):
             for r_at in fix_data['ion_res_list']:
                 res = r_at[0]
                 rcode = res.get_resname()
-                if ph_value <= std_ion[rcode]['pK']:
+
+                if float(ph_value) <= std_ion[rcode]['pK']:
                     ion_to_fix[res] = std_ion[rcode]['lowpH']
                 else:
                     ion_to_fix[res] = std_ion[rcode]['highpH']
@@ -132,6 +133,7 @@ def fix(strcheck, opts, fix_data=None):
                     for mut_res in mut.mutations:
                         ion_to_fix[mut_res['resobj']] = mut_res['new_id']
             else:
+                strcheck.summary['add_hydrogen']['selection'] = []
                 if add_h_mode == 'int':
                     if not strcheck.args['quiet']:
                         print('Selection: interactive')
@@ -143,13 +145,15 @@ def fix(strcheck, opts, fix_data=None):
                         r_at for r_at in fix_data['ion_res_list']
                         if r_at[0].get_resname() == 'HIS'
                     ]
-                    strcheck.summary['add_hydrogen']['selection'] = []
+                else:
+                    res_list = []
+
                 for r_at in res_list:
                     rcode = r_at[0].get_resname()
                     input_line = ParamInput(
                         "Select residue form for " + mu.residue_id(r_at[0]),
-                        strcheck.args['non_interactive']
-                    )
+                            strcheck.args['non_interactive']
+                        )
                     input_line.add_option_list('list', r_at[1].keys())
                     input_line.default = std_ion[rcode]['std']
 

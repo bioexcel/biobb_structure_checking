@@ -126,8 +126,8 @@ do
     sed -i '/Structure exists/d' $DIR/file_b
     sed -i '/Structure saved on/d' $DIR/file_a
     sed -i '/Structure saved on/d' $DIR/file_b
-    sed -i '/Downloading PDB structure/d' $DIR/file_a
-    sed -i '/Downloading PDB structure/d' $DIR/file_b
+    sed -i '/Downloading structure/d' $DIR/file_a
+    sed -i '/Downloading structure/d' $DIR/file_b
     sed -i '/Structure .* loaded/d' $DIR/file_a
     sed -i '/Structure .* loaded/d' $DIR/file_b
     sed -i '/Summary data saved on/d' $DIR/file_a
