@@ -53,7 +53,7 @@ BUNIT = 2
 MODELS_MAXRMS = 15.0    # Threshold value to detect NMR models (angs)
 MODEL_TYPE_LABELS = {
     ENSM: 'Ensembl/NMR',
-    BUNIT: 'BioUnit',
+    BUNIT: 'Assembly/Biological unit',
     UNKNOWN: 'Unknown'
 }
 
@@ -301,10 +301,9 @@ def seq_consecutive(res1, res2, next_res_list):
     """
     if res1 in next_res_list:
         return next_res_list[res1] == res2
-    else:
-        rnum1 = res1.id[1]
-        rnum2 = res2.id[1]
-        return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
+    rnum1 = res1.id[1]
+    rnum2 = res2.id[1]
+    return same_chain(res1, res2) and abs(rnum1 - rnum2) == 1
 
 
 def seq_consecutive_index(res1, res2):

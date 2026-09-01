@@ -1,6 +1,4 @@
 ''' Class to manage Residue Sets to chain building'''
-import re
-import sys
 import biobb_structure_checking.modelling.utils as mu
 
 
@@ -48,8 +46,7 @@ class ResidueSetList():
             i += 1
         if i == self.n:
             return -1
-        else:
-            return i
+        return i
 
     def _append_rset(self, item):
         self.sets.append(item)
@@ -73,14 +70,15 @@ class ResidueSet():
         self.items = set()
         self.type = ''
         self.id = ''
+        self.name = ''
 
-    def set_meta(self, id):
+    def set_meta(self, mol_id):
         """ Add molecule type to residue set"""
         if self._is_protein():
             self.type = 'prot'
         else:
             self.type = 'na'
-        self.id = id
+        self.id = mol_id
 
     def _is_protein(self):
         chain_type = mu.guess_chain_type_list(self._get_residues())['type']
@@ -134,4 +132,4 @@ class ResidueSet():
     def __str__(self):
         # residue_list = self._get_residues()
         return f"{self.id} ({mu.residue_id(self.inir)}-{mu.residue_id(self.finr)}) ({self.type}): {self.get_sequence()}"
-
+    

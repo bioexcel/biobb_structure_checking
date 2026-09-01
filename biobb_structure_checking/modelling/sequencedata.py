@@ -1,5 +1,10 @@
 """ Module to manage sequence information for structures """
 
+import sys
+import os
+import gzip
+# from typing import List, Dict
+from urllib.request import urlretrieve, urlcleanup
 from biobb_structure_checking.constants import FASTA_DOWNLOAD_PREFIX
 import biobb_structure_checking.modelling.utils as mu
 from Bio.SeqFeature import SeqFeature, FeatureLocation
@@ -8,11 +13,6 @@ from Bio.SeqUtils import IUPACData
 from Bio.Seq import Seq, MutableSeq
 from Bio.PDB.Polypeptide import PPBuilder
 from Bio import SeqIO
-import sys
-import os
-import gzip
-# from typing import List, Dict
-from urllib.request import urlretrieve, urlcleanup
 
 # pairwise2 to be deprecated, replaced by PairwiseAligner
 # But Alignment structure has changed from v1.79
@@ -341,7 +341,8 @@ class SequenceData():
             for ch_id, ch_data in self.data[mod.id].items():
                 # print(f"{ch_id=} {ch_data=}")
                 # print(f"{self.has_canonical=} {mod.id=}")
-                if ch_id not in self.has_canonical.get(mod.id, []) or not self.has_canonical.get(mod.id, dict()).get(ch_id, []):
+                if ch_id not in self.has_canonical[mod.id] or\
+                        not self.has_canonical[mod.id].get(ch_id, []):
                     continue
                 frgs = ch_data['pdb']['frgs']
                 ch_data['pdb']['match_numbering'] = True
@@ -593,16 +594,15 @@ class SequenceData():
                 can_seq = self.get_canonical().split("\n")[1]
                 pdb_seq = self.get_pdbseq().split("\n")[1]
 
-
                 for i in range(len(can_seq)):
                     if can_seq[i] != pdb_seq[i] and pdb_seq[i] != '-':
                         mismatches.append(i)
                         can_seq_mis += can_seq[i]
                         pdb_seq_mis += pdb_seq[i]
                         continue
-                    else:
-                        can_seq_mis += '-'
-                        pdb_seq_mis += '-'
+                    can_seq_mis += '-'
+                    pdb_seq_mis += '-'
+
                 if mismatches:
                     summary[f"{ch_id}/{mod.id}"] = {
                         'mismatches': mismatches,
