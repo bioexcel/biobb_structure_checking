@@ -15,7 +15,7 @@
   - Fixed use of cached copy when available when --no_network in use
   - Fixed display of repeated ligand statistics from multiple models
 
-## v3.16.2 (2026.6)
+## v3.16.2 (2026.2)
 ### New functions
  - Added description of ligands/HETatms when available
  - Added --no_network to prevent network usage when not available
