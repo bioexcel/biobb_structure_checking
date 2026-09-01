@@ -214,7 +214,7 @@
     }
    ]
   },
-  "selected": "OCCUPANCY"
+  "selected": "occupancy"
  },
  "amide": {
   "n_amides": 32,

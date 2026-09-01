@@ -10,7 +10,7 @@ Structure pdb:1ark loaded
  Experimental method: SOLUTION NMR
  Keywords: TRANSFERASE
 
- Num. models: 15 (type: BioUnit,   35.032 A)
+ Num. models: 15 (type: Assembly/Biological unit,   35.032 A)
  Num. chains: 15 (A/0: Protein|A/1: Protein|A/2: Protein|A/3: Protein|A/4: Protein|A/5: Protein|A/6: Protein|A/7: Protein|A/8: Protein|A/9: Protein|A/10: Protein|A/11: Protein|A/12: Protein|A/13: Protein|A/14: Protein)
  Num. residues:  900
  Num. residues with ins. codes:  0
@@ -21,7 +21,7 @@ Structure pdb:1ark loaded
  Num. atoms:  13575
 Running models. Options: --select 3-6 --superimpose --save_split
 Detected 15 Model(s)
-Models do not superimpose, RMSd:   35.032 A, guessed as BioUnit 
+Models do not superimpose, RMSd:   35.032 A, guessed as Assembly/Biological unit 
 Selecting model num. 3-6
 Models superimposed: final RMSd    2.615 A
 Final Num. models: 4 (type: Ensembl/NMR,    2.615 A)
