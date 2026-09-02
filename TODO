@@ -10,7 +10,7 @@
         1.2.3 Select chains according to molecule type DONE
         1.2.4 Renumber chains & Residues DONE
     1.3. Detect/Select Alt Locations (altloc) DONE
-        1.3.1 Detect microheterogeity DONE (Added warning, should be fixed on Bio.PDB)
+        1.3.1 Detect microheterogeneity DONE (Added warning, should be fixed on Bio.PDB)
     1.4. Detect Heavy Metals /Remove (metals) DONE
         1.4.1 Check for coordination sphere
     1.5. Detect Ligands /Remove (ligands) DONE
