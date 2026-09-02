@@ -162,7 +162,7 @@ class StructureData():
                     self.meta[fin] = self.headers[org]
         if self.biounit:
             self.meta['biounit'] = self.biounit
-        if self.meta['entry_id'] == 'XXXX' or self.meta['entry_id'] == 'User':  # Recovering PDB id for Assemblies
+        if self.meta['entry_id'] in ('XXXX', 'User'):  # Recovering PDB id for Assemblies
             self.meta['entry_id'] = self.st.id
         # Missing fields from AF entries
         if 'title' not in self.meta:
@@ -220,13 +220,16 @@ class StructureData():
             if res.get_parent().get_parent().id > 0:
                 continue
             res_label = ''
-            if not self.no_network:
+            if self.no_network:
+                print(mu.residue_id(res))
+            else:
                 res_label = mu.fetch_residue_name_by_id(res.get_resname())
                 if len(self.st) > 1:
                     res_id = f"{mu.residue_id(res, False)}/*"
                 else:
                     res_id = mu.residue_id(res)
                 print(f"{res_id} ({res_label})")
+            
 
     def print_hetatm_stats(self):
         '''Print statistics on HETATM'''
