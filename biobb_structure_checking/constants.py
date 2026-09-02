@@ -111,8 +111,8 @@ CMD_LINE.add_argument(
     '--file_format',
     dest='file_format',
     help='Format for retrieving remote structures '
-         '(mmCif(=cif, default)|pdb|xml)',
-    choices=['mmCif', 'pdb', 'cif', 'xml']
+         '(mmCif(=cif, default)|pdb)',
+    choices=['mmCif', 'pdb', 'cif']
 )
 
 CMD_LINE.add_argument(

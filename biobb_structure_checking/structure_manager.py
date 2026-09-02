@@ -46,7 +46,7 @@ from biobb_structure_checking.mutation_manager import MutationManager, MutationS
 
 MODELLER_ENV_VAR = 'KEY_MODELLER10v4'
 ACCEPTED_FORMATS = ['mmCif', 'cif', 'pdb', 'pqr', 'pdbqt']
-ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb', 'xml']
+ACCEPTED_REMOTE_FORMATS = ['mmCif', 'cif', 'pdb']
 
 class StructureManager:
     """ Main Class wrapping Bio.PDB structure object

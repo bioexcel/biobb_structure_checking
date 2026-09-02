@@ -87,8 +87,7 @@ class MMBPDBList(PDBList):
         final = {
             'pdb': '%s.pdb',
             'mmCif': '%s.cif',
-            'cif': '%s.cif',
-            'xml': '%s.xml'
+            'cif': '%s.cif'
         }
 
         final_file = os.path.join(path, final[file_format] % code)
