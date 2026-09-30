@@ -1,3 +1,9 @@
+## v3.16.4 (2026.4)
+### Extended functions
+### Big Fixes
+- sequences
+  - Fixed sequence mismatches check when no canonical sequence is available
+
 ## v3.16.3 (2026.3)
 ### Extended functions
 - altloc
