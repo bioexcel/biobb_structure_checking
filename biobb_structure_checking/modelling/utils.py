@@ -159,9 +159,12 @@ def fetch_residue_name_by_id(res_id):
     ''' Fetch residue name from monomers API, with caching '''
     if res_id in MONOMER_NAME_CACHE:
         return MONOMER_NAME_CACHE[res_id]
-    with urllib.request.urlopen(f"{MONOMERS_API_PREFIX}{res_id}/entry", timeout=10) as response:
-        residue_data = json.load(response)
-    name = residue_data.get('name', '').replace(res_id, '', 1).strip()
+    try:
+        with urllib.request.urlopen(f"{MONOMERS_API_PREFIX}{res_id}/entry", timeout=10) as response:
+            residue_data = json.load(response)
+            name = residue_data.get('name', '').replace(res_id, '', 1).strip()
+    except (urllib.error.URLError, json.JSONDecodeError):
+        name = ''   
     MONOMER_NAME_CACHE[res_id] = name
     return name
 
