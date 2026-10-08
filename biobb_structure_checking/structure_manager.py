@@ -1267,6 +1267,8 @@ class StructureManager:
 
         modif_residues = []
 
+        model_idx = _model_indices(sequence_data.data[mod_id][ch_id]['pdb']['frgs'], list_res)
+
         for i in range(0, len(sequence_data.data[mod_id][ch_id]['pdb']['frgs']) - 1):
             loc_i = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i].features[0].location
             loc_ii = sequence_data.data[mod_id][ch_id]['pdb']['frgs'][i + 1].features[0].location
@@ -1277,8 +1279,6 @@ class StructureManager:
             gap_end = loc_ii.start
             # Gap length taken from sequence gap to avoid PDB numbering issues
             gap_length = seq_ii.start - seq_i.end - 1
-            # Offset to account for breaks in PDB residue numbering
-            seq_off_i_ii = gap_end - seq_ii.start - gap_start + seq_i.end
 
             if [self.st[mod_id][ch_id][gap_start], self.st[mod_id][ch_id][gap_end]] not in brk_list:
                 # Checking for incomplete gap build needed for fixing side chains with rebuild
@@ -1313,13 +1313,13 @@ class StructureManager:
             new_ch_id = new_st[0].child_list[0].id
 
             for nres in range(loc_i.start, loc_i.end):
-                mod_nres = nres - offset + 1
+                mod_nres = model_idx[nres]
                 if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
                     moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
             for nres in range(loc_ii.start, loc_ii.end):
-                mod_nres = nres - offset + 1 - seq_off_i_ii
+                mod_nres = model_idx[nres]
                 if nres in self.st[mod_id][ch_id] and\
                         'CA' in self.st[mod_id][ch_id][nres] and\
                         mod_nres in new_st[0][new_ch_id]:
@@ -1337,18 +1337,20 @@ class StructureManager:
                 pos += 1
 
             res_pairs = []
-            for nres in range(gap_start - extra_gap, gap_start + gap_length + 1):
-                res_pairs.append([nres, nres - offset + 1])
+            for nres in range(gap_start - extra_gap, gap_start + 1):
+                res_pairs.append([(' ', nres, ' '), model_idx[nres]])
+            for k, res_id in enumerate(_missing_res_ids(gap_start, gap_end, gap_length), 1):
+                res_pairs.append([res_id, model_idx[gap_start] + k])
             for nres in range(gap_end, gap_end + extra_gap + 1):
-                res_pairs.append([nres, nres - offset + 1 - seq_off_i_ii])
+                res_pairs.append([(' ', nres, ' '), model_idx[nres]])
 
-            for res_pair in res_pairs:
-                nres, mod_nres = res_pair
-                if nres in self.st[mod_id][ch_id]:
-                    self.remove_residue(self.st[mod_id][ch_id][nres], update_int=False)
+            for res_id, mod_nres in res_pairs:
+                nres = res_id[1]
+                if res_id in self.st[mod_id][ch_id]:
+                    self.remove_residue(self.st[mod_id][ch_id][res_id], update_int=False)
 
                 res = new_st[0][new_ch_id][mod_nres].copy()
-                res.id = (' ', nres, ' ')
+                res.id = res_id
                 self.st[mod_id][ch_id].insert(pos, res)
                 pos += 1
                 if nres < gap_start or nres > gap_end:
@@ -1356,7 +1358,7 @@ class StructureManager:
                 else:
                     print(f"  Adding {mu.residue_id(res)}")
 
-                modif_residues.append(self.st[mod_id][ch_id][nres])
+                modif_residues.append(self.st[mod_id][ch_id][res_id])
 
             print()
 
@@ -1803,6 +1805,37 @@ class StructureManager:
 
 
 # ===============================================================================
+def _model_indices(frgs, residues):
+    """ Index in the Modeller model of every residue number of the structure.
+
+        The model follows the canonical sequence, the structure its own numbering,
+        that may skip numbers or have insertion codes, so the residues are matched
+        by their order in the fragments (features[2] is the canonical position).
+    """
+    seq0 = frgs[0].features[2].location.start
+    model_idx = {}
+    for frg in frgs:
+        loc = frg.features[0].location
+        nums = [res.id[1] for res in residues if loc.start <= res.id[1] <= loc.end]
+        for k, num in enumerate(nums):
+            model_idx[num] = frg.features[2].location.start + k - seq0 + 1
+    return model_idx
+
+
+def _missing_res_ids(gap_start, gap_end, gap_length):
+    """ Residue ids for the residues missing between two residue numbers.
+        The sequence may have more missing residues than free numbers in the
+        structure, the last ones get an insertion code on the last free number.
+        If the ends are not a real gap (rebuilding a residue, gap_end <= gap_start)
+        the numbers following gap_start are used """
+    free_numbers = gap_end - gap_start - 1 if gap_end > gap_start else gap_length
+    return [
+        (' ', gap_start + k, ' ') if k <= free_numbers
+        else (' ', gap_end - 1, chr(ord('A') + k - free_numbers - 1))
+        for k in range(1, gap_length + 1)
+    ]
+
+
 def _guess_modeller_env():
     """ Guessing Modeller version from conda installation if available """
     import subprocess
