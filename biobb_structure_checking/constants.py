@@ -520,6 +520,14 @@ DIALOGS.add_option(
 )
 DIALOGS.add_option(
     'backbone',
+    '--fix_known',
+    'fix_known',
+    'Optimize only the missing residues with Modeller, '
+    'the residues in the structure keep their coordinates',
+    'bool'
+)
+DIALOGS.add_option(
+    'backbone',
     '--no_recheck',
     'no_recheck',
     'Do not re-check after modification',

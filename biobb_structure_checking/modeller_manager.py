@@ -4,6 +4,7 @@
     to optimize side chain orientation
 """
 
+import re
 import sys
 import os
 from os.path import join as opj
@@ -25,7 +26,7 @@ except ImportError:
     has_IUPAC = False
 
 try:
-    from modeller import Environ, log
+    from modeller import Environ, Selection, log
     from modeller.automodel import AutoModel, assess
 except ImportError:
     sys.exit("Error importing Modeller package")
@@ -57,7 +58,7 @@ class ModellerManager():
         self.env.io.atom_files_directory = [self.tmpdir]
         log.none()
 
-    def build(self, target_model, target_chain, extra_NTerm_res):
+    def build(self, target_model, target_chain, extra_NTerm_res, fix_known=False):
         """ ModellerManager.build
         Prepare Modeller input and builds the model
 
@@ -66,6 +67,8 @@ class ModellerManager():
             target_chain (str) : Chain to repair
             extra_NTerm_res (int) : Number of additional residues
                 at NTerm (to fix NTerm, experimental)
+            fix_known (bool) : Optimize only the missing internal segments, the
+                residues in the structure keep their coordinates
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
@@ -84,6 +87,7 @@ class ModellerManager():
 
         templs = []
         knowns = []
+        gaps = []
         for ch_id in self.sequences.data[target_model][target_chain]['chains']:
             frgs = self.sequences.data[target_model][ch_id]['pdb']['frgs']
             pdb_seq = frgs[0].seq
@@ -101,6 +105,11 @@ class ModellerManager():
                 pdb_seq = Seq(alin[0][1], IUPAC.protein)
             else:
                 pdb_seq = Seq(alin[0][1])
+
+            if ch_id == target_chain:
+                # (first, last) residues of every internal gap
+                gaps = [(m.start() + 1, m.end()) for m in re.finditer('-+', str(pdb_seq))
+                        if 0 < m.start() and m.end() < len(pdb_seq)]
 
             templs.append(
                 SeqRecord(
@@ -121,10 +130,11 @@ class ModellerManager():
 
         _write_align(tgt_seq, templs, alin_file)
 
-        return self._automodel_run(alin_file, knowns)
+        return self._automodel_run(alin_file, knowns, gaps if fix_known else None)
 
-    def _automodel_run(self, alin_file, knowns):
-        amdl = AutoModel(
+    def _automodel_run(self, alin_file, knowns, gaps=None):
+        model_class = AutoModel if gaps is None else _gap_model_class(gaps)
+        amdl = model_class(
             self.env,
             alnfile=alin_file,
             knowns=knowns,
@@ -149,6 +159,16 @@ class ModellerManager():
             shutil.rmtree(self.tmpdir)
         else:
             print(f"Using temporary folder: {self.tmpdir}")
+
+
+# Refining only part of the model: https://salilab.org/modeller/10.8/manual/node23.html
+def _gap_model_class(gaps):
+    """ AutoModel optimizing only the residues of the gaps, so the rest of the
+        model keeps the coordinates of the template """
+    class _GapAutoModel(AutoModel):
+        def select_atoms(self):
+            return Selection(*[self.residues[first - 1:last] for first, last in gaps])
+    return _GapAutoModel
 
 
 def _write_align(tgt_seq, templs, alin_file):

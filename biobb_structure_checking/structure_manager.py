@@ -1148,7 +1148,8 @@ class StructureManager:
             self,
             brk_list: Iterable[Atom],
             modeller_key: str = '',
-            extra_gap: int = 0
+            extra_gap: int = 0,
+            fix_known: bool = False
         ) -> str:
         """ Fixes backbone breaks using Modeller """
         ch_to_fix = set()
@@ -1157,7 +1158,8 @@ class StructureManager:
 
         modeller_result = self.run_modeller(
             ch_to_fix, brk_list, modeller_key,
-            extra_gap, extra_NTerm=0
+            extra_gap, extra_NTerm=0,
+            fix_known=fix_known
         )
 
         self.update_internals()
@@ -1171,7 +1173,8 @@ class StructureManager:
             modeller_key='',
             extra_gap: int = 0,
             extra_NTerm: int = 0,
-            sequence_data=None
+            sequence_data=None,
+            fix_known: bool = False
     ):
         """ Runs modeller
             Args:
@@ -1180,6 +1183,7 @@ class StructureManager:
                 *modeller_key* (str): Modeller license key (optional). If not used Modeller installation license will be used.
                 *extra_gap* (int): Additional residues to be taked either side of the gap. Use when obtained model have too long peptide distances (optional, default:0)
                 *extra_NTerm* (int): Additional residues to be modelled on the N Terminus
+                *fix_known* (bool): Optimize only the missing residues, the ones in the structure keep their coordinates (optional, default:False)
                 *sequence_Data* (SequenceData): SequenceData object containing canonical and structure sequences
                 *templates* (list(structures)): Structures to be used as additional templates.
         """
@@ -1219,7 +1223,7 @@ class StructureManager:
                 print(f"Fixing chain/model {ch_id}/{mod.id}")
 
                 try:
-                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm)
+                    model_pdb = mod_mgr.build(mod.id, ch_id, extra_NTerm, fix_known)
                 except NoCanSeqError as err:
                     print(err.message)
                     continue
