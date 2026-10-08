@@ -96,15 +96,22 @@ class ModellerManager():
                 pdb_seq += frag_seq
             # tuned to open gaps on missing loops only
 
-            if not OLD_ALIGN:
-                alin = self.sequences.aligner.align(tgt_seq, pdb_seq)
-            else:
-                alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+            # The chain to fix is placed according to the canonical position of its
+            # fragments, an alignment may shift the gaps in low complexity regions
+            aligned_seq = None
+            if ch_id == target_chain:
+                aligned_seq = _place_fragments(frgs, len(tgt_seq), nt_pos)
+            if aligned_seq is None:
+                if not OLD_ALIGN:
+                    alin = self.sequences.aligner.align(tgt_seq, pdb_seq)
+                else:
+                    alin = pairwise2.align.globalxs(tgt_seq, pdb_seq, -5, -1)
+                aligned_seq = alin[0][1]
 
             if has_IUPAC:
-                pdb_seq = Seq(alin[0][1], IUPAC.protein)
+                pdb_seq = Seq(aligned_seq, IUPAC.protein)
             else:
-                pdb_seq = Seq(alin[0][1])
+                pdb_seq = Seq(aligned_seq)
 
             if ch_id == target_chain:
                 # (first, last) residues of every internal gap
@@ -159,6 +166,25 @@ class ModellerManager():
             shutil.rmtree(self.tmpdir)
         else:
             print(f"Using temporary folder: {self.tmpdir}")
+
+
+def _place_fragments(frgs, length, offset):
+    """ Place the fragments in their canonical position, filling the gaps with '-'
+
+        Args:
+            frgs: fragments of the chain, their features[2] hold the canonical position
+            length (int): length of the target sequence
+            offset (int): residues trimmed from the start of the canonical sequence
+    """
+    placed = ['-'] * length
+    for frg in frgs:
+        first = int(frg.features[2].location.start) - 1 - offset
+        seq = str(frg.seq)
+        if first < 0 or first + len(seq) > length or \
+                set(placed[first:first + len(seq)]) != {'-'}:
+            return None
+        placed[first:first + len(seq)] = seq
+    return ''.join(placed)
 
 
 # Refining only part of the model: https://salilab.org/modeller/10.8/manual/node23.html
