@@ -1330,19 +1330,23 @@ class StructureManager:
             spimp.set_atoms(fixed_ats, moving_ats)
             spimp.apply(new_st.get_atoms())
 
-            # Find position if the 1st residue in the internal residue list
-            pos = 0
-            while pos < len(list_res) and\
-                    self.st[mod_id][ch_id].child_list[pos].id[1] != gap_start - extra_gap:
-                pos += 1
-
+            # Residues to take from the model, the padding of close gaps may include
+            # numbers that are not in the structure
             res_pairs = []
             for nres in range(gap_start - extra_gap, gap_start + 1):
-                res_pairs.append([(' ', nres, ' '), model_idx[nres]])
+                if nres in model_idx:
+                    res_pairs.append([(' ', nres, ' '), model_idx[nres]])
             for k, res_id in enumerate(_missing_res_ids(gap_start, gap_end, gap_length), 1):
                 res_pairs.append([res_id, model_idx[gap_start] + k])
             for nres in range(gap_end, gap_end + extra_gap + 1):
-                res_pairs.append([(' ', nres, ' '), model_idx[nres]])
+                if nres in model_idx:
+                    res_pairs.append([(' ', nres, ' '), model_idx[nres]])
+
+            # Find position if the 1st residue in the internal residue list
+            pos = 0
+            while pos < len(list_res) and\
+                    self.st[mod_id][ch_id].child_list[pos].id[1] != res_pairs[0][0][1]:
+                pos += 1
 
             for res_id, mod_nres in res_pairs:
                 nres = res_id[1]
@@ -1362,7 +1366,8 @@ class StructureManager:
 
             print()
 
-        return modif_residues
+        # Residues replaced by the padding of a later gap are no longer in the structure
+        return [res for res in modif_residues if res.get_parent() is not None]
 
     def add_main_chain_caps(self, caps_list: Iterable[Iterable[str]]) -> List[str]:
         """ Adds ACE and NME caps """
