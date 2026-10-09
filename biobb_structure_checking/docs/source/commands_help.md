@@ -78,11 +78,12 @@ Commands to detect and fix possible structure errors.
 * Checks generated clashes unless **--no_check_clashes** set
 * **--rebuild**  Rebuild complete side chain using Modeller
 
-**backbone** [--fix_atoms All|None|Residue List] [--fix_chain All|None|Break list] [--add_caps All|None|Break list] [--extra_gap]        [--no_recheck] [--no_check_clashes] - _Analyze main chain missing atoms and fragments (protein only)_
+**backbone** [--fix_atoms All|None|Residue List] [--fix_chain All|None|Break list] [--add_caps All|None|Break list] [--extra_gap] [--fix_known] [--no_recheck] [--no_check_clashes] - _Analyze main chain missing atoms and fragments (protein only)_
 * **--fix_atoms** Add missing O, OXT backbone atoms.
 * **--fix_chain** Missing fragments filled using comparative modelling (Modeller License needed)
 * **--add_caps** Add ACE and NME residues as necessary, preserving existing atoms
 * **--extra_gap** (Experimental) Recovers additional residues from model structure at either side of the break, helps to fix loop connections.
+* **--fix_known** Optimize only the missing residues with Modeller, the residues in the structure keep their coordinates.
 * Backbone is rechecked on each op unless **--no_recheck** is set. Use on non-interactive.
 * Generated clashes are checked unless **--no_check_clashes**
 
