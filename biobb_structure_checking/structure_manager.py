@@ -1821,9 +1821,10 @@ def _model_indices(frgs, residues):
     model_idx = {}
     for frg in frgs:
         loc = frg.features[0].location
-        nums = [res.id[1] for res in residues if loc.start <= res.id[1] <= loc.end]
-        for k, num in enumerate(nums):
-            model_idx[num] = frg.features[2].location.start + k - seq0 + 1
+        frg_res = [res for res in residues if loc.start <= res.id[1] <= loc.end]
+        for k, res in enumerate(frg_res):
+            if res.id[2] == ' ':   # residues with insertion code share the number
+                model_idx[res.id[1]] = frg.features[2].location.start + k - seq0 + 1
     return model_idx
 
 

@@ -21,6 +21,7 @@ def test_model_indices_insertion_codes():
     """ Kabat numbering (3V6F chain A): 52A and 82A-C are residues of their own """
     ids = [(51, ' '), (52, ' '), (52, 'A'), (53, ' '), (82, ' '), (82, 'A'), (82, 'B'), (82, 'C'), (83, ' ')]
     idx = _model_indices([fragment(51, 83, 1)], residues(*ids))
+    assert idx[52] == 2   # 52A does not overwrite 52
     assert idx[53] == 4   # not 3: 52A comes before
     assert idx[83] == 9   # not 6
 
