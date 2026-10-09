@@ -115,7 +115,8 @@ def fix(strcheck, opts, fix_data=None):
             opts['fix_chain'],
             fix_data['bck_breaks_list'],
             strcheck.args['modeller_key'],
-            opts['extra_gap']
+            opts['extra_gap'],
+            bool(opts['fix_known'])
         )
         if not fixed_main:
             fix_done = True
@@ -183,7 +184,7 @@ def fix(strcheck, opts, fix_data=None):
     return False
 
 
-def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, extra_gap):
+def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, extra_gap, fix_known=False):
     print("Main chain fixes")
 
     brk_rnums = [
@@ -247,7 +248,7 @@ def _backbone_fix_main_chain(strcheck, fix_main_bck, breaks_list, modeller_key, 
         if f"({mu.residue_num(rpair[0])}-{mu.residue_num(rpair[1])})".replace(' ', '')\
             in fix_main_bck.split(',') or input_option == 'all'
     ]
-    return strcheck.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap)
+    return strcheck.strucm.fix_backbone_chain(to_fix, modeller_key, extra_gap, fix_known)
 
 
 def _backbone_add_caps(strcheck, add_caps, bck_breaks_list):
