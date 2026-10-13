@@ -23,11 +23,12 @@ def check(strcheck):
     }
     if strcheck.strucm.sequence_data.has_canonical[0]:
         mismatches = strcheck.strucm.sequence_data.compare_sequences(strcheck.strucm)
+
         if mismatches:
             print(f"Found {len(mismatches)} mismatch(es)")
-            for chain_id, mismatch in mismatches.items():
+            for ch_id, mismatch in mismatches.items():
                 print(
-                    f"Chain {chain_id}\n"
+                    f"Chain {ch_id}\n"
                     f"{mismatch['canonical']}\n"
                     f"{mismatch['structure']}"
                 )
