@@ -756,7 +756,8 @@ class StructureChecking():
                     * **residue_list** - Indicated terminals
                     * **breaks** - Add caps to backbone breaks
                     * **terms** - Add caps to true terminals
-                * extra_gap (int) - ('0') Recover addiciontal residues from the model to improve match (experimental)
+                * extra_gap (int) - ('0') Recover additional residues from the model to improve match (experimental)
+                * fix_known (bool) - (False) Optimize only the missing residues, the ones in the structure keep their coordinates
                 * no_recheck (bool) - (False) Do not recheck backbone after fixing
                 * no_check_clashes (bool) - (False) Do not check for generated clashes
         """
