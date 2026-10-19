@@ -56,9 +56,19 @@
  "mutateside_clashes": {
   "apolar": [
    {
-    "at1": "ILE A49.CD1",
-    "at2": "ILE A143.CD1",
-    "dist": 2.8151
+    "at1": "THR A48.CG2",
+    "at2": "THR A350.O",
+    "dist": 2.4721
+   },
+   {
+    "at1": "ILE A49.CG2",
+    "at2": "ILE A358.CD1",
+    "dist": 2.7474
+   },
+   {
+    "at1": "THR B48.CG2",
+    "at2": "THR B350.O",
+    "dist": 2.5252
    }
   ],
   "negative": [],

@@ -1,8 +1,14 @@
 ## v3.16.4 (2026.4)
 ### Extended functions
+- backbone
+  - Added --fix_known to optimize only the missing residues with Modeller, the residues in the structure keep their coordinates
 ### Big Fixes
 - sequences
   - Fixed sequence mismatches check when no canonical sequence is available
+- backbone
+  - Fixed gaps shifted in repeated residues when modelling with Modeller, fragments are now placed by their canonical position
+  - Fixed residue matching of Modeller models with insertion codes or skipped residue numbers
+  - Fixed errors with --extra_gap on close gaps
   
 ## v3.16.3 (2026.3)
 ### Extended functions
