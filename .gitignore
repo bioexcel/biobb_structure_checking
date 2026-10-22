@@ -4,9 +4,10 @@ __pycache__/
 
 #Python compiled
 *.pyc
-
+*.egg-info
 .ipynb_checkpoints
 .vscode
 .idea
 
+build/
 tmpPDB

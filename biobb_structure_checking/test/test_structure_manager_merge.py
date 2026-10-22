@@ -1,7 +1,7 @@
 """ Unit tests for the residue matching of StructureManager.merge_structure, run with pytest """
 from types import SimpleNamespace
 
-from biobb_structure_checking.structure_manager import _missing_res_ids, _model_indices
+from biobb_structure_checking.structure_manager import _missing_res_ids, _model_indices, _numbered_pairs
 
 
 def fragment(pdb_first, pdb_last, seq_first):
@@ -26,6 +26,16 @@ def test_model_indices_insertion_codes():
     assert idx[83] == 9   # not 6
 
 
+def test_numbered_pairs_skip_numbering_holes():
+    """ 3V6F chain A: Kabat numbering jumps 104 -> 105G -> 106, 105 has no model index
+        (the gap at 132-139 was left unrepaired with a KeyError) """
+    ids = [(103, ' '), (104, ' '), (105, 'G'), (105, 'H'), (106, ' ')]
+    frg = fragment(103, 106, 1)
+    idx = _model_indices([frg], residues(*ids))
+    assert 105 not in idx
+    assert _numbered_pairs(frg.features[0].location, idx) == [(103, 1), (104, 2)]
+
+
 def test_model_indices_numbering_shift():
     """ 1F45 chain B: the numbers jump 74 -> 79 but the sequence misses 5 residues """
     ids = [(73, ' '), (74, ' '), (79, ' '), (80, ' ')]
@@ -46,3 +56,4 @@ def test_missing_res_ids_overflow_gets_insertion_code():
 def test_missing_res_ids_no_real_gap():
     """ Rebuilding a residue (fixside --rebuild) calls the merge with gap_end == gap_start """
     assert _missing_res_ids(155, 155, 3) == [(' ', 156, ' '), (' ', 157, ' '), (' ', 158, ' ')]
+

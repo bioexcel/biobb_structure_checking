@@ -1312,14 +1312,12 @@ class StructureManager:
             # checking whether there is a chain id in the model (Support for Modeller >= 10)
             new_ch_id = new_st[0].child_list[0].id
 
-            for nres in range(loc_i.start, loc_i.end):
-                mod_nres = model_idx[nres]
+            for nres, mod_nres in _numbered_pairs(loc_i, model_idx):
                 if nres in self.st[mod_id][ch_id] and mod_nres in new_st[0][new_ch_id]:
                     fixed_ats.append(self.st[mod_id][ch_id][nres]['CA'])
                     moving_ats.append(new_st[0][new_ch_id][mod_nres]['CA'])
 
-            for nres in range(loc_ii.start, loc_ii.end):
-                mod_nres = model_idx[nres]
+            for nres, mod_nres in _numbered_pairs(loc_ii, model_idx):
                 if nres in self.st[mod_id][ch_id] and\
                         'CA' in self.st[mod_id][ch_id][nres] and\
                         mod_nres in new_st[0][new_ch_id]:
@@ -1826,6 +1824,17 @@ def _model_indices(frgs, residues):
             if res.id[2] == ' ':   # residues with insertion code share the number
                 model_idx[res.id[1]] = frg.features[2].location.start + k - seq0 + 1
     return model_idx
+
+
+def _numbered_pairs(loc, model_idx):
+    """ (structure number, model index) of the fragment residues in loc. Numbers
+        skipped by the structure numbering (e.g. Kabat, 3V6F chain A lacks 105)
+        have no model index and are left out """
+    return [
+        (nres, model_idx[nres])
+        for nres in range(loc.start, loc.end)
+        if nres in model_idx
+    ]
 
 
 def _missing_res_ids(gap_start, gap_end, gap_length):
