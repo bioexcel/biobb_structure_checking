@@ -31,6 +31,8 @@ try:
 except ImportError:
     sys.exit("Error importing Modeller package")
 
+from biobb_structure_checking.modelling.utils import PROTEIN
+
 TMP_BASE_DIR = '/tmp'
 DEBUG = False
 
@@ -68,7 +70,8 @@ class ModellerManager():
             extra_NTerm_res (int) : Number of additional residues
                 at NTerm (to fix NTerm, experimental)
             fix_known (bool) : Optimize only the missing internal segments, the
-                residues in the structure keep their coordinates
+                residues in the structure keep their coordinates. The other protein
+                chains join the model too, so the segments are rebuilt around them
         """
         alin_file = opj(self.tmpdir, "alin.pir")
 
@@ -118,22 +121,33 @@ class ModellerManager():
                 gaps = [(m.start() + 1, m.end()) for m in re.finditer('-+', str(pdb_seq))
                         if 0 < m.start() and m.end() < len(pdb_seq)]
 
-            templs.append(
-                SeqRecord(
-                    pdb_seq,
-                    f"templ{ch_id}",
-                    "",
-                    f"structureX:{self.templ_file}:"
-                    f"{frgs[0].features[0].location.start}:"
-                    f"{ch_id}:{frgs[-1].features[0].location.end}:"
-                    f"{ch_id}:::-1.00: -1.00",
-                    annotations={'molecule_type': 'protein'}  # required for writing PIR aligment
-                )
-            )
+            templs.append(_template(pdb_seq, f'templ{ch_id}', self.templ_file, ch_id, frgs))
             knowns.append(f'templ{ch_id}')
 
             if ch_id == target_chain:
                 tgt_seq = tgt_seq[0:len(pdb_seq)]
+
+        if fix_known:
+            # The other protein chains join the model, one segment and one template
+            # each, so the gaps, the only residues that move, are rebuilt around them.
+            # The file is saved before any chain is fixed: their own gaps stay open
+            others = [(ch_id, data['pdb']['frgs'])
+                      for ch_id, data in self.sequences.data[target_model].items()
+                      if ch_id != target_chain and data.get('pdb', {}).get('type') == PROTEIN]
+            segments = [str(tgt_seq)] + [''.join(str(frg.seq) for frg in frgs) for _, frgs in others]
+
+            def row(index, seq):
+                """ seq in segment index, gaps in every other segment """
+                return Seq('/'.join(str(seq) if i == index else '-' * len(segment)
+                                    for i, segment in enumerate(segments)))
+
+            for templ in templs:
+                templ.seq = row(0, templ.seq)
+            for index, (ch_id, frgs) in enumerate(others, 1):
+                templs.append(_template(row(index, segments[index]), f'env{ch_id}',
+                                        self.templ_file, ch_id, frgs))
+                knowns.append(f'env{ch_id}')
+            tgt_seq = Seq('/'.join(segments))
 
         _write_align(tgt_seq, templs, alin_file)
 
@@ -195,6 +209,20 @@ def _gap_model_class(gaps):
         def select_atoms(self):
             return Selection(*[self.residues[first - 1:last] for first, last in gaps])
     return _GapAutoModel
+
+
+def _template(seq, name, templ_file, ch_id, frgs):
+    """ Template record of the chain ch_id of templ_file, its fragments frgs """
+    return SeqRecord(
+        seq,
+        name,
+        "",
+        f"structureX:{templ_file}:"
+        f"{frgs[0].features[0].location.start}:"
+        f"{ch_id}:{frgs[-1].features[0].location.end}:"
+        f"{ch_id}:::-1.00: -1.00",
+        annotations={'molecule_type': 'protein'}  # required for writing PIR aligment
+    )
 
 
 def _write_align(tgt_seq, templs, alin_file):
