@@ -1,5 +1,5 @@
 ================================================================================
-=                   BioBB structure checking utility v3.16.3                   =
+=                   BioBB structure checking utility v3.16.4                   =
 =            P. Andrio, A. Hospital, G. Bayarri, J.L. Gelpi 2018-26            =
 ================================================================================
 
@@ -35,7 +35,7 @@ Structure sequence
 TTCCPSIVARSNFNVCRLPGTSEAICATYTGCIIIPGATCPGDYAN
 
 Found 1 mismatch(es)
-Chain A/0
+Chain A
 ---------------------P--L---------------------
 ---------------------S--I---------------------
 Sequences written on 3nir_sequences.fasta
