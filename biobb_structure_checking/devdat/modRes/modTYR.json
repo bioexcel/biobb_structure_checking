@@ -1,0 +1,366 @@
+MongoDB shell version v4.0.24
+connecting to: mongodb://mdb-login.bsc.es:27017/FlexPortal?authSource=admin&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("f3aa03af-897a-4dc0-8d20-aedbc79aa337") }
+MongoDB server version: 4.4.5
+WARNING: shell and server versions do not match
+{
+	"_id" : "0PR",
+	"name" : "N-({3-hydroxy-2-methyl-5-[(phosphonooxy)methyl]pyridin-4-yl}methyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "0A1",
+	"name" : "O-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "0EA",
+	"name" : "(betaR)-beta,3-dihydroxy-N-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "0WZ",
+	"name" : "3-(1H-pyrazol-1-yl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "1OP",
+	"name" : "O-(5-hydroxypentyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "1TY",
+	"name" : "3-{(3E)-4-HYDROXY-6-OXO-3-[(2-PHENYLETHYL)IMINO]CYCLOHEXA-1,4-DIEN-1-YL}ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "2LT",
+	"name" : "3,5-dichloro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "2R3",
+	"name" : "(betaR)-beta-hydroxy-O-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "2TY",
+	"name" : "2-HYDROXY-5-{[(1E)-2-PHENYLETHYLIDENE]AMINO}-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "3CT",
+	"name" : "3-chloro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "3MY",
+	"name" : "3-chloro-D-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "3NF",
+	"name" : "N-acetyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "3YM",
+	"name" : "3-methoxy-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "4BF",
+	"name" : "4-BROMO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "4HL",
+	"name" : "(6E)-4-[(2S)-2-amino-2-carboxyethyl]-6-[2-(4-hydroxybenzyl)hydraziniumylidene]-3-oxocyclohexa-1,4-dien-1-olate",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "4LZ",
+	"name" : "O-[2-(triaza-1,2-dien-2-ium-1-yl)ethyl]-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "51T",
+	"name" : "2,3,6-trifluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "73O",
+	"name" : "(2~{S})-2-azanyl-4-(4-hydroxyphenyl)butanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "AGQ",
+	"name" : "3-[(3E)-3-(carbamimidoylhydrazono)-4-hydroxy-6-oxocyclohexa-1,4-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "AZY",
+	"name" : "3-AZIDO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "B3Y",
+	"name" : "(3S)-3-AMINO-4-(4-HYDROXYPHENYL)BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "BYR",
+	"name" : "3-bromo-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "DBY",
+	"name" : "3,5 DIBROMOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "DI7",
+	"name" : "2,6-dimethyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "DPQ",
+	"name" : "(S)-2-AMINO-3-(4-HYDROXY-3-OXOCYCLOHEXA-1,4-DIENYL)PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "ESB",
+	"name" : "3-[(3E)-3-(ETHYLIMINO)-4-HYDROXY-6-OXOCYCLOHEXA-1,4-DIEN-1-YL]-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "F7Q",
+	"name" : "(2~{S})-2-azanyl-3-[1-(dioxidanyl)-4-oxidanylidene-cyclohexa-2,5-dien-1-yl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "FLT",
+	"name" : "FLUOROMALONYL TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "FTY",
+	"name" : "DEOXY-DIFLUOROMETHELENE-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "FY2",
+	"name" : "2,3-difluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "FY3",
+	"name" : "2,3,5-trifluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "IYR",
+	"name" : "3-IODO-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "MDF",
+	"name" : "META, META'-DI-HYDROXY-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "MBQ",
+	"name" : "2-HYDROXY-5-({1-[(4-METHYLPHENOXY)METHYL]-3-OXOPROP-1-ENYL}AMINO)-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "MTY",
+	"name" : "META-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "NBQ",
+	"name" : "2-HYDROXY-5-({1-[(2-NAPHTHYLOXY)METHYL]-3-OXOPROP-1-ENYL}AMINO)TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "NIY",
+	"name" : "META-NITRO-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "OMX",
+	"name" : "(betaR)-beta-hydroxy-L-Tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "NTR",
+	"name" : "META-HYDROXY BETA NOR-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "NTY",
+	"name" : "BETA NOR-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "OMY",
+	"name" : "(betaR)-3-chloro-beta-hydroxy-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "P3Q",
+	"name" : "2-hydroxy-5-{[(1E)-1-(2-oxoethylidene)-4-phenylbutyl]amino}-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "P2Q",
+	"name" : "2-hydroxy-5-{[(1S,2E)-1-formyl-4-phenoxybut-2-en-1yl]amino}-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "PAQ",
+	"name" : "2-OXY-4-HYDROXY-5-(2-HYDRAZINOPYRIDINE)PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "PTH",
+	"name" : "CE1-METHYLENE-HYDROXY-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "PTM",
+	"name" : "ALPHA-METHYL-O-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "PTR",
+	"name" : "O-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "STY",
+	"name" : "TYROSINE-O-SULPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "T0I",
+	"name" : "(2S)-2-amino-3-(2,4-dihydroxy-5-imidazol-1-yl-phenyl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TCQ",
+	"name" : "(1S,2R)-N-{(1E)-5-[(2S)-2-amino-2-carboxyethyl]-2-hydroxy-4-oxocyclohexa-2,5-dien-1-ylidene}-2-phenylcyclopropanaminium",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TPQ",
+	"name" : "5-(2-CARBOXY-2-AMINOETHYL)-2-HYDROXY-1,4-BENZOQUINONE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TTS",
+	"name" : "3-((3E)-4-HYDROXY-3-{[2-(4-HYDROXYPHENYL)ETHYL]IMINO}-6-OXOCYCLOHEXA-1,4-DIEN-1-YL)ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY3",
+	"name" : "3-HYDROXY-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY1",
+	"name" : "O-tert-butyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYJ",
+	"name" : "2,5-dihydroxy-N-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TXY",
+	"name" : "3-[(5S)-4,5-dihydroxycyclohexa-1,3-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY9",
+	"name" : "3,4-bis(hydroperoxy)-5-hydroxy-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYE",
+	"name" : "4-[(2S)-2-amino-3-hydroxypropyl]phenol",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYN",
+	"name" : "AMINOBENZOFURAZAN-O-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY5",
+	"name" : "O-benzyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYO",
+	"name" : "(4Z,6E)-2-AMINO-7-HYDROPEROXY-4-[(E)-2-HYDROXYVINYL]HEPTA-4,6-DIENOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYW",
+	"name" : "(2S)-2-amino-3-(4-hydroxyphenyl)propane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYS",
+	"name" : "O-SULFO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYT",
+	"name" : "TYROSINE DERIVATIVE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY2",
+	"name" : "3-AMINO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYI",
+	"name" : "3,5-DIIODOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TY8",
+	"name" : "2,4-bis(hydroperoxy)-5-hydroxy-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYQ",
+	"name" : "3-AMINO-6-HYDROXY-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "TYY",
+	"name" : "3-(4-HYDROXY-3-IMINO-6-OXO-CYCLOHEXA-1,4-DIENYL)-ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{ "_id" : "TYB", "name" : "TYROSINAL", "mon_nstd_parent_comp_id" : "TYR" }
+{
+	"_id" : "U2X",
+	"name" : "O-(cyclohexylmethyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "YOF",
+	"name" : "3-FLUOROTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+}
+{
+	"_id" : "YPZ",
+	"name" : "3-[(3Z)-4-hydroxy-6-oxo-3-(2-phenylhydrazinylidene)cyclohexa-1,4-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+}

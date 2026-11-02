@@ -1,0 +1,135 @@
+MongoDB shell version v4.0.24
+connecting to: mongodb://mdb-login.bsc.es:27017/FlexPortal?authSource=admin&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("83a6d0fa-c4fa-4bf2-bac8-bbbf2a69c54b") }
+MongoDB server version: 4.4.5
+WARNING: shell and server versions do not match
+{
+	"_id" : "0E5",
+	"name" : "(2S,3R)-2-azanyl-3-methyl-3-oxidanyl-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "26B",
+	"name" : "O-tert-butyl-N-[(3-{[(2,4,6-trimethylphenyl)carbamoyl]amino}naphthalen-2-yl)carbonyl]-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "28X",
+	"name" : "O-[(R)-{[(3R)-3,4-dihydroxybutyl]oxy}(hydroxy)phosphoryl]-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "2QZ",
+	"name" : "N,N-dimethyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "ALO",
+	"name" : "ALLO-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "B27",
+	"name" : "(2R,3S) 3-amino-4-mercapto-2-butanol",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "BMT",
+	"name" : "4-METHYL-4-[(E)-2-BUTENYL]-4,N-METHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "CTH",
+	"name" : "4-CHLOROTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "DBU",
+	"name" : "(2Z)-2-AMINOBUT-2-ENOIC ACID",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "EUP",
+	"name" : "4-amino-L-allothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "NZC",
+	"name" : "N-methylidene-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "OLT",
+	"name" : "O-METHYL-L-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "OTH",
+	"name" : "N,O-dimethyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "T8L",
+	"name" : "Thio-phosohothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "T9E",
+	"name" : "Selenothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TBM",
+	"name" : "4-METHYL-4-[(E)-2-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TH6",
+	"name" : "4-HYDROXY-L-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TH5",
+	"name" : "O-acetyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "THC",
+	"name" : "N-METHYLCARBONYLTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TMD",
+	"name" : "(6,7-DIHYDRO)4-[(E)-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TMB",
+	"name" : "N-METHYL-4-[(E)-2-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TNY",
+	"name" : "(2S,3R)-3-{[(2S,3R,4R,5R,6R)-3-(acetylamino)-4,5-dihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy}-2-aminobutanoic acid (non-preferred name)",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "TPO",
+	"name" : "PHOSPHOTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "YTH",
+	"name" : "O-phosphono-L-allothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "Z3E",
+	"name" : "O-benzyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}
+{
+	"_id" : "ZU0",
+	"name" : "O-tert-butyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+}

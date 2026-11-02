@@ -1,0 +1,361 @@
+MongoDB shell version v4.0.24
+connecting to: mongodb://mdb-login.bsc.es:27017/FlexPortal?authSource=admin&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("0e42a569-5ac3-433b-8345-29d115d41bad") }
+MongoDB server version: 4.4.5
+WARNING: shell and server versions do not match
+{
+	"_id" : "0AH",
+	"name" : "O-(bromoacetyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "1X6",
+	"name" : "O-[(2E)-3-AMINOPROP-2-ENOYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "2JG",
+	"name" : "(2S)-2-amino-3-oxopropyl hexanoate",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "2RX",
+	"name" : "O-thiophosphono-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "2ZC",
+	"name" : "O-{[4-(2-aminoethyl)phenyl]sulfonyl}-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "42Y",
+	"name" : "O-propanoyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "432",
+	"name" : "O-butanoyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "4HJ",
+	"name" : "O-[(R)-hydroxy{[(3R)-3-hydroxy-4-{[3-({2-[(2-hydroxybenzoyl)sulfanyl]ethyl}amino)-3-oxopropyl]amino}-2,2-dimethyl-4-oxobutyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "4HH",
+	"name" : "O-[(S)-hydroxy{[(3R)-3-hydroxy-2,2-dimethyl-4-oxo-4-({3-oxo-3-[(2-sulfanylethyl)amino]propyl}amino)butyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "4OZ",
+	"name" : "methyl N-(2,3-dihydroxybenzoyl)-O-formyl-L-serinate",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "4OV",
+	"name" : "(2R)-2-[(1R)-2-[(2S)-2-amino-2-carboxyethoxy]-1-{[(2R)-2-amino-2-phenylacetyl]amino}-2-oxoethyl]-5-methyl-3,6-dihydro-2H-1,3-thiazine-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "5JP",
+	"name" : "N-methyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "73C",
+	"name" : "(2~{S})-2-azanyl-3-butoxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "8SP",
+	"name" : "O-[(R)-{[(2R)-2,3-bis(octanoyloxy)propyl]oxy}(hydroxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "A9D",
+	"name" : "(2S)-2-amino-2-carboxyethyl 1-carboxy-L-prolyl-L-prolinate",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "AZS",
+	"name" : "O-DIAZOACETYL-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "BG1",
+	"name" : "O-[(2S)-2-{methyl[(methylamino)sulfonyl]amino}pentanoyl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "BSE",
+	"name" : "BETA-3-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "BWB",
+	"name" : "(2~{S})-2-azanyl-3-[(2~{S},5~{R})-3,4,5-tris(oxidanyl)oxan-2-yl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "BXT",
+	"name" : "(2~{S})-2-azanyl-3-[ethyl(methyl)carbamoyl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "CWR",
+	"name" : "(4-methyl-5-oxo-2,5-dihydro-1H-imidazol-1-yl)acetic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "DBS",
+	"name" : "2-(2,3-DIHYDROXY-BENZOYLAMINO)-3-HYDROXY-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "DHA",
+	"name" : "2-AMINO-ACRYLIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "FGP",
+	"name" : "2-AMINO-3-HYDROXY-3-PHOSPHONOOXY-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "GFT",
+	"name" : "(2S)-2-azanyl-3-[cyclohexyloxy(methyl)phosphoryl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "GVL",
+	"name" : "O-[(R)-{[(3R)-4-AMINO-3-HYDROXY-2,2-DIMETHYL-4-OXOBUTYL]OXY}(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "HSL",
+	"name" : "HOMOSERINE LACTONE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "HSE",
+	"name" : "L-HOMOSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "K5L",
+	"name" : "(2~{R})-2-azanyl-3-(3-oxidanyl-3-oxidanylidene-propanoyl)oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "LPS",
+	"name" : "O-{HYDROXY[((2R)-2-HYDROXY-3-{[(1S)-1-HYDROXYPENTADECYL]OXY}PROPYL)OXY]PHOSPHORYL}-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "MC1",
+	"name" : "METHICILLIN ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "MIS",
+	"name" : "MONOISOPROPYLPHOSPHORYLSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "MH6",
+	"name" : "3-hydroxy-2-iminopropanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "MIR",
+	"name" : "Monoethylphosphorylserine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "N10",
+	"name" : "O-[(HEXYLAMINO)CARBONYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "NC1",
+	"name" : "NITROCEFIN ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "OLZ",
+	"name" : "O-(2-aminoethyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "OAS",
+	"name" : "O-ACETYLSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "OMH",
+	"name" : "O-[(S)-hydroxy(methoxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "OSE",
+	"name" : "O-SULFO-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "P5U",
+	"name" : "O-[(4-cyanophenyl)sulfonyl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "PG1",
+	"name" : "PENICILLIN G ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "RZ4",
+	"name" : "O-tert-butyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "RVX",
+	"name" : "O-[methyl(2-methylpropoxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "S1H",
+	"name" : "1-HEXADECANOSULFONYL-O-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "S12",
+	"name" : "O-[(S)-hydroxy{[(2S)-2-hydroxy-3-(octadec-9-enoyloxy)propyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SBG",
+	"name" : "O-[(S)-HYDROXY(METHYL)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SBL",
+	"name" : "L-NAPHTHYL-1-ACETAMIDO BORONIC ACID ALANINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SAC",
+	"name" : "N-ACETYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEN",
+	"name" : "O-[N,N-dimethylphosphoramidate]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEL",
+	"name" : "2-AMINO-1,3-PROPANEDIOL",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEM",
+	"name" : "O-benzyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SDB",
+	"name" : "(4S)-2-[(1S)-1-amino-2-hydroxyethyl]-3,4,5,6-tetrahydropyrimidine-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SDP",
+	"name" : "2-AMINO-3-(DIETHOXY-PHOSPHORYLOXY)-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEE",
+	"name" : "trihydroxy(L-serinato-kappaO~3~)borate(1-)",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEP",
+	"name" : "PHOSPHOSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SEB",
+	"name" : "O-BENZYLSULFONYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{ "_id" : "SET", "name" : "AMINOSERINE", "mon_nstd_parent_comp_id" : "SER" }
+{
+	"_id" : "SGB",
+	"name" : "O-[(S)-METHYL(1-METHYLETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SOY",
+	"name" : "OXACILLIN-ACYLATED SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SRZ",
+	"name" : "PROPOXY-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SUN",
+	"name" : "O-[(R)-(DIMETHYLAMINO)(ETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVA",
+	"name" : "SERINE VANADATE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVY",
+	"name" : "O-[BIS(1-METHYLETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVZ",
+	"name" : "O-[(S)-HYDROXY(ISOPROPYLAMINO)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVW",
+	"name" : "O-[(R)-AMINO(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SXE",
+	"name" : "O-{(S)-ETHOXY[(1-METHYLETHYL)AMINO]PHOSPHORYL}-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVV",
+	"name" : "O-[(S)-AMINO(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "SVX",
+	"name" : "O-[(R)-ETHOXY(METHYL)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "TIS",
+	"name" : "O-(1,1-dihydroxyethyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "TNR",
+	"name" : "O-(2-ACETAMIDO-2-DEOXY-ALPHA-D-GALACTOPYRANOSYL)-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+}
+{
+	"_id" : "UF0",
+	"name" : "O-[(R)-hydroxy{[(3R)-3-hydroxy-4-{[3-({2-[(hydroxyacetyl)amino]ethyl}amino)-3-oxopropyl]amino}-2,2-dimethyl-4-oxobutyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+}

@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+  <residue restype="ACE">
+    <ratom name="CA">
+    <ratom name="HA1">
+    <ratom name="HA2">
+    <ratom name="HA3">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ALA">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="HB3">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ARG">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="NE">
+    <ratom name="HE">
+    <ratom name="CZ">
+    <ratom name="NH1">
+    <ratom name="HH11">
+    <ratom name="HH12">
+    <ratom name="NH2">
+    <ratom name="HH21">
+    <ratom name="HH22">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ASN">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="OD1">
+    <ratom name="ND2">
+    <ratom name="HD21">
+    <ratom name="HD22">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ASP">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="OD1">
+    <ratom name="OD2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ASPH">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="OD1">
+    <ratom name="OD2">
+    <ratom name="HD2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="CYS2">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="SG">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="CYSH">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="SG">
+    <ratom name="HG">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="GLN">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="OE1">
+    <ratom name="NE2">
+    <ratom name="HE21">
+    <ratom name="HE22">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="GLU">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="OE1">
+    <ratom name="OE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="GLUH">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="OE1">
+    <ratom name="OE2">
+    <ratom name="HE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="GLY">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA1">
+    <ratom name="HA2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="HIS1">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="ND1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="NE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="HISA">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="ND1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="NE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="HISB">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="ND1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="NE2">
+    <ratom name="HE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="HISH">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="ND1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="NE2">
+    <ratom name="HE2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="HOH">
+    <ratom name="OW">
+    <ratom name="HW1">
+    <ratom name="HW2">
+  </residue>
+
+  <residue restype="HYP">
+    <ratom name="N">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG">
+    <ratom name="OD1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="ILE">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB">
+    <ratom name="CG1">
+    <ratom name="HG11">
+    <ratom name="HG12">
+    <ratom name="CG2">
+    <ratom name="HG21">
+    <ratom name="HG22">
+    <ratom name="HG23">
+    <ratom name="CD">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="HD3">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="LEU">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG">
+    <ratom name="CD1">
+    <ratom name="HD11">
+    <ratom name="HD12">
+    <ratom name="HD13">
+    <ratom name="CD2">
+    <ratom name="HD21">
+    <ratom name="HD22">
+    <ratom name="HD23">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="LYS">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="CE">
+    <ratom name="HE1">
+    <ratom name="HE2">
+    <ratom name="NZ">
+    <ratom name="HZ1">
+    <ratom name="HZ2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="LYSH">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="CE">
+    <ratom name="HE1">
+    <ratom name="HE2">
+    <ratom name="NZ">
+    <ratom name="HZ1">
+    <ratom name="HZ2">
+    <ratom name="HZ3">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="MET">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="SD">
+    <ratom name="CE">
+    <ratom name="HE1">
+    <ratom name="HE2">
+    <ratom name="HE3">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="NAC">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA1">
+    <ratom name="HA2">
+    <ratom name="HA3">
+  </residue>
+
+  <residue restype="NH2">
+    <ratom name="N">
+    <ratom name="H1">
+    <ratom name="H2">
+  </residue>
+
+  <residue restype="OCT">
+    <ratom name="C1">
+    <ratom name="H11">
+    <ratom name="H12">
+    <ratom name="H13">
+    <ratom name="C2">
+    <ratom name="H21">
+    <ratom name="H22">
+    <ratom name="C3">
+    <ratom name="H31">
+    <ratom name="H32">
+    <ratom name="C4">
+    <ratom name="H41">
+    <ratom name="H42">
+    <ratom name="C5">
+    <ratom name="H51">
+    <ratom name="H52">
+    <ratom name="C6">
+    <ratom name="H61">
+    <ratom name="H62">
+    <ratom name="C7">
+    <ratom name="H71">
+    <ratom name="H72">
+    <ratom name="C8">
+    <ratom name="H81">
+    <ratom name="H82">
+    <ratom name="O9">
+    <ratom name="H10">
+  </residue>
+
+  <residue restype="PHE">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="CD1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="CE2">
+    <ratom name="HE2">
+    <ratom name="CZ">
+    <ratom name="HZ">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="PRO">
+    <ratom name="N">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="HG1">
+    <ratom name="HG2">
+    <ratom name="CD">
+    <ratom name="HD1">
+    <ratom name="HD2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="SER">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="OG">
+    <ratom name="HG">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="THR">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB">
+    <ratom name="OG1">
+    <ratom name="HG1">
+    <ratom name="CG2">
+    <ratom name="HG21">
+    <ratom name="HG22">
+    <ratom name="HG23">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="TRP">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="CD1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="NE1">
+    <ratom name="HE1">
+    <ratom name="CE2">
+    <ratom name="CE3">
+    <ratom name="HE3">
+    <ratom name="CZ2">
+    <ratom name="HZ2">
+    <ratom name="CZ3">
+    <ratom name="HZ3">
+    <ratom name="CH2">
+    <ratom name="HH2">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="TYR">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB1">
+    <ratom name="HB2">
+    <ratom name="CG">
+    <ratom name="CD1">
+    <ratom name="HD1">
+    <ratom name="CD2">
+    <ratom name="HD2">
+    <ratom name="CE1">
+    <ratom name="HE1">
+    <ratom name="CE2">
+    <ratom name="HE2">
+    <ratom name="CZ">
+    <ratom name="OH">
+    <ratom name="HH">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+  <residue restype="VAL">
+    <ratom name="N">
+    <ratom name="H">
+    <ratom name="CA">
+    <ratom name="HA">
+    <ratom name="CB">
+    <ratom name="HB">
+    <ratom name="CG1">
+    <ratom name="HG11">
+    <ratom name="HG12">
+    <ratom name="HG13">
+    <ratom name="CG2">
+    <ratom name="HG21">
+    <ratom name="HG22">
+    <ratom name="HG23">
+    <ratom name="C">
+    <ratom name="O">
+  </residue>
+
+</residues>

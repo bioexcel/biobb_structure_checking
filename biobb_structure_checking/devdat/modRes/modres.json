@@ -1,0 +1,7705 @@
+[
+	{
+	"_id" : "00A",
+	"name" : "5'-O-[(S)-{[(4-chlorophenyl)carbonyl]oxy},(hydroxy)phosphoryl]adenosine",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "0AR",
+	"name" : "N-[N-[(4S)-4-azanyl-5-hydroxy-5-oxo-pentyl]carbamimidoyl]ethanamide",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "0PR",
+	"name" : "N-({3-hydroxy-2-methyl-5-[(phosphonooxy)methyl]pyridin-4-yl},methyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "0R8",
+	"name" : "[(2S,5R)-5-{4-amino-5-[(4-ethynylphenyl)ethynyl]-2-oxopyrimidin-1(2H)-yl},tetrahydrofuran-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "033",
+	"name" : "N-({4'-[(1-BENZOFURAN-2-YLCARBONYL)AMINO]-1,1'-BIPHENYL-4-YL},SULFONYL)-L-VALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "07O",
+	"name" : "S-[(2S)-2-phenylpropanoyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "0AB",
+	"name" : "(3S,4S)-3-amino-4-methyl-3,4-dihydro-2H-pyran-2-one",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "0BN",
+	"name" : "4-carbamimidoyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "0NC",
+	"name" : "N-methyl-L-alaninamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "0AH",
+	"name" : "O-(bromoacetyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "0A1",
+	"name" : "O-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "02Y",
+	"name" : "6-diazonio-5-oxo-L-norleucine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "0AC",
+	"name" : "(4S,5S)-5-amino-4-hydroxy-6-phenylhexanoic acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "04U",
+	"name" : "azanylidene-[(3S,5S)-5-carboxypyrrolidin-3-yl]imino-azanium",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "0LF",
+	"name" : "(4R)-4-(4-phenylbutoxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "04V",
+	"name" : "(2S)-pyrrolidine-2-carboximidic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "0A8",
+	"name" : "S-[(2-chloroethyl)carbamoyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "0AV",
+	"name" : "2'-O-methyladenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "0A0",
+	"name" : "2-methyl-L-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "0AA",
+	"name" : "methyl L-valinate",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "0AD",
+	"name" : "2'-deoxy-N-propylguanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "0AP",
+	"name" : "2'-deoxycytidine 3',5'-bis(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "0CS",
+	"name" : "3-[(S)-HYDROPEROXYSULFINYL]-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "037",
+	"name" : "(1S,3aR,6aS)-octahydrocyclopenta[c]pyrrole-1-carboxylicacid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "0EA",
+	"name" : "(betaR)-beta,3-dihydroxy-N-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "02L",
+	"name" : "N-(2,2-dimethylpropyl)-L-asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "0A9",
+	"name" : "methyl L-phenylalaninate",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "0AF",
+	"name" : "7-hydroxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "0E5",
+	"name" : "(2S,3R)-2-azanyl-3-methyl-3-oxidanyl-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "0AM",
+	"name" : "2'-deoxy-N-[3-(propyldisulfanyl)propyl]adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "0AU",
+	"name" : "5-iodouridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "02O",
+	"name" : "3-(3-tert-butyl-1,2,4-oxadiazol-5-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "0A2",
+	"name" : "[(1R)-1,5-diaminopentyl][bis(ethanolato)]hydroxyborate(1-)",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "0AG",
+	"name" : "N-(ethoxycarbonyl)-L-leucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "0AK",
+	"name" : "(2S)-2-amino-4-(2-chloroethoxy)-4-oxobutanoic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "08P",
+	"name" : "N-(carboxycarbonyl)-D-cysteine",
+	"mon_nstd_parent_comp_id" : "DCY"
+},
+{
+	"_id" : "02K",
+	"name" : "1-aminocyclohexanecarboxylic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "03Y",
+	"name" : "2-methyl-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "05N",
+	"name" : "(3R,4R)-4-hydroxy-3-methyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "0FL",
+	"name" : "3-amino-N-formyl-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "0QL",
+	"name" : "3-[(2-aminoethyl)disulfanyl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "0UO",
+	"name" : "4-methoxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "0WZ",
+	"name" : "3-(1H-pyrazol-1-yl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "0TD",
+	"name" : "(3S)-3-(methylsulfanyl)-L-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "0SP",
+	"name" : "2'-deoxy-N-[3-(propyldisulfanyl)propyl]adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "0UH",
+	"name" : "2'-deoxy-2-oxoadenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "0Y8",
+	"name" : "(4R)-4-[(7-bromoisoquinolin-1-yl)oxy]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "0X9",
+	"name" : "N~2~-sulfamoyl-L-arginine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "0YG",
+	"name" : "N-[(2Z)-2-amino-3-(4-hydroxyphenyl)prop-2-enoyl]glycine",
+	"mon_nstd_parent_comp_id" : "TYR,GLY"
+},
+{
+	"_id" : "10C",
+	"name" : "4-AMINO-1-{2,5-ANHYDRO-4-[(PHOSPHONOOXY)METHYL]-ALPHA-L-LYXOFURANOSYL},PYRIMIDIN-2(1H)-ONE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "102",
+	"name" : "GAMMA-DEOXY-GAMMA-SULFO-GUANOSINE-5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "12L",
+	"name" : "(1R,2S,5S)-6,6-dimethyl-3-azabicyclo[3.1.0]hexane-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "125",
+	"name" : "2'-O-FLUOROETHYL-5-METHYL-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "126",
+	"name" : "2'-O-METHYL-[TRI(OXYETHYL)]-5-METHYL-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "12A",
+	"name" : "2-METHYLTHIO-N6-(AMINOCARBONYL-L-THREONYL)-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "12Y",
+	"name" : "(4R)-4-[(7-methoxy-2-{2-[(2-methylpropanoyl)amino]-1,3-thiazol-4-yl},quinolin-4-yl)oxy]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "11W",
+	"name" : "(4R)-4-[(2E)-3-{4-[(E)-phenyldiazenyl]phenyl},prop-2-en-1-yl]-L-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "12X",
+	"name" : "(4R)-4-[(8-bromo-7-methoxy-2-{2-[(2-methylpropanoyl)amino]-1,3-thiazol-4-yl},quinolin-4-yl)oxy]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "11Q",
+	"name" : "1-(cyclohexylmethyl)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "127",
+	"name" : "2'-O-AMINOOXY-ETHYL-5-METHYL-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "143",
+	"name" : "S-2,3-DIHYDRO-5-GLYCIN-2-YL-ISOXAZOL-3-YL-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "175",
+	"name" : "3,5-DIHYDRO-5-METHYLIDENE-4H-IMIDAZOL-4-ON",
+	"mon_nstd_parent_comp_id" : "ALA, SER, GLY"
+},
+{
+	"_id" : "18Q",
+	"name" : "2'-deoxy-5-[(thiophen-2-ylmethyl)carbamoyl]uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "1AP",
+	"name" : "2,6-DIAMINOPURINE NUCLEOTIDE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "1AC",
+	"name" : "1-AMINOCYCLOPROPANECARBOXYLIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "18M",
+	"name" : "2'-O-methylguanosine 3',5'-bis(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "1CC",
+	"name" : "5-carboxy-2'-deoxycytidine monophosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "1FC",
+	"name" : "4-amino-1-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-2-oxo-1,2-dihydropyrimidine-5-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "1L1",
+	"name" : "3-cyclohexyl-N-sulfamoyl-D-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "1MG",
+	"name" : "1N-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "1MA",
+	"name" : "6-HYDRO-1-METHYLADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "1OP",
+	"name" : "O-(5-hydroxypentyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "1PI",
+	"name" : "(3R)-3-[(2S)-2-amino-3-oxopropyl]piperidine-1-carboximidamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "1PA",
+	"name" : "4-(carboxymethyl)-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "1RN",
+	"name" : "(E)-N-{[4-oxo-1-(5-O-phosphono-beta-D-arabinofuranosyl)-2-thioxo-1,2,3,4-tetrahydropyrimidin-5-yl]methylidene},glycine",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "1TY",
+	"name" : "3-{(3E)-4-HYDROXY-6-OXO-3-[(2-PHENYLETHYL)IMINO]CYCLOHEXA-1,4-DIEN-1-YL},ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "1SC",
+	"name" : "5'-O-THIOPHOSPHONOCYTIDINE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "1TQ",
+	"name" : "6-(FORMYLAMINO)-7-HYDROXY-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "1X6",
+	"name" : "O-[(2E)-3-AMINOPROP-2-ENOYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "200",
+	"name" : "4-CHLORO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "23F",
+	"name" : "(2Z)-2-AMINO-3-PHENYLACRYLIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "23P",
+	"name" : "3-(propanoylamino)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "23G",
+	"name" : "GUANOSINE-5'-PHOSPHATE-2',3'-CYCLIC PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "26B",
+	"name" : "O-tert-butyl-N-[(3-{[(2,4,6-trimethylphenyl)carbamoyl]amino},naphthalen-2-yl)carbonyl]-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "26A",
+	"name" : "6N-DIMETHYLADENOSINE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "2AT",
+	"name" : "2'-O-ALLYL THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2AU",
+	"name" : "2'-AMINOURIDINE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "2AR",
+	"name" : "2'-DEOXYARISTEROMYCIN-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "2AG",
+	"name" : "(2S)-2-aminopent-4-enoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "28X",
+	"name" : "O-[(R)-{[(3R)-3,4-dihydroxybutyl]oxy},(hydroxy)phosphoryl]-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "2BD",
+	"name" : "N1-(1-HYDROXY-3-BUTEN-2(S)-YL)-2'-DEOXYINOSINE MONO PHOSPHORIC ACID",
+	"mon_nstd_parent_comp_id" : "DI"
+},
+{
+	"_id" : "2DA",
+	"name" : "2',3'-DIDEOXYADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "2CO",
+	"name" : "S-HYDROPEROXYCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "2BT",
+	"name" : "2'-O-BUTYL-THYMIDINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2BU",
+	"name" : "(2S,3S)-N6-(2,3,4-TRIHYDROXYBUTYL)-2'-DEOXYADENOSINE MONO PHOSPHORIC ACID",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "2DT",
+	"name" : "3'-DEOXYTHYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2FM",
+	"name" : "S-(DIFLUOROMETHYL)HOMOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "2EG",
+	"name" : "2'-DEOXY-N-ETHYLGUANOSINE 5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "2HF",
+	"name" : "2-fluoro-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "2KK",
+	"name" : "N~6~-(4-fluorobenzoyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "2KP",
+	"name" : "N~6~-(4-bromobenzoyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "2JV",
+	"name" : "N-(8-aminopyren-1-yl)-2'-deoxy-5'-O-(trihydroxy-lambda~5~-phosphanyl)guanosine",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "2GT",
+	"name" : "2'-O-PROPARGYL THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2GX",
+	"name" : "beta-phenyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "2JG",
+	"name" : "(2S)-2-amino-3-oxopropyl hexanoate",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "2LT",
+	"name" : "3,5-dichloro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "2LU",
+	"name" : "2-AMINO-4-METHYL-PENTANYL GROUP",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "2NT",
+	"name" : "2'-O-[2-[HYDROXY(METHYLENEAMINO)OXY]ETHYL THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2MR",
+	"name" : "N3, N4-DIMETHYLARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "2MT",
+	"name" : "(4R)-2,2-DIMETHYL-1,3-THIAZOLIDINE-4-CARBOXYLIC ACID",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "2MA",
+	"name" : "2-METHYLADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "2MU",
+	"name" : "2',5-DIMETHYLURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "2MG",
+	"name" : "2N-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "2ML",
+	"name" : "2-METHYLLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "2P0",
+	"name" : "1-({[(S)-hydroxy(phosphonooxy)phosphoryl]oxy},acetyl)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "2OM",
+	"name" : "5,6-dihydroorotidine 5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "2OR",
+	"name" : "amino{[(2R,3R,4S)-4-amino-2,3,5-trihydroxy-5-oxopentyl]amino},methaniminium",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "2OT",
+	"name" : "2'-O-[2-(N,N-DIMETHYLAMINOOXY)ETHYL] THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2PR",
+	"name" : "2-AMINO-9-[2-DEOXYRIBOFURANOSYL]-9H-PURINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "2ST",
+	"name" : "5-METHYL-2'-SE-METHYL-2'-SELENOURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "2SG",
+	"name" : "guanosine phosphorodithioate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "2RA",
+	"name" : "3-amino-D-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "2R3",
+	"name" : "(betaR)-beta-hydroxy-O-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "2RX",
+	"name" : "O-thiophosphono-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "2SO",
+	"name" : "3-{3-[(3R)-3,4-dihydroxybutyl]-1-(8-phenyloctyl)-1H-imidazol-3-ium-5-yl},-L-alanine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "2QZ",
+	"name" : "N,N-dimethyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "2TY",
+	"name" : "2-HYDROXY-5-{[(1E)-2-PHENYLETHYLIDENE]AMINO},-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "2VA",
+	"name" : "2'-(L-VALYL)AMINO-2'-DEOXYADENOSINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "2XA",
+	"name" : "(2R)-2-AMINO-3-[(4-CHLOROPHENYL)-DIPHENYL-METHYL]SULFANYL-PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "30F",
+	"name" : "(2Z)-2-amino-3-selanylprop-2-enoic acid",
+	"mon_nstd_parent_comp_id" : "SEC"
+},
+{
+	"_id" : "2ZC",
+	"name" : "O-{[4-(2-aminoethyl)phenyl]sulfonyl},-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "30V",
+	"name" : "S-[(2-carbamoylphenyl)selanyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "31Q",
+	"name" : "(4-carboxyphenyl)(L-cysteinato-kappaS~3~)mercury",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "31H",
+	"name" : "3'-deoxy-3'-[(N-formyl-L-methionyl)amino]adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "31M",
+	"name" : "3'-deoxy-3'-[(L-methionyl-L-phenylalanyl)amino]adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "33W",
+	"name" : "3-(5-bromothiophen-2-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "33S",
+	"name" : "3-iodo-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "34E",
+	"name" : "(3R)-4-[4-(2-methoxyethyl)piperazin-1-yl]-N-methyl-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "3AH",
+	"name" : "[HISTIDIN-1-YL-4H-[1,2,4]TRIAZOL-5-YL]-AMINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "3CF",
+	"name" : "3-cyano-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "3BY",
+	"name" : "1-methyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "3AU",
+	"name" : "3-[(3S)-3-amino-3-carboxypropyl]uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "3CT",
+	"name" : "3-chloro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "3DA",
+	"name" : "3'-DEOXYADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "3GA",
+	"name" : "(3S)-3-[(2S)-2-amino-3-oxopropyl]piperidine-1-carboximidamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "3GL",
+	"name" : "(2S,4S)-2-amino-4-hydroxy-pentanedioic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "3MD",
+	"name" : "2S,3S-3-METHYLASPARTIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "3MU",
+	"name" : "3-methyluridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "3ME",
+	"name" : "2'-O-{2-[2-(dimethylamino)ethoxy]ethyl},-5-methyluridine5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "3MY",
+	"name" : "3-chloro-D-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "3NF",
+	"name" : "N-acetyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "3O3",
+	"name" : "N-[(3S)-3-amino-3-carboxypropyl]-L-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "3PX",
+	"name" : "(3S)-3-(propan-2-yloxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "3QN",
+	"name" : "(E)-N~6~-{2-hydroxy-3-methyl-6-[(phosphonooxy)methyl]benzylidene},-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "3TT",
+	"name" : "[[[[(2R,5S)-5-(4-azanyl-2-oxidanylidene-pyrimidin-1-yl)-1,3-oxathiolan-2-yl]methoxy-oxidanyl-phosphoryl]oxy-oxidanyl-phosphoryl]amino]phosphonic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "3TD",
+	"name" : "(1S)-1,4-anhydro-1-(3-methyl-2,4-dioxo-1,2,3,4-tetrahydropyrimidin-5-yl)-5-O-phosphono-D-ribitol",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "3WS",
+	"name" : "N,2-dimethyl-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "3WX",
+	"name" : "2-methyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "3X9",
+	"name" : "3-{[(1-hydroxy-2,2,5,5-tetramethyl-2,5-dihydro-1H-pyrrol-3-yl)methyl]disulfanyl},-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "3XH",
+	"name" : "3-Hydroxyhippuric acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "3YM",
+	"name" : "3-methoxy-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "3ZH",
+	"name" : "11-{4-[(2S)-2-amino-2-carboxyethyl]-3-(8-phenyloctyl)-2,3-dihydro-1H-imidazol-1-yl},undecanoic acid",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "41H",
+	"name" : "(betaS)-beta-methyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "42Y",
+	"name" : "O-propanoyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "432",
+	"name" : "O-butanoyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "41Q",
+	"name" : "4-imino-L-homoserine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "45A",
+	"name" : "5'-O-[(S)-hydroxy(methyl)phosphoryl]adenosine",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "45F",
+	"name" : "(4S)-4-(prop-2-yn-1-yloxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "47C",
+	"name" : "2'-DEOXY-N-(PROP-2-EN-1-YLOXY)CYTIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4AF",
+	"name" : "4-ACETYL-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "4AK",
+	"name" : "N~6~-sulfo-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "4AR",
+	"name" : "amino({(4S)-4-amino-6-[(2,6-dimethylbenzoyl)oxy]-5-oxohexyl},amino)methaniminium",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "4D4",
+	"name" : "(2S,3R)-2-azanyl-5-carbamimidamido-3-oxidanyl-pentanoicacid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "4CY",
+	"name" : "nitrilo-L-methionine",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "4AW",
+	"name" : "4-AZATRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4CF",
+	"name" : "4-cyano-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "4BF",
+	"name" : "4-BROMO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "4DP",
+	"name" : "3-[5-(DIMETHYLAMINO)-1,3-DIOXO-1,3-DIHYDRO-2H-ISOINDOL-2-YL]-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4GJ",
+	"name" : "3-(pyridin-4-yldisulfanyl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "4FB",
+	"name" : "(4S)-4-FLUORO-L-PROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4F3",
+	"name" : "[2-(1-AMINO-2-HYDROXY-PROPYL)-4-(4-FLUORO-1H-INDOL-3-YLMETHYL)-5-HYDROXY-IMIDAZOL-1-YL]-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "4FW",
+	"name" : "4-FLUOROTRYPTOPHANE",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4IN",
+	"name" : "4-AMINO-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4J5",
+	"name" : "amino{[(3S)-3-amino-3-carboxypropyl]amino},methaniminium",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "4HJ",
+	"name" : "O-[(R)-hydroxy{[(3R)-3-hydroxy-4-{[3-({2-[(2-hydroxybenzoyl)sulfanyl]ethyl},amino)-3-oxopropyl]amino}-2,2-dimethyl-4-oxobutyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "4HH",
+	"name" : "O-[(S)-hydroxy{[(3R)-3-hydroxy-2,2-dimethyl-4-oxo-4-({3-oxo-3-[(2-sulfanylethyl)amino]propyl},amino)butyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "4HL",
+	"name" : "(6E)-4-[(2S)-2-amino-2-carboxyethyl]-6-[2-(4-hydroxybenzyl)hydraziniumylidene]-3-oxocyclohexa-1,4-dien-1-olate",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "4HT",
+	"name" : "4-HYDROXYTRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4II",
+	"name" : "(2~{S},)-2-azanyl-3-(4-azidophenyl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "Phe"
+},
+{
+	"_id" : "4J4",
+	"name" : "S-(2-{[(2',4'-difluorobiphenyl-4-yl)methyl]amino},-2-oxoethyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "4MM",
+	"name" : "N,N,N-trimethylmethionine",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "4KY",
+	"name" : "(4R)-1-acetyl-4-(oct-7-en-1-yloxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4LZ",
+	"name" : "O-[2-(triaza-1,2-dien-2-ium-1-yl)ethyl]-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "4L0",
+	"name" : "(4R)-1-acetyl-4-(hexyloxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4N8",
+	"name" : "1-[(furan-2-ylmethyl)carbamothioyl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4NT",
+	"name" : "[(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(3-chloro-4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "4N9",
+	"name" : "1-[(4-cyanobenzyl)carbamothioyl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4NU",
+	"name" : "{(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-[(3,5-dichloro-4-oxocyclohexa-2,5-dien-1-yl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "4N7",
+	"name" : "1-[(1Z)-3-(4-methylphenyl)-3-oxo-1-phenylprop-1-en-1-yl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "4OC",
+	"name" : "4N,O2'-METHYLCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "4PC",
+	"name" : "3-(2'-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-6-METHYL-3,7-DIHYDRO-2H-PYRROLO[2,3-D]PYRIMIDIN-2-ONE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4OZ",
+	"name" : "methyl N-(2,3-dihydroxybenzoyl)-O-formyl-L-serinate",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "4PH",
+	"name" : "4-methyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "4PD",
+	"name" : "3-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-6-METHYL-1,3-DIHYDRO-2H-PYRROLO[2,3-D]PYRIMIDIN-2-ONE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4OU",
+	"name" : "4-(acryloylamino)-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "4PE",
+	"name" : "3-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-6-METHYL-3H-PYRROLO[2,3-D]PYRIMIDIN-2-OL",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4PQ",
+	"name" : "5-hydroxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "4OV",
+	"name" : "(2R)-2-[(1R)-2-[(2S)-2-amino-2-carboxyethoxy]-1-{[(2R)-2-amino-2-phenylacetyl]amino},-2-oxoethyl]-5-methyl-3,6-dihydro-2H-1,3-thiazine-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "4SC",
+	"name" : "4'-THIO-2'-DEOXYCYTIDINE-5'-MONOPHOSPHATE GROUP",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4SJ",
+	"name" : "N,beta,beta-trimethyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "4U3",
+	"name" : "5-chloro-2'-deoxycytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "4U7",
+	"name" : "[(5S)-5-amino-5-carboxy-6,6-difluorohexyl](trihydroxy)borate(1-)",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "4SU",
+	"name" : "4-THIOURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "4WQ",
+	"name" : "(2S)-2-amino-7,7-dimethyloctanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "51T",
+	"name" : "2,3,6-trifluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "54C",
+	"name" : "(betaR)-beta-hydroxy-1-{2-[(2R)-oxiran-2-yl]propan-2-yl},-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "56A",
+	"name" : "3-(8-phenyloctyl)-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "5AB",
+	"name" : "[(5S)-5-amino-5-carboxyhexyl](trihydroxy)borate",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "5AT",
+	"name" : "5'-AMINO-5'-DEOXYTHYMIDINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "5BU",
+	"name" : "5-BROMO-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "5AA",
+	"name" : "N6-DIMETHYL-3'-AMINO-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "5CS",
+	"name" : "2-AMINO-3-(CYSTEIN-S-YL)-ISOXAZOLIDIN-5-YL-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{ "_id" : "5CT", "name" : "Hypusine", "mon_nstd_parent_comp_id" : "LYS" },
+{
+	"_id" : "5CW",
+	"name" : "5-chloro-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "5CG",
+	"name" : "5'-CHLORO-5'-DEOXY-GUANOSINE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "5CM",
+	"name" : "5-METHYL-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "5CR",
+	"name" : "N-acetyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "5GG",
+	"name" : "Deoxyhypusine",
+	"mon_nstd_parent_comp_id" : "Lys"
+},
+{
+	"_id" : "5FQ",
+	"name" : "N-pentyl-L-alaninamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "5FC",
+	"name" : "5-FORMYL-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "5FU",
+	"name" : "5-FLUORO-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "5GM",
+	"name" : "(4S)-2,4-dimethyl-L-norleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "5FA",
+	"name" : "ADENOSINE-5'-PENTAPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "5HP",
+	"name" : "PYROGLUTAMIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "5HM",
+	"name" : "5-(hydroxymethyl)cytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "5HU",
+	"name" : "5-HYDROXYMETHYLURIDINE-2'-DEOXY-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "5IU",
+	"name" : "5-IODO-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "5IT",
+	"name" : "5-IODO-THYMIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "5HC",
+	"name" : "2'-deoxy-5-(hydroxymethyl)cytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "5HT",
+	"name" : "5-HYDROXY-THYMIDINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "5IC",
+	"name" : "5-IODO-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "5JP",
+	"name" : "N-methyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "63G",
+	"name" : "(6S)-3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-6-hydroxy-5,6,7,8-tetrahydropyrimido[1,2-a]purin-10(3H)-one",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "6CL",
+	"name" : "6-CARBOXYLYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "5MC",
+	"name" : "5-METHYLCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "5PG",
+	"name" : "(2S)-(4-hydroxyphenyl)(methylamino)ethanoic acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "5SE",
+	"name" : "2'-deoxy-5-(methylselanyl)cytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "63H",
+	"name" : "(6R)-3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-6-hydroxy-5,6,7,8-tetrahydropyrimido[1,2-a]purin-10(3H)-one",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "60F",
+	"name" : "(2~{R},)-2-azanyl-3-[(~{E})-3-(4-hydroxyphenyl)prop-2-enoyl]sulfanyl-propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "6BR",
+	"name" : "threoninevanadate",
+	"mon_nstd_parent_comp_id" : "Thr"
+},
+{
+	"_id" : "5OH",
+	"name" : "(2S)-amino[(4R,6S)-2-amino-6-hydroxy-3,4,5,6-tetrahydropyrimidin-4-yl]ethanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "68Z",
+	"name" : "1R,2S,4R)-4-[2-azanyl-6,8-bis(oxidanylidene)-1,7-dihydropurin-9-yl]-2-oxidanyl-cyclopentyl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "5VV",
+	"name" : "N-carbamoyl-L-Asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "5PC",
+	"name" : "5(1-PROPYNYL)-2'-DEOXYCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "5PY",
+	"name" : "1-(2'-DEOXY-5'-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-5-METHYLPYRIMIDIN-2(1H)-ONE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "5SQ",
+	"name" : "2-[2-[(1~{S},)-1-azanyl-2-(1~{H}-imidazol-4-yl)ethyl]-4-[(4-hydroxyphenyl)methylidene]-5-oxidanylidene-imidazol-1-yl]eth anoic acid",
+	"mon_nstd_parent_comp_id" : "HIS, TYR, GLY"
+},
+{
+	"_id" : "5ZA",
+	"name" : "(5Z)-2-[(1S,2R)-1-AMINO-2-HYDROXYPROPYL]-5-[(4-AMINO-1H-INDOL-3-YL)METHYLENE]-3-(2-HYDROXYETHYL)-3,5-DIHYDRO-4H-IMIDAZOL-4-ONE",
+	"mon_nstd_parent_comp_id" : "THR, TRP, GLY"
+},
+{
+	"_id" : "6CV",
+	"name" : "3-bromo-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "64T",
+	"name" : "5-HYDROXY-THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "5MW",
+	"name" : "(2~{S},)-5-[4-(aminomethyl)-1,2,3-triazol-1-yl]-2-azanyl-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "5OW",
+	"name" : "(2~{S},)-2-azanyl-6-[[(~{Z})-~{C}-[2-methyl-3-oxidanyl-5-(phosphonooxymethyl)pyridin-4-yl]-~{N}-[(2~{R})-1-oxidanyl-1-oxidanylidene-3-sulfanyl-propan-2-yl]carbonimidoyl]amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "5XU",
+	"name" : "(2~{S},)-2-azanylpropanal",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "6CT",
+	"name" : "PHOSPHORIC ACID MONO-[5-HYDROXYMETHYL-2-METHYL-3-THYMINYL-CYCLOPENTYLMETHYL]ESTER GROUP",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "66D",
+	"name" : "(4R)-2,4-dimethyl-L-norleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "6CW",
+	"name" : "6-CHLORO-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "5MU",
+	"name" : "5-METHYLURIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "5NC",
+	"name" : "5-AZA-CYTIDINE-5'MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "6FK",
+	"name" : "[(2~{R},,3~{S},5~{R})-5-[2-azanyl-8-[ethanoyl(phenyl)amino]-6-oxidanylidene-3~{H}-purin-9-yl]-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "6DN",
+	"name" : "(2~{S},)-2-azanyl-6-(2-hydroxy-2-oxoethylamino)hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "6G4",
+	"name" : "4-oxononanoyl lysine",
+	"mon_nstd_parent_comp_id" : "Lys"
+},
+{
+	"_id" : "6GL",
+	"name" : "5-(phosphonooxy)-L-norvaline",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "6HA",
+	"name" : "1',5'-ANHYDRO-2',3'-DIDEOXY-2'-(ADENIN-9-YL)-6'-O-PHOSPHORYL-D-ARABINO-HEXITOL",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "6HB",
+	"name" : "2'-deoxy-N-[(2S)-2-hydroxybut-3-en-1-yl]adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "6HC",
+	"name" : "1',5'-ANHYDRO-2',3'-DIDEOXY-2'-(CYTOSIN-1-YL)-6'-O-PHOSPHORYL-D-ARABINO-HEXITOL",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "6HN",
+	"name" : "6-nitro-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "6HT",
+	"name" : "1',5'-ANHYDRO-2',3'-DIDEOXY-2'-(THYMIN-1-YL)-6'-O-PHOSPHORYL-D-ARABINO-HEXITOL",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "6HG",
+	"name" : "1',5'-ANHYDRO-2',3'-DIDEOXY-2'-(GUANIN-9-YL)-6'-O-PHOSPHORYL-D-ARABINO-HEXITOL",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "6IA",
+	"name" : "N6-ISOPENTENYL-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6MA",
+	"name" : "N6-METHYL-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6MT",
+	"name" : "TRANS-N6-METHYL-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6MP",
+	"name" : "6-METHYLPURINE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6M6",
+	"name" : "S-[(2-phenylethyl)carbamothioyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "6MC",
+	"name" : "CIS-N6-METHYL-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6MZ",
+	"name" : "N6-METHYLADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6OO",
+	"name" : "2'-O-methyl-5'-O-thiophosphonocytidine",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "6NW",
+	"name" : "2'-O-methyl-5'-O-thiophosphonoadenosine",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "6OG",
+	"name" : "6-O-METHYL GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "6PO",
+	"name" : "9-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-6-propoxy-9H-purin-2-amine",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "6V1",
+	"name" : "(2~{R},)-2-azanyl-3-[(3~{R})-1-ethyl-2,5-bis(oxidanylidene)pyrrolidin-3-yl]sulfanyl-propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "6WK",
+	"name" : "(2~{R},)-2-azanyl-3-[[(2~{S},3~{S})-2,3-bis(oxidanyl)-4-sulfanyl-butyl]disulfanyl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "6Y9",
+	"name" : "(2~{R},)-1,2-dimethylpyrrolidine-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "70U",
+	"name" : "5-(O-METHYLACETO)-2-THIO-2-DEOXY-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "73O",
+	"name" : "(2~{S},)-2-azanyl-4-(4-hydroxyphenyl)butanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "73C",
+	"name" : "(2~{S},)-2-azanyl-3-butoxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "73P",
+	"name" : "(2~{S},)-6-azanyl-2-(carboxyamino)hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "73N",
+	"name" : "(2~{S},)-5-carbamimidamido-2-(carboxyamino)pentanoic acid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "73W",
+	"name" : "5'-O-[(dithiophosphono)]cytidine",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "74P",
+	"name" : "(E)-N~6~-(1-carboxy-3-oxobutylidene)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "75B",
+	"name" : "5-selenophen-2-yluridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "77Y",
+	"name" : "5-(3-(2-(1H-indol-3-yl)acetamide-N-yl)-1-propen-1-yl)-2'-deoxyuridine",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "7BG",
+	"name" : "2-amino-7-benzyl-9-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-6-oxo-6,9-dihydro-1H-purin-7-ium",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "7AT",
+	"name" : "1-(5-O-phosphono-beta-D-ribofuranosyl)-3-(1H-1,2,3-triazol-5-yl)-1H-pyrazolo[3,4-d]pyrimidin-4-amine",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "7DA",
+	"name" : "7-DEAZA-2'-DEOXYADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "7GU",
+	"name" : "7-DEAZA-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "7JA",
+	"name" : "N-({(1R,2S)-3-oxo-2-[(2Z)-pent-2-en-1-yl]cyclopentyl},acetyl)-L-isoleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "7MG",
+	"name" : "7N-METHYL-8-HYDROGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "7N8",
+	"name" : "4-Borono-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "7XC",
+	"name" : "(2R)-2-azanyl-3-(4-carbamimidamidophenyl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "823",
+	"name" : "N,N-bis(3-sulfanylpropyl)-L-asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "85Y",
+	"name" : "2'-deoxy-5-{[(naphthalen-2-yl)methyl]carbamoyl},uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "85F",
+	"name" : "(2R)-2-azanyl-3-[(2R)-2-azanyl-3-oxidanyl-3-oxidanylidene-propyl]sulfanyl-propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "8AA",
+	"name" : "8-[acetyl(anthracen-2-yl)amino]-2'-deoxy-5'-O-(dihydroxyphosphanyl)guanosine",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "8BA",
+	"name" : "8-bromo-deoxyadenosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "8AN",
+	"name" : "3'-amino-3'-deoxyadenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "8AG",
+	"name" : "8-[ACETYL(ANTHRACEN-2-YL)AMINO]-2'-DEOXYGUANOSINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "8DT",
+	"name" : "5-(3-(acetamide-N-yl)-1-propen-1-yl)-2'-deoxyuridine",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "8AY",
+	"name" : "3-[6-(propan-2-yl)-1,3-benzothiazol-2-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "8FG",
+	"name" : "N-(5'-PHOSPHO-2'-DEOXYGUANOSIN-8-YL)-2-ACETYLAMINOFLUORENE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "8JB",
+	"name" : "(2~{R},)-2-azanyl-3-[[(5~{S})-5-[(1~{S})-1-azanyl-2-oxidanyl-2-oxidanylidene-ethyl]-4,5-dihydro-1,2-oxazol-3-yl]sulfanyl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "8MG",
+	"name" : "8-METHYL-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "8OG",
+	"name" : "8-OXO-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "8LJ",
+	"name" : "(2S)-2,3-dihydro-1H-pyrrole-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "8OS",
+	"name" : "5'-O-[(S)-hydroxy(4-methyl-1H-imidazol-5-yl)phosphoryl]guanosine",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "8PY",
+	"name" : "[(2~{R},,3~{S},5~{R})-5-[2-azanyl-8-[ethanoyl(pyren-2-yl)amino]-6-oxidanylidene-1~{H}-purin-9-yl]-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "8RE",
+	"name" : "3,4-dihydroxylysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "8RO",
+	"name" : "[(2~{R},,3~{S},5~{R})-5-(5-methyl-2-oxidanylidene-7-thia-1,3-diazabicyclo[4.1.0]hept-5-en-3-yl)-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphite",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "8RJ",
+	"name" : "(R)-1'-(2',3'-DIHYDROXYPROPYL)-THYMINE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "8SP",
+	"name" : "O-[(R)-{[(2R)-2,3-bis(octanoyloxy)propyl]oxy},(hydroxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "8WY",
+	"name" : "5,5-dihydroxy-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "8YN",
+	"name" : "Pseudoisocytidine",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "92F",
+	"name" : "7-amino-3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-2-oxo-2,3-dihydropyrido[2,3-d]pyrimidine-6-carbonitrile",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "94O",
+	"name" : "3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-2H-indeno[2',1':5,6]pyrido[2,3-d]pyrimidine-2,6(3H)-dione",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "999",
+	"name" : "(3S)-3-hydroxy-D-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "9DS",
+	"name" : "DANSYL-L-SARCOSINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "9KP",
+	"name" : "(E)-N~6~-[(2E)-1-carboxy-3-(2-carboxyphenyl)prop-2-en-1-ylidene]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "9DN",
+	"name" : "DANSYL-L-ASPARAGINE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "9E7",
+	"name" : "N~6~-(sulfanylmethyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "9NF",
+	"name" : "DANSYL-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "9NV",
+	"name" : "DANSYL-L-NORVALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "9NE",
+	"name" : "DANSYL-L-GLUTAMATE",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "9NR",
+	"name" : "DANSYL-L-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "9QV",
+	"name" : "uridine 2',5'-bis(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "9WV",
+	"name" : "beta-alanyl-3-amino-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "9TU",
+	"name" : "N6-[({3-[3-(trifluoromethyl)-3H-diaziren-3-yl]phenyl},methoxy)carbonyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "9TR",
+	"name" : "N6-{[(3-azidophenyl)methoxy]carbonyl},-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "9TX",
+	"name" : "N6-{[(3-ethynylphenyl)methoxy]carbonyl},-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "9U0",
+	"name" : "N6-({[(1S,2E)-cyclooct-2-en-1-yl]oxy},carbonyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "A3A",
+	"name" : "2'DEOXY-ALPHA-ANOMERIC-ADENOSINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A39",
+	"name" : "2'-O-METHYL-ADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A2M",
+	"name" : "2'-O-methyladenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A40",
+	"name" : "N2-METHYL 2'-DEOXYADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A35",
+	"name" : "2-AMINO DEOXYADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A23",
+	"name" : "ADENOSINE-5'-PHOSPHATE-2',3'-CYCLIC PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A43",
+	"name" : "3'-AMINO DEOXYADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A38",
+	"name" : "8-OXY DEOXYADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A3P",
+	"name" : "ADENOSINE-3'-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A47",
+	"name" : "N6-METHOXY ADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A44",
+	"name" : "2'-O-METHYOXYETHYL-ADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A34",
+	"name" : "N6-METHYL DEOXYADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A2L",
+	"name" : "3'-O-METHYOXYETHYL-ADENOSINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A6C",
+	"name" : "2-(4-amino-2-oxopyrimidin-1(2H)-yl)-1,5-anhydro-2-deoxy-6-O-phosphono-D-altritol",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "A6A",
+	"name" : "2-(6-amino-9H-purin-9-yl)-1,5-anhydro-2-deoxy-6-O-phosphono-D-altritol",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A5M",
+	"name" : "2'-AMINE-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "ACL",
+	"name" : "DEOXY-CHLOROMETHYL-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "A8E",
+	"name" : "(2S)-2-amino-4-bromopent-4-enoic acid",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "A9D",
+	"name" : "(2S)-2-amino-2-carboxyethyl 1-carboxy-L-prolyl-L-prolinate",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "AA3",
+	"name" : "2-AMINOBUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AAR",
+	"name" : "ARGININEAMIDE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "A7E",
+	"name" : "3-ethynyl-1-(5-O-phosphono-beta-D-ribofuranosyl)-1H-pyrazolo[3,4-d]pyrimidin-4-amine",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "A6G",
+	"name" : "2-(2-amino-6-oxo-1,6-dihydro-9H-purin-9-yl)-1,5-anhydro-2-deoxy-6-O-phosphono-D-altritol",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "A6U",
+	"name" : "1,5-anhydro-2-deoxy-2-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-6-O-phosphono-D-altritol",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "ABA",
+	"name" : "ALPHA-AMINOBUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "ABR",
+	"name" : "(R)-(N-PHENYL-2-HYDROXY-ETHYL)-2'-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "ABS",
+	"name" : "(S)-(N-PHENYL-2-HYDROXY-ETHYL)-2'-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A5N",
+	"name" : "O-carboxy-4-imino-L-homoserine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "AA4",
+	"name" : "2-AMINO-5-HYDROXYPENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "A5L",
+	"name" : "9-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-9H-purin-6-amine",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "A5O",
+	"name" : "ADENINE ARABINOSE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AD2",
+	"name" : "2'-DEOXY-ADENOSINE-3'-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "AEI",
+	"name" : "THREONINE-ASPARTIC ESTER",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "AEA",
+	"name" : "(2-AMINO-2-CARBAMOYL-ETHYLSULFANYL)-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "ADI",
+	"name" : "2',3'-DIDEOXYADENOSINE-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "ADP",
+	"name" : "ADENOSINE-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AGT",
+	"name" : "S-{(S)-AMINO[(4-AMINOBUTYL)AMINO]METHYL},-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "AGQ",
+	"name" : "3-[(3E)-3-(carbamimidoylhydrazono)-4-hydroxy-6-oxocyclohexa-1,4-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "AF2",
+	"name" : "2'-deoxy-2'-fluoroadenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "AGM",
+	"name" : "5-METHYL-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "AFA",
+	"name" : "N-[7-METHYL-OCT-2,4-DIENOYL]ASPARAGINE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "AET",
+	"name" : "N-[N-(9-B-D-RIBOFURANOSYLPURIN-6-YL)METHYLCARBAMOYL]THREONINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AFG",
+	"name" : "N-(5'-PHOSPHO-2'-DEOXYGUANOSIN-8-YL)-2-AMINOFLUORENE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "AHL",
+	"name" : "N-HYDROXY-L-ARGININAMIDE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "AHB",
+	"name" : "BETA-HYDROXYASPARAGINE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "AHO",
+	"name" : "N-ACETYL-N-HYDROXY-L-ORNITHINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AHP",
+	"name" : "2-AMINO-HEPTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AIB",
+	"name" : "ALPHA-AMINOISOBUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "ALV",
+	"name" : "(2S)-2-aminopropane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "ALM",
+	"name" : "1-METHYL-ALANINAL",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "ALN",
+	"name" : "NAPHTHALEN-2-YL-3-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{ "_id" : "ALT", "name" : "THIOALANINE", "mon_nstd_parent_comp_id" : "ALA" },
+{
+	"_id" : "ALO",
+	"name" : "ALLO-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "ALC",
+	"name" : "2-AMINO-3-CYCLOHEXYL-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AKL",
+	"name" : "3-AMINO-5-CHLORO-4-OXOPENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ALY",
+	"name" : "N(6)-ACETYLLYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "ALS",
+	"name" : "(3S)-3-(sulfooxy)-L-serine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AMD",
+	"name" : "ASPARTYL-2'-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AMO",
+	"name" : "ASPARTYL-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AN8",
+	"name" : "(2S)-2-aminononanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AN6",
+	"name" : "5'-{[(3S)-3-amino-3-carboxypropyl](ethyl)amino},-5'-deoxyadenosine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "AP7",
+	"name" : "N1-PROTONATED ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "API",
+	"name" : "2,6-DIAMINOPIMELIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "APK",
+	"name" : "5'-O-[(S)-{[(5S)-5-AMINO-6-OXOHEXYL]AMINO},(HYDROXY)PHOSPHORYL]ADENOSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "AR4",
+	"name" : "2-azanyl-5-[3-fluoranyl-5-(hydroxymethyl)-3,4-bis(oxidanyl)oxolan-2-yl]oxy-5-oxidanylidene-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "AR7",
+	"name" : "amino{[(4S)-4-amino-5,5-dihydroxypentyl]amino},methaniminium",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "AR2",
+	"name" : "ARGINYL-BENZOTHIAZOLE-6-CARBOXYLIC ACID",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "ASK",
+	"name" : "DEHYDROXYMETHYLASPARTIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "AS",
+	"name" : "2-DEOXY-ADENOSINE -5'-THIO-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "ASA",
+	"name" : "ASPARTIC ALDEHYDE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ARO",
+	"name" : "C-GAMMA-HYDROXY ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "AS7",
+	"name" : "N4-(4-cyanobenzyl)-L-asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "ASL",
+	"name" : "ASPARTIC ACID-4-CARBOXYETHYL ESTER",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ARM",
+	"name" : "DEOXY-METHYL-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "ASQ",
+	"name" : "PHOSPHOASPARTATE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ASB",
+	"name" : "ASPARTIC ACID-4-CARBOXYMETHYL ESTER",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ASI",
+	"name" : "L-ISO-ASPARTATE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "ATD",
+	"name" : "THYMIDINE-3'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "ATM",
+	"name" : "3'-AZIDO-3'-DEOXYTHYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "ATL",
+	"name" : "[(1S,3R,4S,7R)-7-HYDROXY-3-(THYMIN-1-YL)-2,5-DIOXABICYCLO[2.2.1]HEPT-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "AVJ",
+	"name" : "N,N,N-trimethyl-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "AVC",
+	"name" : "ADENOSINE-5'-MONOPHOSPHATE-2',3'-VANADATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "AYG",
+	"name" : "[(4E)-2-[(1S)-1-AMINOETHYL]-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA,TYR,GLY"
+},
+{
+	"_id" : "AYA",
+	"name" : "N-ACETYLALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "B1F",
+	"name" : "PHENYLALANINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "AZK",
+	"name" : "(S)-2-AMINO-6-AZIDOHEXANOIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "AZY",
+	"name" : "3-AZIDO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "AZH",
+	"name" : "AZIDOHOMOALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "AZS",
+	"name" : "O-DIAZOACETYL-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "B2A",
+	"name" : "ALANINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "B2I",
+	"name" : "ISOLEUCINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "B27",
+	"name" : "(2R,3S) 3-amino-4-mercapto-2-butanol",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "B2H",
+	"name" : "Chromophore (Thr, Trp, Gly)",
+	"mon_nstd_parent_comp_id" : "THR, TRP, GLY"
+},
+{
+	"_id" : "B2V",
+	"name" : "VALINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "B3A",
+	"name" : "(3S)-3-AMINOBUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "B3D",
+	"name" : "3-AMINOPENTANEDIOIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "B3E",
+	"name" : "(3S)-3-AMINOHEXANEDIOIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "B2F",
+	"name" : "PHENYLALANINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "B3U",
+	"name" : "2-amino-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "B3X",
+	"name" : "(3S)-3,5-DIAMINO-5-OXOPENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "B3K",
+	"name" : "(3S)-3,7-DIAMINOHEPTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "B3Y",
+	"name" : "(3S)-3-AMINO-4-(4-HYDROXYPHENYL)BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "B7C",
+	"name" : "3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-7,8-dihydropyrido[2,3-d]pyrimidin-2(3H)-one",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "B9B",
+	"name" : "6-propyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "B9H",
+	"name" : "2'-methyl, 3-propyl, cytidine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "B8Q",
+	"name" : "3-methyl, cytidine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "B8T",
+	"name" : "4-methyl, cytidine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "B8K",
+	"name" : "7-acetyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "B8W",
+	"name" : "6-methyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "B8H",
+	"name" : "[(2~{R},,3~{S},4~{R},5~{S})-5-[1-methyl-2,4-bis(oxidanylidene)pyrimidin-5-yl]-3,4-bis(oxidanyl)oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "BB6",
+	"name" : "(2Z)-2-amino-3-sulfanylbut-2-enoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BB7",
+	"name" : "(2Z)-2-amino-4-methoxy-3-sulfanylbut-2-enoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BB9",
+	"name" : "(2Z)-2-amino-3-sulfanylprop-2-enoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BB8",
+	"name" : "(2S,3S)-BETA-HYDROXY-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "BBC",
+	"name" : "3-[(4-AMINOBUTYL)SULFINYL]-2-IMINOPROPAN-1-OL",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BCS",
+	"name" : "BENZYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BCX",
+	"name" : "(3R)-3-amino-4-sulfanylbutanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BF9",
+	"name" : "[(4Z)-2-[(1R,2S)-1-amino-2-hydroxypropyl]-4-{[4-(benzenecarbonyl)phenyl]methylidene},-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, PHE, GLY"
+},
+{
+	"_id" : "BG1",
+	"name" : "O-[(2S)-2-{methyl[(methylamino)sulfonyl]amino},pentanoyl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "BFD",
+	"name" : "ASPARTATE BERYLLIUM TRIFLUORIDE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "BF6",
+	"name" : "[(4Z)-2-(aminomethyl)-4-{[4-(benzenecarbonyl)phenyl]methylidene},-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "BGM",
+	"name" : "8-BROMO-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "BGH",
+	"name" : "[(2~{R},,3~{R},4~{R},5~{R})-5-(2-azanyl-7-ethanoyl-6-oxidanylidene-1,8-dihydropurin-9-yl)-4-methoxy-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "BIU",
+	"name" : "5-bromo-L-isoleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "BIF",
+	"name" : "(R)-2-AMINO-3-(4-PHENYLCYCLOHEXYL)PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "BH2",
+	"name" : "(3R)-3-hydroxy-L-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "BHD",
+	"name" : "(3S)-3-hydroxy-L-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "BLE",
+	"name" : "LEUCINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "BL2",
+	"name" : "N-(tert-butoxycarbonyl)-L-leucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "BJO",
+	"name" : "(4Z)-4-amino-4-{1-(carboxymethyl)-5-oxo-4-[(4-oxocyclohexa-2,5-dien-1-ylidene)methyl]-1,5-dihydro-2H-imidazol-2-ylidene},butanoic acid",
+	"mon_nstd_parent_comp_id" : "LEU, LEU, GLY"
+},
+{
+	"_id" : "BLY",
+	"name" : "LYSINE BORONIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "BOE",
+	"name" : "2'-O-[2-(BENZYLOXY)ETHYL] THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "BNN",
+	"name" : "ACETYL-P-AMIDINOPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "BMT",
+	"name" : "4-METHYL-4-[(E)-2-BUTENYL]-4,N-METHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "BP5",
+	"name" : "3-(2,2'-BIPYRIDIN-5-YL)-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "BPE",
+	"name" : "(2S)-2-AMINO-3-[(3-AMINOPROPYL)SULFANYL]PROPAN-1-OL",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "BOR",
+	"name" : "(1R)-1-AMINO-4-{[(E)-AMINO(IMINO)METHYL]AMINO},BUTYLBORONIC ACID",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "BRU",
+	"name" : "5-BROMO-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "BSE",
+	"name" : "BETA-3-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "BUC",
+	"name" : "S,S-BUTYLTHIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{ "_id" : "BTC", "name" : "CYSTEINE", "mon_nstd_parent_comp_id" : "CYS" },
+{
+	"_id" : "BTK",
+	"name" : "N~6~-butanoyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "BUG",
+	"name" : "3-methyl-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "BTR",
+	"name" : "6-BROMO-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "BTA",
+	"name" : "4-DEMETHYL-LEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "BWV",
+	"name" : "N~5~-(N-butylcarbamimidoyl)-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "BWB",
+	"name" : "(2~{S},)-2-azanyl-3-[(2~{S},5~{R})-3,4,5-tris(oxidanyl)oxan-2-yl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "BYR",
+	"name" : "3-bromo-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "BVP",
+	"name" : "(E)-5-(2-BROMOVINYL)-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "BXT",
+	"name" : "(2~{S},)-2-azanyl-3-[ethyl(methyl)carbamoyl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "C1J",
+	"name" : "N~5~-(N-octylcarbamimidoyl)-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "C22",
+	"name" : "3-chloro-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "C1S",
+	"name" : "3-(prop-2-en-1-yldisulfanyl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C25",
+	"name" : "CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "C1T",
+	"name" : "S-[(1S,6R)-3,6-dihydroxy-4-methyl-2,5-dioxocyclohex-3-en-1-yl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C12",
+	"name" : "2-(1-AMINO-2-HYDROXYPROPYL)-4-(4-HYDROXYBENZYL)-1-(2-OXOETHYL)-1H-IMIDAZOL-5-OLATE",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "C1X",
+	"name" : "(Z)-N~6~-[(4R,5S)-5-(2-CARBOXYETHYL)-4-(CARBOXYMETHYL)DIHYDRO-2H-THIOPYRAN-3(4H)-YLIDENE]-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "C2L",
+	"name" : "5-METHYL-3'-O-METHOXYETHYL CYTIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "C43",
+	"name" : "2'-O-METHYOXYETHYL-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "C4R",
+	"name" : "(R)-2-amino-3-(bicyclo[2.2.1]hepta-2,5-dien-7-ylthio)propanoic acid rhodium",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C36",
+	"name" : "5-METHYL-5-FLUORO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C45",
+	"name" : "N4-METHOXY-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C46",
+	"name" : "6H,8H-3,4-DIHYDROPYRIMIDO[4,5-C][1,2]OXAZIN-7-0NE(CYTIDINE)-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C2S",
+	"name" : "CYTIDINE-5'-DITHIOPHOSPHORATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C49",
+	"name" : "4-THIO,5-FLUORO,5-METHYL-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C37",
+	"name" : "5-FLUORO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C3Y",
+	"name" : "S-[(1S)-1-HYDROXY-1-(HYDROXYAMINO)ETHYL]-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C34",
+	"name" : "N4-METHYL-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C38",
+	"name" : "5-IODO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C4S",
+	"name" : "2'-deoxy-4'-thiocytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C31",
+	"name" : "2'-O-3-AMINOPROPYL CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "C4G",
+	"name" : "N~5~-[N-(3-aminopropyl)carbamimidoyl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "C42",
+	"name" : "3'-AMINO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C32",
+	"name" : "5-BROMO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C6G",
+	"name" : "6-(carboxymethoxy)-9-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-9H-purin-2-amine",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "C6C",
+	"name" : "S-CYCLOHEXYL THIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C6D",
+	"name" : "N~5~-[N-(3-hydroxypropyl)carbamimidoyl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "C67",
+	"name" : "N~5~-[N-(2-carboxyethyl)carbamimidoyl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "C5L",
+	"name" : "2'-O-(2-methoxyethyl)-5-methylcytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "C5C",
+	"name" : "S-CYCLOPENTYL THIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C7S",
+	"name" : "2'-deoxy-5'-O-thiophosphonocytidine",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CAF",
+	"name" : "S-DIMETHYLARSINOYL-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "C7R",
+	"name" : "2'-deoxy-5'-O-thiophosphonocytidine",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "C99",
+	"name" : "{(2R)-2-[(1S,2R)-1-AMINO-2-HYDROXYPROPYL]-2-HYDROXY-4,5-DIOXOIMIDAZOLIDIN-1-YL},ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "THR, PHE, GLY"
+},
+{
+	"_id" : "CAY",
+	"name" : "CARBOXYMETHYLENECYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CB2",
+	"name" : "PHOSPHORIC ACID MONO-[5-(4-AMINO-5-BROMO-2-OXO-2H-PYRIMIDIN-1-YL)-3,4-DIHYDROXY-TETRAHYDRO-FURAN-2-YLMETHYL] ESTER",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CAS",
+	"name" : "S-(DIMETHYLARSENIC)CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CAR",
+	"name" : "CYTOSINE ARABINOSE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CCC",
+	"name" : "CYTIDINE-5'-PHOSPHATE-2',3'-CYCLIC PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "CBR",
+	"name" : "5-BROMO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CCS",
+	"name" : "CARBOXYMETHYLATED CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CBV",
+	"name" : "5-BROMOCYTIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "CCY",
+	"name" : "2-(1-AMINO-2-MERCAPTO-ETHYL)-5-(4-HYDROXY-BENZYL)-3-(ETHANOYL)-3,5-DIHYDRO-IMIDAZOL-4-ONE",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "CE7",
+	"name" : "(3S)-3-amino-4,4,4-trihydroxybutanamide",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "CEA",
+	"name" : "S-HYDROXY-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CDW",
+	"name" : "(4R)-3-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-1,3-DIAZABICYCLO[2.2.0]HEX-5-EN-2-ONE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CG1",
+	"name" : "5'-O-[(R)-hydroxy(methoxy)phosphoryl]guanosine",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "CG6",
+	"name" : "beta-Methyl-Cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CFL",
+	"name" : "4-amino-1-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)pyrimidin-2(1H)-one",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CFY",
+	"name" : "[(4Z)-2-{(2R)-2-[(1S)-1-amino-2-phenylethyl]-2-hydroxy-2,5-dihydro-1,3-thiazol-4-yl},-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "PHE, CYS, TYR, GLY"
+},
+{
+	"_id" : "CGA",
+	"name" : "CARBOXYMETHYLATED GLUTAMIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "CGV",
+	"name" : "S-[(R)-carboxy(hydroxy)methyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CJO",
+	"name" : "[(2R,4R)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzyl)-5-oxoimidazolidin-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "CH6",
+	"name" : "{(4Z)-2-[(1S)-1-amino-3-(methylsulfanyl)propyl]-4-[(4-hydroxyphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "MET, TYR, GLY"
+},
+{
+	"_id" : "CH7",
+	"name" : "[(4Z)-4-(4-HYDROXYBENZYLIDENE)-5-OXO-2-(3,4,5,6-TETRAHYDROPYRIDIN-2-YL)-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS,TYR,GLY"
+},
+{ "_id" : "CIR", "name" : "CITRULLINE", "mon_nstd_parent_comp_id" : "ARG" },
+{
+	"_id" : "CHP",
+	"name" : "3-CHLORO-4-HYDROXYPHENYLGLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "CGU",
+	"name" : "GAMMA-CARBOXY-GLUTAMIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "CH",
+	"name" : "N3-PROTONATED CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "CLE",
+	"name" : "LEUCINE AMIDE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "CLV",
+	"name" : "{(2S)-2-[(1S)-1-AMINOETHYL]-5-OXO-2,5-DIHYDRO-1H-IMIDAZOL-1-YL},ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA, PHE, GLY"
+},
+{
+	"_id" : "CLH",
+	"name" : "2-AMINO-6-[2-(2-OXO-ACETYLAMINO)-ACETYLAMINO]-HEXANOIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "CMH",
+	"name" : "S-(METHYLMERCURY)-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CMR",
+	"name" : "2'-DEOXY-CYTIDINE-5'-RP-MONOMETHYLPHOSPHONATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CME",
+	"name" : "S,S-(2-HYDROXYETHYL)THIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CMT",
+	"name" : "O-METHYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CLG",
+	"name" : "2-AMINO-6-[2-(2-AMINOOXY-ACETYLAMINO)-ACETYLAMINO]-HEXANOIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "CML",
+	"name" : "(2S)-2-{[(2R)-2-amino-2-carboxyethyl]sulfanyl},butanedioic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CP1",
+	"name" : "2-(METHYLAMINO)-ETHYLGLYCINE-CARBONYLMETHYLENE-CYTOSINE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CNU",
+	"name" : "5-CYANO-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "CQR",
+	"name" : "[(4Z)-2-(AMINOMETHYL)-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "CQ1",
+	"name" : "[(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-azidobenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "CQ2",
+	"name" : "{(4Z)-4-(4-aminobenzylidene)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "CR5",
+	"name" : "(2R)-2-(AMINOMETHYL)-2,4-DIHYDROXY-5-OXO-3-(2-OXOETHYL)-2,5-DIHYDRO-1H-IMIDAZOL-3-IUM",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "CR0",
+	"name" : "[2-(1-AMINO-2-HYDROXYPROPYL)-2-HYDROXY-4-ISOBUTYL-5-OXO-2,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETALDEHYDE",
+	"mon_nstd_parent_comp_id" : "THR, LEU, GLY"
+},
+{
+	"_id" : "CR8",
+	"name" : "2-[1-AMINO-2-(1H-IMIDAZOL-5-YL)ETHYL]-1-(CARBOXYMETHYL)-4-[(4-OXOCYCLOHEXA-2,5-DIEN-1-YLIDENE)METHYL]-1H-IMIDAZOL-5-OLATE",
+	"mon_nstd_parent_comp_id" : "HIS, TYR, GLY"
+},
+{
+	"_id" : "CR2",
+	"name" : "{(4Z)-2-(aminomethyl)-4-[(4-hydroxyphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "CR7",
+	"name" : "[(4Z)-2-[(1S)-1,5-DIAMINOPENTYL]-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS, TYR, GLY"
+},
+{
+	"_id" : "CSX",
+	"name" : "S-OXY CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSZ",
+	"name" : "S-SELANYL CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CTG",
+	"name" : "(5R,6S)-5,6-DIHYDRO-5,6-DIHYDROXYTHYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "CSE",
+	"name" : "SELENOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CRW",
+	"name" : "[2-(1-AMINOETHYL)-4-METHYLENE-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA, SER, GLY"
+},
+{
+	"_id" : "CSA",
+	"name" : "S-ACETONYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSL",
+	"name" : "(D)-2'-METHYLSELENYL-2'-DEOXYCYTIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CS3",
+	"name" : "S-[3-OXO-3-(2-THIENYL)PROPYL]-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CRF",
+	"name" : "[(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(1H-indol-3-ylmethylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TRP, GLY"
+},
+{
+	"_id" : "CSY",
+	"name" : "[(4Z)-2-[(1R)-1-amino-2-hydroxyethyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "SER, TYR, GLY"
+},
+{
+	"_id" : "CRQ",
+	"name" : "[2-(3-CARBAMOYL-1-IMINO-PROPYL)-4-(4-HYDROXY-BENZYLIDENE)-5-OXO-4,5-DIHYDRO-IMIDAZOL-1-YL]-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "GLN, TYR, GLY"
+},
+{
+	"_id" : "CSB",
+	"name" : "CYS BOUND TO LEAD ION",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSR",
+	"name" : "S-ARSONOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CS4",
+	"name" : "S-[3-(3,4-DICHLOROPHENYL)-3-OXOPROPYL]-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSS",
+	"name" : "S-MERCAPTOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSW",
+	"name" : "CYSTEINE-S-DIOXIDE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CS1",
+	"name" : "S-(2-ANILINYL-SULFANYL)-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSU",
+	"name" : "CYSTEINE-S-SULFONIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CS0",
+	"name" : "S-(2-HYDROXYETHYL)-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CRO",
+	"name" : "{2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "CSD",
+	"name" : "3-SULFINOALANINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CSF",
+	"name" : "CYTIDINE-5'-MONOPHOSPHATE-3-FLUORO-N-ACETYL-NEURAMINIC ACID",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "CRU",
+	"name" : "4-[(4Z)-1-(CARBOXYMETHYL)-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-2-YL]-4-IMINOBUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU, TYR, GLY"
+},
+{
+	"_id" : "CSP",
+	"name" : "S-PHOSPHOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CTH",
+	"name" : "4-CHLOROTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "CRG",
+	"name" : "[2-(1-AMINO-2-HYDROXY-PROPYL)-4-(3H-IMIDAZOL-4-YLMETHYLENE)-5-OXO-4,5-DIHYDRO-IMIDAZOL-1-YL]-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "THR, HIS, GLY"
+},
+{
+	"_id" : "CRX",
+	"name" : "[2-(1-AMINOETHYL)-2-HYDROXY-4-METHYLENE-5-OXOIMIDAZOLIDIN-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA, SER, GLY"
+},
+{
+	"_id" : "CSH",
+	"name" : "[2-(2-HYDROXY-1-METHYL-ETHYL)-4-(1H-IMIDAZOL-4-YLMETHYL)-5-OXO-IMIDAZOLIDIN-1-YL]-ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "SER, HIS, GLY"
+},
+{
+	"_id" : "CSJ",
+	"name" : "S-[(2-aminophenyl)carbonyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CRK",
+	"name" : "4-{(Z)-[2-[3-(METHYLSULFANYL)PROPANOYL]-5-OXO-1-(2-OXOETHYL)-1,5-DIHYDRO-4H-IMIDAZOL-4-YLIDENE]METHYL},BENZENOLATE",
+	"mon_nstd_parent_comp_id" : "MET, TYR, GLY"
+},
+{
+	"_id" : "CSO",
+	"name" : "S-HYDROXYCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CTE",
+	"name" : "7-CHLOROTRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "CWD",
+	"name" : "3-(5-chloro-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "CWR",
+	"name" : "(4-methyl-5-oxo-2,5-dihydro-1H-imidazol-1-yl)acetic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "CXM",
+	"name" : "N-CARBOXYMETHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "CX2",
+	"name" : "2'-deoxy-5'-O-{(R)-hydroxy[(2-sulfanylethyl)amino]phosphoryl},cytidine",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CZO",
+	"name" : "[(2R,4S)-2-[(1S,2R)-1-amino-2-hydroxypropyl]-2-hydroxy-4-(4-hydroxybenzyl)-5-oxoimidazolidin-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "CYJ",
+	"name" : "(Z)-N~6~-[(4R,5S)-5-(2-CARBOXYETHYL)-4-(CARBOXYMETHYL)PIPERIDIN-3-YLIDENE]-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "CZ2",
+	"name" : "S-(DIHYDROXYARSINO)CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CY0",
+	"name" : "S-{3-[(4-ANILINOQUINAZOLIN-6-YL)AMINO]-3-OXOPROPYL},-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CY3",
+	"name" : "2-AMINO-3-MERCAPTO-PROPIONAMIDE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CY4",
+	"name" : "S-BUTYRYL-CYSTEIN",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYA",
+	"name" : "TWO OXYGEN ATOMS BOUND TO SG OF CYS",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYD",
+	"name" : "2-AMINO-6-(CYSTEIN-S-YL)-5-OXO-HEXANOIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYM",
+	"name" : "S-METHYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CY1",
+	"name" : "ACETAMIDOMETHYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYG",
+	"name" : "2-AMINO-4-(AMINO-3-OXO-PROPYLSULFANYLCARBONYL)-BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "D00",
+	"name" : "2'-deoxy-N-ethylcytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "CYW",
+	"name" : "S-[(2R)-2-hydroxypropanoyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CZS",
+	"name" : "3-(6-chloro-1,3-benzothiazol-2-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "CYQ",
+	"name" : "2-AMINO-3-PHOSPHONOMETHYLSULFANYL-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYR",
+	"name" : "N~5~-[{[(2R)-2-AMINO-2-CARBOXYETHYL]SULFANYL},(IMINIO)METHYL]-L-ORNITHINATE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CZZ",
+	"name" : "THIARSAHYDROXY-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "CYF",
+	"name" : "5-[2-(2-AMINO-2-CARBAMOYL-ETHYLSULFANYL)-ACETYLAMINO]-2-(3,6-DIHYDROXY-9,9A-DIHYDRO-3H-XANTHEN-9-YL)-BENZOIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "D2T",
+	"name" : "(3R)-3-(methylsulfanyl)-L-aspartic acid",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "D4B",
+	"name" : "[(2~{R},,3~{S},5~{R})-5-[4-azanyl-5-[2-(4-ethynylphenyl)ethynyl]-2-oxidanylidene-pyrimidin-1-yl]-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "D3T",
+	"name" : "2',3'-DIDEOXY-THYMIDINE-5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "D4M",
+	"name" : "[(5R)-5-(5-METHYL-2,4-DIOXO-3,4-DIHYDROPYRIMIDIN-1(2H)-YL)-2,5-DIHYDROFURAN-2-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "DAB",
+	"name" : "2,4-DIAMINOBUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "DA2",
+	"name" : "NG,NG-DIMETHYL-L-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "DAH",
+	"name" : "3,4-DIHYDROXYPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "DC2",
+	"name" : "N-acetyl-S-[(1S)-1,2-dichloroethyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "DCG",
+	"name" : "2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DCT",
+	"name" : "2',3'-DIDEOXYCYTIDINE 5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "DBY",
+	"name" : "3,5 DIBROMOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "DBS",
+	"name" : "2-(2,3-DIHYDROXY-BENZOYLAMINO)-3-HYDROXY-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "DDE",
+	"name" : "{3-[4-(2-AMINO-2-CARBOXY-ETHYL)-1H-IMIDAZOL-2-YL]-1-CARBAMOYL-PROPYL},-TRIMETHYL-AMMONIUM",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "DBU",
+	"name" : "(2Z)-2-AMINOBUT-2-ENOIC ACID",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "DDG",
+	"name" : "2',3'-DIDEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DDN",
+	"name" : "3,4-DIHYDRO-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "DDZ",
+	"name" : "3,3-DIHYDROXY L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "DFC",
+	"name" : "2'-DEOXY-L-RIBO-FURANOSYL CYTOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "DFG",
+	"name" : "2'-DEOXY-L-RIBO-FURANOSYL GUANINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DHU",
+	"name" : "5,6-DIHYDROURIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "DGI",
+	"name" : "2'-DEOXYGUANOSINE-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DHN",
+	"name" : "5-HYDROXY NORVALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "DG8",
+	"name" : "2'-deoxy-8-(pyren-1-ylamino)guanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DI7",
+	"name" : "2,6-dimethyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "DGP",
+	"name" : "2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "DHA",
+	"name" : "2-AMINO-ACRYLIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "DJD",
+	"name" : "4-(6-methyl-1,2,4,5-tetrazin-3-yl)-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "DIR",
+	"name" : "3-{[(E)-AMINO(HYDROXYIMINO)METHYL]AMINO},ALANINE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "DMK",
+	"name" : "3,3-DIMETHYL ASPARTIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "DM0",
+	"name" : "N~2~,N~2~,N~6~,N~6~-tetramethyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "DLS",
+	"name" : "DI-ACETYL-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "DMH",
+	"name" : "N4,N4-DIMETHYL-ASPARAGINE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "DNS",
+	"name" : "N~6~-{[5-(DIMETHYLAMINO)-1-NAPHTHYL]SULFONYL},-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "DNW",
+	"name" : "3-[(2,4-dinitrophenyl)amino]-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "DOH",
+	"name" : "BETA-HYDROXY ASPARTIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "DNR",
+	"name" : "2'-DEOXY-N3-PROTONATED CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "DNL",
+	"name" : "6-AMINO-HEXANAL",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "DOC",
+	"name" : "2',3'-DIDEOXYCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "DON",
+	"name" : "6-DIAZENYL-5-OXO-L-NORLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "DNP",
+	"name" : "3-AMINO-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "DPQ",
+	"name" : "(S)-2-AMINO-3-(4-HYDROXY-3-OXOCYCLOHEXA-1,4-DIENYL)PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "DPB",
+	"name" : "(S)-1-[2'-DEOXY-3',5'-O-(1-PHOSPHONO)BENZYLIDENE-B-D-THREO-PENTOFURANOSYL]THYMINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "DPP",
+	"name" : "DIAMINOPROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "DP1",
+	"name" : "L-N(OMEGA)-NITROARGININE-2,4-L-DIAMINOBUTYRIC AMIDE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "DPL",
+	"name" : "4-OXOPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "DRM",
+	"name" : "{[(1R,2S)-2-(2,4-DIOXO-3,4-DIHYDROPYRIMIDIN-1(2H)-YL)CYCLOPENTYL]OXY},METHYLPHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "DRT",
+	"name" : "2'-DEOXY-L-RIBO-FURANOSYL THYMINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "DUZ",
+	"name" : "5-(benzylcarbamoyl)-2'-deoxyuridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "DYS",
+	"name" : "S-[5-(2-aminoethyl)-2,3-dihydroxyphenyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "DYG",
+	"name" : "(3S)-3-amino-3-[(4Z)-1-(carboxymethyl)-4-[(4-hydroxyphenyl)methylidene]-5-oxo-imidazol-2-yl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "ASP, TYR, GLY"
+},
+{
+	"_id" : "DZM",
+	"name" : "3-deaza-3-methyladenine",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "DYA",
+	"name" : "DIDEHYDROASPARTATE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "DYJ",
+	"name" : "1-[(2E)-4-carboxy-4-oxobut-2-en-2-yl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "E0Y",
+	"name" : "(3S,5R)-5-[(2R,3R)-1,3-dihydroxybutan-2-yl]-3-({(3R)-1-[(1E)-ethanimidoyl]pyrrolidin-3-yl},sulfanyl)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "E",
+	"name" : "N-((-)-(7S,8R,9S,10R)[7,8,9-TRIHYDROXY-7,8,9,10-TETRA HYDROBENZO[A]PYREN-10-YL])-2'-DEOXY-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "E1X",
+	"name" : "PHOSPHORIC ACID MONO-[5-(1-ETHYL-2,6-DIOXO-1,2,3,6-TETRAHYDRO-PURIN-9-YL)-3-HYDROXY-TETRAHYDRO-FURAN-2-YLMETHYL]ESTER",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "E3C",
+	"name" : "3-ethyl, cytidine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "E7G",
+	"name" : "7-ethyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "E6G",
+	"name" : "6-ethyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "EAN",
+	"name" : "[(1~{S},,2~{R},4~{R},6~{S},8~{R})-8-[5-methyl-2,4-bis(oxidanylidene)pyrimidin-1-yl]-6-oxidanyl-9-oxatricyclo[4.3.0.0^{2,4}]nonan-2-yl] dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "E9M",
+	"name" : "N-methyl-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "E9V",
+	"name" : "N-methyl-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "EDA",
+	"name" : "3-[2-DEOXY-RIBOFURANOSYL]-3H-1,3,4,5A,8-PENTAAZA-AS-INDACENE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "ECC",
+	"name" : "(4S)-4-amino-5-hydroxypentanamide",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "ECX",
+	"name" : "S-ethyl-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "EFC",
+	"name" : "S,S-(2-FLUOROETHYL)THIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "EFG",
+	"name" : "1-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-1H-imidazo[2,1-b]purin-4(5H)-one",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "EHG",
+	"name" : "9-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-6-(2-hydroxyethoxy)-9H-purin-2-amine",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "EIT",
+	"name" : "((3R,4R,5R)-4-(2-(1H-IMIDAZOL-1-YL)ETHOXY)-3-HYDROXY-5-(5-METHYL-2,4-DIOXO-3,4-DIHYDROPYRIMIDIN-1(2H)-YL)-TETRAHYDROFURAN-2-YL)METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "EHP",
+	"name" : "3-HYDROXYPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "EJA",
+	"name" : "S-[(1Z)-2-carboxy-N-hydroxyethanimidoyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "ELY",
+	"name" : "N~6~,N~6~-diethyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "EME",
+	"name" : "N-methyl-L-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "EPQ",
+	"name" : "(4S)-4-amino-6-fluoro-N,N-dimethyl-5-oxohexanamide",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "EPM",
+	"name" : "N-PALMITOYL-L-METHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "EQ4",
+	"name" : "5'-O-[(R)-(2-amino-1H-imidazol-1-yl)(hydroxy)phosphoryl]guanosine",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "ESC",
+	"name" : "2-AMINO-4-ETHYL SULFANYL BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "ESB",
+	"name" : "3-[(3E)-3-(ETHYLIMINO)-4-HYDROXY-6-OXOCYCLOHEXA-1,4-DIEN-1-YL]-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "EUP",
+	"name" : "4-amino-L-allothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "EXA",
+	"name" : "N~6~-[(R)-[(1-carboxyethenyl)amino]{3-hydroxy-2-methyl-5-[(phosphonooxy)methyl]pyridin-4-yl},methyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "EXC",
+	"name" : "3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-8-hydroxy-7,7,9,9-tetramethyl-7,8,9,11-tetrahydropyrimido[4',5' :5,6][1,4]oxazino[2,3-f]isoindol-2(3H)-one radical",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "EXY",
+	"name" : "6-[(2R)-oxiran-2-yl]-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "EYG",
+	"name" : "{(2R,4Z)-2-[(1R)-1-amino-3-(methylsulfanyl)propyl]-2-hydroxy-4-[(4-hydroxyphenyl)methylidene]-5-oxoimidazolidin-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "MET, TYR, GLY"
+},
+{
+	"_id" : "EZY",
+	"name" : "N-[(2-nitrophenyl)methyl]glycine",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "F2T",
+	"name" : "2'-deoxy-2'-fluoro-5'-O-thiophosphonouridine",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "F2F",
+	"name" : "3,4-difluoro-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "F3H",
+	"name" : "1,5-anhydro-2,3-dideoxy-3-fluoro-2-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-6-O-phosphono-D-altritol",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "F4H",
+	"name" : "1,5-anhydro-2,3-dideoxy-3-fluoro-2-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-6-O-phosphono-D-mannitol",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "F3N",
+	"name" : "3'-deoxy-3'-(L-phenylalanylamino)adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "F4Q",
+	"name" : "[(1~{S},,2~{R},4~{R},6~{S},8~{R})-8-(2-azanyl-6-oxidanylidene-1~{H}-purin-9-yl)-6-oxidanyl-9-oxatricyclo[4.3.0.0^{2,4}]nonan-2-yl] dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "F7W",
+	"name" : "7-Fluorotryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "F74",
+	"name" : "8-chloro-2'-deoxyguanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "F7Q",
+	"name" : "(2~{S},)-2-azanyl-3-[1-(dioxidanyl)-4-oxidanylidene-cyclohexa-2,5-dien-1-yl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "F75",
+	"name" : "2-(aminomethyl)-1,3-thiazole-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "GLY, CYS"
+},
+{
+	"_id" : "F7H",
+	"name" : "4-azanyl-1-[(1~{S},,2~{R},4~{S},6~{S},8~{R})-2,6-bis(oxidanyl)-9-oxatricyclo[4.3.0.0^{2,4}]nonan-8-yl]-5-methyl-pyrimidin-2-one",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "F6N",
+	"name" : "2-(aminomethyl)-1,3-oxazole-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "GLY, SER"
+},
+{
+	"_id" : "F7K",
+	"name" : "2-azanyl-9-[(1~{S},,2~{R},4~{S},6~{S},8~{R})-2,6-bis(oxidanyl)-9-oxatricyclo[4.3.0.0^{2,4}]nonan-8-yl]-1~{H}-purin-6-one",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "FB6",
+	"name" : "6-(dihydroxyboranyl)-2-methyl-L-norleucine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "FAK",
+	"name" : "N~6~-(trifluoroacetyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FB5",
+	"name" : "2-(difluoromethyl)-6-(dihydroxyboranyl)-L-norleucine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "FA2",
+	"name" : "5-(6-AMINO-9H-PURIN-9-YL)-4-HYDROXYTETRAHYDROFURAN-3-YLDIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "FC0",
+	"name" : "N-CARBOXY-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "FCL",
+	"name" : "3-CHLORO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "FDG",
+	"name" : "2-amino-9-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-7,9-dihydro-1H-purine-6,8-dione",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "FDL",
+	"name" : "N~6~-acetyl-N-(4-methyl-2-oxo-2H-chromen-7-yl)-L-lysinamide",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FFM",
+	"name" : "S-[(1R,2R)-2-hydroxy-1-methyl-2-phosphonoethyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "FGL",
+	"name" : "2-AMINOPROPANEDIOIC ACID",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "FHU",
+	"name" : "(5S,6R)-5-FLUORO-6-HYDROXY-PSEUDOURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "FHE",
+	"name" : "2-[(4~{Z},)-2-[(1~{R})-1-azanyl-2-oxidanylidene-propyl]-4-[[4-[(2-nitrophenyl)methoxy]phenyl]methylidene]-5-oxidanylidene-imidazol-1-yl]ethanoic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "FGP",
+	"name" : "2-AMINO-3-HYDROXY-3-PHOSPHONOOXY-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "FH7",
+	"name" : "N^5^-formyl-N^5^-hydroxy-D-ornithine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FHL",
+	"name" : "(E)-N~6~-[3-CARBOXY-1-(HYDROXYMETHYL)PROPYLIDENE]-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FHO",
+	"name" : "N^5^-FORMYL-N^5^-HYDROXY-L-ORNITHINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FIO",
+	"name" : "N~5~-[(1E)-2-fluoroethanimidoyl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "FLE",
+	"name" : "FUROYL-LEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "FLA",
+	"name" : "TRIFLUOROALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "FLT",
+	"name" : "FLUOROMALONYL TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "FNU",
+	"name" : "6-amino-5-fluorouridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "FMG",
+	"name" : "2-amino-9-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)-7-methyl-6-oxo-6,9-dihydro-1H-purin-7-ium",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "FME",
+	"name" : "N-FORMYLMETHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "FOE",
+	"name" : "2-(2-AMINO-3-OXO-PROPYLSULFANYL)-N-(4-FLUORO-PHENYL)-N-ISOPROPYL-ACETAMIDE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "FOX",
+	"name" : "((1R,2S,4R)-4-{[2-AMINO-5-(FORMYLAMINO)-6-OXO-3,6-DIHYDROPYRIMIDIN-4-YL]AMINO},-2-HYDROXYCYCLOPENTYL)METHYL 5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "FP9",
+	"name" : "(4R)-4-fluoro-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "FQA",
+	"name" : "N~6~-benzyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "FPK",
+	"name" : "1-formyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "FT6",
+	"name" : "6-FLUORO-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "FTY",
+	"name" : "DEOXY-DIFLUOROMETHELENE-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "FVA",
+	"name" : "N-formyl-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "FSW",
+	"name" : "methyl 6-deoxy-2-Se-methyl-2-seleno-alpha-L-galactopyranoside",
+	"mon_nstd_parent_comp_id" : "FUC"
+},
+{
+	"_id" : "FTR",
+	"name" : "FLUOROTRYPTOPHANE",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "FY2",
+	"name" : "2,3-difluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "FY3",
+	"name" : "2,3,5-trifluoro-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "FZN",
+	"name" : "(2S)-2-amino-6-{[(1Z)-1-{[(2R,3R,4S,5R)-5-({[(R)-{[(R)-{[(2R,3S,4R,5R)-5-(6-amino-9H-purin-9-yl)-3,4-dihydroxytetrahydrofuran-2-yl]methoxy},(hydroxy)phosphoryl]oxy}(hydroxy)phosphoryl]oxy}methyl)-3,4-dihydroxytetrahydrofuran-2-yl]sulfanyl}ethylidene]amino}hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "G1G",
+	"name" : "7-METHYL-GUANOSINE-5'-TRIPHOSPHATE-5'-(2'-O-METHYL)-GUANOSINE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G25",
+	"name" : "GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G2S",
+	"name" : "GUANOSINE-5'-DITHIOPHOSPHORATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G01",
+	"name" : "N-[(R)-hydroxy(methyl)phosphoryl]-D-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "G2L",
+	"name" : "3'-O-METHYOXYETHYL-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G31",
+	"name" : "3'-METHYL-2',3'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G38",
+	"name" : "3'-AMINO-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G32",
+	"name" : "O6-METHYL-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G33",
+	"name" : "8-METHYL-2'-DEOXYGUANOSINE 3'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G3A",
+	"name" : "GUANOSINE-P3-ADENOSINE-5',5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G,A"
+},
+{
+	"_id" : "G36",
+	"name" : "O6-ETHYL-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G3M",
+	"name" : "(3S)-N~6~-carbamimidoyl-3-hydroxy-L-lysine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "G42",
+	"name" : "8-OXO-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G47",
+	"name" : "N2-ETHANETHIOL-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G5G",
+	"name" : "(2S,4S)-2-amino-4,5-dihydroxy-4-methylpentanoic acid",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "G46",
+	"name" : "GUANOSINE-5'-MONOTHIOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G49",
+	"name" : "N2-METHYL-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "G48",
+	"name" : "2'-O-METHYOXYETHYL-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G7M",
+	"name" : "N7-METHYL-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "G8M",
+	"name" : "(1S,2R)-2-[(S)-amino(carboxy)methyl]cyclobutanecarboxylic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GAU",
+	"name" : "(4S)-4-AMINO-5-HYDROXYPENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GCK",
+	"name" : "PHOSPHORIC ACID 9-(2-GUANIDINOETHOXY-3-(2-DEOXY-BETA-D-ERYTHROPENTOFURANOSYL))-3H-PYRIMIDO-[5,4-B][1,4]-BENZOOXAZIN-2-ONE]-5'-ESTER",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "GAO",
+	"name" : "GUANINE ARABINOSE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GF2",
+	"name" : "2'-deoxy-2'-fluoroguanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GDR",
+	"name" : "GUANOSINE-5'-DIPHOSPHATE-RHAMNOSE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GFL",
+	"name" : "2-AMINO-9-(2-DEOXY-2-FLUORO-5-O-PHOSPHONO-BETA-D-ARABINOFURANOSYL)-1,9-DIHYDRO-6H-PURIN-6-ONE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GFT",
+	"name" : "(2S)-2-azanyl-3-[cyclohexyloxy(methyl)phosphoryl]oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "GDO",
+	"name" : "3'-deoxy-guanosine 5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GDP",
+	"name" : "GUANOSINE-5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GEE",
+	"name" : "ethyl glycinate",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "GH3",
+	"name" : "3'-DEOXY-GUANOSINE-5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GHG",
+	"name" : "(2S,4S)-2,5-diamino-4-hydroxy-5-oxopentanoic acid (non-preferred name)",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "GHC",
+	"name" : "N-({4-[(2-amino-6-ethyl-4-oxo-3,4-dihydrothieno[2,3-d]pyrimidin-5-yl)sulfanyl]phenyl},carbonyl)-L-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GHW",
+	"name" : "N-({4-[(2-amino-6-methyl-4-oxo-3,4-dihydrothieno[2,3-d]pyrimidin-5-yl)sulfanyl]phenyl},carbonyl)-L-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{ "_id" : "GL3", "name" : "THIOGLYCIN", "mon_nstd_parent_comp_id" : "GLY" },
+{
+	"_id" : "GLQ",
+	"name" : "4-AMINO-5-OXO-PENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GLH",
+	"name" : "N-5-CYCLOHEXYL-N-5-[(CYCLOHEXYLAMINO)CARBONYL]GLUTAMINE",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "GLJ",
+	"name" : "5,5-dihydroxy-L-norvaline",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GME",
+	"name" : "5-O-methyl-glutamic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GLK",
+	"name" : "(4S)-4-amino-5,5-dihydroxypentanoic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GMU",
+	"name" : "2'-O-[(2-GUANIDINIUM)ETHYL]-5-METHYLURIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "GMO",
+	"name" : "{(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-[(4-nitrophenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY"
+},
+{
+	"_id" : "GLZ",
+	"name" : "AMINO-ACETALDEHYDE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "GMA",
+	"name" : "4-AMIDO-4-CARBAMOYL-BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GMS",
+	"name" : "2'-DEOXYGUANOSINE-5'-MONOSELENOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GNC",
+	"name" : "N~2~-methyl-L-glutamine",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "GNG",
+	"name" : "2'-DEOXY-GUANOSINE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GN7",
+	"name" : "N7-2'-DEOXY-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{ "_id" : "GOM", "name" : "GLUTAMOL-AMP", "mon_nstd_parent_comp_id" : "G" },
+{
+	"_id" : "GPL",
+	"name" : "LYSINE GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "GS",
+	"name" : "GUANOSINE-5'-THIO-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GRB",
+	"name" : "8-bromoguanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GSC",
+	"name" : "2-ETHYLTHIO GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "GSS",
+	"name" : "2'-DEOXY-N2-(S)STYRENE OXIDE GUANOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GTP",
+	"name" : "GUANOSINE-5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "GSR",
+	"name" : "2'-DEOXY-N2-(R)STYRENE OXIDE GUANOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GT9",
+	"name" : "S-NONYL-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "GSU",
+	"name" : "O5'-(L-GLUTAMYL-SULFAMOYL)-ADENOSINE",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "GVL",
+	"name" : "O-[(R)-{[(3R)-4-AMINO-3-HYDROXY-2,2-DIMETHYL-4-OXOBUTYL]OXY},(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "GX1",
+	"name" : "2'-deoxy-5'-O-{(S)-hydroxy[(2-sulfanylethyl)amino]phosphoryl},guanosine",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "GYS",
+	"name" : "[(4Z)-2-(1-AMINO-2-HYDROXYETHYL)-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "SER, TYR, GLY"
+},
+{
+	"_id" : "GYC",
+	"name" : "[(4Z)-2-[(1R)-1-AMINO-2-MERCAPTOETHYL]-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "H2U",
+	"name" : "5,6-DIHYDROURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "H1D",
+	"name" : "(2S)-2-AMINO-4-[(2R,3S)-2,3-DIHYDROXY-3-N-HYDROXYCARBAMOYL-PROPYLMERCAPTO]BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "H14",
+	"name" : "(2S,3R)-BETA-HYDROXY-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "H5M",
+	"name" : "TRANS-3-HYDROXY-5-METHYLPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "H7V",
+	"name" : "3-cyclohexyl-N-methyl-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "HAR",
+	"name" : "N-OMEGA-HYDROXY-L-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "HBN",
+	"name" : "N-(2-NAPHTHYL)HISTIDINAMIDE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HAC",
+	"name" : "BETA-CYCLOHEXYL-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "HDP",
+	"name" : "[(1S,6S)-6-HYDROXY-4-(5-METHYL-2,4-DIOXO-3,4-DIHYDROPYRIMIDIN-1(2H)-YL)CYCLOHEX-2-EN-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "HCM",
+	"name" : "(2S)-2-amino-4-(methyldisulfanyl)butanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "HEU",
+	"name" : "3-(2-HYDROXYETHYL)-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "HGY",
+	"name" : "(2S)-amino(hydroxy)ethanoic acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "HHI",
+	"name" : "(2Z)-3-(1H-imidazol-5-yl)-2-iminopropanoic acid",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HHK",
+	"name" : "(2S)-2,8-DIAMINOOCTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA, LYS"
+},
+{
+	"_id" : "HIQ",
+	"name" : "1-[1,2-DIHYDROXY-1-(HYDROXYMETHYL)ETHYL]-L-HISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HIA",
+	"name" : "L-HISTIDINE AMIDE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HIP",
+	"name" : "ND1-PHOSPHONOHISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HIC",
+	"name" : "4-METHYL-HISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HIX",
+	"name" : "3-(1H-1,2,3-triazol-5-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "HMR",
+	"name" : "BETA-HOMOARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "HN0",
+	"name" : "2'-deoxy-N-[(2S,3S,5R)-5-hydroxy-2-pentyltetrahydrofuran-3-yl]guanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "HNC",
+	"name" : "S-[(1S,2R)-2-hydroxy-1-(2-oxoethyl)heptyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "HL5",
+	"name" : "(2S,4R)-5-hydroxyleucine",
+	"mon_nstd_parent_comp_id" : "Leu"
+},
+{
+	"_id" : "HL2",
+	"name" : "(2S,3R)-2-amino-3-hydroxy-4-methylpentanoic acid",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "HLU",
+	"name" : "BETA-HYDROXYLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "HLY",
+	"name" : "(3~{R},)-5-[[(5~{S})-5-azanyl-6-oxidanyl-6-oxidanylidene-hexyl]amino]-3-methyl-3-oxidanyl-5-oxidanylidene-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "HN1",
+	"name" : "(6S,8R)-3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-8-hydroxy-6-[(1S)-1-hydroxyhexyl]-4,6,7,8-tetrahydropyrimido[1,2-a]purin-10(3H)-one",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "HPH",
+	"name" : "(2S)-2-amino-3-phenylpropane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "HPQ",
+	"name" : "HOMOPHENYLALANINYLMETHANE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "HOO",
+	"name" : "(2~{S},)-2-azanyl-3-[2,5-bis(oxidanylidene)imidazol-4-yl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HPC",
+	"name" : "3-AMINO-4-PHENYL-BUTAN-2-ONE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "HOX",
+	"name" : "4-amino-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "HPE",
+	"name" : "HOMOPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "HRG",
+	"name" : "L-HOMOARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "HQA",
+	"name" : "3-(8-hydroxyquinolin-3-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "HSL",
+	"name" : "HOMOSERINE LACTONE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "HS9",
+	"name" : "N-ALPHA-METHYL-L-HISTIDINAMIDE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HS8",
+	"name" : "3-(1-sulfo-1H-imidazol-3-ium-4-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HSK",
+	"name" : "3-hydroxy-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HR7",
+	"name" : "(3S)-3-amino-6-[(diaminomethylidene)amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "HRP",
+	"name" : "5-HYDROXY-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "HSE",
+	"name" : "L-HOMOSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "HSV",
+	"name" : "L-histidinal",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HSO",
+	"name" : "L-histidinol",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "HTR",
+	"name" : "BETA-HYDROXYTRYPTOPHANE",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "HVA",
+	"name" : "3-hydroxy-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "HT7",
+	"name" : "(3S)-3-AMINO-4-(1H-INDOL-3-YL)BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "HTI",
+	"name" : "(4S)-4-{[(2S)-2-AMINO-3-OXOPROPYL]SULFANYL},-L-HOMOSERINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "HV5",
+	"name" : "TERT-BUTYLALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "HY3",
+	"name" : "3-HYDROXYPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "HZP",
+	"name" : "(4S)-4-hydroxy-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "HYI",
+	"name" : "(2S)-2-AMINO-4-[(2R,3R)-2,3-DIHYDROXY-3-N-HYDROXYCARBAMOYL-PROPYLMERCAPTO]BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "HYP",
+	"name" : "4-HYDROXYPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "I2M",
+	"name" : "3-methyl-L-alloisoleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "I4U",
+	"name" : "4-isopropyl, uridine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "I4G",
+	"name" : "N-(2-methylpropyl)glycine",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "I5C",
+	"name" : "5-IODO-2'-DEOXY-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "I58",
+	"name" : "4R-FLUORO-N6-ETHANIMIDOYL-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "IC",
+	"name" : "ISOCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "IAR",
+	"name" : "(2E)-5-[(diaminomethylidene)amino]-2-iminopentanoic acid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "IAM",
+	"name" : "4-[(ISOPROPYLAMINO)METHYL]PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "ICY",
+	"name" : "S-(2-iodobenzyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "IEY",
+	"name" : "2-((1E)-2-(5-IMIDAZOLYL)ETHENYL)-4-(P-HYDROXYBENZYLIDENE)-5-IMIDAZOLINONE",
+	"mon_nstd_parent_comp_id" : "HIS, TYR, GLY"
+},
+{
+	"_id" : "IEL",
+	"name" : "N~6~-[(1Z)-ethanimidoyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "IIC",
+	"name" : "4-IMIDAZOLMETHYLENE-5-IMIDAZOLONE CHROMOPHORE",
+	"mon_nstd_parent_comp_id" : "SER, HIS, GLY"
+},
+{
+	"_id" : "IIL",
+	"name" : "ISO-ISOLEUCINE",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "IF7",
+	"name" : "(3S,4S,5R)-5-(hydroxymethyl)-3,4-bis(oxidanyl)piperidin-2-one",
+	"mon_nstd_parent_comp_id" : "ISO-GALACTO-FAGOMINE LACTAM"
+},
+{
+	"_id" : "IGU",
+	"name" : "2'-DEOXYISOGUANINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "IG",
+	"name" : "ISOGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "IGL",
+	"name" : "ALPHA-AMINO-2-INDANACETIC ACID",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "IMC",
+	"name" : "N1-[2-DEOXY-RIBOFURANOSYL]-[2-AMINO-5-METHYL-4-OXO-4H-PYRIMIDINE]-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "ILM",
+	"name" : "methyl L-isoleucinate",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "ILY",
+	"name" : "N~6~-propan-2-yl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "IML",
+	"name" : "N-METHYL-ISOLEUCINE",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "ILG",
+	"name" : "GLUTAMYL GROUP",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{ "_id" : "IMP", "name" : "INOSINIC ACID", "mon_nstd_parent_comp_id" : "G" },
+{
+	"_id" : "ILX",
+	"name" : "4,5-DIHYDROXYISOLEUCINE",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "IOR",
+	"name" : "N~5~-[(5R)-5-methyl-4-oxo-4,5-dihydro-1H-imidazol-2-yl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "IPG",
+	"name" : "N-ISOPROPYL GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "IT1",
+	"name" : "(2S)-2-amino-6-[[3-hydroxy-2-methyl-5-(phosphonooxymethyl)pyridin-4-yl]methylideneamino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "IU",
+	"name" : "5-IODOURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "IYR",
+	"name" : "3-IODO-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "IZO",
+	"name" : "(2S)-2-AMINOHEX-5-YNOIC ACID",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "J3D",
+	"name" : "N-carboxy-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "JDT",
+	"name" : "2'-deoxy-5-ethyluridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "J9Y",
+	"name" : "(2S)-2-amino-5-{[(E)-amino(methylamino)methylidene](hydroxy)azaniumyl},pentanoate",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "JMH",
+	"name" : "3-Methylcytidine- 5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "JKH",
+	"name" : "4-amino-Proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "JJK",
+	"name" : "S-[(S)-hydroxy(pyridin-3-yl)methyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "JJJ",
+	"name" : "S-(pyridin-3-ylcarbonyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "JJL",
+	"name" : "S-[(S)-hydroxy(5-methoxypyridin-3-yl)methyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "JLP",
+	"name" : "(2S)-2-azanyl-6-[E-[5-(hydroxymethyl)-2-methyl-3-oxidanyl-pyridin-4-yl]methylideneamino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "K1R",
+	"name" : "(2S)-2-AMINO-4-[({[(2R)-2-AMINO-2-CARBOXYETHYL]THIO},AMINO)SULFINYL]BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "KCR",
+	"name" : "N-6-crotonyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "K5L",
+	"name" : "(2~{R},)-2-azanyl-3-(3-oxidanyl-3-oxidanylidene-propanoyl)oxy-propanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "KCX",
+	"name" : "LYSINE NZ-CARBOXYLIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{ "_id" : "KBE", "name" : "beta-lysine", "mon_nstd_parent_comp_id" : "LYS" },
+{
+	"_id" : "KAG",
+	"name" : "2'-DEOXY-N-[(1S)-1-METHYL-3-OXOPROPYL]GUANOSINE 5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "KAK",
+	"name" : "3'-deoxy-guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "K5H",
+	"name" : "(2~{R},)-2-azanyl-3-[3,3,3-tris(fluoranyl)-2,2-bis(oxidanyl)propyl]sulfanyl-propanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "KEO",
+	"name" : "e(R)-beta-lysyl-hydroxylysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KHB",
+	"name" : "N~6~-[(3S)-3-hydroxybutanoyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KNB",
+	"name" : "3-(methylsulfonyl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "KPY",
+	"name" : "(2R)-2-AZANYL-3-[2-[(E)-(1-OXIDANYL-1-OXIDANYLIDENE-PROPAN-2-YLIDENE)AMINO]ETHYLSULFANYL]PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KOR",
+	"name" : "L-HOMOCYSTEINE-S-N-S-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "KST",
+	"name" : "N~6~-(5-CARBOXY-3-THIENYL)-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KGC",
+	"name" : "N~6~-[(2R)-2-CARBOXY-5-OXOTETRAHYDROFURAN-2-YL]-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KPI",
+	"name" : "(2S)-2-amino-6-[(1-hydroxy-1-oxo-propan-2-ylidene)amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KFP",
+	"name" : "N~6~-[(2-amino-4-oxo-3,4-dihydropteridin-6-yl)methyl]-D-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KPF",
+	"name" : "N-(1-carboxy-2-fluoro-ethenyl) lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KWS",
+	"name" : "{2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-methylidene-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, SER, GLY"
+},
+{
+	"_id" : "KZ4",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-4-[(3-bromo-4-hydroxyphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "KZG",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-4-[(4-hydroxy-3-iodophenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},aceti c acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "L5P",
+	"name" : "(2S)-2-azanyl-6-[[(3R,4R)-3,4-bis(oxidanyl)-2-oxidanylidene-5-phosphonooxy-pentyl]amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KYN",
+	"name" : "(2S)-2-amino-4-(2-aminophenyl)-4-oxobutanoic acid",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "KYQ",
+	"name" : "(E)-N~6~-(1-carboxy-2-hydroxyethylidene)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "KZ1",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-5-oxo-4-[(2,3,5-trifluoro-4-hydroxyphenyl)methylidene]-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "KZY",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-4-[(4-hydroxy-3-methylphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "L3O",
+	"name" : "(2S,3S)-3-amino-2-hydroxy-5-methylhexanoic acid",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "KZ7",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-4-[(3-chloro-4-hydroxyphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "KZV",
+	"name" : "{(4Z)-2-[(1R)-1-amino-2-sulfanylethyl]-4-[(3-fluoro-4-hydroxyphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},ace tic acid",
+	"mon_nstd_parent_comp_id" : "CYS, TYR, GLY"
+},
+{
+	"_id" : "LEN",
+	"name" : "3-METHYLBUTAN-1-AMINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LEX",
+	"name" : "(3S)-3-amino-1-hydroxy-5-methylhexan-2-one",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LEF",
+	"name" : "(4S)-5-FLUORO-L-LEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LCK",
+	"name" : "(Z)-N~6~-(2-carboxy-1-methylethylidene)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LCG",
+	"name" : "[(1R,3R,4R,7S)-7-HYDROXY-3-(GUANIN-9-YL)-2,5-DIOXABICYCLO[2.2.1]HEPT-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "LG",
+	"name" : "L-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "LGP",
+	"name" : "N9-1-HYDROXY-PROP-2-OXYMETHYL-GUANINE-3'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "LCA",
+	"name" : "[(1R,3R,4R,7S)-7-HYDROXY-3-(ADENIN-9-YL)-2,5-DIOXABICYCLO[2.2.1]HEPT-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "LA2",
+	"name" : "N~6~-[(6R)-6,8-disulfanyloctanoyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LED",
+	"name" : "(4R)-5-OXO-L-LEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LAA",
+	"name" : "(3R)-3-hydroxy-L-alpha-asparagine",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "LAY",
+	"name" : "N-acetyl-L-leucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LCX",
+	"name" : "CARBOXYLATED LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LE1",
+	"name" : "3-sulfanyl-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "LC",
+	"name" : "L-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "LDG",
+	"name" : "2'-deoxy-N-[(1,3-dimethoxy-9,10-dioxo-9,10-dihydroanthracen-2-yl)methyl]guanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "LEH",
+	"name" : "N-[12-(1H-imidazol-1-yl)dodecanoyl]-L-leucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LGY",
+	"name" : "(E)-N~6~-(4-oxobutylidene)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LEM",
+	"name" : "(3S)-3-amino-5-methylhexan-2-one",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LAL",
+	"name" : "N,N-DIMETHYL-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "LDH",
+	"name" : "N~6~-ETHYL-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LET",
+	"name" : "(Z)-N^6-{3-CARBOXY-1-[(4-CARBOXY-2-OXOBUTOXY)METHYL]PROPYLIDENE},-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LNE",
+	"name" : "N-ethyl-L-leucinamide",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LPG",
+	"name" : "L-PROPARGYLGLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "LPD",
+	"name" : "L-PROLINAMIDE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "LRK",
+	"name" : "(2S)-2-azanyl-6-[[(2R,4R)-1,4-bis(oxidanyl)-3-oxidanylidene-5-phosphonooxy-pentan-2-yl]amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LME",
+	"name" : "(2S,3R)-2-azanyl-3-methyl-pentanedioic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "LNM",
+	"name" : "N-methyl-L-leucinamide",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "LLO",
+	"name" : "N~6~-[(1S)-3-hydroxy-1,3-dimethylbutyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LMF",
+	"name" : "NZ(N-METHYL THIOFORMAMIDE) LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LLY",
+	"name" : "NZ-(DICARBOXYMETHYL)LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LMQ",
+	"name" : "(3S)-3-methyl-L-glutamine",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "LLP",
+	"name" : "(2S)-2-amino-6-[[3-hydroxy-2-methyl-5-(phosphonooxymethyl)pyridin-4-yl]methylideneamino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LLZ",
+	"name" : "N~6~-[(1S)-3-(6-methoxynaphthalen-2-yl)-1-methyl-3-oxopropyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LP6",
+	"name" : "6-piperidin-1-yl-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LHU",
+	"name" : "L-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "LPS",
+	"name" : "O-{HYDROXY[((2R)-2-HYDROXY-3-{[(1S)-1-HYDROXYPENTADECYL]OXY},PROPYL)OXY]PHOSPHORYL}-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "LVN",
+	"name" : "(3S)-4-oxo-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "LYP",
+	"name" : "N~6~-METHYL-N~6~-PROPYL-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LSH",
+	"name" : "[(1R,5R,7R,8S)-7-[5-methyl-2,4-bis(oxidanylidene)pyrimidin-1-yl]-8-oxidanyl-3,3-bis(oxidanylidene)-6-oxa-3$l^{6},-thia-2-azabicyclo[3.2.1]octan-5-yl]methyl dihydrogenphosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "LYK",
+	"name" : "(2S)-2,6-diaminohexane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYX",
+	"name" : "N''-(2-COENZYME A)-PROPANOYL-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYM",
+	"name" : "DEOXY-METHYL-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYN",
+	"name" : "2,6-DIAMINO-HEXANOIC ACID AMIDE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LTR",
+	"name" : "L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "LVG",
+	"name" : "L-VINYLGLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "LYU",
+	"name" : "N~6~-(4-methylpentyl)-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LST",
+	"name" : "[(1R,5R,7R,8S)-2-methyl-7-[5-methyl-2,4-bis(oxidanylidene)pyrimidin-1-yl]-8-oxidanyl-3,3-bis(oxidanylidene)-6-oxa-3$l^{6},-thia-2-azabicyclo[3.2.1]octan-5-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "LYF",
+	"name" : "(2E,4S)-2-{[(5S)-5-amino-5-carboxypentyl]imino},-4-hydroxyheptanedioic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYO",
+	"name" : "4-HYDROXY-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LWY",
+	"name" : "1-[(R)-hydroxy(methyl)phosphoryl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "LSO",
+	"name" : "(Z)-N~6~-(3-CARBOXY-1-{[(4-CARBOXY-2-OXOBUTYL)SULFONYL]METHYL},PROPYLIDENE)-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYR",
+	"name" : "N~6~-[(2Z,4E,6E,8E)-3,7-DIMETHYL-9-(2,6,6-TRIMETHYLCYCLOHEX-1-EN-1-YL)NONA-2,4,6,8-TETRAENYL]LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "LYZ",
+	"name" : "5-HYDROXYLYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "M3L",
+	"name" : "N-TRIMETHYLLYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "M4C",
+	"name" : "N-methyl-2'-O-methylcytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "M0H",
+	"name" : "S-(HYDROXYMETHYL)-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "M3R",
+	"name" : "Methyl phosphonated L-Arginine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "M7A",
+	"name" : "7-methyl, adenosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "M1G",
+	"name" : "3-(2-DEOXY-BETA-D-RIBOFURANOSYL)-PYRIDO[5,6-A]-PURINE-10-ONE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "M2S",
+	"name" : "3-{[(R)-methylsulfinyl]methyl},-L-valine",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MA",
+	"name" : "METHYL L-ALANINATE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "MAD",
+	"name" : "6-HYDRO-1-METHYLADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "M2G",
+	"name" : "N2-DIMETHYLGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "MAA",
+	"name" : "N-methyl-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "M30",
+	"name" : "N-cyclohexylglycine",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MA6",
+	"name" : "6N-DIMETHYLADENOSINE-5'-MONOPHOSHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "MAI",
+	"name" : "DEOXO-METHYLARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "M2L",
+	"name" : "(2R)-2-amino-3-(2-dimethylaminoethylsulfanyl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "M5M",
+	"name" : "2'-(N-ACETAMIDE)-CYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "MA7",
+	"name" : "1N-METHYLADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "MCL",
+	"name" : "NZ-(1-CARBOXYETHYL)-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "MDF",
+	"name" : "META, META'-DI-HYDROXY-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "MBQ",
+	"name" : "2-HYDROXY-5-({1-[(4-METHYLPHENOXY)METHYL]-3-OXOPROP-1-ENYL},AMINO)-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "MC1",
+	"name" : "METHICILLIN ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "MDO",
+	"name" : "{2-[(1S)-1-aminoethyl]-4-methylidene-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "ALA, SER, GLY"
+},
+{
+	"_id" : "MFV",
+	"name" : "{(4Z)-2-[(1R,2R)-1-amino-2-hydroxypropyl]-4-[(4-hydroxy-3-methylphenyl)methylidene]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "THR, TYR, GLY "
+},
+{
+	"_id" : "MD6",
+	"name" : "N-[(3-hydroxypyridin-2-yl)carbonyl]glycine",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MEG",
+	"name" : "(2S,3S)-2-azanyl-3-methyl-pentanedioic acid",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "MCS",
+	"name" : "MALONYL CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "ME0",
+	"name" : "hydroxy-L-methionine",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MFC",
+	"name" : "5-[1-(3-FLUORO-4-HYDROXY-PHENYL)-METH-(Z)-YLIDENE]-3,5-DIHYDRO-IMIDAZOL-4-ONE",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "MCY",
+	"name" : "5-METHYL-2'-DEOXYCYTIDINE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "ME6",
+	"name" : "[(2R,3S,5R)-5-(4-azanyl-3-methyl-2-oxo-pyrimidin-3-ium-1-yl)-3-hydroxy-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "MD3",
+	"name" : "N-(carboxycarbonyl)-S-(naphthalen-2-ylmethyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "MEQ",
+	"name" : "N5-METHYLGLUTAMINE",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "MFO",
+	"name" : "[(2~{R},,3~{S},5~{R})-5-[2-azanyl-8-[ethanoyl(naphthalen-2-yl)amino]-6-oxidanylidene-3~{H}-purin-9-yl]-3-oxidanyl-oxolan-2-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "MD5",
+	"name" : "N-(carboxycarbonyl)-S-(3-nitrobenzyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "MEA",
+	"name" : "N-METHYLPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "MEU",
+	"name" : "O-METHYL-GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MEP",
+	"name" : "PHOSPHORIC ACID MONO-[4-METHOXY-3-METHYL-5-(5-METHYL-2,4-DIOXO-3,4-DIHYDRO-2H-PYRIMIDIN-1-YL)-TETRAHYDRO-FURAN-2-YLMETHYL] ESTER",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "MEN",
+	"name" : "N-METHYL ASPARAGINE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "MFN",
+	"name" : "N-[4,5,7-TRICARBOXYHEPTANOYL]-L-GAMMA-GLUTAMYL-N-{2-[4-({5-[(FORMYLAMINO)METHYL]-3-FURYL},METHOXY)PHENYL]ETHYL}-D-GLUTAMINE",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "MG1",
+	"name" : "2'-DEOXY-1-METHYLGUANOSINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "MGY",
+	"name" : "N-METHYLGLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MIA",
+	"name" : "2-METHYLTHIO-N6-ISOPENTENYL-ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "MIS",
+	"name" : "MONOISOPROPYLPHOSPHORYLSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "ML3",
+	"name" : "2-{[(2R)-2-amino-2-carboxyethyl]sulfanyl},-N,N,N-trimethylethanaminium",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "MME",
+	"name" : "N-METHYL METHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MMT",
+	"name" : "5'-O-(DIMETHYLAMINO)-THYMIDINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "MGG",
+	"name" : "2-(2-CARBOXY-ACETYLAMINO)-5-GUANIDINO-PENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "MH1",
+	"name" : "1-methyl-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "MHU",
+	"name" : "4-N,N-(DIMETHYLAMINO)-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "MLL",
+	"name" : "METHYL L-LEUCINATE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "MNV",
+	"name" : "N-METHYL-C-AMINO VALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "MLY",
+	"name" : "N-DIMETHYL-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "MNU",
+	"name" : "(2R,4S)-1-[(4R)-3,4-DIHYDROXYTETRAHYDROFURAN-2-YL]-5-[(METHYLAMINO)METHYL]-1,2,3,4-TETRAHYDROPYRIMIDINE-2,4-DIOL-5'-MON OPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "MGV",
+	"name" : "P-FLUORO-7-BENZYL GUANINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "MGN",
+	"name" : "2-METHYL-GLUTAMINE",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "MH6",
+	"name" : "3-hydroxy-2-iminopropanoic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "MNL",
+	"name" : "4,N-DIMETHYLNORLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "MMO",
+	"name" : "N~2~-methyl-L-arginine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "MPQ",
+	"name" : "N-METHYL-ALPHA-PHENYL-GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MGQ",
+	"name" : "7-BENZYL GUANINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "MGT",
+	"name" : "7N-METHYL-8-HYDROGUANOSINE-5'-TRIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "MK8",
+	"name" : "2-methyl-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "MHG",
+	"name" : "2-methyl, 7-(3-methyl-pentane), guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "MHS",
+	"name" : "N1-METHYLATED HISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "MHL",
+	"name" : "N-METHYL-4-HYDROXY-LEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "MHO",
+	"name" : "S-OXYMETHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MIR",
+	"name" : "Monoethylphosphorylserine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "MLE",
+	"name" : "N-METHYLLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "MLZ",
+	"name" : "N-METHYL-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "MP8",
+	"name" : "(4R)-4-methyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "MRG",
+	"name" : "N2-(3-MERCAPTOPROPYL)-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "MSA",
+	"name" : "(2-S-METHYL) SARCOSINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "MSE",
+	"name" : "SELENOMETHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MTU",
+	"name" : "9-BETA-D-RIBOFURANOSYL-9H-PURIN-2-AMINE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "MTY",
+	"name" : "META-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "MSL",
+	"name" : "(2S)-2-AMINO-4-(METHYLSULFONIMIDOYL)BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MT2",
+	"name" : "[(3S)-3-amino-3-carboxypropyl](ethyl)methylsulfonium",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "MTR",
+	"name" : "(5-METHYL-6-OXO-1,6-DIHYDRO-PYRIDIN-3-YL)-1,2-DIDEOXY-RIBOFURANOSE-5-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "MSO",
+	"name" : "SELENOMETHIONINE SELENOXIDE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "NA8",
+	"name" : "(1S)-1-CARBOXY-2-NAPHTHALEN-2-YLETHANAMINIUM",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "NEM",
+	"name" : "NE2-METHYLATED HISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "NEP",
+	"name" : "N1-PHOSPHONOHISTIDINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "MVA",
+	"name" : "N-METHYLVALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "NDU",
+	"name" : "2'-DEOXY-5-NITROURIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "MYK",
+	"name" : "N~6~-tetradecanoyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "N79",
+	"name" : "[(1S,5R,6R,8R)-6-(6-aminopurin-9-yl)spiro[2,4,7-trioxa-3-boranuidabicyclo[3.3.0]octane-3,9'-8-oxa-9-boranuidabicyclo[4.3.0]nona-1(6),2,4-triene]-8-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "NAM",
+	"name" : "NAM NAPTHYLAMINOALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "NDN",
+	"name" : "2'-DEOXY-5-NITROURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "N10",
+	"name" : "O-[(HEXYLAMINO)CARBONYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "N80",
+	"name" : "1-ethenyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "NCU",
+	"name" : "[(1R,5R,7R,8S)-7-(4-amino-5-methyl-2-oxopyrimidin-1(2H)-yl)-8-hydroxy-3-methyl-2,6-dioxa-3-azabicyclo[3.2.1]oct-5-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "MYN",
+	"name" : "(2S)-amino[(4R)-2-amino-1,4,5,6-tetrahydropyrimidin-4-yl]ethanoic acid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "NBQ",
+	"name" : "2-HYDROXY-5-({1-[(2-NAPHTHYLOXY)METHYL]-3-OXOPROP-1-ENYL},AMINO)TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "NCB",
+	"name" : "N-CARBAMOYL-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "N6G",
+	"name" : "((2R,3S,4R,5S)-5-(2,6-DIAMINO-9H-PURIN-9-YL)-3,4-DIHYDROXY-TETRAHYDROFURAN-2-YL)METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "N7P",
+	"name" : "1-ACETYL-L-PROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "NC1",
+	"name" : "NITROCEFIN ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "N5M",
+	"name" : "5-nitrocytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "NAL",
+	"name" : "BETA-(2-NAPHTHYL)-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "NLB",
+	"name" : "6-(benzyloxy)-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "NFA",
+	"name" : "PHENYLALANINE AMIDE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{ "_id" : "NLE", "name" : "NORLEUCINE", "mon_nstd_parent_comp_id" : "LEU" },
+{
+	"_id" : "NIY",
+	"name" : "META-NITRO-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "NLQ",
+	"name" : "N~2~-ACETYL-L-GLUTAMINE",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "NLP",
+	"name" : "(1-AMINO-PENTYL)-PHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "NMS",
+	"name" : "1-(O2-(2-METHYLAMINO-2-OXO-ETHYL)-O5-HYDROXYPHOSPHINYL-BETA-D-RIBOFURANOSYL)THYMINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "NRP",
+	"name" : "{4-[(4-hydroxyphenyl)methylidene]-2-[(1E)-3-methylbutanimidoyl]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "LEU,TYR,GLY"
+},
+{
+	"_id" : "NLO",
+	"name" : "O-METHYL-L-NORLEUCINE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "NLW",
+	"name" : "L-leucinamide",
+	"mon_nstd_parent_comp_id" : "Leu"
+},
+{
+	"_id" : "NLY",
+	"name" : "N-(4-aminobutyl)glycine",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "NPH",
+	"name" : "CYSTEINE-METHYLENE-CARBAMOYL-1,10-PHENANTHROLINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "NLN",
+	"name" : "NORLEUCINE AMIDE",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "NMC",
+	"name" : "N-CYCLOPROPYLMETHYL GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "NNH",
+	"name" : "NOR-N-OMEGA-HYDROXY-L-ARGININE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "NRQ",
+	"name" : "{(4Z)-4-(4-hydroxybenzylidene)-2-[3-(methylthio)propanimidoyl]-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "MET,TYR,GLY"
+},
+{
+	"_id" : "NMM",
+	"name" : "(2S)-2-amino-5-[(N-methylcarbamimidoyl)amino]pentanoic acid",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "NMT",
+	"name" : "1-(O2-(METHYLCARBAMOYL)-O5-HYDROXYPHOSPHINYL-BETA-D-RIBOFURANOSYL)THYMINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "NPI",
+	"name" : "(2S)-2-aminoheptanedioic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "NOT",
+	"name" : "6-azido-L-norleucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "OBS",
+	"name" : "(Z)-N^6-[(4S,5R)-5-(2-CARBOXYETHYL)-4-(CARBOXYMETHYL)-1-HYDROXYDIHYDRO-2H-THIOPYRANIUM-3(4H)-YLIDENE]-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "OHU",
+	"name" : "2'-deoxy-5-hydroxyuridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "OIM",
+	"name" : "[(4Z)-2-{(2R,5R)-2-[(1S,2S)-1-amino-2-methylbutyl]-2-hydroxy-5-methyl-2,5-dihydro-1,3-oxazol-4-yl},-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]aceticacid",
+	"mon_nstd_parent_comp_id" : "ILE, GLY, TYR, GLY"
+},
+{
+	"_id" : "OMU",
+	"name" : "O2'-METHYLURIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "NZC",
+	"name" : "N-methylidene-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "OCS",
+	"name" : "CYSTEINESULFONIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "OIP",
+	"name" : "2'-DEOXY-INOSINIC ACID",
+	"mon_nstd_parent_comp_id" : "DI"
+},
+{
+	"_id" : "NZH",
+	"name" : "(2S)-2-AMINO-3-[1-(1H-TETRAAZOL-5-YL)-1H-IMIDAZOL-4-YL]PROPANAL",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "OLT",
+	"name" : "O-METHYL-L-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "OMX",
+	"name" : "(betaR)-beta-hydroxy-L-Tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "OMT",
+	"name" : "S-DIOXYMETHIONINE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "NTR",
+	"name" : "META-HYDROXY BETA NOR-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "NTY",
+	"name" : "BETA NOR-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "NYC",
+	"name" : "[(4E)-2-[(1R,2S)-1-AMINO-2-HYDROXYPROPYL]-4-(1H-INDOL-3-YLMETHYLENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETICACID",
+	"mon_nstd_parent_comp_id" : "THR, TRP, GLY"
+},
+{
+	"_id" : "OHI",
+	"name" : "3-(2-OXO-2H-IMIDAZOL-4-YL)-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "NTT",
+	"name" : "[(1R,5R,7R,8S)-8-hydroxy-3-methyl-7-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-2,6-dioxa-3-azabicyclo[3.2.1]oct-5-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "NYG",
+	"name" : "[(4Z)-2-[(1S)-1,3-DIAMINO-3-OXOPROPYL]-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ASN,TYR,GLY"
+},
+{
+	"_id" : "OLZ",
+	"name" : "O-(2-aminoethyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "ONE",
+	"name" : "1-(BETA-D-RIBOFURANOSYL)-PYRIDIN-4-ONE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "ONH",
+	"name" : "N~5~-hydroxy-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "OCY",
+	"name" : "HYDROXYETHYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "NWD",
+	"name" : "3-(5-nitro-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "OAS",
+	"name" : "O-ACETYLSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "OLD",
+	"name" : "3-[2-(4-bromophenyl)-2-oxoethyl]-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{ "_id" : "NVA", "name" : "NORVALINE", "mon_nstd_parent_comp_id" : "VAL" },
+{
+	"_id" : "NYS",
+	"name" : "S-{5-[(1R)-2-amino-1-hydroxyethyl]-2,3-dihydroxyphenyl},-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "OMH",
+	"name" : "O-[(S)-hydroxy(methoxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "O2G",
+	"name" : "2'-DEOXY-N,N-DIMETHYL-5'-O-[OXIDO(OXO)PHOSPHONIO]GUANOSINE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "OAR",
+	"name" : "N-(4-AMINO-5-HYDROXY-PENTYL)-GUANIDINE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "OFM",
+	"name" : "[(4Z)-2-{(2R,5R)-2-[(1S)-1-amino-2-phenylethyl]-2-hydroxy-5-methyl-2,5-dihydro-1,3-oxazol-4-yl},-4-(4-hydroxybenzylidene )-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "PHE, GLY, TYR, GLY"
+},
+{
+	"_id" : "NYB",
+	"name" : "N-METHYL-S-[(1R)-1-METHYLPROPYL]-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "OMC",
+	"name" : "O2'-METHYLYCYTIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "OMG",
+	"name" : "O2'-METHYLGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "OHS",
+	"name" : "O-(CARBOXYSULFANYL)-4-OXO-L-HOMOSERINE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "OMY",
+	"name" : "(betaR)-3-chloro-beta-hydroxy-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "OTH",
+	"name" : "N,O-dimethyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{ "_id" : "ORN", "name" : "L-ornithine", "mon_nstd_parent_comp_id" : "ALA" },
+{
+	"_id" : "OSE",
+	"name" : "O-SULFO-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "ORQ",
+	"name" : "N~5~-ACETYL-L-ORNITHINE",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "OXX",
+	"name" : "OXALYL-ASPARTYL ANHYDRIDE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "OYL",
+	"name" : "1-ethyl-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "OTZ",
+	"name" : "2-[2-(aminomethyl)-1,3-oxazol-4-yl]-1,3-thiazole-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "GLY, SER, CYS"
+},
+{
+	"_id" : "P",
+	"name" : "2'-DEOXY-N1,N2-PROPANO GUANOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "P2Y",
+	"name" : "(2S)-PYRROLIDIN-2-YLMETHYLAMINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "P9S",
+	"name" : "dihydroxypropylcysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "P4U",
+	"name" : "4-propyl, uridine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "P7G",
+	"name" : "7-propyl, guanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "P3Q",
+	"name" : "2-hydroxy-5-{[(1E)-1-(2-oxoethylidene)-4-phenylbutyl]amino},-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "P2U",
+	"name" : "2'-DEOXY-PSEUDOURIDINE-5'MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "P5P",
+	"name" : "PURINE RIBOSIDE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "P5U",
+	"name" : "O-[(4-cyanophenyl)sulfonyl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "P2Q",
+	"name" : "2-hydroxy-5-{[(1S,2E)-1-formyl-4-phenoxybut-2-en-1yl]amino},-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "P1L",
+	"name" : "S-PALMITOYL-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "P2T",
+	"name" : "2'-O-PROPYL THYMIDINE-5-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "PCS",
+	"name" : "PHENYLALANYLMETHYLCHLORIDE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PHD",
+	"name" : "ASPARTYL PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "PKR",
+	"name" : "(2S)-1-methylpyrrolidine-2-carbaldehyde",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PF5",
+	"name" : "2,3,4,5,6-PENTAFLUORO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PG7",
+	"name" : "((2R,3R,5R)-5-(2-AMINO-6-HYDROXY-9H-PURIN-9-YL)-3-HYDROXY-TETRAHYDROFURAN-2-YL)METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "PGN",
+	"name" : "2'-DEOXYGUANOSINE-3',5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "PHL",
+	"name" : "L-PHENYLALANINOL",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PHI",
+	"name" : "IODO-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PEC",
+	"name" : "S,S-PENTYLTHIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "PBF",
+	"name" : "PARA-(BENZOYL)-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PHA",
+	"name" : "PHENYLALANINAL",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PAS",
+	"name" : "2-AMINO-4-OXO-4-PHOSPHONOOXY-BUTYRIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "PCC",
+	"name" : "5-OXOPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PE1",
+	"name" : "N~2~-({3-HYDROXY-2-METHYL-5-[(PHOSPHONOOXY)METHYL]PYRIDIN-4-YL},METHYL)-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "PBB",
+	"name" : "S-(4-BROMOBENZYL)CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "PCA",
+	"name" : "PYROGLUTAMIC ACID",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "PGY",
+	"name" : "PHENYLGLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "PAT",
+	"name" : "ALPHA-PHOSPHONO-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "PDU",
+	"name" : "5(1-PROPYNYL)-2'-DEOXYURIDINE-5-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "PIA",
+	"name" : "[(4Z)-2-[(1S)-1-aminoethyl]-4-(4-hydroxybenzylidene)-5-oxo-4,5-dihydro-1H-imidazol-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "ALA,TYR,GLY"
+},
+{
+	"_id" : "PFF",
+	"name" : "4-FLUORO-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PLJ",
+	"name" : "methyl L-prolinate",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PG1",
+	"name" : "PENICILLIN G ACYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "PM3",
+	"name" : "2-AMINO-3-(4-PHOSPHONOMETHYL-PHENYL)-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PMT",
+	"name" : "PHOSPHORIC ACID MONO-[3-(3-{[5-(4-AMINO-2-OXO-2H-PYRIMIDIN-1-YL)-3,4- DIHYDROXY-TETRAHYDRO-FURAN-2- YLMETHOXY]-HYDROXY-PHOSPHORYLOXY},-3-OXO-PROPYLCARBAMOYL)-3-HYDROXY-2,2- DIMETHYL-PROPYL] ESTER",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "PAQ",
+	"name" : "2-OXY-4-HYDROXY-5-(2-HYDRAZINOPYRIDINE)PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "PGP",
+	"name" : "GUANOSINE-3',5'-DIPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "PH6",
+	"name" : "(4S)-4-cyclohexyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PHM",
+	"name" : "(3S)-3-amino-1-chloro-4-phenylbutan-2-one",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{ "_id" : "PRS", "name" : "THIOPROLINE", "mon_nstd_parent_comp_id" : "PRO" },
+{
+	"_id" : "PST",
+	"name" : "THYMIDINE-5'-THIOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "PVH",
+	"name" : "HISTIDINE-METHYL-ESTER",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "POM",
+	"name" : "CIS-5-METHYL-4-OXOPROLINE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PPU",
+	"name" : "PUROMYCIN-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "PRJ",
+	"name" : "(2S,3aS,6R,7aS)-6-hydroxyoctahydro-1H-indole-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PRN",
+	"name" : "PURINE 2'-DEOXYRIBO-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "PRV",
+	"name" : "(2R)-amino(2-nitrophenyl)ethanoic acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "PSH",
+	"name" : "1-thiophosphono-L-histidine",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "PSU",
+	"name" : "PSEUDOURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "PTH",
+	"name" : "CE1-METHYLENE-HYDROXY-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "PTM",
+	"name" : "ALPHA-METHYL-O-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "PPN",
+	"name" : "PARA-NITROPHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PR3",
+	"name" : "S,S-PROPYLTHIOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "PSW",
+	"name" : "3-(SULFANYLSELANYL)-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "SEC"
+},
+{
+	"_id" : "PTR",
+	"name" : "O-PHOSPHOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "PVX",
+	"name" : "N-(2-amino-5-{formyl[(6aS,8R,9R,9aR)-9-hydroxy-4-methoxy-1,11-dioxo-1,6a,8,9,9a,11-hexahydrocyclopenta[c]furo[3',2':4,5]furo[2,3-h]chromen-8-yl]amino},-6-oxo-1,6-dihydropyrimidin-4-yl)-2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosylamine",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "PR7",
+	"name" : "1-[(2S)-2-carboxy-2-hydroxyethyl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PR9",
+	"name" : "D-PROLINAMIDE",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PR4",
+	"name" : "1-[(2R)-2-carboxy-2-hydroxyethyl]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "PPW",
+	"name" : "7-DEAZA-8-AZA-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "PRK",
+	"name" : "N~6~-propanoyl-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "PSA",
+	"name" : "3-HYDROXY-4-AMINO-5-PHENYLPENTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "PR5",
+	"name" : "PURINE RIBOSIDE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "PU",
+	"name" : "PUROMYCIN-N-AMINOPHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "QLG",
+	"name" : "[(4Z)-2-[(1Z)-4-AMINO-4-OXOBUTANIMIDOYL]-4-(2-METHYLPROPYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "GLN, LEU, GLY"
+},
+{
+	"_id" : "PYO",
+	"name" : "1-(BETA-D-RIBOFURANOSYL)-PYRIMIDIN-2-ONE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "QDS",
+	"name" : "N-(quinoxalin-2-ylcarbonyl)-D-serine",
+	"mon_nstd_parent_comp_id" : "DSN"
+},
+{
+	"_id" : "QIL",
+	"name" : "N-formyl-L-isoleucine",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "QBT",
+	"name" : "[(2R,3S,5R)-3-HYDROXY-5-[(5S)-5-METHYL-2,4-DIOXO-1,3-DIAZINAN-1-YL]OXOLAN-2-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "QPH",
+	"name" : "N-formyl-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "QCS",
+	"name" : "S-carbamoyl-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "PZG",
+	"name" : "[(2~{R},,3~{S},4~{R},5~{R})-5-(2-azanyl-6-oxidanylidene-1~{H}-purin-9-yl)-3,4-bis(oxidanyl)oxolan-2-yl]methoxy-(3-methyl-1~{H}-pyrazol-4-yl)phosphinic acid",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "PXU",
+	"name" : "2-hydroxy-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "QPA",
+	"name" : "S-[(1S)-1-carboxy-1-(phosphonooxy)ethyl]-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "PYA",
+	"name" : "3-(1,10-PHENANTHROL-2-YL)-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "PYX",
+	"name" : "S-[S-THIOPYRIDOXAMINYL]CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "QFG",
+	"name" : "{(4E)-2-[(1E)-4-amino-4-oxobutanimidoyl]-4-benzylidene-5-oxo-4,5-dihydro-1H-imidazol-1-yl},acetic acid",
+	"mon_nstd_parent_comp_id" : "GLN, PHE, GLY"
+},
+{
+	"_id" : "QMM",
+	"name" : "N,N-dimethyl-L-glutamine",
+	"mon_nstd_parent_comp_id" : "GLN"
+},
+{
+	"_id" : "PYH",
+	"name" : "N~6~-{[(2R,3R)-3-METHYL-3,4-DIHYDRO-2H-PYRROL-2-YL]CARBONYL},-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "R",
+	"name" : "2'-DEOXY-N6-(R)STYRENE OXIDE ADENOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "RMP",
+	"name" : "2'-DEOXY-ADENOSINE-5'-RP-MONOMETHYLPHOSPHONATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "RE0",
+	"name" : "3-[(3R)-3-hydroxy-2-oxo-2,3-dihydro-1H-indol-3-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "RE3",
+	"name" : "3-[(3S)-3-hydroxy-2-oxo-2,3-dihydro-1H-indol-3-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "RIA",
+	"name" : "2'-O-[(5'-PHOSPHO)RIBOSYL]ADENOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "QUO",
+	"name" : "2-AMINO-7-DEAZA-(2'',3''-DIHYDROXY-CYCLOPENTYLAMINO)-GUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "RPC",
+	"name" : "cytidine 3',5'-bis(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "RDG",
+	"name" : "2'-deoxy-N-(furan-2-ylmethyl)guanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "R4K",
+	"name" : "(2S,3R)-2-azanyl-3-hydroxy-3-[(3S)-3-hydroxy-2-oxo-1H-indol-3-yl]propanoic acid",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "R1A",
+	"name" : "3-{[(2,2,5,5-TETRAMETHYL-1-OXO-2,5-DIHYDRO-1H-PYRROLIUM-3-YL)METHYL]DISULFANYL},-D-ALANINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "RPI",
+	"name" : "phospho-arginine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{ "_id" : "RGL", "name" : "ARGINAL", "mon_nstd_parent_comp_id" : "ARG" },
+{
+	"_id" : "RBD",
+	"name" : "(R,R)-N6,N6-(2,3-dihydroxy-1,4-butadiyl)-2'-deoxyadenosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "RC7",
+	"name" : "{(2R)-4-(4-HYDROXYBENZYL)-2-[2-(1H-IMIDAZOL-4-YL)ETHYL]-5-OXO-2,5-DIHYDRO-1H-IMIDAZOL-1-YL},ACETALDEHYDE",
+	"mon_nstd_parent_comp_id" : "HIS,TYR,GLY"
+},
+{
+	"_id" : "RZ4",
+	"name" : "O-tert-butyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "RUS",
+	"name" : "1-(5-O-phosphono-beta-D-ribofuranosyl)-2-selanylpyrimidin-4(1H)-one",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "RT0",
+	"name" : "(2S,4S)-4-[4-(4-fluorophenyl)-1,2,3-triazol-1-yl]pyrrolidine-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "RSQ",
+	"name" : "5-formylcytidine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "RT",
+	"name" : "RIBOSYLTHYMINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "RVX",
+	"name" : "O-[methyl(2-methylpropoxy)phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "S1H",
+	"name" : "1-HEXADECANOSULFONYL-O-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "S12",
+	"name" : "O-[(S)-hydroxy{[(2S)-2-hydroxy-3-(octadec-9-enoyloxy)propyl]oxy},phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "S4U",
+	"name" : "4-THIOURIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "S2P",
+	"name" : "(2S)-2-amino-3-(4-hydroxy-1,2,5-thiadiazol-3-yl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "S4G",
+	"name" : "2'-deoxy-4'-thioguanosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "S2M",
+	"name" : "2'-O-[2-(METHOXY)ETHYL]-2-THIOTHYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "S4A",
+	"name" : "2'-deoxy-4'-thioadenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "S2C",
+	"name" : "S-2-(BORONOETHYL)-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "S6G",
+	"name" : "6-THIO-2'-DEOXYGUANOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "S4C",
+	"name" : "4'-THIO-4'-DEOXY-CYTOSINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "SBG",
+	"name" : "O-[(S)-HYDROXY(METHYL)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SBL",
+	"name" : "L-NAPHTHYL-1-ACETAMIDO BORONIC ACID ALANINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{ "_id" : "SAR", "name" : "SARCOSINE", "mon_nstd_parent_comp_id" : "GLY" },
+{
+	"_id" : "SAH",
+	"name" : "S-ADENOSYL-L-HOMOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SAC",
+	"name" : "N-ACETYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SC",
+	"name" : "2-DEOXY-CYTIDINE-5'-THIOPHOSPHORATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "SCY",
+	"name" : "S-ACETYL-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SEG",
+	"name" : "HYDROXYALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "SCS",
+	"name" : "3-(ethyldisulfanyl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SEN",
+	"name" : "O-[N,N-dimethylphosphoramidate]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SEL",
+	"name" : "2-AMINO-1,3-PROPANEDIOL",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SD4",
+	"name" : "N-hydroxy-L-asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "SDH",
+	"name" : "(5S)-7-amino-1-[2-deoxy-5-O-(trihydroxy-lambda~5~-phosphanyl)-beta-D-erythro-pentofuranosyl]-1,3,6,8-tetraazaspiro[4.4]non-7-ene-2,4,9-trione",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "SDG",
+	"name" : "2-amino-9-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-9H-purine-6-selenol",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "SCH",
+	"name" : "S-METHYL-THIO-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SE7",
+	"name" : "2-AMINO-3-SELENINO-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SEC"
+},
+{
+	"_id" : "SEM",
+	"name" : "O-benzyl-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SDB",
+	"name" : "(4S)-2-[(1S)-1-amino-2-hydroxyethyl]-3,4,5,6-tetrahydropyrimidine-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SDP",
+	"name" : "2-AMINO-3-(DIETHOXY-PHOSPHORYLOXY)-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SEE",
+	"name" : "trihydroxy(L-serinato-kappaO~3~)borate(1-)",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SEP",
+	"name" : "PHOSPHOSERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SDE",
+	"name" : "(S,S)-N6,N6-(2,3-dihydroxy-1,4-butadiyl)-2'-deoxyadenosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "SEB",
+	"name" : "O-BENZYLSULFONYL-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{ "_id" : "SET", "name" : "AMINOSERINE", "mon_nstd_parent_comp_id" : "SER" },
+{
+	"_id" : "SGB",
+	"name" : "O-[(S)-METHYL(1-METHYLETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SHR",
+	"name" : "N-(5-AMINO-5-CARBOXYPENTYL)GLUTAMIC ACID",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "SHP",
+	"name" : "(4-HYDROXYMALTOSEPHENYL)GLYCINE",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "SHC",
+	"name" : "S-HEXYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SIB",
+	"name" : "(2S)-2-AMINO-4-({[(2S,3S,4R,5R)-3,4-DIHYDROXY-5-(6-OXO-1,6-DIHYDRO-9H-PURIN-9-YL)TETRAHYDROFURAN-2-YL]METHYL},THIO)BUTANOIC ACID",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SKH",
+	"name" : "(3~{S},)-5-[[(5~{S})-5-azanyl-6-oxidanyl-6-oxidanylidene-hexyl]amino]-3-methyl-3-oxidanyl-5-oxidanylidene-pentanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "SIC",
+	"name" : "(2R)-2-[(3S)-3-amino-2,5-dioxopyrrolidin-1-yl]-3-sulfanylpropanoic acid",
+	"mon_nstd_parent_comp_id" : "ASP, CYS"
+},
+{
+	"_id" : "SLL",
+	"name" : "(2S)-2-azanyl-6-[(4-hydroxy-4-oxo-butanoyl)amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "SNC",
+	"name" : "S-NITROSO-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SMP",
+	"name" : "2'-DEOXY-ADENOSINE-5'-SP-MONOMETHYLPHOSPHONATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "SMF",
+	"name" : "4-SULFOMETHYL-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "SMT",
+	"name" : "2'-[(METHYLTHIO)ETHYLOXY]-THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "SOC",
+	"name" : "DIOXYSELENOCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SME",
+	"name" : "METHIONINE SULFOXIDE",
+	"mon_nstd_parent_comp_id" : "MET"
+},
+{
+	"_id" : "SMC",
+	"name" : "S-METHYLCYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "SNN",
+	"name" : "L-3-AMINOSUCCINIMIDE",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "SOY",
+	"name" : "OXACILLIN-ACYLATED SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SRA",
+	"name" : "ADENOSINE -5'-THIO-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "SPT",
+	"name" : "5'-THIO-THYMIDINE PHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "SRZ",
+	"name" : "PROPOXY-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SSU",
+	"name" : "URIDINE-5'-PHOSPHOROTHIOATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "SUI",
+	"name" : "(3-AMINO-2,5-DIOXO-1-PYRROLIDINYL)ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP, GLY"
+},
+{
+	"_id" : "SUR",
+	"name" : "1-(BETA-D-RIBOFURANOSYL)-2-THIO-URACIL-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "STY",
+	"name" : "TYROSINE-O-SULPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "SUN",
+	"name" : "O-[(R)-(DIMETHYLAMINO)(ETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SVA",
+	"name" : "SERINE VANADATE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SVY",
+	"name" : "O-[BIS(1-METHYLETHOXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SVZ",
+	"name" : "O-[(S)-HYDROXY(ISOPROPYLAMINO)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SVW",
+	"name" : "O-[(R)-AMINO(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SXE",
+	"name" : "O-{(S)-ETHOXY[(1-METHYLETHYL)AMINO]PHOSPHORYL},-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SWG",
+	"name" : "2-[(4Z)-2-[(1R)-1-amino-2-hydroxy-ethyl]-4-(1H-indol-3-ylmethylidene)-5-oxo-imidazol-1-yl]ethanoic acid",
+	"mon_nstd_parent_comp_id" : "SER, TRP, GLY"
+},
+{
+	"_id" : "SVV",
+	"name" : "O-[(S)-AMINO(HYDROXY)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SVX",
+	"name" : "O-[(R)-ETHOXY(METHYL)PHOSPHORYL]-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "SYS",
+	"name" : "3-[(2-amino-2-oxoethyl)selanyl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "T0I",
+	"name" : "(2S)-2-amino-3-(2,4-dihydroxy-5-imidazol-1-yl-phenyl)propanoic acid",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "T37",
+	"name" : "3'-AMINO-2'DEOXYTHYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T2S",
+	"name" : "THYMIDINE-5'-DITHIOPHOSPHORATE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "T8L",
+	"name" : "Thio-phosohothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "T23",
+	"name" : "2'-O-METHYL-3'-METHYL-3'-DEOXY-ARABINOFURANOSYL-THYMINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "T5O",
+	"name" : "2'-deoxy-5-methoxyuridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "T3P",
+	"name" : "THYMIDINE-3'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T11",
+	"name" : "4-[3-(TRIFLUOROMETHYL)DIAZIRIDIN-3-YL]-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "T48",
+	"name" : "6'-ALPHA-HYDROXY CARBOCYCLIC THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T31",
+	"name" : "THYMIDINE 5'-MONOTHIOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "T39",
+	"name" : "2'-O-METHOXYETHYLENE THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T49",
+	"name" : "S4'-2'DEOXYTHYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TA3",
+	"name" : "(4S,5R)-3-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-5-METHYL-1,3-DIAZABICYCLO[2.2.0]HEXAN-2-ONE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T6A",
+	"name" : "N-[N-(9-B-D-RIBOFURANOSYLPURIN-6-YL)CARBAMOYL]THREONINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "T64",
+	"name" : "(6-4)photoproduct",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T36",
+	"name" : "SPLIT LINKAGE THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T38",
+	"name" : "2'-O-ETHOXYMETHYLENE THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T41",
+	"name" : "1-(2-O-METHYL-BETA-D-ARABINOFURANOSYL)THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T4S",
+	"name" : "1-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)-4-HYDROSELENO-5-METHYLPYRIMIDIN-2(1H)-ONE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T32",
+	"name" : "6'-ALPHA-METHYL CARBOCYCLIC THYMIDINE 5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "T9E",
+	"name" : "Selenothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TAF",
+	"name" : "2'-DEOXY-2'-FLUORO-ARABINO-FURANOSYL THYMINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TBN",
+	"name" : "'2-(4-AMINO-PYRROLO[2,3-D]PYRIMIDIN-7-YL)-5-HYDROXYMETHYL-TETRAHYDRO-FURAN-3,4-DIOL",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "TC",
+	"name" : "4-azanyl-1-[(2~{R},,3~{R},4~{S})-3-oxidanyl-4-[oxidanyl-bis(oxidanylidene)-$l^{6}-phosphanyl]oxy-oxolan-2-yl]pyrimidin-2-one",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "TC1",
+	"name" : "3-(5-PHOSPHO-2-DEOXY-BETA-D-RIBOFURANOSYL)-2-OXO-1,3-DIAZA-PHENOTHIAZINE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "TBG",
+	"name" : "3-methyl-L-valine",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "TAV",
+	"name" : "N-METHYL-N-{2-[(2-NAPHTHYLSULFONYL)AMINO]-5-[(2-NAPHTHYLSULFONYL)OXY]BENZOYL},-L-ASPARTIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP"
+},
+{
+	"_id" : "TBM",
+	"name" : "4-METHYL-4-[(E)-2-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TCJ",
+	"name" : "[(1~{S},,2~{R},4~{R},6~{S},8~{R})-8-(4-azanyl-5-methyl-2-oxidanylidene-pyrimidin-1-yl)-6-oxidanyl-9-oxatricyclo[4.3.0.0^{2,4}]nonan-2-yl] dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "TCY",
+	"name" : "(2R,3aS,4aR,5aR,5bS)-2-(6-amino-9H-purin-9-yl)-3a-hydroxyhexahydrocyclopropa[4,5]cyclopenta[1,2-b]furan-5a(4H)-yl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "TDY",
+	"name" : "5-(METHYLAMINO)THYMIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TED",
+	"name" : "5-[(1E)-14-carboxy-10,13-bis(carboxymethyl)-3,8-dioxo-4,7,10,13-tetraazatetradec-1-en-1-yl]-2'-deoxyuridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TCQ",
+	"name" : "(1S,2R)-N-{(1E)-5-[(2S)-2-amino-2-carboxyethyl]-2-hydroxy-4-oxocyclohexa-2,5-dien-1-ylidene},-2-phenylcyclopropanaminium",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TCP",
+	"name" : "5'-METHYLTHYMIDINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TEF",
+	"name" : "4-(2H-tetrazol-2-yl)-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "TCR",
+	"name" : "CYCLOMETHYLTRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TFF",
+	"name" : "5'-O-[(R)-{[(R)-[difluoro(phosphono)methyl](hydroxy)phosphoryl](difluoro)methyl},(hydroxy)phosphoryl]thymidine",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TH6",
+	"name" : "4-HYDROXY-L-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "THZ",
+	"name" : "1-[(4S)-4-amino-5-(1,3-benzothiazol-2-yl)-5-oxopentyl]guanidine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "TG",
+	"name" : "2-azanyl-9-[(2~{R},,3~{R},4~{S})-3-oxidanyl-4-[oxidanyl-bis(oxidanylidene)-$l^{6}-phosphanyl]oxy-oxolan-2-yl]-1~{H}-purin-6-one",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "TFT",
+	"name" : "(L)-ALPHA-THREOFURANOSYL-THYMINE-3'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TH5",
+	"name" : "O-acetyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TFE",
+	"name" : "2'-O-[2-(TRIFLUORO)ETHYL] THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TFQ",
+	"name" : "4-(2,2,2-TRIFLUOROETHYL)-L-PHENYLALANINE",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "TFO",
+	"name" : "[2-(6-AMINO-9H-PURIN-9-YL)-1-METHYLETHOXY]METHYLPHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "THC",
+	"name" : "N-METHYLCARBONYLTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TIH",
+	"name" : "BETA(2-THIENYL)ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "TGP",
+	"name" : "5'-THIO-2'-DEOXY-GUANOSINE PHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "TIS",
+	"name" : "O-(1,1-dihydroxyethyl)-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "TLC",
+	"name" : "2-O,3-ETHDIYL-ARABINOFURANOSYL-THYMINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TLY",
+	"name" : "(2S)-2-azanyl-6-(ethanethioylamino)hexanoic acid",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "TMD",
+	"name" : "(6,7-DIHYDRO)4-[(E)-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TMB",
+	"name" : "N-METHYL-4-[(E)-2-BUTENYL]-4,N-DIMETHYL-THREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TLN",
+	"name" : "[(1R,3R,4R,7S)-7-HYDROXY-3-(THYMIN-1-YL)-2,5-DIOXABICYCLO[2.2.1]HEPT-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "TP1",
+	"name" : "2-(METHYLAMINO)-ETHYLGLYCINE-CARBONYLMETHYLENE-THYMINE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TPC",
+	"name" : "5'-THIO-2'-DEOXY-CYTOSINE PHOSPHONIC ACID",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "TNQ",
+	"name" : "6-[(carboxymethyl)amino]-7-hydroxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TOQ",
+	"name" : "6,7-dihydroxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TNR",
+	"name" : "O-(2-ACETAMIDO-2-DEOXY-ALPHA-D-GALACTOPYRANOSYL)-L-SERINE",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "TNY",
+	"name" : "(2S,3R)-3-{[(2S,3R,4R,5R,6R)-3-(acetylamino)-4,5-dihydroxy-6-(hydroxymethyl)tetrahydro-2H-pyran-2-yl]oxy},-2-aminobutanoic acid (non-preferred name)",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TNB",
+	"name" : "S-(2,3,6-TRINITROPHENYL)CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "TOZ",
+	"name" : "2-[2-(aminomethyl)-1,3-thiazol-4-yl]-1,3-oxazole-4-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "GLY, CYS, SER"
+},
+{
+	"_id" : "TOX",
+	"name" : "1-hydroperoxy-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TPG",
+	"name" : "2,2,7-TRIMETHYL-GUANOSINE-5'-TRIPHOSPHATE-5'-GUANOSINE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "TPJ",
+	"name" : "(5R)-5-tert-butyl-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "TQQ",
+	"name" : "(S)-2-AMINO-3-(6,7-DIHYDRO-6-IMINO-7-OXO-1H-INDOL-3-YL)PROPANOIC ACID",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TQZ",
+	"name" : "2-AMINO-3-PENTASULFANYLPROPAN-1-OL",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "TPO",
+	"name" : "PHOSPHOTHREONINE",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "TPL",
+	"name" : "TRYPTOPHANOL",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TPQ",
+	"name" : "5-(2-CARBOXY-2-AMINOETHYL)-2-HYDROXY-1,4-BENZOQUINONE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TQI",
+	"name" : "N-{[4-CHLORO-3-(TRIFLUOROMETHYL)PHENYL]SULFONYL},-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TPK",
+	"name" : "(1R)-1-[(2S)-pyrrolidin-2-yl]ethane-1,2-diol",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "TRF",
+	"name" : "N1-FORMYL-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TRN",
+	"name" : "NZ2-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TRG",
+	"name" : "L-(N,N DIMETHYL)LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "TRQ",
+	"name" : "2-AMINO-3-(6,7-DIOXO-6,7-DIHYDRO-1H-INDOL-3-YL)-PROPIONIC ACID",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TRO",
+	"name" : "2-HYDROXY-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TTI",
+	"name" : "2'-deoxy-5-telluroxouridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "TS9",
+	"name" : "(2S,3S,4R)-2-amino-3,4-dihydroxy-3-methylpentanoic acid",
+	"mon_nstd_parent_comp_id" : "ILE"
+},
+{
+	"_id" : "TTS",
+	"name" : "3-((3E)-4-HYDROXY-3-{[2-(4-HYDROXYPHENYL)ETHYL]IMINO},-6-OXOCYCLOHEXA-1,4-DIEN-1-YL)ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TRY",
+	"name" : "(2Z)-2-amino-3-(1H-indol-3-yl)prop-2-enoic acid",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TTM",
+	"name" : "N3-ETHYL-THYMIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TRW",
+	"name" : "TRW3-(2-AMINO-3-HYDROXY-PROPYL)-6-(N'-CYCLOHEXYL-HYDRAZINO)OCTAHYDRO-INDOL-7-OL",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TRX",
+	"name" : "6-HYDROXYTRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TTD",
+	"name" : "CIS-SYN CYCLOBUTANE THYMINE DIMER",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TTQ",
+	"name" : "6-AMINO-7-HYDROXY-L-TRYPTOPHAN",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "TSP",
+	"name" : "3'-THIO-THYMIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "TSY",
+	"name" : "(2S)-2-amino-3-trisulfanylpropanoic acid",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "TY3",
+	"name" : "3-HYDROXY-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TY1",
+	"name" : "O-tert-butyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYJ",
+	"name" : "2,5-dihydroxy-N-methyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TXY",
+	"name" : "3-[(5S)-4,5-dihydroxycyclohexa-1,3-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TY9",
+	"name" : "3,4-bis(hydroperoxy)-5-hydroxy-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYE",
+	"name" : "4-[(2S)-2-amino-3-hydroxypropyl]phenol",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYN",
+	"name" : "AMINOBENZOFURAZAN-O-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TXP",
+	"name" : "1,4,5,6-TETRAHYDRONICOTINAMIDE ADENINE DINUCLEOTIDE PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "TY5",
+	"name" : "O-benzyl-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYO",
+	"name" : "(4Z,6E)-2-AMINO-7-HYDROPEROXY-4-[(E)-2-HYDROXYVINYL]HEPTA-4,6-DIENOIC ACID",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYW",
+	"name" : "(2S)-2-amino-3-(4-hydroxyphenyl)propane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYS",
+	"name" : "O-SULFO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYT",
+	"name" : "TYROSINE DERIVATIVE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TY2",
+	"name" : "3-AMINO-L-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYI",
+	"name" : "3,5-DIIODOTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TY8",
+	"name" : "2,4-bis(hydroperoxy)-5-hydroxy-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYQ",
+	"name" : "3-AMINO-6-HYDROXY-TYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TYY",
+	"name" : "3-(4-HYDROXY-3-IMINO-6-OXO-CYCLOHEXA-1,4-DIENYL)-ALANINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "TXD",
+	"name" : "1,4,5,6-TETRAHYDRONICOTINAMIDE ADENINE DINUCLEOTIDE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{ "_id" : "TYB", "name" : "TYROSINAL", "mon_nstd_parent_comp_id" : "TYR" },
+{
+	"_id" : "U3X",
+	"name" : "4-[(cyclohexylmethyl)amino]-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "U33",
+	"name" : "5-BROMO-2'-DEOXY URIDINE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "U37",
+	"name" : "URIDINE 5'-MONOTHIOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U34",
+	"name" : "URIDINE 5'-MONOMETHYLPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U25",
+	"name" : "URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U2L",
+	"name" : "5-METHYL-3'-O-METHOXYETHYL URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U2P",
+	"name" : "PHOSPHORIC ACID MONO-[2-(2,4-DIOXO-3,4-DIHYDRO-2H-PYRIMIDIN-1-YL)-4-HYDROXY-5-HYDROXYMETHYL-TETRAHYDRO-FURAN-3-YL] ESTER",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U2N",
+	"name" : "2'-AMINO-2'-DEOXYURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "U36",
+	"name" : "2'-O-METHYOXYETHYL-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U2X",
+	"name" : "O-(cyclohexylmethyl)-L-tyrosine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "U31",
+	"name" : "2'-O-3-AMINOPROPYL 2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "U8U",
+	"name" : "5-METHYLAMINOMETHYL-2-THIOURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UAR",
+	"name" : "URACIL ARABINOSE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UBB",
+	"name" : "2',3'-DIDEOXY-URIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UD5",
+	"name" : "5-FLUOROURIDINE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UBI",
+	"name" : "2'-deoxy-5-[(2-methylpropyl)carbamoyl]uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UBR",
+	"name" : "5-bromo-2'-deoxyuridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UBD",
+	"name" : "URIDINE 3',5'-BIS(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UCL",
+	"name" : "5-CHLORO-2'-DEOXYURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UDS",
+	"name" : "N-[(3-HYDROXYQUINOLIN-2-YL)CARBONYL]-D-SERINE",
+	"mon_nstd_parent_comp_id" : "DSN"
+},
+{
+	"_id" : "UMA",
+	"name" : "URIDINE-5'-DIPHOSPHATE-N-ACETYLMURAMOYL-L-ALANINE",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{ "_id" : "UMO", "name" : "2'-F-4'-OMe U", "mon_nstd_parent_comp_id" : "U" },
+{
+	"_id" : "UGY",
+	"name" : "(2S)-amino(carbamoylamino)ethanoic acid",
+	"mon_nstd_parent_comp_id" : "GLY"
+},
+{
+	"_id" : "UF0",
+	"name" : "O-[(R)-hydroxy{[(3R)-3-hydroxy-4-{[3-({2-[(hydroxyacetyl)amino]ethyl},amino)-3-oxopropyl]amino}-2,2-dimethyl-4-oxobutyl]oxy}phosphoryl]-L-serine",
+	"mon_nstd_parent_comp_id" : "SER"
+},
+{
+	"_id" : "UFR",
+	"name" : "2'-DEOXY-5-FORMYLURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UM1",
+	"name" : "(2R)-2-[[(2R)-2-(2-aminoethanoylamino)propanoyl]amino]propanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "UF2",
+	"name" : "1-(2-deoxy-2-fluoro-5-O-phosphono-beta-D-arabinofuranosyl)pyrimidine-2,4(1H,3H)-dione",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UFT",
+	"name" : "2'-deoxy-2'-fluorouridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UM2",
+	"name" : "(2S)-2-amino-N-butyl-propanamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "UMS",
+	"name" : "2'-METHYLSELENYL-2'-DEOXYURIDINE-5'-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UMX",
+	"name" : "[(1R,3R,4R,5S,7S)-3-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-7-hydroxy-5-methyl-2-oxabicyclo[2.2.1]hept-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UPS",
+	"name" : "2'-deoxy-5'-O-thiophosphonouridine",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "UOX",
+	"name" : "3-(oxido-lambda~4~-selanyl)-L-alanine",
+	"mon_nstd_parent_comp_id" : "SEC"
+},
+{
+	"_id" : "UR3",
+	"name" : "3-METHYLURIDINE-5'-MONOPHOSHATE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UPV",
+	"name" : "2'-O-{[(2,2-dimethylpropanoyl)oxy]methyl},uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "UPE",
+	"name" : "2'-deoxy-5-[(2-phenylethyl)carbamoyl]uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "URD",
+	"name" : "1-((2R,3R,4S,5R)-TETRAHYDRO-3,4-DIHYDROXY-5-(HYDROXYMETHYL)FURAN-2-YL)PYRIDINE-2,4(1H,3H)-DIONE",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "US5",
+	"name" : "1-(5-O-phosphono-beta-D-ribofuranosyl)-4-selanylpyrimidin-2(1H)-one",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "US2",
+	"name" : "2'-deoxy-5-(methylsulfanyl)uridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "V3L",
+	"name" : "2'-O-(5-O-phosphono-alpha-D-ribofuranosyl)adenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "VAH",
+	"name" : "(3R)-3-hydroxy-L-norvaline",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "UVX",
+	"name" : "[(1R,3R,4R,7S)-3-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-7-hydroxy-5-methylidene-2-oxabicyclo[2.2.1]hept-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "US3",
+	"name" : "1-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-5-methyl-2-selanylpyrimidin-4(1H)-one",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "USM",
+	"name" : "2'-S-methyl-2'-thiouridine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "VAI",
+	"name" : "(2S)-2-amino-3-methylbutane-1,1-diol",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "US1",
+	"name" : "2'-DEOXY-3'-THIOURIDINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "URX",
+	"name" : "[(1R,3R,4R,5R,7S)-3-(2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)-7-hydroxy-5-methyl-2-oxabicyclo[2.2.1]hept-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "VAD",
+	"name" : "DEAMINOHYDROXYVALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "VAF",
+	"name" : "METHYLVALINE",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "VB1",
+	"name" : "N^6^-[(1R)-2-{[(1S)-1-carboxypropyl]amino},-2-oxo-1-(sulfanylmethyl)ethyl]-6-oxo-L-lysine",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "VH0",
+	"name" : "(2S,4S)-4-[4-(aminomethyl)-1,2,3-triazol-1-yl]pyrrolidine-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "VR0",
+	"name" : "N~5~-[N-(methylcarbamoyl)carbamimidoyl]-L-ornithine",
+	"mon_nstd_parent_comp_id" : "ARG"
+},
+{
+	"_id" : "VYA",
+	"name" : "2-[(4~{Z},)-2-[(1~{S})-1-azanyl-3-methyl-butyl]-4-[(4-hydroxyphenyl)methylidene]-5-oxidanylidene-imidazol-1-yl]ethanoic acid",
+	"mon_nstd_parent_comp_id" : "LEU, TYR, GLY"
+},
+{
+	"_id" : "WFP",
+	"name" : "3,5-difluoro-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "WCR",
+	"name" : "[(2R,4Z)-2-(aminomethyl)-2-hydroxy-4-(4-hydroxybenzylidene)-5-oxoimidazolidin-1-yl]acetic acid",
+	"mon_nstd_parent_comp_id" : "GLY, TYR, GLY"
+},
+{
+	"_id" : "WRP",
+	"name" : "(betaR)-beta-hydroxy-1-[(3R)-3-hydroxy-2-methylbutan-2-yl]-L-tryptophan",
+	"mon_nstd_parent_comp_id" : "TRP"
+},
+{
+	"_id" : "WLU",
+	"name" : "(4R)-5-hydroxy-N-methyl-L-leucine",
+	"mon_nstd_parent_comp_id" : "LEU"
+},
+{
+	"_id" : "WPA",
+	"name" : "(betaR)-beta-methoxy-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "X",
+	"name" : "2'-DEOXY-N7-(8,9-DIHYDRO-9-HYDROXY-10-DEHYDROXY-AFLATOXIN)GUANOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "WVL",
+	"name" : "(2S,3R)-2-amino-3,5-dimethylhex-4-enoic acid",
+	"mon_nstd_parent_comp_id" : "VAL"
+},
+{
+	"_id" : "X2W",
+	"name" : "N-ACETYL-L-GLUTAMYL 5-PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "GLU"
+},
+{
+	"_id" : "X9Q",
+	"name" : "{(2S)-2-[(1S)-1-AMINOETHYL]-4-BENZYL-5-OXO-2,5-DIHYDRO-1H-IMIDAZOL-1-YL},ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ALA, PHE,GLY"
+},
+{
+	"_id" : "XAD",
+	"name" : "9-(2,3-DIDEOXY-6-O-PHOSPHONO-BETA-D-ERYTHRO-HEXOPYRANOSYL)-9H-PURIN-6-AMINE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "XAL",
+	"name" : "[(1S,4R,6R)-6-HYDROXY-4-(ADENIN-9-YL)CYCLOHEX-2-EN-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "XCL",
+	"name" : "[(1S,4R,6R)-6-HYDROXY-4-(CYTOSIN-9-YL)CYCLOHEX-2-EN-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "XCT",
+	"name" : "4-AMINO-1-(2,3-DIDEOXY-6-O-PHOSPHONO-BETA-D-ERYTHRO-HEXOPYRANOSYL)PYRIMIDIN-2(1H)-ONE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "XCY",
+	"name" : "{5-[4-{[4-(AMINOMETHYL)BENZYL]AMINO},-2-OXOPYRIMIDIN-1(2H)- YL]-3-HYDROXYTETRAHYDROFURAN-2-YL}METHYL DIHYDROGENPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "XDT",
+	"name" : "O-methyl-D-allothreonine",
+	"mon_nstd_parent_comp_id" : "DTH"
+},
+{
+	"_id" : "XCN",
+	"name" : "S-cyano-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "XCR",
+	"name" : "[(1R,4S,6S)-4-(4-amino-2-oxopyrimidin-1(2H)-yl)-6-hydroxycyclohex-2-en-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "XGR",
+	"name" : "[(1R,4S,6S)-4-(2-amino-6-oxo-1,6-dihydro-9H-purin-9-yl)-6-hydroxycyclohex-2-en-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "XGU",
+	"name" : "2-AMINO-9-(2,3-DIDEOXY-6-O-PHOSPHONO-BETA-D-ERYTHRO-HEXOPYRANOSYL)-1,9-DIHYDRO-6H-PURIN-6-ONE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "XGL",
+	"name" : "[(1S,4R,6R)-6-HYDROXY-4-(GUANIN-9-YL)CYCLOHEX-2-EN-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "XPR",
+	"name" : "(2S,3aS,6R,7aS)-6-(sulfooxy)octahydro-1H-indole-2-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "XOK",
+	"name" : "(2~{S},)-2-azanyl-6-[[(6~{S})-6-sulfanyloctanoyl]amino]hexanoic acid",
+	"mon_nstd_parent_comp_id" : "lys"
+},
+{
+	"_id" : "XPB",
+	"name" : "O6-[4-oxo-4-(3-pyridyl)butyl]-2'-deoxyguanosine-5'-monophosphate",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "XSN",
+	"name" : "L-alpha-asparagine",
+	"mon_nstd_parent_comp_id" : "ASN"
+},
+{
+	"_id" : "XTF",
+	"name" : "[(1R,4R,5S,6R)-5-fluoro-6-hydroxy-4-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)cyclohex-2-en-1-yl]methyl dihydrogen phosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "XPL",
+	"name" : "N~6~-[(3R,5R)-5-amino-3-methyl-D-prolyl]-L-lysine",
+	"mon_nstd_parent_comp_id" : "PYL"
+},
+{
+	"_id" : "XTH",
+	"name" : "1-(2,3-DIDEOXY-6-O-PHOSPHONO-BETA-D-ERYTHRO-HEXOPYRANOSYL)-5-METHYLPYRIMIDINE-2,4(1H,3H)-DIONE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "XTR",
+	"name" : "[(1R,4S,6S)-6-hydroxy-4-(5-methyl-2,4-dioxo-3,4-dihydropyrimidin-1(2H)-yl)cyclohex-2-en-1-yl]methyl dihydrogenphosphate",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "XUA",
+	"name" : "2'-Se-methyl-2'-selenoadenosine 5'-(dihydrogen phosphate)",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "XX1",
+	"name" : "N~6~-7H-PURIN-6-YL-L-LYSINE",
+	"mon_nstd_parent_comp_id" : "LYS"
+},
+{
+	"_id" : "XTS",
+	"name" : "9-[(2R,3R,4S,5R)-3,4-DIHYDROXY-5-(HYDROXYMETHYL)OXOLAN-2-YL]-3H-PURINE-2,6-DIONE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "XTL",
+	"name" : "[(1S,4R,6R)-6-HYDROXY-4-(THYMIN-9-YL)CYCLOHEX-2-EN-1-YL]METHYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DT"
+},
+{
+	"_id" : "XUG",
+	"name" : "2'-SE-METHYL-2'-SELENOGUANOSINE 5'-(DIHYDROGEN PHOSPHATE)",
+	"mon_nstd_parent_comp_id" : "DG"
+},
+{
+	"_id" : "XXY",
+	"name" : "2-[(1R,2R)-1-amino-2-hydroxypropyl]-1-(carboxymethyl)-4-(1H-imidazol-5-ylmethyl)-1H-imidazol-5-olate",
+	"mon_nstd_parent_comp_id" : "THR, HIS, GLY"
+},
+{
+	"_id" : "XW1",
+	"name" : "(2S)-2-amino-7-ethoxy-7-oxoheptanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "XYG",
+	"name" : "[(4Z)-2-[(1Z)-ETHANIMIDOYL]-4-(4-HYDROXYBENZYLIDENE)-5-OXO-4,5-DIHYDRO-1H-IMIDAZOL-1-YL]ACETIC ACID",
+	"mon_nstd_parent_comp_id" : "ASP, TYR, GLY"
+},
+{
+	"_id" : "XYC",
+	"name" : "(2~{S},)-2-azanyl-3-cyclopentyl-propanoic acid",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "Y",
+	"name" : "2'-DEOXY-N6-(S)STYRENE OXIDE ADENOSINE MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DA"
+},
+{
+	"_id" : "YCO",
+	"name" : "3-(2-deoxy-5-O-phosphono-beta-D-erythro-pentofuranosyl)-1H-pyrimido[5,4-b][1,4]benzoxazin-2(3H)-one",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "YCM",
+	"name" : "S-(2-AMINO-2-OXOETHYL)-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{ "_id" : "YG", "name" : "WYBUTOSINE", "mon_nstd_parent_comp_id" : "G" },
+{
+	"_id" : "YOF",
+	"name" : "3-FLUOROTYROSINE",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "YPR",
+	"name" : "(4R)-4-[(7-methoxy-2-phenylquinolin-4-yl)oxy]-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "YPZ",
+	"name" : "3-[(3Z)-4-hydroxy-6-oxo-3-(2-phenylhydrazinylidene)cyclohexa-1,4-dien-1-yl]-L-alanine",
+	"mon_nstd_parent_comp_id" : "TYR"
+},
+{
+	"_id" : "YYG",
+	"name" : "4-(3-[5-O-PHOSPHONORIBOFURANOSYL]-4,6-DIMETHYL-8-OXO-4,8-DIHYDRO-3H-1,3,4,5,7A-PENTAAZA-S-INDACEN-YLAMINO-BUTYRIC ACID METHYL ESTER",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "YTH",
+	"name" : "O-phosphono-L-allothreonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "Z3E",
+	"name" : "O-benzyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "Z01",
+	"name" : "3-[(2,2-dimethylpropanoyl)amino]-L-alanine",
+	"mon_nstd_parent_comp_id" : "ALA"
+},
+{
+	"_id" : "Z",
+	"name" : "1-(2-DEOXY-5-O-PHOSPHONO-BETA-D-ERYTHRO-PENTOFURANOSYL)PYRIMIDIN-2(1H)-ONE",
+	"mon_nstd_parent_comp_id" : "DC"
+},
+{
+	"_id" : "Z70",
+	"name" : "(2S)-2-amino-4-(2-amino-1H-imidazol-5-yl)butanoic acid",
+	"mon_nstd_parent_comp_id" : "HIS"
+},
+{
+	"_id" : "ZBU",
+	"name" : "(S)-1'-(2',3'-DIHYDROXYPROPYL)-5-BROMO-URACIL",
+	"mon_nstd_parent_comp_id" : "U"
+},
+{
+	"_id" : "ZCL",
+	"name" : "3,4-dichloro-L-phenylalanine",
+	"mon_nstd_parent_comp_id" : "PHE"
+},
+{
+	"_id" : "ZCY",
+	"name" : "(S)-1'-(2',3'-DIHYDROXYPROPYL)-CYTOSINE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "ZBC",
+	"name" : "(2S)-3-(4-AMINO-5-BROMO-2-OXOPYRIMIDIN-1(2H)-YL)-2-HYDROXYPROPYL DIHYDROGEN PHOSPHATE",
+	"mon_nstd_parent_comp_id" : "C"
+},
+{
+	"_id" : "ZDU",
+	"name" : "5-(3-AMINOPROPYL)-2'-DEOXYURIDINE-5'-MONOPHOSPHATE",
+	"mon_nstd_parent_comp_id" : "DU"
+},
+{
+	"_id" : "ZAD",
+	"name" : "(S)-1'-(2',3'-DIHYDROXYPROPYL)-ADENINE",
+	"mon_nstd_parent_comp_id" : "A"
+},
+{
+	"_id" : "ZBZ",
+	"name" : "S-(phenylcarbonyl)-L-cysteine",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "ZGU",
+	"name" : "(S)-1'-(2',3'-DIHYDROXYPROPYL)-GUANINE",
+	"mon_nstd_parent_comp_id" : "G"
+},
+{
+	"_id" : "ZPO",
+	"name" : "pyrazolidine-1-carboxylic acid",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "ZU0",
+	"name" : "O-tert-butyl-L-threonine",
+	"mon_nstd_parent_comp_id" : "THR"
+},
+{
+	"_id" : "ZTH",
+	"name" : "(S)-1'-(2',3'-DIHYDROXYPROPYL)-THYMINE",
+	"mon_nstd_parent_comp_id" : "T"
+},
+{
+	"_id" : "ZYK",
+	"name" : "(4R)-4-({[(3,4-dimethoxyphenyl)carbonyl]amino},oxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "ZYJ",
+	"name" : "(4R)-4-({[(1E)-(3,4-dimethoxyphenyl)methylidene]amino},oxy)-L-proline",
+	"mon_nstd_parent_comp_id" : "PRO"
+},
+{
+	"_id" : "ZZD",
+	"name" : "S-TRITYL-L-CYSTEINE",
+	"mon_nstd_parent_comp_id" : "CYS"
+},
+{
+	"_id" : "ZZJ",
+	"name" : "N^2^-methyl-L-alaninamide",
+	"mon_nstd_parent_comp_id" : "ALA"
+}
+]
