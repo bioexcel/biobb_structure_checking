@@ -20,7 +20,7 @@ setuptools.setup(
     project_urls={
         "Documentation": "http://biobb-structure-checking.readthedocs.io/en/latest/",
         "Bioexcel": "https://bioexcel.eu/"
-    }
+    },
     packages=setuptools.find_packages(exclude=['docs', 'test','devdat']),
     package_data={'biobb_structure_checking': ['py.typed']},
     include_package_data=True,
