@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="biobb_structure_checking",
-    version="3.16.3",
+    version="3.16.4",
 
     author="Biobb developers",
     author_email="gelpi@ub.edu",
