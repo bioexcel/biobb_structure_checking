@@ -2,7 +2,7 @@
 ### Extended functions
 - backbone
   - Added --fix_known to optimize only the missing residues with Modeller, the residues in the structure keep their coordinates
-### Big Fixes
+### Bug Fixes
 - backbone
   - Fixed gaps shifted in repeated residues when modelling with Modeller, fragments are now placed by their canonical position
   - Fixed residue matching of Modeller models with insertion codes or skipped residue numbers
