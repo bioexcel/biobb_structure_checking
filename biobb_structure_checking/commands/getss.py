@@ -1,5 +1,6 @@
 """ Module supporting getss command"""
 
+from numpy import sqrt
 import biobb_structure_checking.constants as cts
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.pdbio.param_input import ParamInput
@@ -21,12 +22,12 @@ def check(strcheck):
         print(
             f" {mu.atom_id(ssb[0]):12}"
             f" {mu.atom_id(ssb[1]):12}"
-            f" {ssb[2]:8.3f}"
+            f" {sqrt(ssb[2]):8.3f}"
         )
         strcheck.summary['getss']['found'].append({
             'at1': mu.atom_id(ssb[0]),
             'at2': mu.atom_id(ssb[1]),
-            'dist': round(float(ssb[2]), 4)
+            'dist': round(sqrt(float(ssb[2])), 4)
         })
     return SS_bonds
 

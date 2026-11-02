@@ -1,5 +1,6 @@
 """ Module to manage sequence information for structures """
 
+from shlex import split
 import sys
 import os
 import gzip
@@ -582,35 +583,33 @@ class SequenceData():
             strucm (StructureManager) : Object containing the loaded structure
         """
         summary = {}
-        for mod in strucm.st:
-            for ch_id in self.data[mod.id]:
-                mismatches = []
-                can_seq_mis = ''
-                pdb_seq_mis = ''
+        can_ids = [seq.split("\n")[0].split(' ')[0].replace('can_sq_', '') for seq in self.get_canonical().split('>')[1:] if seq]
+        can_seqs = [seq.split("\n")[1] for seq in self.get_canonical().split('>')[1:] if seq]
+        pdb_seqs = [seq.split("\n")[1] for seq in self.get_pdbseq().split('>')[1:] if seq]
+        i_chain = 0
+        for can_seq, pdb_seq in zip(can_seqs, pdb_seqs):
+            mismatches = []
+            can_seq_mis = ''
+            pdb_seq_mis = ''
 
-                if not self.has_canonical[mod.id][ch_id]:
+            for i in range(len(can_seq)):
+                if can_seq[i] != pdb_seq[i] and pdb_seq[i] != '-':
+                    mismatches.append(i)
+                    can_seq_mis += can_seq[i]
+                    pdb_seq_mis += pdb_seq[i]
                     continue
+                can_seq_mis += '-'
+                pdb_seq_mis += '-'
 
-                can_seq = self.get_canonical().split("\n")[1]
-                pdb_seq = self.get_pdbseq().split("\n")[1]
-
-                for i in range(len(can_seq)):
-                    if can_seq[i] != pdb_seq[i] and pdb_seq[i] != '-':
-                        mismatches.append(i)
-                        can_seq_mis += can_seq[i]
-                        pdb_seq_mis += pdb_seq[i]
-                        continue
-                    can_seq_mis += '-'
-                    pdb_seq_mis += '-'
-
-                if mismatches:
-                    summary[f"{ch_id}/{mod.id}"] = {
-                        'mismatches': mismatches,
-                        'canonical': can_seq_mis,
-                        'structure': pdb_seq_mis
-                    }
+            if mismatches:
+                summary[can_ids[i_chain]]= {
+                    'mismatches': mismatches,
+                    'canonical': can_seq_mis,
+                    'structure': pdb_seq_mis
+                }
+            i_chain += 1
         return summary
-    
+
 def _get_pack_str_seqs(strucm):
     strucm.revert_can_resnames(canonical=True)
     seqs = {}

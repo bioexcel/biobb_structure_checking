@@ -8,7 +8,7 @@ from os.path import join as opj
 
 from biobb_structure_checking.pdbio.param_input import Dialog
 
-VERSION = '3.16.3'
+VERSION = '3.16.4'
 
 # Default locations and settings
 DATA_DIR_DEFAULT_PATH = 'dat'
@@ -517,6 +517,14 @@ DIALOGS.add_option(
     'extra_gap',
     'Replace extra_gap additional flanking residues',
     int
+)
+DIALOGS.add_option(
+    'backbone',
+    '--fix_known',
+    'fix_known',
+    'Optimize only the missing residues with Modeller, '
+    'the residues in the structure keep their coordinates',
+    'bool'
 )
 DIALOGS.add_option(
     'backbone',
