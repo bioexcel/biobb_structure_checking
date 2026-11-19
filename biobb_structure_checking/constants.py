@@ -46,7 +46,8 @@ DEFAULTS = {
     'build_warnings': False,
     'coords_only': False,
     'overwrite_cache': False,
-    'overwrite': False
+    'overwrite': False,
+    'no_network': False,
 }
 
 
