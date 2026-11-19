@@ -2,6 +2,7 @@
   Module to manage command line for simple parameter input
 """
 import argparse
+from biobb_structure_checking.exceptions import StructureCheckingError
 
 
 def _get_input(value, prompt_text, default=None):
@@ -270,7 +271,7 @@ class Dialog():  #To check subparsers from argparse
 # ===============================================================================
 
 
-class NoDialogAvailableError(Exception):
+class NoDialogAvailableError(StructureCheckingError):
     """ Error on no Dialog available for **command**"""
     def __init__(self, command):
-        self.message = f"ERROR: no dialog available for {command}"
+        super().__init__(f"ERROR: no dialog available for {command}")

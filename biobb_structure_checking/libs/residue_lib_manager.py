@@ -3,7 +3,7 @@
 """
 
 import re
-import sys
+from biobb_structure_checking.exceptions import LibraryLoadError
 
 
 class ResidueLib():
@@ -13,12 +13,10 @@ class ResidueLib():
         try:
             lib_file_h = open(library_path, "r")
 
-        except IOError:
-            print(
-                f"ERROR: unable to open residue library {library_path}",
-                file=sys.stderr
-            )
-            sys.exit(1)
+        except IOError as err:
+            raise LibraryLoadError(
+                f"ERROR: unable to open residue library {library_path}"
+            ) from err
 
         line = lib_file_h.readline()
         line = lib_file_h.readline()

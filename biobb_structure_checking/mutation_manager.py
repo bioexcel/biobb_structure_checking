@@ -3,7 +3,7 @@
 """
 
 import re
-import sys
+from biobb_structure_checking.exceptions import MutationError
 
 import biobb_structure_checking.modelling.utils as mu
 
@@ -115,7 +115,7 @@ class MutationSet():
                     )
 
         if not mut_ok and stop_on_error:
-            sys.exit(f'ERROR: no mutations available for {self.id}')
+            raise MutationError(f'ERROR: no mutations available for {self.id}')
 
     def apply(self, mut_map, res_lib, remove_h):
         """ Perform the individual mutations on the set. """
@@ -139,14 +139,14 @@ class MutationSet():
             if mut['type'] == mu.PROTEIN:
                 for at_id in ['N', 'CA', 'C']:
                     if at_id not in bck_atoms:
-                        sys.exit(
+                        raise MutationError(
                             'ERROR: Backbone atoms missing for '
                             f'{mu.residue_id(res)}, aborting'
                         )
             else:
                 for at_id in ["C1'", "O4'", "C4'"]:
                     if at_id not in bck_atoms:
-                        sys.exit(
+                        raise MutationError(
                             'ERROR: Backbone atoms missing for '
                             f'{mu.residue_id(res)}, aborting'
                         )

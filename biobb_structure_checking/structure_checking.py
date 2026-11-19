@@ -14,6 +14,13 @@ import biobb_structure_checking.constants as cts
 
 from biobb_structure_checking.pdbio.json_writer import JSONWriter
 from biobb_structure_checking.pdbio.param_input import ParamInput, NoDialogAvailableError
+from biobb_structure_checking.exceptions import (
+    StructureLoadError,
+    TimeLimitError,
+    CommandListError,
+    CommandNotFoundError,
+    FATAL_ERRORS
+)
 
 import biobb_structure_checking.structure_manager as stm
 import biobb_structure_checking.modelling.utils as mu
@@ -53,18 +60,11 @@ class StructureChecking():
                 self.args['input_structure_path'],
                 self.args['fasta_seq_path']
             )
-        except IOError:
-            sys.exit(
+        except IOError as err:
+            raise StructureLoadError(
                 "ERROR: fetching/parsing structure from "
                 f"{self.args['input_structure_path']}"
-            )
-        except (
-            stm.WrongServerError,
-            stm.UnknownFileTypeError,
-            stm.ParseError
-        ) as err:
-            sys.exit(err.message)
-
+            ) from err
 
         if self.args['debug']:
             self.timings.append(['load', time.time() - self.start_time])
@@ -74,7 +74,7 @@ class StructureChecking():
             print(f"#DEBUG Memory used after structure load: {memsize:f} MB ")
 
         if self.args['time_limit'] and self._check_time_limit():
-            sys.exit(1)
+            raise TimeLimitError(cts.MSGS['TIME_LIMIT'].format(self.args['time_limit']))
 
     def launch(self):
         """ StructureChecking.launch
@@ -192,7 +192,7 @@ class StructureChecking():
             if not self.args['non_interactive']:
                 op_list = ParamInput('Command List File', False).run(op_list)
             else:
-                sys.exit('ERROR: command list not provided and non_interactive')
+                raise CommandListError('ERROR: command list not provided and non_interactive')
 
         if os.path.isfile(op_list):
             command_list = []
@@ -202,8 +202,8 @@ class StructureChecking():
                         if line == "\n" or line[0:1] == '#':
                             continue
                         command_list.append(line)
-            except OSError:
-                sys.exit(f"{cts.MSGS['ERROR_OPEN_FILE']} {op_list}")
+            except OSError as err:
+                raise CommandListError(f"{cts.MSGS['ERROR_OPEN_FILE']} {op_list}") from err
         else:
             command_list = op_list.split(';')
 
@@ -267,9 +267,9 @@ class StructureChecking():
             )
             f_check = sys.modules[f'biobb_structure_checking.commands.{command}'].check
             f_fix = sys.modules[f'biobb_structure_checking.commands.{command}'].fix
-        except ImportError as e:
-            print(command, e)
-            sys.exit(cts.MSGS['COMMAND_NOT_FOUND'].format(command))
+        except ImportError as err:
+            print(command, err)
+            raise CommandNotFoundError(cts.MSGS['COMMAND_NOT_FOUND'].format(command)) from err
 
         if command not in self.summary:
             self.summary[command] = {}
@@ -309,6 +309,8 @@ class StructureChecking():
                             opts[k] = defaults[k]
             try:
                 error_status = f_fix(self, opts, data_to_fix)
+            except FATAL_ERRORS:
+                raise
             except Exception as e:
                 error_status = [getattr(e, 'message', str(e))]
 

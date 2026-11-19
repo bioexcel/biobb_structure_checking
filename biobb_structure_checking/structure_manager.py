@@ -6,7 +6,6 @@ import warnings
 import os
 from os.path import join as opj
 import shutil
-import sys
 import re
 import gzip
 
@@ -27,6 +26,13 @@ from Bio.PDB.Superimposer import Superimposer
 from Bio.PDB.PDBExceptions import PDBConstructionException
 
 import biobb_structure_checking.constants as cts
+from biobb_structure_checking.exceptions import (
+    StructureCheckingError,
+    StructureLoadError,
+    AtomLimitError,
+    UnsupportedFormatError,
+    ModellerError
+)
 
 from biobb_structure_checking.pdbio.mmb_server import MMBPDBList
 from biobb_structure_checking.pdbio.PDBIO_extended import PDBIO_extended
@@ -115,14 +121,14 @@ class StructureManager:
         )
 
         if self.st is None:
-            sys.exit(
+            raise StructureLoadError(
                 cts.MSGS['NO_NETWORK'].format(
                     input_pdb_path
                 )
             )
 
         if self.st == 'atom_limit_error':
-            sys.exit(
+            raise AtomLimitError(
                 cts.MSGS['ATOM_LIMIT'].format(
                     headers,
                     atom_limit
@@ -244,8 +250,9 @@ class StructureManager:
             if '.' in os.path.basename(input_pdb_path):
                 file_format = os.path.splitext(input_pdb_path)[1][1:]
                 if file_format not in ACCEPTED_FORMATS:
-                    print(f'Error: MMB/BSC Server: File format {file_format} not supported')
-                    sys.exit(1)
+                    raise UnsupportedFormatError(
+                        f'Error: MMB/BSC Server: File format {file_format} not supported'
+                    )
             print(f"Downloading structure from {input_pdb_path} as {file_format} ...")
             try:
                 urlcleanup()
@@ -1196,8 +1203,8 @@ class StructureManager:
 
         try:
             from biobb_structure_checking.modeller_manager import ModellerManager, NoCanSeqError
-        except ImportError:
-            sys.exit("Error importing modeller")
+        except ImportError as err:
+            raise ModellerError("Error importing modeller") from err
 
         mod_mgr = ModellerManager()
 
@@ -1870,47 +1877,47 @@ def _guess_modeller_env():
     return 'KEY_MODELLER', 'MODINSTALL', 'modeller'
 # ===============================================================================
 
-class WrongServerError(Exception):
+class WrongServerError(StructureLoadError):
     ''' Raised when biounits are requested on a non-MMB server'''
     def __init__(self):
-        self.message = 'ERROR: Biounits supported only on MMB server'
+        super().__init__('ERROR: Biounits supported only on MMB server')
 
-class UnknownFileTypeError(Exception):
+class UnknownFileTypeError(StructureLoadError):
     ''' Raised when an unknown file type is provided'''
     def __init__(self, typ):
-        self.message = f'ERROR: unknown filetype ({typ})'
+        super().__init__(f'ERROR: unknown filetype ({typ})')
 
-class OutputPathNotProvidedError(Exception):
+class OutputPathNotProvidedError(StructureCheckingError):
     ''' Raised when the output PDB path is not provided'''
     def __init__(self):
-        self.message = 'ERROR: output PDB path not provided'
+        super().__init__('ERROR: output PDB path not provided')
 
-class NotAValidResidueError(Exception):
+class NotAValidResidueError(StructureCheckingError):
     ''' Raised when a residue is not valid in the current context'''
     def __init__(self, res):
-        self.message = f'Warning: {res} is not a valid residue in this context'
+        super().__init__(f'Warning: {res} is not a valid residue in this context')
 
-class NotEnoughAtomsError(Exception):
+class NotEnoughAtomsError(StructureCheckingError):
     ''' Raised when there are not enough atoms to build missing atoms'''
     def __init__(self):
-        self.message = 'Warning: not enough backbone to build missing atoms'
+        super().__init__('Warning: not enough backbone to build missing atoms')
 
-class ParseError(Exception):
+class ParseError(StructureLoadError):
     ''' Raised when there is a parsing error in the input structure'''
     def __init__(self, err_id, err_txt):
-        self.message = f'{err_id} ({err_txt}) found when parsing input structure'
+        super().__init__(f'{err_id} ({err_txt}) found when parsing input structure')
 
-class UnknownFFError(Exception):
+class UnknownFFError(StructureCheckingError):
     ''' Raised when an unknown force field is provided'''
     def __init__(self, ff):
-        self.message = f'{ff} is not a valid ff for assigning atom types and charges'
+        super().__init__(f'{ff} is not a valid ff for assigning atom types and charges')
 
-class SequencesDoNotMatch(Exception):
+class SequencesDoNotMatch(StructureCheckingError):
     ''' Raised when the sequence lengths do not match'''
     def __init__(self):
-        self.message = "Sequence lengths do not match"
+        super().__init__("Sequence lengths do not match")
 
-class UnknownAtomforResidueError(Exception):
+class UnknownAtomforResidueError(StructureCheckingError):
     ''' Raised when an atom is not valid for a given residue'''
     def __init__(self, res_id, atm_id):
-        self.message = f"Non valid atom {atm_id} for residue {res_id}"
+        super().__init__(f"Non valid atom {atm_id} for residue {res_id}")

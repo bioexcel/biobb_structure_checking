@@ -5,7 +5,7 @@
 """
 
 import re
-import sys
+from biobb_structure_checking.exceptions import StructureCheckingError, ModellerError
 import os
 from os.path import join as opj
 import uuid
@@ -28,8 +28,8 @@ except ImportError:
 try:
     from modeller import Environ, Selection, log
     from modeller.automodel import AutoModel, assess
-except ImportError:
-    sys.exit("Error importing Modeller package")
+except ImportError as err:
+    raise ModellerError("Error importing Modeller package") from err
 
 from biobb_structure_checking.modelling.utils import PROTEIN
 
@@ -49,8 +49,10 @@ class ModellerManager():
             self.tmpdir = opj(TMP_BASE_DIR, "mod" + str(uuid.uuid4()))
             try:
                 os.mkdir(self.tmpdir)
-            except IOError as err:
-                sys.exit(err)
+            except OSError as err:
+                raise ModellerError(
+                    f"Error creating temporary directory {self.tmpdir}: {err}"
+                ) from err
         else:
             self.tmpdir = "/tmp/modtest"
             print("Using temporary working dir " + self.tmpdir)
@@ -241,10 +243,10 @@ def _write_align(tgt_seq, templs, alin_file):
     )
 
 
-class NoCanSeqError(Exception):
+class NoCanSeqError(StructureCheckingError):
     """
     | modeller_manager NoCanSeqError
     | Error raised when no canonical sequence exists
     """
     def __init__(self, mod_id, ch_id):
-        self.message = f"No canonical sequence found for chain {ch_id}/{mod_id}"
+        super().__init__(f"No canonical sequence found for chain {ch_id}/{mod_id}")

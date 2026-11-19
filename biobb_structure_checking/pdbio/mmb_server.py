@@ -3,7 +3,6 @@
 """
 
 import os
-import sys
 import gzip
 
 from urllib.request import urlretrieve
@@ -11,6 +10,7 @@ from urllib.request import urlcleanup
 
 from Bio.PDB.PDBList import PDBList
 from biobb_structure_checking.constants import PDB_DOWNLOAD_PREFIX, ALT_SERVERS
+from biobb_structure_checking.exceptions import UnsupportedFormatError
 
 class MMBPDBList(PDBList):
     """
@@ -68,8 +68,7 @@ class MMBPDBList(PDBList):
         code = pdb_code.lower()
 
         if file_format not in ('pdb', 'cif', 'mmCif'):
-            print(f'Error: File format {file_format} not supported')
-            sys.exit(1)
+            raise UnsupportedFormatError(f'Error: File format {file_format} not supported')
 
         if file_format == 'mmCif':
             file_format = 'cif'

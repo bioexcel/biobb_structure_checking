@@ -4,7 +4,6 @@
 """
 
 import re
-import sys
 import json
 import urllib.request
 # from typing import List, Dict, Tuple, Iterable, Mapping, Union, Set
@@ -19,6 +18,7 @@ from Bio.PDB.NeighborSearch import NeighborSearch
 from Bio.PDB.vectors import Vector, rotaxis
 
 from biobb_structure_checking.constants import MSGS
+from biobb_structure_checking.exceptions import BuildCoordsError
 
 
 MONOMERS_API_PREFIX = 'https://mdb-login.bsc.es/api/pdbmonomer/'
@@ -1073,10 +1073,10 @@ def build_coords_from_lib(res, res_lib, new_res, at_id):
     atom_def = res_lib.get_atom_def(new_res, at_id)
 
     if atom_def is None:
-        sys.exit("#ERROR: Unknown target atom")
+        raise BuildCoordsError(f"#ERROR: Unknown target atom {at_id}")
     for at_def in atom_def.link_ats:
         if at_def not in res:
-            sys.exit(
+            raise BuildCoordsError(
                 f"Error, required atom {at_def} not available"
                 f" in {residue_id(res)}"
             )

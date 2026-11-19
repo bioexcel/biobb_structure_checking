@@ -1,5 +1,4 @@
 ''' Class to manage internal Structure data'''
-import sys
 import biobb_structure_checking.modelling.utils as mu
 
 

@@ -15,6 +15,7 @@ from os.path import join as opj
 import biobb_structure_checking
 import biobb_structure_checking.constants as cts
 from biobb_structure_checking.structure_checking import StructureChecking
+from biobb_structure_checking.exceptions import StructureCheckingError
 
 BANNER = "================================================================================\n"\
          "=                   BioBB structure checking utility v{:10}               =\n"\
@@ -49,7 +50,11 @@ def main():
 
 #    args.quiet = not args.verbose
 
-    StructureChecking(base_dir_path, vars(args)).launch()
+    try:
+        StructureChecking(base_dir_path, vars(args)).launch()
+    except StructureCheckingError as err:
+        print(err.message, file=sys.stderr)
+        sys.exit(err.exit_code)
 
 
 if __name__ == "__main__":

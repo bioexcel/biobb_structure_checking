@@ -3,7 +3,7 @@
 """
 
 import json
-import sys
+from biobb_structure_checking.exceptions import LibraryLoadError
 
 
 class DataLibManager:
@@ -30,12 +30,10 @@ class DataLibManager:
             for charge_set in json_map['data_library']['atom_type_ff']:
                 self.ff_data[charge_set] = {}
 
-        except IOError:
-            print(
-                f"ERROR: unable to open data library {file_path}",
-                file=sys.stderr
-            )
-            sys.exit(2)
+        except IOError as err:
+            raise LibraryLoadError(
+                f"ERROR: unable to open data library {file_path}"
+            ) from err
 
     def get_valid_codes(self, mol_type):
         """ DataLibManager.get_valid_codes
@@ -200,9 +198,7 @@ class DataLibManager:
             data_file_h = open(file_path)
             json_map = json.load(data_file_h)
             self.ff_data[json_map['id']] = json_map
-        except IOError:
-            print(
-                f"ERROR: unable to open forcefield library {file_path}",
-                file=sys.stderr
-            )
-            sys.exit(2)
+        except IOError as err:
+            raise LibraryLoadError(
+                f"ERROR: unable to open forcefield library {file_path}"
+            ) from err

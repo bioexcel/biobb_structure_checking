@@ -1,12 +1,12 @@
 """ Module to manage sequence information for structures """
 
 from shlex import split
-import sys
 import os
 import gzip
 # from typing import List, Dict
 from urllib.request import urlretrieve, urlcleanup
 from biobb_structure_checking.constants import FASTA_DOWNLOAD_PREFIX
+from biobb_structure_checking.exceptions import SequenceLoadError
 import biobb_structure_checking.modelling.utils as mu
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 from Bio.SeqRecord import SeqRecord
@@ -90,8 +90,8 @@ class SequenceData():
                     urlcleanup()
                     urlretrieve(url, fasta_real_path)
                     remove_fasta = True
-                except IOError:
-                    sys.exit("Error retrieving FASTA")
+                except IOError as err:
+                    raise SequenceLoadError(f"Error retrieving FASTA from {url}") from err
 
             elif fasta_sequence_path.startswith('http'):
                 fasta_real_path = f'/tmp/{os.path.basename(fasta_sequence_path)}'
@@ -113,8 +113,8 @@ class SequenceData():
                     fasta_fh = open(fasta_real_path, 'r')
                 for record in SeqIO.parse(fasta_fh, 'fasta'):
                     self.fasta.append(record)
-            except IOError:
-                sys.exit(f"Error loading FASTA at {fasta_real_path}")
+            except IOError as err:
+                raise SequenceLoadError(f"Error loading FASTA at {fasta_real_path}") from err
 
             if remove_fasta:
                 os.remove(fasta_real_path)

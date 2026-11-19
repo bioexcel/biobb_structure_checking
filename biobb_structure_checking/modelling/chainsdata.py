@@ -1,8 +1,8 @@
 ''' Class to manage Chain internal data'''
-import sys
 from Bio.PDB.Chain import Chain
 import biobb_structure_checking.modelling.utils as mu
 from biobb_structure_checking.modelling.residue_set import ResidueSetList
+from biobb_structure_checking.exceptions import RenumberError, ChainSelectionError
 
 class ChainsData():
     ''' Class to manage Chain(s) internal data'''
@@ -92,8 +92,7 @@ class ChainsData():
 
         for tsk in tasks:
             if '=' not in tsk:
-                print(f"ERROR: wrong syntax {tsk}, use origin=target")
-                sys.exit()
+                raise RenumberError(f"ERROR: wrong syntax {tsk}, use origin=target")
             tsk_0, tsk_1 = tsk.split('=')
             chn_0, ini_0, fin_0 = _parse_task_str(tsk_0)
             chn_1, ini_1, fin_1 = _parse_task_str(tsk_1)
@@ -118,11 +117,10 @@ class ChainsData():
             else:
                 # replicate for all chains
                 if chn_1 != '*':
-                    print(
+                    raise RenumberError(
                         f"Error, use either wild card or explicit labels"
                         f" in both origin and updated ({chn_0}={chn_1})"
                     )
-                    sys.exit()
                 for mod in self.st:
                     if mod.id > 0:
                         continue  # Not implemented for multiple models
@@ -198,7 +196,7 @@ class ChainsData():
                 #             f"ERROR: new residue numbers ({tgt['ini']}-{tgt['fin']})"
                 #             f" overlap with existing ones ({n_term1.id[1]}-{c_term1.id[1]}), "
                 #             f" consider using --coords_only")
-                #         sys.exit()
+                #         raise RenumberError()
                 if org['ini'] == tgt['ini'] and\
                         org['fin'] == tgt['fin'] and\
                         org['ini'] == n_term.id[1] and\
@@ -242,11 +240,10 @@ class ChainsData():
                         new_res.parent = new_ch
                         col_res = _check_collision(new_res, new_ch)
                         if col_res:
-                            print(
+                            raise RenumberError(
                                 f"ERROR. New residue {mu.residue_id(new_res)}"
                                 f" collides with existing {mu.residue_id(col_res)}"
                             )
-                            sys.exit()
                         new_ch.add(new_res)
                         mod[org['chn']].detach_child(res.id)
 
@@ -317,8 +314,7 @@ class ChainsData():
                 if chn not in ch_ok and self.chain_ids[mod.id][chn] not in ch_ok:
                     self.st[mod.id].detach_child(chn)
             if not self.st[mod.id]:
-                print("ERROR: would remove all chains, exiting")
-                sys.exit()
+                raise ChainSelectionError("ERROR: would remove all chains, exiting")
 
     def has_NA(self):
         """ Checks if any of the chains is NA"""
