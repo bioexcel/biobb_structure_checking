@@ -342,8 +342,8 @@ class SequenceData():
             for ch_id, ch_data in self.data[mod.id].items():
                 # print(f"{ch_id=} {ch_data=}")
                 # print(f"{self.has_canonical=} {mod.id=}")
-                if ch_id not in self.has_canonical[mod.id] or\
-                        not self.has_canonical[mod.id].get(ch_id, []):
+                if ch_id not in self.has_canonical.get(mod.id, {}) or\
+                        not self.has_canonical.get(mod.id, {}).get(ch_id, []):
                     continue
                 frgs = ch_data['pdb']['frgs']
                 ch_data['pdb']['match_numbering'] = True
